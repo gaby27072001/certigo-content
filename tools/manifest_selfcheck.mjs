@@ -32,7 +32,7 @@ const schemaPath = resolve(repoRoot, "schemas", "manifest.schema.json");
 // algorithm; if you INTENTIONALLY change the algorithm or the fixtures, update
 // this constant in the same commit.
 const EXPECTED_ROOT_HASH =
-  "__GOLDEN_ROOT_HASH__";
+  "fb3c178e096a36aab496037b954e57dcb394aac38b1777e8e783583ce9c5038e";
 
 let failures = 0;
 function ok(msg) {
