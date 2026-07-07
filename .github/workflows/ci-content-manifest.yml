@@ -82,8 +82,12 @@ jobs:
             echo "Aucun content/manifest.json committe (indicatif) - etape ignoree."
           fi
 
+      # Publication indicative du manifeste regenere. Non bloquant: un echec
+      # d'upload (ex. quota de stockage d'artifacts de l'org) ne doit pas faire
+      # echouer la gate d'integrite/determinisme deja validee ci-dessus.
       - name: Publier le manifeste en artifact
         if: ${{ always() }}
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: content-manifest
