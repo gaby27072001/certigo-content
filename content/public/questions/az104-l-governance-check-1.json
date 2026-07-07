@@ -1,0 +1,12 @@
+{
+  "id": "az104-l-governance-check-1",
+  "schemaVersion": "v2",
+  "kind": "public",
+  "prompt": "Vous voulez empêcher *toute* suppression accidentelle d'un groupe de ressources critique, y compris par un Propriétaire, tout en autorisant les modifications. Que mettez-vous en place ?",
+  "choices": [
+    "Une policy en effet audit",
+    "Retirer le rôle Propriétaire à tout le monde",
+    "Un verrou de ressource CanNotDelete",
+    "Un tag canDelete = false"
+  ]
+}
