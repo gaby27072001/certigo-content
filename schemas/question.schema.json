@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/question.schema.json",
+  "title": "Certigo public question (v2)",
+  "description": "Validates content/public/questions/*.json. additionalProperties:false forbids answer-bearing keys (correct/rationale) in a public payload by design (anti-leak).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schemaVersion", "kind", "prompt", "choices"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaVersion": {
+      "const": "v2"
+    },
+    "kind": {
+      "const": "public"
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 1
+    },
+    "choices": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/solution.schema.json",
+  "title": "Certigo answerKey solution (v2)",
+  "description": "Validates content/answerKey/solutions/*.json. Holds the sensitive answer material (correct/rationale) that must never appear in a public payload.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "schemaVersion", "kind", "correct", "rationale"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaVersion": {
+      "const": "v2"
+    },
+    "kind": {
+      "const": "answerKey"
+    },
+    "correct": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
