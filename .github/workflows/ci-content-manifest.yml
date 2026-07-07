@@ -1,0 +1,91 @@
+name: ci-content-manifest
+
+# wp-p1-07 - Manifeste de contenu immuable et adressable par hash.
+#
+# Deux responsabilites, separees de ci-content.yml pour ne pas entrer en
+# conflit avec les PR concurrentes (wp-p1-05 migration de contenu) :
+#   * gate STRICT et CONTENT-INDEPENDANT : self-check de l'algorithme
+#     (determinisme + golden vector + schema). Il ne depend PAS du corpus reel,
+#     donc l'arrivee du contenu reel ne le casse jamais.
+#   * (re)generation du manifeste LIVE a partir du contenu present, publie en
+#     tant qu'artifact. Sur push main, le manifeste se met a jour tout seul
+#     quand le contenu reel atterrit.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "schemas/manifest.schema.json"
+      - "tools/gen_manifest.mjs"
+      - "tools/manifest_selfcheck.mjs"
+      - "tools/__fixtures__/**"
+      - ".github/workflows/ci-content-manifest.yml"
+  pull_request:
+    paths:
+      - "content/**"
+      - "schemas/manifest.schema.json"
+      - "tools/gen_manifest.mjs"
+      - "tools/manifest_selfcheck.mjs"
+      - "tools/__fixtures__/**"
+      - ".github/workflows/ci-content-manifest.yml"
+
+concurrency:
+  group: ci-content-manifest-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  manifest:
+    # Fork-guard : sur PR, ne s'execute que pour les PR internes (pas les forks),
+    # afin de ne pas exposer les runners self-hosted.
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    environment: ${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Install tooling
+        run: npm install --no-save ajv ajv-formats glob
+
+      - name: Self-check (determinisme + golden vector + schema)
+        run: node tools/manifest_selfcheck.mjs
+
+      - name: Regenerer le manifeste LIVE
+        run: |
+          node tools/gen_manifest.mjs --out content/manifest.json
+          echo "----- rootHash / manifestId -----"
+          node -e "const m=require('./content/manifest.json');console.log('rootHash   =',m.rootHash);console.log('manifestId =',m.manifestId);console.log('itemCount  =',m.itemCount);"
+
+      - name: Verifier que le manifeste committe == regenere (si present)
+        # Le manifeste committe est indicatif. S'il est present et diverge du
+        # manifeste regenere a partir du contenu courant, on echoue pour forcer
+        # une regeneration coherente. Tolerant a l'absence (aucun fichier fige).
+        run: |
+          if git ls-files --error-unmatch content/manifest.json >/dev/null 2>&1; then
+            if ! git diff --quiet -- content/manifest.json; then
+              echo "::error::content/manifest.json committe diverge du manifeste regenere. Lance: node tools/gen_manifest.mjs --out content/manifest.json"
+              git --no-pager diff -- content/manifest.json | head -n 40
+              exit 1
+            fi
+            echo "content/manifest.json committe == regenere."
+          else
+            echo "Aucun content/manifest.json committe (indicatif) - etape ignoree."
+          fi
+
+      - name: Publier le manifeste en artifact
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-manifest
+          path: content/manifest.json
+          if-no-files-found: warn
