@@ -60,12 +60,25 @@ jobs:
         # no published patched version remain visible in the job output.
         run: npm audit --audit-level=critical
 
+      - name: Install OSV Scanner
+        env:
+          OSV_SCANNER_VERSION: v2.3.8
+        run: |
+          curl --fail --silent --show-error --location \
+            "https://github.com/google/osv-scanner/releases/download/${OSV_SCANNER_VERSION}/osv-scanner_linux_amd64" \
+            --output "${RUNNER_TEMP}/osv-scanner"
+          curl --fail --silent --show-error --location \
+            "https://github.com/google/osv-scanner/releases/download/${OSV_SCANNER_VERSION}/osv-scanner_SHA256SUMS" \
+            --output "${RUNNER_TEMP}/osv-scanner_SHA256SUMS"
+          (
+            cd "${RUNNER_TEMP}"
+            grep "  osv-scanner_linux_amd64$" osv-scanner_SHA256SUMS | sha256sum --check --strict
+          )
+          chmod +x "${RUNNER_TEMP}/osv-scanner"
+
       - name: Scan OSV database
         continue-on-error: true
-        uses: google/osv-scanner-action/osv-scanner-action@9a498708959aeaef5ef730655706c5a1df1edbc2 # v2.3.8
-        with:
-          scan-args: |-
-            --lockfile=package-lock.json
+        run: "${RUNNER_TEMP}/osv-scanner --lockfile=package-lock.json"
 
       - name: Generate tooling SBOM
         run: npm sbom --sbom-format cyclonedx > tooling-sbom.cdx.json
