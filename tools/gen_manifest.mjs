@@ -22,8 +22,8 @@
 //   - NO timestamps or environment-dependent fields are hashed, so the same
 //     content set always reproduces byte-for-byte the same manifest.
 //
-// Deps (installed by CI via `npm install --no-save ajv ajv-formats glob`):
-//   glob (file discovery). ESM native (.mjs).
+// Dependencies are pinned in package.json/package-lock.json and installed with
+// `npm ci`. ESM native (.mjs).
 //
 // Usage:
 //   node tools/gen_manifest.mjs                 # print manifest JSON (live content)

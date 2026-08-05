@@ -1,0 +1,24 @@
+{
+  "name": "@certigo/content-tooling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": "20.20.2",
+    "npm": "10.8.2"
+  },
+  "scripts": {
+    "validate": "node tools/validate_content.mjs",
+    "manifest:check": "node tools/manifest_selfcheck.mjs",
+    "manifest:generate": "node tools/gen_manifest.mjs --out content/manifest.json",
+    "package": "npm run validate && npm run manifest:generate",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "glob": "13.0.6",
+    "yaml": "2.9.0"
+  }
+}

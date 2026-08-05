@@ -8,12 +8,20 @@ on:
       - "content/**"
       - "schemas/**"
       - "tools/validate_content.mjs"
+      - "test/**"
+      - ".nvmrc"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/ci-content.yml"
   pull_request:
     paths:
       - "content/**"
       - "schemas/**"
       - "tools/validate_content.mjs"
+      - "test/**"
+      - ".nvmrc"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/ci-content.yml"
 
 concurrency:
@@ -36,10 +44,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Install validator dependencies
-        run: npm install --no-save ajv ajv-formats glob
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Test tooling
+        run: npm test
 
       - name: Validate content
-        run: node tools/validate_content.mjs
+        run: npm run validate
