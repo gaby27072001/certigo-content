@@ -84,6 +84,9 @@ jobs:
         run: npm sbom --sbom-format cyclonedx > tooling-sbom.cdx.json
 
       - name: Publish tooling SBOM
+        # Generation is strict; upload is best-effort because repository
+        # artifact quota exhaustion must not invalidate the supply-chain gate.
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: certigo-content-tooling-sbom
