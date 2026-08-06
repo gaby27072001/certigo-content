@@ -1,0 +1,139 @@
+name: ci-content-package
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "schemas/**"
+      - "tools/**"
+      - "test/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".nvmrc"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "content/**"
+      - "schemas/**"
+      - "tools/**"
+      - "test/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".nvmrc"
+      - ".github/workflows/**"
+
+concurrency:
+  group: ci-content-package-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  package-gates:
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    environment: ${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Test packaging and leak gates
+        run: npm test
+
+      - name: Enforce mobile artifact isolation
+        run: npm run policy:artifact-access
+
+  package-public:
+    needs: package-gates
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    environment: ${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Build public artifact in a clean dist
+        run: npm run package:public
+
+      - name: Verify final public artifact
+        run: npm run package:verify:public
+
+      - name: Resolve public artifact identity
+        id: identity
+        if: ${{ github.event_name != 'pull_request' }}
+        shell: bash
+        run: |
+          node -e "const fs=require('fs');const m=require('./dist/public/manifest.json');fs.appendFileSync(process.env.GITHUB_OUTPUT,'artifact_name=certigo-content-public-'+m.manifestId.replace(':','-')+'\n');"
+
+      - name: Publish public artifact
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.identity.outputs.artifact_name }}
+          path: dist/public
+          if-no-files-found: error
+          retention-days: 90
+
+  package-private:
+    needs: package-gates
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    environment: ${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Build private artifact in a clean dist
+        run: npm run package:private
+
+      - name: Verify final private artifact
+        run: npm run package:verify:private
+
+      - name: Resolve private artifact identity
+        id: identity
+        if: ${{ github.event_name != 'pull_request' }}
+        shell: bash
+        run: |
+          node -e "const fs=require('fs');const m=require('./dist/private/manifest.json');fs.appendFileSync(process.env.GITHUB_OUTPUT,'artifact_name=certigo-content-private-'+m.manifestId.replace(':','-')+'\n');"
+
+      - name: Publish private artifact
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.identity.outputs.artifact_name }}
+          path: dist/private
+          if-no-files-found: error
+          retention-days: 30

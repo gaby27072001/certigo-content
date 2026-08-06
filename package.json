@@ -12,7 +12,13 @@
     "validate": "node tools/validate_content.mjs",
     "manifest:check": "node tools/manifest_selfcheck.mjs",
     "manifest:generate": "node tools/gen_manifest.mjs --out content/manifest.json",
-    "package": "npm run validate && npm run manifest:generate",
+    "package": "node tools/package_content.mjs",
+    "package:public": "node tools/package_content.mjs --channel public",
+    "package:private": "node tools/package_content.mjs --channel private",
+    "package:verify": "node tools/package_content.mjs --verify",
+    "package:verify:public": "node tools/package_content.mjs --verify --channel public",
+    "package:verify:private": "node tools/package_content.mjs --verify --channel private",
+    "policy:artifact-access": "node tools/check_artifact_access.mjs",
     "test": "node --test"
   },
   "devDependencies": {

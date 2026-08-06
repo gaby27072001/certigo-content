@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/package-manifest.schema.json",
+  "title": "Certigo channel package manifest",
+  "description": "Deterministic manifest for one independently distributable Certigo content channel.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "channel",
+    "artifact",
+    "algorithm",
+    "serialization",
+    "fileCount",
+    "files",
+    "manifestId",
+    "rootHash"
+  ],
+  "properties": {
+    "schema": { "const": "certigo.content.package-manifest/v1" },
+    "channel": { "enum": ["public", "answerKey"] },
+    "artifact": { "enum": ["public", "private"] },
+    "algorithm": { "const": "sha256" },
+    "serialization": { "const": "json-sorted-keys-compact-utf8-lf" },
+    "fileCount": { "type": "integer", "minimum": 0 },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "hash", "size"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "path": {
+            "type": "string",
+            "pattern": "^(questions|solutions)/[^/]+\\.json$"
+          },
+          "hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "size": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "manifestId": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "rootHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+  }
+}
