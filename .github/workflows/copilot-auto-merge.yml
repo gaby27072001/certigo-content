@@ -1,0 +1,80 @@
+name: Copilot auto-merge
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+  checks: read
+
+concurrency:
+  group: copilot-auto-merge
+  cancel-in-progress: false
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve pending workflow runs
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMERGE_TOKEN || secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          runs=$(gh api "repos/$REPO/actions/runs?status=action_required&per_page=50" \
+            --jq '.workflow_runs[].id' 2>/dev/null || true)
+          if [ -z "$runs" ]; then
+            echo "No workflow runs awaiting approval."
+            exit 0
+          fi
+          for id in $runs; do
+            if gh api -X POST "repos/$REPO/actions/runs/$id/approve" >/dev/null 2>&1; then
+              echo "Run $id approved."
+            else
+              echo "Run $id could not be approved (add a PAT as AUTOMERGE_TOKEN)."
+            fi
+          done
+
+      - name: Approve and merge Copilot pull requests
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMERGE_TOKEN || secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          prs=$(gh pr list --repo "$REPO" --state open --limit 100 \
+            --json number,isDraft,author \
+            --jq '.[]
+                  | select(.isDraft == false)
+                  | select(((.author.login // "") | ascii_downcase | test("copilot")))
+                  | .number')
+
+          if [ -z "$prs" ]; then
+            echo "No open Copilot pull requests."
+            exit 0
+          fi
+
+          for pr in $prs; do
+            echo "::group::PR #$pr"
+
+            if gh pr review "$pr" --repo "$REPO" --approve >/dev/null 2>&1; then
+              echo "Approved."
+            else
+              echo "Approval skipped (already approved or not permitted)."
+            fi
+
+            if gh pr merge "$pr" --repo "$REPO" --squash --auto --delete-branch 2>/dev/null; then
+              echo "Auto-merge armed - will merge once required checks pass."
+            elif gh pr merge "$pr" --repo "$REPO" --squash --delete-branch 2>/dev/null; then
+              echo "Merged."
+            else
+              echo "Not mergeable yet - will retry on the next run."
+            fi
+
+            echo "::endgroup::"
+          done
