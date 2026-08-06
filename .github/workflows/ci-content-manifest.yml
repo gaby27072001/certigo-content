@@ -21,6 +21,10 @@ on:
       - "tools/gen_manifest.mjs"
       - "tools/manifest_selfcheck.mjs"
       - "tools/__fixtures__/**"
+      - "test/**"
+      - ".nvmrc"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/ci-content-manifest.yml"
   pull_request:
     paths:
@@ -29,6 +33,10 @@ on:
       - "tools/gen_manifest.mjs"
       - "tools/manifest_selfcheck.mjs"
       - "tools/__fixtures__/**"
+      - "test/**"
+      - ".nvmrc"
+      - "package.json"
+      - "package-lock.json"
       - ".github/workflows/ci-content-manifest.yml"
 
 concurrency:
@@ -52,17 +60,19 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: "20"
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Install tooling
-        run: npm install --no-save ajv ajv-formats glob
+      - name: Install locked tooling
+        run: npm ci
 
       - name: Self-check (determinisme + golden vector + schema)
-        run: node tools/manifest_selfcheck.mjs
+        run: npm run manifest:check
 
       - name: Regenerer le manifeste LIVE
         run: |
-          node tools/gen_manifest.mjs --out content/manifest.json
+          npm run manifest:generate
           echo "----- rootHash / manifestId -----"
           node -e "const m=require('./content/manifest.json');console.log('rootHash   =',m.rootHash);console.log('manifestId =',m.manifestId);console.log('itemCount  =',m.itemCount);"
 

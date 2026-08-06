@@ -1,0 +1,87 @@
+name: ci-tooling
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - ".nvmrc"
+      - "package.json"
+      - "package-lock.json"
+      - "tools/**"
+      - "test/**"
+      - ".github/workflows/ci-tooling.yml"
+  pull_request:
+    paths:
+      - ".nvmrc"
+      - "package.json"
+      - "package-lock.json"
+      - "tools/**"
+      - "test/**"
+      - ".github/workflows/ci-tooling.yml"
+
+concurrency:
+  group: ci-tooling-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-supply-chain:
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    environment: ${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Test tooling
+        run: npm test
+
+      - name: Validate live content
+        run: npm run validate
+
+      - name: Check manifest invariants
+        run: npm run manifest:check
+
+      - name: Scan npm advisories
+        run: npm audit --audit-level=high
+
+      - name: Install OSV Scanner
+        env:
+          OSV_SCANNER_VERSION: v2.3.8
+          OSV_SCANNER_SHA256: bc98e15319ed0d515e3f9235287ba53cdc5535d576d24fd573978ecfe9ab92dc
+        run: |
+          curl --fail --silent --show-error --location \
+            "https://github.com/google/osv-scanner/releases/download/${OSV_SCANNER_VERSION}/osv-scanner_linux_amd64" \
+            --output "${RUNNER_TEMP}/osv-scanner_linux_amd64"
+          echo "${OSV_SCANNER_SHA256}  ${RUNNER_TEMP}/osv-scanner_linux_amd64" \
+            | sha256sum --check --strict
+          chmod +x "${RUNNER_TEMP}/osv-scanner_linux_amd64"
+
+      - name: Scan OSV database
+        run: "${RUNNER_TEMP}/osv-scanner_linux_amd64 --lockfile=package-lock.json"
+
+      - name: Generate tooling SBOM
+        run: npm sbom --sbom-format cyclonedx > tooling-sbom.cdx.json
+
+      - name: Publish tooling SBOM
+        # Generation is strict; upload is best-effort because repository
+        # artifact quota exhaustion must not invalidate the supply-chain gate.
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: certigo-content-tooling-sbom
+          path: tooling-sbom.cdx.json
+          if-no-files-found: error

@@ -33,7 +33,7 @@
 //   node tools/migrate_p1_05.mjs --source "<abs path to Certigo/content>"
 //   (or set SOURCE_CONTENT_DIR)
 //
-// Deps: npm install --no-save yaml glob
+// Dependencies are pinned in package.json/package-lock.json (`npm ci`).
 
 import { readFileSync, writeFileSync, rmSync, mkdirSync } from "node:fs";
 import { resolve, relative, basename } from "node:path";
