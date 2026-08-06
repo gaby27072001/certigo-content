@@ -54,28 +54,34 @@ jobs:
             fi
           }
 
-          # 1. Debloque les executions en attente d'approbation manuelle.
-          pending=$(api GET "/repos/$REPO/actions/runs?status=action_required&per_page=50" \
-            | jq -r '.workflow_runs[]?.id' 2>/dev/null || true)
-          for id in $pending; do
-            api POST "/repos/$REPO/actions/runs/$id/approve" >/dev/null 2>&1 \
-              && echo "Execution $id approuvee." \
-              || echo "Execution $id non approuvable."
-          done
-
-          # 2. Recupere les PR ouvertes, non-brouillon, ecrites par Copilot.
+          # 1. Recupere les PR ouvertes, non-brouillon, ecrites par Copilot.
           prs=$(api GET "/repos/$REPO/pulls?state=open&per_page=100" \
             | jq -r '.[]
                      | select(.draft == false)
                      | select(((.user.login // "") | ascii_downcase | test("copilot")))
-                     | "\(.number) \(.node_id)"')
+                     | "\(.number) \(.node_id) \(.head.ref)"')
 
           if [ -z "$prs" ]; then
             echo "Aucune pull request Copilot ouverte."
             exit 0
           fi
 
-          echo "$prs" | while read -r num node; do
+          # 2. Debloque uniquement les executions en attente liees a ces PR.
+          #    (ne jamais approuver en masse : cela saturerait les runners)
+          branches=$(echo "$prs" | awk '{print $3}')
+          pending=$(api GET "/repos/$REPO/actions/runs?status=action_required&per_page=100" \
+            | jq -r '.workflow_runs[]? | "\(.id) \(.head_branch)"' 2>/dev/null || true)
+
+          echo "$pending" | while read -r rid rbranch; do
+            [ -z "$rid" ] && continue
+            if echo "$branches" | grep -Fxq "$rbranch"; then
+              api POST "/repos/$REPO/actions/runs/$rid/approve" >/dev/null 2>&1 \
+                && echo "Execution $rid ($rbranch) approuvee." \
+                || echo "Execution $rid ($rbranch) non approuvable."
+            fi
+          done
+
+          echo "$prs" | while read -r num node ref; do
             [ -z "$num" ] && continue
             echo "::group::PR #$num"
 
