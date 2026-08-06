@@ -16,7 +16,7 @@ permissions:
   checks: read
 
 concurrency:
-  group: copilot-auto-merge
+  group: copilot-auto-merge-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: false
 
 jobs:
