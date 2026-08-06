@@ -4,10 +4,6 @@ on:
   schedule:
     - cron: '*/10 * * * *'
   workflow_dispatch:
-  pull_request_target:
-    types: [opened, reopened, synchronize, ready_for_review]
-  check_suite:
-    types: [completed]
 
 permissions:
   contents: write
@@ -16,7 +12,7 @@ permissions:
   checks: read
 
 concurrency:
-  group: copilot-auto-merge-${{ github.event.pull_request.number || github.run_id }}
+  group: copilot-auto-merge
   cancel-in-progress: false
 
 jobs:
