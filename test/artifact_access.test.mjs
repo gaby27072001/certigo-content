@@ -11,8 +11,25 @@ function createWorkflow(content) {
   const root = mkdtempSync(join(tmpdir(), "certigo-workflow-policy-"));
   temporaryRoots.push(root);
   mkdirSync(resolve(root, ".github", "workflows"), { recursive: true });
-  writeFileSync(resolve(root, ".github", "workflows", "mobile.yml"), content);
+  writeFileSync(resolve(root, ".github", "workflows", "consumer.yml"), content);
+  writeFileSync(
+    resolve(root, ".github", "artifact-access-policy.json"),
+    `${JSON.stringify({
+      schema: "certigo.artifact-access-policy/v1",
+      privateArtifactDownloads: [],
+    }, null, 2)}\n`
+  );
   return root;
+}
+
+function allowPrivate(root, entries) {
+  writeFileSync(
+    resolve(root, ".github", "artifact-access-policy.json"),
+    `${JSON.stringify({
+      schema: "certigo.artifact-access-policy/v1",
+      privateArtifactDownloads: entries,
+    }, null, 2)}\n`
+  );
 }
 
 afterEach(() => {
@@ -21,11 +38,11 @@ afterEach(() => {
   }
 });
 
-test("autorise un job mobile qui allow-list uniquement l'artefact public", async () => {
+test("autorise un telechargement public nomme dans tout job", async () => {
   const root = createWorkflow(`
 jobs:
-  mobile-build:
-    name: Mobile build
+  desktop-build:
+    name: Desktop build
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -34,15 +51,103 @@ jobs:
   assert.deepEqual(await findArtifactAccessViolations({ root }), []);
 });
 
-test("rejette un job mobile sans allow-list ou referencant le prive", async () => {
+test("rejette globalement un telechargement sans nom", async () => {
   const root = createWorkflow(`
 jobs:
-  mobile:
+  release:
     steps:
       - uses: actions/download-artifact@v4
-      - run: cp dist/private/manifest.json app/
 `);
   const violations = await findArtifactAccessViolations({ root });
-  assert.ok(violations.some((violation) => violation.includes("artefact prive")));
   assert.ok(violations.some((violation) => violation.includes("sans allow-list")));
+});
+
+test("rejette un nom dynamique qui pourrait resoudre vers le prive", async () => {
+  const root = createWorkflow(`
+jobs:
+  release:
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: \${{ inputs.artifact-name }}
+`);
+  const violations = await findArtifactAccessViolations({ root });
+  assert.ok(
+    violations.some((violation) => violation.includes("dynamique non verifiable"))
+  );
+});
+
+test("rejette le prive hors allow-list et exige une correspondance exacte", async () => {
+  const artifactName = "certigo-content-private-sha256-abc";
+  const root = createWorkflow(`
+jobs:
+  release:
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${artifactName}
+`);
+
+  let violations = await findArtifactAccessViolations({ root });
+  assert.ok(violations.some((violation) => violation.includes("hors allow-list")));
+
+  allowPrivate(root, [
+    {
+      workflow: ".github/workflows/consumer.yml",
+      job: "other-job",
+      name: artifactName,
+    },
+  ]);
+  violations = await findArtifactAccessViolations({ root });
+  assert.ok(violations.some((violation) => violation.includes("hors allow-list")));
+
+  allowPrivate(root, [
+    {
+      workflow: ".github/workflows/consumer.yml",
+      job: "release",
+      name: artifactName,
+    },
+  ]);
+  assert.deepEqual(await findArtifactAccessViolations({ root }), []);
+});
+
+test("rejette une politique privee non explicite ou mal formee", async () => {
+  const root = createWorkflow("jobs: {}\n");
+  allowPrivate(root, [
+    {
+      workflow: ".github/workflows/consumer.yml",
+      job: "release",
+      name: "certigo-content-public-sha256-abc",
+    },
+  ]);
+
+  await assert.rejects(
+    () => findArtifactAccessViolations({ root }),
+    /politique invalide/
+  );
+});
+
+test("inspecte aussi les actions composites locales", async () => {
+  const root = createWorkflow("jobs: {}\n");
+  const actionRoot = resolve(root, ".github", "actions", "download");
+  mkdirSync(actionRoot, { recursive: true });
+  writeFileSync(
+    resolve(actionRoot, "action.yml"),
+    `
+name: Download
+runs:
+  using: composite
+  steps:
+    - uses: actions/download-artifact@v4
+`
+  );
+
+  const violations = await findArtifactAccessViolations({ root });
+  assert.ok(
+    violations.some(
+      (violation) =>
+        violation.includes(".github/actions/download/action.yml:runs") &&
+        violation.includes("sans allow-list")
+    )
+  );
 });

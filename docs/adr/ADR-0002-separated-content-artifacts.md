@@ -23,7 +23,10 @@ Les deux artefacts ne partagent aucun fichier ni manifeste. Chaque manifeste
 declare tous les fichiers de payload de son repertoire ; seul `manifest.json`
 est exclu de cette liste, car son `manifestId` est le hash du corps canonique du
 manifeste. Chaque entree porte le SHA-256 et la taille des octets effectivement
-publies. La verification refuse tout fichier absent, supplementaire ou altere.
+publies. La verification refuse tout fichier absent, supplementaire ou altere. Le schema
+et le verificateur imposent aussi les couples `public/public/questions` et
+`private/answerKey/solutions`, puis exigent l'egalite entre l'id du manifeste,
+le nom du fichier et `payload.id`.
 
 Les payloads JSON sont serialises avec les cles triees, sans espace, en UTF-8 et
 avec un LF final. Aucun timestamp ni chemin absolu n'est emis. Deux executions
@@ -40,10 +43,12 @@ sources. Elle refuse :
 - les memes motifs dans les octets bruts ;
 - tout fichier non declare ou dont le hash/taille diverge.
 
-`tools/check_artifact_access.mjs` analyse aussi tous les workflows. Un job dont
-l'identifiant ou le nom contient `mobile` doit allow-lister un artefact public
-dans `actions/download-artifact`; un telechargement sans nom ou une reference au
-prive fait echouer la CI.
+`tools/check_artifact_access.mjs` analyse tous les jobs de tous les workflows
+ainsi que toutes les actions composites locales, independamment de leur nom.
+Chaque `actions/download-artifact` doit fournir un `with.name` non vide et
+statique. Un artefact prive n'est permis que si le triplet exact
+workflow/job/name (ou action/runs/name) figure dans
+`.github/artifact-access-policy.json`.
 
 ## Publication, retention et immutabilite
 

@@ -4,6 +4,7 @@ import {
   mkdirSync,
   mkdtempSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -35,13 +36,14 @@ function publicQuestion(id, extra = {}) {
   };
 }
 
-function solution(id) {
+function solution(id, extra = {}) {
   return {
     id,
     schemaVersion: "v2",
     kind: "answerKey",
     correct: "A",
     rationale: `Rationale ${id}`,
+    ...extra,
   };
 }
 
@@ -61,7 +63,7 @@ function writePair(root, id, options = {}) {
   writeJson(
     root,
     `content/answerKey/solutions/${options.solutionFile ?? id}.json`,
-    solution(id)
+    solution(id, options.solutionExtra)
   );
 }
 
@@ -132,4 +134,67 @@ test("detecte une fuite de corrige dans un payload public", async () => {
   const result = await validateContent({ root });
 
   assert.ok(result.errors.some((error) => error.includes("[anti-leak]") && error.includes('"correct"')));
+});
+
+test("impose une egalite stricte sans conversion de casse, trim ni normalisation Unicode", async () => {
+  const acceptedRoot = createRoot();
+  writePair(acceptedRoot, "exact", {
+    publicExtra: { choices: ["A", "Re\u0301ponse"] },
+    solutionExtra: { correct: "Re\u0301ponse" },
+  });
+  assert.deepEqual((await validateContent({ root: acceptedRoot })).errors, []);
+
+  for (const [id, choice, correct] of [
+    ["case", "Alpha", "alpha"],
+    ["trim", "Alpha", " Alpha "],
+    ["unicode", "Re\u0301ponse", "Réponse"],
+  ]) {
+    const root = createRoot();
+    writePair(root, id, {
+      publicExtra: { choices: [choice, "Autre"] },
+      solutionExtra: { correct },
+    });
+    const result = await validateContent({ root });
+    assert.ok(
+      result.errors.some(
+        (error) =>
+          error.includes("[integrity:correct-choice]") &&
+          error.includes("egalite stricte")
+      ),
+      `${id} doit etre refuse`
+    );
+  }
+});
+
+test("refuse un payload source expose par lien symbolique", async (context) => {
+  const root = createRoot();
+  writePair(root, "linked");
+  const solutionPath = resolve(
+    root,
+    "content",
+    "answerKey",
+    "solutions",
+    "linked.json"
+  );
+  const targetPath = resolve(root, "linked-target.json");
+  writeFileSync(targetPath, JSON.stringify(solution("linked")));
+  rmSync(solutionPath);
+  try {
+    symlinkSync(targetPath, solutionPath, "file");
+  } catch (error) {
+    if (error.code === "EPERM" || error.code === "EACCES") {
+      context.skip(`liens symboliques indisponibles: ${error.code}`);
+      return;
+    }
+    throw error;
+  }
+
+  const result = await validateContent({ root });
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[schema:solution]") &&
+        error.includes("lien symbolique interdit")
+    )
+  );
 });

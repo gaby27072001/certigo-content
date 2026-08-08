@@ -10,7 +10,9 @@ on:
       - "package-lock.json"
       - "tools/**"
       - "test/**"
-      - ".github/workflows/ci-tooling.yml"
+      - "content/**"
+      - "schemas/**"
+      - ".github/**"
   pull_request:
     paths:
       - ".nvmrc"
@@ -18,7 +20,9 @@ on:
       - "package-lock.json"
       - "tools/**"
       - "test/**"
-      - ".github/workflows/ci-tooling.yml"
+      - "content/**"
+      - "schemas/**"
+      - ".github/**"
 
 concurrency:
   group: ci-tooling-${{ github.ref }}
@@ -34,10 +38,12 @@ jobs:
     runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: ".nvmrc"
           cache: npm
@@ -80,7 +86,7 @@ jobs:
         # Generation is strict; upload is best-effort because repository
         # artifact quota exhaustion must not invalidate the supply-chain gate.
         continue-on-error: true
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: certigo-content-tooling-sbom
           path: tooling-sbom.cdx.json
