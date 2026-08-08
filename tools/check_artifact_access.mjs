@@ -10,27 +10,67 @@ import { compareOrdinal } from "./lib/deterministic.mjs";
 
 const POLICY_SCHEMA = "certigo.artifact-access-policy/v1";
 const DEFAULT_POLICY_PATH = ".github/artifact-access-policy.json";
-const PRIVATE_ARTIFACT_PATTERNS = [
+const PRIVATE_REFERENCE_PATTERNS = [
+  /answerkey/i,
+  /dist[\\/]private/i,
   /certigo-content-private/i,
   /private-sha256/i,
 ];
 
-function isPrivateArtifactName(value) {
-  return PRIVATE_ARTIFACT_PATTERNS.some((pattern) => pattern.test(value));
+function containsPrivateReference(value) {
+  return PRIVATE_REFERENCE_PATTERNS.some((pattern) => pattern.test(value));
+}
+
+function findPrivateReferenceLocations(value, location, ignoredLocations) {
+  if (ignoredLocations.has(location)) return [];
+  if (typeof value === "string") {
+    return containsPrivateReference(value) ? [location] : [];
+  }
+  if (Array.isArray(value)) {
+    return value.flatMap((entry, index) =>
+      findPrivateReferenceLocations(
+        entry,
+        `${location}[${index}]`,
+        ignoredLocations
+      )
+    );
+  }
+  if (value !== null && typeof value === "object") {
+    return Object.entries(value).flatMap(([key, entry]) => {
+      const childLocation = `${location}.${key}`;
+      const keyFindings = containsPrivateReference(key)
+        ? [`${childLocation} (cle)`]
+        : [];
+      return [
+        ...keyFindings,
+        ...findPrivateReferenceLocations(
+          entry,
+          childLocation,
+          ignoredLocations
+        ),
+      ];
+    });
+  }
+  return [];
 }
 
 function loadPolicy(root, policyPath) {
   const path = resolve(root, policyPath);
   const policy = JSON.parse(readFileSync(path, "utf8"));
-  const allowedKeys = new Set(["schema", "privateArtifactDownloads"]);
+  const allowedKeys = new Set([
+    "schema",
+    "privateArtifactDownloads",
+    "privateReferenceScopes",
+  ]);
   const unknownKeys = Object.keys(policy).filter((key) => !allowedKeys.has(key));
   if (
     policy?.schema !== POLICY_SCHEMA ||
     !Array.isArray(policy?.privateArtifactDownloads) ||
+    !Array.isArray(policy?.privateReferenceScopes) ||
     unknownKeys.length > 0
   ) {
     throw new Error(
-      `politique invalide ${policyPath}: schema, privateArtifactDownloads ou cles inattendus`
+      `politique invalide ${policyPath}: schema, allow-lists ou cles inattendus`
     );
   }
 
@@ -42,7 +82,7 @@ function loadPolicy(root, policyPath) {
       !["workflow", "job", "name"].every(
         (key) => typeof entry?.[key] === "string" && entry[key].length > 0
       ) ||
-      !isPrivateArtifactName(entry.name)
+      !containsPrivateReference(entry.name)
     ) {
       throw new Error(
         `politique invalide ${policyPath}: privateArtifactDownloads[${index}] doit contenir workflow/job/name prives exacts`
@@ -57,13 +97,40 @@ function loadPolicy(root, policyPath) {
   if (new Set(identities).size !== identities.length) {
     throw new Error(`politique invalide ${policyPath}: allow-list dupliquee`);
   }
-  return entries;
+  const scopes = policy.privateReferenceScopes.map((entry, index) => {
+    const keys = Object.keys(entry ?? {});
+    if (
+      keys.length !== 2 ||
+      !keys.every((key) => ["workflow", "job"].includes(key)) ||
+      !["workflow", "job"].every(
+        (key) => typeof entry?.[key] === "string" && entry[key].length > 0
+      )
+    ) {
+      throw new Error(
+        `politique invalide ${policyPath}: privateReferenceScopes[${index}] doit contenir workflow/job exacts`
+      );
+    }
+    return entry;
+  });
+  const scopeIdentities = scopes.map(
+    (entry) => `${entry.workflow}\0${entry.job}`
+  );
+  if (new Set(scopeIdentities).size !== scopeIdentities.length) {
+    throw new Error(`politique invalide ${policyPath}: scopes prives dupliques`);
+  }
+  return { downloads: entries, scopes };
 }
 
 function isExplicitlyAllowed(entries, workflow, job, name) {
   return entries.some(
     (entry) =>
       entry.workflow === workflow && entry.job === job && entry.name === name
+  );
+}
+
+function isPrivateScopeAllowed(entries, workflow, job) {
+  return entries.some(
+    (entry) => entry.workflow === workflow && entry.job === job
   );
 }
 
@@ -92,15 +159,26 @@ export async function findArtifactAccessViolations(options = {}) {
   for (const target of targets) {
     const policyIdentity = relative(root, target.path).replaceAll("\\", "/");
     const document = parse(readFileSync(target.path, "utf8"));
-    const scopes =
-      target.kind === "workflow"
-        ? Object.entries(document?.jobs ?? {})
-        : [["runs", { steps: document?.runs?.steps ?? [] }]];
-    for (const [scopeId, scope] of scopes) {
-      for (const step of scope?.steps ?? []) {
+    const scopes = target.kind === "workflow"
+      ? Object.entries(document?.jobs ?? {}).map(([scopeId, definition]) => ({
+          scopeId,
+          definition,
+          steps: definition?.steps ?? [],
+          stepPath: "$.steps",
+        }))
+      : [{
+          scopeId: "runs",
+          definition: document,
+          steps: document?.runs?.steps ?? [],
+          stepPath: "$.runs.steps",
+        }];
+    for (const { scopeId, definition, steps, stepPath } of scopes) {
+      const ignoredPrivateLocations = new Set();
+      for (const [stepIndex, step] of steps.entries()) {
         if (!/^actions\/download-artifact@/i.test(step?.uses ?? "")) continue;
 
         const artifactName = step.with?.name;
+        const artifactNameLocation = `${stepPath}[${stepIndex}].with.name`;
         if (typeof artifactName !== "string" || artifactName.trim().length === 0) {
           violations.push(
             `${policyIdentity}:${scopeId}: download-artifact sans allow-list de nom`
@@ -108,9 +186,9 @@ export async function findArtifactAccessViolations(options = {}) {
           continue;
         }
         if (
-          isPrivateArtifactName(artifactName) &&
+          containsPrivateReference(artifactName) &&
           !isExplicitlyAllowed(
-            privateAllowList,
+            privateAllowList.downloads,
             policyIdentity,
             scopeId,
             artifactName
@@ -119,9 +197,29 @@ export async function findArtifactAccessViolations(options = {}) {
           violations.push(
             `${policyIdentity}:${scopeId}: telechargement prive hors allow-list explicite "${artifactName}"`
           );
+          ignoredPrivateLocations.add(artifactNameLocation);
+        } else if (containsPrivateReference(artifactName)) {
+          ignoredPrivateLocations.add(artifactNameLocation);
         } else if (artifactName.includes("${{")) {
           violations.push(
             `${policyIdentity}:${scopeId}: nom d'artefact dynamique non verifiable "${artifactName}"`
+          );
+        }
+      }
+      if (
+        !isPrivateScopeAllowed(
+          privateAllowList.scopes,
+          policyIdentity,
+          scopeId
+        )
+      ) {
+        for (const location of findPrivateReferenceLocations(
+          definition,
+          "$",
+          ignoredPrivateLocations
+        )) {
+          violations.push(
+            `${policyIdentity}:${scopeId}: reference privee hors mecanisme autorise a ${location}`
           );
         }
       }
@@ -170,7 +268,7 @@ if (isMain) {
         process.exitCode = 1;
       } else {
         console.log(
-          "[artifact-access] OK - tous les telechargements nomment un artefact; le prive est limite a l'allow-list explicite."
+          "[artifact-access] OK - telechargements nommes et toutes les references privees limitees aux allow-lists explicites."
         );
       }
     }

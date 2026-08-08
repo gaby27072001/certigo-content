@@ -61,6 +61,7 @@ test("la CLI de policy retourne un echec exploitable en CI", () => {
     JSON.stringify({
       schema: "certigo.artifact-access-policy/v1",
       privateArtifactDownloads: [],
+      privateReferenceScopes: [],
     })
   );
 

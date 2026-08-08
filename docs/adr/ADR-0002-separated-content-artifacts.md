@@ -48,7 +48,15 @@ ainsi que toutes les actions composites locales, independamment de leur nom.
 Chaque `actions/download-artifact` doit fournir un `with.name` non vide et
 statique. Un artefact prive n'est permis que si le triplet exact
 workflow/job/name (ou action/runs/name) figure dans
-`.github/artifact-access-policy.json`.
+`.github/artifact-access-policy.json`. Le controle parcourt aussi toutes les
+autres valeurs de la definition complete et refuse les references privees via
+commande `gh`, appel `curl`, action tierce, chemin `dist/private` ou
+`answerKey`; seule la valeur `with.name` du `download-artifact` explicitement
+allow-listee est exclue de ce scan.
+Les jobs qui produisent legitimement le canal prive doivent apparaitre dans
+`privateReferenceScopes` par leur couple workflow/job exact. Cette autorisation
+de scope ne dispense jamais un `download-artifact` prive de sa propre entree
+exacte dans `privateArtifactDownloads`.
 
 ## Publication, retention et immutabilite
 

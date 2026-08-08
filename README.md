@@ -70,7 +70,10 @@ Le manifeste de paquet couple strictement `artifact`, `channel`, le repertoire
 du `path`, l'identifiant du nom de fichier et `payload.id`. La politique
 `.github/artifact-access-policy.json` est globale a tous les workflows ; toute
 exception de telechargement prive doit y nommer exactement le workflow, le job
-et l'artefact.
+et l'artefact. Les jobs producteurs autorises sont eux aussi listes exactement
+par workflow/job. Toute autre reference au canal prive dans une definition
+complete de job ou d'action locale (`gh`, `curl`, action tierce, chemin prive,
+etc.) est refusee.
 
 ## Securite de l'outillage
 
