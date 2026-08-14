@@ -34,7 +34,9 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { createHash } from "node:crypto";
+import { pathToFileURL } from "node:url";
 import { glob } from "glob";
+import { compareOrdinal } from "./lib/deterministic.mjs";
 
 export const MANIFEST_SCHEMA_ID = "certigo.content.manifest/v1";
 export const ALGORITHM = "sha256";
@@ -56,7 +58,7 @@ export function canonicalize(value) {
     return "[" + value.map(canonicalize).join(",") + "]";
   }
   if (value !== null && typeof value === "object") {
-    const keys = Object.keys(value).sort();
+    const keys = Object.keys(value).sort(compareOrdinal);
     return (
       "{" +
       keys.map((k) => JSON.stringify(k) + ":" + canonicalize(value[k])).join(",") +
@@ -95,7 +97,7 @@ export async function buildManifest(opts = {}) {
   const items = [];
 
   for (const { channel, glob: pattern } of CHANNELS) {
-    const files = (await glob(pattern, { cwd: root, posix: true })).sort();
+    const files = (await glob(pattern, { cwd: root, posix: true })).sort(compareOrdinal);
     for (const path of files) {
       const abs = resolve(root, path);
       const data = loadJson(abs);
@@ -111,7 +113,7 @@ export async function buildManifest(opts = {}) {
   }
 
   // Global deterministic ordering (by path) regardless of discovery order.
-  items.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0));
+  items.sort((a, b) => compareOrdinal(a.path, b.path));
 
   // Body = the hashed part (NO rootHash / manifestId, NO timestamps).
   const body = {
@@ -146,51 +148,53 @@ function parseArgs(argv) {
   const args = { root: ".", out: null };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--root") args.root = argv[++i];
-    else if (a === "--out") args.out = argv[++i];
-    else if (a === "--help" || a === "-h") args.help = true;
-    else {
-      console.error(`Argument inconnu: ${a}`);
-      process.exit(2);
+    if (a === "--root" || a === "--out") {
+        const value = argv[++i];
+        if (value === undefined || value.startsWith("-")) {
+          throw new Error(`valeur manquante pour ${a}`);
+        }
+        if (a === "--root") args.root = value;
+        else args.out = value;
     }
+    else if (a === "--help" || a === "-h") args.help = true;
+    else throw new Error(`argument inconnu: ${a}`);
   }
   return args;
 }
 
-const isMain = (() => {
-  try {
-    return import.meta.url === `file://${process.argv[1]}` ||
-      import.meta.url.endsWith(new URL(`file://${process.argv[1]}`).pathname);
-  } catch {
-    return false;
-  }
-})();
+const isMain =
+  process.argv[1] !== undefined &&
+  import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 
 if (isMain) {
-  const args = parseArgs(process.argv.slice(2));
-  if (args.help) {
-    console.log(
-      "Usage: node tools/gen_manifest.mjs [--root DIR] [--out FILE]\n" +
-        "  Genere un manifeste de contenu deterministe et adressable par hash."
-    );
-    process.exit(0);
-  }
-  const rootAbs = resolve(args.root);
-  const contentDir = resolve(rootAbs, "content");
-  if (!existsSync(contentDir)) {
-    console.error(`[gen-manifest] repertoire introuvable: ${contentDir}`);
-    process.exit(1);
-  }
-  const manifest = await buildManifest({ root: rootAbs });
-  const serialized = serializeManifest(manifest);
-  if (args.out) {
-    writeFileSync(resolve(args.out), serialized);
-    console.error(
-      `[gen-manifest] ${manifest.itemCount} item(s) -> ${args.out}\n` +
-        `[gen-manifest] rootHash=${manifest.rootHash}\n` +
-        `[gen-manifest] manifestId=${manifest.manifestId}`
-    );
-  } else {
-    process.stdout.write(serialized);
+  try {
+    const args = parseArgs(process.argv.slice(2));
+    if (args.help) {
+        console.log(
+          "Usage: node tools/gen_manifest.mjs [--root DIR] [--out FILE]\n" +
+            "  Genere un manifeste de contenu deterministe et adressable par hash."
+        );
+    } else {
+        const rootAbs = resolve(args.root);
+        const contentDir = resolve(rootAbs, "content");
+        if (!existsSync(contentDir)) {
+          throw new Error(`[gen-manifest] repertoire introuvable: ${contentDir}`);
+        }
+        const manifest = await buildManifest({ root: rootAbs });
+        const serialized = serializeManifest(manifest);
+        if (args.out) {
+          writeFileSync(resolve(args.out), serialized);
+          console.error(
+            `[gen-manifest] ${manifest.itemCount} item(s) -> ${args.out}\n` +
+              `[gen-manifest] rootHash=${manifest.rootHash}\n` +
+              `[gen-manifest] manifestId=${manifest.manifestId}`
+          );
+        } else {
+          process.stdout.write(serialized);
+        }
+    }
+  } catch (error) {
+    console.error(`[gen-manifest] ${error.message}`);
+    process.exitCode = 1;
   }
 }

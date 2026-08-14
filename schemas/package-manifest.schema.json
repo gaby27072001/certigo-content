@@ -25,6 +25,7 @@
     "fileCount": { "type": "integer", "minimum": 0 },
     "files": {
       "type": "array",
+      "uniqueItems": true,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -45,5 +46,47 @@
       "pattern": "^sha256:[0-9a-f]{64}$"
     },
     "rootHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "artifact": { "const": "public" } },
+        "required": ["artifact"]
+      },
+      "then": {
+        "properties": {
+          "channel": { "const": "public" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": { "type": "string", "pattern": "^questions/[^/]+\\.json$" }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "artifact": { "const": "private" } },
+        "required": ["artifact"]
+      },
+      "then": {
+        "properties": {
+          "channel": { "const": "answerKey" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": { "type": "string", "pattern": "^solutions/[^/]+\\.json$" }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

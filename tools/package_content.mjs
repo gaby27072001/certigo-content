@@ -16,6 +16,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { glob } from "glob";
 import { canonicalize, sha256Hex } from "./gen_manifest.mjs";
+import { compareOrdinal } from "./lib/deterministic.mjs";
 import { validateContent } from "./validate_content.mjs";
 
 export const PACKAGE_MANIFEST_SCHEMA_ID = "certigo.content.package-manifest/v1";
@@ -27,12 +28,14 @@ const CHANNELS = {
     manifestChannel: "public",
     sourceGlob: "content/public/questions/*.json",
     payloadDirectory: "questions",
+    payloadKind: "public",
   },
   private: {
     name: "private",
     manifestChannel: "answerKey",
     sourceGlob: "content/answerKey/solutions/*.json",
     payloadDirectory: "solutions",
+    payloadKind: "answerKey",
   },
 };
 
@@ -70,7 +73,7 @@ function walkFiles(root) {
 
   function walk(directory) {
     for (const entry of readdirSync(directory, { withFileTypes: true }).sort((a, b) =>
-      a.name.localeCompare(b.name)
+      compareOrdinal(a.name, b.name)
     )) {
       const absolutePath = resolve(directory, entry.name);
       const relativePath = toPosix(relative(root, absolutePath));
@@ -85,7 +88,7 @@ function walkFiles(root) {
   }
 
   walk(root);
-  return files.sort();
+  return files.sort(compareOrdinal);
 }
 
 function buildManifest(config, files) {
@@ -192,6 +195,11 @@ export function verifyArtifact({
   const manifest = loadJson(manifestPath);
   const validateManifest = createManifestValidator(schemaPath);
   const errors = [];
+  const manifestFiles = Array.isArray(manifest.files) ? manifest.files : [];
+  const expectedConfig = CHANNELS[expectedChannel];
+  if (!expectedConfig) {
+    throw new Error(`[package-verify] canal attendu inconnu: ${expectedChannel}`);
+  }
 
   if (!validateManifest(manifest)) {
     errors.push(
@@ -201,7 +209,12 @@ export function verifyArtifact({
     );
   }
   if (manifest.artifact !== expectedChannel) {
-    errors.push(`canal attendu ${expectedChannel}, obtenu ${manifest.artifact}`);
+    errors.push(`artefact attendu ${expectedChannel}, obtenu ${manifest.artifact}`);
+  }
+  if (manifest.channel !== expectedConfig.manifestChannel) {
+    errors.push(
+      `channel attendu ${expectedConfig.manifestChannel}, obtenu ${manifest.channel}`
+    );
   }
 
   const expectedManifestId = `sha256:${sha256Hex(canonicalize(manifestBody(manifest)))}`;
@@ -210,7 +223,9 @@ export function verifyArtifact({
   }
 
   const actualFiles = walkFiles(root).filter((path) => path !== "manifest.json");
-  const declaredFiles = (manifest.files ?? []).map((entry) => entry.path);
+  const declaredFiles = manifestFiles
+    .map((entry) => entry?.path)
+    .filter((path) => typeof path === "string");
   if (new Set(declaredFiles).size !== declaredFiles.length) {
     errors.push("le manifeste contient des chemins dupliques");
   }
@@ -221,11 +236,37 @@ export function verifyArtifact({
     if (!actualFiles.includes(path)) errors.push(`fichier declare absent: ${path}`);
   }
 
-  for (const entry of manifest.files ?? []) {
+  for (const entry of manifestFiles) {
+    if (entry === null || typeof entry !== "object" || typeof entry.path !== "string") {
+      continue;
+    }
     if (!actualFiles.includes(entry.path)) continue;
     const bytes = readFileSync(resolve(root, entry.path));
     if (bytes.length !== entry.size) errors.push(`taille incorrecte: ${entry.path}`);
     if (hashBuffer(bytes) !== entry.hash) errors.push(`hash incorrect: ${entry.path}`);
+    const expectedPath = `${expectedConfig.payloadDirectory}/${entry.id}.json`;
+    if (entry.path !== expectedPath) {
+      errors.push(
+        `couplage path/id incorrect: ${entry.path} (attendu ${expectedPath})`
+      );
+    }
+    try {
+      const payload = JSON.parse(
+        bytes.toString("utf8").replace(/^\uFEFF/, "")
+      );
+      if (payload.id !== entry.id) {
+        errors.push(
+          `couplage payload/id incorrect: ${entry.path} declare "${entry.id}", payload "${payload.id}"`
+        );
+      }
+      if (payload.kind !== expectedConfig.payloadKind) {
+        errors.push(
+          `kind payload incorrect: ${entry.path} attendu ${expectedConfig.payloadKind}, obtenu ${payload.kind}`
+        );
+      }
+    } catch (error) {
+      errors.push(`JSON de payload invalide ${entry.path}: ${error.message}`);
+    }
   }
   if (manifest.fileCount !== actualFiles.length) {
     errors.push(`fileCount=${manifest.fileCount}, fichiers reels=${actualFiles.length}`);
@@ -248,7 +289,9 @@ export function verifyArtifact({
 
 async function writeArtifact(root, distRoot, config) {
   const artifactRoot = resolve(distRoot, config.name);
-  const sourceFiles = (await glob(config.sourceGlob, { cwd: root, posix: true })).sort();
+  const sourceFiles = (await glob(config.sourceGlob, { cwd: root, posix: true })).sort(
+    compareOrdinal
+  );
   const manifestFiles = [];
 
   for (const sourcePath of sourceFiles) {
@@ -266,7 +309,7 @@ async function writeArtifact(root, distRoot, config) {
     });
   }
 
-  manifestFiles.sort((a, b) => a.path.localeCompare(b.path));
+  manifestFiles.sort((a, b) => compareOrdinal(a.path, b.path));
   const manifest = buildManifest(config, manifestFiles);
   writeFileSync(resolve(artifactRoot, "manifest.json"), serializePretty(manifest), "utf8");
   return artifactRoot;
@@ -359,9 +402,15 @@ function parseArgs(cliArgs) {
   const options = { channel: "all", verify: false };
   for (let index = 0; index < cliArgs.length; index++) {
     const argument = cliArgs[index];
-    if (argument === "--channel") options.channel = cliArgs[++index];
-    else if (argument === "--root") options.root = cliArgs[++index];
-    else if (argument === "--out") options.outDir = cliArgs[++index];
+    if (argument === "--channel" || argument === "--root" || argument === "--out") {
+      const value = cliArgs[++index];
+      if (value === undefined || value.startsWith("-")) {
+        throw new Error(`valeur manquante pour ${argument}`);
+      }
+      if (argument === "--channel") options.channel = value;
+      else if (argument === "--root") options.root = value;
+      else options.outDir = value;
+    }
     else if (argument === "--verify") options.verify = true;
     else if (argument === "--help" || argument === "-h") options.help = true;
     else throw new Error(`argument inconnu: ${argument}`);
