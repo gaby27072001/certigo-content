@@ -1,0 +1,279 @@
+name: publish-content-azure
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Canal a promouvoir depuis main
+        required: true
+        type: choice
+        default: both
+        options:
+          - public
+          - answer-key
+          - both
+
+concurrency:
+  group: publish-content-azure-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  plan:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    permissions:
+      contents: read
+    outputs:
+      public_root_hash: ${{ steps.identity.outputs.public_root_hash }}
+      answer_key_root_hash: ${{ steps.identity.outputs.answer_key_root_hash }}
+      public_storage_target: ${{ steps.topology.outputs.public_storage_target }}
+      answer_key_storage_target: ${{ steps.topology.outputs.answer_key_storage_target }}
+      public_client_id: ${{ steps.topology.outputs.public_client_id }}
+      answer_key_client_id: ${{ steps.topology.outputs.answer_key_client_id }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Validate promotion topology
+        id: topology
+        shell: bash
+        env:
+          PUBLIC_STORAGE_TARGET: ${{ vars.AZURE_PUBLIC_STORAGE_TARGET }}
+          ANSWER_KEY_STORAGE_TARGET: ${{ vars.AZURE_ANSWER_KEY_STORAGE_TARGET }}
+          PUBLIC_CLIENT_ID: ${{ vars.AZURE_PUBLIC_CLIENT_ID }}
+          ANSWER_KEY_CLIENT_ID: ${{ vars.AZURE_ANSWER_KEY_CLIENT_ID }}
+        run: |
+          : "${PUBLIC_STORAGE_TARGET:?Configure repository variable AZURE_PUBLIC_STORAGE_TARGET}"
+          : "${ANSWER_KEY_STORAGE_TARGET:?Configure repository variable AZURE_ANSWER_KEY_STORAGE_TARGET}"
+          : "${PUBLIC_CLIENT_ID:?Configure repository variable AZURE_PUBLIC_CLIENT_ID}"
+          : "${ANSWER_KEY_CLIENT_ID:?Configure repository variable AZURE_ANSWER_KEY_CLIENT_ID}"
+          [[ "${PUBLIC_STORAGE_TARGET}" =~ ^[a-z0-9]{3,24}/[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$ ]]
+          [[ "${ANSWER_KEY_STORAGE_TARGET}" =~ ^[a-z0-9]{3,24}/[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$ ]]
+          [[ "${PUBLIC_CLIENT_ID}" =~ ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$ ]]
+          [[ "${ANSWER_KEY_CLIENT_ID}" =~ ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$ ]]
+          PUBLIC_CLIENT_ID="${PUBLIC_CLIENT_ID,,}"
+          ANSWER_KEY_CLIENT_ID="${ANSWER_KEY_CLIENT_ID,,}"
+          test "${PUBLIC_STORAGE_TARGET}" != "${ANSWER_KEY_STORAGE_TARGET}"
+          test "${PUBLIC_CLIENT_ID}" != "${ANSWER_KEY_CLIENT_ID}"
+          {
+            echo "public_storage_target=${PUBLIC_STORAGE_TARGET}"
+            echo "answer_key_storage_target=${ANSWER_KEY_STORAGE_TARGET}"
+            echo "public_client_id=${PUBLIC_CLIENT_ID}"
+            echo "answer_key_client_id=${ANSWER_KEY_CLIENT_ID}"
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Run publication gates
+        run: |
+          npm test
+          npm run validate
+          npm run manifest:check
+          npm run policy:artifact-access
+          npm run package
+          npm run package:verify
+
+      - name: Resolve immutable identities
+        id: identity
+        shell: bash
+        run: |
+          node --input-type=module -e "
+            import fs from 'node:fs';
+            const report = JSON.parse(fs.readFileSync('dist/reports/package-summary.json', 'utf8'));
+            const publicPackage = report.packages.find((entry) => entry.artifact === 'public');
+            const answerKeyPackage = report.packages.find((entry) => entry.artifact !== 'public');
+            if (!publicPackage || !answerKeyPackage) throw new Error('package summary incomplet');
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, 'public_root_hash=' + publicPackage.rootHash + '\n');
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, 'answer_key_root_hash=' + answerKeyPackage.rootHash + '\n');
+            fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+              '## Candidats de promotion\n\n' +
+              '| Canal | manifestId |\n| --- | --- |\n' +
+              '| public | \`' + publicPackage.manifestId + '\` |\n' +
+              '| answer-key | \`' + answerKeyPackage.manifestId + '\` |\n');
+          "
+
+  publish-public:
+    needs: plan
+    if: ${{ inputs.channel == 'public' || inputs.channel == 'both' }}
+    environment: azure-content-public
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_CORE_OUTPUT: none
+      AZURE_LOGIN_PRE_CLEANUP: true
+      AZURE_LOGIN_POST_CLEANUP: true
+    steps:
+      - name: Checkout approved commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Rebuild and verify public artifact
+        shell: bash
+        env:
+          EXPECTED_ROOT_HASH: ${{ needs.plan.outputs.public_root_hash }}
+        run: |
+          npm run package:public
+          npm run package:verify:public
+          ACTUAL_ROOT_HASH="$(node -p "JSON.parse(require('fs').readFileSync('dist/public/manifest.json')).rootHash")"
+          test "${ACTUAL_ROOT_HASH}" = "${EXPECTED_ROOT_HASH}"
+
+      - name: Validate public environment variables
+        shell: bash
+        env:
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          EXPECTED_CLIENT_ID: ${{ needs.plan.outputs.public_client_id }}
+          EXPECTED_STORAGE_TARGET: ${{ needs.plan.outputs.public_storage_target }}
+        run: |
+          : "${AZURE_CLIENT_ID:?Configure AZURE_CLIENT_ID in azure-content-public}"
+          : "${AZURE_TENANT_ID:?Configure AZURE_TENANT_ID in azure-content-public}"
+          : "${AZURE_SUBSCRIPTION_ID:?Configure AZURE_SUBSCRIPTION_ID in azure-content-public}"
+          : "${AZURE_RESOURCE_GROUP:?Configure AZURE_RESOURCE_GROUP in azure-content-public}"
+          : "${AZURE_STORAGE_ACCOUNT:?Configure AZURE_STORAGE_ACCOUNT in azure-content-public}"
+          : "${AZURE_STORAGE_CONTAINER:?Configure AZURE_STORAGE_CONTAINER in azure-content-public}"
+          test "${AZURE_CLIENT_ID,,}" = "${EXPECTED_CLIENT_ID}"
+          test "${AZURE_STORAGE_ACCOUNT}/${AZURE_STORAGE_CONTAINER}" = "${EXPECTED_STORAGE_TARGET}"
+
+      - name: Login to Azure with GitHub OIDC
+        uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange
+
+      - name: Publish and verify public blobs
+        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        env:
+          SOURCE_DIRECTORY: dist/public
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          REMOTE_PREFIX: releases/sha256/${{ needs.plan.outputs.public_root_hash }}
+          CACHE_CONTROL: public,max-age=31536000,immutable
+        with:
+          azcliversion: 2.89.1
+          inlineScript: |
+            bash tools/publish_blob_artifact.sh \
+              "${SOURCE_DIRECTORY}" \
+              "${AZURE_RESOURCE_GROUP}" \
+              "${AZURE_STORAGE_ACCOUNT}" \
+              "${AZURE_STORAGE_CONTAINER}" \
+              "${REMOTE_PREFIX}" \
+              "${CACHE_CONTROL}"
+
+  publish-answer-key:
+    needs: plan
+    if: ${{ inputs.channel == 'answer-key' || inputs.channel == 'both' }}
+    environment: azure-content-answer-key
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_CORE_OUTPUT: none
+      AZURE_LOGIN_PRE_CLEANUP: true
+      AZURE_LOGIN_POST_CLEANUP: true
+    steps:
+      - name: Checkout approved commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: ".nvmrc"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install locked tooling
+        run: npm ci
+
+      - name: Rebuild and verify answer key artifact
+        shell: bash
+        env:
+          EXPECTED_ROOT_HASH: ${{ needs.plan.outputs.answer_key_root_hash }}
+        run: |
+          npm run package:private
+          npm run package:verify:private
+          ACTUAL_ROOT_HASH="$(node -p "JSON.parse(require('fs').readFileSync('dist/private/manifest.json')).rootHash")"
+          test "${ACTUAL_ROOT_HASH}" = "${EXPECTED_ROOT_HASH}"
+
+      - name: Validate answer key environment variables
+        shell: bash
+        env:
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          EXPECTED_CLIENT_ID: ${{ needs.plan.outputs.answer_key_client_id }}
+          EXPECTED_STORAGE_TARGET: ${{ needs.plan.outputs.answer_key_storage_target }}
+        run: |
+          : "${AZURE_CLIENT_ID:?Configure AZURE_CLIENT_ID in azure-content-answer-key}"
+          : "${AZURE_TENANT_ID:?Configure AZURE_TENANT_ID in azure-content-answer-key}"
+          : "${AZURE_SUBSCRIPTION_ID:?Configure AZURE_SUBSCRIPTION_ID in azure-content-answer-key}"
+          : "${AZURE_RESOURCE_GROUP:?Configure AZURE_RESOURCE_GROUP in azure-content-answer-key}"
+          : "${AZURE_STORAGE_ACCOUNT:?Configure AZURE_STORAGE_ACCOUNT in azure-content-answer-key}"
+          : "${AZURE_STORAGE_CONTAINER:?Configure AZURE_STORAGE_CONTAINER in azure-content-answer-key}"
+          test "${AZURE_CLIENT_ID,,}" = "${EXPECTED_CLIENT_ID}"
+          test "${AZURE_STORAGE_ACCOUNT}/${AZURE_STORAGE_CONTAINER}" = "${EXPECTED_STORAGE_TARGET}"
+
+      - name: Login to Azure with GitHub OIDC
+        uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange
+
+      - name: Publish and verify answer key blobs
+        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        env:
+          SOURCE_DIRECTORY: dist/private
+          AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          REMOTE_PREFIX: releases/sha256/${{ needs.plan.outputs.answer_key_root_hash }}
+          CACHE_CONTROL: private,no-store
+        with:
+          azcliversion: 2.89.1
+          inlineScript: |
+            bash tools/publish_blob_artifact.sh \
+              "${SOURCE_DIRECTORY}" \
+              "${AZURE_RESOURCE_GROUP}" \
+              "${AZURE_STORAGE_ACCOUNT}" \
+              "${AZURE_STORAGE_CONTAINER}" \
+              "${REMOTE_PREFIX}" \
+              "${CACHE_CONTROL}"

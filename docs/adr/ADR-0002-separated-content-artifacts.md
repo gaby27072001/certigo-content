@@ -101,3 +101,7 @@ n'etant active par ce lot, le rollback ne requiert aucune migration de donnees.
 Ce lot ne modifie ni le backend (#244), ni le mobile (#243), ni les formats de
 contenu (#245). Il fournit uniquement les artefacts et les gates que ces lots
 consommeront plus tard.
+
+La publication durable externe est definie separement par
+[`ADR-0003`](ADR-0003-azure-immutable-promotion.md). Elle conserve les deux
+canaux, ne telecharge pas les artefacts GitHub et ne modifie pas le corpus.
