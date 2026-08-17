@@ -10,6 +10,7 @@
   },
   "scripts": {
     "validate": "node tools/validate_content.mjs",
+    "catalog:freshness": "node tools/check_catalog_freshness.mjs",
     "manifest:check": "node tools/manifest_selfcheck.mjs",
     "manifest:generate": "node tools/gen_manifest.mjs --out content/manifest.json",
     "package": "node tools/package_content.mjs",

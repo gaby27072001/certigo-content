@@ -3,6 +3,8 @@
 Source editoriale privee du contenu Certigo. Le depot conserve deux espaces :
 
 - `content/public/questions/` contient les questions distribuables sans reponse ;
+- `content/public/catalog/` et `content/public/coverage/` contiennent le
+  catalogue officiel et les matrices de couverture distribuables ;
 - `content/answerKey/solutions/` contient les corriges sensibles.
 
 Cette separation est aussi une frontiere de distribution : l'outillage produit
@@ -34,6 +36,7 @@ un commit donne.
 | --- | --- |
 | `npm test` | Execute les tests avec la couverture native Node et, si le runtime les supporte, les seuils lignes 80 %, fonctions 75 %, branches 70 %. |
 | `npm run validate` | Valide le corpus reel : schemas, bijection et anti-fuite. |
+| `npm run catalog:freshness` | Controle sans reseau l'age du snapshot et les transitions de cycle de vie ; accepte `-- --as-of YYYY-MM-DD`. |
 | `npm run manifest:check` | Verifie le determinisme, le vecteur golden et le schema du manifeste. |
 | `npm run manifest:generate` | Genere le manifeste mixte historique, reserve au rollback. |
 | `npm run package` | Nettoie `dist/`, valide le corpus et produit les deux artefacts. |
@@ -57,7 +60,8 @@ retention, l'immutabilite, la publication et le rollback.
 4. Executer `npm run manifest:check`.
 5. Executer `npm run package` puis `npm run package:verify`.
 
-Une question publique ne doit contenir aucune cle `correct` ou `rationale`.
+Une question publique, le catalogue et les matrices ne doivent contenir aucune
+cle `correct` ou `rationale`.
 Chaque identifiant public doit posseder exactement une solution et
 reciproquement. `solution.correct` doit etre une valeur de `question.choices`
 selon l'egalite stricte JavaScript (`===`) : aucune conversion de casse, aucun
@@ -65,6 +69,16 @@ trim et aucune normalisation Unicode ne sont appliques. Le manifeste est
 deterministe : toute modification semantique
 du corpus change son hash, tandis que l'ordre des cles et la mise en forme JSON
 ne le changent pas.
+
+Les payloads historiques `v2` restent valides et a plat. Les futures paires
+multi-cloud utilisent le schema `v3`, un ID namespace
+`provider.certification.objective.slug.sequence` et des chemins symetriques
+`questions/<provider>/<certification>/` /
+`solutions/<provider>/<certification>/`. Le catalogue et les 26 matrices AWS /
+Google Cloud du snapshot 2026-08-17 sont documentes dans
+[`docs/editorial/multi-cloud-certification-catalog.md`](docs/editorial/multi-cloud-certification-catalog.md).
+Les choix d'identite, provenance, versioning et cycle de vie sont fixes par
+[`ADR-0004`](docs/adr/ADR-0004-multi-cloud-editorial-foundation.md).
 
 Le manifeste de paquet couple strictement `artifact`, `channel`, le repertoire
 du `path`, l'identifiant du nom de fichier et `payload.id`. La politique

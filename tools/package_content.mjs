@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import {
+  existsSync,
   lstatSync,
   mkdirSync,
   readFileSync,
@@ -16,24 +17,35 @@ import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { glob } from "glob";
 import { canonicalize, sha256Hex } from "./gen_manifest.mjs";
+import { CATALOG_PATH, metadataFields } from "./lib/catalog.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import { validateContent } from "./validate_content.mjs";
 
 export const PACKAGE_MANIFEST_SCHEMA_ID = "certigo.content.package-manifest/v1";
+export const EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID =
+  "certigo.content.package-manifest/v2";
 export const PACKAGE_SERIALIZATION = "json-sorted-keys-compact-utf8-lf";
 
 const CHANNELS = {
   public: {
     name: "public",
     manifestChannel: "public",
-    sourceGlob: "content/public/questions/*.json",
+    sourceRoot: "content/public",
+    legacySourceGlob: "content/public/questions/*.json",
+    extendedSourceGlobs: [
+      "content/public/questions/**/*.json",
+      "content/public/catalog/*.json",
+      "content/public/coverage/**/*.json",
+    ],
     payloadDirectory: "questions",
     payloadKind: "public",
   },
   private: {
     name: "private",
     manifestChannel: "answerKey",
-    sourceGlob: "content/answerKey/solutions/*.json",
+    sourceRoot: "content/answerKey",
+    legacySourceGlob: "content/answerKey/solutions/*.json",
+    extendedSourceGlobs: ["content/answerKey/solutions/**/*.json"],
     payloadDirectory: "solutions",
     payloadKind: "answerKey",
   },
@@ -91,9 +103,11 @@ function walkFiles(root) {
   return files.sort(compareOrdinal);
 }
 
-function buildManifest(config, files) {
+function buildManifest(config, files, extended) {
   const body = {
-    schema: PACKAGE_MANIFEST_SCHEMA_ID,
+    schema: extended
+      ? EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID
+      : PACKAGE_MANIFEST_SCHEMA_ID,
     channel: config.manifestChannel,
     artifact: config.name,
     algorithm: "sha256",
@@ -107,6 +121,42 @@ function buildManifest(config, files) {
     manifestId: `sha256:${rootHash}`,
     rootHash,
   };
+}
+
+function inferResourceType(path) {
+  if (path.startsWith("questions/")) return "question";
+  if (path.startsWith("solutions/")) return "solution";
+  if (path === "catalog/certifications.json") return "certificationCatalog";
+  if (path.startsWith("coverage/")) return "coverageMatrix";
+  return null;
+}
+
+function resourceIdentity(resourceType, data) {
+  if (resourceType === "certificationCatalog") return "certification-catalog";
+  if (resourceType === "coverageMatrix") return data.certification;
+  return data.id;
+}
+
+function resourceMetadata(resourceType, data) {
+  if (resourceType === "coverageMatrix") {
+    return {
+      provider: data.provider,
+      certification: data.certification,
+      blueprintVersion: data.blueprintVersion,
+    };
+  }
+  return metadataFields(data);
+}
+
+function expectedResourcePath(config, resourceType, data, extended) {
+  if (resourceType === "certificationCatalog") return "catalog/certifications.json";
+  if (resourceType === "coverageMatrix") {
+    return `coverage/${data.provider}/${data.certification.split(":")[1]}.json`;
+  }
+  if (!extended || data.schemaVersion === "v2") {
+    return `${config.payloadDirectory}/${data.id}.json`;
+  }
+  return `${config.payloadDirectory}/${data.metadata.provider}/${data.metadata.certification.split(":")[1]}/${data.id}.json`;
 }
 
 function manifestBody(manifest) {
@@ -193,6 +243,8 @@ export function verifyArtifact({
   const root = resolve(artifactRoot);
   const manifestPath = resolve(root, "manifest.json");
   const manifest = loadJson(manifestPath);
+  const extended =
+    manifest.schema === EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID;
   const validateManifest = createManifestValidator(schemaPath);
   const errors = [];
   const manifestFiles = Array.isArray(manifest.files) ? manifest.files : [];
@@ -244,25 +296,74 @@ export function verifyArtifact({
     const bytes = readFileSync(resolve(root, entry.path));
     if (bytes.length !== entry.size) errors.push(`taille incorrecte: ${entry.path}`);
     if (hashBuffer(bytes) !== entry.hash) errors.push(`hash incorrect: ${entry.path}`);
-    const expectedPath = `${expectedConfig.payloadDirectory}/${entry.id}.json`;
-    if (entry.path !== expectedPath) {
-      errors.push(
-        `couplage path/id incorrect: ${entry.path} (attendu ${expectedPath})`
-      );
-    }
     try {
       const payload = JSON.parse(
         bytes.toString("utf8").replace(/^\uFEFF/, "")
       );
-      if (payload.id !== entry.id) {
+      const resourceType = inferResourceType(entry.path);
+      if (resourceType === null) {
+        errors.push(`type de ressource inconnu: ${entry.path}`);
+        continue;
+      }
+      if (extended && entry.resourceType !== resourceType) {
         errors.push(
-          `couplage payload/id incorrect: ${entry.path} declare "${entry.id}", payload "${payload.id}"`
+          `resourceType incorrect: ${entry.path} attendu ${resourceType}, obtenu ${entry.resourceType}`
         );
       }
-      if (payload.kind !== expectedConfig.payloadKind) {
+      if (!extended && !["question", "solution"].includes(resourceType)) {
+        errors.push(`ressource ${resourceType} interdite dans un manifeste v1`);
+      }
+      const expectedId = resourceIdentity(resourceType, payload);
+      if (expectedId !== entry.id) {
+        errors.push(
+          `couplage payload/id incorrect: ${entry.path} declare "${entry.id}", payload "${expectedId}"`
+        );
+      }
+      const expectedPath = expectedResourcePath(
+        expectedConfig,
+        resourceType,
+        payload,
+        extended
+      );
+      if (entry.path !== expectedPath) {
+        errors.push(
+          `couplage path/id incorrect: ${entry.path} (attendu ${expectedPath})`
+        );
+      }
+      if (
+        ["question", "solution"].includes(resourceType) &&
+        payload.kind !== expectedConfig.payloadKind
+      ) {
         errors.push(
           `kind payload incorrect: ${entry.path} attendu ${expectedConfig.payloadKind}, obtenu ${payload.kind}`
         );
+      }
+      if (
+        resourceType === "certificationCatalog" &&
+        payload.schema !== "certigo.certification-catalog/v1"
+      ) {
+        errors.push(`schema catalogue incorrect: ${entry.path}`);
+      }
+      if (
+        resourceType === "coverageMatrix" &&
+        payload.schema !== "certigo.coverage-matrix/v1"
+      ) {
+        errors.push(`schema couverture incorrect: ${entry.path}`);
+      }
+      if (extended) {
+        const expectedMetadata = resourceMetadata(resourceType, payload);
+        for (const field of [
+          "provider",
+          "certification",
+          "blueprintVersion",
+          "objective",
+        ]) {
+          if (entry[field] !== expectedMetadata[field]) {
+            errors.push(
+              `metadata manifeste incorrecte: ${entry.path}.${field}`
+            );
+          }
+        }
       }
     } catch (error) {
       errors.push(`JSON de payload invalide ${entry.path}: ${error.message}`);
@@ -287,30 +388,44 @@ export function verifyArtifact({
   return { manifest, antiLeakReport };
 }
 
-async function writeArtifact(root, distRoot, config) {
+async function writeArtifact(root, distRoot, config, extended) {
   const artifactRoot = resolve(distRoot, config.name);
-  const sourceFiles = (await glob(config.sourceGlob, { cwd: root, posix: true })).sort(
-    compareOrdinal
-  );
+  const sourceFiles = (
+    await glob(
+      extended ? config.extendedSourceGlobs : config.legacySourceGlob,
+      { cwd: root, posix: true }
+    )
+  ).sort(compareOrdinal);
   const manifestFiles = [];
 
   for (const sourcePath of sourceFiles) {
     const data = loadJson(resolve(root, sourcePath));
-    const outputPath = `${config.payloadDirectory}/${basename(sourcePath)}`;
+    const outputPath = extended
+      ? toPosix(relative(config.sourceRoot, sourcePath))
+      : `${config.payloadDirectory}/${basename(sourcePath)}`;
+    const resourceType = inferResourceType(outputPath);
+    if (resourceType === null) {
+      throw new Error(`[package] type de ressource inconnu: ${sourcePath}`);
+    }
     const serialized = serializeJson(data);
     const outputAbsolutePath = resolve(artifactRoot, outputPath);
     mkdirSync(dirname(outputAbsolutePath), { recursive: true });
     writeFileSync(outputAbsolutePath, serialized, "utf8");
-    manifestFiles.push({
-      id: data.id,
+    const manifestEntry = {
+      id: resourceIdentity(resourceType, data),
       path: outputPath,
       hash: sha256Hex(serialized),
       size: Buffer.byteLength(serialized, "utf8"),
-    });
+    };
+    if (extended) {
+      manifestEntry.resourceType = resourceType;
+      Object.assign(manifestEntry, resourceMetadata(resourceType, data));
+    }
+    manifestFiles.push(manifestEntry);
   }
 
   manifestFiles.sort((a, b) => compareOrdinal(a.path, b.path));
-  const manifest = buildManifest(config, manifestFiles);
+  const manifest = buildManifest(config, manifestFiles, extended);
   writeFileSync(resolve(artifactRoot, "manifest.json"), serializePretty(manifest), "utf8");
   return artifactRoot;
 }
@@ -342,6 +457,7 @@ export async function packageContent(options = {}) {
   const root = resolve(options.root ?? cwd());
   const distRoot = resolve(root, options.outDir ?? "dist");
   const configs = resolveChannels(options.channel ?? "all");
+  const extended = existsSync(resolve(root, CATALOG_PATH));
   const schemaPath = resolve(root, "schemas", "package-manifest.schema.json");
   const validation = await validateContent({ root });
   if (validation.errors.length > 0) {
@@ -363,7 +479,7 @@ export async function packageContent(options = {}) {
 
   const packages = [];
   for (const config of configs) {
-    const artifactRoot = await writeArtifact(root, distRoot, config);
+    const artifactRoot = await writeArtifact(root, distRoot, config, extended);
     const verified = verifyArtifact({
       artifactRoot,
       expectedChannel: config.name,
@@ -388,6 +504,8 @@ export async function packageContent(options = {}) {
   const summary = {
     schema: "certigo.content.package-report/v1",
     sourcePairCount: validation.pairCount,
+    certificationCount: validation.certificationCount,
+    coverageMatrixCount: validation.coverageCount,
     packages,
   };
   writeFileSync(

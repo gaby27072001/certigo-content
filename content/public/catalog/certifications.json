@@ -1,0 +1,1004 @@
+{
+  "schema": "certigo.certification-catalog/v1",
+  "asOf": "2026-08-17",
+  "freshness": {
+    "maxAgeDays": 30,
+    "reviewDueOn": "2026-09-16"
+  },
+  "providers": [
+    {
+      "id": "aws",
+      "name": "Amazon Web Services",
+      "namespace": "aws",
+      "officialCatalogUrl": "https://docs.aws.amazon.com/aws-certification/latest/examguides/aws-certification-exam-guides.html",
+      "sourceHosts": [
+        "aws.amazon.com",
+        "d1.awsstatic.com",
+        "docs.aws.amazon.com"
+      ],
+      "checkedOn": "2026-08-17"
+    },
+    {
+      "id": "gcp",
+      "name": "Google Cloud",
+      "namespace": "gcp",
+      "officialCatalogUrl": "https://cloud.google.com/learn/certification",
+      "sourceHosts": [
+        "cloud.google.com",
+        "services.google.com",
+        "support.google.com"
+      ],
+      "checkedOn": "2026-08-17"
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "namespace": "microsoft",
+      "officialCatalogUrl": null,
+      "sourceHosts": [
+        "learn.microsoft.com"
+      ],
+      "checkedOn": null
+    }
+  ],
+  "certifications": [
+    {
+      "id": "aws:aif-c01",
+      "provider": "aws",
+      "slug": "aif-c01",
+      "officialCode": "AIF-C01",
+      "officialSlug": "certified-ai-practitioner",
+      "title": "AWS Certified AI Practitioner",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-ai-practitioner/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html",
+        "version": "1.1",
+        "publishedOn": "2026-04-30",
+        "versionSource": "change-history",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Fundamentals of AI and ML", "weightPercent": 20, "weightType": "exact" },
+          { "id": "domain-2", "title": "Fundamentals of GenAI", "weightPercent": 24, "weightType": "exact" },
+          { "id": "domain-3", "title": "Applications of Foundation Models", "weightPercent": 28, "weightType": "exact" },
+          { "id": "domain-4", "title": "Guidelines for Responsible AI", "weightPercent": 14, "weightType": "exact" },
+          { "id": "domain-5", "title": "Security, Compliance, and Governance for AI Solutions", "weightPercent": 14, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-ai-practitioner/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:aip-c01",
+      "provider": "aws",
+      "slug": "aip-c01",
+      "officialCode": "AIP-C01",
+      "officialSlug": "certified-generative-ai-developer-professional",
+      "title": "AWS Certified Generative AI Developer - Professional",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-generative-ai-developer-professional/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01/ai-professional-01.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Foundation Model Integration, Data Management, and Compliance", "weightPercent": 31, "weightType": "exact" },
+          { "id": "domain-2", "title": "Implementation and Integration", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-3", "title": "AI Safety, Security, and Governance", "weightPercent": 20, "weightType": "exact" },
+          { "id": "domain-4", "title": "Operational Efficiency and Optimization for GenAI Applications", "weightPercent": 12, "weightType": "exact" },
+          { "id": "domain-5", "title": "Testing, Validation, and Troubleshooting", "weightPercent": 11, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-generative-ai-developer-professional/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/ai-professional-01/ai-professional-01.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:ans-c01",
+      "provider": "aws",
+      "slug": "ans-c01",
+      "officialCode": "ANS-C01",
+      "officialSlug": "certified-advanced-networking-specialty",
+      "title": "AWS Certified Advanced Networking - Specialty",
+      "level": "specialty",
+      "status": "active-retiring",
+      "officialUrl": "https://aws.amazon.com/certification/certified-advanced-networking-specialty/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Network Design", "weightPercent": 30, "weightType": "exact" },
+          { "id": "domain-2", "title": "Network Implementation", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-3", "title": "Network Management and Operation", "weightPercent": 20, "weightType": "exact" },
+          { "id": "domain-4", "title": "Network Security, Compliance, and Governance", "weightPercent": 24, "weightType": "exact" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-08-26",
+        "lastExamOn": "2026-08-25",
+        "note": "AWS states that August 25, 2026 is the last day to take the exam."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-advanced-networking-specialty/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01.html" },
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/certification/certified-advanced-networking-specialty/" }
+        ]
+      }
+    },
+    {
+      "id": "aws:clf-c02",
+      "provider": "aws",
+      "slug": "clf-c02",
+      "officialCode": "CLF-C02",
+      "officialSlug": "certified-cloud-practitioner",
+      "title": "AWS Certified Cloud Practitioner",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Cloud Concepts", "weightPercent": 24, "weightType": "exact" },
+          { "id": "domain-2", "title": "Security and Compliance", "weightPercent": 30, "weightType": "exact" },
+          { "id": "domain-3", "title": "Cloud Technology and Services", "weightPercent": 34, "weightType": "exact" },
+          { "id": "domain-4", "title": "Billing, Pricing, and Support", "weightPercent": 12, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:dea-c01",
+      "provider": "aws",
+      "slug": "dea-c01",
+      "officialCode": "DEA-C01",
+      "officialSlug": "certified-data-engineer-associate",
+      "title": "AWS Certified Data Engineer - Associate",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-data-engineer-associate/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/data-engineer-associate-01/data-engineer-associate-01.html",
+        "version": "1.1",
+        "publishedOn": "2025-12-12",
+        "versionSource": "change-history",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Data Ingestion and Transformation", "weightPercent": 34, "weightType": "exact" },
+          { "id": "domain-2", "title": "Data Store Management", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-3", "title": "Data Operations and Support", "weightPercent": 22, "weightType": "exact" },
+          { "id": "domain-4", "title": "Data Security and Governance", "weightPercent": 18, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-data-engineer-associate/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/data-engineer-associate-01/data-engineer-associate-01.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:dop-c02",
+      "provider": "aws",
+      "slug": "dop-c02",
+      "officialCode": "DOP-C02",
+      "officialSlug": "certified-devops-engineer-professional",
+      "title": "AWS Certified DevOps Engineer - Professional",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-devops-engineer-professional/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "SDLC Automation", "weightPercent": 22, "weightType": "exact" },
+          { "id": "domain-2", "title": "Configuration Management and IaC", "weightPercent": 17, "weightType": "exact" },
+          { "id": "domain-3", "title": "Resilient Cloud Solutions", "weightPercent": 15, "weightType": "exact" },
+          { "id": "domain-4", "title": "Monitoring and Logging", "weightPercent": 15, "weightType": "exact" },
+          { "id": "domain-5", "title": "Incident and Event Response", "weightPercent": 14, "weightType": "exact" },
+          { "id": "domain-6", "title": "Security and Compliance", "weightPercent": 17, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-devops-engineer-professional/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:dva-c02",
+      "provider": "aws",
+      "slug": "dva-c02",
+      "officialCode": "DVA-C02",
+      "officialSlug": "certified-developer-associate",
+      "title": "AWS Certified Developer - Associate",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-developer-associate/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html",
+        "version": "2.1",
+        "publishedOn": "2024-12-12",
+        "versionSource": "change-history",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Development with AWS Services", "weightPercent": 32, "weightType": "exact" },
+          { "id": "domain-2", "title": "Security", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-3", "title": "Deployment", "weightPercent": 24, "weightType": "exact" },
+          { "id": "domain-4", "title": "Troubleshooting and Optimization", "weightPercent": 18, "weightType": "exact" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-12-01",
+        "lastExamOn": "2026-11-30",
+        "successor": "aws:dva-c03",
+        "note": "AWS states that DVA-C03 registration opens December 1, 2026 and DVA-C02 remains in use through November 30, 2026."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-developer-associate/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" },
+          { "kind": "lifecycle", "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-03/developer-associate-03.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:mla-c01",
+      "provider": "aws",
+      "slug": "mla-c01",
+      "officialCode": "MLA-C01",
+      "officialSlug": "certified-machine-learning-engineer-associate",
+      "title": "AWS Certified Machine Learning Engineer - Associate",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Data Preparation for Machine Learning (ML)", "weightPercent": 28, "weightType": "exact" },
+          { "id": "domain-2", "title": "ML Model Development", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-3", "title": "Deployment and Orchestration of ML Workflows", "weightPercent": 22, "weightType": "exact" },
+          { "id": "domain-4", "title": "ML Solution Monitoring, Maintenance, and Security", "weightPercent": 24, "weightType": "exact" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-09-01",
+        "successor": "aws:mla-c02",
+        "note": "AWS states that MLA-C02 registration opens September 1, 2026; the English MLA-C01 exam remains available through September 28, 2026."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html" },
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" }
+        ]
+      }
+    },
+    {
+      "id": "aws:saa-c03",
+      "provider": "aws",
+      "slug": "saa-c03",
+      "officialCode": "SAA-C03",
+      "officialSlug": "certified-solutions-architect-associate",
+      "title": "AWS Certified Solutions Architect - Associate",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Design Secure Architectures", "weightPercent": 30, "weightType": "exact" },
+          { "id": "domain-2", "title": "Design Resilient Architectures", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-3", "title": "Design High-Performing Architectures", "weightPercent": 24, "weightType": "exact" },
+          { "id": "domain-4", "title": "Design Cost-Optimized Architectures", "weightPercent": 20, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:sap-c02",
+      "provider": "aws",
+      "slug": "sap-c02",
+      "officialCode": "SAP-C02",
+      "officialSlug": "certified-solutions-architect-professional",
+      "title": "AWS Certified Solutions Architect - Professional",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-solutions-architect-professional/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Design Solutions for Organizational Complexity", "weightPercent": 26, "weightType": "exact" },
+          { "id": "domain-2", "title": "Design for New Solutions", "weightPercent": 29, "weightType": "exact" },
+          { "id": "domain-3", "title": "Continuous Improvement for Existing Solutions", "weightPercent": 25, "weightType": "exact" },
+          { "id": "domain-4", "title": "Accelerate Workload Migration and Modernization", "weightPercent": 20, "weightType": "exact" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-solutions-architect-professional/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:scs-c03",
+      "provider": "aws",
+      "slug": "scs-c03",
+      "officialCode": "SCS-C03",
+      "officialSlug": "certified-security-specialty",
+      "title": "AWS Certified Security - Specialty",
+      "level": "specialty",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-security-specialty/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03.html",
+        "version": "1.0",
+        "publishedOn": "2026-03-26",
+        "versionSource": "change-history",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Detection", "weightPercent": 16, "weightType": "exact" },
+          { "id": "domain-2", "title": "Incident Response", "weightPercent": 14, "weightType": "exact" },
+          { "id": "domain-3", "title": "Infrastructure Security", "weightPercent": 18, "weightType": "exact" },
+          { "id": "domain-4", "title": "Identity and Access Management", "weightPercent": 20, "weightType": "exact" },
+          { "id": "domain-5", "title": "Data Protection", "weightPercent": 18, "weightType": "exact" },
+          { "id": "domain-6", "title": "Security Foundations and Governance", "weightPercent": 14, "weightType": "exact" }
+        ]
+      },
+      "lifecycle": {
+        "replaces": [
+          "aws:scs-c02"
+        ],
+        "note": "SCS-C03 has been in use since December 2, 2025; SCS-C02 was in use through December 1, 2025."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-security-specialty/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03.html" },
+          { "kind": "lifecycle", "url": "https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-appendix-b.html" }
+        ]
+      }
+    },
+    {
+      "id": "aws:soa-c03",
+      "provider": "aws",
+      "slug": "soa-c03",
+      "officialCode": "SOA-C03",
+      "officialSlug": "certified-cloudops-engineer-associate",
+      "title": "AWS Certified CloudOps Engineer - Associate",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-cloudops-engineer-associate/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html",
+        "version": "1.1",
+        "publishedOn": "2026-06-01",
+        "versionSource": "change-history",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "domain-1", "title": "Monitoring, Logging, Analysis, Remediation, and Performance Optimization", "weightPercent": 22, "weightType": "exact" },
+          { "id": "domain-2", "title": "Reliability and Business Continuity", "weightPercent": 22, "weightType": "exact" },
+          { "id": "domain-3", "title": "Deployment, Provisioning, and Automation", "weightPercent": 22, "weightType": "exact" },
+          { "id": "domain-4", "title": "Security and Compliance", "weightPercent": 16, "weightType": "exact" },
+          { "id": "domain-5", "title": "Networking and Content Delivery", "weightPercent": 18, "weightType": "exact" }
+        ]
+      },
+      "lifecycle": {
+        "replaces": [
+          "aws:soa-c02"
+        ],
+        "note": "AWS renamed the SOA-C03 certification to CloudOps Engineer - Associate; holders of SOA-C02 retain the SysOps Administrator title."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-cloudops-engineer-associate/" },
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html" },
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/certification/certified-cloudops-engineer-associate/" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:associate-google-workspace-administrator",
+      "provider": "gcp",
+      "slug": "associate-google-workspace-administrator",
+      "officialCode": null,
+      "officialSlug": "associate-google-workspace-administrator",
+      "title": "Associate Google Workspace Administrator",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/associate-google-workspace-administrator",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/associate_google_workspace_administrator_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Managing user accounts, domains, and Directory", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-2", "title": "Managing core Workspace services", "weightPercent": 23, "weightType": "approximate" },
+          { "id": "section-3", "title": "Managing data governance and compliance", "weightPercent": 15, "weightType": "approximate" },
+          { "id": "section-4", "title": "Managing security policies and access controls", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-5", "title": "Managing browsers and endpoints", "weightPercent": 10, "weightType": "approximate" },
+          { "id": "section-6", "title": "Monitoring and troubleshooting common issues", "weightPercent": 13, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/associate-google-workspace-administrator" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/associate_google_workspace_administrator_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-architect",
+      "provider": "gcp",
+      "slug": "cloud-architect",
+      "officialCode": null,
+      "officialSlug": "cloud-architect",
+      "title": "Professional Cloud Architect",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-architect",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Designing and planning a cloud solution architecture", "weightPercent": 25, "weightType": "approximate" },
+          { "id": "section-2", "title": "Managing and provisioning a cloud solution infrastructure", "weightPercent": 17.5, "weightType": "approximate" },
+          { "id": "section-3", "title": "Designing for security and compliance", "weightPercent": 17.5, "weightType": "approximate" },
+          { "id": "section-4", "title": "Analyzing and optimizing technical and business processes", "weightPercent": 15, "weightType": "approximate" },
+          { "id": "section-5", "title": "Managing implementation", "weightPercent": 12.5, "weightType": "approximate" },
+          { "id": "section-6", "title": "Ensuring solution and operations excellence", "weightPercent": 12.5, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-architect" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-database-engineer",
+      "provider": "gcp",
+      "slug": "cloud-database-engineer",
+      "officialCode": null,
+      "officialSlug": "cloud-database-engineer",
+      "title": "Professional Cloud Database Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-database-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+        "version": "1.2",
+        "publishedOn": null,
+        "versionSource": "document-title",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Design innovative, scalable, and highly available cloud database solutions", "weightPercent": 32, "weightType": "approximate" },
+          { "id": "section-2", "title": "Manage a solution that can span multiple database technologies", "weightPercent": 25, "weightType": "approximate" },
+          { "id": "section-3", "title": "Migrate data solutions", "weightPercent": 23, "weightType": "approximate" },
+          { "id": "section-4", "title": "Deploy scalable and highly available databases in Google Cloud", "weightPercent": 20, "weightType": "approximate" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-09-16",
+        "note": "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-database-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-developer",
+      "provider": "gcp",
+      "slug": "cloud-developer",
+      "officialCode": null,
+      "officialSlug": "cloud-developer",
+      "title": "Professional Cloud Developer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-developer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Designing highly scalable, secure, and reliable cloud-native applications", "weightPercent": 32, "weightType": "approximate" },
+          { "id": "section-2", "title": "Building and testing applications", "weightPercent": 23, "weightType": "approximate" },
+          { "id": "section-3", "title": "Configuring cloud-native applications for deployment", "weightPercent": 24, "weightType": "approximate" },
+          { "id": "section-4", "title": "Integrating applications with Google Cloud services", "weightPercent": 21, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-developer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-devops-engineer",
+      "provider": "gcp",
+      "slug": "cloud-devops-engineer",
+      "officialCode": null,
+      "officialSlug": "cloud-devops-engineer",
+      "title": "Professional Cloud DevOps Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Bootstrapping and maintaining a Google Cloud organization", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-2", "title": "Building and implementing CI/CD pipelines, including continuous testing, for application, infrastructure, and machine learning workloads", "weightPercent": 25, "weightType": "approximate" },
+          { "id": "section-3", "title": "Applying site reliability engineering practices", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-4", "title": "Implementing observability practices and troubleshooting issues", "weightPercent": 25, "weightType": "approximate" },
+          { "id": "section-5", "title": "Optimizing performance and cost", "weightPercent": 12, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-devops-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-digital-leader",
+      "provider": "gcp",
+      "slug": "cloud-digital-leader",
+      "officialCode": null,
+      "officialSlug": "cloud-digital-leader",
+      "title": "Cloud Digital Leader",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-digital-leader",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/cloud_digital_leader_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": "2026-08-12",
+        "versionSource": "document-header",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Digital Transformation with Google Cloud", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-2", "title": "Exploring Data Transformation with Google Cloud", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-3", "title": "Innovating with Google Cloud Artificial Intelligence", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-4", "title": "Modernize Infrastructure and Applications with Google Cloud", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-5", "title": "Trust and Security with Google Cloud", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-6", "title": "Scaling with Google Cloud Operations", "weightPercent": 10, "weightType": "approximate" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-09-16",
+        "note": "The guide states that this version launched on August 12, 2026."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-digital-leader" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/cloud_digital_leader_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-engineer",
+      "provider": "gcp",
+      "slug": "cloud-engineer",
+      "officialCode": null,
+      "officialSlug": "cloud-engineer",
+      "title": "Associate Cloud Engineer",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/associate_cloud_engineer_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Setting up a cloud solution environment", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-2", "title": "Planning and implementing a cloud solution", "weightPercent": 30, "weightType": "approximate" },
+          { "id": "section-3", "title": "Ensuring the successful operation of a cloud solution", "weightPercent": 30, "weightType": "approximate" },
+          { "id": "section-4", "title": "Configuring access and security", "weightPercent": 20, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/associate_cloud_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-network-engineer",
+      "provider": "gcp",
+      "slug": "cloud-network-engineer",
+      "officialCode": null,
+      "officialSlug": "cloud-network-engineer",
+      "title": "Professional Cloud Network Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-network-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": "042426"
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Designing and planning a Google Cloud VPC network", "weightPercent": 21, "weightType": "approximate" },
+          { "id": "section-2", "title": "Implementing a VPC network", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-3", "title": "Configuring managed network services", "weightPercent": 16, "weightType": "approximate" },
+          { "id": "section-4", "title": "Configuring and implementing hybrid and multicloud network interconnectivity", "weightPercent": 16, "weightType": "approximate" },
+          { "id": "section-5", "title": "Managing, monitoring, and troubleshooting network operations", "weightPercent": 14, "weightType": "approximate" },
+          { "id": "section-6", "title": "Configuring, implementing and managing a cloud network security solution", "weightPercent": 13, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-network-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:cloud-security-engineer",
+      "provider": "gcp",
+      "slug": "cloud-security-engineer",
+      "officialCode": null,
+      "officialSlug": "cloud-security-engineer",
+      "title": "Professional Cloud Security Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/cloud-security-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Configuring access", "weightPercent": 25, "weightType": "approximate" },
+          { "id": "section-2", "title": "Securing communications and establishing boundary protection", "weightPercent": 22, "weightType": "approximate" },
+          { "id": "section-3", "title": "Ensuring data protection", "weightPercent": 23, "weightType": "approximate" },
+          { "id": "section-4", "title": "Managing operations", "weightPercent": 19, "weightType": "approximate" },
+          { "id": "section-5", "title": "Supporting compliance requirements", "weightPercent": 11, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-security-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:data-engineer",
+      "provider": "gcp",
+      "slug": "data-engineer",
+      "officialCode": null,
+      "officialSlug": "data-engineer",
+      "title": "Professional Data Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/data-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+        "version": "4.2",
+        "publishedOn": null,
+        "versionSource": "document-title",
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Designing data processing systems", "weightPercent": 22, "weightType": "approximate" },
+          { "id": "section-2", "title": "Ingesting and processing the data", "weightPercent": 25, "weightType": "approximate" },
+          { "id": "section-3", "title": "Storing the data", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-4", "title": "Preparing and using data for analysis", "weightPercent": 15, "weightType": "approximate" },
+          { "id": "section-5", "title": "Maintaining and automating data workloads", "weightPercent": 18, "weightType": "approximate" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-09-16",
+        "note": "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/data-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:data-practitioner",
+      "provider": "gcp",
+      "slug": "data-practitioner",
+      "officialCode": null,
+      "officialSlug": "data-practitioner",
+      "title": "Associate Data Practitioner",
+      "level": "associate",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/data-practitioner",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/v1.0_associate_data_practitioner_exam_guide_english.pdf",
+        "version": "1.0",
+        "publishedOn": null,
+        "versionSource": "filename",
+        "revisionToken": "v1.0"
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Data Preparation and Ingestion", "weightPercent": 30, "weightType": "approximate" },
+          { "id": "section-2", "title": "Data Analysis and Presentation", "weightPercent": 27, "weightType": "approximate" },
+          { "id": "section-3", "title": "Data Pipeline Orchestration", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-4", "title": "Data Management", "weightPercent": 25, "weightType": "approximate" }
+        ]
+      },
+      "lifecycle": {
+        "reviewOn": "2026-09-16",
+        "note": "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/data-practitioner" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/v1.0_associate_data_practitioner_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:generative-ai-leader",
+      "provider": "gcp",
+      "slug": "generative-ai-leader",
+      "officialCode": null,
+      "officialSlug": "generative-ai-leader",
+      "title": "Generative AI Leader",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/generative-ai-leader",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/generative_ai_leader_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Fundamentals of gen AI", "weightPercent": 30, "weightType": "approximate" },
+          { "id": "section-2", "title": "Google Cloud's gen AI offerings", "weightPercent": 35, "weightType": "approximate" },
+          { "id": "section-3", "title": "Techniques to improve gen AI model output", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-4", "title": "Business strategies for a successful gen AI solution", "weightPercent": 15, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/generative-ai-leader" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/generative_ai_leader_exam_guide_english.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:machine-learning-engineer",
+      "provider": "gcp",
+      "slug": "machine-learning-engineer",
+      "officialCode": null,
+      "officialSlug": "machine-learning-engineer",
+      "title": "Professional Machine Learning Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/machine-learning-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+        "version": null,
+        "publishedOn": "2026-06-01",
+        "versionSource": "document-header",
+        "revisionToken": "new"
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Architecting low-code AI solutions", "weightPercent": 13, "weightType": "approximate" },
+          { "id": "section-2", "title": "Collaborating within and across teams to manage data and models", "weightPercent": 16, "weightType": "approximate" },
+          { "id": "section-3", "title": "Scaling prototypes into ML models", "weightPercent": 21, "weightType": "approximate" },
+          { "id": "section-4", "title": "Serving and scaling models", "weightPercent": 20, "weightType": "approximate" },
+          { "id": "section-5", "title": "Automating and orchestrating ML pipelines", "weightPercent": 18, "weightType": "approximate" },
+          { "id": "section-6", "title": "Monitoring AI solutions", "weightPercent": 13, "weightType": "approximate" }
+        ]
+      },
+      "lifecycle": {
+        "note": "The official page identifies this guide as the current update for the Gemini Enterprise Agent Platform transition."
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/machine-learning-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf" }
+        ]
+      }
+    },
+    {
+      "id": "gcp:security-operations-engineer",
+      "provider": "gcp",
+      "slug": "security-operations-engineer",
+      "officialCode": null,
+      "officialSlug": "security-operations-engineer",
+      "title": "Professional Security Operations Engineer",
+      "level": "professional",
+      "status": "active",
+      "officialUrl": "https://cloud.google.com/learn/certification/security-operations-engineer",
+      "guide": {
+        "url": "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          { "id": "section-1", "title": "Platform operations", "weightPercent": 14, "weightType": "approximate" },
+          { "id": "section-2", "title": "Data management", "weightPercent": 14, "weightType": "approximate" },
+          { "id": "section-3", "title": "Threat hunting", "weightPercent": 19, "weightType": "approximate" },
+          { "id": "section-4", "title": "Detection engineering", "weightPercent": 22, "weightType": "approximate" },
+          { "id": "section-5", "title": "Incident response", "weightPercent": 21, "weightType": "approximate" },
+          { "id": "section-6", "title": "Observability", "weightPercent": 10, "weightType": "approximate" }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/security-operations-engineer" },
+          { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf" }
+        ]
+      }
+    }
+  ]
+}

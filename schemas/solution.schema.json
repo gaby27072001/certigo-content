@@ -1,29 +1,99 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://certigo.microsoft.com/schemas/solution.schema.json",
-  "title": "Certigo answerKey solution (v2)",
-  "description": "Validates content/answerKey/solutions/*.json. Holds the sensitive answer material (correct/rationale) that must never appear in a public payload.",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["id", "schemaVersion", "kind", "correct", "rationale"],
-  "properties": {
-    "id": {
-      "type": "string",
-      "minLength": 1
+  "title": "Certigo answerKey solution",
+  "description": "Validates legacy v2 and metadata-aware v3 private solutions. Answer material remains confined to the answerKey channel.",
+  "oneOf": [
+    { "$ref": "#/$defs/v2" },
+    { "$ref": "#/$defs/v3" }
+  ],
+  "$defs": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "certification",
+        "blueprintVersion",
+        "objective"
+      ],
+      "properties": {
+        "provider": {
+          "enum": ["aws", "gcp", "microsoft"]
+        },
+        "certification": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "blueprintVersion": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "objective": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
     },
-    "schemaVersion": {
-      "const": "v2"
+    "v2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "schemaVersion", "kind", "correct", "rationale"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schemaVersion": {
+          "const": "v2"
+        },
+        "kind": {
+          "const": "answerKey"
+        },
+        "correct": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     },
-    "kind": {
-      "const": "answerKey"
-    },
-    "correct": {
-      "type": "string",
-      "minLength": 1
-    },
-    "rationale": {
-      "type": "string",
-      "minLength": 1
+    "v3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "schemaVersion",
+        "kind",
+        "metadata",
+        "correct",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+        },
+        "schemaVersion": {
+          "const": "v3"
+        },
+        "kind": {
+          "const": "answerKey"
+        },
+        "metadata": {
+          "$ref": "#/$defs/metadata"
+        },
+        "correct": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   }
 }

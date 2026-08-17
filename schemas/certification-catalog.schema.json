@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/certification-catalog.schema.json",
+  "title": "Certigo certification catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "asOf",
+    "freshness",
+    "providers",
+    "certifications"
+  ],
+  "properties": {
+    "schema": {
+      "const": "certigo.certification-catalog/v1"
+    },
+    "asOf": {
+      "type": "string",
+      "format": "date"
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxAgeDays", "reviewDueOn"],
+      "properties": {
+        "maxAgeDays": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reviewDueOn": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "providers": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/provider"
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/certification"
+      }
+    }
+  },
+  "$defs": {
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "namespace",
+        "officialCatalogUrl",
+        "sourceHosts",
+        "checkedOn"
+      ],
+      "properties": {
+        "id": {
+          "enum": ["aws", "gcp", "microsoft"]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "namespace": {
+          "enum": ["aws", "gcp", "microsoft"]
+        },
+        "officialCatalogUrl": {
+          "type": ["string", "null"],
+          "format": "uri"
+        },
+        "sourceHosts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9.-]+$"
+          }
+        },
+        "checkedOn": {
+          "type": ["string", "null"],
+          "format": "date"
+        }
+      }
+    },
+    "guide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "version",
+        "publishedOn",
+        "versionSource",
+        "revisionToken"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "version": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "publishedOn": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "versionSource": {
+          "type": ["string", "null"],
+          "enum": [
+            "change-history",
+            "document-header",
+            "document-title",
+            "filename",
+            null
+          ]
+        },
+        "revisionToken": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "weightPercent", "weightType"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(domain|section)-[1-9][0-9]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "weightPercent": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "weightType": {
+          "enum": ["exact", "approximate"]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "url"],
+      "properties": {
+        "kind": {
+          "enum": ["certification-page", "exam-guide", "lifecycle"]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reviewOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "lastExamOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "replaces": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+          }
+        },
+        "successor": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkedOn", "sources"],
+      "properties": {
+        "checkedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        }
+      }
+    },
+    "certification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "provider",
+        "slug",
+        "officialCode",
+        "officialSlug",
+        "title",
+        "level",
+        "status",
+        "officialUrl",
+        "guide",
+        "blueprint",
+        "provenance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "provider": {
+          "enum": ["aws", "gcp", "microsoft"]
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "officialCode": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+        },
+        "officialSlug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "level": {
+          "enum": ["foundational", "associate", "professional", "specialty"]
+        },
+        "status": {
+          "enum": [
+            "announced",
+            "active",
+            "active-retiring",
+            "retired",
+            "replaced"
+          ]
+        },
+        "officialUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "guide": {
+          "$ref": "#/$defs/guide"
+        },
+        "blueprint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["version", "objectives"],
+          "properties": {
+            "version": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+            },
+            "objectives": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/objective"
+              }
+            }
+          }
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/lifecycle"
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        }
+      }
+    }
+  }
+}
