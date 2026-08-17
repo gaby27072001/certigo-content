@@ -66,6 +66,16 @@ deterministe : toute modification semantique
 du corpus change son hash, tandis que l'ordre des cles et la mise en forme JSON
 ne le changent pas.
 
+## Tracks de certification IA
+
+- **AI-901 Microsoft Azure AI Fundamentals** est le track actif, fondé sur les
+  compétences mesurées au 15 avril 2026. Sa couverture et sa stratégie de
+  progression sont documentées dans
+  [`docs/certifications/ai-901-coverage.md`](docs/certifications/ai-901-coverage.md).
+- **AI-900** est un track historique retiré le 30 juin 2026. Ses identifiants
+  et résultats restent distincts et immuables ; ils ne sont pas convertis en
+  tentatives AI-901.
+
 Le manifeste de paquet couple strictement `artifact`, `channel`, le repertoire
 du `path`, l'identifiant du nom de fichier et `payload.id`. La politique
 `.github/artifact-access-policy.json` est globale a tous les workflows ; toute
