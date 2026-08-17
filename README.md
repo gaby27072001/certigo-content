@@ -75,6 +75,18 @@ par workflow/job. Toute autre reference au canal prive dans une definition
 complete de job ou d'action locale (`gh`, `curl`, action tierce, chemin prive,
 etc.) est refusee.
 
+## Promotion Azure
+
+La promotion durable vers Azure Blob Storage est manuelle, limitee a `main` et
+protegee par deux GitHub Environments independants. Elle utilise GitHub OIDC,
+publie chaque canal sous son `manifestId`, verifie les SHA-256 apres upload et
+ne cree aucun alias mutable. Elle ne provisionne aucune ressource et
+n'interagit pas avec les deploiements Certigo existants.
+
+Les prerequis Azure/GitHub, la retention WORM, le lifecycle et le rollback sont
+documentes dans
+[`ADR-0003`](docs/adr/ADR-0003-azure-immutable-promotion.md).
+
 ## Securite de l'outillage
 
 La CI execute `npm audit` et OSV Scanner sur `package-lock.json`. Les alertes

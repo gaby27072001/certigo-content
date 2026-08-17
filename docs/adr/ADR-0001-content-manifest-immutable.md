@@ -87,7 +87,6 @@ Le service de contenu est **hash-addressable**. Convention de service recommand�
 
   ```
   https://<cdn>/content/manifests/sha256/<rootHash>       # manifeste immuable
-  https://<cdn>/content/manifests/<canal>/latest          # pointeur mutable -> rootHash courant
   ```
 
 Propriétés :
@@ -98,12 +97,13 @@ Propriétés :
   et en comparant au `hash` (item) ou au `rootHash` (manifeste) attendu. Un item
   ne doit être considéré valide **que** si son hash correspond à l'entrée
   manifeste — c'est la garantie d'intégrité côté client ;
-- la « publication d'une nouvelle version » consiste à publier le nouveau
-  manifeste sous son propre hash puis à faire pointer un alias mutable
-  (`latest`) vers ce `rootHash` ; les anciennes adresses restent valides.
+- la publication d'une nouvelle version consiste uniquement à publier le
+  nouveau manifeste sous son propre hash. La promotion Azure definie par
+  ADR-0003 n'utilise aucun alias mutable ; le consommateur selectionne
+  explicitement un `manifestId`.
 
-> L'infrastructure CDN concrète (bucket, distribution, invalidation, alias
-> `latest`) est **hors périmètre** de ce lot ; elle sera livrée par un lot
+> L'infrastructure CDN concrète (bucket, distribution, invalidation) est
+> **hors périmètre** de ce lot ; elle sera livrée par un lot
 > LIVE/OPS ultérieur. Le présent lot fige le **format**, le **générateur**, la
 > **régénération/vérification CI**, l'**intégrité** et le **contrat de service
 > documenté**.
@@ -149,8 +149,8 @@ Un exemple **illustratif** (non-autoritatif) du format est fourni sous
   vérification CI robuste et indépendante du corpus.
 - **À noter** : la canonicalisation est propre à ce format (les consommateurs
   doivent réutiliser `canonicalize` de `tools/gen_manifest.mjs` pour recalculer un
-  hash identique) ; l'infra CDN et l'alias `latest` restent à livrer (lot
-  LIVE/OPS).
+  hash identique) ; l'infra CDN reste à livrer (lot LIVE/OPS). ADR-0003 interdit
+  l'alias mutable automatique pour la promotion Azure.
 
 ## Références
 
