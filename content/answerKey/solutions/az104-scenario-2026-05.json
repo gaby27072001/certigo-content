@@ -1,0 +1,7 @@
+{
+  "id": "az104-scenario-2026-05",
+  "schemaVersion": "v2",
+  "kind": "answerKey",
+  "correct": "Azure Container Apps avec une règle de mise à l'échelle KEDA et minReplicas à 0",
+  "rationale": "Azure Container Apps expose des règles **KEDA** capables d'utiliser une file Service Bus comme source d'événements. Avec `minReplicas` à 0, la révision peut revenir à zéro lorsque la file est vide et repartir à la demande, sans gestion directe d'un cluster. Azure Container Instances ne fournit pas cette mise à l'échelle déclarative, un slot App Service sert aux déploiements et une VM planifiée ne suit pas la file."
+}
