@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-3.dx-bgp-preference.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Appliquer aux annonces BGP les communautés de préférence locale AWS avec une valeur plus élevée sur la liaison primaire",
+  "rationale": "Sur les private VIF et transit VIF, les communautés BGP de préférence locale Direct Connect `7224:7300` (haute), `7224:7200` (moyenne) et `7224:7100` (basse) influencent le chemin choisi par AWS vers des préfixes clients de même longueur. Une valeur haute sur le primaire et basse sur le secours produit le comportement actif/passif. Ces communautés ne s'appliquent pas aux public VIF ; DNS et groupes de sécurité ne participent pas à la sélection BGP."
+}

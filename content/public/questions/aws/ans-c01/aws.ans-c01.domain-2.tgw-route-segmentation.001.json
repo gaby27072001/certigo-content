@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-2.tgw-route-segmentation.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Les attachements prod et dev d'un Transit Gateway ne doivent jamais communiquer directement. Les deux segments doivent toutefois atteindre un VPC d'inspection, puis des services partagés autorisés. Comment configurer les tables Transit Gateway ?",
+  "choices": [
+    "Associer prod et dev à des tables distinctes, limiter les propagations, ajouter des routes par défaut vers l'inspection et propager seulement les préfixes partagés nécessaires",
+    "Associer et propager tous les attachements dans la table par défaut",
+    "Désactiver toutes les tables de routage et utiliser seulement les NACL",
+    "Configurer une route statique identique vers prod et dev dans chaque VPC sans inspection"
+  ]
+}

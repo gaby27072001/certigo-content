@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-1.dns-egress-detection.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Des instances privées utilisent le résolveur VPC et accèdent à Internet par une architecture Transit Gateway centralisée. Le SOC doit détecter une exfiltration par DNS et corréler les requêtes avec les flux refusés ou acceptés, sans capturer tous les paquets. Que faut-il activer ?",
+  "choices": [
+    "Uniquement les journaux d'accès de l'Application Load Balancer",
+    "Route 53 Resolver query logging ainsi que les VPC Flow Logs et Transit Gateway Flow Logs, livrés au compte de sécurité",
+    "VPC Traffic Mirroring sur toutes les interfaces réseau de l'organisation sans filtre",
+    "Uniquement CloudTrail data events pour les compartiments S3"
+  ]
+}

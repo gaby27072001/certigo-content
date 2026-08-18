@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-3.vpn-mtu-failover.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Autoriser Path MTU Discovery et ajuster le MSS ou la MTU au chemin VPN pour tenir compte de l'overhead IPsec",
+  "rationale": "L'encapsulation IPsec réduit la MTU utilisable par rapport à un chemin Direct Connect jumbo. Si les messages ICMP de fragmentation sont bloqués, les gros paquets créent un black hole. Autoriser PMTUD et appliquer un MSS clamping ou une MTU adaptée au plus petit chemin restaure le basculement."
+}

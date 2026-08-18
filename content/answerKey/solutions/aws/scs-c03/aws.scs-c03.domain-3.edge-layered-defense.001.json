@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-3.edge-layered-defense.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "CloudFront devant l'ALB, une web ACL AWS WAF avec règles gérées et rate-based rules, et AWS Shield Advanced",
+  "rationale": "CloudFront absorbe et distribue le trafic à l'edge, WAF applique des contrôles de couche 7 comme les règles gérées et les limites de débit, et Shield Advanced apporte une protection et une assistance DDoS renforcées. Les groupes de sécurité et NACL ne filtrent pas les chemins HTTP. Inspector évalue des vulnérabilités, pas le trafic entrant d'un ALB."
+}

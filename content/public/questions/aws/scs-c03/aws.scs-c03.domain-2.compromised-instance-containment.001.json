@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-2.compromised-instance-containment.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "GuardDuty signale une instance EC2 qui communique avec une infrastructure de commande et contrôle. L'équipe doit stopper rapidement les communications, préserver les volumes pour analyse et éviter de détruire les preuves en mémoire avant la collecte initiale. Quelle automatisation lancer en premier ?",
+  "choices": [
+    "Terminer immédiatement l'instance et supprimer ses volumes",
+    "Associer un groupe de sécurité de quarantaine, capturer les métadonnées et instantanés nécessaires via un runbook Systems Manager, puis poursuivre l'analyse",
+    "Redémarrer l'instance avec la même AMI et conserver son groupe de sécurité",
+    "Désactiver CloudTrail afin de réduire le bruit pendant l'enquête"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-2.role-session-revocation.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un rôle IAM fédéré a émis des sessions temporaires avant que sa relation d'approbation compromise soit corrigée. Les sessions peuvent rester valides plusieurs heures. Quelle action contient le risque le plus directement ?",
+  "choices": [
+    "Renommer le rôle IAM uniquement",
+    "Révoquer les sessions actives du rôle, corriger la politique de confiance et rechercher leur usage dans CloudTrail",
+    "Faire tourner une clé d'accès IAM qui n'est pas utilisée par le rôle",
+    "Supprimer les journaux CloudTrail qui contiennent l'ARN du rôle"
+  ]
+}

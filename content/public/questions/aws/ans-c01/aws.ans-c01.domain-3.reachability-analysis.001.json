@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-3.reachability-analysis.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Après une modification IaC, une instance ne peut plus joindre un interface VPC endpoint. L'équipe veut identifier si une route, un NACL, un groupe de sécurité ou la configuration de l'endpoint bloque le chemin, sans envoyer de paquets en production. Quel outil utiliser en premier ?",
+  "choices": [
+    "VPC Reachability Analyzer entre l'interface source et l'interface de l'endpoint",
+    "AWS Cost Explorer avec regroupement par service",
+    "Amazon Macie sur le compartiment de journaux",
+    "Une rotation des certificats ACM"
+  ]
+}

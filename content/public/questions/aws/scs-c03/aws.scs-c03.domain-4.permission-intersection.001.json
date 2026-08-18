@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-4.permission-intersection.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une session de rôle reçoit un refus pour `s3:PutObject` alors que sa politique d'identité autorise l'action. Le rôle possède une permission boundary, la session a une session policy et le compte appartient à une OU avec SCP. Quelle méthode de diagnostic est correcte ?",
+  "choices": [
+    "Ajouter immédiatement une seconde politique d'identité Allow identique",
+    "Examiner les refus explicites et l'intersection entre politique d'identité, permission boundary, session policy, SCP et politique de ressource à l'aide des événements et outils d'analyse IAM",
+    "Supprimer CloudTrail afin que l'appel ne soit plus journalisé",
+    "Modifier le groupe de sécurité du compartiment S3"
+  ]
+}

@@ -18,6 +18,7 @@ import { checkCatalogFreshness } from "../tools/check_catalog_freshness.mjs";
 import { buildManifest, canonicalize } from "../tools/gen_manifest.mjs";
 import {
   isCertificationActiveOn,
+  isCertificationRecommendedOn,
   metadataFields,
   parseDate,
 } from "../tools/lib/catalog.mjs";
@@ -103,6 +104,17 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
+  const coverageRoot = resolve(root, "content", "public", "coverage");
+  for (const provider of readdirSync(coverageRoot)) {
+    const providerRoot = resolve(coverageRoot, provider);
+    for (const file of readdirSync(providerRoot)) {
+      if (!file.endsWith(".json")) continue;
+      const path = resolve(providerRoot, file);
+      const matrix = readJson(path);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      writeJson(path, matrix);
+    }
+  }
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -198,6 +210,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
     (certification) => certification.id === "aws:ans-c01"
   );
   assert.equal(ans.status, "active-retiring");
+  assert.equal(ans.lifecycle.recommendThrough, "2026-08-25");
   assert.equal(ans.lifecycle.lastExamOn, "2026-08-25");
   assert.equal(ans.lifecycle.reviewOn, "2026-08-26");
   assert.equal(
@@ -207,13 +220,17 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async () => {
+test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
   assert.equal(result.coverageCount, 26);
 
   const catalog = readJson(catalogAt(repoRoot));
+  const expectedSpecialtyDistribution = new Map([
+    ["aws:ans-c01", [7, 6, 5, 6]],
+    ["aws:scs-c03", [4, 4, 4, 5, 4, 3]],
+  ]);
   for (const certification of catalog.certifications) {
     const matrix = readJson(
       resolve(
@@ -226,7 +243,21 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
       )
     );
     assert.equal(matrix.certification, certification.id);
-    assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    const expectedDistribution = expectedSpecialtyDistribution.get(certification.id);
+    if (expectedDistribution) {
+      assert.deepEqual(
+        matrix.objectives.map((objective) => objective.questionIds.length),
+        expectedDistribution
+      );
+      assert.ok(
+        matrix.objectives.reduce(
+          (total, objective) => total + objective.questionIds.length,
+          0
+        ) >= 24
+      );
+    } else {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    }
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0
@@ -244,14 +275,21 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
 
   assert.equal(isCertificationActiveOn(ans, "2026-08-25"), true);
   assert.equal(isCertificationActiveOn(ans, "2026-08-26"), false);
+  assert.equal(isCertificationRecommendedOn(ans, "2026-08-25"), true);
+  assert.equal(isCertificationRecommendedOn(ans, "2026-08-26"), false);
   assert.equal(
     isCertificationActiveOn({ ...ans, status: "retired" }, "2026-08-17"),
+    false
+  );
+  assert.equal(
+    isCertificationRecommendedOn({ ...ans, status: "retired" }, "2026-08-17"),
     false
   );
 
   const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-17" });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:ans-c01"));
+  assert.ok(current.recommendedCertificationIds.includes("aws:ans-c01"));
 
   const transition = checkCatalogFreshness({
     root: repoRoot,
@@ -259,6 +297,8 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
   });
   assert.ok(!transition.activeCertificationIds.includes("aws:ans-c01"));
   assert.ok(transition.excludedCertificationIds.includes("aws:ans-c01"));
+  assert.ok(!transition.recommendedCertificationIds.includes("aws:ans-c01"));
+  assert.ok(transition.nonRecommendedCertificationIds.includes("aws:ans-c01"));
   assert.ok(
     transition.errors.some((error) => error.includes("transition a reverifier"))
   );
@@ -426,6 +466,9 @@ test("rejette les ecarts semantiques du catalogue et les sources non officielles
     (certification) => certification.provider === "gcp"
   ).officialUrl = "https://example.com/fake-gcp";
   catalog.certifications[0].blueprint.objectives[0].weightPercent = 19;
+  catalog.certifications.find(
+    (certification) => certification.id === "aws:ans-c01"
+  ).lifecycle.recommendThrough = "2026-08-27";
   catalog.certifications.reverse();
   writeJson(catalogAt(root), catalog);
   rmSync(resolve(root, "content", "public", "coverage", "aws", "aif-c01.json"));
@@ -435,6 +478,13 @@ test("rejette les ecarts semantiques du catalogue et les sources non officielles
   assert.ok(result.errors.some((error) => error.includes("sourceHosts")));
   assert.ok(result.errors.some((error) => error.includes("hote non officiel")));
   assert.ok(result.errors.some((error) => error.includes("[catalog:weight]")));
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[catalog:lifecycle]") &&
+        error.includes("recommendThrough")
+    )
+  );
   assert.ok(result.errors.some((error) => error.includes("[coverage:missing]")));
 });
 

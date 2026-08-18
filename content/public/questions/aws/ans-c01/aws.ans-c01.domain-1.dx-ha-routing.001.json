@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-1.dx-ha-routing.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une banque exige une connectivité hybride tolérant la perte d'un équipement, d'une liaison et d'un site Direct Connect. Le trafic normal doit utiliser Direct Connect, avec un secours chiffré rapidement disponible. Quel design satisfait le mieux ces exigences ?",
+  "choices": [
+    "Deux connexions Direct Connect sur des équipements et sites distincts vers un Direct Connect gateway et Transit Gateway, plus un Site-to-Site VPN de secours avec politiques BGP cohérentes",
+    "Une seule connexion Direct Connect avec deux private VIF sur le même routeur",
+    "Un seul Site-to-Site VPN sans tunnels redondants",
+    "Deux VPC peerings entre le datacenter et AWS"
+  ]
+}

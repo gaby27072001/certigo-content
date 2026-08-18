@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-4.central-egress-inspection.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Tous les VPC applicatifs doivent sortir vers Internet par un VPC egress central où AWS Network Firewall inspecte les flux de manière stateful. Le trafic arrive par Transit Gateway et doit rester symétrique entre les AZ. Quel design est requis ?",
+  "choices": [
+    "Des endpoints Network Firewall par AZ, un routage zonal cohérent et le mode appliance sur l'attachement Transit Gateway d'inspection",
+    "Un endpoint Network Firewall unique dans une AZ avec routage asymétrique",
+    "Une propagation de route directe des VPC applicatifs vers une Internet Gateway locale",
+    "Un VPC peering transitif entre tous les VPC"
+  ]
+}

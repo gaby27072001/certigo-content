@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.global-static-entry.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "AWS Global Accelerator avec les NLB comme endpoints régionaux",
+  "rationale": "Global Accelerator fournit des adresses anycast statiques et achemine les flux TCP/UDP sur le réseau mondial AWS vers des endpoints sains. CloudFront cible principalement HTTP(S) et la distribution de contenu, sans répondre à ce protocole ni à l'exigence d'IP statiques anycast. Une zone privée n'est pas résoluble par les clients Internet."
+}

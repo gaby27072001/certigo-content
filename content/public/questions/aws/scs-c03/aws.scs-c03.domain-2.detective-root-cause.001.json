@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-2.detective-root-cause.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Plusieurs conclusions GuardDuty relient une adresse IP, un rôle IAM et trois instances sur une période de six heures. Le SOC veut reconstruire les relations et la chronologie avant de confirmer la cause racine. Quel service doit compléter les journaux conservés ?",
+  "choices": [
+    "Amazon Detective pour analyser les entités, comportements et relations à partir des données de sécurité",
+    "AWS Budgets pour regrouper les coûts par étiquette",
+    "Amazon Route 53 Domains pour renouveler les noms de domaine",
+    "AWS Artifact pour télécharger des rapports de conformité"
+  ]
+}

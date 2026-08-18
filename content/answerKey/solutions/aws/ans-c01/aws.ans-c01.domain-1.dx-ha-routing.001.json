@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.dx-ha-routing.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Deux connexions Direct Connect sur des équipements et sites distincts vers un Direct Connect gateway et Transit Gateway, plus un Site-to-Site VPN de secours avec politiques BGP cohérentes",
+  "rationale": "Des connexions dans des sites distincts éliminent les points uniques aux niveaux équipement, liaison et emplacement. Le VPN fournit un chemin chiffré de secours, et BGP contrôle la préférence Direct Connect en régime normal. Plusieurs VIF sur une même connexion ne protègent pas contre la perte physique de cette connexion ou du site."
+}

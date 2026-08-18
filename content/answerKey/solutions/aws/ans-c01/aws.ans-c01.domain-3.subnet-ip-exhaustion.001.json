@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-3.subnet-ip-exhaustion.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Associer un CIDR secondaire non chevauchant au VPC, créer de nouveaux sous-réseaux et configurer le CNI pour utiliser cette capacité selon le plan retenu",
+  "rationale": "Un CIDR secondaire ajoute de l'espace adressable sans remplacer le VPC. De nouveaux sous-réseaux et une configuration CNI adaptée permettent aux pods ou nœuds d'utiliser cette capacité progressivement. Le CIDR principal ne peut pas être modifié en place et des adresses publiques par pod ne résolvent pas l'allocation privée."
+}

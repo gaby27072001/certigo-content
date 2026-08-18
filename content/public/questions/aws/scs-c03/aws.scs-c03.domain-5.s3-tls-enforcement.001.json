@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-5.s3-tls-enforcement.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Un compartiment S3 réglementé doit refuser les requêtes non chiffrées et les clients utilisant une version TLS inférieure à 1.2, tout en évitant de bloquer involontairement les appels directs de services AWS lorsque les clés de contexte réseau sont masquées. Quel contrôle appliquer ?",
+  "choices": [
+    "Une bucket policy avec des Deny sur `aws:SecureTransport` faux et `s3:TlsVersion` inférieur à 1.2, structurés avec l'exception appropriée pour les principaux de service AWS",
+    "Une règle de cycle de vie S3 qui supprime les objets après un jour",
+    "Un groupe de sécurité attaché directement au compartiment S3",
+    "Une clé KMS asymétrique sans bucket policy"
+  ]
+}

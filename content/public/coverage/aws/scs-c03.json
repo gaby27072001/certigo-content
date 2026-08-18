@@ -3,13 +3,79 @@
   "provider": "aws",
   "certification": "aws:scs-c03",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Detection", "weightPercent": 16, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Incident Response", "weightPercent": 14, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Infrastructure Security", "weightPercent": 18, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Identity and Access Management", "weightPercent": 20, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-5", "title": "Data Protection", "weightPercent": 18, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-6", "title": "Security Foundations and Governance", "weightPercent": 14, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Detection",
+      "weightPercent": 16,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.scs-c03.domain-1.org-trail-security-lake.001",
+        "aws.scs-c03.domain-1.cross-account-findings.001",
+        "aws.scs-c03.domain-1.dns-egress-detection.001",
+        "aws.scs-c03.domain-1.encrypted-log-group.001"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Incident Response",
+      "weightPercent": 14,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.scs-c03.domain-2.forensic-readiness.001",
+        "aws.scs-c03.domain-2.compromised-instance-containment.001",
+        "aws.scs-c03.domain-2.role-session-revocation.001",
+        "aws.scs-c03.domain-2.detective-root-cause.001"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Infrastructure Security",
+      "weightPercent": 18,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.scs-c03.domain-3.edge-layered-defense.001",
+        "aws.scs-c03.domain-3.golden-ami-pipeline.001",
+        "aws.scs-c03.domain-3.private-admin-access.001",
+        "aws.scs-c03.domain-3.symmetric-inspection.001"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Identity and Access Management",
+      "weightPercent": 20,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.scs-c03.domain-4.identity-center-abac.001",
+        "aws.scs-c03.domain-4.vendor-external-id.001",
+        "aws.scs-c03.domain-4.permission-intersection.001",
+        "aws.scs-c03.domain-4.roles-anywhere.001",
+        "aws.scs-c03.domain-4.organization-access-analyzer.001"
+      ]
+    },
+    {
+      "objective": "domain-5",
+      "title": "Data Protection",
+      "weightPercent": 18,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.scs-c03.domain-5.s3-tls-enforcement.001",
+        "aws.scs-c03.domain-5.external-key-store.001",
+        "aws.scs-c03.domain-5.backup-vault-lock.001",
+        "aws.scs-c03.domain-5.multi-region-secret-rotation.001"
+      ]
+    },
+    {
+      "objective": "domain-6",
+      "title": "Security Foundations and Governance",
+      "weightPercent": 14,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.scs-c03.domain-6.delegated-security-admin.001",
+        "aws.scs-c03.domain-6.secure-stacksets.001",
+        "aws.scs-c03.domain-6.continuous-audit-evidence.001"
+      ]
+    }
   ]
 }

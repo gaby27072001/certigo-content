@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-6.secure-stacksets.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-6"
+  },
+  "prompt": "Une baseline réseau et IAM doit être déployée dans chaque compte d'une OU, mise à jour automatiquement lorsque l'OU change et contrôlée avant déploiement par des règles d'infrastructure as code. Quelle approche est la plus adaptée ?",
+  "choices": [
+    "CloudFormation StackSets avec permissions gérées par le service et trusted access Organizations, complété par CloudFormation Guard dans la chaîne de validation",
+    "Des commandes AWS CLI copiées dans un document partagé et exécutées à la main",
+    "Une AMI publique pour créer les rôles IAM",
+    "Une bucket policy S3 qui crée automatiquement des VPC"
+  ]
+}

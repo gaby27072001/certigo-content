@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.network-observability-baseline.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Métriques CloudWatch Direct Connect et VPN, VPC et Transit Gateway Flow Logs, Transit Gateway Network Manager et VPC Reachability Analyzer",
+  "rationale": "CloudWatch fournit les métriques de liaison, les journaux de flux montrent les conversations acceptées ou refusées, Network Manager visualise la topologie et les routes, et Reachability Analyzer évalue un chemin configuré. CloudTrail enregistre les changements d'API mais ne mesure pas le débit ni les pertes de données."
+}

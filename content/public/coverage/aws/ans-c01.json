@@ -5,9 +5,61 @@
   "blueprintVersion": "2026-08-17",
   "status": "retiring",
   "objectives": [
-    { "objective": "domain-1", "title": "Network Design", "weightPercent": 30, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Network Implementation", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Network Management and Operation", "weightPercent": 20, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Network Security, Compliance, and Governance", "weightPercent": 24, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Network Design",
+      "weightPercent": 30,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.ans-c01.domain-1.global-static-entry.001",
+        "aws.ans-c01.domain-1.hybrid-dns-design.001",
+        "aws.ans-c01.domain-1.overlapping-private-service.001",
+        "aws.ans-c01.domain-1.dx-ha-routing.001",
+        "aws.ans-c01.domain-1.eks-alb-ingress.001",
+        "aws.ans-c01.domain-1.network-observability-baseline.001",
+        "aws.ans-c01.domain-1.segmented-transit-design.001"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Network Implementation",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.ans-c01.domain-2.transit-vif-dxgw.001",
+        "aws.ans-c01.domain-2.tgw-route-segmentation.001",
+        "aws.ans-c01.domain-2.shared-resolver-rules.001",
+        "aws.ans-c01.domain-2.dnssec-delegation.001",
+        "aws.ans-c01.domain-2.ipam-automation.001",
+        "aws.ans-c01.domain-2.sdwan-tgw-connect.001"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Network Management and Operation",
+      "weightPercent": 20,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.ans-c01.domain-3.dx-bgp-preference.001",
+        "aws.ans-c01.domain-3.reachability-analysis.001",
+        "aws.ans-c01.domain-3.vpn-mtu-failover.001",
+        "aws.ans-c01.domain-3.subnet-ip-exhaustion.001",
+        "aws.ans-c01.domain-3.s3-nat-cost.001"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Network Security, Compliance, and Governance",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.ans-c01.domain-4.central-egress-inspection.001",
+        "aws.ans-c01.domain-4.firewall-manager-governance.001",
+        "aws.ans-c01.domain-4.flow-log-forensics.001",
+        "aws.ans-c01.domain-4.traffic-mirroring-ids.001",
+        "aws.ans-c01.domain-4.private-ip-vpn-over-dx.001",
+        "aws.ans-c01.domain-4.s3-endpoint-governance.001"
+      ]
+    }
   ]
 }

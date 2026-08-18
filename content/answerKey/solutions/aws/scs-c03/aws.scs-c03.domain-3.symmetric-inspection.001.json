@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-3.symmetric-inspection.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Activer le mode appliance sur l'attachement Transit Gateway d'inspection et aligner les tables de routage par AZ pour conserver la symétrie",
+  "rationale": "Une inspection stateful exige que les deux sens d'un flux passent par le même chemin d'appliance. Le mode appliance de l'attachement VPC du VPC d'inspection et un routage zonal cohérent permettent à Transit Gateway de préserver cette affinité. Propager toutes les routes peut contourner l'inspection, et désactiver l'état dégrade le contrôle sans résoudre l'architecture."
+}

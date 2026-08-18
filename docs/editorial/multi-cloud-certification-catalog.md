@@ -116,11 +116,13 @@ snapshot.
 | 2 | Coeur Associate : SAA-C03, DVA-C02, SOA-C03, Cloud Engineer, Data Practitioner, Associate Google Workspace Administrator. |
 | 3 | Data et AI : DEA-C01, MLA-C01, AIP-C01, Professional Data Engineer, Cloud Database Engineer, Machine Learning Engineer. |
 | 4 | Architecture, developpement, DevOps, securite et reseau : SAP-C02, DOP-C02, SCS-C03 et les six Professional Google correspondantes. |
+| Specialty | SCS-C03 et ANS-C01 tant que ce dernier reste `active-retiring`, avec conservation historique apres retrait. |
 
-ANS-C01 ne recoit pas de nouvelles questions : son retrait est imminent. Sa
-matrice existe pour representer exactement le snapshot du 2026-08-17, puis
-sera automatiquement exclue de l'inventaire actif le 2026-08-26 et passee a
-`retired` dans une PR de cycle de vie.
+ANS-C01 recoit une vague bornee de scenarios originaux pendant sa phase
+`active-retiring`. `lifecycle.recommendThrough` vaut `2026-08-25` : le gate
+`isCertificationRecommendedOn` l'exclut des recommandations a compter du
+2026-08-26. Les paires restent conservables comme contenu historique et la
+matrice passera a `retired` lors de la revue de cycle de vie.
 
 Chaque vague :
 

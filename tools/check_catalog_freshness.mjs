@@ -8,6 +8,7 @@ import {
   CATALOG_PATH,
   daysBetween,
   isCertificationActiveOn,
+  isCertificationRecommendedOn,
   loadCatalog,
   parseDate,
 } from "./lib/catalog.mjs";
@@ -76,6 +77,12 @@ export function checkCatalogFreshness(options = {}) {
   const excludedCertificationIds = catalog.certifications
     .filter((certification) => !isCertificationActiveOn(certification, asOf))
     .map((certification) => certification.id);
+  const recommendedCertificationIds = catalog.certifications
+    .filter((certification) => isCertificationRecommendedOn(certification, asOf))
+    .map((certification) => certification.id);
+  const nonRecommendedCertificationIds = catalog.certifications
+    .filter((certification) => !isCertificationRecommendedOn(certification, asOf))
+    .map((certification) => certification.id);
 
   return {
     asOf,
@@ -84,6 +91,8 @@ export function checkCatalogFreshness(options = {}) {
     errors,
     activeCertificationIds,
     excludedCertificationIds,
+    recommendedCertificationIds,
+    nonRecommendedCertificationIds,
   };
 }
 
@@ -120,11 +129,16 @@ if (isMain) {
     } else {
       const result = checkCatalogFreshness(options);
       console.log(
-        `[catalog:freshness] snapshot=${result.catalogAsOf}, controle=${result.asOf}, actifs=${result.activeCertificationIds.length}`
+        `[catalog:freshness] snapshot=${result.catalogAsOf}, controle=${result.asOf}, actifs=${result.activeCertificationIds.length}, recommandes=${result.recommendedCertificationIds.length}`
       );
       if (result.excludedCertificationIds.length > 0) {
         console.log(
           `[catalog:freshness] exclus automatiquement: ${result.excludedCertificationIds.join(", ")}`
+        );
+      }
+      if (result.nonRecommendedCertificationIds.length > 0) {
+        console.log(
+          `[catalog:freshness] non recommandes: ${result.nonRecommendedCertificationIds.join(", ")}`
         );
       }
       if (result.errors.length > 0) {

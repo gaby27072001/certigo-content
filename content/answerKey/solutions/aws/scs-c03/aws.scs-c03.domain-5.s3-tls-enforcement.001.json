@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-5.s3-tls-enforcement.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Une bucket policy avec des Deny sur `aws:SecureTransport` faux et `s3:TlsVersion` inférieur à 1.2, structurés avec l'exception appropriée pour les principaux de service AWS",
+  "rationale": "Les conditions globales et S3 de la bucket policy peuvent imposer HTTPS et une version TLS minimale. Les appels de services AWS peuvent masquer certaines clés de contexte ; la politique doit donc tenir compte de `aws:PrincipalIsAWSService` pour ne pas les refuser par erreur. Les compartiments S3 n'acceptent pas de groupe de sécurité et le chiffrement au repos ne remplace pas TLS."
+}

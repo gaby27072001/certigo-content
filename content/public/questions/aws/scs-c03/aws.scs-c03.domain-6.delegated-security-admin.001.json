@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-6.delegated-security-admin.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-6"
+  },
+  "prompt": "Le compte de management AWS Organizations ne doit pas servir aux opérations quotidiennes. L'entreprise veut activer GuardDuty, Security Hub et Macie dans les comptes existants et futurs, avec une équipe sécurité centrale. Quel modèle de gouvernance appliquer ?",
+  "choices": [
+    "Désigner un compte sécurité comme administrateur délégué pour chaque service et configurer l'auto-activation ou les politiques centrales sur les OU",
+    "Créer toutes les ressources de sécurité uniquement dans le compte de management",
+    "Inviter manuellement chaque compte sans utiliser Organizations",
+    "Donner les identifiants root du compte de management au SOC"
+  ]
+}

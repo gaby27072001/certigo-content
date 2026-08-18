@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-1.cross-account-findings.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Désigner un administrateur délégué Security Hub, utiliser la configuration centrale avec des politiques par OU et configurer une Région d'agrégation",
+  "rationale": "La configuration centrale de Security Hub permet à l'administrateur délégué d'appliquer des politiques aux comptes et OU, y compris aux nouveaux comptes. L'agrégation inter-Région consolide les conclusions dans une Région opérationnelle. EventBridge seul ne configure pas les standards, et un déploiement AWS Config isolé dans le compte de management ne configure ni les contrôles ni les conclusions Security Hub des comptes membres."
+}

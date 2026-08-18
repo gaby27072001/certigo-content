@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-2.sdwan-tgw-connect.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Un Transit Gateway Connect attachment utilisant GRE et BGP au-dessus de l'attachement de transport",
+  "rationale": "Transit Gateway Connect est conçu pour les appliances SD-WAN et utilise GRE avec BGP pour fournir une intégration dynamique et scalable. Le peering VPC ne fournit pas de propagation BGP et PrivateLink expose des services, pas un domaine de routage. Une Internet Gateway ne remplace pas l'intégration au Transit Gateway."
+}

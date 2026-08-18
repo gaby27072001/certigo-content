@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-1.encrypted-log-group.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une fonction Lambda possède `logs:CreateLogStream` et `logs:PutLogEvents`, mais aucun événement n'arrive dans un groupe CloudWatch Logs chiffré avec une clé KMS gérée par le client. Les invocations réussissent. La politique de clé n'autorise que le rôle d'exécution Lambda. Quelle correction est nécessaire ?",
+  "choices": [
+    "Ajouter une passerelle NAT au sous-réseau de la fonction",
+    "Autoriser le principal de service régional CloudWatch Logs dans la politique KMS, avec un contexte de chiffrement limité au groupe de journaux",
+    "Accorder `kms:Decrypt` à tous les utilisateurs IAM du compte",
+    "Remplacer la clé KMS par une clé asymétrique de signature"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-1.org-trail-security-lake.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Créer un journal d'organisation CloudTrail multi-Région vers un compartiment S3 dédié et protégé, puis déléguer Amazon Security Lake pour agréger les sources de l'organisation",
+  "rationale": "Un journal d'organisation couvre les comptes actuels et futurs, et le mode multi-Région évite les angles morts régionaux. Le compte d'archivage impose la séparation des responsabilités, tandis que Security Lake normalise et centralise les sources prises en charge au format OCSF. Les autres options fragmentent la collecte ou ne conservent qu'un sous-ensemble des événements."
+}

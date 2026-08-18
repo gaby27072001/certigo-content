@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-4.s3-endpoint-governance.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Des VPC réglementés doivent accéder à un compartiment S3 sans NAT ni Internet. Même si des identifiants sont volés, les requêtes au compartiment doivent être refusées lorsqu'elles ne proviennent pas de l'endpoint approuvé. Quel ensemble de contrôles appliquer ?",
+  "choices": [
+    "Un gateway endpoint S3 avec endpoint policy restrictive et une bucket policy exigeant le VPC endpoint attendu",
+    "Une Internet Gateway et une bucket policy autorisant tout principal authentifié",
+    "Un Transit Gateway sans politique S3",
+    "Un groupe de sécurité directement attaché au compartiment S3"
+  ]
+}

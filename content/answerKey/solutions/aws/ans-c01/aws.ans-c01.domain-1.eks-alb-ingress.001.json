@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.eks-alb-ingress.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "AWS Load Balancer Controller créant un Application Load Balancer avec règles d'écoute et web ACL",
+  "rationale": "L'ALB fournit le routage hôte/chemin, l'intégration ACM et l'association à WAF. AWS Load Balancer Controller traduit les ressources Kubernetes en configuration ALB et groupes cibles. NLB opère principalement en couche 4, tandis que GWLB sert à insérer des appliances réseau transparentes."
+}

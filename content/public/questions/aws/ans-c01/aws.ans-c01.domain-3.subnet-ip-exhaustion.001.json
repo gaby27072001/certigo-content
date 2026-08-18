@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-3.subnet-ip-exhaustion.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un cluster EKS ne peut plus augmenter le nombre de pods parce que les sous-réseaux privés principaux manquent d'adresses, mais le VPC ne peut pas être recréé. Quelle évolution offre de la capacité avec le moins d'interruption ?",
+  "choices": [
+    "Associer un CIDR secondaire non chevauchant au VPC, créer de nouveaux sous-réseaux et configurer le CNI pour utiliser cette capacité selon le plan retenu",
+    "Modifier le CIDR principal du VPC en place",
+    "Attribuer une Elastic IP publique à chaque pod",
+    "Supprimer les routes locales de la table VPC"
+  ]
+}

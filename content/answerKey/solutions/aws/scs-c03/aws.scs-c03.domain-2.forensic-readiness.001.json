@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-2.forensic-readiness.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Préprovisionner par StackSets un rôle de réponse intercompte à confiance restreinte, des runbooks Systems Manager et une journalisation centralisée immuable",
+  "rationale": "La préparation intercompte réduit la dépendance envers les identités du compte potentiellement compromis et permet une réponse reproductible. Les StackSets maintiennent le rôle et les runbooks à l'échelle, tandis que les journaux externes restent disponibles si le compte affecté est altéré. Les identifiants root partagés et la création tardive d'utilisateurs augmentent fortement le risque."
+}

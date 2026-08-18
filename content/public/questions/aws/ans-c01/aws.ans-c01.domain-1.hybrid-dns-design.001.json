@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-1.hybrid-dns-design.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Les serveurs sur site doivent résoudre `corp.aws` hébergé dans une private hosted zone, et les instances VPC doivent résoudre `legacy.corp` servi par les DNS sur site. La solution doit être hautement disponible dans deux AZ. Quel design choisir ?",
+  "choices": [
+    "Des Route 53 Resolver inbound endpoints pour les requêtes vers AWS, des outbound endpoints avec règles de forwarding vers le DNS sur site, et des redirecteurs conditionnels des deux côtés",
+    "Associer une zone publique Route 53 à tous les noms internes",
+    "Configurer le serveur DNS fourni par DHCP comme cible directe depuis Internet",
+    "Créer uniquement un enregistrement `/etc/hosts` sur chaque instance"
+  ]
+}
