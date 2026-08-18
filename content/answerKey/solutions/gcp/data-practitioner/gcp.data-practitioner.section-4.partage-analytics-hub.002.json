@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-4.partage-analytics-hub.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Créer une annonce Analytics Hub dans un échange et autoriser les projets partenaires à s'y abonner",
+  "rationale": "Analytics Hub permet de publier et de découvrir des données BigQuery gouvernées, puis de les partager par abonnement sans exports dupliqués. Un bucket public expose inutilement les données, l'accès uniforme simplifie les autorisations IAM d'objets Cloud Storage mais ne publie pas un dataset BigQuery, et le rôle Owner viole le moindre privilège."
+}

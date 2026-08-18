@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-1.api-quotas-regions.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Activer l'API Compute Engine, estimer les vCPU requis et demander à l'avance une augmentation du quota régional",
+  "rationale": "Compute Engine doit être activé et les quotas régionaux doivent couvrir la capacité prévue avant la création des VM. Répartir les VM entre zones ne contourne pas un quota régional, Cloud Resource Manager ne fournit pas le service de calcul et changer une valeur par défaut de CLI n'augmente aucun quota."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-1.transfert-hors-ligne.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une société doit migrer 800 To d'archives depuis un centre de données vers Cloud Storage. Sa liaison disponible ne permettrait pas de terminer le transfert avant plusieurs mois et aucune augmentation de bande passante n'est possible. Quel service convient le mieux ?",
+  "choices": [
+    "BigQuery Data Transfer Service pour planifier l'import des fichiers depuis le centre de données",
+    "Storage Transfer Service avec un transfert récurrent par Internet sur la liaison existante",
+    "Une commande gcloud storage cp exécutée en parallèle sur plusieurs postes",
+    "Transfer Appliance pour expédier les données hors ligne vers Google Cloud"
+  ]
+}

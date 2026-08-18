@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-3.cycle-vie-sauvegarde.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Des règles de gestion du cycle de vie du bucket pour changer la classe après 90 jours et supprimer après 7 ans",
+  "rationale": "La gestion du cycle de vie exécute nativement les transitions de classe et suppressions selon l'âge des objets. Une alerte n'agit pas sur les données, une règle de conservation empêche surtout la suppression avant une durée donnée et une VM cron ajoute une exploitation inutile et fragile."
+}

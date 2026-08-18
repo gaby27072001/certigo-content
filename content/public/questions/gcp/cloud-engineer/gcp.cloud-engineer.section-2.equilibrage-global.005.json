@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-2.equilibrage-global.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un site HTTPS public est servi par des groupes d'instances gérés dans deux régions. Les utilisateurs doivent atteindre une adresse IP anycast unique et être dirigés vers un backend sain et proche, avec terminaison TLS gérée. Quel composant faut-il mettre en place ?",
+  "choices": [
+    "Un équilibreur de charge réseau passthrough interne",
+    "Un Application Load Balancer externe global avec certificat géré et vérifications d'état",
+    "Cloud NAT dans chaque région",
+    "Une zone privée Cloud DNS avec plusieurs enregistrements A"
+  ]
+}

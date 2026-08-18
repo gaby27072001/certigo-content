@@ -103,6 +103,16 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
+  const coverageRoot = resolve(root, "content", "public", "coverage");
+  for (const provider of readdirSync(coverageRoot)) {
+    const providerRoot = resolve(coverageRoot, provider);
+    for (const file of readdirSync(providerRoot)) {
+      const matrixPath = resolve(providerRoot, file);
+      const matrix = readJson(matrixPath);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      writeJson(matrixPath, matrix);
+    }
+  }
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -207,7 +217,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async () => {
+test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
@@ -226,7 +236,8 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
       )
     );
     assert.equal(matrix.certification, certification.id);
-    assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    const questionIds = matrix.objectives.flatMap((objective) => objective.questionIds);
+    assert.equal(questionIds.length, new Set(questionIds).size);
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0

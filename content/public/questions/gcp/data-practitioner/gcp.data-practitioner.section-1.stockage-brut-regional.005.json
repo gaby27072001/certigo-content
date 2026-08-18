@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-1.stockage-brut-regional.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise collecte des images, des fichiers JSON et des exports CSV qui seront traités ultérieurement par lots dans BigQuery situé en europe-west1. Elle veut un stockage objet économique et limiter les mouvements interrégionaux pendant les chargements. Quelle solution choisir ?",
+  "choices": [
+    "Une table BigQuery pour stocker directement les images avec les lignes CSV",
+    "Une instance Cloud SQL régionale pour conserver chaque fichier dans une colonne binaire",
+    "Un bucket Cloud Storage régional en europe-west1 pour les données brutes",
+    "Une base Firestore multirégionale contenant les fichiers sous forme de documents"
+  ]
+}

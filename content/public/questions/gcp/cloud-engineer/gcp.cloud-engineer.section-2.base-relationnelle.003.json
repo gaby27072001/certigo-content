@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-2.base-relationnelle.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une application régionale utilise PostgreSQL, exige des transactions relationnelles et doit continuer à fonctionner après la panne d'une zone avec un minimum d'administration. Quelle architecture faut-il déployer ?",
+  "choices": [
+    "BigQuery avec des tables partitionnées",
+    "Firestore en mode natif",
+    "PostgreSQL installé sur une VM unique avec un disque local SSD",
+    "Cloud SQL for PostgreSQL configuré en haute disponibilité régionale"
+  ]
+}

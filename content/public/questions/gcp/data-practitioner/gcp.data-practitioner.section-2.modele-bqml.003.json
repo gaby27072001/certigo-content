@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-2.modele-bqml.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une équipe connaît SQL et possède dans BigQuery un historique étiqueté des clients ayant résilié. Elle veut entraîner un modèle de classification sans déplacer les données, puis produire un score pour les clients actifs. Quelle séquence utiliser ?",
+  "choices": [
+    "Exporter les tables vers Cloud Storage, créer un cluster Dataproc et écrire une application Spark",
+    "Créer une fonction SQL qui attribue un score fixe selon le pays du client",
+    "Créer un tableau de bord Looker Studio et utiliser ses filtres comme modèle prédictif",
+    "Exécuter CREATE MODEL dans BigQuery ML, évaluer le modèle, puis appeler ML.PREDICT sur les clients actifs"
+  ]
+}

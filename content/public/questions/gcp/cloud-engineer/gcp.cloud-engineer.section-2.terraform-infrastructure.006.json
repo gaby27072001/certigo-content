@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-2.terraform-infrastructure.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Trois administrateurs doivent créer de façon répétable les mêmes réseaux, sous-réseaux et règles de pare-feu dans plusieurs projets. Les changements doivent être relus avant application et l'état partagé sans dépendre du poste d'un administrateur. Quelle approche faut-il adopter ?",
+  "choices": [
+    "Exécuter manuellement les commandes gcloud depuis chaque poste",
+    "Enregistrer une suite de captures d'écran de la console",
+    "Créer les ressources une fois puis cloner les disques des VM",
+    "Définir les ressources avec Terraform, examiner le plan et stocker l'état dans un backend Cloud Storage protégé"
+  ]
+}

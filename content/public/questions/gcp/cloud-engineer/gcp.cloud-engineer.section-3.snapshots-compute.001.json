@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-3.snapshots-compute.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une VM Compute Engine héberge un service avec des données sur un disque persistant. L'équipe veut créer automatiquement une sauvegarde incrémentale quotidienne du disque et conserver les sauvegardes pendant 14 jours. Quelle action opérationnelle faut-il effectuer ?",
+  "choices": [
+    "Créer chaque jour une image de conteneur dans Artifact Registry",
+    "Copier le disque vers un disque local SSD et redémarrer la VM",
+    "Créer une stratégie de planification de snapshots avec une fréquence quotidienne et une durée de conservation de 14 jours, puis l'associer au disque",
+    "Activer uniquement la suppression automatique de la VM après 14 jours"
+  ]
+}

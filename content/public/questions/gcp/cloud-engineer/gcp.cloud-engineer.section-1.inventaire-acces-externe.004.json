@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-1.inventaire-acces-externe.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Des auditeurs d'un partenaire doivent, pendant trois mois, rechercher les ressources de plusieurs projets sans recevoir de comptes Google internes ni de clés persistantes. L'entreprise doit aussi conserver une vue centralisée des actifs examinés. Quelle approche faut-il choisir ?",
+  "choices": [
+    "Créer un compte de service par auditeur et lui remettre une clé JSON",
+    "Ajouter les auditeurs comme propriétaires de chaque projet et utiliser Cloud Monitoring",
+    "Configurer Workforce Identity Federation avec un rôle de consultation limité et utiliser Cloud Asset Inventory au niveau de l'organisation",
+    "Autoriser l'accès anonyme aux projets et exporter les métriques vers BigQuery"
+  ]
+}

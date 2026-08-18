@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-3.diagnostic-journaux.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une application sur Compute Engine devient parfois indisponible lorsque l'espace disque est presque saturé. L'équipe veut collecter les métriques du système d'exploitation, examiner les journaux applicatifs et être alertée avant la saturation. Quelle approche faut-il utiliser ?",
+  "choices": [
+    "Consulter uniquement le journal d'activité de facturation une fois par mois",
+    "Créer une règle de pare-feu autorisant toutes les connexions entrantes",
+    "Déployer Ops Agent, filtrer les entrées dans Cloud Logging et créer une règle d'alerte Cloud Monitoring sur l'utilisation du disque",
+    "Créer un snapshot à chaque erreur HTTP sans collecter de métriques"
+  ]
+}
