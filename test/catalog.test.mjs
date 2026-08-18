@@ -103,6 +103,18 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
+  const coverageRoot = resolve(root, "content", "public", "coverage");
+  for (const provider of readdirSync(coverageRoot, { withFileTypes: true })) {
+    if (!provider.isDirectory()) continue;
+    const providerRoot = resolve(coverageRoot, provider.name);
+    for (const file of readdirSync(providerRoot)) {
+      const matrixPath = resolve(providerRoot, file);
+      const matrix = readJson(matrixPath);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      if (matrix.status === "complete") matrix.status = "planned";
+      writeJson(matrixPath, matrix);
+    }
+  }
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -168,6 +180,7 @@ function addV3Pair(root, overrides = {}) {
     "aif-c01.json"
   );
   const matrix = readJson(matrixPath);
+  matrix.status = "in-progress";
   matrix.objectives[0].questionIds = [id];
   writeJson(matrixPath, matrix);
   return id;
@@ -207,7 +220,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async () => {
+test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
@@ -226,7 +239,12 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
       )
     );
     assert.equal(matrix.certification, certification.id);
-    assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    if (matrix.status === "planned") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    }
+    if (matrix.status === "complete") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length > 0));
+    }
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0
