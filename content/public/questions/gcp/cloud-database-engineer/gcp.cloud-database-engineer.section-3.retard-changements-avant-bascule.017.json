@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.retard-changements-avant-bascule.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "La copie initiale d'une migration continue DMS de PostgreSQL vers AlloyDB est terminée. Quatre heures avant le basculement, le retard CDC continue d'augmenter et le volume de WAL retenu par le slot de réplication approche la limite de stockage de la source. Quelle décision réduit le risque de perte ou d'indisponibilité ?",
+  "choices": [
+    "Reporter le basculement, garder la source comme système de référence, analyser métriques et journaux DMS, slot/WAL, transactions longues, réseau et capacité d'application cible, puis ne reprendre le plan qu'après rattrapage stable et validation",
+    "Augmenter seulement la rétention WAL et maintenir le basculement à l'heure prévue même si le retard CDC subsiste, ce qui évite à court terme l'épuisement du stockage mais peut promouvoir une cible incomplète et violer le RPO",
+    "Annuler immédiatement le job, supprimer la cible et recommencer la copie initiale avec une instance AlloyDB plus grande, ce qui élimine l'état actuel mais abandonne une copie validée sans avoir isolé le goulot d'étranglement prévu",
+    "Ouvrir AlloyDB aux nouvelles écritures avant le rattrapage et laisser DMS finir les changements historiques en arrière-plan, ce qui soulage la source mais crée deux systèmes de référence, des conflits et un ordre de transactions indéterminé sans mécanisme fiable de résolution"
+  ]
+}

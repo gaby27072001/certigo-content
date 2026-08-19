@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-1.prevision-ventes-magasins.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une chaîne de magasins conserve cinq ans de ventes quotidiennes dans BigQuery. L’équipe analytique maîtrise SQL, doit livrer en deux semaines des prévisions par magasin avec intervalles de confiance et souhaite éviter de gérer une infrastructure d’entraînement. Quelle approche répond le mieux à ces contraintes ?",
+  "choices": [
+    "Créer un modèle ARIMA_PLUS dans BigQuery ML, valider les séries historiques, puis produire par magasin les horizons et intervalles attendus avec ML.FORECAST.",
+    "Exporter les ventes vers Cloud Storage, entraîner un LSTM personnalisé sur GKE et construire un service de prévision dédié, malgré le délai court et l’exploitation supplémentaire.",
+    "Soumettre l’historique à Gemini avec un prompt imposant un format numérique et estimer les intervalles à partir de plusieurs réponses, sans modèle temporel reproductible.",
+    "Entraîner une régression AutoML sur Gemini Enterprise Agent Platform à partir des ventes agrégées, mais sans représenter explicitement la saisonnalité et l’ordre temporel."
+  ]
+}

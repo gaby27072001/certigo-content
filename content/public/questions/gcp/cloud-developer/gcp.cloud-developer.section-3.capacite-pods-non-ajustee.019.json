@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.capacite-pods-non-ajustee.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un Deployment GKE utilise un Horizontal Pod Autoscaler avec une cible de 60 % d'utilisation CPU. Sous charge, les pods saturent, mais le HPA indique une valeur CPU inconnue et n'ajoute aucun replica. Les conteneurs définissent resources.limits.cpu, mais pas resources.requests.cpu. Quelle correction appliquer ?",
+  "choices": [
+    "Fixer immédiatement replicas à 20 dans le Deployment et supprimer le HPA afin de garantir une capacité constante pour toutes les pointes futures.",
+    "Abaisser la cible du HPA à 20 % tout en conservant uniquement resources.limits.cpu, puis augmenter la fréquence de collecte des métriques.",
+    "Définir une valeur resources.requests.cpu réaliste pour chaque conteneur mesuré, conserver la cible d'utilisation CPU du HPA et vérifier les métriques.",
+    "Activer uniquement l'autoscaling du pool de nœuds, porter son minimum à dix nœuds et laisser le Deployment à trois replicas sans requêtes CPU déclarées."
+  ]
+}

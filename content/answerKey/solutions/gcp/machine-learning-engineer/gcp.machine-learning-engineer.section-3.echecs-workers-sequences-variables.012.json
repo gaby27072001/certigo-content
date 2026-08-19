@@ -1,0 +1,19 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.echecs-workers-sequences-variables.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Profiler la mémoire, regrouper les séquences par longueur ou limiter les jetons par lot, puis utiliser l’accumulation de gradients et vérifier l’équilibrage des workers.",
+  "rationale": "Le regroupement par longueur avec budget de jetons est la correction adaptée : le budget de jetons ou le regroupement par longueur stabilise la mémoire par lot, l’accumulation conserve une taille effective et le profilage plus l’équilibrage confirment la cause entre workers. Relancer les mêmes lots ne change pas leur pic mémoire et gaspille des ressources. Augmenter le nombre d’exemples et le préchargement aggrave la pression tout en ignorant la longueur variable. Appliquer un plafond uniforme sans mesurer son effet peut stabiliser la mémoire, mais risque de supprimer le signal des documents longs et ne respecte donc pas la contrainte de préserver la qualité.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/training/monitor-debug-interactive-shell",
+    "https://cloud.google.com/blog/products/ai-machine-learning/efficient-pytorch-training-with-vertex-ai"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.modernisation-procedures-oracle.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Utiliser les espaces de travail de conversion Database Migration Service pour analyser et convertir le schéma Oracle, examiner les problèmes, corriger puis appliquer le DDL validé à la cible",
+  "rationale": "L'espace de travail de conversion DMS analyse les objets Oracle, propose du DDL PostgreSQL, expose les problèmes et permet revue et correction avant application : il fournit donc l'estimation et le schéma révisable demandés. Des fichiers physiques Oracle ne peuvent pas être importés tels quels par PostgreSQL et ne convertissent aucun objet. Un flux CDC transporte les changements de données, mais ne réécrit pas automatiquement la sémantique des packages et procédures PL/SQL. Un script de renommage et de types courants ignore exceptions, vues, dépendances et logique procédurale, donc sous-estime l'effort.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/database-migration/docs/oracle-to-postgresql/create-conversion-workspace"
+  ]
+}

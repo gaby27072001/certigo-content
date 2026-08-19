@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.classification-stockage-obligatoire.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "La politique interne exige que chaque bucket Cloud Storage porte un libellé data-classification dont la valeur appartient à une liste approuvée. Le SOC doit détecter à l'échelle de l'organisation les buckets sans ce libellé ou avec une valeur non conforme, alors qu'aucun détecteur intégré ne représente cette règle propre à l'entreprise. Il veut centraliser les résultats dans Security Command Center. Quelle approche choisir ?",
+  "choices": [
+    "Exporter chaque mois l’inventaire des buckets, vérifier manuellement le libellé requis et envoyer les écarts aux propriétaires",
+    "Créer pour chaque bucket une alerte Cloud Monitoring et documenter sa classification attendue dans les annotations",
+    "Créer une métrique sur les journaux de création des buckets et alerter lorsque l’événement observé ne contient pas le libellé",
+    "Déployer un module personnalisé Security Health Analytics décrivant la règle et examiner ses résultats dans Security Command Center"
+  ]
+}

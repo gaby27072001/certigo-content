@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.campagne-recherches-catalogue.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un catalogue produit sur AlloyDB connaît une hausse des recherches en lecture pendant les campagnes, tandis que les écritures doivent rester stables sur le primaire. La charge de lecture varie fortement et les clients acceptent un léger retard de réplication. Quelle évolution limite le risque sur les écritures ?",
+  "choices": [
+    "Augmenter le primaire AlloyDB et lui envoyer toutes les recherches via un pool de connexions plus large, ce qui absorbe un pic ponctuel mais maintient la contention entre lectures variables et écritures stables",
+    "Créer plusieurs clusters primaires indépendants et partitionner les tables de catalogue entre eux, ce qui augmente la capacité mais impose routage, cohérence et rééquilibrage applicatifs inutiles",
+    "Construire davantage d'index sur le primaire et désactiver ceux qui servent rarement, ce qui peut optimiser certaines requêtes mais ne sépare pas la charge de lecture ni son élasticité des écritures",
+    "Ajouter un pool de lecture AlloyDB, router vers son endpoint les recherches qui tolèrent un léger retard de réplication, puis adapter le nombre et la taille de ses nœuds aux campagnes sans charger le primaire"
+  ]
+}

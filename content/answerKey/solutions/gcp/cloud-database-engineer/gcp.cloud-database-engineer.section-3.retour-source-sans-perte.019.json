@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.retour-source-sans-perte.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Définir une fenêtre de décision, maintenir ou préparer une réplication inverse validée des écritures cible vers source, et documenter gel, vérifications et procédure de repli",
+  "rationale": "Une fenêtre de décision assortie d'une réplication inverse validée et d'un runbook de gel et de contrôle ramène à la source les commandes créées sur la cible sans maintenir deux autorités concurrentes. Restaurer la sauvegarde de la veille fournit un état connu, mais perd toutes les transactions plus récentes. Autoriser les doubles écritures puis réconcilier par horodatage crée doublons, conflits et ambiguïtés d'ordre. Réduire le TTL DNS accélère le retour des connexions, mais DNS ne transporte aucune donnée de la cible vers la source.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/architecture/database-migration-concepts-principles-part-2"
+  ]
+}

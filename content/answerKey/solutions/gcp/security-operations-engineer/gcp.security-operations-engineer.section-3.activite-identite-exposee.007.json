@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.activite-identite-exposee.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Formuler les comportements attendus de l’attaquant, rechercher dans les journaux d’audit les usages de l’identité par IP, agent, méthode et chronologie, comparer à sa référence habituelle, pivoter vers les ressources touchées et documenter les preuves",
+  "rationale": "Une chasse guidée par une hypothèse comportementale examine méthodes API, origine, chronologie et ressources, compare ces éléments à la référence du compte et remet des preuves reproductibles à l’équipe de réponse. Une recherche limitée à l’adresse IP peut manquer une infrastructure tournante ou une activité dépourvue de cet IOC. L’attente d’une détection de haute sévérité abandonne le caractère proactif demandé. Un confinement global avant établissement de la portée risque d’interrompre des services, tandis qu’une reconstruction fondée sur les seules alertes ignore les événements non détectés. L’analyse comportementale est donc la seule démarche capable de confirmer ou réfuter l’usage de la clé exposée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/logging/docs/audit"
+  ]
+}

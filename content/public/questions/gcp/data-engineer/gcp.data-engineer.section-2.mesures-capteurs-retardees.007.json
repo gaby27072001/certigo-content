@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.mesures-capteurs-retardees.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des capteurs publient dans Pub/Sub des événements horodatés. Le réseau peut les retarder jusqu'à vingt minutes. Le métier exige des agrégats par fenêtres de cinq minutes, une première estimation rapide puis des corrections lorsque des événements tardifs arrivent, sans classer ces événements selon l'heure de traitement. Comment configurer le pipeline Dataflow ?",
+  "choices": [
+    "Utiliser des fenêtres globales, déclencher une sortie toutes les cinq minutes selon l'horloge du worker et purger l'état dès qu'une première estimation est publiée",
+    "Remplacer l'horodatage métier par l'heure de publication Pub/Sub, utiliser des fenêtres fixes et envoyer après cinq minutes les arrivées tardives dans une table séparée",
+    "Utiliser le temps événementiel avec fenêtres fixes, watermarks, déclencheurs précoces et retard autorisé couvrant vingt minutes, puis réémettre les résultats corrigés",
+    "Écrire les événements bruts dans BigQuery, exécuter toutes les cinq minutes une requête qui rescane la journée complète et remplacer les agrégats des fenêtres déjà publiées"
+  ]
+}

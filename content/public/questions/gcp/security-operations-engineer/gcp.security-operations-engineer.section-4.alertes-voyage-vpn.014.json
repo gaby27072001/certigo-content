@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.alertes-voyage-vpn.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une détection de connexion impossible génère 2 000 alertes par semaine. L’analyse montre que 92 % proviennent de deux sorties VPN d’entreprise, mais quelques comptes compromis ont aussi utilisé le VPN. Comment réduire le bruit sans aveugler la détection ?",
+  "choices": [
+    "Désactiver la règle, examiner mensuellement un échantillon, puis la réactiver pendant les campagnes connues ; conserver entre-temps un tableau de bord et une revue manuelle des connexions présentant de grandes distances ou de nouveaux appareils",
+    "Exclure les sorties VPN connues et conserver une alerte sur les nouveaux appareils et pays rares, en supposant que ces signaux détecteront les comptes compromis sans analyser les séquences expliquées",
+    "Augmenter uniformément le seuil de distance pour obtenir moins de dix alertes, puis suivre le volume et réviser trimestriellement ce seuil sans qualifier les cas supprimés ni leur contexte VPN",
+    "Mesurer les motifs de faux positifs, enrichir avec les plages VPN et le contexte de session, supprimer uniquement les séquences expliquées, conserver des signaux compensatoires et suivre précision et volume après changement"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.controle-reseau-equipes-separees.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise sépare ses équipes Paiements et Catalogue. Chaque équipe doit administrer ses services en préproduction et en production, tandis que l'équipe réseau garde le contrôle central des sous-réseaux et que les règles de résidence s'appliquent à toute la production. Quelle architecture répond le mieux à ces exigences avec le moins de duplication ?",
+  "choices": [
+    "Créer des dossiers par environnement, des projets de service par application et un projet hôte Shared VPC géré par l'équipe réseau ; appliquer les contraintes de résidence au dossier de production",
+    "Créer des dossiers par environnement et des projets par application, mais laisser chaque équipe posséder son VPC et relier les réseaux par appairage ; appliquer la résidence au dossier de production, au prix d'une administration réseau distribuée",
+    "Créer un projet hôte Shared VPC unique et des projets de service, mais organiser les dossiers par équipe et répéter les contraintes de résidence dans chaque projet de production au lieu de les hériter d'un dossier commun",
+    "Créer des dossiers de production et de préproduction, puis un projet hôte Shared VPC distinct par application afin que chaque équipe réseau duplique sous-réseaux, routes et contrôles de résidence"
+  ]
+}

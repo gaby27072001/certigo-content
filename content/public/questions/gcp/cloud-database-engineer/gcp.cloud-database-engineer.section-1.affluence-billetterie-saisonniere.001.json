@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.affluence-billetterie-saisonniere.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une plateforme de billetterie exploite MySQL sur site. Les mesures des 90 derniers jours indiquent 8 vCPU utilisés à 65 % en régime normal, 14 vCPU pendant les ouvertures de vente, 1,8 To de données et une croissance annuelle prévue de 40 %. Le p99 doit rester inférieur à 80 ms. L'équipe veut migrer vers Cloud SQL sans surdimensionner durablement. Quelle démarche de dimensionnement est la plus appropriée ?",
+  "choices": [
+    "Rejouer une charge représentative avec les pics prévus, choisir une forme offrant une marge mesurée, dimensionner le stockage selon les IOPS et la croissance, puis réévaluer avec Cloud Monitoring",
+    "Choisir dès le départ la plus grande forme disponible et réserver cinq ans de capacité, ce qui absorbe les pics prévus mais immobilise durablement du calcul et du stockage non utilisés hors campagne",
+    "Dimensionner sur les 8 vCPU observés en régime normal et activer seulement l'augmentation automatique du stockage, ce qui maîtrise le coût courant mais ne couvre pas les pics CPU des ouvertures de vente",
+    "Dimensionner le stockage sur 1,8 To plus 40 % de croissance et conserver la forme de calcul actuelle, ce qui anticipe le volume mais ignore les IOPS et le p99 sous charge saisonnière"
+  ]
+}

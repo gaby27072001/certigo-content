@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.optimisation-prototype-distribue.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un prototype TensorFlow donne de bons résultats, mais le taux d’apprentissage, la profondeur et la taille de lot ont été choisis manuellement. L’équipe doit explorer efficacement cet espace sur plusieurs machines, suivre une métrique de validation et interrompre les essais peu prometteurs. Que doit-elle faire ?",
+  "choices": [
+    "Packager l’entraînement personnalisé sur Agent Platform, puis lancer un réglage centralisé d’hyperparamètres avec espace de recherche, métrique de validation et arrêt des essais faibles.",
+    "Déployer chaque combinaison sur un endpoint de prédiction, mesurer sa latence sous charge et choisir la plus rapide, sans comparer la métrique de validation du modèle.",
+    "Répartir manuellement les combinaisons entre plusieurs notebooks partagés, consigner uniquement le meilleur résultat et arrêter les essais sur appréciation visuelle des courbes.",
+    "Utiliser un job d’entraînement distribué avec une combinaison choisie au hasard, augmenter le nombre de workers et répéter jusqu’à dépasser le score du prototype."
+  ]
+}

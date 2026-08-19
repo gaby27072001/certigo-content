@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.echecs-workers-sequences-variables.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Après le passage d’une à huit GPU, un entraînement PyTorch échoue régulièrement par manque de mémoire sur certains workers. Les journaux montrent des séquences de longueurs très variables et les lots sont répartis par nombre d’exemples. Quelle correction doit être essayée en priorité sans réduire arbitrairement la qualité du modèle ?",
+  "choices": [
+    "Configurer la tâche pour relancer automatiquement chaque worker en échec avec les mêmes lots, puis augmenter le nombre maximal de tentatives afin que les séquences courtes finissent par dominer.",
+    "Augmenter la taille de lot en nombre d’exemples et activer davantage de préchargement sur chaque GPU, sans tenir compte du nombre variable de jetons traité par worker.",
+    "Tronquer toutes les séquences au même maximum prudent, puis continuer sans mesurer la perte de signal sur les documents longs.",
+    "Profiler la mémoire, regrouper les séquences par longueur ou limiter les jetons par lot, puis utiliser l’accumulation de gradients et vérifier l’équilibrage des workers."
+  ]
+}

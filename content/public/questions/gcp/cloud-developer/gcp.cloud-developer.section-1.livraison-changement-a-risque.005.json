@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.livraison-changement-a-risque.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une nouvelle révision Cloud Run modifie le moteur de tarification. L'équipe veut d'abord lui envoyer 5 % du trafic, comparer les métriques, puis revenir immédiatement à l'ancienne version si le taux d'erreur augmente. Que doit-elle faire ?",
+  "choices": [
+    "Déployer la révision sans trafic, vérifier son démarrage, puis lui transférer 5 % des requêtes et revenir à 100 % sur l'ancienne si les métriques se dégradent.",
+    "Remplacer l'image associée au tag existant dans Artifact Registry, puis redémarrer progressivement les instances Cloud Run pour leur faire charger ce tag mutable.",
+    "Déployer la version dans un second projet, dupliquer ses dépendances, puis modifier des enregistrements DNS pondérés pour envoyer 5 % des clients et les restaurer en cas d'erreur.",
+    "Limiter les instances de la nouvelle révision à 5 % de l'ancienne, surveiller leur saturation et laisser l'équilibreur choisir librement la destination des requêtes."
+  ]
+}

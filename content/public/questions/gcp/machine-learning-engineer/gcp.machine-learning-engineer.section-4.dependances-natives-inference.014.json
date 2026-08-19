@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.dependances-natives-inference.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un modèle PyTorch dépend d’une bibliothèque native non incluse dans les conteneurs préconstruits et exige une étape de tokenisation spécifique avant chaque prédiction. L’entreprise veut un endpoint géré et reproductible. Quelle approche convient ?",
+  "choices": [
+    "Choisir un conteneur PyTorch préconstruit, télécharger la bibliothèque native au démarrage de chaque réplica et exécuter la tokenisation dans un service séparé appelé sur le réseau.",
+    "Construire une image de prédiction immuable avec dépendances, serveur HTTP et tokenisation, la tester, la publier dans Artifact Registry puis la déployer sur Agent Platform.",
+    "Convertir le modèle au format ONNX, supposer que la bibliothèque native devient inutile et réimplémenter la tokenisation dans le client de chaque application consommatrice.",
+    "Déployer l’image complète sur un cluster GKE autogéré, avec autoscaling des pods malgré l’exigence d’un endpoint géré."
+  ]
+}

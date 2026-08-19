@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.entrainement-ia-donnees-sensibles.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Placer les services pris en charge dans un périmètre VPC Service Controls, utiliser la connectivité privée et appliquer des CMEK avec des rôles IAM minimaux",
+  "rationale": "Le périmètre VPC Service Controls réduit l'exfiltration depuis les services pris en charge, la connectivité privée évite les chemins publics, les CMEK donnent le contrôle des clés et les rôles minimaux bornent les accès. Rendre les jeux de données publics viole immédiatement la confidentialité, et un filtre IP ne restaure pas une frontière de données. IAP protège l'accès à l'interface des notebooks mais pas tous les appels et flux Vertex AI, tandis que leurs IP restent publiques. Combiner les rôles Vertex AI requis, des notebooks sans IP publique et Private Google Access améliore la posture, mais le chiffrement Google par défaut ne satisfait pas l'exigence explicite de clés contrôlées par l'entreprise et aucune frontière anti-exfiltration n'est créée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/vertex-ai/docs/general/vpc-service-controls",
+    "https://cloud.google.com/vertex-ai/docs/general/cmek"
+  ]
+}

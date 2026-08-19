@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-6.encrypted-traffic-analysis.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Utiliser Cloud NGFW Enterprise avec politiques communes, interception TLS et prévention des intrusions, puis cibler les workloads de chaque VPC au moyen de secure tags, sans aucune appliance tierce autogérée.",
+  "rationale": "Cloud NGFW Enterprise fournit l'interception TLS et l'inspection applicative gérées, notamment la prévention des intrusions; des politiques communes ciblées par secure tags restent cohérentes malgré les adresses éphémères des workloads dans plusieurs VPC. Les règles VPC Firewall classiques filtrent principalement les couches 3 et 4 et leur journalisation ne déchiffre pas TLS. Cloud Armor protège des applications derrière des équilibreurs compatibles et une edge policy ne s'attache pas à Cloud NAT pour inspecter l'egress général ou tout protocole. Une appliance multi-NIC unique pourrait effectuer une inspection similaire, mais sans équilibreur ni health check elle crée le point de panne et la charge d'administration que l'organisation cherche explicitement à éviter.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/firewall/docs/about-tls-inspection"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.continuite-transactions-regionales.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une plateforme de règlement européenne traite des écritures fortement cohérentes. Elle doit continuer à accepter les transactions après la perte complète d'une région, avec un RPO inférieur à cinq minutes et un RTO inférieur à quinze minutes. L'équipe veut éviter un basculement manuel de base de données. Quelle architecture répond le mieux à ces contraintes ?",
+  "choices": [
+    "Déployer Spanner dans une configuration multirégionale, placer les services stateless derrière un équilibreur de charge global et tester régulièrement le basculement régional.",
+    "Déployer Cloud SQL en haute disponibilité dans une région, ajouter un réplica interrégional asynchrone, conserver les sauvegardes nocturnes dans la région de secours et promouvoir le réplica selon un runbook d'incident.",
+    "Exploiter une base Firestore indépendante dans chaque région, répliquer les écritures par Pub/Sub et confier à un service métier la détection puis la résolution des conflits entre les deux copies.",
+    "Installer PostgreSQL sur des VM avec disque persistant régional, maintenir une réplique en lecture dans une autre région et utiliser Cloud DNS pour basculer vers cette réplique après promotion manuelle."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.incident-dirigeant-interrompu.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Automatiser les enrichissements et actions réversibles, calculer une décision à partir de plusieurs signaux, exiger une approbation humaine pour désactiver les comptes à fort impact, puis journaliser résultat et retour arrière",
+  "rationale": "Un playbook gradué automatise enrichissements et actions réversibles, agrège plusieurs signaux et réserve une approbation humaine à la désactivation d’un compte à fort impact, avec journal et retour arrière. Une suspension automatique sur un verdict unique peut encore interrompre la transaction d’un dirigeant, même limitée à cinq minutes. Un traitement entièrement manuel assorti de deux approbations ralentit aussi les étapes sûres et recrée le backlog que l’automatisation doit réduire. Une décision confiée au fournisseur de messagerie ignore le contexte d’identité et de criticité détenu par l’entreprise. Cette répartition concentre donc l’intervention humaine sur le risque métier réel.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/soar/respond/working-with-playbooks/using-actions-in-playbooks"
+  ]
+}

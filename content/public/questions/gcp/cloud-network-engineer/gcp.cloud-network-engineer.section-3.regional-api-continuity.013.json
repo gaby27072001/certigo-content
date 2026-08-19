@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.regional-api-continuity.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une API est exposée par deux équilibreurs régionaux, l'un principal en Europe et l'autre de secours aux États-Unis. Le nom DNS doit normalement retourner l'adresse européenne, mais basculer automatiquement si sa cible devient non saine. Quelle configuration Cloud DNS répond à ce besoin ?",
+  "choices": [
+    "Créer une politique Cloud DNS de basculement, définir l'Europe comme cible principale et les États-Unis comme sauvegarde, puis associer les contrôles d'état adaptés.",
+    "Créer deux enregistrements simples de même nom, régler leur TTL à quelques secondes et exécuter un script client qui ignore l'adresse européenne lorsqu'elle ne répond plus.",
+    "Signer la zone avec DNSSEC et configurer la clé de signature européenne comme primaire, afin que Cloud DNS sélectionne la région dont la signature et le service restent valides.",
+    "Créer une zone de transfert pointant normalement vers un résolveur européen, puis utiliser une seconde politique de transfert comme sauvegarde vers un résolveur américain."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-5.cout-capacite-stable-traitements-nocturnes.022",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Couvrir la base prévisible avec un engagement d'utilisation adapté et exécuter les tâches reprenables sur des VM Spot avec checkpointing, tout en gardant la capacité minimale sur des VM non interruptibles",
+  "rationale": "Un engagement adapté couvre à moindre coût la base stable, tandis que les VM Spot et le checkpointing exploitent le caractère interruptible du surplus nocturne sans menacer la capacité minimale. Engager le pic complet garantit la capacité, mais paie en continu des ressources utilisées quelques heures et surdimensionne l'engagement. Mettre base et surplus sur Spot accepte l'interruption de la charge minimale requise 24 h/24, même avec reprise. Garder la base à la demande et réserver le batch standard inverse le profil économique : la consommation stable n'obtient pas la remise d'engagement et le travail reprenable n'utilise pas Spot.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/compute/docs/instances/committed-use-discounts-overview"
+  ]
+}

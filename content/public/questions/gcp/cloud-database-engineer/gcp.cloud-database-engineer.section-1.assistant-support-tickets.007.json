@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.assistant-support-tickets.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe construit un assistant d'assistance technique. Les tickets et métadonnées relationnelles résident dans PostgreSQL ; l'application doit effectuer une recherche sémantique sur des embeddings, filtrer par client et priorité, puis joindre les résultats aux tables existantes. L'équipe veut éviter une nouvelle plateforme de données. Quelle solution est la plus appropriée ?",
+  "choices": [
+    "Exporter tickets, embeddings et métadonnées dans Cloud Storage puis exécuter une recherche exhaustive à chaque requête, ce qui évite un nouveau moteur mais ne fournit pas la latence ni les jointures interactives",
+    "Conserver PostgreSQL et sérialiser chaque embedding dans une colonne texte recherchée avec LIKE, ce qui permet les filtres relationnels mais ne calcule pas la proximité vectorielle sémantique",
+    "Utiliser AlloyDB for PostgreSQL avec l'extension vectorielle et un index adapté, puis appliquer dans la même requête les filtres SQL de client et de priorité ainsi que les jointures aux tables de tickets",
+    "Indexer les embeddings dans Cloud Logging et joindre les résultats aux tickets dans le navigateur, ce qui centralise les événements mais détourne un service d'observabilité et expose les données au client"
+  ]
+}

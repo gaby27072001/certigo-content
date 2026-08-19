@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.appel-aval-lent-transaction.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une transaction traverse Cloud Run, GKE et un service tiers. L'équipe voit des erreurs dans les journaux, mais ne sait pas quel appel aval ajoute trois secondes. Quelle instrumentation facilitera le diagnostic de bout en bout ?",
+  "choices": [
+    "Ajouter dans chaque service un identifiant généré localement et un message texte détaillé, sans propager un contexte commun permettant de rattacher les appels aval à la même transaction",
+    "Enregistrer le temps total, le code HTTP et le service appelant dans une métrique par minute, mais sans spans enfant capables d'attribuer les trois secondes à un appel précis",
+    "Activer VPC Flow Logs et corréler adresses IP, ports et volumes avec les journaux applicatifs, sans disposer de la hiérarchie des appels ni des durées de spans distribués",
+    "Propager le contexte OpenTelemetry, exporter les spans vers Cloud Trace et inclure trace_id et span_id dans les journaux structurés afin d'identifier l'appel aval responsable des trois secondes"
+  ]
+}

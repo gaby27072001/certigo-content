@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.rotation-acces-base-donnees.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Conserver le secret dans Secret Manager et l'injecter à l'exécution avec une identité Cloud Run autorisée sur ce secret ; référencer sa version et la faire évoluer sans reconstruire l'image ni exposer la valeur au pipeline",
+  "rationale": "Secret Manager injecté à l'exécution sépare le mot de passe du build et de l'image, permet une nouvelle version du secret sans reconstruction et limite la lecture à l'identité Cloud Run de production. Un montage de build éphémère évite une couche temporaire, mais écrire ensuite la valeur dans l'image la rend persistante et expose le build à un secret inutile. Chiffrer la valeur au build avec une clé statique embarquée déplace le secret sans résoudre son exposition et impose toujours une reconstruction à la rotation. Lire Secret Manager dans le pipeline puis figer la valeur dans la configuration versionnée exige un nouveau déploiement à chaque rotation et donne au pipeline un accès que le scénario exclut.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/run/docs/configuring/services/secrets"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-5.reprise-chargement-quotidien.022",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Un DAG Cloud Composer charge chaque jour une partition BigQuery après validation d'un fichier. Une panne après le chargement mais avant la confirmation Airflow provoque parfois une nouvelle tentative et des doublons. Le DAG doit pouvoir être relancé pour n'importe quelle date sans effets supplémentaires. Quelle conception adopter ?",
+  "choices": [
+    "Désactiver les nouvelles tentatives, écrire un fichier marqueur avant le chargement et demander une intervention manuelle lorsque le marqueur existe après une panne",
+    "Paramétrer chaque tâche par date logique, remplacer atomiquement la partition ou utiliser MERGE, exécuter les contrôles de qualité et publier seulement après leur réussite",
+    "Ajouter les lignes dans une table intermédiaire, attendre deux heures après chaque chargement puis dédupliquer toute la table finale selon l'heure d'exécution Airflow",
+    "Utiliser la date système du worker, créer une nouvelle table suffixée à chaque tentative et faire pointer une vue vers la table dont le nom est le plus récent"
+  ]
+}

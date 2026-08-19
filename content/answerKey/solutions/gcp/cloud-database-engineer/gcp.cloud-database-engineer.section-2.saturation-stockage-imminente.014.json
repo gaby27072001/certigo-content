@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.saturation-stockage-imminente.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Créer des alertes Cloud Monitoring anticipées sur stockage, connexions, latence et erreurs, suivre les SLI/SLO de disponibilité, et surveiller les quotas requis avant la création planifiée d'une réplique",
+  "rationale": "Des alertes anticipées sur capacité et symptômes utilisateurs, complétées par des SLI/SLO et le suivi des quotas, préviennent ensemble saturation, violation de disponibilité et échec futur de création de réplique. Une vérification manuelle quotidienne manque les évolutions rapides et les incidents hors horaires. Alerter seulement après indisponibilité puis augmenter le quota arrive trop tard pour protéger le SLO ou le stockage. Les journaux Data Access auditent les actions, mais ne remplacent pas les métriques de stockage, connexions, latence, erreurs et quotas.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/monitor-instance"
+  ]
+}

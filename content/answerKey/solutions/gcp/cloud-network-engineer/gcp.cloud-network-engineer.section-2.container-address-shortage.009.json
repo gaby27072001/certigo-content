@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.container-address-shortage.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Ajouter une plage secondaire non chevauchante au sous-réseau, l'associer au cluster comme plage de pods supplémentaire et l'affecter aux nouveaux pools de nœuds concernés.",
+  "rationale": "Associer au cluster une nouvelle plage secondaire de pods non chevauchante, puis l'affecter aux nouveaux pools de nœuds, étend la capacité Alias IP sans recréer le cluster ni renuméroter les pods existants. Agrandir la plage de services ne fournit aucune adresse aux pods, car les deux allocations secondaires ont des fonctions séparées. Un cluster VPC-native ne peut pas être converti sur place en cluster basé sur routes; cette proposition contredit aussi l'indisponibilité autorisée. Enfin, une route statique rend éventuellement un préfixe joignable, mais ne l'enregistre pas dans l'IPAM GKE et les nœuds ne peuvent pas faire découvrir cette capacité au cluster comme plage de pods supplémentaire.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/kubernetes-engine/docs/how-to/multi-pod-cidr"
+  ]
+}

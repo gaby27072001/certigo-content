@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.images-non-approuvees-production.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Configurer Artifact Analysis et les attestations du pipeline, puis une politique Binary Authorization qui refuse au cluster tout digest ne portant pas les preuves exigées avant livraison",
+  "rationale": "La politique Binary Authorization évalue le digest à l'admission et exige les attestations produites après build, analyse et approbation ; une image poussée sans ces preuves est donc refusée. Un webhook fondé sur le préfixe prod- fait confiance à un tag modifiable et l'incident créé après l'analyse ne bloque pas l'exécution. Faire échouer le pipeline et limiter le push améliore la prévention, mais un autre chemin de déploiement demeure possible sans contrôle du cluster. Une politique qui autorise tout digest d'un dépôt vérifie l'emplacement seulement et accepte encore une image non testée ou non approuvée faute d'attestations.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/binary-authorization/docs/configuring-policy-console"
+  ]
+}

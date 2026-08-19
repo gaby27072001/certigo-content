@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.garde-fou-projets-production.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un groupe international veut interdire la création d'adresses IP externes dans tous les projets de production, tout en laissant une équipe bac à sable gérer ses propres contraintes. Les projets sont nombreux et créés fréquemment. Quelle conception est la plus maintenable ?",
+  "choices": [
+    "Placer les projets de production dans un dossier dédié et y appliquer une règle d'organisation interdisant les IP externes, en séparant les projets bac à sable dans un autre dossier",
+    "Déployer par pipeline une règle de pare-feu de refus dans chaque projet de production existant, vérifier périodiquement sa présence et ajouter manuellement chaque nouveau projet au contrôle",
+    "Attribuer à l’équipe centrale le rôle Administrateur réseau sur toutes les VM de production et lui faire retirer les adresses externes détectées après chaque déploiement, sans imposer de contrainte aux projets",
+    "Créer dans chaque projet une règle IAM Deny visant les développeurs, maintenir une liste centrale des permissions liées aux adresses externes et appliquer la règle à chaque nouveau projet par pipeline"
+  ]
+}

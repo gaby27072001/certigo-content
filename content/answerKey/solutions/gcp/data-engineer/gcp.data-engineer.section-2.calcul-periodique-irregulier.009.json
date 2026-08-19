@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.calcul-periodique-irregulier.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Soumettre le traitement à Managed Service for Apache Spark (serverless), avec une image d'exécution versionnée, un compte de service dédié et des paramètres immuables par environnement",
+  "rationale": "Managed Service for Apache Spark (serverless) exécute le lot Spark et son image versionnée sans cluster persistant, avec identité et paramètres propres à l’environnement. Le cluster Dataproc permanent garde un maître et des workers principaux facturés entre les traitements. Réécrire en procédures BigQuery change de moteur, maintient deux implémentations et ajoute une validation de divergence contraire au souhait de conserver Spark. Le cluster à la demande dont le maître et HDFS subsistent après l’arrêt des workers reste une infrastructure et un état à administrer alors que Cloud Storage porte toutes les données durables.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/dataproc-serverless/docs/overview"
+  ]
+}

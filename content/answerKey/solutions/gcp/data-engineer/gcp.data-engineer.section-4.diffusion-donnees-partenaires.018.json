@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-4.diffusion-donnees-partenaires.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Publier une vue nettoyée comme listing Analytics Hub, gérer les abonnements révocables avec IAM, conserver les données chez le producteur et ne créer aucune copie partenaire",
+  "rationale": "Le listing Analytics Hub fondé sur une vue nettoyée partage les données en place, garde la copie chez le producteur et centralise les abonnements IAM révocables. Les exports avec liens signés créent des copies et supprimer les objets ne révoque pas les fichiers déjà téléchargés. Un projet copié par partenaire produit des versions retardées, augmente les coûts et le rôle Data Owner accorde trop de privilèges. La vue qui conserve les colonnes personnelles et donne accès au jeu source délègue le masquage au consommateur, contrairement à l’exigence de nettoyage avant publication.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/bigquery/docs/analytics-hub-introduction"
+  ]
+}

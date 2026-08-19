@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-5.retard-flux-et-donnees-invalides.024",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Un pipeline Dataflow en continu écrit dans BigQuery. Des messages mal formés bloquent parfois un lot, et l'équipe ne découvre les retards qu'après une plainte. Elle veut reprendre automatiquement les erreurs transitoires, isoler les données corrompues sans les perdre et être alertée avant que le retard ne dépasse le SLO. Quelle solution est la plus complète ?",
+  "choices": [
+    "Relancer automatiquement le pipeline complet à chaque exception, ignorer les messages qui échouent une seconde fois et alerter uniquement lorsque tous les workers sont arrêtés",
+    "Arrêter le pipeline au premier message invalide, conserver l'abonnement Pub/Sub, corriger manuellement le message puis recréer le job avec un nouvel identifiant de destination contrôlé",
+    "Écrire les messages dans une table brute, exécuter chaque semaine une requête de détection et corriger les lignes directement",
+    "Rendre les écritures idempotentes, retenter les erreurs transitoires, mettre les données invalides en quarantaine et alerter sur le retard et les erreurs"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.interruptions-breves-inexpliquees.024",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une instance Cloud SQL HA subit deux interruptions brèves : l'une pendant une fenêtre de maintenance annoncée, l'autre sans changement planifié. Dans les deux cas, les clients se reconnectent et le temps de disponibilité du moteur repart à zéro. L'astreinte doit déterminer si le second événement est un basculement HA automatique plutôt qu'un redémarrage de maintenance. Quelle mise en œuvre est la plus fiable ?",
+  "choices": [
+    "Classer tout redémarrage situé dans la fenêtre annoncée comme maintenance et tout autre redémarrage comme basculement automatique, puis calculer le SLO à partir de cette règle, ce qui ignore les opérations décalées, les interventions manuelles et les autres causes de redémarrage",
+    "Alerter sur chaque remise à zéro du temps de disponibilité et demander à l'astreinte de tester une requête, ce qui détecte un redémarrage mais ne fournit ni la cause, ni la chronologie de maintenance, ni la preuve d'un changement de rôle HA",
+    "Corréler uniquement erreurs clientes, latence et disponibilité de la réplique de secours, puis conclure à un basculement si la coupure reste sous le RTO, ce qui mesure l'impact mais ne distingue pas un failover d'un redémarrage planifié",
+    "Corréler opérations et journaux système Cloud SQL, état et signaux HA avec notifications de maintenance, puis appliquer un runbook qui vérifie chronologie, reconnexion, intégrité et rôle servi afin de qualifier failover automatique ou redémarrage planifié"
+  ]
+}

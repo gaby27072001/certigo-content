@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.risque-erreur-nouvelle-version.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Une stratégie canary Cloud Deploy par phases de 5 %, 25 % et 100 %, avec vérifications automatiques du taux d'erreur, approbation obligatoire avant la phase finale et ancienne révision prête au retour",
+  "rationale": "Les phases canary Cloud Deploy appliquent les paliers demandés, les vérifications arrêtent la progression sur le taux d'erreur, et l'approbation protège le passage final. Un rolling aux mêmes pourcentages mais surveillé manuellement n'offre pas l'arrêt automatique au franchissement du SLO. Blue/green facilite le retour, mais une bascule immédiate à 100 % expose tous les clients et ne satisfait pas la montée 5/25/100. Des feature flags par cohortes fournissent la progressivité, mais l'absence de gate télémétrique et d'approbation obligatoire laisse deux contraintes explicites non couvertes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/deploy/docs/deployment-strategies/canary"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.changing-administrator-networks.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une banque conçoit un cluster GKE dont les nœuds n'auront pas d'adresse IP externe. Les administrateurs se connectent depuis plusieurs réseaux d'entreprise dont les adresses changent fréquemment, et aucune adresse publique du plan de contrôle n'est autorisée. Quelle option d'accès au plan de contrôle réduit la gestion de listes CIDR ?",
+  "choices": [
+    "Créer un cluster privé avec endpoint DNS, désactiver l'endpoint IP externe et autoriser par IAM les administrateurs qui disposent d'un chemin vers les API Google.",
+    "Conserver l'endpoint IP public du plan de contrôle, autoriser `0.0.0.0/0`, puis s'appuyer uniquement sur les identifiants Kubernetes et la rotation régulière des certificats clients.",
+    "Attribuer une IP externe à chaque nœud, restreindre SSH aux bureaux connus et utiliser les nœuds comme bastions pour atteindre l'endpoint privé du plan de contrôle.",
+    "Placer un équilibreur réseau passthrough externe devant l'endpoint privé GKE et limiter son frontend aux plages géographiques où se trouvent les administrateurs."
+  ]
+}

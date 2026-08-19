@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-5.gouvernance-api-partenaires.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Placer Apigee devant le backend et gérer les produits API, applications partenaires, politiques OAuth et quotas, versions de proxy et analyses d'usage, tout en conservant une seule surface contractuelle et un cycle de publication centralisé, avec un portail développeur commun.",
+  "rationale": "Apigee place la gouvernance devant un backend unique : produits et applications représentent les partenaires, les politiques appliquent OAuth et quotas, les proxies gèrent les versions et les analyses attribuent l'usage et le portail publie le contrat, tout en conservant une surface contractuelle centrale. Une copie Cloud Run par partenaire isole la capacité, mais multiplie backends, déploiements et divergences, contrairement à l'interdiction de duplication. Des clés de comptes de service distribuées sont des secrets longue durée inadaptés aux partenaires, et coder OAuth, quotas, versions et mesure dans le métier recrée une passerelle difficile à gouverner. Cloud Armor par adresse ne remplace pas OAuth, un contrat n'impose pas techniquement le débit et de simples chemins versionnés n'apportent ni produits partenaires ni analyse contractuelle intégrée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/apigee/docs/api-platform/get-started/what-apigee"
+  ]
+}

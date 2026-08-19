@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.correctifs-vm-sans-ip-publique.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des VM de traitement ne doivent posséder aucune adresse IP externe, mais elles doivent télécharger des correctifs depuis Internet. L'équipe sécurité veut une sortie centralisée, des ports sources prévisibles et des journaux de traduction. Quelle solution faut-il déployer ?",
+  "choices": [
+    "Attacher une IP externe aux VM pendant la maintenance, limiter la sortie aux dépôts et journaliser chaque changement",
+    "Un équilibreur de charge réseau interne configuré comme passerelle par défaut",
+    "Cloud NAT associé à Cloud Router pour les sous-réseaux concernés, avec journalisation activée",
+    "Utiliser Private Service Connect pour les seuls dépôts publiés comme services compatibles"
+  ]
+}

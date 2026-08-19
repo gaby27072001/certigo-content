@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-4.cout-capacite-elastique.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Dimensionner la charge stable, prendre un engagement adapté à cette base, conserver une capacité autoscalée à la demande ou Spot pour les tâches interruptibles, et imposer labels, budgets, responsables et suivi des écarts réels.",
+  "rationale": "Dimensionner puis engager seulement la charge stable transforme la demande prévisible en économie, tandis que l'autoscaling à la demande ou Spot pour les tâches interruptibles couvre les pointes ; labels, budgets, responsables et suivi traitent les 18 % orphelins. Un engagement de 1 400 vCPU paie toute l'année un pic de quelques heures, et désactiver l'autoscaling retire l'élasticité. Mettre bases et services synchrones sur Spot les expose à des interruptions sans garantie malgré la répartition zonale, ce qui compromet la continuité. Des quotas calés sur la moyenne bloquent les pointes et une approbation manuelle par dépassement arrive trop tard, tandis que l'absence de trafic récent ne suffit pas à prouver qu'un projet est inutile.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/compute/docs/instances/committed-use-discounts-overview"
+  ]
+}

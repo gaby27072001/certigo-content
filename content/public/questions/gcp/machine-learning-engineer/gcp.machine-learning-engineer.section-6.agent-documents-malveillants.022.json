@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-6.agent-documents-malveillants.022",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Un agent génératif analyse des documents internes et appelle des outils métier. Un test montre qu’un document malveillant peut lui demander d’ignorer ses règles et d’exfiltrer un secret dans la réponse. Quelle défense en profondeur est la plus appropriée ?",
+  "choices": [
+    "Renforcer le prompt système avec des exemples d’injections interdites, appliquer des expressions régulières aux réponses et laisser à l’agent un compte de service large pour que tous les outils fonctionnent.",
+    "Appliquer le moindre privilège aux outils, isoler les données, filtrer entrées et sorties avec Model Armor, valider les appels côté serveur et tester les injections.",
+    "Placer les documents sous VPC Service Controls, mais laisser l’agent appeler sans validation tous les outils internes avec une identité commune.",
+    "Faire vérifier chaque sortie par un second modèle auquel sont transmis les mêmes secrets et privilèges que ceux de l’agent principal."
+  ]
+}

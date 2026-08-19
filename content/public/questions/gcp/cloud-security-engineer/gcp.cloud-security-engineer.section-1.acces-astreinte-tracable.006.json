@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.acces-astreinte-tracable.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe d'astreinte doit exécuter ponctuellement un outil local qui lit un jeu de données BigQuery sensible. La sécurité veut des identifiants de courte durée, une attribution individuelle dans les journaux et aucune clé téléchargeable. Que faut-il configurer ?",
+  "choices": [
+    "Partager le mot de passe d'un utilisateur technique et activer les journaux d'accès aux données",
+    "Autoriser le groupe d'astreinte à emprunter un compte de service BigQuery à privilèges minimaux, sans créer de clé",
+    "Fournir une clé JSON par ingénieur pour un compte limité au jeu de données, consigner son identifiant dans le ticket et la révoquer après usage",
+    "Accorder le rôle Administrateur BigQuery au groupe d’astreinte sur tous les projets de production, avec une condition active pendant les horaires d’astreinte"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.acces-rares-systemes-paiement.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Valider les alias et les dates d’effet de l’inventaire enrichi, écrire une règle candidate corrélant les événements aux entités de paiement, exécuter son retrohunt sur six mois, puis mesurer les résultats avant activation",
+  "rationale": "Un retrohunt de la règle candidate valide d’abord les alias et dates d’effet de l’inventaire, corrèle les événements aux entités de paiement sur six mois, puis mesure les résultats avant activation. Le backfill de l’étiquette actuelle par nom d’hôte ignore identité et période d’appartenance, créant des rapprochements anachroniques dans l’historique. L’attente de six mois de nouveaux événements renonce à tester immédiatement l’hypothèse sur les données conservées. La création d’un incident critique pour chaque accès administratif ne tient compte ni de la rareté, ni du propriétaire, ni du contexte et confond exploration avec alerte qualifiée. Ce workflow évalue donc proprement la valeur d’un enrichissement avant sa mise en production.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/detection/run-rule-historical-data",
+    "https://cloud.google.com/chronicle/docs/investigation/entity-context-in-search"
+  ]
+}

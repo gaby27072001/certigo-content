@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-5.tests-messagerie-isoles.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Une équipe développe un service qui publie et consomme Pub/Sub. Les tests de pull request doivent être rapides, isolés, reproductibles et ne créer aucune ressource cloud, mais une validation réelle des autorisations doit avoir lieu avant production. Comment structurer les tests ?",
+  "choices": [
+    "Créer pour chaque pull request des sujets et abonnements dans le projet de production avec un préfixe unique, utiliser un compte limité à ces noms, supprimer les ressources en fin de pipeline et rechercher chaque nuit les ressources orphelines.",
+    "Remplacer Pub/Sub par un adaptateur simulé dans tous les tests, reproduire les accusés de réception et délais, puis vérifier les autorisations IAM par inspection des fichiers Terraform plutôt qu'en appelant le service réel.",
+    "Exécuter les tests locaux et CI contre l'émulateur Pub/Sub avec les bibliothèques clientes, puis valider séparément les vraies API et IAM dans un projet éphémère doté d'une identité de service et supprimé après les tests, avec des rôles IAM minimaux.",
+    "Tester le métier et les schémas sans courtier, déployer ensuite dans un projet de préproduction partagé avec les identités des développeurs et valider manuellement publication, consommation et autorisations avant chaque version."
+  ]
+}

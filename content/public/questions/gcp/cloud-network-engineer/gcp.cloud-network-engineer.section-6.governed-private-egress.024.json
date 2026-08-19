@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-6.governed-private-egress.024",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Des VM privées doivent télécharger des mises à jour depuis Internet. Les flux non-HTTP doivent seulement partager quelques adresses de sortie stables, tandis que HTTP et HTTPS doivent être filtrés par catégories d'URL avec journalisation. Le volume par VM varie fortement et une appliance tierce ne doit être exploitée que si le service géré ne couvre pas le besoin. Quelle architecture est la plus appropriée ?",
+  "choices": [
+    "Attribuer une IP externe réservée à chaque VM, filtrer les destinations par règles de pare-feu egress et analyser les journaux DNS pour déduire les catégories d'URL HTTPS demandées.",
+    "Acheminer tous les protocoles vers une NVA multi-NIC unique, dimensionnée au pic et administrée manuellement, car les services Cloud NAT et Secure Web Proxy ne peuvent pas participer au même design de sortie.",
+    "Utiliser uniquement Public Cloud NAT avec allocation statique de ports et règles de pare-feu par destination IP, puis considérer les adresses résolues comme un filtrage équivalent aux catégories d'URL HTTPS.",
+    "Utiliser Public Cloud NAT à IP manuelles et ports dynamiques pour la sortie générale, Secure Web Proxy pour les politiques web, et une NVA hautement disponible seulement pour les fonctions manquantes selon le protocole."
+  ]
+}

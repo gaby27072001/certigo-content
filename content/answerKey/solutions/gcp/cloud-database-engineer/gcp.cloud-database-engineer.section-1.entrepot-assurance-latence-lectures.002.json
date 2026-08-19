@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.entrepot-assurance-latence-lectures.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Comparer par benchmark les options de stockage sous une charge représentative de lectures aléatoires, mesurer IOPS et p95, puis retenir la configuration la moins coûteuse qui respecte le SLO avec une marge documentée",
+  "rationale": "Le benchmark comparatif du stockage isole le facteur limitant constaté, les lectures aléatoires, et permet de retenir la configuration la moins coûteuse respectant le p95. Doubler les vCPU suppose sans preuve que le calcul corrigera les IOPS, alors que CPU et mémoire restent sous 45 %. Réduire simultanément calcul et stockage jusqu'aux erreurs modifie deux variables, expose la production et empêche d'attribuer le résultat. Archiver les partitions froides sans mesurer plans, lectures et restauration ne démontre ni la suppression du goulot d'E/S ni le maintien du SLO.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/instance-settings"
+  ]
+}

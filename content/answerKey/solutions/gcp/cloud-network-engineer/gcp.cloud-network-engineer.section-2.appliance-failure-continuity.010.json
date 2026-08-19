@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.appliance-failure-continuity.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Mettre les appliances derrière un équilibreur réseau passthrough interne avec health check, puis utiliser cet équilibreur comme prochain saut des routes d'inspection ciblées.",
+  "rationale": "Un équilibreur réseau passthrough interne utilisé comme prochain saut donne aux routes une cible stable, distribue les nouveaux flux entre les appliances et retire automatiquement un backend qui échoue au health check. Deux routes pointant directement vers des NIC n'intègrent pas cette santé; le script d'alerte introduit un délai et une dépendance opérationnelle avant le basculement. Un Application Load Balancer externe est un proxy HTTP(S) destiné à la publication applicative et son adresse anycast n'est pas un prochain saut pour des routes privées est-ouest. Déplacer une IP externe entre VM par fonction est également manuel, expose inutilement le chemin et ne fournit ni équilibrage actif-actif ni retrait natif fondé sur l'état.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/load-balancing/docs/internal/ilb-next-hop-overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.objectif-reprise-non-teste.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Organiser un exercice planifié sur une réplique de test avec les équipes d'astreinte : mesurer son retard, exécuter la promotion selon le runbook, valider connexions, application et données, chronométrer le RTO réel, puis documenter restauration et retour",
+  "rationale": "Promouvoir une réplique de test pendant un exercice planifié et chronométrer validation, reconnexion et retour mesure réellement le RTO du mécanisme prévu avec un risque maîtrisé. Un exercice sur table vérifie rôles et décisions, mais pas les autorisations, commandes, délais et dépendances réels. Restaurer une sauvegarde dans la région de secours teste un autre chemin et un autre RPO, pas la promotion de la réplique. Extrapoler depuis retard, latence et historiques surveille les prérequis, mais ne valide pas l'enchaînement du runbook ni l'application.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/replication/cross-region-replicas"
+  ]
+}

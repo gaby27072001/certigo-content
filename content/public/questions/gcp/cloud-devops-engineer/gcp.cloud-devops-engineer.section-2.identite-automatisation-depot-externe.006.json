@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.identite-automatisation-depot-externe.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un pipeline GitHub Actions doit publier une image dans Artifact Registry puis déclencher un déploiement. La politique interdit les clés de compte de service persistantes et exige des droits limités au dépôt et à la branche principale. Quelle authentification mettre en place ?",
+  "choices": [
+    "Stocker dans les secrets GitHub une clé JSON limitée au dépôt Artifact Registry, vérifier la branche dans le workflow et renouveler automatiquement la clé chaque semaine, tout en conservant un identifiant persistant côté GitHub",
+    "Configurer Workload Identity Federation avec les revendications du dépôt et de la branche, autoriser l'usurpation d'un compte de service aux rôles minimaux et n'émettre que des jetons temporaires",
+    "Configurer Workload Identity Federation pour la branche principale, mais faire usurper le compte de service Compute Engine par défaut doté du rôle Propriétaire afin de couvrir publication et déploiement",
+    "Remplacer GitHub Actions par un déclencheur Cloud Build accessible au dépôt, puis donner au compte de build des droits étendus sur tous les registres et environnements sans condition de branche"
+  ]
+}

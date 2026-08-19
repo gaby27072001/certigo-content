@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.metriques-coherentes-environnement-hybride.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Déployer les collecteurs de Google Cloud Managed Service for Prometheus sur les clusters, écrire dans le service géré et interroger avec PromQL dans Cloud Monitoring sans exploiter une base temporelle administrée par l'équipe",
+  "rationale": "Les collecteurs Managed Service for Prometheus sur tous les clusters préservent le modèle de labels, centralisent les séries dans un backend géré et offrent une requête PromQL commune dans Cloud Monitoring. Un Prometheus fédéré autogéré peut unifier les données, mais oblige précisément l'équipe à exploiter stockage, mises à niveau et haute disponibilité de la base centrale. Limiter le service géré à GKE et garder des Prometheus locaux externes maintient des requêtes, tableaux de bord et alertes séparés. Convertir les scrapes en journaux puis en métriques perd la sémantique native, complexifie les labels et ne fournit pas l'expérience PromQL demandée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-unmanaged"
+  ]
+}

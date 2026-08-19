@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-1.inventaire-actifs-metiers.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Après plusieurs acquisitions, une entreprise doit inventorier des tables BigQuery, des objets Cloud Storage et des tables externes répartis entre les projets métiers. Les responsables des données veulent rechercher les actifs, détecter automatiquement les nouveaux schémas, obtenir des profils statistiques et ajouter une classification métier, sans déplacer les données hors des projets propriétaires. Quelle approche répond le mieux au besoin ?",
+  "choices": [
+    "Activer découverte et profilage, enregistrer les actifs techniques dans Knowledge Catalog et faire valider leurs aspects métier par les domaines propriétaires",
+    "Copier chaque trimestre toutes les sources dans un projet central, exécuter le profilage sur les copies et supprimer du catalogue les actifs qui restent dans les projets métiers",
+    "Tenir un inventaire dans BigQuery, demander aux producteurs de saisir schémas et statistiques, puis rechercher les actifs en SQL",
+    "Créer un pipeline Dataflow par domaine qui échantillonne les données, écrit des profils JSON dans Cloud Storage et publie manuellement un index distinct pour chaque moteur"
+  ]
+}

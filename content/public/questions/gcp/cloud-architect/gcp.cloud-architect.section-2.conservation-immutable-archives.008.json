@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-2.conservation-immutable-archives.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un organisme conserve des pièces justificatives dans Cloud Storage. Pendant sept ans, aucun administrateur ne doit pouvoir réduire la durée de conservation ni supprimer un objet. Après 90 jours, les consultations deviennent exceptionnelles et l'équipe veut réduire automatiquement le coût. Quelle configuration respecte ces exigences ?",
+  "choices": [
+    "Activer la conservation souple pendant sept ans, une règle de cycle de vie vers Archive après 90 jours et Storage Admin pour l'équipe conformité, puis compter sur les journaux d'audit et une alerte pour détecter toute réduction ou suppression anticipée.",
+    "Définir puis verrouiller une politique de conservation de sept ans sur le bucket et ajouter une règle de cycle de vie qui change la classe des objets vers Archive après 90 jours, sans intervention ultérieure des administrateurs.",
+    "Activer le versioning, déplacer les générations non courantes vers Archive après 90 jours, restreindre la suppression avec une condition IAM fondée sur l'âge des objets et confier aux administrateurs la mise à jour annuelle de cette condition.",
+    "Répliquer chaque mois les pièces dans un second bucket Archive d'un autre projet, interdire l'accès des équipes applicatives à ce projet et utiliser une tâche planifiée qui supprime les copies ayant dépassé sept ans."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.deploiement-conteneurs-approuves.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Construire dans Cloud Build, analyser et stocker les images dans Artifact Registry, produire une attestation liée au digest après les contrôles puis imposer cette attestation avec Binary Authorization sur GKE, avant admission de tout pod dans le cluster de production.",
+  "rationale": "Cloud Build établit l'origine contrôlée, l'analyse d'Artifact Registry peut bloquer une vulnérabilité critique, l'attestation liée au digest matérialise l'approbation de l'image exacte et Binary Authorization refuse l'image avant toute création de pod ; la preuve et le contrôle sont donc préventifs. Un build local avec tag signé confirme au mieux l'auteur du tag, pas l'exécution du pipeline ni le résultat d'analyse, et une règle fondée sur préfixe et tag accepte encore une image non attestée. Scanner après démarrage laisse une image critique s'exécuter avant son isolement, ce qui contredit l'interdiction de déploiement. Des nœuds privés et un dépôt restreint réduisent l'exposition réseau, mais un tag stable sans attestation ni contrôle d'admission ne prouve pas le passage par le pipeline approuvé.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/binary-authorization/docs/overview"
+  ]
+}

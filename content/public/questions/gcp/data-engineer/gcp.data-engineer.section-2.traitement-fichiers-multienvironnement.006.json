@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.traitement-fichiers-multienvironnement.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une équipe reçoit chaque nuit des fichiers Avro dans Cloud Storage, applique une bibliothèque Python interne et charge des tables BigQuery partitionnées. Le même pipeline Apache Beam doit être déployé de manière immuable dans trois environnements avec des paramètres différents, sans installer de dépendances au démarrage des workers. Quelle méthode de déploiement convient le mieux ?",
+  "choices": [
+    "Créer une image Compute Engine, y installer la bibliothèque Python et lancer le script Beam avec cron dès que le fichier nocturne est attendu",
+    "Construire une image de conteneur et un Flex Template Dataflow, puis fournir au lancement les paramètres propres à chaque environnement de façon reproductible",
+    "Empaqueter la bibliothèque dans une archive Cloud Storage, lancer directement le script Beam depuis Cloud Shell et modifier ses constantes avant chaque promotion",
+    "Déployer une fonction Cloud Run par environnement, télécharger toutes les dépendances au démarrage et déclencher la fonction par notification Cloud Storage"
+  ]
+}

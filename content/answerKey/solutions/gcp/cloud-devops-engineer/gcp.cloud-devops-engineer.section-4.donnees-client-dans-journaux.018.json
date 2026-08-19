@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.donnees-client-dans-journaux.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Configurer un processor de transformation dans l'OpenTelemetry Collector pour supprimer ou hacher les attributs sensibles avant tout export externe",
+  "rationale": "Le processor de transformation du Collector supprime ou hache les attributs sensibles avant l'export tout en conservant les champs techniques, donc les valeurs interdites ne quittent jamais le réseau applicatif. Une vue Cloud Logging ne masque les champs qu'après leur ingestion : les données brutes ont déjà franchi la frontière interdite. Une clé de chiffrement client protège les données au repos et l'accès, mais n'empêche pas les valeurs en clair d'être envoyées hors du réseau. Une copie brute dans Cloud Storage viole directement la contrainte de sortie, même si la copie destinée à Logging est correctement hachée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/stackdriver/docs/otlp/migrate-collector-to-otlp-exporters"
+  ]
+}

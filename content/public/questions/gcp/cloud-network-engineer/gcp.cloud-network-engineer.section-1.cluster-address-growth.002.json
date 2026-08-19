@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.cluster-address-growth.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une plateforme prévoit un cluster GKE VPC-native qui pourrait atteindre 3 000 nœuds et plusieurs centaines de milliers de pods. L'espace RFC 1918 est rare, mais l'équipe veut éviter une renumérotation lors de la croissance. Quelle décision IPAM doit être prise avant la création du cluster ?",
+  "choices": [
+    "Dimensionner une très grande plage principale pour les nœuds, puis compter sur GKE pour y prélever automatiquement les adresses de pods et de services lors de chaque montée en charge.",
+    "Réserver des plages secondaires distinctes pour pods et services, dimensionner celle des pods selon les pods par nœud et prévoir des plages de pods supplémentaires.",
+    "Partager une unique plage secondaire entre pods et services, puis réduire le nombre maximal de pods par nœud uniquement lorsque cette plage approche de l'épuisement.",
+    "Annoncer par Cloud Router une plage externe plus vaste vers le cluster, afin que les nouveaux pods utilisent ces adresses routées sans modifier le sous-réseau VPC."
+  ]
+}

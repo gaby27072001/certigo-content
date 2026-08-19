@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.conservation-reglementaire-volume-debug.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Router les journaux réglementaires vers un bucket central avec une rétention d'un an et vers Cloud Storage pour l'archive, puis exclure les DEBUG non utiles des buckets de stockage",
+  "rationale": "Le routage sélectif conserve les audits un an dans un bucket interrogeable, en archive une copie sept ans et exclut les DEBUG sans valeur, ce qui satisfait simultanément consultation, conformité et coût. Conserver tous les journaux sept ans avec des vues masque le bruit aux lecteurs mais ne réduit ni ingestion ni stockage des DEBUG. Des buckets locaux et un export annuel manuel dispersent les droits, n'assurent pas une archive continue et conservent encore le volume DEBUG. Des compteurs quotidiens ne permettent pas l'enquête ou la preuve événementielle : supprimer les audits originaux échoue à la conservation réglementaire même si le coût baisse.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/logging/docs/routing/overview#log-exclusions"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-5.triplement-facture-telemetrie.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "La facture Cloud Logging et Cloud Trace triple après l'ajout d'un service à fort trafic. Les incidents nécessitent tous les journaux ERROR, mais seulement un échantillon représentatif des succès et des traces normales. Quelle optimisation préservera le mieux la capacité de diagnostic ?",
+  "choices": [
+    "Désactiver journaux et traces sur le nouveau service, mais conserver les métriques de plateforme agrégées, ce qui réduit le coût au prix de la disparition du contexte des erreurs applicatives",
+    "Conserver 100 % des erreurs, succès, DEBUG et traces normales, puis raccourcir uniquement la période des tableaux de bord sans agir sur l'ingestion, l'échantillonnage ou le stockage",
+    "Garder intégralement les erreurs, échantillonner les succès et traces normales, exclure les DEBUG inutiles et adapter la rétention de chaque bucket à son usage",
+    "Convertir chaque erreur en compteur quotidien et supprimer l'événement ainsi que sa trace, tout en conservant un échantillon des succès qui ne permet pas de reconstituer les incidents"
+  ]
+}

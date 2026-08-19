@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.liste-volumineuse-econome.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un tableau de bord liste des milliers de ressources via une API Google Cloud, mais n'affiche que le nom et l'état. Les données changent peu pendant cinq minutes. Quelle implémentation minimise latence, mémoire et quota tout en retournant toutes les ressources ?",
+  "choices": [
+    "Demander la taille de page maximale, conserver toutes les propriétés renvoyées et ignorer les jetons suivants pour réduire le nombre total d'appels.",
+    "Lancer plusieurs appels identiques en parallèle sur la première page et arrêter la collecte dès qu'une réponse contient moins d'éléments que prévu.",
+    "Suivre chaque pageToken jusqu'à épuisement, demander seulement les champs utiles lorsque c'est possible et mettre brièvement en cache la liste complète.",
+    "Effectuer un appel détaillé pour chaque ressource déjà connue, fusionner les réponses en mémoire et relancer toute la série à chaque affichage du tableau."
+  ]
+}

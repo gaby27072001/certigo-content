@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.banque-residence-europeenne.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une banque doit déployer une base managée en Europe. Les données et sauvegardes doivent rester dans l'Union européenne, les clés doivent être contrôlées par l'équipe sécurité, chaque accès administratif doit être auditable et une règle d'organisation doit empêcher les ressources hors des régions approuvées. Quelle combinaison est la plus adaptée ?",
+  "choices": [
+    "Choisir une instance multirégionale mondiale chiffrée par défaut et activer les journaux d'administration, ce qui assure disponibilité et traçabilité partielle mais permet la réplication hors de l'Union européenne",
+    "Déployer dans une région européenne autorisée par Organization Policy, avec CMEK Cloud KMS compatible, IAM au moindre privilège et Data Access audit logs pour la résidence, le contrôle des clés et la traçabilité",
+    "Déployer une instance à IP privée dans une région européenne et protéger le compte administrateur par un mot de passe complexe, ce qui limite l'exposition mais n'impose ni CMEK, ni restriction d'emplacement, ni audit des données",
+    "Conserver l'instance dans une région européenne et chiffrer manuellement les exports avec une clé Cloud KMS, ce qui protège les archives mais ne gouverne ni la clé de la base active, ni les accès, ni les futures régions"
+  ]
+}

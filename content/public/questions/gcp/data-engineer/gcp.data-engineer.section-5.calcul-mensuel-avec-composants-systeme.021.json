@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-5.calcul-mensuel-avec-composants-systeme.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Un calcul Spark mensuel dure deux heures et utilise une bibliothèque native ainsi qu'un service auxiliaire installé par action d'initialisation sur chaque nœud. Les données durables sont dans Cloud Storage, mais le service auxiliaire nécessite le contrôle du système d'exploitation pendant le job. L'équipe veut éviter toute ressource inactive entre les exécutions. Quelle approche choisir ?",
+  "choices": [
+    "Créer par Workflow Template un cluster Dataproc éphémère, installer la bibliothèque et le service auxiliaire par action d'initialisation, exécuter le job puis supprimer le cluster",
+    "Soumettre le job à Managed Service for Apache Spark (serverless) et tenter d'installer au démarrage un service système persistant sur les workers gérés",
+    "Conserver un cluster Dataproc autoscalé actif toute l'année, réduire ses workers secondaires à zéro et maintenir le service auxiliaire entre les exécutions mensuelles",
+    "Créer manuellement des VM Compute Engine chaque mois, installer Spark et la bibliothèque sur leurs disques locaux, puis arrêter les VM après le calcul"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-6.risque-version-production.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Une application GKE critique est publiée toutes les semaines. La dernière version a passé les tests mais a augmenté les erreurs uniquement sous trafic réel. L'équipe veut limiter le rayon d'impact, automatiser la décision de poursuite et revenir rapidement à une version saine. Quel mécanisme de livraison convient ?",
+  "choices": [
+    "Effectuer un rolling update Kubernetes sur tous les pods avec maxUnavailable à zéro, attendre la réussite des vérifications de disponibilité, surveiller les tickets et métriques pendant trente minutes puis relancer manuellement le déploiement précédent si les erreurs augmentent.",
+    "Maintenir deux clusters identiques, déployer et tester la version dans le cluster inactif, basculer ensuite 100 % du trafic par modification de l'équilibreur et revenir intégralement à l'ancien cluster si le taux d'erreur global franchit un seuil.",
+    "Utiliser une livraison progressive par canari avec Cloud Deploy, augmenter le trafic par étapes, vérifier automatiquement taux d'erreur et latence à chaque palier, puis promouvoir ou effectuer un rollback, avant toute généralisation aux utilisateurs.",
+    "Conserver chaque image précédente dans Artifact Registry, déployer la nouvelle sur tous les pods pendant une fenêtre, comparer manuellement les métriques au lendemain et restaurer le digest antérieur avec kubectl si les objectifs de service ne sont plus respectés."
+  ]
+}

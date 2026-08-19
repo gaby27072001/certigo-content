@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.livraison-source-sans-infrastructure.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Exécuter gcloud run deploy avec --source afin de confier la construction, le stockage de l'image et la création d'une nouvelle révision aux services gérés.",
+  "rationale": "gcloud run deploy --source confie aux services gérés la construction, le stockage de l'image et la création d'une révision en une commande, conformément au souhait de ne pas gérer ces étapes séparément. Construire sur une VM dédiée impose précisément l'infrastructure, le registre et la procédure manuelle que l'équipe veut éviter. Un pod GKE ne s'exécute pas directement depuis un répertoire local brut et introduit en plus l'administration d'un cluster. Cloud Shell et Web Preview sont des outils de développement temporaires; maintenir une session ouverte ne constitue pas un déploiement disponible.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/run/docs/deploying-source-code"
+  ]
+}

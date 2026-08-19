@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.admission-images-approuvees.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une organisation veut empêcher le déploiement sur GKE d'images qui n'ont pas été construites par son pipeline approuvé et validées par l'analyse de vulnérabilités. Le contrôle doit s'appliquer à l'admission, même si un utilisateur possède le droit de créer des pods. Quelle solution faut-il configurer ?",
+  "choices": [
+    "Alerter sur les créations de pods et suspendre celles dont l’image n’est pas approuvée",
+    "Une stratégie Binary Authorization exigeant des attestations du pipeline approuvé avant l'admission",
+    "Limiter GKE au registre interne et réserver au pipeline l’import des images analysées, signées et contrôlées",
+    "Exécuter chaque nuit un job qui repère les images sans preuve d’analyse, arrête les pods concernés et supprime ces images du registre"
+  ]
+}

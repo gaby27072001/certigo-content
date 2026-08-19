@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-2.preparation-evenements-volumineux.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Implémenter les transformations dans Apache Beam sur Dataflow, avec autoscaling, tests et versionnement, puis écrire les exemples TFRecord dans Cloud Storage.",
+  "rationale": "Le pipeline Apache Beam exécuté par Dataflow est la conception adaptée : Apache Beam sur Dataflow fournit fenêtres, distribution, autoscaling et exécution gérée, tandis que tests et versionnement rendent la production de TFRecord reproductible. Un notebook pandas, même chargé par morceaux, reste un environnement fragile et mal adapté à 8 To et à l’exploitation quotidienne. BigQuery SQL peut traiter de gros volumes, mais la procédure proposée sépare la sérialisation TFRecord et complique les transformations à fenêtres demandées. Dataproc avec Spark est techniquement crédible, mais un cluster permanent dimensionné pour le pic gaspille des ressources et ne répond pas au souhait de minimiser la gestion.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/dataflow/docs/overview"
+  ]
+}

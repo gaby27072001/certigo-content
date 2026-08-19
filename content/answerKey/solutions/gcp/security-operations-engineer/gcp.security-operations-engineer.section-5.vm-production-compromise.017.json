@@ -1,0 +1,19 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.vm-production-compromise.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Documenter l’état et l’heure, acquérir si possible les données volatiles, isoler la VM par un contrôle réseau préparé, créer des instantanés ou images en lecture seule avec chaîne de conservation, puis analyser des copies",
+  "rationale": "L’acquisition des données volatiles, suivie d’un isolement réseau préparé et d’images protégées analysées sur copie, limite la propagation tout en préservant la chaîne de conservation. Un redémarrage préalable détruit la mémoire et modifie le disque avant sa capture. La suppression du binaire et des journaux altère directement les preuves, même si un instantané est ensuite créé. Le maintien de la VM connectée jusqu’à la fin de toutes les acquisitions maximise l’observation mais laisse l’attaquant exfiltrer ou se déplacer. La séquence retenue équilibre donc intégrité forensique, sécurité et continuité de l’enquête.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/docs/security/incident-response",
+    "https://cloud.google.com/compute/docs/disks/create-snapshots"
+  ]
+}

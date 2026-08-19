@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-1.coherence-rapport-financier.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Des transformations SQL BigQuery alimentent chaque nuit un tableau financier. Une colonne source a récemment changé de sémantique sans erreur technique, produisant des montants incohérents. L'équipe veut versionner les transformations, bloquer la publication lorsque les clés sont nulles ou dupliquées et conserver un graphe de dépendances reproductible. Quelle approche est la plus adaptée ?",
+  "choices": [
+    "Programmer des requêtes BigQuery qui comptent les valeurs nulles et envoyer une alerte Cloud Monitoring, tout en laissant la publication nocturne continuer",
+    "Exécuter des scans de qualité Dataplex sur les tables publiées et demander au contrôleur financier d'approuver manuellement les écarts détectés",
+    "Versionner transformations, dépendances et assertions Dataform dans Git, puis conditionner la publication à leur réussite avant la mise à disposition, avec contrôles documentés",
+    "Regrouper les transformations dans une procédure BigQuery, vérifier seulement le total final et conserver le résultat précédent dans une table de secours pendant l'enquête"
+  ]
+}

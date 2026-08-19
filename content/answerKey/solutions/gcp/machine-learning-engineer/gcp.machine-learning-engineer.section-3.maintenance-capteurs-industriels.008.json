@@ -1,0 +1,19 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.maintenance-capteurs-industriels.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Entraîner un DNN temporel compact par entraînement personnalisé, le servir en lot chaque heure et produire des attributions de caractéristiques sur les alertes.",
+  "rationale": "Le DNN temporel compact avec inférence horaire en lot répond au compromis demandé : un DNN temporel compact exploite les interactions non linéaires dans les séquences, l’inférence horaire en lot maîtrise coût et délai à cette échelle, et les attributions répondent au niveau d’explication demandé. Un modèle ARIMA_PLUS_XREG par équipement reste adapté à des séries plus structurées, mais 20 000 modèles indépendants complexifient l’exploitation et capturent moins bien les interactions non linéaires entre capteurs. Transformer les mesures en texte pour un grand LLM en ligne augmente fortement coût et latence, tout en offrant une calibration numérique moins adaptée au signal. La régression logistique globale est économique et directement interprétable, mais les seuls agrégats moyennes-maxima éliminent l’ordre temporel et risquent de sous-ajuster les motifs complexes explicitement décrits.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/training/create-custom-job",
+    "https://cloud.google.com/vertex-ai/docs/explainable-ai/overview"
+  ]
+}

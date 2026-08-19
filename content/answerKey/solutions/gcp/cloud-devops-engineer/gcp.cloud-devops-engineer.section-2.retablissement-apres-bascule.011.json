@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.retablissement-apres-bascule.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Conserver les révisions Cloud Run blue et green, journaliser l'identité de l'approbateur dans le pipeline, migrer le trafic vers green et garder blue disponible pour rétablir immédiatement son trafic",
+  "rationale": "Deux révisions Cloud Run peuvent servir de cibles blue et green : le pipeline enregistre l'approbateur, la migration de trafic bascule vers green, blue reste disponible pour un retour immédiat, et les Cloud Audit Logs attribuent l'action de configuration à l'identité qui l'exécute. Migrer progressivement puis supprimer blue retire précisément la cible prête à reprendre le trafic ; reconstruire depuis l'image ne garantit donc pas le délai de deux minutes. Garder les deux révisions mais utiliser un compte d'équipe partagé permet le rollback, cependant ni le pipeline ni les journaux ne peuvent attribuer l'approbation à une personne. Un second service piloté par DNS peut conserver un environnement de retour et une approbation, mais son TTL impose une propagation qui ne garantit ni bascule sans interruption ni retour sous deux minutes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration",
+    "https://cloud.google.com/logging/docs/audit"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.livraison-changement-a-risque.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Déployer la révision sans trafic, vérifier son démarrage, puis lui transférer 5 % des requêtes et revenir à 100 % sur l'ancienne si les métriques se dégradent.",
+  "rationale": "Déployer d'abord la révision sans trafic permet de vérifier son démarrage sans exposer les utilisateurs; déplacer ensuite 5 % des requêtes fournit un canari mesurable et remettre 100 % sur l'ancienne révision assure le retour immédiat. Remplacer un tag dans Artifact Registry ne modifie pas une révision déjà déployée et ne contrôle pas la fraction reçue par le nouveau code. Dupliquer l'architecture dans deux projets puis utiliser DNS alourdit l'exploitation, et les caches DNS empêchent une répartition et un retour aussi précis. Limiter le nombre d'instances de la nouvelle révision ne définit pas une proportion de trafic et risque seulement de la saturer.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration"
+  ]
+}

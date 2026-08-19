@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.arbitrage-livraison-fiabilite.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Le SLO mensuel d'un service est de 99,9 %. À mi-période, une série de versions a consommé 90 % du budget d'erreur et la tendance prévoit son épuisement dans deux jours. Une fonctionnalité non urgente est prête. Quelle décision est cohérente avec une politique de budget d'erreur ?",
+  "choices": [
+    "Suspendre les changements risqués, consacrer l'effort à la fiabilité et ne reprendre la livraison normale qu'après retour dans les seuils définis par la règle d'épuisement convenue",
+    "Déployer la fonctionnalité derrière un feature flag limité à 5 % et poursuivre l'expérimentation, même si ce changement non urgent consomme un budget presque épuisé",
+    "Créer une nouvelle fenêtre de SLO commençant au jour du déploiement afin de disposer d'un budget neuf, sans traiter les échecs qui ont consommé 90 % de la fenêtre contractuelle actuelle",
+    "Ajouter une capacité de secours et renforcer l'astreinte, puis livrer normalement la fonctionnalité sans vérifier que ces mesures réduisent le burn rate ou restaurent le budget disponible"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.ecarts-financiers-apres-conversion.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Après conversion d'un schéma SQL Server vers PostgreSQL, les nombres de lignes correspondent, mais des montants diffèrent et certaines écritures échouent. L'analyse révèle des colonnes money, des valeurs par défaut, des identités et des procédures T-SQL. Quelle validation doit précéder le basculement ?",
+  "choices": [
+    "Comparer les nombres de tables et de lignes, puis accepter la cible si les totaux correspondent, ce qui détecte les omissions massives mais pas les changements de précision, valeurs par défaut ou comportements DML",
+    "Tester types, précision, contraintes, valeurs par défaut, séquences et logique convertie, comparer des sommes de contrôle, puis rejouer des transactions DML représentatives réelles avant le basculement",
+    "Accepter les écarts de montants tant que le transport CDC n'affiche aucune erreur et corriger après basculement, ce qui valide la livraison des changements mais pas leur sémantique dans PostgreSQL",
+    "Désactiver contraintes, valeurs par défaut et séquences sur PostgreSQL afin que le rejeu accepte toutes les écritures, ce qui réduit les échecs techniques mais masque les divergences et compromet l'intégrité"
+  ]
+}

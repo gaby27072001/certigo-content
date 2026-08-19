@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-2.connectivite-hybride-resiliente.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Une passerelle HA VPN dans le projet hôte, Cloud Router avec BGP et des tunnels redondants répartis sur les deux interfaces et les deux équipements sur site, pour assurer un SLA de connectivité sur l’ensemble du Shared VPC.",
+  "rationale": "HA VPN offre deux interfaces côté Google et, avec des tunnels vers les deux équipements sur site et BGP via Cloud Router, reconverge dynamiquement après une panne ; le projet hôte Shared VPC centralise cette connectivité et permet le SLA demandé. Des passerelles Classic VPN par projet, des routes statiques et une activation manuelle ne fournissent ni routage dynamique ni continuité automatique. L'appairage VPC ne rend pas transitive une connexion hybride et l'unique tunnel du projet réseau demeure un point de défaillance. Des VPN logiciels par VM dispersent l'exploitation et reposent sur des scripts de changement de routes, sans la redondance gérée de la passerelle Google.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.registre-commandes-international.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un éditeur SaaS conçoit un registre mondial de commandes. Les transactions mettent à jour plusieurs lignes, les contraintes relationnelles sont importantes, le service doit écrire dans plusieurs régions et rester disponible pendant la perte d'une région. Le volume prévu dépasse rapidement les capacités d'une instance unique. Quel service choisir ?",
+  "choices": [
+    "Choisir Spanner dans une configuration multirégionale, afin de fournir le schéma relationnel, les transactions fortement cohérentes, les écritures mondiales et la montée en charge horizontale avec tolérance à la perte d'une région",
+    "Déployer Cloud SQL for PostgreSQL HA dans une région et ajouter des répliques interrégionales en lecture, ce qui conserve SQL mais ne fournit pas les écritures multirégionales ni l'échelle horizontale demandées",
+    "Utiliser Bigtable multicluster et implémenter les jointures ainsi que les transactions multi-lignes dans l'application, ce qui monte en charge mondialement mais ne respecte pas le modèle transactionnel relationnel",
+    "Choisir Firestore multirégional et dénormaliser toutes les relations dans des documents, ce qui simplifie la réplication mais ne satisfait pas les contraintes relationnelles et transactions multi-lignes du registre et impose leur cohérence à l'application"
+  ]
+}

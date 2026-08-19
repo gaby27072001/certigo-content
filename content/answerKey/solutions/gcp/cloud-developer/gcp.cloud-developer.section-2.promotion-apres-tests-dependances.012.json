@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.promotion-apres-tests-dependances.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Exécuter d'abord les tests unitaires, créer un environnement isolé pour les tests d'intégration dans Cloud Build, puis promouvoir uniquement après leur réussite.",
+  "rationale": "Exécuter d'abord les tests unitaires puis des tests d'intégration dans un environnement isolé de Cloud Build donne un retour rapide et fait de leur réussite une condition automatique de promotion. Une validation manuelle après production intervient trop tard et n'offre pas la reproductibilité d'une barrière CI. Des tests exécutés seulement sur le poste du développeur ne sont pas attestés par le pipeline et ne peuvent donc pas bloquer sa promotion. Déployer d'abord puis surveiller la disponibilité transforme une régression évitable en incident utilisateur et ne teste pas nécessairement les interactions Cloud SQL et Pub/Sub.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/build/docs/configuring-builds/create-basic-configuration"
+  ]
+}

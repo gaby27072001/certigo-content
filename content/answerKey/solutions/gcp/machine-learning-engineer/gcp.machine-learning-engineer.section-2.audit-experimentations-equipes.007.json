@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-2.audit-experimentations-equipes.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Suivre chaque exécution dans Experiments, enregistrer paramètres, métriques et artefacts, puis relier données, code et modèles versionnés avec ML Metadata.",
+  "rationale": "Le suivi dans Experiments relié par ML Metadata répond au besoin d’audit : Experiments centralise les exécutions et ML Metadata relie de façon structurée données, code, paramètres, évaluations et artefacts versionnés, ce qui satisfait la reproductibilité six mois plus tard. Une feuille et des liens dépendent d’une documentation manuelle et ne matérialisent pas la lignée. Des copies de notebooks dont le nom encode les paramètres restent difficiles à interroger et ne prouvent pas les dépendances entre ressources. Des endpoints et journaux d’inférence tracent le service, mais pas les jeux, paramètres ni étapes ayant produit chaque modèle.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/experiments/intro-vertex-ai-experiments"
+  ]
+}

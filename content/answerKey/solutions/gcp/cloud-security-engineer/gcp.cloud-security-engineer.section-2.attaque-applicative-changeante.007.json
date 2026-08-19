@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.attaque-applicative-changeante.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Activer Adaptive Protection dans Cloud Armor afin d'analyser le profil de trafic, signaler les attaques de couche 7 et proposer une signature de règle",
+  "rationale": "Adaptive Protection apprend le profil normal du trafic protégé par Cloud Armor, détecte les anomalies de couche 7 et produit une signature de règle suggérée que l'équipe peut examiner puis appliquer à la périphérie. Des seuils fixes et des règles WAF connues ne s'adaptent pas aux caractéristiques mouvantes décrites et provoquent les faux positifs signalés. Cloud IDS inspecte du trafic répliqué, mais ne génère pas ce modèle adaptatif ni une règle Cloud Armor à la périphérie. reCAPTCHA Enterprise aide à distinguer les interactions automatisées, mais un seuil uniforme par parcours ne fournit pas la détection DDoS adaptative demandée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/armor/docs/adaptive-protection-overview"
+  ]
+}

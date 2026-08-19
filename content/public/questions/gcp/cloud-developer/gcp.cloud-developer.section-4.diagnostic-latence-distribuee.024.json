@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.diagnostic-latence-distribuee.024",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une requête traverse API Gateway, deux services Cloud Run et un worker Pub/Sub. Les journaux montrent une latence élevée, mais l'équipe ne sait pas quel composant l'introduit. Quelle instrumentation facilite le diagnostic de bout en bout ?",
+  "choices": [
+    "Écrire dans chaque service un message sans identifiant commun, puis rapprocher les journaux selon leur seconde d'émission et leur adresse source.",
+    "Activer DEBUG en permanence dans tous les composants et rechercher manuellement la même chaîne de requête dans chaque flux de journaux.",
+    "Créer un compteur de latence global sans dimension de service et déclencher une alerte lorsque sa moyenne dépasse le seuil de bout en bout.",
+    "Propager le contexte de trace dans les appels et les attributs Pub/Sub, exporter des spans et inclure l'identifiant de trace dans les journaux structurés."
+  ]
+}

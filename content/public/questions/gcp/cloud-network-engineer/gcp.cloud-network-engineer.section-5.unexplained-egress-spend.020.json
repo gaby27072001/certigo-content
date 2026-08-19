@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-5.unexplained-egress-spend.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Le coût de sortie Internet d'un sous-réseau a fortement augmenté. L'équipe doit identifier, sur les dernières heures, les VM, destinations et ports responsables en agrégeant des métadonnées de flux, sans conserver le contenu des paquets. Quelle démarche est la plus adaptée ?",
+  "choices": [
+    "Activer Packet Mirroring pour tout le sous-réseau, envoyer chaque paquet complet vers une flotte de collecteurs et conserver les captures afin de recalculer les volumes par destination.",
+    "Exporter seulement les journaux d'audit d'administration vers BigQuery et agréger les opérations Compute Engine par principal, car chaque opération contient les octets et ports de ses connexions.",
+    "Générer des Connectivity Tests pour chaque combinaison de VM, adresse et port, puis additionner les chemins joignables afin d'estimer quels flux ont produit la sortie facturée.",
+    "Activer VPC Flow Logs avec échantillonnage et métadonnées adaptés, puis agréger dans Flow Analyzer les octets, sources, destinations et ports sur la période afin d'attribuer la hausse à chaque VM et port distant."
+  ]
+}

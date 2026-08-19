@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.gouvernance-equipes-distribuees.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Créer des dossiers par domaine et pays, des projets séparés par charge, appliquer les règles d'organisation au niveau supérieur et attribuer des rôles prédéfinis ou personnalisés minimaux à des groupes, avec délégation documentée au niveau de tous les dossiers.",
+  "rationale": "Les dossiers par domaine et pays, les projets par charge, les contraintes héritées depuis le niveau supérieur et les rôles minimaux accordés à des groupes créent des limites administratives cohérentes sans rôles primitifs. Le projet partagé avec Editor viole explicitement l'interdiction des rôles primitifs et les préfixes assortis de conditions ne constituent pas une séparation de projets robuste. Une organisation par domaine fragmente la gouvernance, duplique les politiques et le compte d'urgence partagé supprime l'attribution individuelle. Des rôles attribués directement à chaque développeur et des politiques locales dans chaque projet sont difficiles à auditer et ne garantissent pas l'interdiction centrale des IP publiques.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy"
+  ]
+}

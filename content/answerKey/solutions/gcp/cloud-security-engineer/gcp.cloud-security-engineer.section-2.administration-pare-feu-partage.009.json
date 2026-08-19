@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.administration-pare-feu-partage.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Faire associer par l'administrateur d'organisation une stratégie de pare-feu hiérarchique au dossier, réserver roles/compute.securityAdmin à l'équipe sécurité dans le projet hôte et ne déléguer que roles/compute.networkUser sur les sous-réseaux requis",
+  "rationale": "La stratégie hiérarchique associée par l'administrateur compétent impose un socle hérité aux ressources du dossier, y compris aux nouveaux projets. Réserver roles/compute.securityAdmin au groupe sécurité dans le projet hôte sépare l'administration des contrôles du réseau partagé; roles/compute.networkUser permet aux équipes applicatives d'utiliser uniquement les sous-réseaux délégués. Dupliquer des règles locales entraîne de la dérive, et octroyer les rôles d'administration réseau ou sécurité aux équipes applicatives annule la séparation. Une convention de nommage n'empêche aucune modification. Des tags limités aux VM existantes ne couvrent pas automatiquement les nouvelles charges, et le rôle Éditeur est excessif.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/firewall/docs/firewall-policies-overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.gouvernance-api-partenaires.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Plusieurs clients mobiles consomment une API REST Cloud Run. L'équipe veut valider des jetons, appliquer des quotas par consommateur et publier une spécification OpenAPI sans implémenter ces fonctions dans chaque service. Quelle conception convient ?",
+  "choices": [
+    "Placer un équilibreur TCP interne devant Cloud Run et utiliser des règles réseau distinctes pour représenter les quotas de chaque client mobile.",
+    "Placer Apigee devant les services, puis y publier la spécification OpenAPI et configurer la validation des jetons ainsi que les quotas par consommateur.",
+    "Créer une zone Cloud DNS par catégorie de client, faire varier les noms d'API dans les applications mobiles et utiliser le nombre de résolutions comme quota de requêtes HTTP.",
+    "Ajouter des règles de pare-feu VPC autorisant les plages IP connues des opérateurs mobiles, analyser les jetons dans chaque backend et calculer les dépassements de quota après traitement."
+  ]
+}

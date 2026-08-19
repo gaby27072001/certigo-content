@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.authentification-centralisee-sessions.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Configurer le SSO SAML avec l'IdP, appliquer l'authentification multifacteur selon le risque dans l'IdP et définir la politique de session dans Cloud Identity",
+  "rationale": "Le SSO SAML délègue l'authentification et la révocation à l'IdP d'entreprise, qui applique l'authentification multifacteur selon le risque; la politique Cloud Identity borne ensuite les sessions Google. Des clés de compte de service sont des identifiants de charge de travail durables, pas des sessions d'employés. Conserver l'authentification Google et ajouter des conditions IAM limite certaines autorisations après connexion, mais ne centralise ni l'authentification ni la révocation dans l'IdP. Un groupe Lecteur ne configure aucun des contrôles d'authentification ou de session demandés.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/architecture/identity/single-sign-on"
+  ]
+}

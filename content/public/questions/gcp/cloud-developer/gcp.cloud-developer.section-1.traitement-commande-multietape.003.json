@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.traitement-commande-multietape.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Après une commande, un service doit appeler trois API dans un ordre déterminé, attendre un résultat, appliquer des branches conditionnelles et réessayer certaines étapes. Le client HTTP ne doit pas rester connecté. Quelle solution est la plus appropriée ?",
+  "choices": [
+    "Publier un message Pub/Sub par étape et faire porter à chaque consommateur l'état, les branches conditionnelles et les compensations de toute la séquence.",
+    "Créer dynamiquement une tâche Cloud Scheduler par commande afin d'appeler successivement les trois API selon des horaires rapprochés.",
+    "Décrire dans Workflows les appels, attentes, branches et nouvelles tentatives, puis démarrer chaque exécution asynchrone avec un état géré et traçable.",
+    "Conserver une requête Cloud Run ouverte jusqu'à la fin des trois appels et augmenter son délai d'expiration pour couvrir les reprises transitoires."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.continuite-traitement-multizone.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer un cluster GKE régional, répartir les pods avec des contraintes de topologie et choisir un stockage persistant compatible avec une reprise zonale testée.",
+  "rationale": "Un cluster GKE régional rend le plan de contrôle disponible entre zones; les contraintes de topologie répartissent les pods et un stockage adapté assure la persistance lors d'une perte zonale. Le cluster zonal avec pods et volumes colocalisés conserve précisément le point de défaillance que le scénario interdit. Le système de fichiers en mémoire de Cloud Run n'est pas un stockage durable et ne répond pas au besoin de contrôle Kubernetes. Administrer soi-même Kubernetes sur des groupes non gérés pourrait couvrir plusieurs zones, mais impose inutilement la maintenance du plan de contrôle et de la réplication.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/kubernetes-engine/docs/concepts/regional-clusters"
+  ]
+}

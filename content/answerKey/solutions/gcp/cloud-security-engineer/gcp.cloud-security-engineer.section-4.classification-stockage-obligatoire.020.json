@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.classification-stockage-obligatoire.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Déployer un module personnalisé Security Health Analytics décrivant la règle et examiner ses résultats dans Security Command Center",
+  "rationale": "Un module personnalisé Security Health Analytics peut évaluer la présence et la valeur du libellé data-classification selon la règle propre à l'entreprise, puis publier les non-conformités comme résultats centralisés dans Security Command Center. Un inventaire mensuel reste tardif et manuel. Une alerte Cloud Monitoring et ses annotations documentent une classification attendue, mais n'évaluent pas le libellé réel du bucket. Une métrique fondée sur les journaux de création ne voit que les événements retenus depuis son activation et manque les buckets existants ainsi que les modifications ultérieures; elle n'évalue donc pas l'état courant.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/security-command-center/docs/custom-modules-sha-overview"
+  ]
+}

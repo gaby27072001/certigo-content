@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.partage-objet-temporaire.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Des utilisateurs doivent télécharger pendant dix minutes un rapport privé dans Cloud Storage. L'application ne doit ni rendre l'objet public ni relayer son contenu. Quelle méthode utiliser ?",
+  "choices": [
+    "Accorder temporairement le rôle Storage Object Viewer à allUsers sur le bucket, puis programmer la suppression de ce rôle après dix minutes.",
+    "Copier le rapport dans un bucket public et appliquer une règle de cycle de vie qui supprime l'objet exactement dix minutes après sa création.",
+    "Générer pour l'objet une URL signée V4 dont la durée de validité est limitée à dix minutes, sans modifier les autorisations publiques du bucket.",
+    "Remettre au navigateur une clé de compte de service limitée au projet et lui demander d'utiliser directement l'API Cloud Storage pendant dix minutes."
+  ]
+}

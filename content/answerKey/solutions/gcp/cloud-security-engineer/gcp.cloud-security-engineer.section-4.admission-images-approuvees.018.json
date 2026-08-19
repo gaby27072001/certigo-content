@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.admission-images-approuvees.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Une stratégie Binary Authorization exigeant des attestations du pipeline approuvé avant l'admission",
+  "rationale": "Binary Authorization contrôle l'admission GKE et exige l'attestation cryptographique produite après la construction et l'analyse approuvées, même si l'appelant peut créer des pods. Une alerte Cloud Monitoring observe les créations mais ne bloque aucune admission. Limiter le cluster au registre interne et l'import au pipeline réduit les chemins, mais ne prouve pas à l'admission que l'image précise a réussi l'analyse exigée. Un job quotidien supprime après coup, donc une image non conforme peut déjà avoir exécuté du code.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/binary-authorization/docs/overview"
+  ]
+}

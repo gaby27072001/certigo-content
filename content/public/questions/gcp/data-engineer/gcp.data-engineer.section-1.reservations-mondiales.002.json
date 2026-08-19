@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-1.reservations-mondiales.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une plateforme de réservation mondiale doit conserver des transactions relationnelles ACID, éviter les doubles ventes et continuer à servir les écritures après la perte d'une zone. La charge augmente horizontalement et les lecteurs situés sur plusieurs continents exigent une vue cohérente des réservations confirmées. Quel service doit constituer le système d'enregistrement principal ?",
+  "choices": [
+    "Déployer Cloud SQL en haute disponibilité dans une région, ajouter des réplicas en lecture interrégionaux et router les écritures vers l'instance principale",
+    "Déployer Spanner en configuration multirégionale, utiliser des transactions en lecture-écriture et choisir des clés primaires qui répartissent la charge",
+    "Stocker chaque réservation dans Bigtable, utiliser des mutations conditionnelles par ligne et reconstruire les relations entre comptes dans l'application",
+    "Ingérer les demandes dans BigQuery, puis exécuter des requêtes MERGE fréquentes pour détecter les conflits et publier les réservations confirmées"
+  ]
+}

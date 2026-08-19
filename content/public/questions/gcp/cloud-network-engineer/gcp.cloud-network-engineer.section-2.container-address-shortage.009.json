@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.container-address-shortage.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un cluster GKE VPC-native approche de l'épuisement de sa plage secondaire de pods, alors que la plage de services et la plage principale des nœuds disposent encore de capacité. L'application ne peut pas subir une recréation du cluster. Quelle action est adaptée ?",
+  "choices": [
+    "Ajouter une plage secondaire non chevauchante au sous-réseau, l'associer au cluster comme plage de pods supplémentaire et l'affecter aux nouveaux pools de nœuds concernés.",
+    "Étendre fortement la plage secondaire des services, puis redémarrer les nouveaux pods pour qu'ils obtiennent leurs adresses dans la partie inutilisée de cette plage.",
+    "Convertir sur place le cluster VPC-native en cluster basé sur routes et annoncer une nouvelle plage de pods avec des routes statiques générées par les nœuds.",
+    "Créer une route statique couvrant une nouvelle plage, définir les nœuds existants comme prochains sauts et laisser l'IPAM GKE découvrir cette capacité sans modifier le cluster."
+  ]
+}

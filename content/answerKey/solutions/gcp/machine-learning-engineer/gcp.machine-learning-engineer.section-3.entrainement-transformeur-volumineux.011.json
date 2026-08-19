@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.entrainement-transformeur-volumineux.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Évaluer un cluster TPU et configurer avec JAX un maillage de parallélisme des données et du modèle, puis profiler calculs et communications avant généralisation.",
+  "rationale": "Le maillage TPU combinant parallélisme de modèle et de données est l’architecture adaptée : JAX/XLA s’adapte bien aux TPU et un maillage combinant parallélisme de modèle et de données traite à la fois le dépassement mémoire et le débit ; le profilage vérifie ensuite le coût des communications. Des CPU répliquant tout le modèle ne résolvent pas la mémoire et ralentissent le calcul matriciel. Le seul parallélisme de données sur de petites GPU conserve une copie complète qui ne tient déjà pas. Une agrégation de fichiers sur appareils edge n’offre ni interconnexion ni synchronisation adaptées à l’entraînement dense à grande échelle.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/tpu/docs/jax-pods"
+  ]
+}

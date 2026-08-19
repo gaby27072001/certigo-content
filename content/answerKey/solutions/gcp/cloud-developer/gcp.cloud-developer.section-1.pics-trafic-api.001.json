@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.pics-trafic-api.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Déployer le conteneur sur Cloud Run avec une concurrence et des limites d'instances adaptées aux variations rapides de trafic.",
+  "rationale": "Cloud Run satisfait simultanément les contraintes d'API conteneurisée sans état, de mise à l'échelle automatique et de faible charge opérationnelle; ses réglages de concurrence et d'instances encadrent l'adaptation. Le groupe Compute Engine proposé reste dimensionné pour la pointe et impose à l'équipe la gestion des VM et des modèles d'instance. GKE Standard peut exécuter le conteneur, mais la gestion des nœuds et des réplicas contredit l'absence de besoin Kubernetes et l'objectif d'exploitation minimale. Cloud Build est un service de construction par travaux, pas un environnement destiné à traiter chaque requête HTTP.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/run/docs/about-instance-autoscaling"
+  ]
+}

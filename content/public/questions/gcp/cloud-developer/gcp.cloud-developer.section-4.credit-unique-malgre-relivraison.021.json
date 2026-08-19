@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.credit-unique-malgre-relivraison.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un abonnement Pub/Sub peut livrer un même événement plusieurs fois. Le consommateur crédite un compte puis acquitte le message. Comment éviter un double crédit sans perdre les événements transitoirement en erreur ?",
+  "choices": [
+    "Enregistrer atomiquement l'identifiant métier avec le crédit, puis acquitter après le commit afin que toute relivraison reste sans effet fonctionnel.",
+    "Acquitter le message avant l'écriture, placer la demande de crédit dans une file locale persistante de l'instance et la rejouer après un échec applicatif.",
+    "Traiter le message sans identifiant métier en supposant que Pub/Sub ne le relivre jamais après sa première réception et son acquittement par un consommateur.",
+    "Conserver en mémoire les identifiants déjà traités dans chaque instance et supprimer périodiquement les plus anciens pour limiter l'occupation mémoire."
+  ]
+}

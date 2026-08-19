@@ -75,15 +75,37 @@ function sameMetadata(left, right) {
   );
 }
 
-function checkOfficialUrl(urlValue, provider, label, err) {
+function checkOfficialUrl(
+  urlValue,
+  provider,
+  label,
+  err,
+  category = "[catalog:provenance]"
+) {
   let host;
   try {
     host = new URL(urlValue).hostname.toLowerCase();
   } catch {
+    err(`${category} ${label}: URL invalide "${urlValue}"`);
     return;
   }
   if (!provider.sourceHosts.includes(host)) {
-    err(`[catalog:provenance] ${label}: hote non officiel "${host}"`);
+    err(`${category} ${label}: hote non officiel "${host}"`);
+  }
+}
+
+function validateSolutionProvenance({ data, file, catalogIndex, err }) {
+  if (!Array.isArray(data?.provenance)) return;
+  const provider = catalogIndex?.providers.get(data?.metadata?.provider);
+  if (!provider) return;
+  for (const url of data.provenance) {
+    checkOfficialUrl(
+      url,
+      provider,
+      file,
+      err,
+      "[solution:provenance]"
+    );
   }
 }
 
@@ -293,6 +315,24 @@ export function correctMatchesChoice(choices, correct) {
   );
 }
 
+export function answerLengthMetrics(choices, correct) {
+  if (!correctMatchesChoice(choices, correct)) return null;
+  const lengths = choices.map((choice) => choice.length);
+  const correctLength = correct.length;
+  const distractorLengths = choices
+    .filter((choice) => choice !== correct)
+    .map((choice) => choice.length);
+  const meanDistractorLength =
+    distractorLengths.reduce((total, length) => total + length, 0) /
+    distractorLengths.length;
+  return {
+    choiceCount: choices.length,
+    distinct: new Set(lengths).size === lengths.length,
+    rank: [...lengths].sort((left, right) => left - right).indexOf(correctLength),
+    ratio: correctLength / meanDistractorLength,
+  };
+}
+
 export async function validateContent(options = {}) {
   const root = resolve(options.root ?? cwd());
   const errors = [];
@@ -352,6 +392,7 @@ export async function validateContent(options = {}) {
 
   const publicIds = new Map();
   const answerIds = new Map();
+  const answerLengthsByCertification = new Map();
 
   for (const file of questionFiles) {
     let data;
@@ -402,6 +443,7 @@ export async function validateContent(options = {}) {
         answerIds.set(data.id, { file, data });
       }
       validateMetadata({ data, file, channel: "answerKey", catalogIndex, err });
+      validateSolutionProvenance({ data, file, catalogIndex, err });
     }
   }
 
@@ -415,6 +457,17 @@ export async function validateContent(options = {}) {
       err(
         `[integrity:correct-choice] solution "${id}" (${solution.file}): correct doit correspondre exactement a une valeur de choices dans ${question.file} (egalite stricte, sans conversion de casse, trim ni normalisation Unicode)`
       );
+    } else if (question.data.schemaVersion === "v3") {
+      const certification = question.data.metadata?.certification;
+      const metrics = answerLengthMetrics(
+        question.data.choices,
+        solution.data.correct
+      );
+      if (typeof certification === "string" && metrics !== null) {
+        const entries = answerLengthsByCertification.get(certification) ?? [];
+        entries.push({ id, ...metrics });
+        answerLengthsByCertification.set(certification, entries);
+      }
     }
     if (question.data.schemaVersion !== solution.data.schemaVersion) {
       err(
@@ -527,6 +580,55 @@ export async function validateContent(options = {}) {
     });
   }
 
+  for (const [certification, coverage] of coverageByCertification) {
+    const referencedQuestionCount = coverage.matrix.objectives.reduce(
+      (total, objective) => total + objective.questionIds.length,
+      0
+    );
+    if (referencedQuestionCount === 0) continue;
+    const entries = answerLengthsByCertification.get(certification) ?? [];
+    for (const entry of entries) {
+      if (entry.choiceCount !== 4) {
+        err(
+          `[editorial:answer-length] paire "${entry.id}": exactement quatre choix sont requis`
+        );
+        continue;
+      }
+      if (!entry.distinct) {
+        err(
+          `[editorial:answer-length] paire "${entry.id}": les quatre choix doivent avoir des longueurs distinctes`
+        );
+      }
+      if (entry.ratio < 0.85 || entry.ratio > 1.15) {
+        err(
+          `[editorial:answer-length] paire "${entry.id}": ratio de longueur ${entry.ratio.toFixed(3)}, attendu entre 0.85 et 1.15`
+        );
+      }
+    }
+    if (
+      entries.every((entry) => entry.choiceCount === 4) &&
+      entries.length >= 4
+    ) {
+      const minimumPerRank = Math.floor(entries.length / 4);
+      const maximumPerRank = Math.ceil(entries.length / 4);
+      const ranks = [0, 0, 0, 0];
+      for (const entry of entries) ranks[entry.rank]++;
+      if (
+        ranks.some(
+          (count) => count < minimumPerRank || count > maximumPerRank
+        )
+      ) {
+        const expected =
+          minimumPerRank === maximumPerRank
+            ? `${minimumPerRank}/${minimumPerRank}/${minimumPerRank}/${minimumPerRank}`
+            : `chaque rang entre ${minimumPerRank} et ${maximumPerRank}`;
+        err(
+          `[editorial:answer-length] ${certification}: rangs de longueur ${ranks.join("/")}, attendu ${expected}`
+        );
+      }
+    }
+  }
+
   if (catalogIndex) {
     for (const certification of catalog.certifications.filter((item) =>
       isCertificationActiveOn(item, catalog.asOf)
@@ -579,7 +681,9 @@ export function printValidationResult(result) {
     return false;
   }
 
-  console.log("\nOK - schemas, catalogue, couverture, integrite et anti-fuite valides.");
+  console.log(
+    "\nOK - schemas, catalogue, couverture, provenance, integrite, equilibre editorial et anti-fuite valides."
+  );
   return true;
 }
 

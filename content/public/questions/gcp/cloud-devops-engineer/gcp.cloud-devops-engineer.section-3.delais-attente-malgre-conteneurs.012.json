@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.delais-attente-malgre-conteneurs.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une API reçoit des requêtes via un équilibreur de charge. L'équipe possède une métrique indiquant que 99,99 % des conteneurs sont en cours d'exécution, mais des clients signalent des délais d'attente. Quel SLI représente le mieux leur expérience ?",
+  "choices": [
+    "Mesurer la proportion de conteneurs Running et de probes de disponibilité réussies dans le cluster, même lorsque le chemin client complet ou le délai de réponse de l'API n'est pas observé",
+    "Mesurer le pourcentage de déploiements réussis et de tests synthétiques de readiness internes, sans inclure les requêtes réelles ni leur distribution de latence au point d'entrée",
+    "Suivre CPU, mémoire, profondeur de file et nombre de pods disponibles, puis considérer le service fiable tant que ces ressources restent sous leurs seuils techniques",
+    "La proportion, au point d'entrée, de requêtes clientes valides servies sans erreur et sous un seuil de latence défini, calculée sur le trafic réel plutôt que sur le seul état interne des conteneurs"
+  ]
+}

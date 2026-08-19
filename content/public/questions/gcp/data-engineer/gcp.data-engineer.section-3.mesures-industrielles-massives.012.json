@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.mesures-industrielles-massives.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une flotte industrielle génère plusieurs millions de mesures par seconde. L'application opérationnelle lit surtout les dernières mesures d'un appareil ou une plage temporelle pour un appareil donné. Elle exige une latence de quelques millisecondes, une montée en charge horizontale et n'effectue ni jointures complexes ni transactions multi-lignes. Quel stockage et quelle clé sont les plus adaptés ?",
+  "choices": [
+    "Utiliser Cloud SQL partitionné et indexé sur appareil et horodatage, puis augmenter verticalement l'instance principale",
+    "Écrire des fichiers Parquet horaires par appareil dans Cloud Storage, maintenir un index des objets dans Firestore et lire tous les fichiers couvrant la plage demandée",
+    "Créer un document Firestore par appareil avec un tableau des mesures récentes, archiver les anciennes valeurs dans des sous-collections et répartir les écritures par région",
+    "Utiliser Bigtable avec une clé préfixée par un identifiant d'appareil réparti puis un composant temporel adapté aux lectures de plage"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.reaction-nouvel-objet.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Créer un déclencheur Eventarc sur la finalisation Cloud Storage et donner à son compte de service le droit d'invoquer le service Cloud Run privé.",
+  "rationale": "Un déclencheur Eventarc réagit à la finalisation Cloud Storage et son compte de service peut invoquer le service Cloud Run privé, sans interrogation périodique. Lister le bucket chaque minute avec Cloud Scheduler est du polling, ajoute du délai et oblige à maintenir un curseur fiable dans Firestore. Demander aux clients une seconde notification couple la fiabilité du traitement au client et rendre le récepteur public affaiblit l'authentification. Monter le bucket puis observer un système de fichiers local ne fournit pas un flux fiable des événements de finalisation et dépend du cycle de vie des instances.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/eventarc/docs/run/route-trigger-cloud-storage"
+  ]
+}

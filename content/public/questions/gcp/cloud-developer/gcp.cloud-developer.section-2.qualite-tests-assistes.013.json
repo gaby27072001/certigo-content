@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.qualite-tests-assistes.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un assistant de code propose des tests unitaires pour un calcul financier comportant des règles métier réglementées. Quelle pratique maximise la vitesse sans déléguer la responsabilité de qualité au modèle ?",
+  "choices": [
+    "Faire générer des cas par l'assistant, les relire selon les exigences, compléter les limites et exécuter la suite déterministe dans le pipeline CI.",
+    "Accepter automatiquement les tests générés dès qu'ils compilent et couvrent chaque méthode publique, sans vérifier la pertinence de leurs assertions métier.",
+    "Remplacer les assertions réglementaires par des instantanés de sortie générés par le modèle, puis accepter toute mise à jour groupée de ces instantanés.",
+    "Autoriser l'assistant à tester ses hypothèses sur un échantillon de production, à modifier temporairement les données et à restaurer ensuite une sauvegarde contrôlée."
+  ]
+}

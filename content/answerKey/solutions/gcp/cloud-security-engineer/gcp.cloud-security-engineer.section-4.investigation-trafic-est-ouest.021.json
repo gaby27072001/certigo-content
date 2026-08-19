@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.investigation-trafic-est-ouest.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Cloud IDS pour l'inspection et les alertes, complété par VPC Flow Logs centralisés pour les recherches de flux",
+  "rationale": "Cloud IDS inspecte le trafic répliqué et génère des alertes de signatures de menace; VPC Flow Logs centralisés conservent les métadonnées permettant de retrouver les VM ayant communiqué avec l'adresse suspecte. Les journaux Cloud NAT décrivent surtout les traductions de sortie et une corrélation IAM ne fournit pas l'inspection du trafic est-ouest. Cloud Armor protège le trafic vers des équilibreurs publics; les journaux de pare-feu complètent la visibilité mais cet ensemble n'inspecte pas tout le trafic est-ouest avec des signatures IDS. Access Transparency retrace certains accès du personnel Google et les journaux administrateur des actions de contrôle, pas les communications entre VM.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/intrusion-detection-system/docs/overview",
+    "https://cloud.google.com/vpc/docs/flow-logs"
+  ]
+}

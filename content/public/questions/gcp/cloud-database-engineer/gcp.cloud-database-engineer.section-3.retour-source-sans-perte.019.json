@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.retour-source-sans-perte.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Lors d'une migration presque sans interruption, l'application écrira sur la cible après le basculement. Le comité exige de pouvoir revenir à la source pendant deux heures sans perdre les nouvelles commandes. Quel élément doit impérativement figurer dans le plan ?",
+  "choices": [
+    "Conserver la sauvegarde de la source prise la veille et la restaurer si la cible échoue, ce qui fournit un point connu mais perd les transactions créées depuis, notamment après le basculement",
+    "Autoriser temporairement les écritures sur source et cible et réconcilier les commandes par horodatage après décision, ce qui garde deux issues ouvertes mais crée conflits, doublons et absence de vérité unique",
+    "Définir une fenêtre de décision, maintenir ou préparer une réplication inverse validée des écritures cible vers source, et documenter gel, vérifications et procédure de repli",
+    "Préparer un retour DNS instantané vers la source et conserver le TTL à une minute, ce qui accélère le reroutage mais ne recopie aucune des nouvelles commandes enregistrées uniquement sur la cible"
+  ]
+}

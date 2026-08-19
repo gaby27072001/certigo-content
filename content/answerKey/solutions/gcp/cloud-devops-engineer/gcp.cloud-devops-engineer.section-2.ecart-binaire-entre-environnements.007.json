@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.ecart-binaire-entre-environnements.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Construire une seule fois, enregistrer l'image et sa provenance dans Artifact Registry, puis promouvoir exactement le même digest entre environnements sans reconstruire l'artefact pour la production.",
+  "rationale": "Construire une fois puis promouvoir le digest déjà testé garantit l'identité binaire entre préproduction et production, tandis que la provenance relie l'artefact au build et aux sources. Reconstruire avec un tag de version immuable empêche de réaffecter ce tag, mais peut toujours résoudre d'autres dépendances et produire d'autres octets. Copier un tag signé mais le résoudre au moment de la promotion reste vulnérable à la mutabilité de la référence source et n'enregistre pas le digest testé. Un export manuel assorti d'un checksum peut vérifier des octets ponctuellement, mais contourne l'identité, l'historique et la provenance du pipeline exigés.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/build/docs/securing-builds/view-build-provenance"
+  ]
+}

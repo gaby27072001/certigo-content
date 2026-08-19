@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-6.succes-connexion-manquants.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Un collecteur de journaux d’identité reste marqué « sain », mais une modification fournisseur a cessé d’émettre les événements de connexion réussie. Les échecs continuent, si bien que le volume global ne tombe pas à zéro. Comment détecter automatiquement cette dégradation ?",
+  "choices": [
+    "Alerter si le collecteur ne répond plus ou si le volume total tombe à zéro, puis vérifier quotidiennement la répartition entre réussites et échecs, consigner les écarts et contacter le fournisseur",
+    "Alerter lorsque le volume total dépasse sa moyenne mensuelle, puis examiner les sous-types, la fraîcheur et le collecteur afin de déterminer manuellement si une catégorie attendue a disparu",
+    "Faire vérifier chaque heure par un analyste la présence d’une réussite, consigner le résultat et escalader après deux absences, mais sans politique métrique automatisée ni routage hors permanence",
+    "Surveiller la fraîcheur et le taux attendu par sous-type ou requête sentinelle, établir une référence tenant compte des cycles, puis alerter dans Cloud Monitoring sur absence ou écart durable avec routage et runbook"
+  ]
+}

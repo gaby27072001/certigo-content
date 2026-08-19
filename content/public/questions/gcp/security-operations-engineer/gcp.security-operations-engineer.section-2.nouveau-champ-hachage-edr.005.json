@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-2.nouveau-champ-hachage-edr.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une nouvelle version d’un produit EDR ajoute un champ de hachage SHA-256. Le parseur par défaut Google SecOps continue à traiter les anciens événements, mais place le nouveau champ dans les données brutes. Une règle attend ce hachage dans le champ UDM normalisé. Quelle action minimise le risque de régression ?",
+  "choices": [
+    "Créer une extension de parseur ciblée sur la nouvelle variante, la tester avec des échantillons anciens, nouveaux et malformés, puis vérifier les champs UDM et les erreurs avant déploiement",
+    "Remplacer le parseur par une implémentation personnalisée reproduisant les mappages et ajoutant le SHA-256, puis tester la nouvelle version avant de basculer toute la source et surveiller les erreurs",
+    "Extraire le SHA-256 depuis la charge brute avec une expression compatible avec deux versions et conserver le parseur par défaut, sans normaliser la valeur dans le champ UDM attendu par la règle",
+    "Déclarer la source comme un autre EDR dont le parseur expose un SHA-256, vérifier les champs UDM obtenus et conserver ce type tant que les détections semblent fonctionner, sans valider la sémantique complète"
+  ]
+}

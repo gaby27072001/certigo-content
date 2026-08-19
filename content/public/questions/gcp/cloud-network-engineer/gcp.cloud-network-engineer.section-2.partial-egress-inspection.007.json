@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.partial-egress-inspection.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une appliance d'inspection possède une interface dans le VPC. Seul le trafic sortant du sous-réseau applicatif `10.42.0.0/20` vers Internet doit passer par l'appliance; les autres VM doivent conserver la route par défaut normale. Quelle configuration réalise ce traitement sélectif ?",
+  "choices": [
+    "Remplacer la route par défaut pour toutes les VM par une route statique de priorité supérieure vers l'appliance, puis ajouter des exceptions pour chacun des autres sous-réseaux.",
+    "Exporter une route par défaut depuis un VPC pair vers tous les workloads et utiliser les règles de pare-feu du pair pour reconnaître le sous-réseau `10.42.0.0/20`.",
+    "Créer une route basée sur des règles filtrant la source `10.42.0.0/20` et utilisant l'équilibreur interne des appliances comme prochain saut, avec une priorité adaptée.",
+    "Créer une règle de pare-feu ingress ciblant `10.42.0.0/20`, avec l'adresse de l'appliance comme destination autorisée, afin que le pare-feu remplace le prochain saut du trafic."
+  ]
+}

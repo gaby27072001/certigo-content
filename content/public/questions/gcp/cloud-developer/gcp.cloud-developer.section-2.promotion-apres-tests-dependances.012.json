@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.promotion-apres-tests-dependances.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une application dépend de Cloud SQL et de Pub/Sub. L'équipe veut bloquer la promotion si un test d'intégration échoue, tout en conservant des tests unitaires rapides à chaque commit. Comment structurer Cloud Build ?",
+  "choices": [
+    "Remplacer les tests unitaires par une validation manuelle en production et restaurer la version précédente lorsqu'un scénario d'intégration échoue.",
+    "Exécuter les tests d'intégration sur le poste du développeur, puis laisser Cloud Build promouvoir l'image sans exploiter leur résultat.",
+    "Déployer chaque image directement en production et utiliser un test de disponibilité ainsi qu'une alerte pour détecter les régressions après exposition.",
+    "Exécuter d'abord les tests unitaires, créer un environnement isolé pour les tests d'intégration dans Cloud Build, puis promouvoir uniquement après leur réussite."
+  ]
+}

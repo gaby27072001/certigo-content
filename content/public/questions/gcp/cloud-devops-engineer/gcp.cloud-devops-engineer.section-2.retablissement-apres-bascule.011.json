@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.retablissement-apres-bascule.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une API Cloud Run possède une ancienne révision blue et une nouvelle révision green, toutes deux compatibles avec le schéma de données. L'entreprise exige une bascule sans interruption, un retour vers blue en moins de deux minutes et une preuve de l'identité ayant approuvé le changement. Quelle mise en œuvre répond à toutes les contraintes ?",
+  "choices": [
+    "Migrer le trafic Cloud Run vers green par paliers, puis supprimer blue dès que green reçoit 100 % du trafic et conserver seulement son image dans Artifact Registry pour reconstruire un retour en cas d'incident",
+    "Conserver blue et green, mais faire basculer manuellement le trafic par un opérateur utilisant un compte d'équipe partagé ; blue reste disponible, sans approbation individuelle enregistrée dans le pipeline",
+    "Conserver les révisions Cloud Run blue et green, journaliser l'identité de l'approbateur dans le pipeline, migrer le trafic vers green et garder blue disponible pour rétablir immédiatement son trafic",
+    "Déployer green comme un second service Cloud Run, enregistrer l'approbation dans le pipeline puis modifier un enregistrement DNS à TTL prolongé ; revenir vers blue exige une nouvelle propagation DNS dans toutes les régions clientes"
+  ]
+}

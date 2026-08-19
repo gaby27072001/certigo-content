@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-6.ecarts-octroi-credit.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Un modèle d’octroi de crédit atteint une bonne AUC globale, mais une association de consommateurs signale davantage de faux négatifs pour certains groupes. L’équipe doit évaluer l’équité sans masquer les performances opérationnelles et fournir des éléments d’explication. Que doit-elle faire ?",
+  "choices": [
+    "Optimiser l’AUC globale sur un nouvel échantillon, publier une matrice de confusion agrégée et utiliser Explainable AI seulement sur les dossiers contestés, sans mesurer les écarts entre groupes.",
+    "Retirer les attributs de groupe avant entraînement et évaluation, rechercher quelques variables proxy évidentes, puis supposer que cette cécité suffit à garantir des décisions équitables.",
+    "Sous gouvernance, mesurer rappel, faux négatifs et calibration par groupe, analyser attributions et cas limites, valider les seuils métier puis surveiller ces mesures de façon continue dans la durée en production.",
+    "Appliquer un seuil identique à tous les groupes, comparer ensuite leurs taux d’acceptation et ajuster manuellement quelques décisions jusqu’à rapprocher les moyennes sans réévaluer la calibration."
+  ]
+}

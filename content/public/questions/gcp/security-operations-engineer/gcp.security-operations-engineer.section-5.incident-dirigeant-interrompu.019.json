@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.incident-dirigeant-interrompu.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Google SecOps SOAR enrichit les alertes de hameçonnage avec GTI. L’équipe souhaite automatiser davantage, mais la désactivation d’un compte de dirigeant a déjà interrompu une transaction légitime. Quel playbook constitue le meilleur compromis ?",
+  "choices": [
+    "Désactiver automatiquement pendant cinq minutes tout compte associé à une URL suspecte, lancer l’enrichissement GTI et permettre à un analyste d’annuler l’action après examen du message et du contexte utilisateur",
+    "Automatiser les enrichissements et actions réversibles, calculer une décision à partir de plusieurs signaux, exiger une approbation humaine pour désactiver les comptes à fort impact, puis journaliser résultat et retour arrière",
+    "Traiter chaque alerte manuellement et exiger deux approbations avant les enrichissements et actions réversibles, afin de réduire les erreurs malgré un délai de triage accru et un backlog potentiel",
+    "Confier au fournisseur de messagerie la décision de désactiver le compte Google Cloud, puis importer son verdict, ses preuves et l’historique des actions dans SecOps sans appliquer le contexte métier interne"
+  ]
+}

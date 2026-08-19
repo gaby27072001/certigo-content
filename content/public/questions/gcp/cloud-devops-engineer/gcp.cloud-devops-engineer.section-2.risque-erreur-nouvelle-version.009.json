@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.risque-erreur-nouvelle-version.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une nouvelle version d'une API peut augmenter les erreurs pour certains clients. L'équipe veut exposer progressivement 5 %, 25 %, puis 100 % du trafic, interrompre automatiquement la progression si le taux d'erreur dépasse le SLO et demander une approbation avant la production complète. Que faut-il configurer ?",
+  "choices": [
+    "Une stratégie canary Cloud Deploy par phases de 5 %, 25 % et 100 %, avec vérifications automatiques du taux d'erreur, approbation obligatoire avant la phase finale et ancienne révision prête au retour",
+    "Un déploiement rolling Cloud Deploy par lots de 5 %, 25 % et 100 %, mais avec une observation manuelle des tableaux de bord et aucune vérification automatique du seuil d'erreur avant la progression",
+    "Un environnement blue/green validé hors production, suivi d'une bascule immédiate de 100 % et d'un rollback manuel si le SLO se dégrade, sans exposition graduelle des clients",
+    "Des feature flags activés pour des cohortes de 5 %, 25 % puis 100 %, mais sans gate automatisé sur la télémétrie ni approbation obligatoire avant la cohorte finale"
+  ]
+}

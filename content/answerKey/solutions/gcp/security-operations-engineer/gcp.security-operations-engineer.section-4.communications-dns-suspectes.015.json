@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.communications-dns-suspectes.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Configurer un module de détecteur personnalisé Event Threat Detection fondé sur les IOC, associer la liste aux champs de domaine attendus, tester avec des événements représentatifs et acheminer les constats",
+  "rationale": "Un module personnalisé Event Threat Detection compare les journaux Cloud DNS à la liste d’IOC et génère presque en temps réel des constats SCC après mappage et tests. Un module Security Health Analytics appliqué aux étiquettes recherche un défaut de posture statique et n’évalue pas les requêtes DNS. Une interrogation périodique de BigQuery suivie de tickets recrée une chaîne parallèle sans module ETD ni schéma natif de constat. Une liste YARA-L affichée dans un tableau de bord reste passive sans règle d’évaluation et reporte la création des constats sur les analystes. Le module IOC natif associe seul la source, la latence et la sortie SCC exigées.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/security-command-center/docs/use-custom-modules-etd"
+  ]
+}

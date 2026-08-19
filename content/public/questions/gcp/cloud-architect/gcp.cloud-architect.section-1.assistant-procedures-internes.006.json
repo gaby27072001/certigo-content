@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.assistant-procedures-internes.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un cabinet souhaite un assistant qui réponde en français à partir de ses procédures internes, cite les sources et n'affiche que les documents accessibles à l'utilisateur. Il veut lancer un pilote en six semaines, mesurer la qualité des réponses et éviter d'entraîner un modèle de fondation. Quelle approche est la plus appropriée ?",
+  "choices": [
+    "Construire une application de recherche et génération ancrée avec Agent Search, propager les contrôles d'accès documentaires et évaluer précision, citations et taux de résolution sur un jeu de questions validé, avec identité propagée jusqu’à chaque résultat et citation vérifiable.",
+    "Affiner un modèle Gemini distinct pour chaque département sur ses procédures, intégrer dans chaque jeu d'entraînement uniquement les documents autorisés au département, republier les modèles à chaque changement d'habilitation et évaluer leurs réponses sur des exemples internes.",
+    "Indexer toutes les procédures dans un index vectoriel, envoyer les passages retrouvés dans une invite Gemini partagée et demander au modèle, par instruction système et attribut déclaré par l'utilisateur, de ne pas citer les contenus auxquels celui-ci n'a pas droit.",
+    "Créer un moteur de recherche par mots-clés qui applique les ACL des documents, assembler les premiers extraits dans des réponses modèles sans génération et mesurer principalement le volume de recherches et les clics sur le premier résultat."
+  ]
+}

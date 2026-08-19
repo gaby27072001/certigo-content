@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.stale-emergency-configuration.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une équipe remplace d'urgence `/config/app.json` dans son origine, mais l'objet possède encore un TTL Cloud CDN de deux heures et les clients continuent à recevoir l'ancienne version. Elle doit corriger ce seul chemin immédiatement tout en conservant le cache des autres objets. Que faire ?",
+  "choices": [
+    "Désactiver Cloud CDN sur le service backend, attendre que tous les points de présence cessent de servir l'objet, puis le réactiver après validation de la nouvelle origine.",
+    "Redémarrer les instances d'origine et remplacer leur groupe dans le backend, afin de provoquer une nouvelle découverte de contenu par chaque cache de périphérie.",
+    "Modifier immédiatement l'en-tête `Cache-Control` de l'origine avec un TTL nul et attendre que les entrées déjà en cache relisent cet en-tête avant leur expiration initiale dans chaque point de présence.",
+    "Invalider immédiatement et précisément `/config/app.json` dans Cloud CDN, puis utiliser des noms d'objets versionnés lors des prochains déploiements pour éviter les purges courantes."
+  ]
+}

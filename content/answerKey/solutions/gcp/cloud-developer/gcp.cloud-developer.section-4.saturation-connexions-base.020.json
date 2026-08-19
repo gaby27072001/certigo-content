@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.saturation-connexions-base.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Employer le connecteur Cloud SQL avec IAM, borner le pool de chaque instance et limiter le nombre d'instances Cloud Run selon le budget total de connexions de la base.",
+  "rationale": "Le connecteur Cloud SQL avec IAM sécurise l'authentification; un pool borné réutilise les connexions et une limite d'instances Cloud Run maintient leur total sous le budget de la base. Ouvrir une connexion par requête amplifie les créations pendant les pointes et attendre le nettoyage serveur ne prévient pas l'épuisement. Supprimer la limite d'instances multiplie les pools et aggrave précisément la saturation observée. Intégrer un mot de passe administrateur dans l'image expose un secret durable, tandis qu'un pool non borné ne contrôle toujours pas le nombre de connexions.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/sql/docs/postgres/connect-run"
+  ]
+}

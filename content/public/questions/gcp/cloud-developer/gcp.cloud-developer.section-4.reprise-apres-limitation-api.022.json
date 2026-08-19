@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.reprise-apres-limitation-api.022",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un client appelle une API Google Cloud et reçoit sporadiquement HTTP 429 et 503. Des centaines d'instances réessaient en même temps. Quelle politique améliore la résilience sans créer une tempête de requêtes ?",
+  "choices": [
+    "Réessayer immédiatement chaque réponse 429 ou 503 dans une boucle sans limite, en augmentant le nombre de connexions parallèles à chaque tentative jusqu'à ce qu'une instance de l'API accepte finalement la requête.",
+    "Utiliser les reprises de la bibliothèque ou un backoff exponentiel borné avec jitter, uniquement pour les erreurs transitoires et les opérations sûres ou idempotentes.",
+    "Mettre en cache les réponses 429 et 503 comme des succès pendant une journée afin que les autres instances n'appellent plus l'API pendant l'incident.",
+    "Modifier les paramètres métier après chaque erreur, soumettre une nouvelle opération non idempotente et conserver un historique local pour rapprocher ensuite les tentatives."
+  ]
+}

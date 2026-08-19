@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.reaction-nouvel-objet.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "À chaque finalisation d'un objet dans un bucket, un service Cloud Run privé doit lancer une validation. L'équipe veut éviter l'interrogation périodique du bucket. Quelle configuration utiliser ?",
+  "choices": [
+    "Utiliser Cloud Scheduler pour lister périodiquement le bucket et mémoriser dans Firestore le dernier objet traité afin de reprendre le balayage.",
+    "Rendre Cloud Run public et demander à chaque client qui téléverse un objet d'appeler ensuite une URL de notification distincte.",
+    "Créer un déclencheur Eventarc sur la finalisation Cloud Storage et donner à son compte de service le droit d'invoquer le service Cloud Run privé.",
+    "Monter le bucket dans chaque instance Cloud Run comme un système de fichiers et exécuter un observateur local chargé de détecter les nouveaux fichiers."
+  ]
+}

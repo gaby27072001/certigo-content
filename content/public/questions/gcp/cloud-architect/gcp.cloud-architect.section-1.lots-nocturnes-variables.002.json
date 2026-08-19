@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.lots-nocturnes-variables.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un distributeur exécute chaque nuit plusieurs milliers de traitements indépendants de 30 secondes à 20 minutes, avec un volume saisonnier variant d'un facteur vingt. L'équipe veut payer uniquement l'exécution et refuse d'administrer Kubernetes, des images ou systèmes de VM, ainsi que du code de reprise après préemption. Quelle conception faut-il recommander ?",
+  "choices": [
+    "Créer des CronJobs sur GKE Autopilot, dimensionner les demandes de chaque pod, maintenir les manifestes, politiques et versions du cluster, puis laisser Autopilot provisionner automatiquement les nœuds nécessaires aux pointes saisonnières.",
+    "Déclencher avec Cloud Scheduler un MIG de VM Spot réduit à zéro entre les lots, préparer une image de VM, installer l'agent de traitement au démarrage et implémenter la reprise des tâches interrompues par une préemption.",
+    "Conteneuriser les traitements en tâches Cloud Run, les déclencher selon le lot et configurer parallélisme, délais et nouvelles tentatives par tâche, sans conserver de capacité de calcul entre deux exécutions.",
+    "Réserver des VM à locataire unique pour le volume annuel maximal, isoler chaque famille de traitements dans son propre groupe et arrêter les instances manuellement lorsque les équipes constatent une période creuse."
+  ]
+}

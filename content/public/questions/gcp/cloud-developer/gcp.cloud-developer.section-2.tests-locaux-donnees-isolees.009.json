@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.tests-locaux-donnees-isolees.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Les tests unitaires d'un service Firestore doivent être rapides, reproductibles et ne jamais modifier les données du projet partagé. Quelle configuration de développement faut-il privilégier ?",
+  "choices": [
+    "Démarrer l'émulateur Firestore local, appliquer ses variables d'environnement et recréer un jeu de données propre avant chaque suite de tests.",
+    "Exécuter les tests contre la base de production en isolant les documents par un préfixe aléatoire, puis lancer un nettoyage asynchrone après la suite.",
+    "Intercepter toutes les requêtes HTTP de la bibliothèque Firestore avec un proxy local et simuler manuellement les codes de réponse attendus du service.",
+    "Créer un projet Google Cloud permanent pour chaque développeur, conserver les données entre les tests et réinitialiser intégralement la base une fois par semaine."
+  ]
+}

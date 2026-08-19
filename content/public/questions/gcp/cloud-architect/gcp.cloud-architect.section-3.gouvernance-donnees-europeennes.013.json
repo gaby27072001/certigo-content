@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.gouvernance-donnees-europeennes.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une application traite des données personnelles de résidents européens. Le service juridique impose stockage et traitement dans l'Union européenne, contrôle client du cycle de vie des clés, séparation entre administrateurs de données et de clés, et preuves d'accès conservées dix ans. Quelle conception répond le mieux à l'ensemble ?",
+  "choices": [
+    "Choisir des services multirégion qui incluent l'Europe, activer Assured Workloads pour inventorier les ressources, conserver les clés gérées par Google et exporter uniquement les journaux Admin Activity vers BigQuery avec une expiration de table fixée à dix ans.",
+    "Configurer explicitement une région européenne dans chaque script de déploiement, attribuer Owner au responsable conformité pour superviser données et clés, puis copier les journaux dans un bucket Standard que les administrateurs peuvent purger après dix ans.",
+    "Appliquer des contraintes de localisation, choisir des régions européennes compatibles, utiliser des CMEK Cloud KMS avec rôles séparés et exporter les journaux d'audit vers un bucket dont la conservation est verrouillée dix ans.",
+    "Pseudonymiser les identifiants avant leur envoi, autoriser les traitements dans toute région, employer des clés gérées par Google et conserver pendant dix ans uniquement les journaux de l'application plutôt que les accès aux données."
+  ]
+}

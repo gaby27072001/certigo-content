@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-5.campagnes-achats-irregulieres.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Déclencher selon un volume minimal ou des seuils de dérive mesurés, exécuter une pipeline versionnée, comparer au champion et promouvoir seulement si tous les garde-fous sont satisfaits.",
+  "rationale": "Le déclenchement conditionnel d’une pipeline évaluée contre le champion est la politique adaptée : des déclencheurs liés au volume ou à la dérive évitent le calcul inutile, tandis que pipeline versionnée, comparaison au champion et garde-fous empêchent une régression automatique. Réentraîner à chaque ajout et promouvoir sur simple succès technique ignore qualité et coût. Attendre une baisse de ventes réagit tardivement, sans diagnostic ni évaluation par campagne. Une date saisie manuellement et un seuil absolu sont auditables mais ne comparent pas le candidat au modèle actuellement servi et ne reflètent pas les campagnes irrégulières.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.analystes-acces-temporaire.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Plusieurs analystes accèdent temporairement à Cloud SQL for PostgreSQL. L'entreprise veut supprimer les mots de passe individuels longue durée, centraliser les départs dans IAM et accorder uniquement SELECT sur le schéma reporting. Quelle approche faut-il appliquer ?",
+  "choices": [
+    "Activer l'authentification IAM de base, créer un utilisateur IAM distinct et révocable par analyste, puis accorder dans PostgreSQL uniquement SELECT sur le schéma reporting avec les privilèges minimaux requis, sans mot de passe durable",
+    "Attribuer temporairement Project Owner à chaque analyste et retirer le rôle à son départ, ce qui centralise bien le cycle de vie IAM mais accorde des privilèges de projet très supérieurs à SELECT",
+    "Créer un compte PostgreSQL partagé en lecture seule avec un mot de passe renouvelé chaque semaine dans Secret Manager, ce qui limite les tables mais conserve un secret durable et supprime l'attribution individuelle",
+    "Accorder Cloud SQL Viewer aux analystes et les laisser se connecter avec leurs identités Google, ce qui limite les métadonnées de ressource mais n'accorde pas automatiquement les privilèges SELECT internes à PostgreSQL"
+  ]
+}

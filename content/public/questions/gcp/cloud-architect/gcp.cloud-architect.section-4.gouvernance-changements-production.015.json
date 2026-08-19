@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-4.gouvernance-changements-production.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une entreprise réglementée veut gouverner les mises en production d'une API. La personne qui prépare une version ne doit pas pouvoir l'approuver, chaque décision doit être attribuable dans Cloud Audit Logs et une correction d'urgence doit rester rapide mais temporaire, reliée à un incident et revue après coup. Quel processus faut-il définir ?",
+  "choices": [
+    "Attribuer aux développeurs les rôles de création et d'approbation Cloud Deploy, consigner leur justification dans les journaux applicatifs, exporter ces journaux chaque nuit et conserver une clé de compte de service partagée pour que l'astreinte puisse contourner l'approbation lors d'une urgence, puis documenter la correction si le temps le permet.",
+    "Séparer les groupes Cloud Deploy de créateurs et d'approbateurs, exiger l'approbation de la cible de production et conserver ses événements dans Cloud Audit Logs ; pour l'urgence, accorder une élévation break-glass limitée dans le temps, liée à l'incident et suivie d'une revue obligatoire.",
+    "Promouvoir automatiquement toute version dont les tests réussissent avec une identité CI disposant du rôle Owner, enregistrer seulement le résultat du pipeline et réutiliser cette même identité pour les corrections urgentes afin d'éviter toute attente d'approbation.",
+    "Faire approuver les versions par un comité au moyen de courriels, laisser ensuite les opérateurs déployer directement avec kubectl, copier les messages dans Cloud Storage pour l'audit et autoriser en urgence un administrateur permanent à ignorer le comité, sans expiration automatique mais avec régularisation trimestrielle."
+  ]
+}

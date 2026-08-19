@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-6.succes-connexion-manquants.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Surveiller la fraîcheur et le taux attendu par sous-type ou requête sentinelle, établir une référence tenant compte des cycles, puis alerter dans Cloud Monitoring sur absence ou écart durable avec routage et runbook",
+  "rationale": "Une surveillance automatisée par sous-type mesure fraîcheur et taux des connexions réussies, tient compte des cycles attendus et déclenche après un écart durable une notification assortie d’un runbook. Le ping et le volume total nul restent normaux puisque les échecs continuent d’arriver. Une alerte sur une hausse agrégée n’a aucun lien direct avec la disparition des réussites. Une vérification horaire manuelle observe le bon signal, mais dépend de la disponibilité d’un analyste et ne répond pas à l’automatisation demandée. La métrique sémantique détecte donc précisément une dégradation partielle plutôt qu’une simple panne de transport.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/ingestion/ingestion-notifications-for-health-metrics"
+  ]
+}

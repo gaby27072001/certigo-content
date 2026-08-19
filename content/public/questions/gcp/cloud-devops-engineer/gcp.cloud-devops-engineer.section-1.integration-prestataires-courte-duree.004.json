@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.integration-prestataires-courte-duree.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Des prestataires rejoignent une équipe pendant quelques semaines. Ils doivent disposer du même IDE et des mêmes outils, accéder à des API privées sans clé locale et perdre immédiatement leur environnement à la fin du contrat. Quelle solution réduit le mieux la dérive et le risque d'exfiltration ?",
+  "choices": [
+    "Fournir des VM créées depuis un modèle contrôlé et reliées au réseau privé, mais distribuer à chaque prestataire une clé de compte de service durable et conserver la VM jusqu'à une suppression manuelle",
+    "Utiliser Cloud Shell avec un script d'installation commun, mais faire partager à tous les prestataires un même compte utilisateur afin de simplifier l'accès et la révocation en fin de mission",
+    "Fournir des Cloud Workstations avec une image commune et un réseau privé, mais associer au pool un compte de service partagé très privilégié et conserver les disques personnels après le départ",
+    "Fournir à chaque prestataire une Cloud Workstation issue d'une image contrôlée, reliée au réseau privé, avec IAM individuel, arrêt automatique et suppression en fin de contrat, sans clé locale durable"
+  ]
+}

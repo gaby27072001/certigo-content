@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.entrainement-transformeur-volumineux.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une équipe entraîne avec JAX un transformeur dense sur un corpus massif. Un seul accélérateur manque de mémoire, le calcul matriciel domine et le code est déjà compatible XLA. Elle veut réduire le temps d’entraînement à grande échelle tout en répartissant paramètres et données. Quel choix est le plus cohérent ?",
+  "choices": [
+    "Distribuer l’entraînement sur un grand nombre de CPU généralistes, conserver le modèle complet sur chaque worker et augmenter l’accumulation de gradients pour contourner la mémoire limitée.",
+    "Choisir plusieurs petites GPU, répliquer le modèle complet sur chacune et n’utiliser que le parallélisme de données, même si un exemplaire du modèle dépasse la mémoire d’un accélérateur.",
+    "Évaluer un cluster TPU et configurer avec JAX un maillage de parallélisme des données et du modèle, puis profiler calculs et communications avant généralisation.",
+    "Entraîner des fragments de paramètres sur des appareils edge et agréger périodiquement les poids dans Cloud Storage."
+  ]
+}

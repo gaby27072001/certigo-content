@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.quadruplement-rapports-lecture.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Créer des répliques en lecture dimensionnées, router les rapports tolérant le retard vers elles, puis alerter sur retard, CPU, connexions, stockage et erreurs ciblés avant d'ajuster leur nombre ou leur taille",
+  "rationale": "Des répliques en lecture dimensionnées, un routage dédié et des alertes sur retard et capacité isolent les rapports du primaire tout en vérifiant que les données restent dans la tolérance de quelques secondes. Agrandir seulement le primaire et les délais d'expiration conserve la concurrence avec les transactions. Une seconde instance alimentée chaque nuit décharge le primaire, mais son retard se compte en heures et n'est pas supervisé en continu. Une restauration mensuelle isole aussi la charge, mais fournit des données beaucoup trop anciennes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/replication/create-replica"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gcp.security-operations-engineer.section-1.acces-donnees-filiale.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Séparer l’autorisation de fonctionnalités de l’accès aux données, attribuer le rôle minimal d’édition des détections et limiter le périmètre de données au groupe autorisé",
+  "rationale": "La séparation entre rôle fonctionnel et périmètre de données accorde uniquement l’édition des détections et exclut techniquement la filiale non autorisée. Un rôle administrateur, même associé à une restriction de données et à l’audit, permet encore de modifier l’ingestion ; la journalisation constate l’action sans l’empêcher. Un compte de service partagé limite éventuellement le périmètre visible, mais supprime l’attribution individuelle et emploie une identité de charge de travail pour des utilisateurs. Un rôle propriétaire assorti d’une vue masquée reste excessif, car une vue n’est pas une frontière d’autorisation et le retrait ultérieur ne remplace pas un contrôle durable. Le moindre privilège doit être imposé séparément sur les fonctions et les données.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/onboard/configure-feature-access",
+    "https://cloud.google.com/chronicle/docs/administration/configure-datarbac-users"
+  ]
+}

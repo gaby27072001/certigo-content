@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.prevention-exfiltration-analytique.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Placer BigQuery et les services de stockage concernés dans un périmètre VPC Service Controls, définir des niveaux d'accès contextuels et déclarer explicitement les flux entrants et sortants nécessaires, même avec une identité pourtant valide compromise.",
+  "rationale": "VPC Service Controls crée autour de BigQuery et du stockage une frontière qui bloque les copies vers des ressources hors périmètre ; les niveaux d'accès et règles ingress et egress autorisent précisément les postes et workflows approuvés, même avec une identité valide compromise. BigQuery Data Owner accroît les privilèges, les vues ne couvrent que l'accès logique et l'alerte sur labels intervient seulement après une écriture. VPN, pare-feu et Private Google Access contrôlent le chemin réseau, mais pas la destination d'un appel authentifié à l'API BigQuery vers un projet externe. Les CMEK protègent les données au repos et séparent les tâches KMS, mais n'empêchent pas un analyste autorisé de lire puis copier les résultats avant une éventuelle désactivation de clé.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/vpc-service-controls/docs/overview"
+  ]
+}

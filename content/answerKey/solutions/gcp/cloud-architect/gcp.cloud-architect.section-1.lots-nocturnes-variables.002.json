@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.lots-nocturnes-variables.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Conteneuriser les traitements en tâches Cloud Run, les déclencher selon le lot et configurer parallélisme, délais et nouvelles tentatives par tâche, sans conserver de capacité de calcul entre deux exécutions.",
+  "rationale": "Les tâches Cloud Run allouent le calcul pendant l'exécution, démarrent sans capacité permanente et gèrent parallélisme, délais et nouvelles tentatives sans imposer Kubernetes ni l'exploitation d'un système de VM ; elles satisfont donc toutes les contraintes explicites. GKE Autopilot facture les ressources demandées par les workloads plutôt que des nœuds inactifs, mais l'équipe devrait encore administrer le cluster, ses manifestes, politiques et versions, ce que l'énoncé refuse. Le MIG Spot peut revenir à zéro, mais son démarrage dépend d'une image et de scripts de VM, et les préemptions exigent précisément le code de reprise exclu par le scénario. Les VM à locataire unique dimensionnées au maximum créent un coût fixe important et une extinction manuelle, à l'opposé du paiement limité à l'exécution.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/run/docs/create-jobs"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.acces-prestataires-sans-comptes.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise doit donner à 300 prestataires un accès temporaire à la console Google Cloud. Les prestataires sont déjà gérés dans l'IdP OIDC du fournisseur, et l'entreprise ne veut ni créer de comptes Cloud Identity ni synchroniser ces identités. Quelle solution répond le mieux à ces exigences ?",
+  "choices": [
+    "Créer un pool Workforce Identity Federation, faire confiance à l'IdP OIDC et attribuer les rôles IAM à des ensembles de principaux fondés sur les attributs",
+    "Créer un compte de service partagé, conserver sa clé JSON dans un coffre chiffré, la distribuer aux prestataires à la connexion et journaliser chaque utilisation du compte",
+    "Synchroniser les prestataires avec Google Cloud Directory Sync, les placer dans des groupes temporaires gérés par IAM et attribuer à ces groupes le rôle Éditeur sur les projets concernés",
+    "Créer un pool Workload Identity Federation pour l'IdP OIDC, mapper les attributs des prestataires et leur permettre d'emprunter des comptes de service dédiés avec des jetons de courte durée"
+  ]
+}

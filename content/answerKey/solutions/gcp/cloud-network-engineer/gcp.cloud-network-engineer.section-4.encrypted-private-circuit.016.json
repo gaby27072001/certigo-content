@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.encrypted-private-circuit.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Déployer HA VPN over Cloud Interconnect avec des IP internes pour les gateways et transporter les tunnels IPsec sur les VLAN attachments redondants.",
+  "rationale": "HA VPN over Cloud Interconnect superpose des tunnels IPsec utilisant des adresses internes aux VLAN attachments redondants: le trafic reste sur le transport Interconnect tout en obtenant le chiffrement IPsec explicitement exigé. MACsec protège la couche 2 sur des connexions et équipements compatibles, mais l'activer sans vérifier la prise en charge ne répond pas automatiquement à une exigence IPsec de bout en bout. Remplacer l'Interconnect par un seul Classic VPN sur Internet perd la capacité, le chemin privé et la redondance déjà disponibles. L'authentification BGP protège la session de routage; Cloud Router ne propose pas un réglage TLS qui chiffrerait le plan de données, donc cette option laisse les paquets utilisateurs non chiffrés.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-connectivity/docs/interconnect/concepts/ha-vpn-interconnect"
+  ]
+}

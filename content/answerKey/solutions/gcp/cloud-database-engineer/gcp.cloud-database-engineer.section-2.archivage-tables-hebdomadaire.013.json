@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.archivage-tables-hebdomadaire.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Déclencher avec Cloud Scheduler un service Cloud Run utilisant un compte de service minimal, suivre jusqu'à son terme l'opération d'export asynchrone, journaliser son issue dans Cloud Logging et réessayer les échecs confirmés",
+  "rationale": "Cloud Scheduler associé à un service serverless permet de lancer l'export avec une identité gérée, suivre l'opération asynchrone, journaliser son résultat et appliquer des reprises de bout en bout. L'appel direct de l'API qui considère seulement l'acceptation HTTP comme un succès ne détecte pas un échec ultérieur. Les sauvegardes automatiques protègent l'instance entière, mais ne produisent pas les tables sélectionnées dans le bucket demandé. La VM éphémère sans clé est plausible, mais son arrêt après soumission empêche lui aussi de confirmer l'achèvement et de décider d'un rejeu.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/import-export/exporting"
+  ]
+}

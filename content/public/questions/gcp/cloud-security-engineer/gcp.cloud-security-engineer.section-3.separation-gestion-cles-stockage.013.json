@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.separation-gestion-cles-stockage.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une banque exige de contrôler la rotation et la révocation de la clé qui protège un bucket Cloud Storage. Les administrateurs du stockage ne doivent pas pouvoir administrer cette clé. Quelle conception satisfait le mieux cette séparation des tâches ?",
+  "choices": [
+    "Créer une clé CMEK dans un projet de clés distinct, donner au compte de service Cloud Storage le droit de chiffrer/déchiffrer et réserver l'administration de la clé à l'équipe cryptographique",
+    "Conserver le chiffrement Google par défaut, isoler les administrateurs Storage, imposer une approbation pour IAM et faire surveiller par l’équipe cryptographique les rotations gérées par Google",
+    "Chiffrer chaque objet côté application avec une clé distincte, envelopper ces clés avec une KEK Cloud KMS située dans le projet Storage et accorder aux administrateurs Storage la gestion de cette KEK et des métadonnées associées",
+    "Rendre le bucket public en lecture pendant la rotation, conserver les anciennes versions jusqu’à validation de la nouvelle clé, puis restaurer les contrôles d’accès et vérifier par audit que tous les objets sont lisibles"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.exfiltration-endpoint-cloud.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Une exfiltration a été contenue. SecOps montre l’usage d’un jeton depuis un hôte compromis ; SCC montre qu’un rôle excessif permettait l’accès à plusieurs buckets. L’équipe doit établir la cause racine et éviter la récidive. Quelle action est la plus complète ?",
+  "choices": [
+    "Bloquer l’IP, révoquer le jeton, remettre les buckets en privé, tourner les secrets, vérifier l’arrêt du trafic et contrôler les autres sessions, puis clôturer sans reconstruire l’origine ni réduire le rôle IAM excessif",
+    "Réinstaller l’hôte compromis, révoquer tous les jetons de son utilisateur et bloquer les IOC observés, puis clôturer la cause racine comme compromission endpoint sans réexaminer la portée du rôle IAM ni les accès aux autres buckets autorisés",
+    "Construire une chronologie reliant compromission, vol du jeton, appels et portée IAM ; préserver les preuves ; associer équipes endpoint, IAM et données pour corriger l’origine, réduire les privilèges, faire tourner les secrets et ajouter des détections validées",
+    "Supprimer les constats SCC après la remise en privé, conserver un résumé, les alertes et les hachages principaux, puis considérer les contrôles existants suffisants sans nouvelle détection, analyse complète du rôle IAM ni revue de l’hôte initial"
+  ]
+}

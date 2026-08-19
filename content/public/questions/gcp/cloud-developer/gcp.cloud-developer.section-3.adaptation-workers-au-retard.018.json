@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.adaptation-workers-au-retard.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Des workers GKE consomment une file. Leur utilisation CPU reste faible, mais le retard de messages varie fortement. L'objectif est d'ajouter des pods quand le backlog augmente. Quelle stratégie est la plus pertinente ?",
+  "choices": [
+    "Configurer le HPA uniquement sur une cible de 80 % de CPU, augmenter les requêtes CPU pour rendre la métrique plus sensible et recalibrer cette cible après chaque variation importante du backlog.",
+    "Exporter la taille du backlog vers Cloud Monitoring et configurer le HPA sur cette métrique externe, avec des limites de replicas et de capacité cohérentes.",
+    "Établir un planning hebdomadaire des pointes attendues et modifier manuellement le nombre de replicas chaque lundi avant l'arrivée des messages.",
+    "Activer uniquement l'autoscaling des nœuds, augmenter le minimum du pool selon le backlog et conserver un replica unique du worker avec des nœuds préalloués."
+  ]
+}

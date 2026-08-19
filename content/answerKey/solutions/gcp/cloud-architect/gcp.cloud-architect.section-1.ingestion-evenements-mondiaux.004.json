@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.ingestion-evenements-mondiaux.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Publier les événements dans Pub/Sub, les traiter avec Dataflow en streaming, conserver le brut dans Cloud Storage et servir l'analyse dans BigQuery et dimensionner indépendamment chaque étape selon son propre débit.",
+  "rationale": "Pub/Sub découple les producteurs, Dataflow enrichit le flux en continu, Cloud Storage conserve le brut à bas coût et BigQuery sert l'analyse ; chaque composant peut ainsi absorber indépendamment les pointes tout en respectant la latence de quelques secondes. Cloud SQL mélange ingestion et analytique dans une instance à redimensionner avant les lancements, ce qui crée un goulot d'étranglement et un risque de perte de capacité. Les fichiers horaires sur Filestore suivis de lots Dataproc ne peuvent pas fournir un enrichissement en quelques secondes. L'API Cloud Run qui appelle tous les consommateurs reste synchroniquement couplée à leur disponibilité ; Cloud Tasks ne traite que les échecs après l'appel et ne supprime pas ce couplage initial.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/pubsub/docs/overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.adaptation-workers-au-retard.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Exporter la taille du backlog vers Cloud Monitoring et configurer le HPA sur cette métrique externe, avec des limites de replicas et de capacité cohérentes.",
+  "rationale": "La taille du backlog mesure directement le travail en attente; l'exporter vers Cloud Monitoring permet au HPA d'ajuster les replicas selon la demande, avec des bornes de capacité. Un HPA uniquement fondé sur le CPU restera inactif puisque le scénario précise que cette utilisation est faible, même après un recalibrage artificiel des requêtes CPU. Une modification manuelle hebdomadaire ne suit ni les pointes imprévues ni leur fin. L'autoscaling des nœuds peut fournir de la capacité aux pods demandés, mais ne change pas à lui seul le replica unique du Deployment.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/kubernetes-engine/docs/tutorials/external-metrics-autoscaling"
+  ]
+}

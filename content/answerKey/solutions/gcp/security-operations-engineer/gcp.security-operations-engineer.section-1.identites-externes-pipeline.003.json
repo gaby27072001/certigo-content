@@ -1,0 +1,19 @@
+{
+  "id": "gcp.security-operations-engineer.section-1.identites-externes-pipeline.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Fédérer les utilisateurs avec Workforce Identity Federation, fédérer la charge de travail pour usurper un compte de service dédié, attribuer des rôles minimaux et activer les journaux d’audit pertinents",
+  "rationale": "La fédération des personnes et du pipeline élimine les secrets durables : les prestataires gardent une identité individuelle issue de leur fournisseur et la charge de travail reçoit des jetons courts pour usurper un compte de service dédié. Des comptes locaux individuels avec MFA préservent l’attribution humaine, mais nécessitent une synchronisation manuelle des départs et laissent au pipeline une clé API permanente. Un compte de service et sa clé partagés, même avec rotation quotidienne, ne distinguent ni les utilisateurs ni la charge de travail. Le filtrage IP avec identifiants communs ne constitue pas une authentification individuelle et conserve un secret réutilisable. La double fédération répond ainsi aux exigences de révocation centralisée, d’authentification forte et d’audit.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/iam/docs/workforce-identity-federation",
+    "https://cloud.google.com/iam/docs/workload-identity-federation"
+  ]
+}

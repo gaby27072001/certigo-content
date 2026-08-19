@@ -59,6 +59,17 @@ const expectedGcp = [
   "gcp:machine-learning-engineer",
   "gcp:security-operations-engineer",
 ];
+const expectedGcpProfessional = [
+  "gcp:cloud-architect",
+  "gcp:cloud-database-engineer",
+  "gcp:cloud-developer",
+  "gcp:cloud-devops-engineer",
+  "gcp:cloud-network-engineer",
+  "gcp:cloud-security-engineer",
+  "gcp:data-engineer",
+  "gcp:machine-learning-engineer",
+  "gcp:security-operations-engineer",
+];
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -103,6 +114,15 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
+  for (const provider of readdirSync(resolve(root, "content", "public", "coverage"))) {
+    const providerRoot = resolve(root, "content", "public", "coverage", provider);
+    for (const file of readdirSync(providerRoot)) {
+      const path = resolve(providerRoot, file);
+      const matrix = readJson(path);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      writeJson(path, matrix);
+    }
+  }
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -149,15 +169,18 @@ function addV3Pair(root, overrides = {}) {
     kind: "public",
     metadata: publicMetadata,
     prompt: "What is AI?",
-    choices: ["A", "B"],
+    choices: overrides.choices ?? ["AAAA", "BBB", "CCCCC", "DDDDDD"],
   });
   writeJson(privatePath, {
     id,
     schemaVersion: "v3",
     kind: "answerKey",
     metadata: privateMetadata,
-    correct: "A",
+    correct: overrides.correct ?? "AAAA",
     rationale: "Because.",
+    provenance: overrides.provenance ?? [
+      "https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html",
+    ],
   });
   const matrixPath = resolve(
     root,
@@ -207,13 +230,14 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async () => {
+test("valide le catalogue reel et la vague GCP Professional complete", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
   assert.equal(result.coverageCount, 26);
 
   const catalog = readJson(catalogAt(repoRoot));
+  const completedGcpProfessional = [];
   for (const certification of catalog.certifications) {
     const matrix = readJson(
       resolve(
@@ -226,7 +250,23 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
       )
     );
     assert.equal(matrix.certification, certification.id);
-    assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    const questionCount = matrix.objectives.reduce(
+      (total, objective) => total + objective.questionIds.length,
+      0
+    );
+    if (
+      certification.provider === "gcp" &&
+      certification.level === "professional"
+    ) {
+      completedGcpProfessional.push(certification.id);
+      assert.equal(matrix.status, "complete");
+      assert.equal(questionCount, 24);
+      assert.ok(
+        matrix.objectives.every((objective) => objective.questionIds.length > 0)
+      );
+    } else if (matrix.status === "planned") {
+      assert.equal(questionCount, 0);
+    }
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0
@@ -234,6 +274,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
     if (certification.provider === "aws") assert.equal(sum, 100);
     else assert.ok(sum >= 99 && sum <= 101);
   }
+  assert.deepEqual(completedGcpProfessional, expectedGcpProfessional);
 });
 
 test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif", () => {
@@ -327,6 +368,187 @@ test("accepte une paire v3 namespacee et la rattache a sa matrice", async () => 
     !publicManifest.files.some((entry) => entry.resourceType === "solution")
   );
   await verifyPackagedContent({ root, outDir: "dist-first" });
+});
+
+test("rejette une provenance privee v3 hors des domaines officiels", async () => {
+  const root = createMetadataRoot();
+  addV3Pair(root, { provenance: ["https://example.com/unofficial"] });
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[solution:provenance]") &&
+        error.includes('hote non officiel "example.com"')
+    )
+  );
+});
+
+test("rejette une URL de provenance privee v3 impossible a analyser", async () => {
+  const root = createMetadataRoot();
+  addV3Pair(root, { provenance: ["https://"] });
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[solution:provenance]") &&
+        error.includes('URL invalide "https://"')
+    )
+  );
+});
+
+function completeAifMatrix(root, ids) {
+  setAifMatrixStatus(root, ids, "complete");
+}
+
+function setAifMatrixStatus(root, ids, status) {
+  const matrixPath = resolve(
+    root,
+    "content",
+    "public",
+    "coverage",
+    "aws",
+    "aif-c01.json"
+  );
+  const matrix = readJson(matrixPath);
+  matrix.status = status;
+  matrix.objectives[0].questionIds = ids;
+  writeJson(matrixPath, matrix);
+}
+
+test("rejette une question complete sans exactement quatre choix", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: ["aaa", "bb", "c"],
+    correct: "bb",
+  });
+  completeAifMatrix(root, [id]);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some((error) => error.includes("exactement quatre choix"))
+  );
+});
+
+test("rejette des longueurs de choix non distinctes", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: ["aaaa", "bbb", "cc", "dd"],
+    correct: "bbb",
+  });
+  completeAifMatrix(root, [id]);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some((error) => error.includes("longueurs distinctes"))
+  );
+});
+
+test("rejette une reponse v3 dont le ratio de longueur revele la cle", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: [
+      "a".repeat(100),
+      "b".repeat(20),
+      "c".repeat(30),
+      "d".repeat(40),
+    ],
+    correct: "a".repeat(100),
+  });
+  completeAifMatrix(root, [id]);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some((error) => error.includes("ratio de longueur"))
+  );
+});
+
+test("rejette une distribution desequilibree des rangs de longueur", async () => {
+  const root = createMetadataRoot();
+  const cases = [
+    [90, 100, 105, 110, 0],
+    [91, 101, 106, 111, 0],
+    [90, 100, 105, 110, 1],
+    [90, 100, 105, 110, 2],
+  ];
+  const ids = cases.map((lengths, index) => {
+    const rank = lengths[4];
+    const choices = lengths
+      .slice(0, 4)
+      .map((length, choiceIndex) =>
+        String.fromCharCode(97 + choiceIndex).repeat(length)
+      );
+    return addV3Pair(root, {
+      id: `aws.aif-c01.domain-1.length-rank.${index + 1}`.replace(
+        /\.(\d)$/,
+        ".00$1"
+      ),
+      choices,
+      correct: choices[rank],
+    });
+  });
+  completeAifMatrix(root, ids);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("rangs de longueur 2/1/1/0") &&
+        error.includes("attendu 1/1/1/1")
+    )
+  );
+});
+
+test("controle aussi les rangs lorsque le total n'est pas divisible par quatre", async () => {
+  const root = createMetadataRoot();
+  const ids = Array.from({ length: 5 }, (_, index) => {
+    const choices = [90, 100, 105, 110].map((length, choiceIndex) =>
+      String.fromCharCode(97 + choiceIndex).repeat(length)
+    );
+    return addV3Pair(root, {
+      id: `aws.aif-c01.domain-1.uneven-rank.00${index + 1}`,
+      choices,
+      correct: choices[0],
+    });
+  });
+  completeAifMatrix(root, ids);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("rangs de longueur 5/0/0/0") &&
+        error.includes("chaque rang entre 1 et 2")
+    )
+  );
+});
+
+test("applique les controles editoriaux a une matrice in-progress publiee", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: [
+      "a".repeat(100),
+      "b".repeat(20),
+      "c".repeat(30),
+      "d".repeat(40),
+    ],
+    correct: "a".repeat(100),
+  });
+  setAifMatrixStatus(root, [id], "in-progress");
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some((error) => error.includes("ratio de longueur"))
+  );
 });
 
 test("rejette les divergences de namespace, metadata et couverture v3", async () => {

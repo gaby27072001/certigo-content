@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-network-engineer.section-6.abusive-public-api.022",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Attacher une politique backend Cloud Armor, tester les règles WAF préconfigurées en aperçu puis les appliquer, ajouter un rate limiting avec une clé client fiable et journaliser les décisions.",
+  "rationale": "Une politique de sécurité backend Google Cloud Armor est évaluée devant les backends de l'Application Load Balancer; le mode preview mesure d'abord les correspondances des règles WAF préconfigurées, puis le rate limiting réduit les rafales selon une clé client fiable; la journalisation permet de suivre ces décisions. Les règles de pare-feu VPC filtrent aux couches réseau et transport: elles ne comprennent ni chemin HTTP ni charge SQL et ne fournissent pas ce comptage applicatif. Cloud NAT gère les connexions sortantes initiées par les workloads; modifier ses ports ou délais ne protège pas le frontend contre des requêtes entrantes. Une zone Cloud DNS privée retirerait l'API de la résolution publique pour tous les clients et un TTL ne constitue ni détection SQL, ni limitation de débit, ni contrôle d'identité des appelants.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/armor/docs/security-policy-overview",
+    "https://cloud.google.com/armor/docs/rate-limiting-overview"
+  ]
+}

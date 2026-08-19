@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-5.redimensionnement-avant-campagne.024",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Une application batch s'exécute dans un groupe d'instances géré Compute Engine zonal hors GKE, non autoscalé et non placé derrière un équilibreur de charge. Après huit jours de faible utilisation, une recommandation propose un type de machine plus petit. Un pic mensuel, absent de cette fenêtre, commence la semaine prochaine. Comment rechercher l'économie sans compromettre la fiabilité ?",
+  "choices": [
+    "Appliquer immédiatement le type recommandé au modèle du groupe et remplacer toutes les VM parce que huit jours de CPU et de mémoire suffisent, puis revenir manuellement si le pic mensuel révèle une capacité insuffisante",
+    "Reporter la modification jusqu'après le pic, puis ignorer définitivement la recommandation et conserver le type actuel sans mesurer si la charge ordinaire permet une économie durable",
+    "Remplacer toutes les VM avant le pic selon l'utilisation moyenne des huit jours et relever temporairement les seuils d'alerte de durée du batch, sans test de charge ni estimation du pic absent",
+    "Examiner CPU, mémoire et limites de la fenêtre de huit jours, intégrer la prévision du pic, tester le type proposé, puis déployer un nouveau modèle progressivement avec surveillance et retour possible"
+  ]
+}

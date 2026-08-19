@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.evolution-parc-clusters.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise exploite vingt clusters GKE dans plusieurs projets. Elle veut tester les versions sur un groupe pilote, imposer les mêmes politiques de sécurité partout et éviter qu'une mise à niveau de production ne commence pendant les heures de pointe. Quelle approche est la plus adaptée ?",
+  "choices": [
+    "Enregistrer les clusters dans une fleet, appliquer les politiques communes, utiliser des release channels distincts pour le pilote et la production, puis définir des fenêtres et exclusions de maintenance",
+    "Enregistrer les clusters dans une fleet et appliquer les politiques communes, mais placer pilote et production dans le même release channel et autoriser les maintenances à toute heure, de sorte que la version puisse atteindre tous les clusters pendant le pic",
+    "Utiliser des clusters blue/green par projet et valider la nouvelle version sur un cluster pilote, mais administrer séparément politiques, inscriptions et bascules sans fleet ni calendrier de maintenance commun",
+    "Conserver une version épinglée pour chaque cluster, appliquer manuellement les correctifs après validation sur un pilote et repousser les mises à niveau mineures hors de toute release channel gérée"
+  ]
+}

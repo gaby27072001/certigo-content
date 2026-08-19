@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-2.donnees-clients-sensibles.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des data scientists doivent prototyper un modèle de désabonnement à partir de conversations contenant noms, courriels et numéros de téléphone. Ils n’ont pas besoin de ces identifiants, mais doivent pouvoir joindre plusieurs tables sur un même client sans révéler son identité. Que faut-il mettre en place avant l’accès aux notebooks ?",
+  "choices": [
+    "Copier les conversations brutes dans un projet par équipe, chiffrer les disques des notebooks et demander aux chercheurs de retirer les identifiants avant chaque expérience.",
+    "Accorder BigQuery Data Owner aux chercheurs pour créer leurs propres vues masquées, tout en leur laissant lire les tables sources contenant les identifiants personnels.",
+    "Supprimer toutes les conversations contenant une PII détectée, puis entraîner uniquement sur le reliquat, même si cette sélection modifie fortement la population observée.",
+    "Détecter les PII avec Sensitive Data Protection, les pseudonymiser de manière cohérente dans une zone gouvernée, puis limiter les notebooks au jeu minimisé en lecture."
+  ]
+}

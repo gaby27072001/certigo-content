@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.environnements-coherents-repetables.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Définir dans Terraform versionné le réseau privé, les clés, l'instance HA et sa maintenance, examiner le plan et la dérive pour chaque environnement, utiliser des identités gérées et injecter les secrets depuis Secret Manager sans mot de passe dans le dépôt",
+  "rationale": "Terraform versionné décrit réseau, KMS, HA et maintenance dans un plan révisable avec état et détection de dérive, tandis que les identités gérées et Secret Manager évitent les secrets dans le dépôt. Des modèles suivis d'actions console peuvent protéger les mots de passe, mais n'assurent pas que les environnements restent reproductibles. Un script gcloud idempotent automatise les créations, sans fournir à lui seul état déclaratif, graphe de dépendances et plan complet. PostgreSQL sur VM est automatisable, mais transfère basculement, sauvegardes, correctifs et maintenance à l'équipe au lieu de livrer Cloud SQL HA.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/docs/terraform/best-practices-for-terraform",
+    "https://cloud.google.com/sql/docs/postgres/create-instance"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.latence-isolee-nouvelle-revision.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Juste après une livraison Cloud Run, la latence p95 augmente uniquement pour la nouvelle révision, sans saturation apparente. L'astreinte veut accélérer l'analyse avec Gemini Cloud Assist tout en exigeant que toute conclusion soit étayée avant une action de production. Quelle démarche est la plus fiable ?",
+  "choices": [
+    "Lancer une investigation Gemini Cloud Assist, traiter ses observations et causes probables comme des hypothèses, puis les confirmer avec métriques, traces et journaux segmentés par révision avant de décider d'un rollback",
+    "Demander à Gemini Cloud Assist de désigner automatiquement la cause racine, accepter son explication comme preuve suffisante et redémarrer toutes les dépendances proposées sans vérifier la télémétrie de chaque révision",
+    "Ignorer les hypothèses de Gemini Cloud Assist et comparer uniquement les moyennes CPU et mémoire globales, puis augmenter toutes les instances même si la régression reste isolée à une seule révision",
+    "Utiliser Gemini Cloud Assist seulement pour résumer les journaux agrégés de toute l'application, puis supprimer la nouvelle révision dès qu'une anomalie est citée sans confirmer le signal dans les métriques et traces par révision"
+  ]
+}

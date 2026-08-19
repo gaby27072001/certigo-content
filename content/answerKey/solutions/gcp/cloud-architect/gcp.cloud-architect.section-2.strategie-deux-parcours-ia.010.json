@@ -1,0 +1,21 @@
+{
+  "id": "gcp.cloud-architect.section-2.strategie-deux-parcours-ia.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Orchestrer le modèle propriétaire avec Agent Platform Pipelines, exécuter son entraînement sur AI Hypercomputer avec accélérateurs à la demande et une porte d'évaluation, puis appeler les API Google AI Vision et Speech-to-Text préentraînées pour le parcours standard.",
+  "rationale": "Agent Platform Pipelines et AI Hypercomputer couvrent la reproductibilité, les accélérateurs à la demande et la porte de score du modèle propriétaire, tandis que les API Google AI préentraînées couvrent directement l'étiquetage et la transcription sans cycle ML supplémentaire. Le notebook GPU laisse capacité, exécution et promotion manuelles, et Gemini Enterprise avec NotebookLM vise des agents et la synthèse de connaissances plutôt qu'un pipeline média automatisé. Affiner des modèles de Model Garden sur un cluster GPU permanent peut servir le modèle propriétaire, mais impose inutilement entraînement et endpoints au parcours dont les fonctions sont standard. Entraîner deux modèles avec Agent Platform Pipelines rend bien les exécutions traçables, mais le second entraînement et son endpoint accéléré contredisent explicitement l'absence de personnalisation et ajoutent coût et exploitation.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/gemini-enterprise-agent-platform/machine-learning/pipelines/introduction",
+    "https://cloud.google.com/ai-hypercomputer/docs/overview",
+    "https://cloud.google.com/vision/docs/features-list",
+    "https://cloud.google.com/speech-to-text/docs/speech-to-text-requests"
+  ]
+}

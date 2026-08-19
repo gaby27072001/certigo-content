@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.erreurs-livraison-dans-une-region.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Après le déploiement d'une nouvelle révision, le taux d'erreur atteint 40 % dans une région alors que l'autre région et la révision précédente sont saines. Les utilisateurs doivent être protégés avant l'analyse de cause racine. Quelle séquence d'actions minimise l'impact ?",
+  "choices": [
+    "Conserver le trafic dans la région en échec pendant la collecte des traces, puis préparer un rollback après confirmation de la cause, ce qui prolonge l'exposition de 40 % des requêtes",
+    "Augmenter immédiatement la capacité des deux régions et redéployer la nouvelle révision avec davantage de logs, sans isoler la région défaillante ni retirer la version suspecte",
+    "Retirer la région défaillante du routage, vérifier la capacité de la région saine, y rediriger le trafic puis revenir à la révision précédente en conservant les preuves d'incident",
+    "Renvoyer tout le trafic vers la région saine sans vérifier sa marge, puis conserver la nouvelle révision jusqu'à la fin de l'analyse"
+  ]
+}

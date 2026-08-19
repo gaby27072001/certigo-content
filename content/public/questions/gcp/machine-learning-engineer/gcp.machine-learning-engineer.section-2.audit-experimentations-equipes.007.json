@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-2.audit-experimentations-equipes.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Trois équipes comparent un classifieur XGBoost et deux variantes génératives. Six mois plus tard, l’audit doit retrouver pour chaque résultat le jeu de données, les paramètres, les artefacts, la version de code et les métriques, y compris une évaluation LLM-as-a-judge. Quelle pratique répond le mieux au besoin ?",
+  "choices": [
+    "Conserver dans une feuille partagée les métriques, paramètres et liens vers les artefacts de chaque essai, puis demander aux équipes de documenter manuellement les dépendances entre versions.",
+    "Archiver un notebook par expérience avec les paramètres dans son nom et les artefacts dans des dossiers Cloud Storage datés.",
+    "Suivre chaque exécution dans Experiments, enregistrer paramètres, métriques et artefacts, puis relier données, code et modèles versionnés avec ML Metadata.",
+    "Déployer chaque variante sur un endpoint distinct, conserver les journaux d’inférence et les évaluations LLM-as-a-judge, mais ne pas enregistrer les jeux ni paramètres d’entraînement."
+  ]
+}

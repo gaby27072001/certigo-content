@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.collaboration-mobile-deconnectee.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une application mobile collaborative stocke des profils et des documents semi-structurés dont les champs évoluent fréquemment. Elle exige synchronisation temps réel, mode hors connexion, montée en charge sans administration de serveurs et cohérence transactionnelle sur de petits ensembles de documents. Quel choix minimise l'exploitation tout en respectant ces besoins ?",
+  "choices": [
+    "Exécuter PostgreSQL sur une VM gérée par l'équipe et exposer une API de synchronisation maison, ce qui permet un schéma flexible mais impose capacité, correctifs, HA et développement du mode hors connexion",
+    "Stocker les interactions dans BigQuery et interroger les dernières lignes depuis l'application mobile, ce qui facilite l'analyse à grande échelle mais ne fournit ni transactions interactives ni synchronisation hors connexion",
+    "Utiliser Cloud SQL derrière une API avec un pool de connexions et un cache local développé sur mesure, ce qui protège la base mais nécessite de construire la synchronisation temps réel et le mode hors connexion",
+    "Utiliser Firestore en mode natif avec ses SDK clients, la persistance hors connexion, les écouteurs temps réel, les transactions documentaires et des règles de sécurité adaptées aux profils et documents"
+  ]
+}

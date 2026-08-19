@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.visibilite-operations-trente-projets.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer un projet d'observabilité, router les journaux avec un sink agrégé vers un bucket central à rétention adaptée et utiliser un metrics scope commun couvrant tous les projets surveillés",
+  "rationale": "Un sink agrégé centralise en continu les journaux descendants dans un bucket à rétention contrôlée, et un metrics scope fournit les tableaux de bord multi-projets sans accès des analystes aux projets applicatifs. Des buckets séparés pendant sept ans préservent les audits, mais imposent des droits dans trente projets et ne centralisent ni recherche ni gouvernance. Un projet de tableaux de bord accompagné de journaux locaux centralise les métriques seulement et laisse rétention et accès dispersés. Router uniquement les journaux applicatifs ignore les événements d'audit soumis aux sept ans ; la rétention courte des buckets par défaut échoue donc à la contrainte réglementaire.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/logging/docs/export/aggregated_sinks"
+  ]
+}

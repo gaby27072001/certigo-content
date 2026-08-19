@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-1.resume-tickets-budget.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une plateforme doit résumer des milliers de tickets courts en français. Le résumé n’est pas critique en temps réel, le budget est strict et l’équipe veut comparer qualité, latence et coût avant de s’engager. Quelle démarche est la plus appropriée ?",
+  "choices": [
+    "Sélectionner le modèle Gemini au contexte le plus large et l’appeler en temps réel pour chaque ticket, en supposant que la capacité maximale justifie le coût et la latence supplémentaires.",
+    "Affiner immédiatement le plus grand modèle du Model Garden sur l’ensemble des tickets, puis mesurer sa qualité après déploiement sans référence de prompting ni modèle plus économique.",
+    "Évaluer plusieurs modèles Gemini du Model Garden sur un corpus représentatif, puis retenir pour le traitement par lots le plus petit qui respecte les seuils de qualité et de latence.",
+    "Traduire les tickets en anglais avec Translate API, appliquer un extracteur de phrases sur le texte traduit, puis retraduire le résultat, sans évaluer une capacité de résumé génératif."
+  ]
+}

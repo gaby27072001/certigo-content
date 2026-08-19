@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.saturation-pendant-pic-trimestriel.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un service Compute Engine connaît chaque trimestre un pic prévisible de trafic multipliant la charge par quatre. Lors du dernier pic, l'autoscaler n'a pas créé d'instances car le quota CPU régional était atteint. Quelle préparation est la plus fiable sans dimensionner en permanence pour le maximum ?",
+  "choices": [
+    "Augmenter seulement le quota CPU, puis attendre le pic pour créer manuellement des instances à la demande, sans réservation ni test prouvant que la capacité régionale sera disponible",
+    "Tester la charge, prévoir les besoins, relever les quotas et réserver la capacité de base nécessaire, puis laisser l'autoscaler absorber la demande dans ces limites",
+    "Répartir le groupe sur deux zones avec l'autoscaler actuel, mais conserver le même quota régional saturé et ne demander aucune réservation ou hausse avant le prochain pic",
+    "Exécuter tout le surplus sur des VM Spot avec checkpointing et conserver le quota actuel, même si le service interactif exige une capacité régionale garantie pendant le pic"
+  ]
+}

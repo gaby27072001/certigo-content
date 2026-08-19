@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.decision-bancaire-faible-latence.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Déployer un endpoint privé Agent Platform, servir les caractéristiques cohérentes depuis Feature Store, configurer l’autoscaling sur la charge et valider la capacité par des tests.",
+  "rationale": "L’endpoint privé associé à Feature Store et à l’autoscaling répond aux contraintes : endpoint privé, Feature Store et autoscaling testé répondent ensemble à l’isolement, à la cohérence entraînement-service, au budget de latence et au pic de débit. Des scores horaires mis en cache peuvent servir vite, mais leur ancienneté ne respecte pas une décision fondée sur les caractéristiques courantes. GKE et BigQuery par requête offrent un chemin privé, mais les scans et une logique Java distincte menacent latence et cohérence. Un endpoint public protégé par IAM reste exposé contrairement à l’exigence, et laisser chaque client reconstruire les caractéristiques favorise le skew.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/predictions/using-private-endpoints"
+  ]
+}

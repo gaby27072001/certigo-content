@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.demarrage-lent-et-sante.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un pod GKE met 90 secondes à charger un modèle. Pendant cette phase, sa vérification de vivacité échoue et Kubernetes le redémarre en boucle. Après démarrage, il faut retirer rapidement le pod du trafic s'il ne peut plus servir, sans le redémarrer pour une dépendance momentanément indisponible. Quelle configuration appliquer ?",
+  "choices": [
+    "Configurer une startupProbe pour le chargement, une readinessProbe pour l'aptitude à servir et une livenessProbe réservée aux blocages internes.",
+    "Configurer uniquement une livenessProbe avec un délai initial d'une heure, même si le modèle se charge plus vite et si le processus se bloque ensuite.",
+    "Supprimer les sondes Kubernetes et laisser l'équilibreur continuer à envoyer du trafic aux pods dès leur création, y compris pendant le chargement.",
+    "Utiliser une seule livenessProbe qui vérifie le processus, la base et toutes les API externes afin de redémarrer le pod dès qu'une dépendance est indisponible."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.compte-sauvegarde-risque-eleve.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Examiner les détections contributrices, la chronologie, la criticité et la référence comportementale de l’entité, puis pivoter vers les hôtes et identités liés avant de décider d’une escalade",
+  "rationale": "L’analyse contextuelle du score examine les détections contributrices, leur regroupement temporel, la criticité du compte et sa référence comportementale avant toute escalade. Une désactivation immédiate fondée sur le classement seul peut interrompre une fonction de sauvegarde critique sans preuve suffisante. L’abandon de l’enquête en l’absence d’IOC ignore la valeur d’une chaîne de signaux moyens et les comportements encore inconnus du renseignement. Une réduction globale des poids masque le cas présent et affaiblit aussi les futures détections. Le score doit servir à prioriser et orienter les pivots, non à établir automatiquement la compromission.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/detection/risk-analytics-overview"
+  ]
+}

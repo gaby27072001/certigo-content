@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.risque-nouvelle-version-recommandation.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Déployer les deux versions, diriger une faible part aléatoire vers la nouvelle, journaliser l’affectation et les métriques, puis augmenter progressivement ou revenir en arrière selon les garde-fous.",
+  "rationale": "Le déploiement canari avec affectation journalisée est la stratégie adaptée : un canari aléatoire avec version journalisée limite l’exposition, permet une comparaison attribuable des métriques métier et techniques et autorise promotion graduelle ou rollback selon les garde-fous. Une bascule totale pendant une période calme reste une exposition à 100 % et le retrait de l’ancienne ralentit le retour. Le trafic employé n’est pas nécessairement représentatif du comportement client. Alterner selon l’heure confond effet de version et effet temporel, et l’absence d’attribution par requête empêche une comparaison fiable.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/predictions/rolling-deployment"
+  ]
+}

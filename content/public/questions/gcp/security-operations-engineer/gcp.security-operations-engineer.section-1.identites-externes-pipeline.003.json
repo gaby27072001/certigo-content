@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-1.identites-externes-pipeline.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Des prestataires doivent accéder à Google SecOps avec leurs identités d’entreprise, et un pipeline externe doit appeler une API de sécurité sans clé longue durée. Les responsables exigent révocation centralisée, authentification forte et traçabilité individuelle. Quelle solution est la plus appropriée ?",
+  "choices": [
+    "Créer pour chaque prestataire un compte Google local protégé par MFA et fournir au pipeline une clé API permanente stockée dans un coffre, puis synchroniser manuellement les départs depuis l’annuaire du fournisseur et auditer les appels",
+    "Créer un compte de service dédié aux prestataires et au pipeline, télécharger sa clé dans un coffre central, imposer une rotation quotidienne et journaliser chaque utilisation afin de réduire la durée d’exposition des identifiants partagés",
+    "Fédérer les utilisateurs avec Workforce Identity Federation, fédérer la charge de travail pour usurper un compte de service dédié, attribuer des rôles minimaux et activer les journaux d’audit pertinents",
+    "Autoriser les adresses IP des prestataires et du pipeline, utiliser des identifiants communs protégés par MFA, faire tourner le secret chaque jour et journaliser les appels pour faciliter la révocation et l’audit"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.acces-prestataires-sans-comptes.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer un pool Workforce Identity Federation, faire confiance à l'IdP OIDC et attribuer les rôles IAM à des ensembles de principaux fondés sur les attributs",
+  "rationale": "Workforce Identity Federation fédère directement les prestataires depuis l'IdP OIDC, sans créer de comptes Cloud Identity, et permet d'autoriser des ensembles de principaux par attributs. Le compte de service partagé et sa clé JSON sont des identifiants durables qui suppriment l'attribution individuelle. Google Cloud Directory Sync créerait précisément les comptes interdits par l'énoncé et le rôle Éditeur serait excessif. Workload Identity Federation, même avec emprunt et jetons courts, représente des charges de travail non humaines et ne fournit pas l'accès interactif de workforce demandé.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/iam/docs/workforce-identity-federation"
+  ]
+}

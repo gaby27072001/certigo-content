@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-4.latence-tableau-direction.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un tableau de bord Looker exécute très souvent les mêmes agrégations sur une grande table BigQuery. Les données arrivent chaque heure, une fraîcheur horaire suffit et les utilisateurs attendent des réponses interactives. L'équipe souhaite réduire les calculs répétés sans maintenir un pipeline d'agrégation personnalisé. Quelle solution privilégier ?",
+  "choices": [
+    "Créer une vue matérialisée pour les agrégations compatibles, avec actualisation incrémentale, et réserver BI Engine aux données du tableau de bord",
+    "Créer chaque heure une table agrégée par requête planifiée, reconstruire toutes ses partitions et faire pointer Looker vers la table seulement après la fin du remplacement",
+    "Augmenter la limite d'octets par requête, désactiver le cache et attribuer une réservation distincte à chaque utilisateur",
+    "Répliquer les lignes dans Memorystore, calculer les agrégations dans Looker et consulter BigQuery lors d'une absence du cache"
+  ]
+}

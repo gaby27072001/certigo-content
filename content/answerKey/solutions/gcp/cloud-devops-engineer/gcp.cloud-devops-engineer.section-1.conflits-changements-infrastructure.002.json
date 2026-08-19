@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.conflits-changements-infrastructure.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Versionner les modules, utiliser un backend d'état distant verrouillable, faire examiner le plan puis appliquer depuis un pipeline avec une identité dédiée",
+  "rationale": "Les modules versionnés, l'état distant verrouillable, la revue du plan et une identité de pipeline dédiée rendent le changement reproductible, sérialisé et attribuable à Git. Des agents sérialisés qui conservent chacun un état local évitent peut-être deux exécutions simultanées, mais leurs vérités distinctes continuent à diverger et l'archivage après l'application arrive trop tard. Des commandes gcloud générées et revues restent impératives et ne disposent d'aucun état partagé pour détecter ou réconcilier la dérive. Un backend verrouillable avec apply automatique résout la concurrence, mais l'absence de plan publié et approuvé viole l'exigence d'évaluation avant production.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/docs/terraform/resource-management/store-state"
+  ]
+}

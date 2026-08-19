@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-5.cross-project-path-failure.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Après une modification, une VM du projet A ne peut plus joindre un service interne dans le projet B. L'équipe veut savoir, avant de capturer des paquets, quelle route est sélectionnée et quelle règle de pare-feu bloque éventuellement le chemin simulé. Quel outil utiliser en premier ?",
+  "choices": [
+    "Ouvrir Performance Dashboard pour le projet et déduire la règle de pare-feu fautive à partir des cartes agrégées de perte et de latence entre les zones.",
+    "Utiliser Network Topology pour visualiser les deux projets, puis supposer que l'absence d'une arête entre les VM désigne précisément la route ou la règle de pare-feu responsable.",
+    "Exécuter Connectivity Tests avec les endpoints source et destination afin d'analyser routes, pare-feu et autres composants, puis compléter si disponible par le plan de données.",
+    "Instrumenter le service avec Cloud Profiler et Cloud Trace, comparer les temps CPU avant et après la modification et interpréter l'absence de traces comme un blocage réseau."
+  ]
+}

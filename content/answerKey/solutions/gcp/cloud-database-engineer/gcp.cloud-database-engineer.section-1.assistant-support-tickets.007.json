@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.assistant-support-tickets.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Utiliser AlloyDB for PostgreSQL avec l'extension vectorielle et un index adapté, puis appliquer dans la même requête les filtres SQL de client et de priorité ainsi que les jointures aux tables de tickets",
+  "rationale": "AlloyDB avec type vectoriel, index adapté et filtres SQL est le seul choix qui réalise la proximité sémantique tout en joignant les résultats aux métadonnées PostgreSQL sans nouvelle plateforme. Parcourir tous les objets Cloud Storage n'offre ni index de voisins proches ni latence interactive. Sérialiser les embeddings en texte et utiliser LIKE ne calcule aucune distance vectorielle. Cloud Logging est destiné à l'observabilité ; y placer les vecteurs et joindre dans le navigateur compromet modèle transactionnel, performances et confidentialité.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/alloydb/docs/ai/work-with-embeddings"
+  ]
+}

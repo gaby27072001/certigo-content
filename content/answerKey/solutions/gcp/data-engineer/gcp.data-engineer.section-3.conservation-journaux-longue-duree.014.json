@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.conservation-journaux-longue-duree.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Configurer Object Lifecycle Management pour changer automatiquement la classe selon l'âge puis supprimer les objets à l'échéance, sans exécuter de code de maintenance personnalisé",
+  "rationale": "Object Lifecycle Management applique côté service les transitions de classe selon l’âge puis la suppression à sept ans, sans code de maintenance. La fonction nocturne reproduit ce mécanisme en listant et réécrivant les objets, avec davantage de coût, de quotas et de risques d’échec. Autoclass optimise selon les accès, mais supprimer trente jours après la dernière lecture ne respecte pas une conservation calculée depuis la création. Expirer la copie BigQuery tout en gardant les objets Standard indéfiniment enfreint l’obligation de suppression des journaux bruts.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/storage/docs/lifecycle"
+  ]
+}

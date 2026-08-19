@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-5.ecart-normalisation-production.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Versionner une transformation unique réutilisée à l’entraînement et au service, valider schéma et statistiques dans la pipeline, puis bloquer toute promotion divergente.",
+  "rationale": "La transformation versionnée commune à l’entraînement et au service corrige durablement le skew : une transformation versionnée unique supprime les implémentations divergentes, et les validations automatisées de schéma et statistiques bloquent le skew avant promotion. Entraîner sur deux normalisations apprend une distribution artificielle sans garantir le comportement en ligne. Quelques valeurs fixes avec tolérance peuvent manquer des cas limites et légitiment toujours deux codes évoluant séparément. Préparer l’entraînement dans BigQuery mais recalculer en Java conserve précisément la duplication à l’origine de la dégradation.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/pipelines/introduction"
+  ]
+}

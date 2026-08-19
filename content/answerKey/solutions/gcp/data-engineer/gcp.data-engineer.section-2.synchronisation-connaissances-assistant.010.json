@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.synchronisation-connaissances-assistant.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Configurer dans Gemini Enterprise Agent Platform un connecteur pris en charge, une synchronisation incrémentale avec ACL et la supervision des erreurs d'ingestion",
+  "rationale": "Un connecteur pris en charge par Gemini Enterprise Agent Platform fournit la synchronisation incrémentale, propage les ACL de la source et expose les erreurs d’ingestion sans code d’intégration spécifique. Le pipeline Dataflow reconstruit lui-même les ACL et les reprises, ce qui contredit l’objectif de minimiser le code. Les exports JSON nocturnes perdent les identités, rendent l’index obsolète pendant la journée et interrompent les réponses lors du remplacement. Un connecteur Discovery Engine personnalisé par source reste du code à exploiter, stocke dangereusement des jetons et republie inutilement tout le corpus à chaque changement.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/gemini/enterprise/docs/connectors/introduction-to-connectors-and-data-stores"
+  ]
+}

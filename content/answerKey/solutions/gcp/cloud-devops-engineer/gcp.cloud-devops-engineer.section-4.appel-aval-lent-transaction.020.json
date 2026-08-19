@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.appel-aval-lent-transaction.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Propager le contexte OpenTelemetry, exporter les spans vers Cloud Trace et inclure trace_id et span_id dans les journaux structurés afin d'identifier l'appel aval responsable des trois secondes",
+  "rationale": "La propagation OpenTelemetry produit une même trace à travers Cloud Run, GKE et le tiers ; le waterfall attribue les trois secondes à un span, et trace_id/span_id relient ce span aux journaux structurés. Des identifiants générés localement ne partagent aucun contexte entre services et ne peuvent reconstruire la transaction. Une métrique par minute agrège durée et code HTTP, mais ne représente ni les appels enfant ni la durée de chacun. VPC Flow Logs expose adresses, ports et volumes réseau, pas la hiérarchie applicative, les spans ou la sémantique complète permettant d'identifier l'appel aval lent.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/trace/docs/trace-log-integration"
+  ]
+}

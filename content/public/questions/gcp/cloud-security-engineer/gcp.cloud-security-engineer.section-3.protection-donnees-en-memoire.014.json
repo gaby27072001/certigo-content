@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.protection-donnees-en-memoire.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un assureur traite des données médicales dans la mémoire de VM. Il utilise déjà TLS et des disques chiffrés, mais son modèle de menace exige également de protéger les données pendant leur utilisation contre l'accès de l'hyperviseur. Quel contrôle doit-il ajouter ?",
+  "choices": [
+    "Utiliser Shielded VM avec démarrage sécurisé et des clés CMEK pour les disques qui contiennent les données médicales",
+    "Des Confidential VMs utilisant une technologie d'environnement d'exécution de confiance prise en charge",
+    "Supprimer les disques après 30 jours et conserver des sauvegardes chiffrées pour la rétention",
+    "Activer VPC Flow Logs à 100 % et alerter dans le SIEM sur les accès réseau inhabituels aux VM médicales sensibles"
+  ]
+}

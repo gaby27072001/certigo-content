@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.encrypted-private-circuit.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Des VLAN attachments Dedicated Interconnect fournissent déjà la capacité requise, mais une nouvelle règle impose le chiffrement IPsec du trafic sur ces liens privés sans le faire transiter par Internet. Quelle modification est recommandée ?",
+  "choices": [
+    "Activer MACsec sur les connexions compatibles et supposer qu'il répond à toute exigence IPsec de bout en bout, sans configurer de tunnel ni vérifier les équipements du partenaire.",
+    "Remplacer les VLAN attachments par un tunnel Classic VPN unique sur Internet, dimensionné pour le débit moyen et associé à une route statique de secours.",
+    "Activer l'authentification MD5 et TLS sur les sessions BGP de Cloud Router, puis considérer que cette protection du plan de contrôle chiffre également le plan de données.",
+    "Déployer HA VPN over Cloud Interconnect avec des IP internes pour les gateways et transporter les tunnels IPsec sur les VLAN attachments redondants."
+  ]
+}

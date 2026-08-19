@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-1.acces-donnees-filiale.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "L’équipe de détection doit permettre à un ingénieur d’éditer des règles YARA-L dans Google SecOps, sans lui donner accès aux paramètres d’ingestion ni aux dossiers contenant des données d’une filiale soumise à une séparation stricte. Quelle démarche répond le mieux au principe du moindre privilège ?",
+  "choices": [
+    "Attribuer le rôle administrateur SecOps, limiter les données visibles à la filiale autorisée et contrôler les changements d’ingestion dans les journaux d’audit plutôt que de restreindre les fonctions",
+    "Séparer l’autorisation de fonctionnalités de l’accès aux données, attribuer le rôle minimal d’édition des détections et limiter le périmètre de données au groupe autorisé",
+    "Créer un compte de service partagé par les ingénieurs, limiter son accès aux données de la filiale autorisée et consigner chaque utilisation dans un registre afin de centraliser les modifications de règles",
+    "Accorder temporairement le rôle propriétaire, masquer la filiale dans une vue, auditer les actions et retirer l’accès après la modification, sans restriction fonctionnelle dédiée durable"
+  ]
+}

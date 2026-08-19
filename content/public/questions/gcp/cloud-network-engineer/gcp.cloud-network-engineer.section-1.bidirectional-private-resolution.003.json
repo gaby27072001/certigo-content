@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.bidirectional-private-resolution.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise possède une zone privée Cloud DNS `gcp.corp` et une zone Active Directory `corp.example` sur site. Les VM Google Cloud doivent résoudre les noms sur site, et les résolveurs sur site doivent résoudre `gcp.corp`, sans exposer aucune zone publiquement. Quel plan DNS est approprié ?",
+  "choices": [
+    "Publier les deux suffixes dans des zones Cloud DNS publiques signées par DNSSEC, tout en limitant les enregistrements retournés à des adresses RFC 1918.",
+    "Créer un peering DNS entre le VPC et une zone privée intermédiaire, puis supposer que ce peering transmettra aussi les requêtes jusqu'aux serveurs Active Directory sur site.",
+    "Créer une zone de transfert privée vers les résolveurs sur site et une politique serveur entrante dont les points d'entrée Cloud DNS sont joignables par le réseau hybride.",
+    "Configurer chaque VM avec les adresses publiques de résolveurs Active Directory exposés derrière un pare-feu Internet, puis autoriser ces mêmes résolveurs à interroger directement l'adresse de métadonnées Cloud DNS."
+  ]
+}

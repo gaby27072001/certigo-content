@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.regional-api-continuity.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Créer une politique Cloud DNS de basculement, définir l'Europe comme cible principale et les États-Unis comme sauvegarde, puis associer les contrôles d'état adaptés.",
+  "rationale": "Une politique de routage Cloud DNS de basculement exprime la relation principal-secours et peut utiliser les contrôles d'état pour cesser de retourner la cible européenne lorsqu'elle devient non saine. Deux enregistrements simples restent tous deux des réponses valides: un TTL court et une logique dans les clients ne donnent pas à Cloud DNS la connaissance de santé requise. DNSSEC authentifie l'origine et l'intégrité des données DNS; la validité d'une clé de signature ne mesure pas la disponibilité de l'API et ne sélectionne pas une région. Une zone de transfert délègue les requêtes à des résolveurs, mais n'orchestre pas le basculement entre les adresses des deux équilibreurs régionaux.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/dns/docs/routing-policies-overview"
+  ]
+}

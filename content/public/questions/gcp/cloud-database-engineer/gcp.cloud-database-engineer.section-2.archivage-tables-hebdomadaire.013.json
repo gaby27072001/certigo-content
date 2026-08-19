@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.archivage-tables-hebdomadaire.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une équipe doit exporter chaque dimanche certaines tables Cloud SQL vers un bucket d'archives. L'exécution doit être traçable, réessayable et ne doit pas dépendre d'un poste d'administrateur ni d'un fichier de clé statique. Quelle solution est la plus appropriée ?",
+  "choices": [
+    "Déclencher avec Cloud Scheduler un service Cloud Run utilisant un compte de service minimal, suivre jusqu'à son terme l'opération d'export asynchrone, journaliser son issue dans Cloud Logging et réessayer les échecs confirmés",
+    "Faire appeler directement l'API d'export Cloud SQL par Cloud Scheduler et traiter l'acceptation HTTP comme un succès, ce qui évite les clés mais ne suit pas l'opération asynchrone ni ses échecs",
+    "Conserver les sauvegardes automatiques Cloud SQL du dimanche selon la durée d'archive, ce qui protège l'instance complète mais ne produit pas l'export des tables choisies dans le bucket demandé ni sa rétention réglementaire",
+    "Démarrer chaque dimanche une VM éphémère avec un compte de service pour soumettre gcloud sql export, puis l'arrêter aussitôt, ce qui évite une clé statique mais ne vérifie pas l'achèvement ni le rejeu en cas d'échec"
+  ]
+}

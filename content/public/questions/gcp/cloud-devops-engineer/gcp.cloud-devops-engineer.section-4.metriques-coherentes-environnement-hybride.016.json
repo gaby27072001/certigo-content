@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.metriques-coherentes-environnement-hybride.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une entreprise exploite GKE et des clusters Kubernetes hors de Google Cloud. Elle veut requêter les mêmes métriques Prometheus, conserver les labels Kubernetes utiles et éviter d'administrer une base de séries temporelles centrale. Quelle solution est la plus appropriée ?",
+  "choices": [
+    "Déployer un serveur Prometheus central autogéré sur GKE, fédérer tous les clusters et conserver leurs labels, mais assumer soi-même le stockage, les mises à niveau et la haute disponibilité de la base temporelle",
+    "Utiliser Managed Service for Prometheus seulement pour GKE et laisser chaque cluster externe dans son Prometheus local, puis maintenir des tableaux de bord et alertes distincts sans requête commune",
+    "Convertir les scrapes Prometheus externes en journaux structurés envoyés à Cloud Logging, puis recréer des métriques basées sur les logs au lieu de préserver le modèle, les labels et PromQL",
+    "Déployer les collecteurs de Google Cloud Managed Service for Prometheus sur les clusters, écrire dans le service géré et interroger avec PromQL dans Cloud Monitoring sans exploiter une base temporelle administrée par l'équipe"
+  ]
+}

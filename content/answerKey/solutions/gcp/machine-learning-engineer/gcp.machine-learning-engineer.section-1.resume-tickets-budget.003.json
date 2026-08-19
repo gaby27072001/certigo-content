@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-1.resume-tickets-budget.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Évaluer plusieurs modèles Gemini du Model Garden sur un corpus représentatif, puis retenir pour le traitement par lots le plus petit qui respecte les seuils de qualité et de latence.",
+  "rationale": "L’évaluation comparative sur un corpus représentatif est la démarche adaptée : une évaluation sur un corpus représentatif mesure le compromis qualité-latence-coût et permet de choisir le plus petit modèle satisfaisant les seuils pour un traitement par lots. Le contexte maximal appelé en temps réel surdimensionne la capacité et le mode de service sans garantir une meilleure synthèse. Affiner d’emblée le plus grand modèle engage données et calcul avant d’établir une référence ou de comparer des options moins chères. Traduction, extraction de phrases et retraduction forment une solution plausible, mais n’évaluent pas la synthèse générative attendue et cumulent erreurs et étapes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models"
+  ]
+}

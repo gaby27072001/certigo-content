@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-4.latence-distribuee-intermittente.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Propager un contexte de trace, instrumenter les services avec OpenTelemetry, corréler Cloud Trace, Logging et Monitoring, puis utiliser Profiler sur le service identifié et vérifier l'hypothèse par un test ciblé, sans modifier la capacité.",
+  "rationale": "La propagation d'un contexte OpenTelemetry permet à Cloud Trace de reconstruire le chemin d'une même requête entre Cloud Run, Pub/Sub et GKE ; la corrélation aux logs et métriques localise le segment, puis Profiler et un test ciblé vérifient la cause sans changer la capacité. Surdimensionner tous les services peut masquer le symptôme, coûte cher et ne démontre pas quel maillon est responsable. Des redémarrages successifs en charge perturbent la production et une amélioration temporaire après redémarrage n'établit pas la causalité. Les moyennes quotidiennes de journaux masquent les valeurs extrêmes intermittentes et, sans contexte distribué, ne relient pas les étapes d'une même requête.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/trace/docs/overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.centralized-network-ownership.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un groupe international veut isoler la facturation et le cycle de vie de ses applications dans cinquante projets, tout en imposant une administration centralisée des sous-réseaux, routes et pare-feu. Les équipes applicatives doivent déployer leurs VM sans pouvoir modifier la topologie réseau. Quelle architecture répond le mieux à ces exigences ?",
+  "choices": [
+    "Créer un projet hôte Shared VPC par environnement, rattacher les projets de service et déléguer aux identités applicatives l'utilisation des seuls sous-réseaux requis.",
+    "Créer un VPC autonome par projet applicatif, établir tous les peerings bilatéraux nécessaires et confier à chaque équipe la maintenance de ses routes et règles de pare-feu.",
+    "Regrouper applications et réseaux dans un projet unique, puis utiliser des tags réseau et des comptes de service distincts pour représenter les frontières entre équipes.",
+    "Créer un hub Network Connectivity Center avec un spoke hybride pour chaque projet et laisser les équipes administrer leurs sous-réseaux derrière le hub."
+  ]
+}
