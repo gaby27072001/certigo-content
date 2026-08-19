@@ -66,9 +66,11 @@ deterministe : toute modification semantique
 du corpus change son hash, tandis que l'ordre des cles et la mise en forme JSON
 ne le changent pas.
 
-La matrice editoriale et les sources officielles du corpus AZ-104 sont
-documentees dans
-[`docs/az-104-coverage.md`](docs/az-104-coverage.md).
+Les matrices editoriales et les sources officielles des corpus Azure sont
+documentees dans :
+
+- [`docs/coverage/az-900.md`](docs/coverage/az-900.md) ;
+- [`docs/coverage/az-104.md`](docs/coverage/az-104.md).
 
 Le manifeste de paquet couple strictement `artifact`, `channel`, le repertoire
 du `path`, l'identifiant du nom de fichier et `payload.id`. La politique
