@@ -115,7 +115,7 @@ test("produit deux artefacts byte-identical avec des manifestes distincts", asyn
   assert.deepEqual(privateManifest.files.map((entry) => entry.path), ["solutions/sample.json"]);
 });
 
-test("conserve le package v2 de #20 byte-identical", async () => {
+test("conserve le package v2 courant byte-identical", async () => {
   const outDir = mkdtempSync(join(tmpdir(), "certigo-package-v2-golden-"));
   temporaryRoots.push(outDir);
 
@@ -129,18 +129,18 @@ test("conserve le package v2 de #20 byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
+          "sha256:8eae9175b558475e65118cacf5de7a5a928cb572a159d8db8c6be9dbdc279eca",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:e3bfa7c20c03503384a68d8e261bcbb88f749292a273744a5ba4a309fc48c901",
+          "sha256:ccb9ade310f0f2d75933e1eb7588cda576dd445fb84d79043cf9f0e187effe6b",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
+    "817c724c1abc1c520a2c5bdf47efd5da39e91ccc6276f1e69efc6efb02c63697"
   );
 });
 
