@@ -44,8 +44,9 @@ un commit donne.
 
 Les payloads publies sont canonises et les manifestes n'incluent ni timestamp
 ni chemin dependant de la machine. Deux executions sur le meme commit sont
-identiques octet pour octet. Les noms d'artefacts CI integrent leur
-`manifestId`; voir
+identiques octet pour octet. Les artefacts GitHub temporaires sont uniquement
+crees par lancement manuel avec l'option explicite d'upload ; leurs noms
+integrent leur `manifestId`. Voir
 [`ADR-0002`](docs/adr/ADR-0002-separated-content-artifacts.md) pour la
 retention, l'immutabilite, la publication et le rollback.
 
