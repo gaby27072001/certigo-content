@@ -70,7 +70,8 @@ Les matrices editoriales et les sources officielles des corpus Azure sont
 documentees dans :
 
 - [`docs/coverage/az-900.md`](docs/coverage/az-900.md) ;
-- [`docs/coverage/az-104.md`](docs/coverage/az-104.md).
+- [`docs/coverage/az-104.md`](docs/coverage/az-104.md) ;
+- [`docs/coverage/dp-900.md`](docs/coverage/dp-900.md).
 
 Le manifeste de paquet couple strictement `artifact`, `channel`, le repertoire
 du `path`, l'identifiant du nom de fichier et `payload.id`. La politique
