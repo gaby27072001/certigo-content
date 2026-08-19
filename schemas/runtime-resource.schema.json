@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/runtime-resource.schema.json",
+  "title": "Certigo canonical runtime composition resource",
+  "description": "Closed public schemas for reference-only tracks, blueprint-domain bindings, units, lessons, blocks, and concepts.",
+  "oneOf": [
+    { "$ref": "#/$defs/track" },
+    { "$ref": "#/$defs/domain" },
+    { "$ref": "#/$defs/unit" },
+    { "$ref": "#/$defs/lesson" },
+    { "$ref": "#/$defs/concept" }
+  ],
+  "$defs": {
+    "certificationId": {
+      "type": "string",
+      "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "blueprintVersion": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "legacyId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "enum": ["planned", "active", "retiring", "retired", "replaced"]
+        },
+        "retiredOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "replacedBy": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "replaced" } },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["replacedBy"],
+            "properties": {
+              "replacedBy": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "status": { "const": "retired" } },
+            "required": ["status"]
+          },
+          "then": {
+            "required": ["retiredOn"],
+            "properties": {
+              "retiredOn": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "trackId": {
+      "type": "string",
+      "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.track\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "domainId": {
+      "type": "string",
+      "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.domain\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "unitId": {
+      "type": "string",
+      "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.unit\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "lessonId": {
+      "type": "string",
+      "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.lesson\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "conceptId": {
+      "type": "string",
+      "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.concept\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "resourceType",
+        "id",
+        "certificationId",
+        "blueprintVersion",
+        "mode",
+        "summary",
+        "domainIds",
+        "unitIds",
+        "lifecycle"
+      ],
+      "properties": {
+        "schema": { "const": "certigo.runtime.track/v1" },
+        "resourceType": { "const": "track" },
+        "id": { "$ref": "#/$defs/trackId" },
+        "legacyId": { "$ref": "#/$defs/legacyId" },
+        "certificationId": { "$ref": "#/$defs/certificationId" },
+        "blueprintVersion": { "$ref": "#/$defs/blueprintVersion" },
+        "mode": { "enum": ["guided", "questionBank"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "domainIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/domainId" }
+        },
+        "unitIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/unitId" }
+        },
+        "lifecycle": { "$ref": "#/$defs/lifecycle" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "mode": { "const": "guided" } },
+            "required": ["mode"]
+          },
+          "then": {
+            "properties": {
+              "unitIds": {
+                "type": "array",
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "mode": { "const": "questionBank" } },
+            "required": ["mode"]
+          },
+          "then": {
+            "properties": {
+              "unitIds": {
+                "type": "array",
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    },
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "resourceType",
+        "id",
+        "certificationId",
+        "blueprintVersion",
+        "objectiveId",
+        "lifecycle"
+      ],
+      "properties": {
+        "schema": { "const": "certigo.runtime.domain/v1" },
+        "resourceType": { "const": "domain" },
+        "id": { "$ref": "#/$defs/domainId" },
+        "legacyId": { "$ref": "#/$defs/legacyId" },
+        "certificationId": { "$ref": "#/$defs/certificationId" },
+        "blueprintVersion": { "$ref": "#/$defs/blueprintVersion" },
+        "objectiveId": {
+          "type": "string",
+          "pattern": "^(domain|section)-[1-9][0-9]*$"
+        },
+        "lifecycle": { "$ref": "#/$defs/lifecycle" }
+      }
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "resourceType",
+        "id",
+        "certificationId",
+        "blueprintVersion",
+        "domainId",
+        "title",
+        "lessonIds",
+        "lifecycle"
+      ],
+      "properties": {
+        "schema": { "const": "certigo.runtime.unit/v1" },
+        "resourceType": { "const": "unit" },
+        "id": { "$ref": "#/$defs/unitId" },
+        "legacyId": { "$ref": "#/$defs/legacyId" },
+        "certificationId": { "$ref": "#/$defs/certificationId" },
+        "blueprintVersion": { "$ref": "#/$defs/blueprintVersion" },
+        "domainId": { "$ref": "#/$defs/domainId" },
+        "title": { "type": "string", "minLength": 1 },
+        "lessonIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/lessonId" }
+        },
+        "lifecycle": { "$ref": "#/$defs/lifecycle" }
+      }
+    },
+    "lesson": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "resourceType",
+        "id",
+        "certificationId",
+        "blueprintVersion",
+        "unitId",
+        "title",
+        "estimatedMinutes",
+        "blocks",
+        "lifecycle"
+      ],
+      "properties": {
+        "schema": { "const": "certigo.runtime.lesson/v1" },
+        "resourceType": { "const": "lesson" },
+        "id": { "$ref": "#/$defs/lessonId" },
+        "legacyId": { "$ref": "#/$defs/legacyId" },
+        "certificationId": { "$ref": "#/$defs/certificationId" },
+        "blueprintVersion": { "$ref": "#/$defs/blueprintVersion" },
+        "unitId": { "$ref": "#/$defs/unitId" },
+        "title": { "type": "string", "minLength": 1 },
+        "estimatedMinutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/block" }
+        },
+        "lifecycle": { "$ref": "#/$defs/lifecycle" }
+      }
+    },
+    "block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "conceptId"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.lesson\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.block\\.[0-9]{3}$"
+        },
+        "type": {
+          "enum": ["hook", "concept", "example", "code", "check", "recap"]
+        },
+        "conceptId": { "$ref": "#/$defs/conceptId" },
+        "title": { "type": "string", "minLength": 1 },
+        "body": { "type": "string", "minLength": 1 },
+        "code": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 1 },
+        "questionId": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "const": "check" } },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["questionId"],
+            "properties": {
+              "questionId": {
+                "type": "string",
+                "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+              },
+              "title": false,
+              "body": false,
+              "code": false,
+              "language": false
+            }
+          },
+          "else": {
+            "not": { "required": ["questionId"] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "code" } },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["code", "language"],
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "language": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": ["hook", "concept", "example", "recap"]
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["body"],
+            "properties": {
+              "body": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "resourceType",
+        "id",
+        "certificationId",
+        "blueprintVersion",
+        "domainId",
+        "title",
+        "lifecycle"
+      ],
+      "properties": {
+        "schema": { "const": "certigo.runtime.concept/v1" },
+        "resourceType": { "const": "concept" },
+        "id": { "$ref": "#/$defs/conceptId" },
+        "legacyId": { "$ref": "#/$defs/legacyId" },
+        "certificationId": { "$ref": "#/$defs/certificationId" },
+        "blueprintVersion": { "$ref": "#/$defs/blueprintVersion" },
+        "domainId": { "$ref": "#/$defs/domainId" },
+        "title": { "type": "string", "minLength": 1 },
+        "lifecycle": { "$ref": "#/$defs/lifecycle" }
+      }
+    }
+  }
+}
