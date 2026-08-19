@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   cpSync,
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
@@ -114,10 +115,38 @@ test("produit deux artefacts byte-identical avec des manifestes distincts", asyn
   assert.deepEqual(privateManifest.files.map((entry) => entry.path), ["solutions/sample.json"]);
 });
 
+test("conserve le package v2 de #20 byte-identical", async () => {
+  const outDir = mkdtempSync(join(tmpdir(), "certigo-package-v2-golden-"));
+  temporaryRoots.push(outDir);
+
+  const result = await packageContent({ root: repoRoot, outDir });
+
+  assert.equal(result.release, null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.deepEqual(
+    result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
+    [
+      {
+        artifact: "public",
+        manifestId:
+          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
+      },
+      {
+        artifact: "private",
+        manifestId:
+          "sha256:e3bfa7c20c03503384a68d8e261bcbb88f749292a273744a5ba4a309fc48c901",
+      },
+    ]
+  );
+  assert.equal(
+    sha256Hex(canonicalize(treeSnapshot(outDir))),
+    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
+  );
+});
+
 test("revalide un package historique v1 sans release descriptor", async () => {
   const root = createRoot();
   await packageContent({ root });
-  rmSync(resolve(root, "dist", "release.json"));
 
   const verified = await verifyPackagedContent({ root });
   assert.equal(verified.release, null);

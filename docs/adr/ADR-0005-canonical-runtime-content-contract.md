@@ -189,7 +189,8 @@ existantes : elle exige une migration explicite et une nouvelle release.
 
 La presence d'au moins une ressource sous `content/public/runtime/**` active le
 mode v3. Le simple ajout du catalogue ne change donc pas les manifestes v2 de
-la PR #20.
+la PR #20. Les packages v1/v2 restent byte-identical et n'emettent pas de
+`release.json`; le descripteur de release est propre au mode runtime v3.
 
 ### Canonicalisation, hashes et tailles
 

@@ -624,7 +624,10 @@ export async function packageContent(options = {}) {
   }
 
   let release = null;
-  if (configs.length === Object.keys(CHANNELS).length) {
+  if (
+    mode === CONTENT_MODE.runtime &&
+    configs.length === Object.keys(CHANNELS).length
+  ) {
     release = buildReleaseDescriptor(manifests.public, manifests.private);
     writeFileSync(
       resolve(distRoot, "release.json"),
@@ -643,7 +646,9 @@ export async function packageContent(options = {}) {
     sourcePairCount: validation.pairCount,
     certificationCount: validation.certificationCount,
     coverageMatrixCount: validation.coverageCount,
-    runtimeResourceCount: validation.runtimeResourceCount,
+    ...(mode === CONTENT_MODE.runtime
+      ? { runtimeResourceCount: validation.runtimeResourceCount }
+      : {}),
     packages,
     ...(release === null
       ? {}
