@@ -1,0 +1,18 @@
+{
+  "id": "aws.aif-c01.domain-4.audit-biais-sous-groupes.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aif-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un modèle d’éligibilité semble globalement performant, mais l’organisation veut vérifier qu’il ne pénalise pas une population donnée. Quelle action est la plus pertinente ?",
+  "choices": [
+    "Regarder uniquement l’accuracy globale",
+    "Augmenter la température d’inférence",
+    "Supprimer les labels historiques sans analyse",
+    "Comparer les résultats et métriques entre sous-groupes pertinents, avec un audit humain"
+  ]
+}

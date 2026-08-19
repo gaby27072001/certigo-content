@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   cpSync,
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
@@ -19,6 +20,7 @@ import {
   inspectPublicArtifact,
   packageContent,
   verifyArtifact,
+  verifyPackagedContent,
 } from "../tools/package_content.mjs";
 import { canonicalize, sha256Hex } from "../tools/gen_manifest.mjs";
 
@@ -51,6 +53,99 @@ function createRoot() {
       id: "sample",
     })
   );
+  return root;
+}
+
+function countJsonFiles(root) {
+  let count = 0;
+  function walk(directory) {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (entry.name.endsWith(".json")) count++;
+    }
+  }
+  walk(root);
+  return count;
+}
+
+function createHistoricalV2Root() {
+  const root = mkdtempSync(join(tmpdir(), "certigo-package-v2-historical-"));
+  temporaryRoots.push(root);
+  cpSync(resolve(repoRoot, "schemas"), resolve(root, "schemas"), { recursive: true });
+  cpSync(resolve(repoRoot, "content"), resolve(root, "content"), { recursive: true });
+
+  const wavesAfterRuntimeV2 = [
+    {
+      provider: "aws",
+      certifications: ["aif-c01", "clf-c02"],
+      pairCount: 42,
+    },
+    {
+      provider: "gcp",
+      certifications: ["cloud-digital-leader", "generative-ai-leader"],
+      pairCount: 42,
+    },
+  ];
+  for (const wave of wavesAfterRuntimeV2) {
+    for (const channel of [
+      ["public", "questions"],
+      ["answerKey", "solutions"],
+    ]) {
+      const channelRoot = resolve(root, "content", channel[0], channel[1], wave.provider);
+      const pairCount = wave.certifications.reduce(
+        (total, certification) =>
+          total + countJsonFiles(resolve(channelRoot, certification)),
+        0
+      );
+      assert.equal(pairCount, wave.pairCount);
+      for (const certification of wave.certifications) {
+        rmSync(resolve(channelRoot, certification), { recursive: true });
+      }
+    }
+  }
+
+  const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
+  const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  for (const certification of catalog.certifications) {
+    if (
+      ![
+        "aws:aif-c01",
+        "aws:clf-c02",
+        "gcp:cloud-digital-leader",
+        "gcp:generative-ai-leader",
+      ].includes(certification.id)
+    ) {
+      continue;
+    }
+    certification.provenance.checkedOn = "2026-08-17";
+    if (certification.provider === "aws") {
+      certification.provenance.sources = certification.provenance.sources.filter(
+        (source) => !source.url.endsWith("AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf")
+      );
+    }
+  }
+  writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
+
+  for (const { provider, certification } of [
+    { provider: "aws", certification: "aif-c01" },
+    { provider: "aws", certification: "clf-c02" },
+    { provider: "gcp", certification: "cloud-digital-leader" },
+    { provider: "gcp", certification: "generative-ai-leader" },
+  ]) {
+    const matrixPath = resolve(
+      root,
+      "content",
+      "public",
+      "coverage",
+      provider,
+      `${certification}.json`
+    );
+    const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
+    matrix.status = "planned";
+    for (const objective of matrix.objectives) objective.questionIds = [];
+    writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
+  }
   return root;
 }
 
@@ -111,6 +206,74 @@ test("produit deux artefacts byte-identical avec des manifestes distincts", asyn
   assert.notEqual(publicManifest.manifestId, privateManifest.manifestId);
   assert.deepEqual(publicManifest.files.map((entry) => entry.path), ["questions/sample.json"]);
   assert.deepEqual(privateManifest.files.map((entry) => entry.path), ["solutions/sample.json"]);
+});
+
+test("conserve le package v2 courant byte-identical", async () => {
+  const outDir = mkdtempSync(join(tmpdir(), "certigo-package-v2-golden-"));
+  temporaryRoots.push(outDir);
+
+  const result = await packageContent({ root: repoRoot, outDir });
+
+  assert.equal(result.sourcePairCount, 232 + 42 + 42);
+  assert.equal(result.release, null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.deepEqual(
+    result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
+    [
+      {
+        artifact: "public",
+        manifestId:
+          "sha256:5561b413b74a0bf79dd29b5dd73d2c26f6f19203d40cfb357d29d8591b2f6aba",
+      },
+      {
+        artifact: "private",
+        manifestId:
+          "sha256:54e6c240026508ddcb0768f3641473e08590bc48a430d60144d7574cc9c545ff",
+      },
+    ]
+  );
+  assert.equal(
+    sha256Hex(canonicalize(treeSnapshot(outDir))),
+    "e06b508f366edc8ebd5e3ae787078c2908142ccc8c2df0d7540634b0e5bf6418"
+  );
+});
+
+test("conserve le package v2 historique de #25 byte-identical", async () => {
+  const root = createHistoricalV2Root();
+  const outDir = resolve(root, "dist-golden");
+  const result = await packageContent({ root, outDir });
+
+  assert.equal(result.sourcePairCount, 232);
+  assert.equal(result.release, null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.deepEqual(
+    result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
+    [
+      {
+        artifact: "public",
+        manifestId:
+          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
+      },
+      {
+        artifact: "private",
+        manifestId:
+          "sha256:e3bfa7c20c03503384a68d8e261bcbb88f749292a273744a5ba4a309fc48c901",
+      },
+    ]
+  );
+  assert.equal(
+    sha256Hex(canonicalize(treeSnapshot(outDir))),
+    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
+  );
+});
+
+test("revalide un package historique v1 sans release descriptor", async () => {
+  const root = createRoot();
+  await packageContent({ root });
+
+  const verified = await verifyPackagedContent({ root });
+  assert.equal(verified.release, null);
+  assert.equal(verified.packages.length, 2);
 });
 
 test("la gate finale rejette une fuite injectee recursivement dans dist/public", async () => {

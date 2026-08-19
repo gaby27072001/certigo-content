@@ -1,0 +1,18 @@
+{
+  "id": "gcp.generative-ai-leader.section-3.limitations-modeles-fondation-mitigation.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un chatbot d'assistance juridique interne, basé sur un grand modèle de langage, fournit parfois des références à des articles de loi qui n'existent pas, et ignore une réforme législative récente survenue après la date de collecte de ses données d'entraînement. Quelles pratiques recommandées par Google Cloud permettent de traiter ces deux limitations spécifiques ?",
+  "choices": [
+    "Augmenter la taille de la fenêtre de contexte du modèle réduit fortement les hallucinations et supprime la coupure de connaissances du modèle, sans qu'il soit nécessaire de recourir à l'ancrage ou au RAG pour ce chatbot juridique.",
+    "L'ancrage (grounding) et le RAG réduisent les hallucinations et intègrent des informations récentes, complétés par une supervision humaine (human-in-the-loop) pour les réponses sensibles.",
+    "Le réglage fin (fine-tuning) du modèle sur les anciens textes de loi suffit à corriger la coupure de connaissances de ce chatbot, sans qu'un mécanisme de récupération d'informations à jour soit nécessaire par ailleurs.",
+    "L'ingénierie de prompt, sans ancrage ni RAG, permet de garantir que le modèle ne cite plus un article de loi inexistant dans ses réponses à l'utilisateur final."
+  ]
+}

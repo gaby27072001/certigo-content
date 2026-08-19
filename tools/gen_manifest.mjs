@@ -36,41 +36,20 @@ import { resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 import { glob } from "glob";
-import { CATALOG_PATH, metadataFields } from "./lib/catalog.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
+import {
+  CONTENT_MODE,
+  detectContentMode,
+  resourceIdentity,
+  resourceMetadata,
+  sourceSpecsForMode,
+} from "./lib/resources.mjs";
 
 export const MANIFEST_SCHEMA_ID = "certigo.content.manifest/v1";
 export const EXTENDED_MANIFEST_SCHEMA_ID = "certigo.content.manifest/v2";
+export const RUNTIME_MANIFEST_SCHEMA_ID = "certigo.content.manifest/v3";
 export const ALGORITHM = "sha256";
 export const CANONICALIZATION = "json-sorted-keys-compact-utf8";
-
-const LEGACY_CHANNELS = [
-  { channel: "public", glob: "content/public/questions/*.json" },
-  { channel: "answerKey", glob: "content/answerKey/solutions/*.json" },
-];
-
-const EXTENDED_CHANNELS = [
-  {
-    channel: "public",
-    glob: "content/public/questions/**/*.json",
-    resourceType: "question",
-  },
-  {
-    channel: "public",
-    glob: "content/public/catalog/*.json",
-    resourceType: "certificationCatalog",
-  },
-  {
-    channel: "public",
-    glob: "content/public/coverage/**/*.json",
-    resourceType: "coverageMatrix",
-  },
-  {
-    channel: "answerKey",
-    glob: "content/answerKey/solutions/**/*.json",
-    resourceType: "solution",
-  },
-];
 
 /**
  * Deterministic JSON serialization: recursively sorted object keys, compact
@@ -119,21 +98,10 @@ function idFromPath(posixPath) {
   return base.replace(/\.json$/i, "");
 }
 
-function extendedIdentity(resourceType, data) {
-  if (resourceType === "certificationCatalog") return "certification-catalog";
-  if (resourceType === "coverageMatrix") return data.certification;
-  return data.id;
-}
-
-function extendedMetadata(resourceType, data) {
-  if (resourceType === "coverageMatrix") {
-    return {
-      provider: data.provider,
-      certification: data.certification,
-      blueprintVersion: data.blueprintVersion,
-    };
-  }
-  return metadataFields(data);
+function schemaForMode(mode) {
+  if (mode === CONTENT_MODE.legacy) return MANIFEST_SCHEMA_ID;
+  if (mode === CONTENT_MODE.extended) return EXTENDED_MANIFEST_SCHEMA_ID;
+  return RUNTIME_MANIFEST_SCHEMA_ID;
 }
 
 /**
@@ -143,26 +111,27 @@ function extendedMetadata(resourceType, data) {
  */
 export async function buildManifest(opts = {}) {
   const root = resolve(opts.root ?? ".");
-  const extended = existsSync(resolve(root, CATALOG_PATH));
-  const channels = extended ? EXTENDED_CHANNELS : LEGACY_CHANNELS;
+  const mode = detectContentMode(root);
+  const extended = mode !== CONTENT_MODE.legacy;
+  const resources = sourceSpecsForMode(mode);
   const items = [];
 
-  for (const { channel, glob: pattern, resourceType } of channels) {
-    const files = (await glob(pattern, { cwd: root, posix: true })).sort(compareOrdinal);
+  for (const { channel, sourceGlob, resourceType } of resources) {
+    const files = (await glob(sourceGlob, { cwd: root, posix: true })).sort(compareOrdinal);
     for (const path of files) {
       const abs = resolve(root, path);
       const data = loadJson(abs);
       const canonical = canonicalize(data);
       const item = {
         channel,
-        id: extended ? extendedIdentity(resourceType, data) : idFromPath(path),
+        id: extended ? resourceIdentity(resourceType, data) : idFromPath(path),
         path,
         hash: sha256Hex(canonical),
         size: Buffer.byteLength(canonical, "utf8"),
       };
       if (extended) {
         item.resourceType = resourceType;
-        Object.assign(item, extendedMetadata(resourceType, data));
+        Object.assign(item, resourceMetadata(resourceType, data));
       }
       items.push(item);
     }
@@ -173,7 +142,7 @@ export async function buildManifest(opts = {}) {
 
   // Body = the hashed part (NO rootHash / manifestId, NO timestamps).
   const body = {
-    schema: extended ? EXTENDED_MANIFEST_SCHEMA_ID : MANIFEST_SCHEMA_ID,
+    schema: schemaForMode(mode),
     algorithm: ALGORITHM,
     canonicalization: CANONICALIZATION,
     itemCount: items.length,

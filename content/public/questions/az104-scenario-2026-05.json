@@ -1,0 +1,12 @@
+{
+  "id": "az104-scenario-2026-05",
+  "schemaVersion": "v2",
+  "kind": "public",
+  "prompt": "Un traitement conteneurisé consomme les messages d'une file Azure Service Bus. Il doit créer des réplicas selon la longueur de la file et revenir à zéro réplica lorsqu'elle est vide, sans administrer Kubernetes. Quelle solution choisissez-vous ?",
+  "choices": [
+    "Azure Container Instances avec une stratégie de mise à l'échelle automatique",
+    "Azure Container Apps avec une règle de mise à l'échelle KEDA et minReplicas à 0",
+    "Azure App Service avec un emplacement de déploiement",
+    "Une machine virtuelle arrêtée automatiquement chaque nuit"
+  ]
+}
