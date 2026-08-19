@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-4.portfolio-7rs-tco-legacy-monolith-assessment.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "L'evaluation de portefeuille d'un monolithe Java on-premises vieux de 12 ans gerant la gestion des commandes montre une application avec peu de dependances externes ; l'entreprise veut reduire rapidement l'empreinte de son centre de donnees avec une echeance de 6 mois, l'equipe manque actuellement de disponibilite pour une refonte architecturale complete, mais la feuille de route future prevoit de decouper l'application en services d'ici 18 a 24 mois, et la direction financiere exige une comparaison de cout total de possession defendable par rapport au maintien on-premises avant d'approuver le budget.",
+  "choices": [
+    "Sauter toute decouverte formelle ou analyse de cout total de possession puisque l'echeance est serree, et commencer immediatement avec AWS Application Migration Service une refonte complete du monolithe en microservices pour satisfaire des maintenant l'objectif de feuille de route a long terme.",
+    "Mettre fin a l'application et demander a l'unite metier de trouver un remplacement SaaS via AWS Marketplace, sans effectuer de decouverte, d'analyse de cout total de possession, ni evaluer les options de rehebergement pour la fonctionnalite existante de commandes.",
+    "Realiser d'abord une decouverte applicative avec AWS Application Discovery Service pour inventorier l'environnement, batir le dossier de cout total de possession avec AWS Migration Evaluator pour comparer le maintien on-premises et AWS, suivre la vague de migration avec AWS Transform, puis reheberger le monolithe tel quel pour respecter l'echeance, en planifiant une refonte future.",
+    "Racheter la capacite de gestion des commandes en achetant aujourd'hui un nouveau progiciel commercial tiers via AWS Marketplace, ce qui necessite une migration complete des donnees avec AWS DMS et une reformation des processus metier dans le delai de six mois."
+  ]
+}

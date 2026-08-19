@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-4.target-platform-containerization-storage-selection.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "La decision de nouvelle architecture cible pour une application existante de traitement d'images par lots, fonctionnant on-premises sur des machines virtuelles Linux auto-gerees avec un repertoire partage monte en NFS sur lequel plusieurs travailleurs concurrents lisent et ecrivent simultanement, doit moderniser la couche de calcul vers des conteneurs afin de reduire la charge operationnelle de patch, ne pas exiger que l'equipe gere elle-meme ni le plan de controle Kubernetes ni les noeuds de calcul sous-jacents, permettre a de nombreux travailleurs de lire et d'ecrire simultanement le meme repertoire partage plutot que d'utiliser une semantique de stockage objet, et permettre une mise a l'echelle elastique du nombre de taches de travailleurs selon la profondeur d'une file.",
+  "choices": [
+    "Conteneuriser les travailleurs sur Amazon ECS avec le type de lancement AWS Fargate, sans provisionner ni patcher aucun noeud de calcul sous-jacent, monter un systeme de fichiers Amazon EFS partage pour la lecture-ecriture concurrente, et mettre a l'echelle entre 2 et 20 taches selon la profondeur d'une file Amazon SQS. Cette configuration cible une capacite ECS correspondant a la charge de travail nocturne habituelle de la flotte.",
+    "Faire fonctionner les travailleurs conteneurises sur Amazon EKS, dont AWS gere toujours le plan de controle Kubernetes, mais avec des noeuds Amazon EC2 auto-geres que l'equipe doit elle-meme provisionner, patcher et mettre a niveau, et monter un compartiment Amazon S3 sur les conteneurs comme un systeme de fichiers POSIX partage, sans activer Amazon EKS Auto Mode ni les groupes de noeuds geres pour cette meme charge, avec Amazon CloudWatch pour la supervision quotidienne de ces noeuds.",
+    "Conserver les travailleurs sur des instances Amazon EC2 auto-gerees sans conteneurs pour eviter toute nouvelle couche d'orchestration, et remplacer le repertoire NFS partage par des volumes Amazon EBS individuels attaches un pour un a chaque instance de travailleur, en surveillant l'utilisation disque via Amazon CloudWatch et en conservant l'equilibrage de charge existant devant les instances Amazon EC2.",
+    "Conteneuriser les travailleurs sur Amazon ECS avec le type de lancement EC2, avec des instances de cluster que l'equipe provisionne et patche elle-meme, et monter Amazon FSx for Windows File Server sur les conteneurs de travailleurs Linux, avec une fenetre de patch mensuelle geree par l'equipe pour ces instances de cluster existantes."
+  ]
+}

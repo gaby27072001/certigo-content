@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.hybrid-rerank-retrieval-relevance.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Executer une recherche hybride mots-cles et vecteurs dans Amazon OpenSearch Service, puis reordonner uniquement les candidats ainsi obtenus avec le modele de reclassement gere d'Amazon Bedrock avant de les transmettre au modele de fondation.",
+  "rationale": "La recherche hybride additionne les deux signaux dont le copilote a besoin : le score lexical ancre les termes juridiques qui doivent correspondre litteralement, le score vectoriel rattrape les clauses reformulees. Le reclassement gere d'Amazon Bedrock s'applique ensuite a la seule liste de candidats issue de cette premiere passe, donc le calcul cher reste proportionnel a quelques dizaines de fragments et non au corpus, et le service etant gere il n'y a ni entrainement ni endpoint de reranker a exploiter. La recherche vectorielle seule avec k porte a 200 ne corrige pas la faiblesse lexicale : un terme juridique exact reste noye parmi des voisins semantiques, et les 200 fragments transmis gonflent le cout en tokens comme la latence tout en diluant l'attention du modele. La recherche BM25 seule, meme enrichie de synonymes, reste dependante du vocabulaire indexe : une clause paraphrasee avec des termes absents du dictionnaire n'est pas retrouvee. Le cross-encoder entraine et heberge sur SageMaker AI applique le calcul le plus couteux du pipeline a chaque fragment du corpus pour chaque requete, ce qui inverse exactement l'economie recherchee et ajoute l'entrainement, l'hebergement et le cycle de vie d'un modele supplementaire. Sources officielles AWS : https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html https://docs.aws.amazon.com/bedrock/latest/userguide/rerank.html"
+}

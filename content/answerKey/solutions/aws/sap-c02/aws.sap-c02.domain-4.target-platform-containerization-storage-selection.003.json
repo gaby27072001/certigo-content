@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-4.target-platform-containerization-storage-selection.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Conteneuriser les travailleurs sur Amazon ECS avec le type de lancement AWS Fargate, sans provisionner ni patcher aucun noeud de calcul sous-jacent, monter un systeme de fichiers Amazon EFS partage pour la lecture-ecriture concurrente, et mettre a l'echelle entre 2 et 20 taches selon la profondeur d'une file Amazon SQS. Cette configuration cible une capacite ECS correspondant a la charge de travail nocturne habituelle de la flotte.",
+  "rationale": "Amazon ECS avec le type de lancement Fargate conteneurise les travailleurs sans exiger que l'equipe provisionne ou patche le moindre noeud de calcul sous-jacent, Amazon EFS fournit une semantique de fichiers POSIX permettant a de nombreuses taches concurrentes de lire et d'ecrire le meme repertoire partage simultanement comme l'exigeait le NFS d'origine, et la mise a l'echelle automatique du service ECS fondee sur la profondeur de file SQS repond a l'exigence d'elasticite. Amazon EKS gere toujours le plan de controle Kubernetes pour le compte du client, quel que soit le type de noeuds choisi ; toutefois, des noeuds Amazon EC2 auto-geres constituent le plan de donnees et restent entierement a la charge de l'equipe pour le provisionnement, le patch et la mise a niveau, ce qui ne satisfait pas l'exigence de ne pas gerer les noeuds de calcul sous-jacents, et un compartiment Amazon S3 ne fournit pas la semantique de systeme de fichiers POSIX en lecture-ecriture concurrente exigee par de nombreux travailleurs simultanes. Conserver des instances EC2 auto-gerees sans conteneurs ne modernise pas la couche de calcul comme demande, et des volumes EBS individuels attaches un pour un a chaque instance ne peuvent pas fournir l'acces partage concurrent en lecture-ecriture exige par de nombreux travailleurs a la fois. Amazon ECS avec le type de lancement EC2 laisse l'equipe provisionner et patcher les instances de cluster sous-jacentes, ce qui ne reduit pas la charge operationnelle de patch comme exige, et Amazon FSx for Windows File Server est concu pour un acces SMB natif Windows plutot que pour des conteneurs de travailleurs Linux necessitant un acces POSIX concurrent. Sources officielles AWS : https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html https://docs.aws.amazon.com/eks/latest/userguide/eks-compute.html https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html"
+}

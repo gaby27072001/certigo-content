@@ -89,6 +89,19 @@ function catalogAt(root) {
   return resolve(root, "content", "public", "catalog", "certifications.json");
 }
 
+function clearCoverageQuestionIds(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) {
+      clearCoverageQuestionIds(path);
+    } else if (entry.name.endsWith(".json")) {
+      const matrix = readJson(path);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      writeJson(path, matrix);
+    }
+  }
+}
+
 function createMetadataRoot() {
   const root = mkdtempSync(join(tmpdir(), "certigo-catalog-"));
   temporaryRoots.push(root);
@@ -103,6 +116,7 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
+  clearCoverageQuestionIds(resolve(root, "content", "public", "coverage"));
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -207,7 +221,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async () => {
+test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
@@ -226,7 +240,11 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
       )
     );
     assert.equal(matrix.certification, certification.id);
-    assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    if (matrix.status === "planned") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    } else if (matrix.status === "complete") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length > 0));
+    }
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0

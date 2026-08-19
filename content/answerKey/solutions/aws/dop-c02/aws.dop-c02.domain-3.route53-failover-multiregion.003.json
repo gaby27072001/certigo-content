@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-3.route53-failover-multiregion.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Creer un enregistrement Route 53 en routage de basculement, associe a un controle de sante sur l'ALB primaire et assorti d'un TTL faible, pour rediriger le trafic vers la region secondaire.",
+  "rationale": "Le routage de basculement Route 53 avec controle de sante et TTL faible redirige automatiquement le trafic vers la region secondaire des que l'ALB primaire echoue aux controles de sante, sans intervention humaine, et respecte exactement la contrainte metier acceptant une propagation DNS de quelques minutes tout en evitant le cout et la complexite d'une couche anycast globale explicitement ecartee par l'enonce. Global Accelerator offrirait un basculement plus rapide au niveau IP, mais son reseau anycast global introduit precisement la complexite operationnelle et le cout supplementaires que l'organisation a choisi d'eviter pour ce cas d'usage HTTP(S) tolerant une bascule DNS ; ce n'est donc pas la solution alignee sur les contraintes exprimees. Le routage pondere a parts egales continuerait d'envoyer la moitie du trafic vers la region primaire meme en cas de panne totale, puisque la repartition ne tient pas compte de l'etat de sante des points de terminaison, ce qui echoue completement a l'objectif de bascule automatique. La modification de l'enregistrement par l'ingenieur d'astreinte depend de la reactivite humaine face au tableau de bord, ce qui introduit un delai de reprise imprevisible et viole l'exigence d'un basculement automatique. Sources officielles AWS : https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html"
+}

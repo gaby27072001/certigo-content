@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.hierarchical-knowledge-base-multitenant.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Creer une base de connaissances Amazon Bedrock par tenant, chacune adossee a sa propre collection Amazon OpenSearch Serverless, et organiser les documents par filtres de metadonnees (categorie, date) pour la recuperation dans chaque base.",
+  "rationale": "Une base de connaissances Bedrock par tenant, adossee a une collection OpenSearch Serverless distincte, place la frontiere d'isolation dans l'infrastructure : une requete adressee a la base d'un cabinet ne peut pas atteindre les vecteurs d'une autre collection, meme si le code applicatif se trompe d'identifiant de filtre. Les filtres de metadonnees par categorie et par date fournissent la hierarchie interne demandee, et chaque collection s'ingere et se reindexe selon son propre calendrier, sans consommer les ressources de recherche des autres tenants ni imposer de plan de controle maison. La base partagee pilotee par instruction de prompt fait reposer la separation sur le comportement du modele : une injection de prompt, une reformulation adverse ou une simple hallucination de citation suffit a faire remonter le fragment d'un autre cabinet, et le magasin vectoriel a de toute facon deja renvoye ce fragment avant que le modele ne decide. L'index unique sans identifiant de tenant supprime jusqu'a la possibilite de filtrer : deux cabinets plaidant sur des sujets juridiques voisins produisent des embeddings proches, donc la recherche par similarite melange leurs passages confidentiels. La table pgvector unique et non partitionnee couple les tenants sur la meme ressource : la reindexation nocturne complete se declenche pour l'ingestion d'un seul cabinet, sa duree croit avec le corpus global, et la charge d'ecriture concurrente degrade la latence de lecture des autres. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html"
+}

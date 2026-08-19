@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.bedrock-cross-region-circuit-breaker.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer des profils d'inference multi-Region Amazon Bedrock pour le modele principal, puis encadrer les invocations par un circuit breaker AWS Step Functions qui bascule vers un modele de secours plus petit au-dela d'un seuil d'echecs.",
+  "rationale": "Les profils d'inference multi-Region d'Amazon Bedrock repartissent les requetes entre les Regions prises en charge par le modele sans dupliquer la pile applicative, ce qui apporte la continuite automatique et evite la duplication de code par Region ; le circuit breaker Step Functions ajoute la degradation vers un modele de secours des qu'un seuil d'echecs est franchi, et comme le routage reste gere par le profil Bedrock, l'arrivee d'un nouveau modele prefere ne force aucune reecriture metier. La pile dupliquee derriere un basculement Route 53 oblige a maintenir deux copies completes de l'application et de leurs dependances, et n'offre aucun repli vers un modele moins couteux : l'echec du modele lui-meme reste fatal dans les deux Regions. Le sondage sequentiel de trois endpoints SageMaker AI cumule la latence de chaque tentative avant de repondre, laisse le code de routage a maintenir Region par Region et modele par modele, et ne degrade jamais vers un modele plus economique. L'epinglage sur une version unique avec runbook d'escalade prolonge l'indisponibilite jusqu'a l'intervention humaine et fige le choix de modele, ce qui reproduit l'incident constate. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles.html https://docs.aws.amazon.com/step-functions/latest/dg/concepts-error-handling.html"
+}

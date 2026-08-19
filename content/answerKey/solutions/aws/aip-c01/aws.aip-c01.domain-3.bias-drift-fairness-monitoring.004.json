@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-3.bias-drift-fairness-monitoring.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Planifier un moniteur de derive de biais Amazon SageMaker Clarify sur les donnees capturees par l'endpoint, avec une baseline etablie sur le jeu de reference, et notifier l'equipe par une alarme Amazon CloudWatch.",
+  "rationale": "SageMaker Clarify sait surveiller la derive de biais d'un modele deja en service : a partir d'une baseline calculee sur un jeu de donnees de reference, un moniteur planifie recalcule sur les donnees capturees par l'endpoint des metriques de biais predefinies, comme la difference de proportions des predictions positives entre groupes, et signale l'ecart par rapport a cette baseline. Les metriques etant celles fournies par le service, l'equipe n'invente pas ses propres indicateurs, et la surveillance suit l'evolution reelle du trafic mois apres mois. Les resultats du moniteur sont emis vers CloudWatch, ou une alarme sur seuil declenche la notification et la procedure de remediation sans attendre qu'un observateur repere la tendance. Conserver le rapport d'avant lancement comme reference permanente ignore que la population de candidats, les intitules de postes et la redaction des CV changent : des poids figes ne garantissent pas des resultats stables. La relecture trimestrielle d'un echantillon produit une appreciation humaine sur quelques dossiers, sans metrique normalisee ni comparaison a une baseline, donc une derive diffuse sur des milliers de candidatures reste invisible. Le ratio calcule chaque nuit dans Athena mesure bien quelque chose en continu, mais il repose sur une definition maison non comparable aux metriques de biais standard, il n'est confronte a aucune reference, et sa restitution trimestrielle en revue de conformite retarde toute reaction. Sources officielles AWS : https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-monitor-bias-drift.html https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html"
+}

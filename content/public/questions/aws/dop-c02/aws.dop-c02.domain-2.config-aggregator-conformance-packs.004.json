@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-2.config-aggregator-conformance-packs.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "L'equipe de securite d'une organisation comptant plusieurs centaines de comptes AWS doit verifier en continu que toutes les ressources respectent un ensemble commun de regles de configuration (par exemple, volumes EBS chiffres et groupes de securite restreints), obtenir une vue de conformite consolidee au niveau de l'organisation, et s'assurer que tout nouveau compte membre applique automatiquement ces regles sans configuration manuelle repetee.",
+  "choices": [
+    "Deployer AWS Config et un jeu de regles managees compte par compte, puis consolider chaque semaine les resultats de conformite dans une feuille de calcul tenue a jour par l'equipe de securite.",
+    "Activer AWS Config dans le seul compte de gestion de l'organisation et lire les resultats de conformite depuis le tableau de bord de ce compte pour l'ensemble du perimetre.",
+    "Creer les regles AWS Config compte par compte au moyen de scripts AWS CLI executes par l'equipe de securite a chaque ajout d'une regle au referentiel commun.",
+    "Deployer un pack de conformite organisationnel AWS Config associe a un agregateur au niveau de l'organisation, pour obtenir une vue consolidee et une application aux nouveaux comptes membres."
+  ]
+}

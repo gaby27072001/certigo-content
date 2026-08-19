@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-4.database-migration-cdc-minimal-downtime.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Utiliser AWS SCT pour convertir le schema et le code Oracle vers Aurora, lancer une tache AWS DMS en mode full load and CDC (chargement complet suivi de capture continue des changements) via la liaison Direct Connect a 150 Mbps pendant que la base source continue de servir le trafic de production, puis effectuer une bascule finale breve une fois que DMS confirme que la cible a rattrape la source.",
+  "rationale": "AWS SCT convertit le schema et le code Oracle pour Aurora avant la bascule, et une tache AWS DMS en mode full load and CDC copie les 20 To de donnees existantes via la liaison Direct Connect a 150 Mbps pendant que la base source reste en ligne et continue de servir le trafic de production, sans exiger d'arret pour la phase de chargement en masse, puis capture en continu les changements jusqu'a une bascule finale breve : cela respecte a la fois l'exigence de quelques minutes d'indisponibilite, reservee a la seule bascule, et la continuite du service de la base source pendant la quasi-totalite de la migration. Transferer les 20 To en une seule operation continue puis mettre la source hors ligne durant plusieurs jours viole directement l'exigence de quelques minutes d'indisponibilite et celle de continuite du service pendant la migration. Un chargement complet unique sans capture des changements, contraint dans une seule fenetre de week-end sur une liaison a 150 Mbps, laisse a la fois un risque de depassement de la fenetre pour 20 To et des modifications survenues pendant le transfert non capturees automatiquement, ce qui expose a des pertes ou des incoherences de donnees sur un systeme de commandes fonctionnant 24 heures sur 24. AWS DataSync est concu pour le transfert de fichiers vers des services comme Amazon S3, Amazon EFS ou Amazon FSx et non pour la migration d'une base relationnelle active avec conversion de schema et replication continue, et reecrire manuellement tout le SQL apres la bascule plutot que de valider la compatibilite au prealable avec SCT risque de prolonger la breve fenetre de bascule et d'introduire des erreurs. Sources officielles AWS : https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html"
+}

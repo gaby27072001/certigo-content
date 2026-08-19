@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-5.health-aware-proactive-incident.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Activer la vue organisationnelle d'AWS Health et creer des regles Amazon EventBridge sur les evenements Health concernant les ressources affectees, pour declencher le processus d'incident.",
+  "rationale": "La vue organisationnelle d'AWS Health centralise les evenements pertinents pour les 30 comptes, et des regles EventBridge ciblent specifiquement les evenements lies aux ressources reellement deployees par l'entreprise, declenchant automatiquement le processus interne d'incident avant impact client, sans surveillance manuelle repetee : c'est la seule option proactive, specifique aux ressources et automatisee. La consultation horaire du tableau de bord public pour 30 comptes represente une charge operationnelle enorme, n'est pas en temps reel et depend entierement de la vigilance humaine. Un flux generique de statut des services n'est pas lie aux ressources specifiques de l'entreprise : route vers un canal de discussion, il genere du bruit non pertinent tout en manquant potentiellement les evenements cibles sur les comptes ou ressources concernes. Une alarme fondee sur les seules metriques applicatives internes ne peut se declencher qu'apres qu'un probleme AWS a deja degrade l'application, ce qui est reactif et non proactif, et ne fournit pas non plus de classification officielle de la cause pour faciliter la gestion de l'incident. Sources officielles AWS : https://docs.aws.amazon.com/health/latest/ug/what-is-aws-health.html https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html"
+}

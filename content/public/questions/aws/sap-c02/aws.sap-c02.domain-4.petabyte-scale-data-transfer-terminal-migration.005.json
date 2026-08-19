@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-4.petabyte-scale-data-transfer-terminal-migration.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "L'approche de migration pour un transfert ponctuel de 1,5 Po de ressources media d'archive, deja copiees sur des baies de stockage transportables depuis un site on-premises ne disposant que d'une liaison Internet de 200 Mbps, sans AWS Direct Connect disponible sur ce site distant et aucun projet d'en installer un, vers Amazon S3, pour une organisation disposant d'un contrat AWS Enterprise Support, doit respecter une echeance metier de quelques semaines, garantir un cout de transfert previsible, et valider l'integrite des donnees de chaque fichier apres son arrivee.",
+  "choices": [
+    "Utiliser AWS DataSync pour transferer l'integralite des 1,5 Po via la liaison Internet existante de 200 Mbps, en planifiant un transfert continu aussi longtemps que necessaire pour atteindre le volume total attendu par l'archivage ; a ce debit, un tel transfert continu durerait environ 23 mois. Cette planification couvre l'ensemble du volume de 1,5 Po sur la seule liaison disponible du site.",
+    "Reserver une serie de sessions de 6 heures au terminal AWS Data Transfer Terminal le plus proche, echelonnees sur plusieurs jours avec au moins une heure d'ecart entre deux sessions, transporter les baies de stockage vers cette installation reseau pour chaque session, s'y connecter a une liaison a tres haut debit sur place, televerser vers Amazon S3 et valider les sommes de controle Amazon S3 de chaque objet apres chaque session, en evitant la liaison limitee de 200 Mbps du site.",
+    "Provisionner une nouvelle connexion AWS Direct Connect sur le site distant afin d'augmenter la bande passante disponible avant de commencer le transfert, puis utiliser S3 Transfer Acceleration via cette nouvelle liaison pour deplacer les 1,5 Po. Cette nouvelle connexion couvrirait uniquement ce site distant pour la duree du transfert.",
+    "Compresser les ressources localement et les transferer via la liaison de 200 Mbps existante en utilisant plusieurs flux paralleles de televersement multipart S3 pour maximiser le debit disponible sur la connexion existante du site, sans jamais depasser la capacite physique agregee de la liaison Internet existante du site distant concerne."
+  ]
+}

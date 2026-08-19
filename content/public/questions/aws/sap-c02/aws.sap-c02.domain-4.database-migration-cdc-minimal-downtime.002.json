@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-4.database-migration-cdc-minimal-downtime.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "La decision d'approche de migration pour une base de donnees Oracle on-premises de 20 To alimentant un systeme de commandes 24 heures sur 24 doit tolerer au plus quelques minutes d'indisponibilite lors de la bascule finale, le site est relie a AWS par une connexion AWS Direct Connect dediee de 1 Gbps dont la bande passante moyenne disponible pour la migration est d'environ 150 Mbps compte tenu du trafic de production concurrent, la cible est Amazon Aurora, un moteur different d'Oracle, et il est imperatif que la base source continue de servir le trafic de production pendant la quasi-totalite de la migration.",
+  "choices": [
+    "Exporter l'integralite de la base de donnees de 20 To vers un seul jeu de fichiers et les transferer via la liaison Direct Connect a 150 Mbps en une seule operation de copie continue, puis mettre la base source hors ligne durant plusieurs jours le temps que le transfert de 20 To se termine sur cette liaison.",
+    "Utiliser AWS DMS en mode chargement complet uniquement, une charge initiale sans capture des changements, planifiee durant une seule fenetre de maintenance de week-end sur la liaison a 150 Mbps, et appliquer a posteriori, via un script ecrit par un ingenieur, les changements survenus sur la source pendant la fenetre.",
+    "Sauter AWS SCT et reecrire tout le SQL et les procedures stockees specifiques a Oracle apres la bascule via un script ecrit par l'equipe, et utiliser AWS DataSync sur la liaison Direct Connect pour deplacer directement les 20 To de fichiers de base puisqu'il est optimise pour le transfert de fichiers, en s'appuyant ensuite sur Amazon RDS Performance Insights et Amazon CloudWatch pour la supervision de la base cible apres la bascule.",
+    "Utiliser AWS SCT pour convertir le schema et le code Oracle vers Aurora, lancer une tache AWS DMS en mode full load and CDC (chargement complet suivi de capture continue des changements) via la liaison Direct Connect a 150 Mbps pendant que la base source continue de servir le trafic de production, puis effectuer une bascule finale breve une fois que DMS confirme que la cible a rattrape la source."
+  ]
+}

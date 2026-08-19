@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-1.codeartifact-package-origin-control.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une equipe plateforme publie ses paquets npm internes dans un depot AWS CodeArtifact configure avec une connexion externe vers le registre public npmjs.com, afin que les builds AWS CodeBuild resolvent au meme endroit les dependances internes et open source. La securite applicative redoute une attaque de substitution de dependance : un tiers publierait sur le registre public un paquet portant exactement le nom d'un paquet interne, et le prochain build pourrait alors resoudre la version publique a la place de la version interne. L'equipe veut empecher cette confusion de noms pour les paquets deja publies en interne, continuer a consommer normalement les dependances open source, et n'ajouter aucune etape manuelle au pipeline de livraison.",
+  "choices": [
+    "Supprimer la connexion externe vers npmjs.com du depot CodeArtifact, et faire televerser dans le depot interne par l'equipe plateforme chaque dependance open source requise avant l'execution du build.",
+    "Configurer les controles d'origine des paquets CodeArtifact pour bloquer les versions amont des paquets deja publies en interne, les autres paquets restant servis par la connexion externe.",
+    "Ajouter a la specification de build CodeBuild une etape qui compare la liste des dependances resolues a une liste d'exclusion de noms de paquets tenue a jour par l'equipe de securite applicative.",
+    "Republier chaque paquet interne sous une portee npm privee, et demander aux equipes applicatives de mettre a jour leurs instructions d'import lors de leur prochaine iteration de maintenance."
+  ]
+}

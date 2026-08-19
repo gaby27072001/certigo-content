@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-2.large-model-inference-container-deployment.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une equipe migre un grand modele de langage a poids ouverts de 70 milliards de parametres depuis un petit conteneur de service ML traditionnel, concu a l'origine pour des modeles scikit-learn legers, vers Amazon SageMaker AI. Le conteneur naif sature la memoire GPU et le demarrage prend 40 minutes car les poids se chargent sequentiellement dans un seul processus de travail. Les exigences sont : (1) repartir efficacement le grand modele sur plusieurs GPU (parallelisme de modele), (2) reduire le temps de demarrage a froid et de chargement du modele, (3) utiliser une image de conteneur concue specifiquement pour le service de grands modeles plutot qu'un conteneur de serveur web Python generique, et (4) supporter un debit concurrent eleve de tokens sans devoir ecrire a la main une logique de batching personnalisee. Quelle approche de deploiement satisfait le mieux ces quatre exigences ?",
+  "choices": [
+    "Conserver l'image de conteneur legere existante et augmenter le nombre de coeurs CPU ainsi que le nombre de processus de travail du serveur web afin d'absorber davantage de requetes simultanees sur le point de terminaison.",
+    "Decouper le checkpoint en modules d'une couche chacun, deployer chaque module sur un point de terminaison SageMaker AI distinct, et enchainer les appels a ces points de terminaison dans l'ordre des couches pour chaque token genere.",
+    "Deployer le modele avec les conteneurs LMI (Large Model Inference) de SageMaker AI, qui apportent le partitionnement sur plusieurs GPU, un chargement optimise des poids et le batching continu des requetes.",
+    "Quantifier les poids en precision reduite hors ligne, les copier sur le disque d'une instance Amazon EC2 GPU et servir le modele derriere un script Flask maison expose par un Application Load Balancer."
+  ]
+}

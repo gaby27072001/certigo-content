@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-2.stacksets-guardrail-ou-rollout.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Utiliser AWS CloudFormation StackSets en permissions gerees par le service, integrees a AWS Organizations, avec deploiement automatique cible sur l'unite d'organisation concernee.",
+  "rationale": "Les permissions gerees par le service integrees a AWS Organizations permettent de cibler directement une unite d'organisation et de deployer automatiquement la pile de garde-fous dans tout compte, present ou futur, qui rejoint cette unite, sans creation manuelle de roles ni octroi de permissions administratives larges : c'est la seule option qui satisfait simultanement l'echelle, l'automatisation pour les nouveaux comptes et la faible charge operationnelle. La transmission du modele a chaque proprietaire de compte pour un deploiement dans sa propre console n'est ni auditable de maniere centralisee, ni reproductible, ni soutenable a l'echelle de 200 comptes, et ne garantit aucune application aux nouveaux comptes. La creation de piles independantes a partir d'identifiants IAM utilisateur partages entre equipes viole le moindre privilege, n'automatise rien pour les nouveaux comptes et multiplie le risque en cas de compromission de ces identifiants. Les StackSets en mode auto-gere exigent la creation prealable d'un role d'execution dans chacun des 200 comptes, ce qui represente une charge operationnelle considerable, et ne deploient pas automatiquement la pile lorsqu'un nouveau compte rejoint l'unite d'organisation, contrairement au mode gere par le service. Sources officielles AWS : https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-associate-stackset-with-org.html"
+}

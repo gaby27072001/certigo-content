@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-1.shared-services-vpc-segmentation-transit-gateway.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Construire une topologie hub-and-spoke autour d'une Transit Gateway centrale, rattacher chaque VPC spoke et un VPC de services partages jouant le role de hub, utiliser des tables de routage distinctes par environnement, et inserer un VPC d'inspection avec Gateway Load Balancer.",
+  "rationale": "Une topologie hub-and-spoke fondee sur Transit Gateway permet a chaque VPC spoke d'atteindre le VPC de services partages sans negocier de connexion point a point supplementaire a chaque ajout, et l'utilisation de tables de routage Transit Gateway distinctes par environnement applique une segmentation stricte empechant tout routage transitif du developpement vers la production ; l'insertion d'un VPC d'inspection avec Gateway Load Balancer fournit le point unique de supervision est-ouest exige. Le maillage complet de peering croit en N carre a mesure que de nouveaux VPC sont ajoutes, violant l'exigence de ne pas renegocier de connexion a chaque ajout, et le peering ne supporte pas le routage transitif nativement, ce qui complique l'acces centralise aux services partages. Une Transit Gateway avec une table de routage unique partagee par tous les environnements permet par defaut le routage entre le developpement et la production, ce qui viole directement l'exigence de segmentation stricte, et corriger cela a posteriori avec des NACL est fragile et sujet a l'erreur plutot qu'une isolation native au niveau du routage. Le hub base sur des passerelles NAT connecte par peering supplementaire a chaque VPC de production reintroduit un maillage croissant et connecte directement le developpement a la production via des chemins ad hoc, ce qui contredit la segmentation stricte demandee. Sources officielles AWS : https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html https://docs.aws.amazon.com/vpc/latest/tgw/how-transit-gateways-work.html"
+}

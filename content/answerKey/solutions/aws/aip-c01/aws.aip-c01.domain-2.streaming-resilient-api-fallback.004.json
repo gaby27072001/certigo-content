@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-2.streaming-resilient-api-fallback.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Activer le backoff exponentiel du SDK AWS sur les erreurs de limitation, configurer quotas et limitation sur API Gateway, tracer le chemin de requete avec AWS X-Ray et renvoyer une reponse de repli une fois les reessais epuises.",
+  "rationale": "Le mode de reessai adaptatif du SDK AWS traite ThrottlingException comme une erreur transitoire et espace les tentatives avec jitter, ce qui absorbe les pics courts sans penaliser les requetes qui passent du premier coup. La limitation et les quotas d'API Gateway agissent en amont, donc le lissage se produit avant que le trafic n'atteigne Bedrock et protege aussi les autres consommateurs du compte. X-Ray relie les segments de la passerelle, de l'application et de l'appel au modele, ce qui permet de distinguer une lenteur d'inference d'un ralentissement applicatif, et la reponse de repli remplace l'echec opaque par un contenu degrade mais exploitable quand les reessais sont epuises. Le renvoi immediat d'une erreur 500 avec alarme CloudWatch conserve la panne visible pour l'utilisateur et reporte la correction sur une intervention manuelle, alors que la limitation etait transitoire. Le retrait de la limitation d'API Gateway augmente le debit envoye a un service deja sature : les rejets se deplacent simplement vers Bedrock, et ajouter des instances applicatives accelere seulement l'arrivee des requetes rejetees. La pause fixe de soixante secondes penalise toutes les requetes, y compris en periode creuse, sans s'adapter a la charge reelle ; elle degrade l'experience de chat en continu et n'apporte ni tracabilite ni contenu de repli. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/inference-api.html https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html"
+}

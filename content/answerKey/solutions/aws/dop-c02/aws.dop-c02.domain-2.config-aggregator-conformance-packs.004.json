@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-2.config-aggregator-conformance-packs.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Deployer un pack de conformite organisationnel AWS Config associe a un agregateur au niveau de l'organisation, pour obtenir une vue consolidee et une application aux nouveaux comptes membres.",
+  "rationale": "Un pack de conformite organisationnel associe a un agregateur de configuration deploie automatiquement le meme ensemble de regles a tous les comptes membres, y compris les nouveaux, et fournit une vue consolidee de conformite au niveau de l'organisation sans configuration manuelle repetee : c'est la seule option qui satisfait a la fois l'echelle, la continuite et l'automatisation exigees. La consolidation hebdomadaire dans une feuille de calcul introduit un delai important entre une derive de configuration et sa detection, et represente une charge operationnelle croissante avec le nombre de comptes. Activer AWS Config dans le seul compte de gestion ne permet pas d'evaluer les ressources des comptes membres, qui possedent leur propre plan de configuration ; le tableau de bord de ce compte ne couvre donc pas le perimetre attendu et laisse la quasi-totalite du parc sans verification. La creation de regles compte par compte via des scripts AWS CLI represente une charge operationnelle considerable a l'echelle de plusieurs centaines de comptes et n'applique aucune regle automatiquement aux nouveaux comptes qui rejoignent l'organisation. Sources officielles AWS : https://docs.aws.amazon.com/config/latest/developerguide/conformance-packs.html https://docs.aws.amazon.com/config/latest/developerguide/aggregate-data.html"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-3.data-lineage-governance-audit-trail.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Cataloguer les sources dans AWS Glue Data Catalog avec des metadonnees d'attribution, activer la journalisation des invocations de modele Amazon Bedrock vers CloudWatch Logs, et tracer les acces avec AWS CloudTrail.",
+  "rationale": "Les trois composants couvrent les trois questions du regulateur avec des enregistrements produits automatiquement. Le Glue Data Catalog decrit chaque jeu de documents de recherche et porte les metadonnees d'attribution, donc la provenance se requete au lieu de se reconstituer. La journalisation des invocations de modele de Bedrock conserve, pour chaque appel, l'identifiant du modele et sa version ainsi que la charge utile contenant les passages recuperes, ce qui relie une reponse passee a ses sources exactes. CloudTrail enregistre de son cote les appels d'API, donc l'identite de l'appelant et l'horodatage de chaque acces a l'assistant. Les journaux applicatifs sur stockage local disparaissent avec l'instance et n'offrent qu'une correlation manuelle d'horodatages, sans garantie de completude ni d'integrite. La conservation du seul texte du resume ne prouve rien : ni la version du modele, ni les documents cites, ni l'auteur de la demande n'ont ete enregistres, et rien ne permet donc de reconstituer la generation. Les tableurs d'analystes reposent sur le souvenir de chaque personne, arrivent avec un mois de decalage et restent modifiables a posteriori, ce qui ne constitue pas une piste d'audit opposable et reintroduit le travail manuel a supprimer. Sources officielles AWS : https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+}

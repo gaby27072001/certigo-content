@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.hierarchical-knowledge-base-multitenant.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une plateforme SaaS multi-tenant de recherche documentaire juridique heberge pour chaque cabinet client un corpus isole pouvant depasser 50 000 documents. Une revue de securite exige que la conception du magasin vectoriel : (1) garantisse une isolation logique stricte entre tenants au moment de la recuperation, de sorte qu'un tenant ne puisse jamais recuperer un fragment appartenant a un autre tenant, meme en cas de bug applicatif, (2) permette une organisation hierarchique par categorie de document (contrats, memoires, notes) au sein d'un meme tenant, (3) permette de faire evoluer l'ingestion et la reindexation d'un tenant independamment des autres, sans degrader la latence de requete des autres tenants, et (4) minimise le code operationnel personnalise en s'appuyant sur des services geres. Quelle architecture satisfait le mieux ces quatre exigences ?",
+  "choices": [
+    "Creer une base de connaissances Amazon Bedrock par tenant, chacune adossee a sa propre collection Amazon OpenSearch Serverless, et organiser les documents par filtres de metadonnees (categorie, date) pour la recuperation dans chaque base.",
+    "Creer une base de connaissances Amazon Bedrock unique partagee par tous les tenants et injecter dans chaque prompt systeme l'identifiant du cabinet appelant en demandant au modele de ne citer que les documents de ce cabinet.",
+    "Regrouper les fragments et embeddings de tous les tenants dans un index Amazon OpenSearch Service unique, sans champ d'identifiant de tenant, et laisser la recherche par similarite ramener les passages les plus proches de la question posee par l'utilisateur.",
+    "Utiliser une instance Amazon RDS avec pgvector qui stocke les vecteurs de tous les tenants dans une table unique non partitionnee, et lancer chaque nuit une reindexation complete de la table apres les ingestions de la journee."
+  ]
+}

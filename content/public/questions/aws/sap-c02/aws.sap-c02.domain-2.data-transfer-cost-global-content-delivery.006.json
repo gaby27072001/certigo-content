@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.data-transfer-cost-global-content-delivery.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une nouvelle solution diffuse des fichiers video volumineux a une base d'utilisateurs mondiale et recoit egalement de gros fichiers televerses par des bureaux distants disposant d'une connectivite mediocre. La conception doit minimiser le cout de transfert de donnees sortant vers les utilisateurs dans le monde entier, reduire la latence percue par les utilisateurs eloignes de la Region d'origine, accelerer les televersements volumineux depuis un bureau distant a forte latence vers le compartiment d'origine sans provisionner de nouvelle infrastructure sur ce site, et reduire le cout de stockage des ressources dont le profil d'acces est imprevisible et evolue automatiquement sans regles de cycle de vie manuelles.",
+  "choices": [
+    "Diffuser les fichiers via Amazon CloudFront devant le compartiment S3 d'origine pour reduire latence et cout de transfert, activer S3 Transfer Acceleration pour les televersements depuis les bureaux distants, et stocker les ressources en S3 Intelligent-Tiering pour un basculement automatique entre niveaux. Cette distribution CloudFront couvre l'ensemble des emplacements en peripherie disponibles a l'echelle mondiale.",
+    "Diffuser les fichiers video directement depuis le compartiment S3 d'une seule Region sans Amazon CloudFront, demander aux bureaux de compresser localement avant de televerser via Internet public, et stocker toutes les ressources en S3 Standard en permanence, la latence percue restant dependante de la distance de chaque utilisateur a la Region unique.",
+    "Deployer le compartiment d'origine Amazon S3 dans chaque Region du monde et faire router chaque utilisateur vers le compartiment regional le plus proche par une logique cote client, sans regle de cycle de vie ni niveau intelligent, avec une suppression trimestrielle des anciens objets executee par un ingenieur, en repliquant les objets Amazon S3 via AWS DataSync entre chaque compartiment regional, avec Amazon CloudWatch pour surveiller les tableaux de bord de replication.",
+    "Utiliser AWS Global Accelerator devant le compartiment S3 pour reduire les couts de transfert, et configurer des regles de cycle de vie S3 deplacant chaque objet vers Glacier Deep Archive apres 30 jours en appliquant la meme regle a tous les objets independamment de leur frequence d'acces reelle, avec une revue de cette politique de cycle de vie prevue une fois par an."
+  ]
+}

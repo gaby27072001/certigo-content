@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-4.cross-account-log-centralization.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Creer dans chaque compte un filtre d'abonnement CloudWatch Logs vers un flux Amazon Data Firehose central livrant vers Amazon S3, deploye par un StackSet organisationnel.",
+  "rationale": "Un filtre d'abonnement CloudWatch Logs cross-account vers un flux Amazon Data Firehose gere centralement, deploye via un StackSet organisationnel, automatise la livraison des journaux vers le compte central pour tous les comptes existants et futurs, sans que chaque equipe n'ait a configurer ou a detenir d'acces en ecriture direct au compte central : cela minimise la charge de maintenance tout en preservant la gouvernance centralisee. L'export hebdomadaire vers un fichier local puis un televersement par la console introduit un delai d'analyse important, une forte charge operationnelle repetee dans 50 comptes, et un risque eleve d'oubli ou d'erreur humaine. Accorder a chaque equipe un acces en ecriture direct et auto-configure au compartiment central abandonne le controle de gouvernance centralise, cree des configurations incoherentes entre equipes et augmente la surface de risque en cas de mauvaise configuration d'un des 50 comptes. AWS Config capture l'historique des changements de configuration des ressources, mais ne collecte ni les journaux de flux VPC ni les journaux applicatifs ; publier ces enregistrements dans le compte de journalisation ne fournit donc pas le contenu que l'organisation doit centraliser. Sources officielles AWS : https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CrossAccountSubscriptions.html"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-2.account-vending-service-catalog.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Publier des produits AWS Service Catalog fondes sur des modeles CloudFormation approuves, avec des contraintes de lancement qui executent le provisionnement via un role dedie au portefeuille.",
+  "rationale": "AWS Service Catalog avec des contraintes de lancement permet aux equipes de lancer en libre-service uniquement des produits pre-approuves, tandis que le role d'execution dedie realise le provisionnement reel sans jamais exposer de permissions CloudFormation ou IAM directes aux utilisateurs finaux ; chaque lancement est trace nominalement, ce qui satisfait a la fois le libre-service, le moindre privilege et l'auditabilite. Accorder iam:* et cloudformation:* dans un compte partage revient a abandonner totalement le moindre privilege et permet a n'importe quelle equipe de creer des ressources non conformes aux garde-fous, voire de modifier les permissions elles-memes. Le modele fonde sur des tickets traites a la main n'est pas du libre-service : il introduit une latence operationnelle importante et ne s'adapte pas au nombre croissant de demandes, contrairement a l'objectif d'autonomie des equipes. Distribuer une application CDK executee avec des identifiants personnels administrateur contourne les garde-fous de conformite, complique l'attribution precise des actions (le code peut etre modifie librement avant execution) et viole directement le moindre privilege exige. Sources officielles AWS : https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-launch.html"
+}

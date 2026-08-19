@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-1.cost-visibility-purchasing-strategy-tagging.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une organisation de 15 unites metier repartie sur des dizaines de comptes lies sous une facturation consolidee AWS Organizations doit produire chaque mois une refacturation precise par unite metier, y compris pour des ressources partagees et centralisees, comme une passerelle NAT partagee ou un pipeline de journalisation centralise, qui ne se rattachent a aucune unite metier prise isolement, imposer une taxonomie de balises coherente des la creation de toute ressource dans chaque compte membre, et fournir une vue unique combinant couts directs et couts partages repartis, sans reconciliation manuelle mensuelle de fichiers exportes compte par compte.",
+  "choices": [
+    "Demander a chaque unite metier de balliser ses propres ressources en suivant une page de wiki interne, et faire reconstruire chaque mois par les equipes finance le rapport de refacturation en important et en joignant les fichiers CSV exportes de chaque compte lie de l'organisation, en stockant les fichiers CSV exportes dans Amazon S3, en controlant l'acces via AWS IAM, et en repertoriant les comptes lies via AWS Organizations, en utilisant Amazon SNS pour notifier chaque equipe finance quand un nouveau fichier CSV est disponible.",
+    "Definir une norme de balisage obligatoire au niveau de l'organisation via des tag policies AWS Organizations combinees a des politiques de controle de service refusant la creation de ressources sans balise de centre de cout, activer AWS Cost Explorer avec le Cost and Usage Report consolide, et utiliser des Cost Categories pour repartir au prorata les couts des ressources partagees entre les unites metier.",
+    "N'activer les balises d'allocation de cout que sur les ressources facilement attribuables a une seule unite metier parmi les 15 unites concernees, et exclure des rapports mensuels les ressources partagees et centralisees telles que la passerelle NAT ou le pipeline de journalisation de l'organisation. Cette configuration s'applique aux 15 unites metier et aux dizaines de comptes lies sous la facturation consolidee.",
+    "S'appuyer uniquement sur des alertes AWS Budgets par compte comme source des chiffres de refacturation mensuelle, sans taxonomie de balisage ni Cost Categories, avec une repartition annuelle des ressources partagees calculee dans un tableur par l'equipe finance, sans recoupement avec les factures reelles constatees chaque mois. Cette approche couvre l'ensemble des comptes lies de l'organisation sur une base mensuelle."
+  ]
+}

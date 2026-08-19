@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-3.spot-savings-plans-batch-analytics-cost-optimization.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un traitement analytique par lots nocturne existant fonctionne sur une flotte fixe d'instances EC2 a la demande dimensionnee pour le jeu de donnees de pointe historique, mais l'equipe constate via les Cost and Usage Reports que l'utilisation moyenne de la flotte pendant l'execution de plusieurs heures est nettement inferieure a la capacite provisionnee, et que le traitement tolere l'interruption et le redemarrage de travailleurs individuels puisqu'il point de controle sa progression vers S3. L'equipe veut reduire significativement la depense sans compromettre l'engagement d'achevement nocturne, tout en preservant sans interruption la petite infrastructure de support toujours active.",
+  "choices": [
+    "Migrer les travailleurs tolerants a l'interruption vers des instances Amazon EC2 Spot gerees via Auto Scaling avec des types d'instance diversifies, conserver l'infrastructure toujours active sur des Compute Savings Plans, et redimensionner via AWS Compute Optimizer, en repartissant les travailleurs sur plusieurs types d'instance pour lisser davantage les pics de demande de capacite Spot.",
+    "Acheter des instances Amazon EC2 reservees standard pour l'ensemble de la flotte de traitement par lots, y compris les travailleurs tolerants a l'interruption, afin de verrouiller une remise sur trois ans sur une capacite fixe alors que l'utilisation reelle de la flotte nocturne vient de se reveler inferieure a la capacite provisionnee, en conservant la meme visibilite Amazon CloudWatch et les memes rapports AWS Cost and Usage Report que la configuration actuelle, sans jamais consulter AWS Trusted Advisor ni Amazon QuickSight pour visualiser l'ecart avec l'utilisation reelle.",
+    "Augmenter encore la taille de la flotte Amazon EC2 a la demande pour respecter l'echeance nocturne avec une large marge, sans changer de modele tarifaire ni exploiter les donnees d'utilisation deja recueillies via les Cost and Usage Reports, avec la meme configuration de flotte reconduite chaque nuit. Cette configuration conserve la meme taille de flotte chaque nuit, quel que soit le volume de donnees traite.",
+    "Deplacer l'infrastructure de support toujours active vers des instances Amazon EC2 Spot pour maximiser les economies, et conserver les travailleurs de traitement par lots nocturne tolerants a l'interruption sur une tarification a la demande classique, avec les deux populations de travailleurs de cette flotte nocturne inchangees par ailleurs. Cette repartition s'applique de maniere identique aux deux populations de travailleurs de la flotte nocturne."
+  ]
+}

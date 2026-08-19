@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-2.outposts-data-residency-integration.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Deployer AWS Outposts dans le centre de donnees sur site, y executer le traitement des journaux et l'inference, et n'echanger avec la Region AWS que les prompts assainis et les appels de gouvernance des templates.",
+  "rationale": "AWS Outposts installe du materiel gere par AWS dans les locaux du client et y expose les memes API et modeles de deploiement que la Region : les journaux d'abonnes sont traites la ou ils resident, sans franchir la frontiere reglementee, tandis que l'equipe reutilise ses gabarits d'infrastructure, ses roles et son outillage existants. Le rack reste rattache au plan de controle AWS, donc l'exploitation, les mises a jour et la gouvernance centralisee des prompts continuent de fonctionner, et seuls les prompts assaines et les appels de gestion de templates traversent le lien vers la Region. L'export nocturne vers un bucket S3 regional deplace precisement les journaux bruts que la reglementation retient sur site : le chiffrement, les politiques IAM et le point de terminaison VPC protegent la donnee, mais ne changent rien au fait qu'elle a quitte l'installation. La pile entierement autonome garde bien les donnees sur place, mais impose de reconstruire hebergement de modele, gouvernance et outillage en double, sans reutilisation des API AWS ni rattachement au plan de controle, ce qui va a l'encontre des deux dernieres exigences. AWS Wavelength repond a un besoin de faible latence en peripherie du reseau mobile, dans une zone operee par le fournisseur telecom : y acheminer les journaux bruts revient encore a les sortir du centre de donnees, pour un service qui ne traite pas la question de la residence sur site. Sources officielles AWS : https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html https://docs.aws.amazon.com/wavelength/latest/developerguide/what-is-wavelength.html"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.bedrock-cross-region-circuit-breaker.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une entreprise de services financiers a construit un assistant client sur Amazon Bedrock deploye dans une seule Region principale. Lors d'une recente perturbation de service regionale, l'assistant est devenu totalement indisponible pendant plusieurs heures, ce qui a viole le SLA contractuel avec les clients entreprise. L'equipe d'architecture exige desormais une solution qui : (1) maintient la disponibilite de l'application pendant une perturbation regionale sans bascule manuelle, (2) evite de dupliquer toute la logique applicative dans chaque Region pour chaque appel de modele, (3) degrade gracieusement vers un modele plus economique plutot que d'echouer completement lorsque des echecs d'invocation repetes sont detectes, et (4) n'oblige pas a reecrire la logique metier de l'assistant chaque fois qu'AWS ajoute un nouveau modele prefere. Quelle approche satisfait le mieux ces quatre contraintes ?",
+  "choices": [
+    "Deployer une copie complete de la pile applicative dans une seconde Region, synchroniser les configurations via un pipeline de deploiement, et rediriger le trafic par basculement DNS Amazon Route 53 pilote par des bilans de sante CloudWatch.",
+    "Configurer des profils d'inference multi-Region Amazon Bedrock pour le modele principal, puis encadrer les invocations par un circuit breaker AWS Step Functions qui bascule vers un modele de secours plus petit au-dela d'un seuil d'echecs.",
+    "Heberger le meme modele sur des endpoints Amazon SageMaker AI dans trois Regions, puis interroger ces endpoints en sequence depuis l'application jusqu'a obtenir une reponse valide, avec une file de reessais geree dans le code du service.",
+    "Epingler l'application sur une version de modele unique validee, publier un runbook d'escalade vers le support AWS et rerouter le trafic vers une autre Region des que Bedrock declare une perturbation de disponibilite dans la Region principale."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-1.cost-visibility-purchasing-strategy-tagging.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Definir une norme de balisage obligatoire au niveau de l'organisation via des tag policies AWS Organizations combinees a des politiques de controle de service refusant la creation de ressources sans balise de centre de cout, activer AWS Cost Explorer avec le Cost and Usage Report consolide, et utiliser des Cost Categories pour repartir au prorata les couts des ressources partagees entre les unites metier.",
+  "rationale": "Des tag policies AWS Organizations combinees a des politiques de controle de service imposent la balise de centre de cout des la creation de toute ressource dans chaque compte membre, ce qui garantit une taxonomie coherente sans dependre de la discipline de chaque equipe ; les Cost Categories permettent de definir des regles de repartition au prorata des couts des ressources partagees et centralisees entre les unites metier ; et Cost Explorer avec le Cost and Usage Report consolide fournit une vue unique combinant couts directs et couts repartis sans reconciliation manuelle de fichiers. Demander a chaque unite metier de balliser volontairement ses ressources et faire joindre manuellement des fichiers CSV chaque mois ne garantit aucune coherence de taxonomie et reproduit exactement la reconciliation manuelle que l'organisation cherche a eliminer. N'activer les balises que sur les ressources facilement attribuables et exclure les ressources partagees des rapports laisse leur cout invisible dans la refacturation, ce qui ne constitue pas une vue combinant couts directs et couts partages. Des alertes AWS Budgets par compte ne constituent pas un mecanisme d'allocation de cout par unite metier, et une estimation manuelle annuelle de la repartition des ressources partagees n'offre ni la precision ni la cadence mensuelle exigees. Sources officielles AWS : https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-2.intelligent-model-routing-cost-quality.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un chatbot de support client recoit 80 % de questions simples de FAQ et 20 % de demandes complexes de depannage a plusieurs etapes. Envoyer chaque question au modele le plus grand et le plus couteux gaspille le budget et ajoute une latence inutile pour les 80 % de questions simples, mais retrograder tout vers le modele le moins cher degraderait la qualite pour les 20 % de demandes complexes. Les exigences sont : (1) acheminer dynamiquement chaque requete vers le modele le plus petit et le moins cher capable de la traiter lorsque sa qualite predite est jugee suffisante, et vers un modele plus grand seulement si necessaire, en se fondant sur le contenu reel de la requete plutot que sur un niveau de client fixe, (2) eviter de maintenir un code de classification personnalise qui decide lui-meme du routage, en preferant une capacite geree, (3) conserver un point de terminaison client unique et stable plutot que l'application implementant sa propre logique conditionnelle par modele, et (4) confiner le routage a des modeles de la meme famille ou du meme fournisseur pour garder un style de reponse coherent. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Configurer le routage intelligent de prompt d'Amazon Bedrock, qui expose un point de terminaison unique et dirige chaque requete vers le modele le plus economique d'une meme famille capable d'atteindre le seuil de qualite configure.",
+    "Ecrire une fonction AWS Lambda de classification qui estime la complexite d'une question a partir de mots-cles et de la longueur du message, puis appelle le point de terminaison du modele correspondant a la branche retenue.",
+    "Adresser l'ensemble des requetes au modele le plus capable du catalogue, et compenser le surcout en mettant en cache dans une table Amazon DynamoDB les reponses aux questions de FAQ les plus frequemment posees.",
+    "Associer chaque compte client a un niveau de modele fixe dans le profil client, les comptes standard etant servis par le plus petit modele et les comptes premium par le plus grand, quelle que soit la question posee."
+  ]
+}

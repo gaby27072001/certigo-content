@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-1.hybrid-dns-direct-connect-failover.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une banque regionale exploite un environnement hybride : une foret Active Directory on-premises au siege et une topologie hub-and-spoke de VPC dans AWS reliee par AWS Direct Connect. L'architecte doit concevoir une strategie qui resout les noms DNS dans les deux sens entre le site on-premises et l'ensemble des VPC, qui bascule automatiquement le chemin reseau sans intervention manuelle si Direct Connect tombe en panne, qui evite les surprises de routage transitif entre VPC, et qui minimise la charge operationnelle liee au maintien de regles de forwarding DNS dupliquees dans chaque VPC.",
+  "choices": [
+    "Configurer des points de terminaison Amazon Route 53 Resolver independants dans chaque VPC et dupliquer les regles de forwarding vers le site on-premises dans chacun d'eux, sans provisionner de second chemin reseau, en s'appuyant uniquement sur Direct Connect comme unique connexion vers le site on-premises. Cette configuration couvre l'ensemble des VPC actuels de l'organisation dans la Region principale.",
+    "Etablir un maillage complet de peering VPC entre chaque VPC et le site on-premises via une instance NAT, avec des routes statiques uniquement, et prevoir un basculement vers une seconde connexion Direct Connect commandee dans un autre point de presence du reseau, en repartissant les instances NAT sur Amazon EC2 derriere un Application Load Balancer, avec Amazon CloudWatch pour surveiller les journaux de flux VPC, et Amazon Route 53 configure en secours pour les noms publics uniquement.",
+    "Deployer des points de terminaison entrants et sortants Route 53 Resolver dans un VPC de services partages rattache par AWS Transit Gateway a tous les VPC et au site on-premises, partager les regles de forwarding via AWS RAM, et provisionner un VPN Site-to-Site en secours avec BGP, ce qui centralise la resolution DNS et le basculement reseau en un seul endroit reutilisable par tous les VPC actuels et futurs.",
+    "Publier des zones hebergees Route 53 publiques pour les noms d'hotes internes du site on-premises et les ouvrir a la resolution depuis Internet, ce qui supprime le besoin de tout point de terminaison Resolver dedie a la resolution interne, et laisser les requetes de resolution transiter par des serveurs DNS publics exposes aux resolveurs de tout le monde entier."
+  ]
+}

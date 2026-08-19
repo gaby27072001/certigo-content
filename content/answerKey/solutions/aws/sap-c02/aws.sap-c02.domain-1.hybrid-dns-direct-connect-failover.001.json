@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-1.hybrid-dns-direct-connect-failover.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Deployer des points de terminaison entrants et sortants Route 53 Resolver dans un VPC de services partages rattache par AWS Transit Gateway a tous les VPC et au site on-premises, partager les regles de forwarding via AWS RAM, et provisionner un VPN Site-to-Site en secours avec BGP, ce qui centralise la resolution DNS et le basculement reseau en un seul endroit reutilisable par tous les VPC actuels et futurs.",
+  "rationale": "Des points de terminaison Route 53 Resolver deployes une seule fois dans un VPC de services partages, rattaches par Transit Gateway a tous les VPC et au site on-premises, avec des regles de forwarding partagees via AWS RAM, resolvent les noms dans les deux sens sans duplication par VPC ; le VPN Site-to-Site avec BGP fournit un chemin de secours qui bascule automatiquement des la detection de la perte de Direct Connect, sans intervention manuelle ; et Transit Gateway evite les problemes de routage transitif propres au VPC peering. Dupliquer les points de terminaison Resolver et les regles de forwarding dans chaque VPC laisse Direct Connect comme unique chemin reseau, sans aucun mecanisme de basculement automatique en cas de panne, et multiplie les regles a maintenir a chaque changement de topologie. Le maillage de peering avec routes statiques ne supporte pas le routage transitif nativement, ce qui oblige a multiplier les connexions a mesure que le nombre de VPC augmente, et le basculement vers la seconde connexion Direct Connect reste une operation manuelle declenchee par un operateur. Exposer les noms d'hotes internes via des zones hebergees publiques resolvables depuis Internet ne fournit aucun basculement automatique de chemin reseau et rend la topologie interne visible publiquement. Sources officielles AWS : https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html"
+}

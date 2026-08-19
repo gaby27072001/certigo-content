@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-1.pipeline-canary-blast-radius.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une equipe de plateforme deploie une fonction AWS Lambda critique pour le traitement des paiements via AWS CodeDeploy. Un incident recent a montre qu'un deploiement expose brutalement 100% du trafic avant qu'une anomalie ne soit detectee, retardant le rollback et amplifiant la perte de revenus. La direction technique exige desormais qu'un nouveau deploiement limite au maximum le blast radius initial, declenche un rollback automatique des qu'une degradation est mesuree (taux d'erreurs 5xx et latence P99), et minimise l'intervention humaine pendant la fenetre de bascule. Quelle configuration de deploiement repond le mieux a ces contraintes ?",
+  "choices": [
+    "Configurer CodeDeployDefault.AllAtOnce et executer un test de fumee dans CodeBuild sur la nouvelle version une fois la totalite du trafic basculee vers celle-ci.",
+    "Configurer un deploiement lineaire (Linear10PercentEvery1Minute) et confier le suivi de la bascule a un ingenieur qui observe un tableau de bord CloudWatch dedie a la fonction.",
+    "Configurer un deploiement canary (Canary10Percent5Minutes) avec hooks pre-traffic et post-traffic et une alarme composite CloudWatch (erreurs 5xx et latence P99) pilotant le rollback.",
+    "Configurer un deploiement Blue/Green basculant la totalite du trafic apres une etape d'approbation enregistree dans CodePipeline, puis executer un runbook de revue des journaux applicatifs."
+  ]
+}

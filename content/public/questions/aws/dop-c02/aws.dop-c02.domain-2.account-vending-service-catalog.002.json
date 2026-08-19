@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-2.account-vending-service-catalog.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une entreprise souhaite permettre a ses equipes applicatives de provisionner elles-memes des environnements standardises (VPC et roles IAM) sans leur accorder d'acces direct a CloudFormation ou a IAM, tout en garantissant que seules des configurations pre-approuvees et conformes aux garde-fous de securite peuvent etre lancees, avec une tracabilite complete de qui a lance quoi.",
+  "choices": [
+    "Publier des produits AWS Service Catalog fondes sur des modeles CloudFormation approuves, avec des contraintes de lancement qui executent le provisionnement via un role dedie au portefeuille.",
+    "Accorder aux equipes applicatives les permissions iam:* et cloudformation:* dans un compte partage, afin qu'elles composent elles-memes les ressources dont leurs environnements ont besoin au quotidien.",
+    "Faire ouvrir par chaque equipe un ticket aupres du service d'infrastructure, qui cree ensuite les ressources demandees a la main dans la console AWS du compte cible.",
+    "Distribuer aux equipes une application AWS CDK qu'elles executent depuis leur poste avec leurs identifiants IAM personnels disposant de droits administrateur sur le compte."
+  ]
+}

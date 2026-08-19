@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.internet-facing-app-layered-security-controls.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une nouvelle application web publique doit attenuer les attaques DDoS volumetriques et applicatives ainsi que les exploitations web courantes telles que l'injection SQL et le XSS, ne jamais exposer les identifiants de base de donnees dans le code ou la configuration et les faire tourner automatiquement, chiffrer les donnees au repos et en transit de bout en bout entre les niveaux applicatifs, et faire respecter le moindre privilege par role IAM distinct selon la fonction, notamment entre le niveau web et le niveau travailleur.",
+  "choices": [
+    "S'appuyer uniquement sur des regles de groupe de securite limitant le trafic aux ports 80 et 443 pour attenuer le DDoS, stocker les identifiants de base de donnees dans un fichier chiffre change tous les 90 jours par un ingenieur, transmettre les donnees en clair entre les niveaux applicatifs internes, et un role IAM partage AdministratorAccess pour les niveaux web et travailleur.",
+    "Activer AWS Shield Standard, inclus par defaut, sans regles gerees AWS WAF, stocker les identifiants dans Secrets Manager mais desactiver la rotation automatique, chiffrer uniquement les volumes Amazon EBS au repos sans chiffrer le trafic interne entre niveaux, et deux roles IAM avec PowerUserAccess partage, sans activer Amazon GuardDuty ni AWS Security Hub pour la detection des menaces au niveau du compte.",
+    "Utiliser un CDN tiers devant l'ALB pour une mise en cache basique sans regles WAF, conserver les identifiants en variables d'environnement injectees au deploiement sans rotation, ne chiffrer ni les donnees au repos ni en transit pour simplifier les echanges entre services, et un role IAM web avec acces Amazon S3 complet a tous les compartiments, en journalisant les acces via Amazon CloudWatch Logs et AWS CloudTrail, et en isolant le niveau travailleur dans un groupe de securite Amazon VPC distinct.",
+    "Attacher AWS WAF avec des groupes de regles gerees et AWS Shield Advanced devant l'ALB, stocker les identifiants dans AWS Secrets Manager avec rotation automatique pour le moteur RDS, chiffrer les donnees au repos avec AWS KMS et en transit avec TLS de bout en bout entre les niveaux, et des roles IAM distincts a moindre privilege pour le niveau web et le niveau travailleur."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-1.codeartifact-package-origin-control.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer les controles d'origine des paquets CodeArtifact pour bloquer les versions amont des paquets deja publies en interne, les autres paquets restant servis par la connexion externe.",
+  "rationale": "Les controles d'origine des paquets (package origin controls) agissent au niveau de chaque paquet du depot : lorsqu'un paquet a deja ete publie en interne, CodeArtifact refuse d'y ingerer une version provenant du registre amont, ce qui neutralise precisement la substitution de dependance sans bloquer les paquets purement open source, qui continuent d'etre servis par la connexion externe ; le controle est applique par le service a chaque resolution, donc aucune etape manuelle n'est ajoutee au pipeline. Supprimer la connexion externe protege bien contre l'ingestion amont, mais transfere a l'equipe plateforme le televersement de chaque dependance open source et de chacune de ses mises a jour transitives, ce qui introduit exactement l'etape manuelle que l'enonce cherche a eviter et ralentit chaque build. Une etape de comparaison a une liste d'exclusion dans la specification de build est un controle detectif tardif : le paquet substitue a deja ete resolu et potentiellement execute pendant l'installation des dependances, et la liste doit etre maintenue a la main a chaque nouveau paquet interne, ce qui la rend structurellement incomplete. Republier les paquets internes sous une portee privee reduit le risque de collision de noms, mais la protection depend de la mise a jour des imports par chaque equipe applicative selon son propre calendrier de maintenance : tant qu'un import non porte subsiste, la resolution amont reste possible, et l'ancien nom non porte demeure revendiquable sur le registre public. Sources officielles AWS : https://docs.aws.amazon.com/codeartifact/latest/ug/package-origin-controls.html https://docs.aws.amazon.com/codeartifact/latest/ug/external-connection.html"
+}

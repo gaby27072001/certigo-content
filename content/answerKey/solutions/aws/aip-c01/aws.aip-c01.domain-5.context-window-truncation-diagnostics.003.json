@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-5.context-window-truncation-diagnostics.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Mesurer le total de tokens envoye a l'API Converse et le confronter au quota du modele dans Amazon Bedrock, puis appliquer une fenetre glissante sur l'historique, un chunking par section et un ordre de prompt qui place l'essentiel en tete.",
+  "rationale": "Compter les tokens reellement soumis, instructions systeme incluses, et les rapprocher de la limite publiee pour le modele dans Bedrock tranche la question de depart : si le total depasse la limite sur les seuls echanges longs, le caractere intermittent du symptome s'explique, et la panne se distingue d'une erreur d'API puisqu'elle produit une reponse coherente mais ecourtee plutot qu'une exception. La correction en decoule : fenetre glissante ou resume de l'historique pour borner sa croissance, chunking par section pour ne soumettre que les parties utiles du document, et placement des elements indispensables en tete afin qu'ils survivent a une reduction. La resoumission de la meme requete avec un delai croissant renvoie une charge utile toujours hors limite : le resultat se repete a l'identique, l'alerte apres trois echecs ne fait que constater la boucle. Le plafond fixe applique a tous les televersements ampute des documents qui tenaient parfaitement, sans resume ni priorisation, et degrade donc la qualite sur l'ensemble du trafic pour traiter un cas limite. Le changement de modele pour une fenetre annoncee plus large, sans toucher a la construction du prompt, ne fait que deplacer le seuil : un historique qui continue de croitre finira par le franchir, la cause reste ignoree et le comportement de l'assistant change sur les cas qui fonctionnaient. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/inference-api.html https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html"
+}

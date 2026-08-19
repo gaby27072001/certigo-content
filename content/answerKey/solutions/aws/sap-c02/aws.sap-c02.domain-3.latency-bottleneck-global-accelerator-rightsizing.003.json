@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-3.latency-bottleneck-global-accelerator-rightsizing.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Placer AWS Global Accelerator devant le Network Load Balancer pour acheminer le trafic via le reseau dorsal mondial vers le point de terminaison sain le plus proche, et redimensionner les instances EC2 sous-utilisees avec AWS Compute Optimizer, tout en conservant le meme Network Load Balancer existant comme point de terminaison enregistre derriere Global Accelerator.",
+  "rationale": "AWS Global Accelerator achemine le trafic TCP des joueurs via le reseau dorsal mondial d'AWS jusqu'au point de terminaison sain le plus performant, ce qui reduit et stabilise la latence mondiale mesurable face a l'accord de niveau de service en s'appuyant sur un service gere plutot qu'une infrastructure de peripherie personnalisee, et Compute Optimizer permet de redimensionner les instances constamment sous-utilisees pour reduire le gaspillage. Augmenter simplement le nombre d'instances dans la meme Region unique ne change rien a la distance parcourue par les joueurs eloignes et ignore completement l'opportunite de redimensionnement identifiee. CloudFront est concu pour la mise en cache de contenu HTTP, un trafic de session de jeu TCP a etat long n'est pas un modele d'acces adapte a la mise en cache, ce qui en fait un outil inadapte ici. Deplacer l'integralite du backend vers une seule nouvelle Region n'ameliore la latence que pour les joueurs proches de cette nouvelle Region tout en desavantageant les autres, et augmenter la taille d'instances deja sous-utilisees aggrave le gaspillage au lieu de le reduire. Sources officielles AWS : https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html"
+}
