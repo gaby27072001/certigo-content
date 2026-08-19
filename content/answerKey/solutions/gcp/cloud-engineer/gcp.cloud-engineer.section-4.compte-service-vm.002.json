@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-4.compte-service-vm.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Associer un compte de service dédié à la VM et lui accorder Storage Object Viewer sur le bucket",
+  "rationale": "Une VM obtient automatiquement des jetons pour son compte de service attaché ; un rôle de lecture accordé au seul bucket respecte le moindre privilège sans clé dans le code. Une clé Owner est dangereuse, Editor sur le compte par défaut est trop large et l'accès public supprime le contrôle d'identité."
+}

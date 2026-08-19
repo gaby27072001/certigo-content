@@ -1,0 +1,13 @@
+{
+  "id": "aws.aif-c01.domain-5.moindre-privilege-iam.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aif-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Attacher à un rôle IAM une politique limitée à ce préfixe et aux actions nécessaires",
+  "rationale": "Une politique limitée aux seules ressources et opérations nécessaires applique le moindre privilège. Le root user et les clés permanentes partagées augmentent fortement le risque, tandis qu’un compartiment public expose inutilement les données."
+}

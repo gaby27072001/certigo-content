@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-3.cycle-vie-sauvegarde.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un bucket Cloud Storage reçoit des exports quotidiens. Pour réduire les coûts, les objets doivent passer automatiquement en classe Archive après 90 jours puis être supprimés après 7 ans. Quelle configuration faut-il appliquer ?",
+  "choices": [
+    "Une alerte Cloud Monitoring sur le nombre d'objets",
+    "Une règle de conservation verrouillée de 90 jours suivie d'une suppression manuelle",
+    "Une tâche cron sur une VM qui télécharge et recharge chaque objet",
+    "Configurer le cycle de vie du bucket pour archiver après 90 jours et supprimer après 7 ans"
+  ]
+}

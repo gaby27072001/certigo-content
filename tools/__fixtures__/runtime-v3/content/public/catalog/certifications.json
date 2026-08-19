@@ -1,0 +1,274 @@
+{
+  "schema": "certigo.certification-catalog/v1",
+  "asOf": "2026-08-17",
+  "freshness": {
+    "maxAgeDays": 30,
+    "reviewDueOn": "2026-09-16"
+  },
+  "providers": [
+    {
+      "id": "aws",
+      "name": "Amazon Web Services",
+      "namespace": "aws",
+      "officialCatalogUrl": "https://docs.aws.amazon.com/aws-certification/latest/examguides/aws-certification-exam-guides.html",
+      "sourceHosts": [
+        "aws.amazon.com",
+        "d1.awsstatic.com",
+        "docs.aws.amazon.com"
+      ],
+      "checkedOn": "2026-08-17"
+    },
+    {
+      "id": "gcp",
+      "name": "Google Cloud",
+      "namespace": "gcp",
+      "officialCatalogUrl": "https://cloud.google.com/learn/certification",
+      "sourceHosts": [
+        "cloud.google.com",
+        "services.google.com",
+        "support.google.com"
+      ],
+      "checkedOn": "2026-08-17"
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "namespace": "microsoft",
+      "officialCatalogUrl": "https://learn.microsoft.com/credentials/browse/",
+      "sourceHosts": [
+        "learn.microsoft.com"
+      ],
+      "checkedOn": "2026-08-17"
+    }
+  ],
+  "certifications": [
+    {
+      "id": "aws:clf-c02",
+      "provider": "aws",
+      "slug": "clf-c02",
+      "officialCode": "CLF-C02",
+      "officialSlug": "certified-cloud-practitioner",
+      "title": "AWS Certified Cloud Practitioner",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+      "guide": {
+        "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          {
+            "id": "domain-1",
+            "title": "Cloud Concepts",
+            "weightPercent": 24,
+            "weightType": "exact"
+          },
+          {
+            "id": "domain-2",
+            "title": "Security and Compliance",
+            "weightPercent": 30,
+            "weightType": "exact"
+          },
+          {
+            "id": "domain-3",
+            "title": "Cloud Technology and Services",
+            "weightPercent": 34,
+            "weightType": "exact"
+          },
+          {
+            "id": "domain-4",
+            "title": "Billing, Pricing, and Support",
+            "weightPercent": 12,
+            "weightType": "exact"
+          }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/"
+          },
+          {
+            "kind": "exam-guide",
+            "url": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html"
+          }
+        ]
+      }
+    },
+    {
+      "id": "microsoft:ai-900",
+      "provider": "microsoft",
+      "slug": "ai-900",
+      "officialCode": "AI-900",
+      "officialSlug": "azure-ai-fundamentals",
+      "title": "Microsoft Azure AI Fundamentals",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://learn.microsoft.com/credentials/certifications/azure-ai-fundamentals/",
+      "guide": {
+        "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-900",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "AI workloads and responsible AI",
+            "weightPercent": 100,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://learn.microsoft.com/credentials/certifications/azure-ai-fundamentals/"
+          },
+          {
+            "kind": "exam-guide",
+            "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/ai-900"
+          }
+        ]
+      }
+    },
+    {
+      "id": "microsoft:az-900",
+      "provider": "microsoft",
+      "slug": "az-900",
+      "officialCode": "AZ-900",
+      "officialSlug": "azure-fundamentals",
+      "title": "Microsoft Azure Fundamentals",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://learn.microsoft.com/credentials/certifications/azure-fundamentals/",
+      "guide": {
+        "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "Cloud concepts",
+            "weightPercent": 100,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://learn.microsoft.com/credentials/certifications/azure-fundamentals/"
+          },
+          {
+            "kind": "exam-guide",
+            "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900"
+          }
+        ]
+      }
+    },
+    {
+      "id": "microsoft:dp-900",
+      "provider": "microsoft",
+      "slug": "dp-900",
+      "officialCode": "DP-900",
+      "officialSlug": "azure-data-fundamentals",
+      "title": "Microsoft Azure Data Fundamentals",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://learn.microsoft.com/credentials/certifications/azure-data-fundamentals/",
+      "guide": {
+        "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/dp-900",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "Core data concepts",
+            "weightPercent": 100,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://learn.microsoft.com/credentials/certifications/azure-data-fundamentals/"
+          },
+          {
+            "kind": "exam-guide",
+            "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/dp-900"
+          }
+        ]
+      }
+    },
+    {
+      "id": "microsoft:sc-900",
+      "provider": "microsoft",
+      "slug": "sc-900",
+      "officialCode": "SC-900",
+      "officialSlug": "security-compliance-and-identity-fundamentals",
+      "title": "Microsoft Security, Compliance, and Identity Fundamentals",
+      "level": "foundational",
+      "status": "active",
+      "officialUrl": "https://learn.microsoft.com/credentials/certifications/security-compliance-and-identity-fundamentals/",
+      "guide": {
+        "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/sc-900",
+        "version": null,
+        "publishedOn": null,
+        "versionSource": null,
+        "revisionToken": null
+      },
+      "blueprint": {
+        "version": "2026-08-17",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "Security, compliance, and identity concepts",
+            "weightPercent": 100,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "provenance": {
+        "checkedOn": "2026-08-17",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://learn.microsoft.com/credentials/certifications/security-compliance-and-identity-fundamentals/"
+          },
+          {
+            "kind": "exam-guide",
+            "url": "https://learn.microsoft.com/credentials/certifications/resources/study-guides/sc-900"
+          }
+        ]
+      }
+    }
+  ]
+}

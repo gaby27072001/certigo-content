@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-3.evenements-pubsub-eventarc.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Créer un déclencheur Eventarc pour acheminer les événements Pub/Sub vers le service Cloud Run",
+  "rationale": "Eventarc filtre et achemine les événements Pub/Sub vers Cloud Run de façon gérée et événementielle. Une requête planifiée ne consomme pas directement un topic, Composer avec Dataproc serait disproportionné pour chaque message et Storage Transfer Service n'assure pas le routage temps réel vers un service."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-4.cycle-vie-stockage.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Des règles de cycle de vie qui changent la classe de stockage après 90 jours et suppriment les objets après 365 jours",
+  "rationale": "La gestion du cycle de vie Cloud Storage automatise les transitions vers une classe plus froide et l'expiration selon l'âge des objets. Une requête BigQuery ne gère pas les objets, un transfert vers Standard ne réduit pas le coût d'archives et une règle de conservation empêche la suppression anticipée mais n'effectue pas les transitions de classe."
+}

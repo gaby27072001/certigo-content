@@ -103,18 +103,12 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
-  for (const provider of readdirSync(
-    resolve(root, "content", "public", "coverage")
-  )) {
-    const providerRoot = resolve(
-      root,
-      "content",
-      "public",
-      "coverage",
-      provider
-    );
-    for (const name of readdirSync(providerRoot)) {
-      const matrixPath = resolve(providerRoot, name);
+  const coverageRoot = resolve(root, "content", "public", "coverage");
+  for (const provider of readdirSync(coverageRoot, { withFileTypes: true })) {
+    if (!provider.isDirectory()) continue;
+    const providerRoot = resolve(coverageRoot, provider.name);
+    for (const file of readdirSync(providerRoot)) {
+      const matrixPath = resolve(providerRoot, file);
       const matrix = readJson(matrixPath);
       for (const objective of matrix.objectives) objective.questionIds = [];
       if (matrix.status === "complete" || matrix.status === "in-progress") {
@@ -188,6 +182,7 @@ function addV3Pair(root, overrides = {}) {
     "aif-c01.json"
   );
   const matrix = readJson(matrixPath);
+  matrix.status = "in-progress";
   matrix.objectives[0].questionIds = [id];
   writeJson(matrixPath, matrix);
   return id;
@@ -234,6 +229,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   assert.equal(result.coverageCount, 26);
 
   const catalog = readJson(catalogAt(repoRoot));
+  const questionIds = [];
   for (const certification of catalog.certifications) {
     const matrix = readJson(
       resolve(
@@ -247,6 +243,13 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
     );
     assert.equal(matrix.certification, certification.id);
     assert.ok(matrix.objectives.every((objective) => Array.isArray(objective.questionIds)));
+    questionIds.push(...matrix.objectives.flatMap((objective) => objective.questionIds));
+    if (matrix.status === "planned") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    }
+    if (matrix.status === "complete") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length > 0));
+    }
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0
@@ -254,6 +257,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
     if (certification.provider === "aws") assert.equal(sum, 100);
     else assert.ok(sum >= 99 && sum <= 101);
   }
+  assert.equal(questionIds.length, new Set(questionIds).size);
 });
 
 test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif", () => {

@@ -1,0 +1,13 @@
+{
+  "id": "aws.clf-c02.domain-2.protection-compte-racine.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:clf-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Activer MFA sur le root user et utiliser des identités IAM pour les tâches courantes",
+  "rationale": "AWS recommande de protéger le root user avec MFA et de ne pas l’employer pour le travail quotidien. Une clé root permanente et un mot de passe partagé augmentent l’exposition de privilèges, tandis que désactiver les politiques IAM empêche une délégation contrôlée."
+}

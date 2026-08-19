@@ -37,7 +37,7 @@ export function isCertificationActiveOn(certification, dateValue) {
 
 export function metadataFields(payload) {
   if (
-    payload?.schemaVersion !== "v3" ||
+    !["v3", "v4"].includes(payload?.schemaVersion) ||
     payload.metadata === null ||
     Array.isArray(payload.metadata) ||
     typeof payload.metadata !== "object"

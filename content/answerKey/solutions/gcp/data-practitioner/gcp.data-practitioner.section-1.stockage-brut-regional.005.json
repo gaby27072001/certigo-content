@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-1.stockage-brut-regional.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Un bucket Cloud Storage régional en europe-west1 pour les données brutes",
+  "rationale": "Cloud Storage accepte nativement des objets de formats variés et un bucket colocalisé avec BigQuery évite des transferts interrégionaux inutiles. BigQuery est destiné aux données analytiques structurées, Cloud SQL aux charges relationnelles et Firestore aux documents applicatifs plutôt qu'à un lac de fichiers bruts."
+}

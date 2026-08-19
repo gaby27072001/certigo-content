@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-4.heritage-role-personnalise.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Retirer Editor au dossier et accorder dans le projet un rôle personnalisé minimal",
+  "rationale": "Les autorisations héritées sont additives : ajouter Viewer ou Owner ne retire pas Editor. Il faut supprimer l'attribution au parent, puis limiter la portée au projet avec un rôle personnalisé contenant seulement les permissions nécessaires. Les règles de pare-feu ne contrôlent pas les autorisations IAM."
+}

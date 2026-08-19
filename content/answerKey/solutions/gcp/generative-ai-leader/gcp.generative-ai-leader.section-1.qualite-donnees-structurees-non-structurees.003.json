@@ -1,0 +1,13 @@
+{
+  "id": "gcp.generative-ai-leader.section-1.qualite-donnees-structurees-non-structurees.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "La base de polices est un exemple de données structurées à schéma tabulaire fixe, et les rapports PDF sont des données non structurées en texte libre ; dans les deux cas, il faut vérifier la cohérence, l'exhaustivité et la pertinence des données avant utilisation.",
+  "rationale": "Les données structurées suivent un schéma tabulaire fixe (colonnes définies), tandis que les données non structurées comme du texte libre en PDF n'ont pas ce format prédéfini ; la qualité des données (cohérence, exhaustivité, pertinence) doit être vérifiée pour les deux catégories avant l'entraînement d'un modèle de fondation. Inverser les catégories, en qualifiant la base relationnelle de non structurée et les PDF de structurés, contredit la définition même de ces types de données. Considérer que toute donnée numérisée serait d'emblée prête à l'emploi ignore la nécessité d'un contrôle qualité systématique. De même, une base relationnelle structurée n'est pas par nature complète, cohérente et à jour : elle peut contenir des doublons, des valeurs obsolètes ou manquantes comme toute autre source de données."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.generative-ai-leader.section-2.outils-agents-agent-studio-vs-ai-studio.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un architecte solution prépare un agent gen AI qui doit : appeler une fonction externe pour consulter un stock en temps réel, traduire automatiquement un document entrant, et être déployé pour un usage par plusieurs équipes métier de façon continue, au-delà d'un simple test individuel. Quelle combinaison d'outils est correcte ?",
+  "choices": [
+    "Utiliser Cloud Storage pour l'ensemble des interactions externes de l'agent, les fonctions cloud et les API de traduction n'étant pas adaptées comme outils d'agent dans ce scénario.",
+    "Considérer qu'Agent Studio est réservé au prototypage individuel de prompts pour un usage personnel, alors que Google AI Studio serait l'outil à privilégier pour le déploiement d'agents partagés par plusieurs équipes métier.",
+    "Utiliser Google AI Studio pour l'ensemble du projet, cet outil étant conçu pour l'orchestration d'agents partagés par plusieurs équipes métier à grande échelle et pour la durée.",
+    "Utiliser des fonctions/extensions avec des services comme Cloud Functions ou Cloud Run pour l'appel d'API, l'API Document Translation pour la traduction, et Agent Studio pour construire et déployer cet agent partagé."
+  ]
+}

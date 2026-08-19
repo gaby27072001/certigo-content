@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-2.automl-evaluation.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un modèle AutoML de BigQuery ML prédit si une transaction est frauduleuse. Avant de noter les nouvelles transactions, l'équipe doit vérifier ses performances sur des données non utilisées pour l'entraînement. Quelle approche respecte le cycle de vie du modèle ?",
+  "choices": [
+    "Exécuter ML.PREDICT sur les données d'entraînement et mesurer la précision sur ces résultats",
+    "Publier le modèle dans Looker et juger sa qualité à partir de la mise en page du tableau de bord",
+    "Conserver un jeu d'évaluation, examiner les métriques avec ML.EVALUATE, puis utiliser ML.PREDICT si elles sont acceptables",
+    "Réentraîner le modèle à chaque lot et conserver le dernier score d'entraînement"
+  ]
+}
