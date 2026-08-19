@@ -43,6 +43,9 @@ jobs:
       - name: Test packaging and leak gates
         run: npm test
 
+      - name: Enforce certification catalog freshness
+        run: npm run catalog:freshness
+
       - name: Enforce global artifact download policy
         run: npm run policy:artifact-access
 
