@@ -47,8 +47,9 @@ un commit donne.
 
 Les payloads publies sont canonises et les manifestes n'incluent ni timestamp
 ni chemin dependant de la machine. Deux executions sur le meme commit sont
-identiques octet pour octet. Les noms d'artefacts CI integrent leur
-`manifestId`; voir
+identiques octet pour octet. Les artefacts GitHub temporaires sont uniquement
+crees par lancement manuel avec l'option explicite d'upload ; leurs noms
+integrent leur `manifestId`. Voir
 [`ADR-0002`](docs/adr/ADR-0002-separated-content-artifacts.md) pour la
 retention, l'immutabilite, la publication et le rollback.
 
@@ -74,9 +75,13 @@ Les payloads historiques `v2` restent valides et a plat. Les futures paires
 multi-cloud utilisent le schema `v3`, un ID namespace
 `provider.certification.objective.slug.sequence` et des chemins symetriques
 `questions/<provider>/<certification>/` /
-`solutions/<provider>/<certification>/`. Le catalogue et les 26 matrices AWS /
-Google Cloud du snapshot 2026-08-17 sont documentes dans
-[`docs/editorial/multi-cloud-certification-catalog.md`](docs/editorial/multi-cloud-certification-catalog.md).
+`solutions/<provider>/<certification>/`.
+
+Les matrices editoriales et leurs sources officielles sont consolidees dans
+[`docs/coverage/certifications/`](docs/coverage/certifications/README.md). Cet
+index couvre AI-901, AZ-900, AZ-104, DP-900, ainsi que le catalogue et les 26
+matrices AWS / Google Cloud du snapshot 2026-08-17.
+
 Les choix d'identite, provenance, versioning et cycle de vie sont fixes par
 [`ADR-0004`](docs/adr/ADR-0004-multi-cloud-editorial-foundation.md).
 

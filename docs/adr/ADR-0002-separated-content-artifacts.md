@@ -60,14 +60,22 @@ exacte dans `privateArtifactDownloads`.
 
 ## Publication, retention et immutabilite
 
-`.github/workflows/ci-content-package.yml` publie :
+Les push sur `main` et les pull requests construisent et verifient toujours les
+deux paquets, leurs manifestes et leurs hashes. La supply chain reste bloquante :
+tests, validation du corpus, invariants du manifeste, `npm audit`, scan OSV et
+generation du SBOM sont executes sans masquer les erreurs.
+
+GitHub Artifact n'est plus une sortie automatique. Un lancement
+`workflow_dispatch` peut demander explicitement `upload_github_artifacts=true`
+si le quota est disponible. Cette option publie temporairement :
 
 - `certigo-content-public-sha256-<hash>` pendant 90 jours ;
-- `certigo-content-private-sha256-<hash>` pendant 30 jours.
+- `certigo-content-private-sha256-<hash>` pendant 30 jours ;
+- `certigo-content-tooling-sbom` pendant 30 jours.
 
-Les deux publications ont lieu uniquement sur `main` ou lancement manuel,
-jamais depuis une pull request. Les PR executent la construction et toutes les
-gates mais ne consomment pas le quota de stockage d'artefacts.
+L'upload reste strict : une demande explicite echoue si le quota est indisponible
+ou si un fichier manque. Sans cette option, les etapes d'upload sont sautees et
+toutes les gates precedentes restent executees.
 
 Le suffixe `sha256-<hash>` est la representation GitHub-compatible du
 `manifestId` `sha256:<hash>` (le caractere `:` est interdit dans un nom
@@ -78,15 +86,24 @@ active automatiquement.
 Le workflow historique conserve seulement le self-check de l'ancien manifeste
 pour la compatibilite et le rollback. Il ne publie plus l'artefact mixte.
 
-## Procedure de publication
+## Reconstruction et publication durable
 
 1. Executer `npm ci`, `npm test`, `npm run package` et
    `npm run package:verify`.
 2. Fusionner sur `main` apres passage des gates.
-3. Recuperer les deux artefacts par leur nom complet derive du `manifestId`.
-4. Pour un consommateur mobile, allow-lister exclusivement le nom
-   `certigo-content-public-sha256-*`; ne jamais telecharger tous les artefacts
-   d'un run.
+3. Reconstruire le contenu actif depuis sa revision approuvee : la serialisation
+   canonique reproduit les memes octets, `manifestId` et hashes sans dependre
+   d'un artefact GitHub conserve.
+4. Si un diagnostic ponctuel exige un artefact GitHub, lancer manuellement le
+   workflow avec `upload_github_artifacts=true` et utiliser le nom exact derive
+   du `manifestId`.
+
+La cible durable est Azure Blob Storage immuable. Elle remplacera GitHub
+Artifact apres la mise en service de
+[`Certigo#290`](https://github.com/gchambaud_microsoft/Certigo/pull/290).
+Le workflow `publish-content-azure` reste separe, manuel et limite a `main` ;
+il reconstruit et reverifie les paquets au lieu de telecharger un artefact
+GitHub.
 
 ## Rollback
 
