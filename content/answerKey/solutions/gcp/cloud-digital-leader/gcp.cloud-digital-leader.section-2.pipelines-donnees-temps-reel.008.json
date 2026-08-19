@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-digital-leader.section-2.pipelines-donnees-temps-reel.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-digital-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Ingérer les évènements avec Pub/Sub, les transformer avec Dataflow, puis les visualiser en temps réel dans Looker.",
+  "rationale": "Le guide cite Pub/Sub et Dataflow comme les produits qui modernisent les pipelines de données en flux, et Looker comme l'outil de visualisation des données en temps réel : cette combinaison correspond exactement au besoin de tableaux de bord quasi temps réel. Le choix B remplace le streaming par des lots nocturnes rafraîchis une fois par jour, ce qui introduit un décalage incompatible avec l'exigence de quasi temps réel. Le choix C archive la télémétrie brute pour consultation ponctuelle par les équipes, sans pipeline de transformation ni tableau de bord exploitable en continu par les équipes d'exploitation. Le choix D introduit un traitement trimestriel, largement incompatible avec le besoin de suivi continu des camions."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.generative-ai-leader.section-3.surveillance-continue-derive-modele.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Six mois après la mise en production d'un agent gen AI de scoring de leads commerciaux, l'équipe constate une baisse progressive de la pertinence des réponses sans changement de code applicatif. Quelles pratiques Google Cloud recommandées pour la surveillance continue permettraient d'anticiper et de diagnostiquer ce problème ?",
+  "choices": [
+    "Mettre en place un suivi de la dérive (drift) du modèle, des indicateurs clés de performance (KPI), un suivi de version, et un feature store pour tracer les données utilisées.",
+    "Suivre le taux d'erreurs applicatives côté serveur permet de détecter toute dérive du comportement du modèle de scoring, sans qu'un indicateur métier supplémentaire soit véritablement nécessaire dans ce contexte.",
+    "Revalider le modèle au moment de sa mise en production initiale suffit, les performances d'un modèle de fondation restant globalement stables tant qu'une mise à jour de code applicatif n'est pas déployée par la suite.",
+    "Remplacer le modèle par une version plus récente dès la moindre variation de performance constatée, sans chercher à établir au préalable un diagnostic de la cause via le suivi de dérive ou les KPI."
+  ]
+}

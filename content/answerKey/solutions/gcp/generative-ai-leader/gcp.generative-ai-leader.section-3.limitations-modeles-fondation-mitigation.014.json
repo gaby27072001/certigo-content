@@ -1,0 +1,13 @@
+{
+  "id": "gcp.generative-ai-leader.section-3.limitations-modeles-fondation-mitigation.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "L'ancrage (grounding) et le RAG réduisent les hallucinations et intègrent des informations récentes, complétés par une supervision humaine (human-in-the-loop) pour les réponses sensibles.",
+  "rationale": "L'ancrage et le RAG sont les pratiques recommandées pour réduire les hallucinations et pallier la coupure de connaissances en intégrant des informations à jour, complétées par une supervision humaine pour les réponses sensibles comme des références juridiques. Augmenter la taille de la fenêtre de contexte ne supprime pas la coupure de connaissances, puisque le modèle reste limité aux données vues à l'entraînement tant qu'aucun mécanisme de récupération n'est ajouté. Le réglage fin sur d'anciens textes de loi ne corrige pas non plus la coupure de connaissances, car il fige les informations à la date des données utilisées pour ce réglage. L'ingénierie de prompt, sans ancrage ni RAG, ne permet pas de garantir l'absence de références inventées, car elle ne connecte le modèle à aucune source vérifiable."
+}

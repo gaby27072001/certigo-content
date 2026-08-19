@@ -1,0 +1,13 @@
+{
+  "id": "gcp.generative-ai-leader.section-1.couches-paysage-ia-generative.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Il s'agit de cinq couches distinctes : l'infrastructure (TPU/GPU), les modèles (Gemini), les plateformes (orchestration et RAG), les agents (exécution autonome de tâches) et les applications (interface utilisateur final).",
+  "rationale": "Le paysage de l'IA générative distingue bien cinq couches complémentaires mais distinctes : l'infrastructure matérielle, les modèles de fondation, les plateformes d'orchestration, les agents autonomes, et les applications destinées aux utilisateurs finaux. L'idée d'une couche unique indifférenciée regroupant matériel, modèles et applications ne permet pas de raisonner sur l'architecture d'une pile IA générative ni de situer chaque composant. Fusionner les agents et les applications ignore que l'agent exécute des tâches de façon autonome alors que l'application est l'interface visible par l'utilisateur final, deux rôles différents. De même, fusionner infrastructure et modèles ignore que les TPU et GPU sont des ressources de calcul indépendantes du modèle de fondation qu'elles exécutent."
+}

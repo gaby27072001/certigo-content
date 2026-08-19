@@ -1,0 +1,13 @@
+{
+  "id": "gcp.generative-ai-leader.section-2.outils-agents-agent-studio-vs-ai-studio.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Utiliser des fonctions/extensions avec des services comme Cloud Functions ou Cloud Run pour l'appel d'API, l'API Document Translation pour la traduction, et Agent Studio pour construire et déployer cet agent partagé.",
+  "rationale": "Des fonctions/extensions appuyées sur Cloud Functions ou Cloud Run permettent à l'agent d'appeler une API externe de stock, l'API Document Translation prend en charge la traduction automatique du document, et Agent Studio est l'outil adapté à la construction et au déploiement d'un agent destiné à un usage continu par plusieurs équipes métier. Le guide de certification indique qu'il faut savoir quand utiliser Agent Studio plutôt que Google AI Studio (sous-objectif 2.5) ; l'attribution fonctionnelle précise retenue ici pour chaque outil relève d'une inférence éditoriale, documentée à titre privé. Limiter les interactions externes à Cloud Storage écarterait les fonctions cloud et les API de traduction comme outils d'agent. Inverser les rôles d'Agent Studio et de Google AI Studio, ou retenir Google AI Studio pour l'ensemble du projet, ne correspond pas à un déploiement partagé et durable par plusieurs équipes."
+}

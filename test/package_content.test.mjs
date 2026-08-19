@@ -75,31 +75,70 @@ function createHistoricalV2Root() {
   cpSync(resolve(repoRoot, "schemas"), resolve(root, "schemas"), { recursive: true });
   cpSync(resolve(repoRoot, "content"), resolve(root, "content"), { recursive: true });
 
-  const publicAwsRoot = resolve(root, "content", "public", "questions", "aws");
-  const privateAwsRoot = resolve(root, "content", "answerKey", "solutions", "aws");
-  assert.equal(countJsonFiles(publicAwsRoot), 42);
-  assert.equal(countJsonFiles(privateAwsRoot), 42);
-  rmSync(publicAwsRoot, { recursive: true });
-  rmSync(privateAwsRoot, { recursive: true });
+  const wavesAfterRuntimeV2 = [
+    {
+      provider: "aws",
+      certifications: ["aif-c01", "clf-c02"],
+      pairCount: 42,
+    },
+    {
+      provider: "gcp",
+      certifications: ["cloud-digital-leader", "generative-ai-leader"],
+      pairCount: 42,
+    },
+  ];
+  for (const wave of wavesAfterRuntimeV2) {
+    for (const channel of [
+      ["public", "questions"],
+      ["answerKey", "solutions"],
+    ]) {
+      const channelRoot = resolve(root, "content", channel[0], channel[1], wave.provider);
+      const pairCount = wave.certifications.reduce(
+        (total, certification) =>
+          total + countJsonFiles(resolve(channelRoot, certification)),
+        0
+      );
+      assert.equal(pairCount, wave.pairCount);
+      for (const certification of wave.certifications) {
+        rmSync(resolve(channelRoot, certification), { recursive: true });
+      }
+    }
+  }
 
   const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
   const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
   for (const certification of catalog.certifications) {
-    if (!["aws:aif-c01", "aws:clf-c02"].includes(certification.id)) continue;
+    if (
+      ![
+        "aws:aif-c01",
+        "aws:clf-c02",
+        "gcp:cloud-digital-leader",
+        "gcp:generative-ai-leader",
+      ].includes(certification.id)
+    ) {
+      continue;
+    }
     certification.provenance.checkedOn = "2026-08-17";
-    certification.provenance.sources = certification.provenance.sources.filter(
-      (source) => !source.url.endsWith("AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf")
-    );
+    if (certification.provider === "aws") {
+      certification.provenance.sources = certification.provenance.sources.filter(
+        (source) => !source.url.endsWith("AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf")
+      );
+    }
   }
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
-  for (const certification of ["aif-c01", "clf-c02"]) {
+  for (const { provider, certification } of [
+    { provider: "aws", certification: "aif-c01" },
+    { provider: "aws", certification: "clf-c02" },
+    { provider: "gcp", certification: "cloud-digital-leader" },
+    { provider: "gcp", certification: "generative-ai-leader" },
+  ]) {
     const matrixPath = resolve(
       root,
       "content",
       "public",
       "coverage",
-      "aws",
+      provider,
       `${certification}.json`
     );
     const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
@@ -175,7 +214,7 @@ test("conserve le package v2 courant byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42);
+  assert.equal(result.sourcePairCount, 232 + 42 + 42);
   assert.equal(result.release, null);
   assert.equal(existsSync(resolve(outDir, "release.json")), false);
   assert.deepEqual(
@@ -184,18 +223,18 @@ test("conserve le package v2 courant byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:f20eeba50ebbd00b7d4c7e7bed90eede336355173bcd8f1409f1fcb0d429e78d",
+          "sha256:5561b413b74a0bf79dd29b5dd73d2c26f6f19203d40cfb357d29d8591b2f6aba",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:e48085f94664351f7ccb37f826898607caab1566acb26917a814102fea42b6d3",
+          "sha256:54e6c240026508ddcb0768f3641473e08590bc48a430d60144d7574cc9c545ff",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "acb0a1d2f2519d6bee2974e5f3b6ee97144939d898a4c5348b0e88f45902656e"
+    "e06b508f366edc8ebd5e3ae787078c2908142ccc8c2df0d7540634b0e5bf6418"
   );
 });
 
