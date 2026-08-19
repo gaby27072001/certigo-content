@@ -19,6 +19,7 @@ import {
   inspectPublicArtifact,
   packageContent,
   verifyArtifact,
+  verifyPackagedContent,
 } from "../tools/package_content.mjs";
 import { canonicalize, sha256Hex } from "../tools/gen_manifest.mjs";
 
@@ -111,6 +112,16 @@ test("produit deux artefacts byte-identical avec des manifestes distincts", asyn
   assert.notEqual(publicManifest.manifestId, privateManifest.manifestId);
   assert.deepEqual(publicManifest.files.map((entry) => entry.path), ["questions/sample.json"]);
   assert.deepEqual(privateManifest.files.map((entry) => entry.path), ["solutions/sample.json"]);
+});
+
+test("revalide un package historique v1 sans release descriptor", async () => {
+  const root = createRoot();
+  await packageContent({ root });
+  rmSync(resolve(root, "dist", "release.json"));
+
+  const verified = await verifyPackagedContent({ root });
+  assert.equal(verified.release, null);
+  assert.equal(verified.packages.length, 2);
 });
 
 test("la gate finale rejette une fuite injectee recursivement dans dist/public", async () => {

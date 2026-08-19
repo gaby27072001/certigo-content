@@ -10,20 +10,35 @@ import {
   writeFileSync,
 } from "node:fs";
 import { createHash } from "node:crypto";
-import { basename, dirname, relative, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { argv, cwd } from "node:process";
 import { pathToFileURL } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { glob } from "glob";
-import { canonicalize, sha256Hex } from "./gen_manifest.mjs";
-import { CATALOG_PATH, metadataFields } from "./lib/catalog.mjs";
+import {
+  CANONICALIZATION,
+  canonicalize,
+  sha256Hex,
+} from "./gen_manifest.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
+import {
+  CONTENT_MODE,
+  detectContentMode,
+  expectedArtifactPath,
+  resourceIdentity,
+  resourceMetadata,
+  resourceTypeFromArtifactPath,
+  sourceGlobsForChannel,
+} from "./lib/resources.mjs";
 import { validateContent } from "./validate_content.mjs";
 
 export const PACKAGE_MANIFEST_SCHEMA_ID = "certigo.content.package-manifest/v1";
 export const EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID =
   "certigo.content.package-manifest/v2";
+export const RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID =
+  "certigo.content.package-manifest/v3";
+export const RELEASE_SCHEMA_ID = "certigo.content.release/v1";
 export const PACKAGE_SERIALIZATION = "json-sorted-keys-compact-utf8-lf";
 
 const CHANNELS = {
@@ -31,12 +46,6 @@ const CHANNELS = {
     name: "public",
     manifestChannel: "public",
     sourceRoot: "content/public",
-    legacySourceGlob: "content/public/questions/*.json",
-    extendedSourceGlobs: [
-      "content/public/questions/**/*.json",
-      "content/public/catalog/*.json",
-      "content/public/coverage/**/*.json",
-    ],
     payloadDirectory: "questions",
     payloadKind: "public",
   },
@@ -44,14 +53,17 @@ const CHANNELS = {
     name: "private",
     manifestChannel: "answerKey",
     sourceRoot: "content/answerKey",
-    legacySourceGlob: "content/answerKey/solutions/*.json",
-    extendedSourceGlobs: ["content/answerKey/solutions/**/*.json"],
     payloadDirectory: "solutions",
     payloadKind: "answerKey",
   },
 };
 
-const FORBIDDEN_PUBLIC_KEYS = new Set(["correct", "rationale"]);
+const FORBIDDEN_PUBLIC_KEYS = new Set([
+  "correct",
+  "correctoptionids",
+  "explanation",
+  "rationale",
+]);
 
 function toPosix(path) {
   return path.replaceAll("\\", "/");
@@ -103,11 +115,22 @@ function walkFiles(root) {
   return files.sort(compareOrdinal);
 }
 
-function buildManifest(config, files, extended) {
+function packageSchemaForMode(mode) {
+  if (mode === CONTENT_MODE.legacy) return PACKAGE_MANIFEST_SCHEMA_ID;
+  if (mode === CONTENT_MODE.extended) return EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID;
+  return RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID;
+}
+
+function modeFromPackageSchema(schema) {
+  if (schema === PACKAGE_MANIFEST_SCHEMA_ID) return CONTENT_MODE.legacy;
+  if (schema === EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID) return CONTENT_MODE.extended;
+  if (schema === RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID) return CONTENT_MODE.runtime;
+  return null;
+}
+
+function buildManifest(config, files, mode) {
   const body = {
-    schema: extended
-      ? EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID
-      : PACKAGE_MANIFEST_SCHEMA_ID,
+    schema: packageSchemaForMode(mode),
     channel: config.manifestChannel,
     artifact: config.name,
     algorithm: "sha256",
@@ -123,42 +146,6 @@ function buildManifest(config, files, extended) {
   };
 }
 
-function inferResourceType(path) {
-  if (path.startsWith("questions/")) return "question";
-  if (path.startsWith("solutions/")) return "solution";
-  if (path === "catalog/certifications.json") return "certificationCatalog";
-  if (path.startsWith("coverage/")) return "coverageMatrix";
-  return null;
-}
-
-function resourceIdentity(resourceType, data) {
-  if (resourceType === "certificationCatalog") return "certification-catalog";
-  if (resourceType === "coverageMatrix") return data.certification;
-  return data.id;
-}
-
-function resourceMetadata(resourceType, data) {
-  if (resourceType === "coverageMatrix") {
-    return {
-      provider: data.provider,
-      certification: data.certification,
-      blueprintVersion: data.blueprintVersion,
-    };
-  }
-  return metadataFields(data);
-}
-
-function expectedResourcePath(config, resourceType, data, extended) {
-  if (resourceType === "certificationCatalog") return "catalog/certifications.json";
-  if (resourceType === "coverageMatrix") {
-    return `coverage/${data.provider}/${data.certification.split(":")[1]}.json`;
-  }
-  if (!extended || data.schemaVersion === "v2") {
-    return `${config.payloadDirectory}/${data.id}.json`;
-  }
-  return `${config.payloadDirectory}/${data.metadata.provider}/${data.metadata.certification.split(":")[1]}/${data.id}.json`;
-}
-
 function manifestBody(manifest) {
   return {
     schema: manifest.schema,
@@ -169,6 +156,58 @@ function manifestBody(manifest) {
     fileCount: manifest.fileCount,
     files: manifest.files,
   };
+}
+
+function releaseBody(release) {
+  return {
+    schema: release.schema,
+    algorithm: release.algorithm,
+    canonicalization: release.canonicalization,
+    publicManifestId: release.publicManifestId,
+    privateManifestId: release.privateManifestId,
+  };
+}
+
+export function buildReleaseDescriptor(publicManifest, privateManifest) {
+  const body = {
+    schema: RELEASE_SCHEMA_ID,
+    algorithm: "sha256",
+    canonicalization: CANONICALIZATION,
+    publicManifestId: publicManifest.manifestId,
+    privateManifestId: privateManifest.manifestId,
+  };
+  return {
+    ...body,
+    releaseId: `sha256:${sha256Hex(canonicalize(body))}`,
+  };
+}
+
+function verifyReleaseDescriptor({ distRoot, schemaPath, manifests }) {
+  const releasePath = resolve(distRoot, "release.json");
+  const release = loadJson(releasePath);
+  const validateRelease = createManifestValidator(schemaPath);
+  const errors = [];
+  if (!validateRelease(release)) {
+    errors.push(
+      ...(validateRelease.errors ?? []).map(
+        (error) => `schema ${error.instancePath || "/"} ${error.message}`
+      )
+    );
+  }
+  const expectedReleaseId = `sha256:${sha256Hex(canonicalize(releaseBody(release)))}`;
+  if (release.releaseId !== expectedReleaseId) {
+    errors.push("releaseId ne correspond pas au corps canonique de la release");
+  }
+  if (release.publicManifestId !== manifests.public.manifestId) {
+    errors.push("publicManifestId ne correspond pas au manifeste public");
+  }
+  if (release.privateManifestId !== manifests.private.manifestId) {
+    errors.push("privateManifestId ne correspond pas au manifeste prive");
+  }
+  if (errors.length > 0) {
+    throw new Error(`[release-verify] ${errors.join("; ")}`);
+  }
+  return release;
 }
 
 function findForbiddenKeys(value, location = "$") {
@@ -197,7 +236,7 @@ export function inspectPublicArtifact(artifactRoot) {
 
     const absolutePath = resolve(root, path);
     const raw = readFileSync(absolutePath, "utf8");
-    if (/"(?:correct|rationale)"\s*:/i.test(raw)) {
+    if (/"(?:correct|correctOptionIds|explanation|rationale)"\s*:/i.test(raw)) {
       violations.push(`motif de corrige interdit dans ${path}`);
     }
 
@@ -234,6 +273,26 @@ function createManifestValidator(schemaPath) {
   return ajv.compile(loadJson(schemaPath));
 }
 
+function createPayloadValidators(schemaDirectory) {
+  const paths = {
+    certificationCatalog: "certification-catalog.schema.json",
+    concept: "runtime-resource.schema.json",
+    coverageMatrix: "coverage-matrix.schema.json",
+    domain: "runtime-resource.schema.json",
+    lesson: "runtime-resource.schema.json",
+    question: "question.schema.json",
+    solution: "solution.schema.json",
+    track: "runtime-resource.schema.json",
+    unit: "runtime-resource.schema.json",
+  };
+  return new Map(
+    Object.entries(paths).map(([resourceType, file]) => [
+      resourceType,
+      createManifestValidator(resolve(schemaDirectory, file)),
+    ])
+  );
+}
+
 export function verifyArtifact({
   artifactRoot,
   expectedChannel,
@@ -243,9 +302,10 @@ export function verifyArtifact({
   const root = resolve(artifactRoot);
   const manifestPath = resolve(root, "manifest.json");
   const manifest = loadJson(manifestPath);
-  const extended =
-    manifest.schema === EXTENDED_PACKAGE_MANIFEST_SCHEMA_ID;
+  const mode = modeFromPackageSchema(manifest.schema);
+  const extended = mode !== CONTENT_MODE.legacy;
   const validateManifest = createManifestValidator(schemaPath);
+  const payloadValidators = createPayloadValidators(dirname(schemaPath));
   const errors = [];
   const manifestFiles = Array.isArray(manifest.files) ? manifest.files : [];
   const expectedConfig = CHANNELS[expectedChannel];
@@ -259,6 +319,9 @@ export function verifyArtifact({
         (error) => `schema ${error.instancePath || "/"} ${error.message}`
       )
     );
+  }
+  if (mode === null) {
+    errors.push(`schema de manifeste inconnu: ${manifest.schema}`);
   }
   if (manifest.artifact !== expectedChannel) {
     errors.push(`artefact attendu ${expectedChannel}, obtenu ${manifest.artifact}`);
@@ -300,10 +363,30 @@ export function verifyArtifact({
       const payload = JSON.parse(
         bytes.toString("utf8").replace(/^\uFEFF/, "")
       );
-      const resourceType = inferResourceType(entry.path);
+      const resourceType = resourceTypeFromArtifactPath(entry.path);
       if (resourceType === null) {
         errors.push(`type de ressource inconnu: ${entry.path}`);
         continue;
+      }
+      const validatePayload = payloadValidators.get(resourceType);
+      if (!validatePayload(payload)) {
+        errors.push(
+          ...(validatePayload.errors ?? []).map(
+            (error) =>
+              `payload ${entry.path}${error.instancePath || "/"} ${error.message}`
+          )
+        );
+      }
+      if (resourceType === "question" && payload.schemaVersion === "v4") {
+        const optionIds = Array.isArray(payload.options)
+          ? payload.options.map((option) => option?.id)
+          : [];
+        if (
+          optionIds.some((id) => typeof id !== "string") ||
+          new Set(optionIds).size !== optionIds.length
+        ) {
+          errors.push(`ids d'option dupliques ou invalides: ${entry.path}`);
+        }
       }
       if (extended && entry.resourceType !== resourceType) {
         errors.push(
@@ -319,11 +402,13 @@ export function verifyArtifact({
           `couplage payload/id incorrect: ${entry.path} declare "${entry.id}", payload "${expectedId}"`
         );
       }
-      const expectedPath = expectedResourcePath(
-        expectedConfig,
-        resourceType,
-        payload,
-        extended
+      const expectedPath = expectedArtifactPath(
+        {
+          artifact: expectedConfig.name,
+          mode,
+          resourceType,
+          data: payload,
+        }
       );
       if (entry.path !== expectedPath) {
         errors.push(
@@ -349,6 +434,15 @@ export function verifyArtifact({
         payload.schema !== "certigo.coverage-matrix/v1"
       ) {
         errors.push(`schema couverture incorrect: ${entry.path}`);
+      }
+      if (
+        ["track", "domain", "unit", "lesson", "concept"].includes(resourceType) &&
+        (
+          payload.resourceType !== resourceType ||
+          payload.schema !== `certigo.runtime.${resourceType}/v1`
+        )
+      ) {
+        errors.push(`schema runtime incorrect: ${entry.path}`);
       }
       if (extended) {
         const expectedMetadata = resourceMetadata(resourceType, payload);
@@ -388,24 +482,32 @@ export function verifyArtifact({
   return { manifest, antiLeakReport };
 }
 
-async function writeArtifact(root, distRoot, config, extended) {
+async function writeArtifact(root, distRoot, config, mode) {
   const artifactRoot = resolve(distRoot, config.name);
-  const sourceFiles = (
-    await glob(
-      extended ? config.extendedSourceGlobs : config.legacySourceGlob,
-      { cwd: root, posix: true }
-    )
-  ).sort(compareOrdinal);
+  const sourceFiles = [];
+  for (const pattern of sourceGlobsForChannel(mode, config.manifestChannel)) {
+    sourceFiles.push(...await glob(pattern, { cwd: root, posix: true }));
+  }
+  sourceFiles.sort(compareOrdinal);
   const manifestFiles = [];
 
   for (const sourcePath of sourceFiles) {
     const data = loadJson(resolve(root, sourcePath));
-    const outputPath = extended
-      ? toPosix(relative(config.sourceRoot, sourcePath))
-      : `${config.payloadDirectory}/${basename(sourcePath)}`;
-    const resourceType = inferResourceType(outputPath);
+    const relativeSourcePath = toPosix(relative(config.sourceRoot, sourcePath));
+    const resourceType = resourceTypeFromArtifactPath(relativeSourcePath);
     if (resourceType === null) {
       throw new Error(`[package] type de ressource inconnu: ${sourcePath}`);
+    }
+    const outputPath = expectedArtifactPath({
+      artifact: config.name,
+      mode,
+      resourceType,
+      data,
+    });
+    if (outputPath === null || outputPath !== relativeSourcePath) {
+      throw new Error(
+        `[package] chemin source non canonique: ${sourcePath} (attendu ${outputPath ?? "inconnu"})`
+      );
     }
     const serialized = serializeJson(data);
     const outputAbsolutePath = resolve(artifactRoot, outputPath);
@@ -417,7 +519,7 @@ async function writeArtifact(root, distRoot, config, extended) {
       hash: sha256Hex(serialized),
       size: Buffer.byteLength(serialized, "utf8"),
     };
-    if (extended) {
+    if (mode !== CONTENT_MODE.legacy) {
       manifestEntry.resourceType = resourceType;
       Object.assign(manifestEntry, resourceMetadata(resourceType, data));
     }
@@ -425,7 +527,7 @@ async function writeArtifact(root, distRoot, config, extended) {
   }
 
   manifestFiles.sort((a, b) => compareOrdinal(a.path, b.path));
-  const manifest = buildManifest(config, manifestFiles, extended);
+  const manifest = buildManifest(config, manifestFiles, mode);
   writeFileSync(resolve(artifactRoot, "manifest.json"), serializePretty(manifest), "utf8");
   return artifactRoot;
 }
@@ -434,7 +536,9 @@ export async function verifyPackagedContent(options = {}) {
   const root = resolve(options.root ?? cwd());
   const distRoot = resolve(root, options.outDir ?? "dist");
   const schemaPath = resolve(root, "schemas", "package-manifest.schema.json");
+  const releaseSchemaPath = resolve(root, "schemas", "content-release.schema.json");
   const packages = [];
+  const manifests = {};
 
   for (const config of resolveChannels(options.channel ?? "all")) {
     const result = verifyArtifact({
@@ -449,16 +553,31 @@ export async function verifyPackagedContent(options = {}) {
       rootHash: result.manifest.rootHash,
       fileCount: result.manifest.fileCount,
     });
+    manifests[config.name] = result.manifest;
   }
-  return { packages };
+  const allChannels = options.channel === undefined || options.channel === "all";
+  const releasePath = resolve(distRoot, "release.json");
+  const releaseRequired = Object.values(manifests).some(
+    (manifest) => manifest.schema === RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID
+  );
+  const release =
+    allChannels && (releaseRequired || existsSync(releasePath))
+      ? verifyReleaseDescriptor({
+          distRoot,
+          schemaPath: releaseSchemaPath,
+          manifests,
+        })
+      : null;
+  return { packages, release };
 }
 
 export async function packageContent(options = {}) {
   const root = resolve(options.root ?? cwd());
   const distRoot = resolve(root, options.outDir ?? "dist");
   const configs = resolveChannels(options.channel ?? "all");
-  const extended = existsSync(resolve(root, CATALOG_PATH));
+  const mode = detectContentMode(root);
   const schemaPath = resolve(root, "schemas", "package-manifest.schema.json");
+  const releaseSchemaPath = resolve(root, "schemas", "content-release.schema.json");
   const validation = await validateContent({ root });
   if (validation.errors.length > 0) {
     throw new Error(`[package] corpus invalide: ${validation.errors.join("; ")}`);
@@ -474,12 +593,14 @@ export async function packageContent(options = {}) {
     if (configs.some((config) => config.name === "public")) {
       rmSync(resolve(distRoot, "reports", "public-anti-leak.json"), { force: true });
     }
+    rmSync(resolve(distRoot, "release.json"), { force: true });
   }
   mkdirSync(resolve(distRoot, "reports"), { recursive: true });
 
   const packages = [];
+  const manifests = {};
   for (const config of configs) {
-    const artifactRoot = await writeArtifact(root, distRoot, config, extended);
+    const artifactRoot = await writeArtifact(root, distRoot, config, mode);
     const verified = verifyArtifact({
       artifactRoot,
       expectedChannel: config.name,
@@ -499,6 +620,22 @@ export async function packageContent(options = {}) {
       rootHash: verified.manifest.rootHash,
       fileCount: verified.manifest.fileCount,
     });
+    manifests[config.name] = verified.manifest;
+  }
+
+  let release = null;
+  if (configs.length === Object.keys(CHANNELS).length) {
+    release = buildReleaseDescriptor(manifests.public, manifests.private);
+    writeFileSync(
+      resolve(distRoot, "release.json"),
+      serializePretty(release),
+      "utf8"
+    );
+    verifyReleaseDescriptor({
+      distRoot,
+      schemaPath: releaseSchemaPath,
+      manifests,
+    });
   }
 
   const summary = {
@@ -506,14 +643,22 @@ export async function packageContent(options = {}) {
     sourcePairCount: validation.pairCount,
     certificationCount: validation.certificationCount,
     coverageMatrixCount: validation.coverageCount,
+    runtimeResourceCount: validation.runtimeResourceCount,
     packages,
+    ...(release === null
+      ? {}
+      : {
+          releaseId: release.releaseId,
+          publicManifestId: release.publicManifestId,
+          privateManifestId: release.privateManifestId,
+        }),
   };
   writeFileSync(
     resolve(distRoot, "reports", "package-summary.json"),
     serializePretty(summary),
     "utf8"
   );
-  return summary;
+  return { ...summary, release };
 }
 
 function parseArgs(cliArgs) {
@@ -553,6 +698,11 @@ if (isMain) {
       for (const entry of result.packages) {
         console.log(
           `[package] ${entry.artifact}: ${entry.fileCount} fichier(s), ${entry.manifestId}, artifact=${entry.artifactName}`
+        );
+      }
+      if (result.release) {
+        console.log(
+          `[package] release: ${result.release.releaseId}, public=${result.release.publicManifestId}`
         );
       }
     }
