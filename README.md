@@ -66,6 +66,12 @@ deterministe : toute modification semantique
 du corpus change son hash, tandis que l'ordre des cles et la mise en forme JSON
 ne le changent pas.
 
+Les matrices editoriales et les sources officielles des corpus Azure sont
+documentees dans :
+
+- [`docs/coverage/az-900.md`](docs/coverage/az-900.md) ;
+- [`docs/coverage/az-104.md`](docs/coverage/az-104.md).
+
 Le manifeste de paquet couple strictement `artifact`, `channel`, le repertoire
 du `path`, l'identifiant du nom de fichier et `payload.id`. La politique
 `.github/artifact-access-policy.json` est globale a tous les workflows ; toute
