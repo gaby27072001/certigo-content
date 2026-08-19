@@ -1,28 +1,16 @@
 name: ci-tooling
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      upload_github_artifacts:
+        description: Upload temporary GitHub artifacts (requires available quota)
+        required: false
+        type: boolean
+        default: false
   push:
     branches: [main]
-    paths:
-      - ".nvmrc"
-      - "package.json"
-      - "package-lock.json"
-      - "tools/**"
-      - "test/**"
-      - "content/**"
-      - "schemas/**"
-      - ".github/**"
-  pull_request:
-    paths:
-      - ".nvmrc"
-      - "package.json"
-      - "package-lock.json"
-      - "tools/**"
-      - "test/**"
-      - "content/**"
-      - "schemas/**"
-      - ".github/**"
+  pull_request: {}
 
 concurrency:
   group: ci-tooling-${{ github.ref }}
@@ -83,11 +71,10 @@ jobs:
         run: npm sbom --sbom-format cyclonedx > tooling-sbom.cdx.json
 
       - name: Publish tooling SBOM
-        # Generation is strict; upload is best-effort because repository
-        # artifact quota exhaustion must not invalidate the supply-chain gate.
-        continue-on-error: true
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload_github_artifacts == true }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: certigo-content-tooling-sbom
           path: tooling-sbom.cdx.json
           if-no-files-found: error
+          retention-days: 30
