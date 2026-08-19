@@ -111,7 +111,9 @@ function createMetadataRoot() {
       const matrixPath = resolve(providerRoot, file);
       const matrix = readJson(matrixPath);
       for (const objective of matrix.objectives) objective.questionIds = [];
-      if (matrix.status === "complete") matrix.status = "planned";
+      if (matrix.status === "complete" || matrix.status === "in-progress") {
+        matrix.status = "planned";
+      }
       writeJson(matrixPath, matrix);
     }
   }
@@ -240,6 +242,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
       )
     );
     assert.equal(matrix.certification, certification.id);
+    assert.ok(matrix.objectives.every((objective) => Array.isArray(objective.questionIds)));
     questionIds.push(...matrix.objectives.flatMap((objective) => objective.questionIds));
     if (matrix.status === "planned") {
       assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));

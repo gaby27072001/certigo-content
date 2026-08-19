@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-1.acces-console-multi-comptes-annuaire-existant.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une société de services doit donner à 800 collaborateurs un accès à la console de 12 comptes AWS. Les identités et les groupes métier existent déjà dans l'annuaire d'entreprise, exposé par un fournisseur d'identité SAML 2.0. Les droits diffèrent selon l'équipe, l'accès doit disparaître dès qu'une personne quitte l'annuaire, et l'équipe cloud veut éviter de gérer des mots de passe ou des clés d'accès de longue durée du côté AWS. Quelle conception d'accès l'architecte doit-il proposer ?",
+  "choices": [
+    "Déployer AWS IAM Identity Center, le connecter au fournisseur d'identité SAML 2.0 existant, définir un jeu d'autorisations par profil métier et affecter ces jeux aux groupes de l'annuaire sur les 12 comptes.",
+    "Créer dans chaque compte un utilisateur IAM par collaborateur, imposer l'authentification multifacteur et une rotation régulière des mots de passe, puis regrouper ces utilisateurs dans des groupes IAM par équipe.",
+    "Créer un compte AWS dédié à l'authentification, y déclarer les 800 utilisateurs IAM et distribuer à chacun des clés d'accès de longue durée permettant d'appeler les autres comptes.",
+    "Publier dans AWS Secrets Manager les identifiants de connexion partagés de chaque équipe et faire tourner ces secrets toutes les vingt-quatre heures."
+  ]
+}

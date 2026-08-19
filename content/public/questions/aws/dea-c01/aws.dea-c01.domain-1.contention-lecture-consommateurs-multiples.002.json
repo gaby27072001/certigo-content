@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-1.contention-lecture-consommateurs-multiples.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Quatre applications d'analyse indépendantes consomment le même flux Amazon Kinesis Data Streams de cinq partitions. Depuis l'ajout de la quatrième application, les journaux montrent de nombreuses exceptions ReadProvisionedThroughputExceeded et la latence de bout en bout dépasse une minute pour toutes les applications, alors que le volume écrit par les producteurs n'a pas augmenté. Quelle solution corrige le problème tout en gardant les quatre applications indépendantes ?",
+  "choices": [
+    "Enregistrer chaque application comme consommateur à diffusion amplifiée (enhanced fan-out) et lire via SubscribeToShard, afin d'attribuer à chacune un débit de lecture dédié de 2 Mo/s par partition.",
+    "Doubler le nombre de partitions du flux et laisser les quatre applications continuer à appeler GetRecords sur le débit de lecture partagé.",
+    "Fusionner les quatre applications en une seule fonction AWS Lambda qui écrit ses résultats dans quatre tables Amazon DynamoDB distinctes.",
+    "Augmenter la taille de lot de chaque appel GetRecords et espacer les appels à un toutes les cinq secondes pour chaque application."
+  ]
+}

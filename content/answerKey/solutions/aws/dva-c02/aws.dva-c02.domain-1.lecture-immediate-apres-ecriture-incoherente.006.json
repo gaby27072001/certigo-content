@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-1.lecture-immediate-apres-ecriture-incoherente.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Demander une lecture fortement cohérente en positionnant `ConsistentRead` à true sur l'opération GetItem, en acceptant un coût double en unités de capacité de lecture et l'impossibilité d'utiliser ce mode sur un index secondaire global.",
+  "rationale": "Par défaut, GetItem effectue une lecture à cohérence éventuelle : la requête peut être servie par une copie qui n'a pas encore reçu la dernière écriture, d'où l'ancienne valeur observée juste après le PutItem. En positionnant `ConsistentRead` à true, DynamoDB sert la lecture depuis la copie principale et garantit la prise en compte de toutes les écritures réussies antérieures ; le prix à payer est une unité de capacité de lecture complète au lieu d'une demi-unité, une latence légèrement supérieure et l'impossibilité d'appliquer ce mode à un index secondaire global. Ajouter une temporisation arbitraire est un contournement fragile : la durée n'est jamais garantie, elle pénalise chaque utilisateur et l'anomalie réapparaît sous charge. DAX est un cache en mémoire dont les lectures d'éléments sont à cohérence éventuelle : un cache périmé peut au contraire prolonger l'affichage de l'ancienne valeur. Les index secondaires globaux sont mis à jour de façon asynchrone et n'offrent aucune option de lecture fortement cohérente : ils aggraveraient le problème."
+}

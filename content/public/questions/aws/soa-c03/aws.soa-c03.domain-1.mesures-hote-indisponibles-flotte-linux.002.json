@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-1.mesures-hote-indisponibles-flotte-linux.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un administrateur doit déclencher une alarme lorsque l'utilisation mémoire et l'espace disque libre d'une flotte d'instances Amazon EC2 Linux dépassent des seuils définis. Dans la console CloudWatch, il ne trouve aucune métrique de mémoire ni de système de fichiers pour ces instances. Quelle action permet d'obtenir ces mesures ?",
+  "choices": [
+    "Installer et configurer l'agent CloudWatch sur les instances, en distribuant sa configuration par un document AWS Systems Manager, afin de publier les métriques de mémoire et de système de fichiers dans CloudWatch.",
+    "Activer la surveillance détaillée (detailed monitoring) EC2 pour obtenir les métriques de mémoire avec une granularité d'une minute.",
+    "Lire les métriques de mémoire dans l'espace de noms AWS/EC2, où elles sont publiées par défaut toutes les cinq minutes.",
+    "Activer les événements de données AWS CloudTrail sur les instances afin d'en déduire la consommation mémoire et disque."
+  ]
+}

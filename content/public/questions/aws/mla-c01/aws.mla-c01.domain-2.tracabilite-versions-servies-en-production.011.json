@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-2.tracabilite-versions-servies-en-production.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un audit interne exige de pouvoir retrouver, pour toute prédiction servie en production au cours des douze derniers mois, la version exacte du modèle, l'image de conteneur et l'artefact utilisés, les métriques d'évaluation associées et la personne qui a approuvé la mise en production. Aujourd'hui, les artefacts sont simplement copiés dans un bucket Amazon S3. Que doit mettre en place l'ingénieur ML ?",
+  "choices": [
+    "Enregistrer chaque modèle entraîné comme une version de package dans un groupe du registre de modèles SageMaker, avec l'URI de l'artefact, l'image du conteneur et les métriques d'évaluation, puis conditionner le déploiement au statut d'approbation de cette version.",
+    "Continuer à copier les artefacts dans Amazon S3 en ajoutant la date et le nom de l'auteur dans le nom de chaque objet.",
+    "Tenir un tableur partagé listant les versions déployées, complété manuellement à chaque mise en production.",
+    "S'appuyer sur les journaux CloudWatch des jobs d'entraînement, qui contiennent les paramètres et les métriques de chaque exécution."
+  ]
+}

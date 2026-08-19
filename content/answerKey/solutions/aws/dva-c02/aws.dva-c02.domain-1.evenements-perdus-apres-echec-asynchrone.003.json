@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-1.evenements-perdus-apres-echec-asynchrone.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer une destination d'échec (Lambda Destinations) vers une file Amazon SQS ou un sujet Amazon SNS, qui reçoit l'enregistrement d'invocation complet avec la charge utile, le contexte de la réponse et la raison de l'erreur une fois les tentatives épuisées.",
+  "rationale": "Pour une invocation asynchrone, Lambda place l'événement dans une file interne et le rejoue deux fois par défaut ; sans destination d'échec ni file d'attente de lettres mortes, l'événement est définitivement abandonné. Une destination d'échec capture un enregistrement JSON complet - charge utile d'origine, contexte de la requête et de la réponse, motif de l'erreur - ce qui permet l'analyse et le rejeu, là où une file de lettres mortes classique ne transmet que la charge utile brute. Le mécanisme est asynchrone et ne ralentit donc pas le chemin nominal. Augmenter le délai d'expiration ne sert que si les échecs proviennent de traitements trop longs : cela ne conserve aucun événement en cas d'erreur applicative. X-Ray produit des traces d'observabilité, mais ne stocke pas les charges utiles et ne rejoue jamais une invocation. Enfin, les notifications d'événements Amazon S3 vers Lambda sont asynchrones par nature : le mode d'invocation ne peut pas être basculé en synchrone depuis S3, et le service appelant ne conserve pas l'événement pour le compte de l'application."
+}

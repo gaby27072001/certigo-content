@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-1.divergence-calculs-entrainement-inference.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Les caractéristiques d'un modèle de recommandation sont calculées deux fois : un job Apache Spark sur Amazon EMR produit le jeu d'entraînement, tandis qu'un service applicatif recalcule les mêmes agrégats au moment de l'inférence temps réel. Les deux implémentations ont divergé et les prédictions en production ne correspondent plus à celles observées à l'entraînement. Quelle approche l'ingénieur ML doit-il retenir ?",
+  "choices": [
+    "Centraliser les caractéristiques dans Amazon SageMaker Feature Store : les écrire une seule fois dans un groupe de caractéristiques, construire les jeux d'entraînement depuis le magasin hors ligne et servir l'inférence depuis le magasin en ligne.",
+    "Dupliquer le code Spark dans une fonction AWS Lambda afin que les deux chemins de calcul restent proches l'un de l'autre.",
+    "Documenter les formules de calcul des caractéristiques dans un wiki d'équipe et ajouter une revue de code obligatoire avant toute modification.",
+    "Recalculer les caractéristiques à chaque requête d'inférence avec une requête Amazon Athena sur les données brutes stockées dans Amazon S3."
+  ]
+}

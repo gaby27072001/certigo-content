@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-3.documents-volumineux-rafales-espacees.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un modèle d'extraction documentaire traite des fichiers PDF pouvant atteindre 400 Mo, avec environ 90 secondes de calcul par document. Les demandes arrivent par rafales imprévisibles séparées de plusieurs heures, l'appelant accepte d'être notifié plus tard et l'équipe ne veut rien payer entre les rafales. Quel mode de déploiement Amazon SageMaker convient ?",
+  "choices": [
+    "Un point de terminaison temps réel SageMaker, dimensionné pour absorber la charge utile et la durée de traitement de chaque document.",
+    "Une inférence sans serveur SageMaker, qui provisionne la capacité à la demande à chaque invocation.",
+    "Un point de terminaison asynchrone SageMaker, qui met les demandes en file, accepte des charges utiles volumineuses et de longues durées de traitement, notifie l'appelant via Amazon SNS et peut réduire sa flotte à zéro instance entre les rafales.",
+    "Une transformation par lots SageMaker planifiée toutes les heures sur l'ensemble des documents déposés."
+  ]
+}

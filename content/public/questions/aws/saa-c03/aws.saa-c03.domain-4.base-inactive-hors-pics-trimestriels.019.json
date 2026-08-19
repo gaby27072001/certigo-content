@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-4.base-inactive-hors-pics-trimestriels.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une application interne de gestion des ressources humaines s'appuie sur une base PostgreSQL. L'activité est concentrée sur environ trois heures par jour ouvré, avec des campagnes trimestrielles multipliant la charge par dix pendant quelques jours ; le reste du temps, la base est quasiment inactive. L'instance provisionnée est dimensionnée pour le pic, si bien que l'utilisation moyenne des ressources plafonne à 8 %. L'entreprise veut réduire la facture sans dégrader les pics ni changer de moteur. Que doit proposer l'architecte ?",
+  "choices": [
+    "Conserver l'instance provisionnée et arrêter le cluster chaque nuit ainsi que le week-end au moyen d'une tâche planifiée.",
+    "Migrer les données vers Amazon DynamoDB en mode de capacité à la demande.",
+    "Migrer vers Amazon Aurora Serverless v2 compatible avec PostgreSQL, en fixant une capacité minimale basse et une capacité maximale couvrant le pic trimestriel, afin que la capacité suive la charge de façon continue.",
+    "Réduire durablement la classe de l'instance provisionnée à la taille correspondant à la charge moyenne et accepter la dégradation pendant les pics."
+  ]
+}

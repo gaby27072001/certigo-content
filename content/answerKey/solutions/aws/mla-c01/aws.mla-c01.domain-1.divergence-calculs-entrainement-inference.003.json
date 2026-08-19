@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-1.divergence-calculs-entrainement-inference.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Centraliser les caractéristiques dans Amazon SageMaker Feature Store : les écrire une seule fois dans un groupe de caractéristiques, construire les jeux d'entraînement depuis le magasin hors ligne et servir l'inférence depuis le magasin en ligne.",
+  "rationale": "L'écart observé est un décalage entre entraînement et service : deux implémentations distinctes de la même caractéristique finissent toujours par diverger. SageMaker Feature Store supprime la cause en ne conservant qu'un seul chemin d'écriture : les valeurs sont ingérées une fois dans un groupe de caractéristiques, le magasin hors ligne matérialise l'historique sur Amazon S3 pour construire des jeux d'entraînement avec des jointures à un instant donné, et le magasin en ligne restitue la dernière valeur connue avec une latence de quelques millisecondes pour l'inférence. Les définitions, les types et l'horodatage sont partagés, et le catalogue permet la réutilisation par d'autres modèles. Réécrire le code Spark dans une fonction Lambda crée une troisième implémentation à maintenir : la divergence est reportée, pas éliminée, et chaque évolution devra être répliquée à l'identique dans deux environnements d'exécution différents. Documenter les formules et imposer une revue de code repose entièrement sur la discipline humaine, ne garantit aucune égalité numérique et ne détecte pas les dérives silencieuses. Recalculer les agrégats par une requête Athena à chaque appel d'inférence introduit une latence de plusieurs secondes, incompatible avec un service temps réel, et facture un balayage de données pour chaque prédiction."
+}

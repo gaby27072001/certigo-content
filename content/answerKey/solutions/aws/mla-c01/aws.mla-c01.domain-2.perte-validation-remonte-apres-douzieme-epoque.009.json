@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-2.perte-validation-remonte-apres-douzieme-epoque.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Introduire de la régularisation (abandon de neurones, pénalité L2, augmentation de données) et activer l'arrêt anticipé sur la perte de validation afin de conserver le point de contrôle de l'époque 12.",
+  "rationale": "La divergence entre une perte d'entraînement qui baisse et une perte de validation qui remonte est la signature du surapprentissage : le réseau mémorise le bruit du jeu d'entraînement au lieu d'apprendre des régularités généralisables. Les techniques de régularisation attaquent la cause : l'abandon de neurones empêche la co-adaptation des unités, la pénalité L2 contraint l'amplitude des poids, et l'augmentation de données enrichit artificiellement un jeu de 40 000 exemples qui reste modeste pour un réseau profond. L'arrêt anticipé surveille la métrique de validation et restaure le point de contrôle du minimum, ici l'époque 12, ce qui évite à la fois le gaspillage de calcul et la sélection d'un modèle dégradé. Augmenter la capacité du réseau accroît le nombre de paramètres libres et amplifie donc mécaniquement le surapprentissage déjà constaté. Prolonger l'entraînement ne fait que poursuivre la mémorisation, la remontée observée sur cinquante époques étant monotone, sans aucun indice de retournement. Sélectionner sur la perte d'entraînement revient à choisir le modèle qui généralise le plus mal, puisque cette métrique continue de s'améliorer précisément pendant que la performance sur données nouvelles se dégrade."
+}

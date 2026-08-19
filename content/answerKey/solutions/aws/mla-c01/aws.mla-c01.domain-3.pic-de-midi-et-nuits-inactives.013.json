@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-3.pic-de-midi-et-nuits-inactives.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Enregistrer la variante de production comme cible évolutive Application Auto Scaling et lui appliquer une politique de suivi de cible sur la métrique SageMakerVariantInvocationsPerInstance, avec des bornes minimale et maximale et des délais de récupération adaptés.",
+  "rationale": "La mise à l'échelle automatique des points de terminaison SageMaker s'obtient en enregistrant la variante de production comme cible évolutive auprès d'Application Auto Scaling, puis en attachant une politique de suivi de cible. La métrique SageMakerVariantInvocationsPerInstance est la référence recommandée car elle mesure directement la charge par instance : le service ajoute des instances quand la valeur observée dépasse la cible et les retire quand la demande retombe, ce qui couvre à la fois le pic de midi et le creux nocturne. Les bornes minimale et maximale encadrent le coût et le risque, tandis que les délais de récupération à la montée et à la descente évitent les oscillations. Porter durablement la flotte à six instances résout la latence mais paie le pic vingt-quatre heures sur vingt-quatre, ce qui est exactement le gaspillage que l'équipe veut éliminer. Passer à une instance plus grande déplace le plafond sans rendre la capacité élastique : le creux nocturne reste facturé, et une seule grande instance ne remplace pas la répartition de charge entre plusieurs instances. L'inférence sans serveur élimine le dimensionnement mais change le profil de service, avec démarrages à froid, limites de durée et de charge utile et absence d'instances GPU ; ce n'est pas un réglage d'élasticité pour un point de terminaison temps réel existant soumis à un engagement de latence."
+}

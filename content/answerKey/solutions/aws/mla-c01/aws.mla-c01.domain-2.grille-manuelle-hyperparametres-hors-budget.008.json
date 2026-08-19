@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-2.grille-manuelle-hyperparametres-hors-budget.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Utiliser le réglage automatique de modèle (AMT) de SageMaker avec la stratégie bayésienne : déclarer les plages des six hyperparamètres, désigner la métrique objective d'AUC de validation, activer l'arrêt anticipé des essais non prometteurs et limiter le parallélisme pour que chaque essai profite des précédents.",
+  "rationale": "Le réglage automatique de modèle de SageMaker en mode bayésien construit un modèle de substitution reliant les hyperparamètres à la métrique objective, puis choisit chaque nouvel essai là où l'espérance de gain est la plus forte. Sur six dimensions, cette approche atteint généralement un meilleur optimum que la recherche exhaustive avec un nombre d'essais nettement inférieur, ce qui répond à la contrainte budgétaire. L'arrêt anticipé interrompt les jobs dont la métrique intermédiaire est clairement en retrait, libérant la capacité pour des essais prometteurs, et un parallélisme modéré est essentiel : trop d'essais simultanés sont lancés avant que les résultats précédents ne soient connus, ce qui dégrade la stratégie bayésienne en recherche quasi aléatoire. Porter la grille à 500 combinaisons aggrave exactement le problème dénoncé, car le coût croît de manière combinatoire avec le nombre de dimensions, sans exploiter l'information accumulée. Revenir aux valeurs par défaut et grossir les instances accélère chaque job mais abandonne toute optimisation de la qualité : l'AUC ne progressera pas, seule la facture changera. Prolonger l'entraînement jusqu'à stabilisation de la perte d'entraînement optimise la mauvaise quantité et conduit droit au surapprentissage, alors que la métrique de sélection est l'AUC mesurée sur la validation."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-4.temps-de-reponse-au-dela-de-la-cible.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Le 99e centile de latence d'un point de terminaison d'inférence dépasse la cible. L'équipe ignore si le temps est consommé par le modèle lui-même ou par la surcharge d'orchestration du conteneur, et souhaite étayer par des mesures son choix de famille et de taille d'instance. Quelle démarche doit-elle suivre ?",
+  "choices": [
+    "Doubler immédiatement le nombre d'instances derrière le point de terminaison et observer si le 99e centile redescend.",
+    "Comparer d'abord les métriques CloudWatch ModelLatency et OverheadLatency du point de terminaison pour localiser le temps consommé, puis lancer un job SageMaker Inference Recommender qui évalue plusieurs familles et tailles d'instances sous le profil de trafic attendu.",
+    "Migrer le point de terminaison vers la plus grande instance GPU disponible, qui offre nécessairement la plus faible latence.",
+    "Instrumenter uniquement l'application cliente afin de mesurer le temps total de bout en bout perçu par les utilisateurs."
+  ]
+}

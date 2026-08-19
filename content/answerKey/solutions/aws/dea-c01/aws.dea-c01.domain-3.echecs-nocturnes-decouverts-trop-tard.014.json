@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-3.echecs-nocturnes-decouverts-trop-tard.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Créer une règle Amazon EventBridge sur l'événement Glue Job State Change filtrant les états FAILED et TIMEOUT, avec pour cible une rubrique Amazon SNS à laquelle l'équipe d'astreinte est abonnée.",
+  "rationale": "AWS Glue publie nativement des événements Glue Job State Change dans Amazon EventBridge : une règle qui filtre les états FAILED et TIMEOUT et cible une rubrique Amazon SNS notifie l'astreinte en quelques secondes, sans aucun code à écrire ni infrastructure à exploiter, et la même règle couvre les quarante tâches d'un seul tenant. L'interrogation périodique de GetJobRuns depuis une fonction Lambda réintroduit du code, un magasin d'état, un risque de limitation d'API et un délai de détection égal à l'intervalle de scrutation, pour reproduire une fonctionnalité déjà fournie. Activer la journalisation continue améliore le diagnostic mais ne déclenche aucune notification : les échecs resteraient découverts le matin, c'est-à-dire exactement le problème à résoudre. Un suivi CloudTrail des appels StartJobRun enregistre le déclenchement des tâches et non leur issue, et un tableau de bord rafraîchi quotidiennement conserve un délai de détection de vingt-quatre heures."
+}

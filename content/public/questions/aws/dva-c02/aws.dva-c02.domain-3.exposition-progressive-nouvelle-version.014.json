@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-3.exposition-progressive-nouvelle-version.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une fonction AWS Lambda de production est appelée par Amazon API Gateway via un alias `prod`. L'équipe veut exposer une nouvelle version à une petite fraction du trafic pendant dix minutes, surveiller son comportement, puis basculer la totalité du trafic, sans que les clients aient à modifier l'ARN qu'ils invoquent. Quelle méthode doit-elle utiliser ?",
+  "choices": [
+    "Publier une nouvelle version de la fonction et configurer le routage pondéré de l'alias `prod` pour envoyer 10 % des invocations vers cette version, par exemple avec `AutoPublishAlias` et une préférence de déploiement de type Canary10Percent10Minutes dans AWS SAM.",
+    "Déployer la nouvelle version dans une seconde fonction et demander aux équipes clientes de basculer manuellement l'ARN qu'elles appellent.",
+    "Mettre à jour le code de `$LATEST` et observer les métriques pendant dix minutes avant d'annoncer officiellement le changement.",
+    "Créer un second étage API Gateway et laisser chaque client tirer au sort l'étage qu'il appelle."
+  ]
+}

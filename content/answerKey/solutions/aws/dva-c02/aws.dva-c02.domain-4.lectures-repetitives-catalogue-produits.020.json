@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-4.lectures-repetitives-catalogue-produits.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Placer un cluster DynamoDB Accelerator (DAX) devant la table et faire passer les lectures par le client DAX, afin de servir les accès répétés depuis un cache en mémoire, en microsecondes, tout en réduisant les unités de capacité de lecture consommées.",
+  "rationale": "DAX est un cache en mémoire entièrement géré, spécifique à DynamoDB : les lectures répétées d'éléments identiques sont servies en microsecondes depuis le cluster, sans consommer d'unités de capacité de lecture sur la table, ce qui traite simultanément la latence et le coût. Le motif d'accès décrit - forte répétition et données rarement modifiées - correspond exactement à ce cas d'usage, et les durées de vie du cache d'éléments et du cache de requêtes permettent d'arbitrer la fraîcheur, sachant que les lectures servies par DAX sont à cohérence éventuelle et que les lectures fortement cohérentes traversent le cache. Passer en capacité provisionnée avec une réservation élevée revient à payer plus cher le même volume de lectures sans améliorer la latence. La réutilisation d'une connexion HTTP évite le coût d'établissement de la session TLS mais ne met aucune réponse en cache : chaque lecture atteint toujours le service et consomme sa capacité. Dupliquer les données dans un index secondaire global ajoute un coût d'écriture et de stockage supplémentaire sans réduire le nombre de lectures ni la latence, puisque le trafic reste dirigé vers les mêmes éléments."
+}

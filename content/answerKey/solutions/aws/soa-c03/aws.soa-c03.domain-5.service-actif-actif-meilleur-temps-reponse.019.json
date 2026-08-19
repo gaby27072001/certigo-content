@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-5.service-actif-actif-meilleur-temps-reponse.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Un routage basé sur la latence, avec un enregistrement d'alias par Région, chacun associé à un contrôle de santé.",
+  "rationale": "Le routage basé sur la latence s'appuie sur les latences mesurées entre les réseaux des utilisateurs et les Régions AWS pour répondre avec l'enregistrement le plus rapide, et les contrôles de santé associés retirent automatiquement une Région défaillante des réponses : les deux exigences sont couvertes. Le routage par géolocalisation applique des règles administratives par pays ou continent, qui ne correspondent pas nécessairement au chemin réseau le plus rapide. Le routage pondéré répartit le trafic selon des poids fixes, sans tenir compte de la latence. Le routage à réponses multivaleurs renvoie jusqu'à huit enregistrements sains de façon aléatoire : il apporte une répartition simple mais ne sélectionne pas la Région la plus proche."
+}

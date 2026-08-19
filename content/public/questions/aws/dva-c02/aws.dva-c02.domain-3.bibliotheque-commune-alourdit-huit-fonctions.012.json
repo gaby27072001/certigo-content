@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-3.bibliotheque-commune-alourdit-huit-fonctions.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Huit fonctions AWS Lambda d'une même application dépendent de la même bibliothèque volumineuse de traitement d'images, incluse dans chaque archive .zip. Les paquets approchent la limite de taille décompressée, les téléversements ralentissent le pipeline et une dépendance native doit désormais être compilée pour l'environnement d'exécution. Quelle stratégie d'artefact le développeur doit-il adopter ?",
+  "choices": [
+    "Téléverser les dépendances dans un compartiment Amazon S3 et les télécharger dans /tmp au début de chaque invocation.",
+    "Extraire les dépendances communes dans une couche Lambda versionnée et partagée, référencée par les huit fonctions, et empaqueter sous forme d'image de conteneur publiée dans Amazon ECR les fonctions qui dépassent encore les limites du paquet .zip ou qui nécessitent des binaires natifs.",
+    "Committer les binaires compilés dans le dépôt de code et augmenter le délai d'expiration des fonctions.",
+    "Découper le code en fonctions supplémentaires appelées en chaîne afin que chaque paquet reste sous la limite de taille."
+  ]
+}

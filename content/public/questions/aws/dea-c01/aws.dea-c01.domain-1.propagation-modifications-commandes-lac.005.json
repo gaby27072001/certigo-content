@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-1.propagation-modifications-commandes-lac.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une table Amazon DynamoDB enregistre les commandes d'un site marchand. L'équipe analytique souhaite disposer dans le lac de données Amazon S3 des créations, modifications et suppressions de commandes en quasi temps réel, avec la valeur avant et après modification. La contrainte est de ne dégrader ni la latence ni la capacité consommée par l'application transactionnelle. Quelle solution répond au besoin ?",
+  "choices": [
+    "Activer Amazon DynamoDB Streams sur la table avec la vue NEW_AND_OLD_IMAGES et brancher une fonction AWS Lambda qui écrit les enregistrements de modification dans Amazon S3.",
+    "Planifier toutes les cinq minutes une opération Scan complète de la table, exportée vers Amazon S3 par une tâche AWS Glue.",
+    "Activer la restauration à un instant donné sur la table et la restaurer toutes les cinq minutes dans une table temporaire à exporter.",
+    "Créer un index secondaire global trié sur l'horodatage de dernière modification et interroger cet index toutes les cinq minutes depuis Amazon Athena."
+  ]
+}

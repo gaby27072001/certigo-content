@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-1.alimentation-entrepot-depuis-base-sur-site.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une base Oracle hébergée dans un centre de données privé alimente les opérations d'un assureur. L'équipe de données doit copier ces tables vers Amazon S3 pour alimenter un entrepôt Amazon Redshift, avec une interruption de service quasi nulle et un décalage inférieur à quelques minutes une fois la copie initiale terminée. Quelle approche respecte ces contraintes ?",
+  "choices": [
+    "Exporter chaque nuit un vidage complet de la base Oracle vers Amazon S3 avec AWS DataSync, puis recharger intégralement les tables cibles.",
+    "Créer une diffusion Amazon Data Firehose configurée pour interroger directement les tables Oracle toutes les minutes.",
+    "Transférer la base avec AWS Snowball Edge, puis planifier des exports différentiels rédigés manuellement par les administrateurs Oracle.",
+    "Créer une tâche AWS Database Migration Service de type charge complète et réplication continue, avec la journalisation supplémentaire activée sur la source Oracle."
+  ]
+}

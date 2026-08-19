@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-3.exposition-progressive-nouvelle-version.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Publier une nouvelle version de la fonction et configurer le routage pondéré de l'alias `prod` pour envoyer 10 % des invocations vers cette version, par exemple avec `AutoPublishAlias` et une préférence de déploiement de type Canary10Percent10Minutes dans AWS SAM.",
+  "rationale": "Un alias Lambda est un pointeur stable vers une version : les appelants conservent l'ARN de l'alias `prod`, tandis que le routage pondéré répartit les invocations entre la version courante et la nouvelle version publiée. En déclarant `AutoPublishAlias` et une préférence de déploiement de type canari dans AWS SAM, AWS CodeDeploy fait glisser le trafic automatiquement (10 % pendant dix minutes, puis la totalité), exécute les éventuels hooks de validation avant et après le basculement et surveille les alarmes CloudWatch associées. Déployer une seconde fonction impose une coordination avec toutes les équipes clientes, exclut tout déploiement progressif et rend le retour arrière lent et manuel. Mettre à jour `$LATEST` expose immédiatement 100 % du trafic au nouveau code, sans phase canari ni point de retour ; `$LATEST` n'étant pas immuable, tout suivi fiable des versions devient impossible. Faire tirer au sort un étage API Gateway côté client déplace la logique de déploiement chez les consommateurs, produit un trafic non reproductible et n'offre aucun mécanisme automatique de bascule ni de retour arrière."
+}

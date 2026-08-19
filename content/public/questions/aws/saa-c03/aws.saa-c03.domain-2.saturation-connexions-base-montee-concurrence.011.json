@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-2.saturation-connexions-base-montee-concurrence.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application sans serveur composée de fonctions AWS Lambda interroge un cluster Amazon Aurora MySQL. Aux heures de pointe, la montée en concurrence des fonctions provoque des erreurs de saturation du nombre de connexions à la base, et les basculements du cluster restent perceptibles pendant une à deux minutes côté application. L'entreprise ne veut pas réécrire le code applicatif ni changer de moteur de base de données. Que doit recommander l'architecte ?",
+  "choices": [
+    "Augmenter la taille de l'instance Aurora pour relever la limite de connexions et réduire la concurrence maximale autorisée des fonctions AWS Lambda.",
+    "Ajouter des réplicas en lecture Aurora et diriger l'ensemble des requêtes, y compris les écritures, vers le point de terminaison de lecture du cluster.",
+    "Interposer Amazon RDS Proxy entre les fonctions AWS Lambda et le cluster Aurora afin de mutualiser et de réutiliser les connexions à la base, et de raccourcir l'indisponibilité perçue lors des basculements en conservant les connexions clientes.",
+    "Mettre en cache les résultats dans Amazon ElastiCache et n'ouvrir une connexion à la base de données qu'en cas d'absence dans le cache."
+  ]
+}

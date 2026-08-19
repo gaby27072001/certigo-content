@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-3.ajustement-seuils-sans-redeploiement.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Externaliser les indicateurs et les seuils dans AWS AppConfig, avec un validateur de configuration, une stratégie de déploiement progressive et un retour arrière automatique déclenché par une alarme CloudWatch, l'application récupérant la configuration via l'extension AppConfig pour Lambda.",
+  "rationale": "AWS AppConfig sépare le cycle de vie de la configuration de celui du code : les valeurs sont versionnées dans un profil de configuration, contrôlées avant diffusion par un validateur (schéma JSON ou fonction Lambda), puis diffusées selon une stratégie progressive (pourcentage croissant, durée de cuisson) avec un retour arrière automatique si une alarme CloudWatch se déclenche. L'extension AppConfig pour Lambda met la configuration en cache localement et l'actualise en arrière-plan, ce qui évite un appel à chaque invocation tout en propageant les changements en quelques secondes, sans nouveau déploiement. Modifier des variables d'environnement impose une mise à jour de la configuration de fonction et une nouvelle version : c'est exactement le cycle lourd que l'équipe veut supprimer, sans diffusion progressive ni annulation automatique. Coder les valeurs dans le paquet et maintenir une branche par environnement multiplie les divergences et interdit tout changement à chaud. Un fichier dans Amazon S3 relu à chaque invocation ajoute de la latence et du coût, n'offre ni validation, ni déploiement progressif, ni retour arrière : une valeur erronée se propage instantanément à l'ensemble du trafic."
+}

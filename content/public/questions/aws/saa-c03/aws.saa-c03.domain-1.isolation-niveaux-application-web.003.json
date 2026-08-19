@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-1.isolation-niveaux-application-web.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un architecte conçoit le réseau d'une application web à trois niveaux : un Application Load Balancer exposé aux clients, une flotte de serveurs web et applicatifs en groupe Auto Scaling, et une base de données Amazon RDS. Les serveurs et la base ne doivent jamais être joignables depuis Internet, mais les serveurs doivent pouvoir télécharger des correctifs depuis Internet. Comme le groupe Auto Scaling remplace fréquemment les instances, les règles de filtrage ne doivent pas dépendre des adresses IP des instances. Quelle conception réseau répond à ces exigences ?",
+  "choices": [
+    "Placer les trois niveaux dans des sous-réseaux publics avec des adresses IP élastiques, puis restreindre les échanges au moyen d'ACL réseau qui référencent les plages d'adresses de chaque niveau.",
+    "Placer les trois niveaux dans des sous-réseaux privés, ouvrir les groupes de sécurité en entrée sur 0.0.0.0/0 et compter sur les tables de routage pour empêcher tout trafic entrant depuis Internet.",
+    "Placer l'Application Load Balancer et les serveurs dans des sous-réseaux publics, la base de données dans un sous-réseau privé, et autoriser dans chaque groupe de sécurité les plages CIDR des sous-réseaux appelants.",
+    "Placer l'Application Load Balancer dans les sous-réseaux publics, les serveurs et la base de données dans des sous-réseaux privés répartis sur plusieurs zones de disponibilité, ajouter une passerelle NAT pour le trafic sortant des sous-réseaux privés, et chaîner les groupes de sécurité en autorisant chacun à recevoir le trafic du groupe de sécurité du niveau appelant."
+  ]
+}
