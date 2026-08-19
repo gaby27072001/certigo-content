@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-digital-leader.section-2.pipelines-donnees-temps-reel.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-digital-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une entreprise de logistique veut alimenter des tableaux de bord quasi temps réel à partir de la télémétrie continue de ses camions, en transformant les évènements avant de les visualiser pour ses équipes d'exploitation. Quelle chaîne d'outils correspond le mieux à ce besoin ?",
+  "choices": [
+    "Ingérer les évènements avec Pub/Sub, les transformer avec Dataflow, puis les visualiser en temps réel dans Looker.",
+    "Charger la télémétrie dans BigQuery par lots nocturnes, puis rafraîchir les tableaux de bord une fois par jour après chaque import.",
+    "Archiver la télémétrie brute dans Cloud Storage à des fins de conservation, puis laisser les équipes d'exploitation interroger les fichiers directement au besoin.",
+    "Traiter les évènements une seule fois par trimestre après leur export vers un disque local."
+  ]
+}
