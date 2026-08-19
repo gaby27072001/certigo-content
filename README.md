@@ -70,6 +70,8 @@ ne le changent pas.
 Les matrices editoriales et les sources officielles des corpus Azure sont
 documentees dans :
 
+- [`docs/coverage/ai-901.md`](docs/coverage/ai-901.md), track actif distinct
+  de l'historique AI-900, sans conversion de tentative ni credit synthetique ;
 - [`docs/coverage/az-900.md`](docs/coverage/az-900.md) ;
 - [`docs/coverage/az-104.md`](docs/coverage/az-104.md) ;
 - [`docs/coverage/dp-900.md`](docs/coverage/dp-900.md).
