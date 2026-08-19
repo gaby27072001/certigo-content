@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "section-4"
   },
-  "correct": "Activer Workload Identity Federation for GKE, utiliser un compte de service Kubernetes dédié et accorder à son principal le rôle Pub/Sub Publisher sur le topic",
+  "correct": "Utiliser Workload Identity Federation for GKE avec un ServiceAccount Kubernetes dédié autorisé sur le topic",
   "rationale": "Workload Identity Federation for GKE fournit au Pod des jetons de courte durée liés à son identité Kubernetes et permet une attribution IAM précise sur le topic. Le compte des nœuds étendrait l'accès aux autres Pods, un Secret contenant une clé reste un identifiant persistant et l'accès anonyme est non sécurisé."
 }

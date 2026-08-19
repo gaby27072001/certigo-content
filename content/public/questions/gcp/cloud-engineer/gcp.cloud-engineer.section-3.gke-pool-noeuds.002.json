@@ -10,8 +10,8 @@
   },
   "prompt": "Un cluster GKE Standard exécute des services généraux. Une nouvelle charge nécessite des GPU, mais les autres Pods doivent rester sur les nœuds actuels. Quelle opération est la plus adaptée ?",
   "choices": [
-    "Ajouter un pool de nœuds avec GPU, lui appliquer un taint et planifier la charge avec les tolérances et sélecteurs appropriés",
-    "Remplacer immédiatement tous les nœuds du pool existant par des nœuds GPU",
+    "Ajouter un pool GPU avec taint, puis utiliser tolérances et sélecteurs pour la charge",
+    "Remplacer le pool existant par un pool GPU et replanifier les charges générales",
     "Créer une règle de pare-feu qui cible les Pods nécessitant un GPU",
     "Augmenter le nombre maximal de Pods par nœud sans modifier le matériel"
   ]

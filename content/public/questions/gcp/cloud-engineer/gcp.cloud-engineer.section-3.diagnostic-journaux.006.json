@@ -10,9 +10,9 @@
   },
   "prompt": "Une application sur Compute Engine devient parfois indisponible lorsque l'espace disque est presque saturé. L'équipe veut collecter les métriques du système d'exploitation, examiner les journaux applicatifs et être alertée avant la saturation. Quelle approche faut-il utiliser ?",
   "choices": [
-    "Consulter uniquement le journal d'activité de facturation une fois par mois",
-    "Créer une règle de pare-feu autorisant toutes les connexions entrantes",
-    "Déployer Ops Agent, filtrer les entrées dans Cloud Logging et créer une règle d'alerte Cloud Monitoring sur l'utilisation du disque",
+    "Consulter le journal d'activité de facturation et créer une alerte mensuelle",
+    "Étendre la règle de pare-feu d'entrée et surveiller le nombre de connexions",
+    "Installer Ops Agent, filtrer les journaux et alerter sur l'utilisation du disque",
     "Créer un snapshot à chaque erreur HTTP sans collecter de métriques"
   ]
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Trois administrateurs doivent créer de façon répétable les mêmes réseaux, sous-réseaux et règles de pare-feu dans plusieurs projets. Les changements doivent être relus avant application et l'état partagé sans dépendre du poste d'un administrateur. Quelle approche faut-il adopter ?",
   "choices": [
-    "Exécuter manuellement les commandes gcloud depuis chaque poste",
-    "Enregistrer une suite de captures d'écran de la console",
-    "Créer les ressources une fois puis cloner les disques des VM",
-    "Définir les ressources avec Terraform, examiner le plan et stocker l'état dans un backend Cloud Storage protégé"
+    "Exécuter les mêmes commandes gcloud depuis un script local partagé entre les administrateurs",
+    "Exporter les configurations de la console et les relire avant chaque déploiement",
+    "Créer les ressources dans un projet modèle puis cloner les disques et règles associées",
+    "Définir l'infrastructure avec Terraform, examiner le plan et stocker l'état dans Cloud Storage"
   ]
 }

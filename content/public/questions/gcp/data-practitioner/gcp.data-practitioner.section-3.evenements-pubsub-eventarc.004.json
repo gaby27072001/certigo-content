@@ -10,7 +10,7 @@
   },
   "prompt": "Des applications publient des événements de commande dans un topic Pub/Sub. Une équipe veut invoquer un service Cloud Run uniquement pour les messages de ce topic, sans interroger périodiquement la source ni gérer de serveur de routage. Quelle architecture choisir ?",
   "choices": [
-    "Créer une requête BigQuery planifiée qui interroge le topic toutes les cinq minutes",
+    "Créer une requête BigQuery planifiée qui lit une table de messages exportés à intervalle de cinq minutes",
     "Créer un DAG Cloud Composer qui démarre un cluster Dataproc pour chaque message",
     "Créer un déclencheur Eventarc pour acheminer les événements Pub/Sub vers le service Cloud Run",
     "Copier quotidiennement les messages dans Cloud Storage avec Storage Transfer Service"

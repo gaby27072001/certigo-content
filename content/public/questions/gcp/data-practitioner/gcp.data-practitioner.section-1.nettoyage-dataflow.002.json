@@ -10,7 +10,7 @@
   },
   "prompt": "Plusieurs agences déposent chaque jour des fichiers CSV. Certains contiennent des identifiants en double, des dates dans des formats différents ou une clé client vide. L'équipe veut automatiser un chargement fiable dans BigQuery et isoler les lignes non conformes. Quelle approche faut-il adopter ?",
   "choices": [
-    "Charger tous les fichiers avec la détection automatique du schéma et corriger les erreurs après publication",
+    "Charger les fichiers avec détection de schéma et corriger les lignes rejetées après publication",
     "Demander à chaque agence de corriger manuellement ses fichiers dans un tableur",
     "Créer un pipeline Dataflow par lot qui valide le schéma, normalise les dates, déduplique et place les rejets en quarantaine",
     "Créer une table externe BigQuery sur les fichiers et ignorer les lignes dont la clé client est vide"

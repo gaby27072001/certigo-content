@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "section-3"
   },
-  "correct": "Examiner les métriques de retard système, de fraîcheur et de backlog du job, puis corréler les étapes concernées avec Cloud Logging",
+  "correct": "Examiner le retard système, la fraîcheur et le backlog, puis corréler les étapes dans Cloud Logging",
   "rationale": "Les métriques Dataflow indiquent si les données s'accumulent et à quelle étape le retard se forme; les journaux apportent ensuite le contexte d'erreur. L'historique BigQuery ne couvre pas toute la chaîne, un redémarrage sans diagnostic peut masquer la cause et Cloud Storage ne remplace ni Pub/Sub ni l'observabilité du job."
 }

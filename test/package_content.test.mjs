@@ -86,6 +86,15 @@ function createHistoricalV2Root() {
       certifications: ["cloud-digital-leader", "generative-ai-leader"],
       pairCount: 42,
     },
+    {
+      provider: "gcp",
+      certifications: [
+        "associate-google-workspace-administrator",
+        "cloud-engineer",
+        "data-practitioner",
+      ],
+      pairCount: 60,
+    },
   ];
   for (const wave of wavesAfterRuntimeV2) {
     for (const channel of [
@@ -127,24 +136,21 @@ function createHistoricalV2Root() {
   }
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
-  for (const { provider, certification } of [
-    { provider: "aws", certification: "aif-c01" },
-    { provider: "aws", certification: "clf-c02" },
-    { provider: "gcp", certification: "cloud-digital-leader" },
-    { provider: "gcp", certification: "generative-ai-leader" },
-  ]) {
-    const matrixPath = resolve(
-      root,
-      "content",
-      "public",
-      "coverage",
-      provider,
-      `${certification}.json`
-    );
-    const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
-    matrix.status = "planned";
-    for (const objective of matrix.objectives) objective.questionIds = [];
-    writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
+  for (const { provider, certifications } of wavesAfterRuntimeV2) {
+    for (const certification of certifications) {
+      const matrixPath = resolve(
+        root,
+        "content",
+        "public",
+        "coverage",
+        provider,
+        `${certification}.json`
+      );
+      const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
+      matrix.status = "planned";
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
+    }
   }
   return root;
 }
@@ -214,7 +220,7 @@ test("conserve le package v2 courant byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42 + 42);
+  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60);
   assert.equal(result.release, null);
   assert.equal(existsSync(resolve(outDir, "release.json")), false);
   assert.deepEqual(
@@ -223,18 +229,18 @@ test("conserve le package v2 courant byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:5561b413b74a0bf79dd29b5dd73d2c26f6f19203d40cfb357d29d8591b2f6aba",
+          "sha256:561856321bcee074d2c40f2cb970e6780f5a49de98e6e892f56b20635b7cdd84",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:54e6c240026508ddcb0768f3641473e08590bc48a430d60144d7574cc9c545ff",
+          "sha256:093dce8a62420661f3eeb0efff46327e533b483dfc01217c6abe096a86263d6b",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "e06b508f366edc8ebd5e3ae787078c2908142ccc8c2df0d7540634b0e5bf6418"
+    "1f917094a696e6831da117a74840abfce8b99e624b41838d1a3e7bb037dd81af"
   );
 });
 
