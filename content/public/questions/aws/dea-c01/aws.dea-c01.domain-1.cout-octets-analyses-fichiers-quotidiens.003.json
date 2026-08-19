@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-1.cout-octets-analyses-fichiers-quotidiens.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Chaque nuit, un partenaire dépose dans Amazon S3 environ 400 Go de fichiers CSV compressés en gzip décrivant les événements de la journée. Les analystes les interrogent avec Amazon Athena en filtrant presque toujours sur une plage de dates et sur trois colonnes parmi quarante. Le coût des octets analysés explose et les requêtes durent plusieurs minutes. L'équipe de données veut réduire durablement le volume analysé avec un effort opérationnel minimal. Que doit-elle mettre en place ?",
+  "choices": [
+    "Charger chaque nuit les fichiers CSV dans une base Amazon RDS for PostgreSQL et rediriger les analystes vers cette base.",
+    "Conserver les fichiers CSV tels quels et relever la limite d'octets analysés configurée sur le groupe de travail Athena.",
+    "Déployer un cluster Amazon EMR permanent qui recompresse chaque nuit les fichiers CSV avec un taux de compression gzip plus élevé.",
+    "Planifier une tâche AWS Glue ETL Spark qui convertit les fichiers CSV en Apache Parquet compressé Snappy et les écrit dans Amazon S3, partitionnés par date d'événement."
+  ]
+}

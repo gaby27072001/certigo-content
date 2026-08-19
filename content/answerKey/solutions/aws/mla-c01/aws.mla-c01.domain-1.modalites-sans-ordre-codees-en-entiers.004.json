@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-1.modalites-sans-ordre-codees-en-entiers.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Remplacer l'encodage entier par un encodage un-parmi-n (one-hot), par exemple avec une transformation Amazon SageMaker Data Wrangler, afin de créer une colonne indicatrice par modalité.",
+  "rationale": "Un encodage entier attribue implicitement un ordre et une distance aux modalités : un modèle linéaire interprète la valeur 5 comme cinq fois la valeur 1 et suppose que les écarts entre canaux successifs sont identiques, ce qui n'a aucun sens pour une variable nominale. L'encodage un-parmi-n crée une colonne indicatrice binaire par modalité : chaque canal reçoit son propre coefficient, indépendant des autres, et aucune relation d'ordre n'est introduite. Avec seulement six modalités, la cardinalité reste faible et l'augmentation du nombre de colonnes est négligeable ; SageMaker Data Wrangler propose cette transformation directement dans le flux de préparation, ce qui la rend reproductible et exportable vers le pipeline. Standardiser les entiers ne fait que translater et changer l'échelle : l'ordre artificiel et l'équidistance restent présents, donc le problème d'interprétation demeure entier. La transformation logarithmique s'adresse à des variables numériques continues à distribution asymétrique ; appliquée à des codes de modalités, elle déforme un ordre qui n'existait pas, sans le supprimer. Le regroupement en intervalles suppose lui aussi que les codes voisins sont semblables, si bien que fusionner les canaux 0 et 1 revient à décréter arbitrairement que le référencement et le courriel se comportent de la même façon, tout en perdant de l'information."
+}

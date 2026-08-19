@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-1.colonnes-nulles-atteignent-entrainement.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un job AWS Glue quotidien alimente le jeu d'entraînement d'un modèle de prévision. Deux fois ce trimestre, des colonnes entièrement nulles et des montants négatifs impossibles ont atteint l'entraînement, et le problème n'a été découvert qu'après le déploiement du modèle. L'équipe veut des contrôles déclaratifs, versionnés avec le pipeline, qui interrompent le traitement et déclenchent une alerte dès la détection. Que doit mettre en place l'ingénieur ?",
+  "choices": [
+    "Créer un crawler AWS Glue supplémentaire qui met à jour le catalogue de données après chaque exécution afin de détecter les changements de schéma.",
+    "Définir un ensemble de règles AWS Glue Data Quality en DQDL (complétude, unicité, plages de valeurs), l'évaluer dans le job Glue, faire échouer l'exécution en cas de violation et router le résultat vers Amazon EventBridge puis Amazon SNS.",
+    "Programmer chaque mois un job de profilage AWS Glue DataBrew et faire examiner visuellement le rapport par un analyste.",
+    "Demander à un ingénieur d'exécuter quelques requêtes Amazon Athena de contrôle après chaque exécution du pipeline."
+  ]
+}

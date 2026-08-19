@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-1.acces-console-multi-comptes-annuaire-existant.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Déployer AWS IAM Identity Center, le connecter au fournisseur d'identité SAML 2.0 existant, définir un jeu d'autorisations par profil métier et affecter ces jeux aux groupes de l'annuaire sur les 12 comptes.",
+  "rationale": "Le besoin combine une source d'identité déjà existante, une granularité de droits par équipe, un retrait immédiat des accès et l'absence d'identifiants durables. AWS IAM Identity Center répond aux quatre points : il fédère l'annuaire par SAML 2.0, donc l'authentification et le cycle de vie des comptes restent pilotés par l'annuaire, et la désactivation d'une personne dans l'annuaire lui coupe l'accès sans intervention dans AWS. Les jeux d'autorisations décrivent une fois pour toutes un profil de droits, puis sont affectés à un groupe sur autant de comptes que nécessaire, ce qui remplace 800 fois 12 déclarations par quelques affectations. À la connexion, l'utilisateur reçoit des identifiants temporaires émis par AWS STS : il n'y a ni mot de passe ni clé d'accès à conserver côté AWS. Créer un utilisateur IAM par collaborateur dans chaque compte multiplie les identités à créer, à auditer et surtout à supprimer manuellement au départ d'une personne, ce qui est précisément le risque que l'entreprise veut éliminer. Le compte d'authentification unique avec des clés d'accès de longue durée réintroduit le secret durable que l'énoncé exclut : une clé compromise reste valable jusqu'à sa révocation manuelle. Les identifiants partagés par équipe, même stockés et tournés dans AWS Secrets Manager, détruisent l'imputabilité individuelle dans les journaux et ne se retirent pas à la personne qui part, puisque tous les membres de l'équipe utilisent le même compte de connexion."
+}

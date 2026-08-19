@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-1.saturation-debit-stockage-bloc.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une base de données auto-gérée utilise un volume Amazon EBS gp2 de 200 Gio. Les métriques montrent une file d'attente élevée et des IOPS constamment plafonnées à la valeur de base du volume. L'équipe veut plus d'IOPS et de débit sans augmenter la capacité de stockage ni payer davantage que nécessaire. Quelle action choisir ?",
+  "choices": [
+    "Étendre le volume gp2 à 4 000 Gio afin d'augmenter les IOPS de base, proportionnelles à la taille du volume.",
+    "Modifier le volume vers le type gp3 et provisionner indépendamment les IOPS et le débit nécessaires, sans changer la taille du volume.",
+    "Convertir le volume au type Cold HDD (sc1), optimisé pour les accès aléatoires transactionnels.",
+    "Planifier un instantané EBS toutes les heures afin de vider la file d'attente d'écriture du volume."
+  ]
+}

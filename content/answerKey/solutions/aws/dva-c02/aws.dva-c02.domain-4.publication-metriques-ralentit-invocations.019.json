@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-4.publication-metriques-ralentit-invocations.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Émettre les mesures dans les journaux au format de métriques intégré (EMF) de CloudWatch, sous la forme d'une seule ligne structurée par invocation avec un nombre maîtrisé de dimensions, CloudWatch extrayant ensuite les métriques de façon asynchrone.",
+  "rationale": "Le format de métriques intégré transforme une ligne de journal structurée en métriques CloudWatch : la fonction écrit ses mesures sur la sortie standard, sans appel d'API supplémentaire sur le chemin critique, et CloudWatch les extrait de façon asynchrone tout en conservant le journal complet pour l'analyse détaillée. La latence liée à PutMetricData disparaît, les erreurs de limitation aussi, et le coût diminue puisque les six mesures voyagent dans un unique événement de journal. Déporter PutMetricData dans un fil d'arrière-plan ne supprime ni les appels d'API, ni leur coût, ni la limitation ; pire, l'environnement d'exécution Lambda est gelé dès le retour du gestionnaire, ce qui fait perdre les publications non terminées. Créer une métrique par identifiant de commande produit une cardinalité non bornée : chaque combinaison de dimensions constitue une métrique personnalisée facturée, ce qui fait exploser le coût et rend les tableaux de bord inexploitables. Les métriques fournies par défaut par Lambda (invocations, erreurs, durée, limitations, concurrence) décrivent l'exécution de la fonction et ne contiennent aucun indicateur métier."
+}

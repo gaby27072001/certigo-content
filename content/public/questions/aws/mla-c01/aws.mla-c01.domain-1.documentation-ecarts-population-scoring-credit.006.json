@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-1.documentation-ecarts-population-scoring-credit.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Avant d'entraîner un modèle de scoring de crédit, une équipe doit mesurer de façon reproductible et documentée le déséquilibre de classes du jeu de données ainsi que l'écart de proportion d'étiquettes positives entre les tranches d'âge, afin de justifier ses choix de préparation auprès de la conformité. Quelle méthode l'ingénieur ML doit-il employer ?",
+  "choices": [
+    "Supprimer la colonne « tranche d'âge » du jeu de données avant l'entraînement, ce qui élimine mécaniquement toute mesure de biais à produire.",
+    "Attendre la fin de l'entraînement et analyser la matrice de confusion du modèle par tranche d'âge sur le jeu de test.",
+    "Suréchantillonner immédiatement les tranches d'âge minoritaires jusqu'à obtenir des effectifs égaux, puis considérer la question du biais comme réglée.",
+    "Exécuter un job Amazon SageMaker Clarify d'analyse de biais avant l'entraînement, en déclarant la facette « tranche d'âge » et l'étiquette cible, pour obtenir des métriques telles que le déséquilibre de classes (CI) et la différence de proportions d'étiquettes (DPL) dans un rapport versionné."
+  ]
+}

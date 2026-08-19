@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-4.restriction-colonnes-sensibles-sans-duplication.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un lac de données Amazon S3 est enregistré dans AWS Lake Formation et catalogué dans AWS Glue. Une table clients contient des colonnes de contact directement identifiantes. Les analystes marketing doivent interroger cette table avec Amazon Athena mais ne doivent jamais voir les colonnes de courriel et de téléphone, alors que l'équipe conformité conserve un accès complet. La direction refuse toute duplication du jeu de données et exige un effort d'exploitation minimal. Quelle solution retenir ?",
+  "choices": [
+    "Créer une copie de la table sans les colonnes sensibles dans un autre compartiment et donner aux analystes marketing l'accès à cette copie.",
+    "Attacher aux analystes marketing une politique IAM refusant l'action s3:GetObject sur les objets qui contiennent les colonnes sensibles.",
+    "Chiffrer les colonnes de courriel et de téléphone avec une clé AWS KMS distincte et ne communiquer cette clé qu'à l'équipe conformité.",
+    "Accorder aux analystes marketing la permission SELECT via AWS Lake Formation en n'incluant que les colonnes autorisées, et laisser Athena appliquer le filtrage à l'exécution."
+  ]
+}

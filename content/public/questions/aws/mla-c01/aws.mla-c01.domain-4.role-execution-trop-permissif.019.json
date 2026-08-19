@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-4.role-execution-trop-permissif.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Les jobs d'entraînement d'une équipe utilisent un rôle d'exécution Amazon SageMaker auquel la politique gérée AmazonS3FullAccess est attachée. L'audit exige un accès au moindre privilège : les jobs ne doivent lire que le préfixe des données du projet et n'écrire que dans le préfixe des artefacts du même projet. Que doit faire l'ingénieur ML ?",
+  "choices": [
+    "Remplacer la politique gérée par une politique gérée par le client, limitée aux actions strictement nécessaires et aux ARN du bucket et des préfixes du projet, après avoir vérifié les appels réellement effectués par les jobs.",
+    "Conserver AmazonS3FullAccess sur le rôle et compenser en activant le blocage de l'accès public sur tous les buckets du compte.",
+    "Conserver AmazonS3FullAccess et exiger l'authentification multifacteur des ingénieurs qui lancent les jobs d'entraînement.",
+    "Conserver AmazonS3FullAccess et ajouter une liste de contrôle d'accès sur les objets des autres projets."
+  ]
+}

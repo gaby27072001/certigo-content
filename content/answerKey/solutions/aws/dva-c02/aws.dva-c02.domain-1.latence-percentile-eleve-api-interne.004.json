@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-1.latence-percentile-eleve-api-interne.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Déplacer l'initialisation du client du SDK et des ressources réutilisables en dehors du gestionnaire, dans la phase d'initialisation, puis augmenter la mémoire allouée afin d'obtenir davantage de puissance de calcul et mesurer le rapport coût/latence sur plusieurs paliers.",
+  "rationale": "Ce qui est initialisé en dehors du gestionnaire s'exécute une seule fois par environnement d'exécution, pendant la phase d'initialisation, puis est réutilisé par toutes les invocations servies ensuite par ce même environnement : le client du SDK, les pools de connexions et les objets de configuration coûteux doivent donc être créés au niveau statique ou global. En parallèle, la puissance de calcul allouée à Lambda est proportionnelle à la mémoire configurée : 128 Mo brident fortement le processeur, et augmenter la mémoire raccourcit souvent la durée au point de réduire aussi le coût, ce qu'il faut vérifier palier par palier. Réduire la mémoire va à l'inverse du besoin et dégrade encore la puissance de calcul disponible. Les variables d'environnement sont des chaînes de caractères immuables, définies dans la configuration de la fonction : elles ne peuvent contenir ni objet ni connexion et ne conservent rien entre les invocations. Une concurrence réservée de 1 ne garantit aucune réutilisation utile : elle limite la fonction à une seule invocation simultanée et provoque des rejets pour limitation dès que deux requêtes arrivent en même temps ; c'est la concurrence provisionnée qui maintient des environnements déjà initialisés pour supprimer les démarrages à froid."
+}

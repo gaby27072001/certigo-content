@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-3.pic-de-midi-et-nuits-inactives.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un point de terminaison temps réel Amazon SageMaker fonctionne avec deux instances fixes. Chaque midi, la latence du modèle dépasse l'engagement de service pendant une heure, tandis que la nuit les instances restent quasiment inactives et facturées. L'équipe veut suivre la charge automatiquement sans surdimensionner en permanence. Que doit-elle configurer ?",
+  "choices": [
+    "Porter durablement la flotte à six instances afin d'absorber le pic de midi sans intervention.",
+    "Remplacer le type d'instance par la plus grande taille disponible dans la même famille.",
+    "Basculer le modèle vers une inférence sans serveur pour supprimer toute décision de dimensionnement.",
+    "Enregistrer la variante de production comme cible évolutive Application Auto Scaling et lui appliquer une politique de suivi de cible sur la métrique SageMakerVariantInvocationsPerInstance, avec des bornes minimale et maximale et des délais de récupération adaptés."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-4.role-execution-trop-permissif.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Remplacer la politique gérée par une politique gérée par le client, limitée aux actions strictement nécessaires et aux ARN du bucket et des préfixes du projet, après avoir vérifié les appels réellement effectués par les jobs.",
+  "rationale": "Le moindre privilège se met en oeuvre sur l'identité qui agit, c'est-à-dire le rôle d'exécution assumé par le job d'entraînement. Une politique gérée par le client permet de n'autoriser que les actions réellement utilisées, typiquement la lecture d'objets et le listage du bucket restreint par préfixe pour les données, et l'écriture d'objets pour les artefacts, chaque instruction étant limitée aux ARN du bucket et des préfixes du projet. S'appuyer au préalable sur les appels réellement observés, via l'historique des événements AWS CloudTrail ou les derniers services accédés, évite de casser les jobs tout en supprimant les autorisations superflues. Le blocage de l'accès public empêche l'exposition à Internet mais ne restreint en rien ce qu'un rôle interne disposant d'un accès complet peut lire ou écrire dans les autres buckets du compte : le risque décrit par l'audit demeure entier. L'authentification multifacteur porte sur l'authentification des personnes qui lancent les jobs, alors que les appels à Amazon S3 sont effectués par le rôle d'exécution du job, dont les permissions excessives restent inchangées. Ajouter des listes de contrôle d'accès sur les objets d'autres projets est une approche par exception, fragile et difficile à maintenir : tout nouvel objet ou nouveau bucket échappe au dispositif, et les listes de contrôle d'accès ne sont d'ailleurs plus le mécanisme d'autorisation recommandé."
+}

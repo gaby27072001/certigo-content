@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-3.myriade-petits-fichiers-telemetrie.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Ingérer le flux dans Amazon Kinesis Data Streams, le livrer par Amazon Data Firehose vers Amazon S3 avec regroupement par tampon, conversion au format Apache Parquet et partitionnement par date, puis interroger les données avec Amazon Athena.",
+  "rationale": "Le coût et la lenteur des requêtes viennent de deux causes précises : un très grand nombre de petits objets et un format ligne non compressé qui oblige à lire chaque enregistrement en entier. La chaîne proposée traite les deux. Amazon Kinesis Data Streams absorbe un débit de cet ordre en répartissant la charge sur des partitions et conserve les enregistrements de façon durable pendant la fenêtre de rétention, ce qui protège les consommateurs lents et autorise le suivi en quasi-temps réel. Amazon Data Firehose accumule les enregistrements dans un tampon avant écriture, ce qui produit des objets de taille exploitable au lieu de millions de fragments, convertit à la volée au format colonnaire Apache Parquet et écrit selon un partitionnement par date. Amazon Athena n'a plus alors qu'à lire les colonnes projetées dans les partitions concernées, ce qui réduit directement le volume parcouru, donc la facture et la durée des requêtes. Garder l'écriture directe des appareils et fusionner la nuit laisse la journée entière avec le problème des petits fichiers, ne change pas le format et ajoute un traitement de reprise à exploiter. Amazon DynamoDB est un magasin transactionnel destiné aux accès par clé, mal adapté aux balayages analytiques, et un export quotidien contredit l'exigence de quasi-temps réel. Enfin, une fonction AWS Lambda écrivant un fichier par message reproduit à l'identique le problème initial, en y ajoutant le coût d'invocation par événement."
+}

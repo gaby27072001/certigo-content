@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-1.documentation-ecarts-population-scoring-credit.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Exécuter un job Amazon SageMaker Clarify d'analyse de biais avant l'entraînement, en déclarant la facette « tranche d'âge » et l'étiquette cible, pour obtenir des métriques telles que le déséquilibre de classes (CI) et la différence de proportions d'étiquettes (DPL) dans un rapport versionné.",
+  "rationale": "SageMaker Clarify calcule des métriques de biais avant entraînement directement sur le jeu de données, sans qu'aucun modèle n'ait besoin d'exister. En déclarant la colonne de facette et l'étiquette cible, le job produit notamment le déséquilibre de classes (CI), qui quantifie l'écart d'effectifs entre groupes de la facette, et la différence de proportions d'étiquettes (DPL), qui mesure l'écart de taux d'étiquettes positives entre ces groupes. Le rapport généré est un artefact reproductible, rattaché à une exécution datée et stocké sur Amazon S3, donc opposable à la conformité. Supprimer la colonne d'âge ne supprime pas le biais, qui subsiste par corrélation avec d'autres variables, et rend tout simplement impossible la mesure demandée, ce qui va à l'encontre de l'exigence. Analyser la matrice de confusion après entraînement mesure un biais du modèle, pas celui des données, alors que l'exigence porte explicitement sur une caractérisation préalable destinée à orienter la préparation. Suréchantillonner sans avoir mesuré revient à appliquer une correction à l'aveugle : sans valeur de référence initiale, il devient impossible de démontrer l'ampleur du déséquilibre traité ni l'effet réel de la correction, et un suréchantillonnage aveugle peut introduire de la redondance et du surapprentissage."
+}

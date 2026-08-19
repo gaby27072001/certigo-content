@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-5.anciennes-versions-servies-apres-mise-en-production.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Après la mise en production de nouveaux fichiers CSS et JavaScript, une partie des utilisateurs continue de recevoir les anciennes versions servies par Amazon CloudFront, dont la durée de vie du cache est de vingt-quatre heures. L'équipe veut corriger l'incident immédiatement et éviter qu'il ne se reproduise à chaque déploiement. Que faire ?",
+  "choices": [
+    "Créer une invalidation CloudFront sur les chemins concernés pour traiter l'incident en cours, puis adopter des noms de fichiers versionnés afin que chaque déploiement produise de nouvelles clés de cache.",
+    "Définir une durée de vie de zéro seconde sur l'ensemble de la distribution afin de supprimer toute mise en cache.",
+    "Attendre l'expiration naturelle de la durée de vie de vingt-quatre heures, aucune autre action n'étant possible.",
+    "Supprimer puis recréer la distribution CloudFront à chaque déploiement pour vider le cache."
+  ]
+}

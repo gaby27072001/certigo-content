@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-4.degradation-lente-apres-evolution-formulaire.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un modèle de scoring en production depuis huit mois voit ses performances se dégrader lentement. L'équipe soupçonne qu'une variable amont a changé de distribution après une évolution du formulaire de saisie. Elle veut une détection automatique et une alerte, sans inspection manuelle. Que doit configurer l'ingénieur ML ?",
+  "choices": [
+    "Activer la capture des données sur le point de terminaison, calculer une référence statistique à partir du jeu d'entraînement avec Amazon SageMaker Model Monitor, planifier des jobs de surveillance de la qualité des données et déclencher une alarme CloudWatch sur les violations détectées.",
+    "Réentraîner le modèle chaque nuit sur les données les plus récentes, ce qui absorbe par construction tout changement de distribution.",
+    "Exporter chaque trimestre un échantillon des requêtes d'inférence et le comparer visuellement aux histogrammes du jeu d'entraînement.",
+    "Ajouter des journaux applicatifs détaillés dans le service appelant afin d'enregistrer chaque requête envoyée au point de terminaison."
+  ]
+}

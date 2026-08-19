@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-3.bascule-progressive-nouvelle-version-modele.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Utiliser une mise à jour de flotte bleu/vert avec trafic canari sur le point de terminaison : router d'abord une petite part du trafic vers la nouvelle flotte, associer des alarmes CloudWatch de retour arrière automatique et n'achever la bascule qu'à l'issue de la période d'observation.",
+  "rationale": "La mise à jour bleu/vert avec trafic canari répond point par point à l'énoncé : SageMaker provisionne la nouvelle flotte à côté de l'ancienne, n'y route qu'une fraction du trafic pendant une période d'observation configurable, surveille les alarmes CloudWatch déclarées dans la configuration de déploiement, et bascule le reste du trafic seulement si aucune alarme ne s'est déclenchée. En cas d'alarme, le retour arrière vers la flotte d'origine est automatique et ne dépend d'aucune intervention humaine, ce qui limite l'exposition au strict minimum. Une mise à jour en une seule fois expose immédiatement l'intégralité du trafic : la dégradation est détectée après coup et la correction reste manuelle. Créer un second point de terminaison puis basculer par DNS ne permet ni le partage fin du trafic ni le retour arrière automatique, car la propagation des enregistrements et les caches clients rendent la bascule et le retour lents et imprévisibles, les clients conservant des connexions ouvertes vers l'ancienne cible. Faire tirer la version au hasard côté client disperse la logique de déploiement dans chaque application, empêche tout contrôle central de la répartition et remplace le déclenchement automatique par une comparaison de journaux différée de plusieurs jours."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-2.adaptation-capacite-trafic-imprevisible.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application web s'exécute dans un groupe Amazon EC2 Auto Scaling. Le trafic varie fortement et de manière imprévisible. L'équipe veut maintenir l'utilisation CPU moyenne du groupe proche de 60 % tout en limitant l'effort de réglage des seuils. Quelle configuration de mise à l'échelle retenir ?",
+  "choices": [
+    "Définir une action de mise à l'échelle planifiée qui ajoute deux instances chaque matin et les retire chaque soir.",
+    "Fixer manuellement la capacité souhaitée au pic observé le mois précédent et la laisser constante.",
+    "Créer une stratégie de mise à l'échelle par paliers déclenchée par une alarme sur la métrique de trafic réseau entrant de l'équilibreur de charge.",
+    "Créer une stratégie de mise à l'échelle par suivi de cible sur la métrique d'utilisation CPU moyenne du groupe, avec une valeur cible de 60 %."
+  ]
+}

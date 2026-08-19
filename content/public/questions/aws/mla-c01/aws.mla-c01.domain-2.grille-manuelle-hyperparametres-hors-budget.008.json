@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-2.grille-manuelle-hyperparametres-hors-budget.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un modèle XGBoost entraîné sur Amazon SageMaker comporte six hyperparamètres influents. L'équipe lance aujourd'hui une grille manuelle de 200 jobs d'entraînement par itération, dépasse son budget de calcul et n'obtient pourtant plus d'amélioration de l'AUC de validation. Quelle méthode doit-elle adopter ?",
+  "choices": [
+    "Utiliser le réglage automatique de modèle (AMT) de SageMaker avec la stratégie bayésienne : déclarer les plages des six hyperparamètres, désigner la métrique objective d'AUC de validation, activer l'arrêt anticipé des essais non prometteurs et limiter le parallélisme pour que chaque essai profite des précédents.",
+    "Conserver la recherche exhaustive mais porter la grille à 500 combinaisons afin de couvrir plus finement l'espace de recherche.",
+    "Fixer les hyperparamètres à leurs valeurs par défaut et compenser en augmentant la taille des instances d'entraînement.",
+    "Augmenter le nombre d'itérations d'entraînement de chaque job jusqu'à ce que la perte d'entraînement cesse de diminuer."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-5.anciennes-versions-servies-apres-mise-en-production.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Créer une invalidation CloudFront sur les chemins concernés pour traiter l'incident en cours, puis adopter des noms de fichiers versionnés afin que chaque déploiement produise de nouvelles clés de cache.",
+  "rationale": "L'invalidation supprime immédiatement les objets visés du cache des emplacements périphériques et résout l'incident en cours, tandis que le versionnage des noms de fichiers fait de chaque déploiement une nouvelle clé de cache : c'est la pratique recommandée, elle évite les invalidations répétées et les frais associés. Ramener la durée de vie à zéro supprime le bénéfice du cache, augmente la charge sur l'origine et le coût, alors que le problème vient de la stratégie de nommage. Attendre vingt-quatre heures laisse des utilisateurs sur une version incohérente de l'application. Supprimer puis recréer la distribution change le nom de domaine distribué, impose de reconfigurer le DNS et les certificats, et provoque une interruption de service disproportionnée."
+}

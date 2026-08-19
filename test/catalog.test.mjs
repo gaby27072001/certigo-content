@@ -103,6 +103,26 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
+  for (const provider of readdirSync(
+    resolve(root, "content", "public", "coverage")
+  )) {
+    const providerRoot = resolve(
+      root,
+      "content",
+      "public",
+      "coverage",
+      provider
+    );
+    for (const name of readdirSync(providerRoot)) {
+      const matrixPath = resolve(providerRoot, name);
+      const matrix = readJson(matrixPath);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      if (matrix.status === "complete" || matrix.status === "in-progress") {
+        matrix.status = "planned";
+      }
+      writeJson(matrixPath, matrix);
+    }
+  }
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -207,7 +227,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async () => {
+test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
@@ -226,7 +246,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices vides", async (
       )
     );
     assert.equal(matrix.certification, certification.id);
-    assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
+    assert.ok(matrix.objectives.every((objective) => Array.isArray(objective.questionIds)));
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
       0

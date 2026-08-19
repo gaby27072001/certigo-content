@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-1.atterrissage-continu-evenements-navigation.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Ingérer les événements dans un flux Amazon Kinesis Data Streams dont la rétention est portée à 24 heures, puis brancher Amazon Data Firehose comme consommateur pour convertir en Parquet et livrer par lots dans Amazon S3.",
+  "rationale": "Kinesis Data Streams conserve les enregistrements pendant une durée configurable et permet à un consommateur de repositionner son curseur : c'est précisément ce qui rend possible la relecture des 24 dernières heures après un incident aval. Amazon Data Firehose branché sur ce flux prend en charge la mise en tampon, la conversion des enregistrements JSON vers Apache Parquet et la livraison par lots vers Amazon S3, ce qui produit des objets de taille exploitable avec une latence de quelques minutes et sans serveur à administrer. Écrire un objet par événement génère des dizaines de milliers de petits objets par seconde : le coût des requêtes PUT explose, les listages deviennent inexploitables et la lecture ultérieure est dominée par la surcharge par objet, même si un job Glue recompacte le tout chaque nuit. Une file Amazon SQS FIFO plafonne son débit bien en dessous de 20 000 messages par seconde sans découpage en groupes multiples, ne conserve pas les messages une fois consommés, et la fonction Lambda associée reproduit le problème des objets unitaires. Envoyer les événements directement à Firehose supprime le tampon durable rejouable : le tampon de livraison n'est pas un magasin interrogeable, il n'expose aucun curseur de relecture, et une fois les données livrées ou expirées, il devient impossible de rejouer une fenêtre de 24 heures."
+}

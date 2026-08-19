@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-2.journaux-contenant-donnees-clients.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Mettre en place une journalisation structurée qui applique une liste d'autorisation de champs et masque les données sensibles avant l'écriture, en ne conservant que des valeurs tronquées ou hachées et un identifiant de corrélation.",
+  "rationale": "La seule mesure préventive consiste à ne jamais écrire la donnée sensible : une couche de journalisation structurée qui n'autorise que des champs explicitement listés, masque ou tronque les identifiants (quatre derniers chiffres de la carte, empreinte de l'adresse électronique) et conserve un identifiant de corrélation permet de continuer à diagnostiquer les incidents sans exposer de données personnelles ni de données de porteur de carte. Le chiffrement du groupe de journaux protège le stockage mais pas la restitution : toute personne autorisée à lire les journaux voit encore les numéros de carte en clair, et l'exigence de classification des données n'est pas satisfaite. Réduire la rétention à un jour laisse une fenêtre d'exposition complète et détruit par ailleurs les journaux nécessaires aux investigations. Amazon Macie est un contrôle détectif qui identifie les données sensibles après coup, dans Amazon S3 : il constate la fuite au lieu de l'empêcher et n'évite ni l'exposition initiale ni la diffusion des journaux vers d'autres destinations. Les politiques de protection des données de CloudWatch Logs peuvent compléter le dispositif, mais ne remplacent pas la correction à la source."
+}

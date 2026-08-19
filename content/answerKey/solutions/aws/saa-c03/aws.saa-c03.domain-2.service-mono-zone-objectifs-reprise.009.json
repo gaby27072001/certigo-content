@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-2.service-mono-zone-objectifs-reprise.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Répartir le groupe Auto Scaling et l'Application Load Balancer sur au moins deux zones de disponibilité, externaliser l'état de session dans un magasin partagé tel qu'Amazon ElastiCache, et convertir l'instance Amazon RDS en déploiement multi-AZ avec bascule automatique.",
+  "rationale": "La panne redoutée est la perte d'une zone de disponibilité entière : la parade consiste à supprimer tous les points uniques de défaillance qui y résident. Étendre le groupe Auto Scaling et le répartiteur de charge à plusieurs zones permet au trafic d'être servi par les instances restantes dès que les contrôles de santé écartent la zone défaillante. Le déploiement multi-AZ d'Amazon RDS entretient une instance de secours dans une autre zone avec une réplication synchrone : la bascule est automatique, déclenchée par le service, et l'objectif de point de reprise reste proche de zéro puisqu'une transaction validée l'a été sur les deux copies. Externaliser les sessions est la pièce souvent oubliée : tant que l'état vit dans la mémoire des serveurs, la disparition d'une zone déconnecte les utilisateurs qui y étaient rattachés, ce qui reste une interruption fonctionnelle même si l'infrastructure survit. Le réplica en lecture s'appuie sur une réplication asynchrone, donc un retard de réplication peut exister au moment de la panne, et la promotion manuelle allonge le temps de reprise au-delà de la fenêtre de cinq minutes. La restauration d'un instantané reconstruit une instance à partir de zéro : la durée de restauration dépasse largement l'objectif et l'intervalle entre instantanés, au mieux, fixe le point de reprise. Doubler la taille des instances augmente la capacité mais laisse tout le système dans la même zone, et une sauvegarde quotidienne accepte implicitement une perte pouvant atteindre vingt-quatre heures."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-4.traitement-donnees-sante-sans-internet.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Lancer les jobs d'entraînement et les points de terminaison dans des sous-réseaux privés du VPC avec l'isolation réseau des conteneurs activée, joindre Amazon S3 et les API SageMaker par des points de terminaison VPC de passerelle et d'interface, et chiffrer volumes et artefacts avec une clé AWS KMS gérée par le client dont la politique n'autorise que les rôles du projet.",
+  "rationale": "Les trois exigences se traitent par trois mécanismes distincts et complémentaires. Rattacher les jobs d'entraînement et les points de terminaison à des sous-réseaux privés du VPC, avec l'isolation réseau qui prive le conteneur de tout accès sortant vers Internet, garantit qu'aucun trafic ne quitte le périmètre ; les points de terminaison VPC, de type passerelle pour Amazon S3 et de type interface pour les API SageMaker, maintiennent ces appels sur le réseau AWS et permettent d'appliquer en plus des politiques de point de terminaison. Le chiffrement au repos avec une clé AWS KMS gérée par le client couvre les volumes attachés aux instances d'entraînement et d'hébergement ainsi que les artefacts de modèle et les données sur Amazon S3, et la politique de clé restreint les opérations de chiffrement et de déchiffrement aux seuls rôles du projet, ce qui répond à l'exigence de contrôle d'usage. Le chiffrement TLS ne protège que le transit et laisse le trafic emprunter l'Internet public tout en n'apportant rien au repos. SSE-S3 chiffre bien les objets, mais avec des clés gérées par le service : ni la propriété de la clé ni la restriction d'usage par rôle ne sont possibles, et les appels d'API continuent de sortir sur Internet. Placer les points de terminaison dans des sous-réseaux publics avec un filtrage par adresse IP laisse le trafic transiter par l'Internet public, ce que la conformité interdit explicitement, et n'apporte aucune réponse au chiffrement au repos."
+}

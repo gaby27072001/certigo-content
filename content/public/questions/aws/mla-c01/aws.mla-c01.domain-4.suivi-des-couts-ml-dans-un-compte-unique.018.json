@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-4.suivi-des-couts-ml-dans-un-compte-unique.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "La facture mensuelle des charges de travail ML augmente et la direction demande une répartition des dépenses par équipe et par projet, ainsi qu'une alerte lorsqu'un projet dépasse son budget mensuel. Toutes les ressources ML sont regroupées dans un seul compte AWS. Quelle approche l'ingénieur doit-il mettre en oeuvre ?",
+  "choices": [
+    "S'appuyer sur les recommandations AWS Trusted Advisor, qui listent les ressources sous-utilisées à supprimer.",
+    "Recréer l'ensemble des ressources ML dans un compte AWS distinct par projet afin que les factures soient naturellement séparées.",
+    "Suivre le nombre d'invocations de chaque point de terminaison dans CloudWatch et convertir ce volume en coût estimé par projet.",
+    "Appliquer une stratégie d'étiquetage cohérente (équipe, projet, environnement) sur les ressources ML, activer ces étiquettes comme balises de répartition des coûts, analyser les dépenses par étiquette dans AWS Cost Explorer et créer des budgets AWS Budgets avec notifications par projet."
+  ]
+}

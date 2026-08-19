@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-2.ecriture-inter-comptes-sans-cle-statique.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une fonction AWS Lambda exécutée dans le compte A doit écrire des rapports dans un compartiment Amazon S3 appartenant au compte B. L'équipe envisage de créer un utilisateur IAM dans le compte B et de placer sa clé d'accès dans une variable d'environnement de la fonction. Quelle approche le développeur doit-il privilégier ?",
+  "choices": [
+    "Conserver la clé d'accès de l'utilisateur IAM du compte B dans une variable d'environnement et la faire tourner manuellement chaque trimestre.",
+    "Ouvrir le compartiment du compte B en lecture et en écriture à tout le monde, puis restreindre l'accès par filtrage d'adresses IP.",
+    "Copier le rôle d'exécution de la fonction dans le compte B en réutilisant exactement le même ARN de rôle.",
+    "Créer dans le compte B un rôle IAM dont la politique de confiance autorise le rôle d'exécution de la fonction du compte A, puis appeler AssumeRole avec AWS STS dans le code pour obtenir des identifiants temporaires avant d'écrire dans le compartiment."
+  ]
+}

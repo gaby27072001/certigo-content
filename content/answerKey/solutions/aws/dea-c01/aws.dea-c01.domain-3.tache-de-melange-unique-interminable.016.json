@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-3.tache-de-melange-unique-interminable.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Traiter le déséquilibre de la clé de jointure, en salant l'identifiant surreprésenté par un suffixe aléatoire répliqué côté table des marchands, ou en forçant une jointure par diffusion de la petite table.",
+  "rationale": "Le profil décrit est la signature classique d'un déséquilibre de données : le partitionnement par hachage de la clé de jointure envoie toutes les lignes du marchand dominant vers une seule partition, dont l'exécuteur épuise sa mémoire. Le salage répartit artificiellement cette clé sur plusieurs partitions en ajoutant un suffixe aléatoire côté transactions et en répliquant les lignes correspondantes côté marchands, ce qui rééquilibre la charge ; si la table des marchands est suffisamment petite, une jointure par diffusion supprime purement et simplement le mélange, donc le déséquilibre. Augmenter le délai d'expiration ne change ni la répartition ni la mémoire disponible : la tâche échouera de nouveau sur le même dépassement. Ramener le mélange à une seule partition concentre encore davantage les données sur un unique exécuteur et supprime tout parallélisme, ce qui aggrave la situation. Passer de Parquet à CSV abandonne un format colonnaire compressé au profit d'un format texte plus volumineux et non typé : la lecture devient plus lente et le déséquilibre demeure intact."
+}
