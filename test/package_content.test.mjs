@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import {
   cpSync,
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
@@ -19,6 +20,7 @@ import {
   inspectPublicArtifact,
   packageContent,
   verifyArtifact,
+  verifyPackagedContent,
 } from "../tools/package_content.mjs";
 import { canonicalize, sha256Hex } from "../tools/gen_manifest.mjs";
 
@@ -51,6 +53,60 @@ function createRoot() {
       id: "sample",
     })
   );
+  return root;
+}
+
+function countJsonFiles(root) {
+  let count = 0;
+  function walk(directory) {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (entry.name.endsWith(".json")) count++;
+    }
+  }
+  walk(root);
+  return count;
+}
+
+function createHistoricalV2Root() {
+  const root = mkdtempSync(join(tmpdir(), "certigo-package-v2-historical-"));
+  temporaryRoots.push(root);
+  cpSync(resolve(repoRoot, "schemas"), resolve(root, "schemas"), { recursive: true });
+  cpSync(resolve(repoRoot, "content"), resolve(root, "content"), { recursive: true });
+
+  const publicAwsRoot = resolve(root, "content", "public", "questions", "aws");
+  const privateAwsRoot = resolve(root, "content", "answerKey", "solutions", "aws");
+  assert.equal(countJsonFiles(publicAwsRoot), 42);
+  assert.equal(countJsonFiles(privateAwsRoot), 42);
+  rmSync(publicAwsRoot, { recursive: true });
+  rmSync(privateAwsRoot, { recursive: true });
+
+  const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
+  const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  for (const certification of catalog.certifications) {
+    if (!["aws:aif-c01", "aws:clf-c02"].includes(certification.id)) continue;
+    certification.provenance.checkedOn = "2026-08-17";
+    certification.provenance.sources = certification.provenance.sources.filter(
+      (source) => !source.url.endsWith("AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf")
+    );
+  }
+  writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
+
+  for (const certification of ["aif-c01", "clf-c02"]) {
+    const matrixPath = resolve(
+      root,
+      "content",
+      "public",
+      "coverage",
+      "aws",
+      `${certification}.json`
+    );
+    const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
+    matrix.status = "planned";
+    for (const objective of matrix.objectives) objective.questionIds = [];
+    writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
+  }
   return root;
 }
 
@@ -111,6 +167,74 @@ test("produit deux artefacts byte-identical avec des manifestes distincts", asyn
   assert.notEqual(publicManifest.manifestId, privateManifest.manifestId);
   assert.deepEqual(publicManifest.files.map((entry) => entry.path), ["questions/sample.json"]);
   assert.deepEqual(privateManifest.files.map((entry) => entry.path), ["solutions/sample.json"]);
+});
+
+test("conserve le package v2 courant byte-identical", async () => {
+  const outDir = mkdtempSync(join(tmpdir(), "certigo-package-v2-golden-"));
+  temporaryRoots.push(outDir);
+
+  const result = await packageContent({ root: repoRoot, outDir });
+
+  assert.equal(result.sourcePairCount, 232 + 42);
+  assert.equal(result.release, null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.deepEqual(
+    result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
+    [
+      {
+        artifact: "public",
+        manifestId:
+          "sha256:f20eeba50ebbd00b7d4c7e7bed90eede336355173bcd8f1409f1fcb0d429e78d",
+      },
+      {
+        artifact: "private",
+        manifestId:
+          "sha256:e48085f94664351f7ccb37f826898607caab1566acb26917a814102fea42b6d3",
+      },
+    ]
+  );
+  assert.equal(
+    sha256Hex(canonicalize(treeSnapshot(outDir))),
+    "acb0a1d2f2519d6bee2974e5f3b6ee97144939d898a4c5348b0e88f45902656e"
+  );
+});
+
+test("conserve le package v2 historique de #25 byte-identical", async () => {
+  const root = createHistoricalV2Root();
+  const outDir = resolve(root, "dist-golden");
+  const result = await packageContent({ root, outDir });
+
+  assert.equal(result.sourcePairCount, 232);
+  assert.equal(result.release, null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.deepEqual(
+    result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
+    [
+      {
+        artifact: "public",
+        manifestId:
+          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
+      },
+      {
+        artifact: "private",
+        manifestId:
+          "sha256:e3bfa7c20c03503384a68d8e261bcbb88f749292a273744a5ba4a309fc48c901",
+      },
+    ]
+  );
+  assert.equal(
+    sha256Hex(canonicalize(treeSnapshot(outDir))),
+    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
+  );
+});
+
+test("revalide un package historique v1 sans release descriptor", async () => {
+  const root = createRoot();
+  await packageContent({ root });
+
+  const verified = await verifyPackagedContent({ root });
+  assert.equal(verified.release, null);
+  assert.equal(verified.packages.length, 2);
 });
 
 test("la gate finale rejette une fuite injectee recursivement dans dist/public", async () => {
