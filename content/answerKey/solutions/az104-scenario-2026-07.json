@@ -1,0 +1,7 @@
+{
+  "id": "az104-scenario-2026-07",
+  "schemaVersion": "v2",
+  "kind": "answerKey",
+  "correct": "Un point de terminaison privé ciblant le sous-service blob, une zone DNS privée associée et l'accès réseau public désactivé",
+  "rationale": "Un **private endpoint** crée dans le sous-réseau une interface avec une adresse IP privée reliée au sous-service `blob`. La zone DNS privée fait résoudre le nom du service vers cette adresse, puis la désactivation de l'accès public ferme l'autre chemin. Un service endpoint conserve le point de terminaison public du service ; une IP publique ou un simple peering ne fournit pas Private Link."
+}
