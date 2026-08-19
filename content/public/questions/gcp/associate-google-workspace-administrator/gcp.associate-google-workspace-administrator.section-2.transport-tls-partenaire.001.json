@@ -1,0 +1,18 @@
+{
+  "id": "gcp.associate-google-workspace-administrator.section-2.transport-tls-partenaire.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:associate-google-workspace-administrator",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Le service juridique exige que les messages échangés avec un domaine partenaire soient transmis uniquement si une connexion TLS est disponible. Les messages non chiffrés doivent être rejetés et les autres domaines ne doivent pas être affectés. Quelle configuration Gmail faut-il appliquer ?",
+  "choices": [
+    "Activer le mode confidentiel pour le service juridique et laisser le transport TLS opportuniste",
+    "Ajouter le domaine partenaire à la liste des expéditeurs bloqués",
+    "Exiger TLS pour le domaine partenaire avec une règle de conformité du transport sécurisé",
+    "Créer un alias de domaine identique au domaine partenaire"
+  ]
+}

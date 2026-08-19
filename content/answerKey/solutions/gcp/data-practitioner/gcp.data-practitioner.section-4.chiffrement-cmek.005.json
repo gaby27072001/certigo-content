@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-4.chiffrement-cmek.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Une clé de chiffrement gérée par le client dans Cloud KMS, configurée comme CMEK pour le dataset",
+  "rationale": "Une CMEK dans Cloud KMS donne à l'entreprise le contrôle du cycle de vie et de la révocation de la clé, tandis que le service chiffre les données au repos. Une clé gérée par Google n'offre pas ce contrôle, une CSEK impose la fourniture et la gestion directe du secret, et TLS protège le transit sans remplacer le chiffrement au repos."
+}

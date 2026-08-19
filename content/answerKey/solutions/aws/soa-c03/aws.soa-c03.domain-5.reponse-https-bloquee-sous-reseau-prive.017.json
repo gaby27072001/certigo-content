@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-5.reponse-https-bloquee-sous-reseau-prive.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "L'ACL réseau du sous-réseau, qui fonctionne sans état, n'autorise pas le trafic sortant vers la plage de ports éphémères : la requête entrante est acceptée mais la réponse est rejetée.",
+  "rationale": "Les ACL réseau sont sans état : le trafic de retour doit être autorisé explicitement par une règle sortante couvrant les ports éphémères du client, sinon on observe exactement ce couple d'enregistrements, un ACCEPT en entrée suivi d'un REJECT en sortie. Un groupe de sécurité est au contraire à état : il autorise automatiquement la réponse à une connexion entrante acceptée et ne peut donc pas produire ce rejet du retour. La route locale du VPC est créée automatiquement dans chaque table de routage et ne peut pas être supprimée, ce qui exclut cette hypothèse. Les journaux de flux capturent bien le trafic entre interfaces réseau d'un même VPC, selon la portée configurée."
+}

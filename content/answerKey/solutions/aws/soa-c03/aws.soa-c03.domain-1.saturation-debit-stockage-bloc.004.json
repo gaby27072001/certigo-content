@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-1.saturation-debit-stockage-bloc.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Modifier le volume vers le type gp3 et provisionner indépendamment les IOPS et le débit nécessaires, sans changer la taille du volume.",
+  "rationale": "Le type gp3 dissocie la performance de la capacité : la modification élastique du volume permet de conserver 200 Gio tout en provisionnant les IOPS et le débit réellement nécessaires, ce qui traite la saturation sans acheter de stockage inutile. Passer à 4 000 Gio en gp2 revient à acheter des IOPS sous forme de capacité inutilisée, donc à un coût nettement supérieur pour un besoin identique. Le type sc1 est un disque magnétique conçu pour des accès séquentiels peu fréquents et dégraderait fortement une charge transactionnelle aléatoire. Les instantanés EBS servent à la sauvegarde ; ils n'augmentent pas les IOPS et ajoutent au contraire de la charge d'entrées-sorties pendant leur création."
+}

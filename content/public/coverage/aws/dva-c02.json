@@ -3,11 +3,59 @@
   "provider": "aws",
   "certification": "aws:dva-c02",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Development with AWS Services", "weightPercent": 32, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Security", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Deployment", "weightPercent": 24, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Troubleshooting and Optimization", "weightPercent": 18, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Development with AWS Services",
+      "weightPercent": 32,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dva-c02.domain-1.appels-perdus-lors-des-pics.001",
+        "aws.dva-c02.domain-1.couplage-synchrone-trois-consommateurs.002",
+        "aws.dva-c02.domain-1.evenements-perdus-apres-echec-asynchrone.003",
+        "aws.dva-c02.domain-1.latence-percentile-eleve-api-interne.004",
+        "aws.dva-c02.domain-1.lecture-immediate-apres-ecriture-incoherente.006",
+        "aws.dva-c02.domain-1.recherche-commandes-par-client-couteuse.005"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Security",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dva-c02.domain-2.authentification-utilisateurs-application-mobile.007",
+        "aws.dva-c02.domain-2.cle-partenaire-lisible-par-operateur.009",
+        "aws.dva-c02.domain-2.ecriture-inter-comptes-sans-cle-statique.008",
+        "aws.dva-c02.domain-2.identifiants-base-fixes-depuis-deploiement.010",
+        "aws.dva-c02.domain-2.journaux-contenant-donnees-clients.011"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Deployment",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dva-c02.domain-3.ajustement-seuils-sans-redeploiement.016",
+        "aws.dva-c02.domain-3.application-creee-a-la-main-a-reproduire.013",
+        "aws.dva-c02.domain-3.bibliotheque-commune-alourdit-huit-fonctions.012",
+        "aws.dva-c02.domain-3.exposition-progressive-nouvelle-version.014",
+        "aws.dva-c02.domain-3.regression-detectee-le-lendemain.015"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Troubleshooting and Optimization",
+      "weightPercent": 18,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dva-c02.domain-4.lectures-repetitives-catalogue-produits.020",
+        "aws.dva-c02.domain-4.maillon-lent-parcours-distribue.017",
+        "aws.dva-c02.domain-4.publication-metriques-ralentit-invocations.019",
+        "aws.dva-c02.domain-4.recherche-erreurs-par-identifiant-correlation.018"
+      ]
+    }
   ]
 }

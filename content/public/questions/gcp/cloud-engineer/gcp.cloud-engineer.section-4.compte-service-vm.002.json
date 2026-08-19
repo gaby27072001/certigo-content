@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-4.compte-service-vm.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une application exécutée sur une VM doit lire des objets dans un bucket Cloud Storage précis. L'équipe veut éviter les identifiants intégrés au code et appliquer le moindre privilège. Quelle configuration faut-il utiliser ?",
+  "choices": [
+    "Placer une clé JSON d'un propriétaire de projet dans les métadonnées de démarrage",
+    "Associer un compte de service dédié à la VM et lui accorder Storage Object Viewer sur le bucket",
+    "Utiliser le compte de service Compute Engine par défaut avec le rôle Editor",
+    "Rendre les objets du bucket accessibles publiquement"
+  ]
+}

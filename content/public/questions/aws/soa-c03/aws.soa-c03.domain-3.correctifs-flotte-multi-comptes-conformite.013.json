@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-3.correctifs-flotte-multi-comptes-conformite.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Plusieurs centaines d'instances Amazon EC2, réparties sur plusieurs comptes, doivent recevoir les correctifs du système d'exploitation pendant des fenêtres de maintenance définies, avec un état de conformité consultable par application. Quelle approche retenir ?",
+  "choices": [
+    "Se connecter en SSH ou RDP à chaque instance pendant la fenêtre de maintenance pour appliquer les correctifs.",
+    "Construire une AMI corrigée et remplacer l'ensemble des instances à chaque bulletin de sécurité, sans suivi de conformité.",
+    "Créer une règle Amazon EventBridge qui redémarre les instances chaque semaine, le redémarrage installant les correctifs disponibles.",
+    "Utiliser Patch Manager d'AWS Systems Manager avec une base de référence de correctifs, des groupes de correctifs définis par étiquettes et des fenêtres de maintenance, puis suivre l'état via les rapports de conformité des correctifs."
+  ]
+}

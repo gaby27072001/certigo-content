@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-1.reduction-bruit-alertes-nocturnes.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Créer une alarme composite CloudWatch dont la règle combine les trois alarmes existantes avec l'opérateur AND, puis n'attacher l'action Amazon SNS qu'à cette alarme composite.",
+  "rationale": "L'alarme composite CloudWatch est conçue exactement pour ce cas : sa règle booléenne (ALARM(alarme1) AND ALARM(alarme2) AND ALARM(alarme3)) ne passe en ALARM que si toutes les alarmes enfants le sont, et l'action Amazon SNS n'est portée que par l'alarme composite, ce qui supprime le bruit tout en conservant les alarmes unitaires pour le diagnostic. Allonger la période d'évaluation ne fait que retarder les notifications : les trois alarmes continuent d'émettre chacune leur message et la détection devient plus lente. Une règle EventBridge planifiée sur DescribeAlarms ajoute du code et un délai de scrutation d'une heure pour reproduire une fonctionnalité native. Publier une métrique personnalisée depuis les instances impose de maintenir un script sur chaque hôte, ne couvre pas les métriques de l'Application Load Balancer gérées par AWS et fait perdre la granularité des alarmes existantes."
+}

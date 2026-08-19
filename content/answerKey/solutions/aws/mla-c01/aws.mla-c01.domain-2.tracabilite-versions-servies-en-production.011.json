@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-2.tracabilite-versions-servies-en-production.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Enregistrer chaque modèle entraîné comme une version de package dans un groupe du registre de modèles SageMaker, avec l'URI de l'artefact, l'image du conteneur et les métriques d'évaluation, puis conditionner le déploiement au statut d'approbation de cette version.",
+  "rationale": "Le registre de modèles SageMaker est conçu pour la répétabilité et l'audit. Chaque entraînement retenu devient une version de package numérotée au sein d'un groupe dédié au cas d'usage, qui porte l'URI de l'artefact sur Amazon S3, l'image de conteneur d'inférence, les hyperparamètres et les métriques d'évaluation attachées. Le statut d'approbation constitue la porte de déploiement : le pipeline ne promeut qu'une version explicitement approuvée, et la transition de statut est tracée dans AWS CloudTrail avec l'identité de son auteur, ce qui répond directement à l'exigence de savoir qui a approuvé. Une convention de nommage d'objets Amazon S3 ne relie ni les métriques ni l'image de conteneur à l'artefact, ne résiste pas aux renommages et n'offre aucun mécanisme d'approbation opposable. Un tableur tenu à la main est un enregistrement déclaratif, dissocié du système réel : rien n'empêche un déploiement non consigné, et l'audit ne peut pas s'y fier. Les journaux CloudWatch documentent l'exécution d'un entraînement mais sont soumis à une période de rétention, ne portent aucune notion de version promue ni d'approbation, et ne permettent pas de relier une prédiction servie à un artefact précis."
+}

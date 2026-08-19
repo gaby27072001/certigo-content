@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-4.temps-de-reponse-au-dela-de-la-cible.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Comparer d'abord les métriques CloudWatch ModelLatency et OverheadLatency du point de terminaison pour localiser le temps consommé, puis lancer un job SageMaker Inference Recommender qui évalue plusieurs familles et tailles d'instances sous le profil de trafic attendu.",
+  "rationale": "La démarche correcte consiste à mesurer avant de dimensionner. SageMaker publie dans CloudWatch la métrique ModelLatency, qui correspond au temps passé dans le conteneur du modèle, et OverheadLatency, qui couvre le temps ajouté par SageMaker autour de cet appel : leur comparaison indique immédiatement si le problème relève du modèle et de son instance ou de la surcharge de traitement des requêtes. Inference Recommender prend ensuite le relais en exécutant des tests de charge automatisés sur plusieurs familles et tailles d'instances avec le profil de trafic attendu, et restitue latence, débit et coût par configuration : le choix d'instance devient une décision étayée et non une intuition. Doubler la flotte ajoute du parallélisme mais ne réduit pas le temps de traitement d'une requête isolée : si la latence du modèle domine, le 99e centile bougera peu tout en doublant la facture. Migrer vers la plus grande instance GPU n'a rien d'automatiquement bénéfique, car de nombreux modèles classiques n'exploitent pas le GPU, le transfert de données peut même allonger la latence, et le coût croît fortement. Instrumenter uniquement le client mesure un temps de bout en bout qui mélange réseau, client et service, sans séparer les composantes internes ni aider à choisir une instance."
+}

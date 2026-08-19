@@ -56,6 +56,115 @@ function createRoot() {
   return root;
 }
 
+function countJsonFiles(root) {
+  let count = 0;
+  function walk(directory) {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (entry.name.endsWith(".json")) count++;
+    }
+  }
+  walk(root);
+  return count;
+}
+
+function createHistoricalV2Root() {
+  const root = mkdtempSync(join(tmpdir(), "certigo-package-v2-historical-"));
+  temporaryRoots.push(root);
+  cpSync(resolve(repoRoot, "schemas"), resolve(root, "schemas"), { recursive: true });
+  cpSync(resolve(repoRoot, "content"), resolve(root, "content"), { recursive: true });
+
+  const wavesAfterRuntimeV2 = [
+    {
+      provider: "aws",
+      certifications: ["aif-c01", "clf-c02"],
+      pairCount: 42,
+    },
+    {
+      provider: "gcp",
+      certifications: ["cloud-digital-leader", "generative-ai-leader"],
+      pairCount: 42,
+    },
+    {
+      provider: "gcp",
+      certifications: [
+        "associate-google-workspace-administrator",
+        "cloud-engineer",
+        "data-practitioner",
+      ],
+      pairCount: 60,
+    },
+    {
+      provider: "aws",
+      certifications: ["dea-c01", "dva-c02", "mla-c01", "saa-c03", "soa-c03"],
+      pairCount: 100,
+    },
+    {
+      provider: "aws",
+      certifications: ["aip-c01", "dop-c02", "sap-c02"],
+      pairCount: 72,
+    },
+  ];
+  for (const wave of wavesAfterRuntimeV2) {
+    for (const channel of [
+      ["public", "questions"],
+      ["answerKey", "solutions"],
+    ]) {
+      const channelRoot = resolve(root, "content", channel[0], channel[1], wave.provider);
+      const pairCount = wave.certifications.reduce(
+        (total, certification) =>
+          total + countJsonFiles(resolve(channelRoot, certification)),
+        0
+      );
+      assert.equal(pairCount, wave.pairCount);
+      for (const certification of wave.certifications) {
+        rmSync(resolve(channelRoot, certification), { recursive: true });
+      }
+    }
+  }
+
+  const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
+  const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  for (const certification of catalog.certifications) {
+    if (
+      ![
+        "aws:aif-c01",
+        "aws:clf-c02",
+        "gcp:cloud-digital-leader",
+        "gcp:generative-ai-leader",
+      ].includes(certification.id)
+    ) {
+      continue;
+    }
+    certification.provenance.checkedOn = "2026-08-17";
+    if (certification.provider === "aws") {
+      certification.provenance.sources = certification.provenance.sources.filter(
+        (source) => !source.url.endsWith("AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf")
+      );
+    }
+  }
+  writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
+
+  for (const { provider, certifications } of wavesAfterRuntimeV2) {
+    for (const certification of certifications) {
+      const matrixPath = resolve(
+        root,
+        "content",
+        "public",
+        "coverage",
+        provider,
+        `${certification}.json`
+      );
+      const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
+      matrix.status = "planned";
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
+    }
+  }
+  return root;
+}
+
 function treeSnapshot(root) {
   const snapshot = {};
   function walk(directory) {
@@ -121,6 +230,7 @@ test("conserve le package v2 courant byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
+  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72);
   assert.equal(result.release, null);
   assert.equal(existsSync(resolve(outDir, "release.json")), false);
   assert.deepEqual(
@@ -129,18 +239,47 @@ test("conserve le package v2 courant byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:8eae9175b558475e65118cacf5de7a5a928cb572a159d8db8c6be9dbdc279eca",
+          "sha256:22a70252077a1a52d34218b6a3419c237e41e260386e20fd293593e086b7073a",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:ccb9ade310f0f2d75933e1eb7588cda576dd445fb84d79043cf9f0e187effe6b",
+          "sha256:f6765b9559d9c7acc8e4207ef1351c2db6ac05b2dd99e131bf0e8179d30a3a95",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "817c724c1abc1c520a2c5bdf47efd5da39e91ccc6276f1e69efc6efb02c63697"
+    "2c8a6ab8732a703a84f70bf0dae3f1e51cd443a6a0852af4abb938dcd7d1a431"
+  );
+});
+
+test("conserve le package v2 historique de #25 byte-identical", async () => {
+  const root = createHistoricalV2Root();
+  const outDir = resolve(root, "dist-golden");
+  const result = await packageContent({ root, outDir });
+
+  assert.equal(result.sourcePairCount, 232);
+  assert.equal(result.release, null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.deepEqual(
+    result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
+    [
+      {
+        artifact: "public",
+        manifestId:
+          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
+      },
+      {
+        artifact: "private",
+        manifestId:
+          "sha256:e3bfa7c20c03503384a68d8e261bcbb88f749292a273744a5ba4a309fc48c901",
+      },
+    ]
+  );
+  assert.equal(
+    sha256Hex(canonicalize(treeSnapshot(outDir))),
+    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
   );
 });
 

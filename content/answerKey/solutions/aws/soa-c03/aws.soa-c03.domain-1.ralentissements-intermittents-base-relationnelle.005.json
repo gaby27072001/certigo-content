@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-1.ralentissements-intermittents-base-relationnelle.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Activer Performance Insights sur l'instance et analyser la charge de base de données décomposée par événements d'attente, par requêtes SQL et par utilisateurs sur la période des pics.",
+  "rationale": "Performance Insights est le service RDS intégré qui échantillonne l'activité du moteur et affiche la charge active moyenne décomposée par événement d'attente, par instruction SQL, par hôte et par utilisateur : c'est précisément ce qui permet de désigner la requête responsable d'un pic, sans agent supplémentaire. CPUUtilization est une métrique agrégée au niveau de l'instance : elle signale une saturation mais jamais l'instruction qui en est la cause. Les journaux d'accès de l'Application Load Balancer contiennent des requêtes HTTP et aucune information sur le SQL exécuté. Une réplique en lecture peut décharger le trafic de lecture, mais elle ne réalise aucun diagnostic et ne signale aucune requête."
+}

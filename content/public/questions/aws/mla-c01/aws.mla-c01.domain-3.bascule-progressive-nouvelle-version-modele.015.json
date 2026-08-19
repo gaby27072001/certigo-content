@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-3.bascule-progressive-nouvelle-version-modele.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une nouvelle version d'un modèle doit remplacer celle en production sur un point de terminaison Amazon SageMaker. L'équipe veut d'abord n'exposer qu'environ 10 % du trafic réel à la nouvelle version, surveiller la latence du modèle et le taux d'erreurs pendant une période d'observation, puis revenir automatiquement à l'ancienne version si une alarme se déclenche. Quelle stratégie de déploiement doit-elle choisir ?",
+  "choices": [
+    "Mettre à jour le point de terminaison en une seule fois avec la nouvelle version et surveiller les tableaux de bord après la bascule.",
+    "Créer un second point de terminaison portant la nouvelle version et faire basculer manuellement les clients par une modification d'enregistrement DNS.",
+    "Utiliser une mise à jour de flotte bleu/vert avec trafic canari sur le point de terminaison : router d'abord une petite part du trafic vers la nouvelle flotte, associer des alarmes CloudWatch de retour arrière automatique et n'achever la bascule qu'à l'issue de la période d'observation.",
+    "Laisser chaque application cliente tirer au hasard la version à appeler, puis comparer les journaux applicatifs après quelques jours."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-4.cycle-vie-stockage.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Des fichiers d'audit dans Cloud Storage sont consultés fréquemment pendant 30 jours, rarement après 90 jours et doivent être supprimés après 365 jours conformément à la politique interne. L'équipe veut automatiser ce comportement. Que doit-elle configurer ?",
+  "choices": [
+    "Une requête BigQuery planifiée qui supprime les lignes correspondant aux noms de fichiers",
+    "Un transfert Storage Transfer Service quotidien vers un nouveau bucket Standard",
+    "Des règles de cycle de vie qui changent la classe de stockage après 90 jours et suppriment les objets après 365 jours",
+    "Une règle de conservation de 365 jours comme unique mécanisme de changement de classe et de suppression"
+  ]
+}

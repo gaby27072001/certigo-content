@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-1.relecture-integrale-journaux-preparation.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Convertir le jeu de données en Apache Parquet compressé avec Snappy, le partitionner par date sur Amazon S3, puis ne projeter que les 12 colonnes utiles dans les jobs de préparation.",
+  "rationale": "Le problème vient du volume d'octets réellement lus, pas de la puissance de calcul. Apache Parquet est un format colonnaire : les moteurs de lecture ne descendent que les colonnes projetées, donc 12 colonnes sur 180 au lieu de la totalité des enregistrements, et les statistiques de blocs permettent en plus d'écarter des groupes de lignes. La compression Snappy reste fractionnable, ce qui autorise le traitement parallèle d'un même fichier, alors qu'un CSV compressé en gzip doit être décompressé séquentiellement de bout en bout. Le partitionnement par date ajoute l'élagage de partitions : une préparation portant sur les trente derniers jours ne parcourt plus les quatre téraoctets. Augmenter la taille des instances ne réduit ni les octets lus ni le coût de transfert, la dépense augmente donc pour un travail identique. Apache Avro est un format orienté ligne, adapté à l'écriture en flux et à l'évolution de schéma, mais il oblige à lire chaque enregistrement entier ; le laisser non compressé aggrave encore le volume à parcourir. Recopier les mêmes fichiers CSV sur Amazon EFS ne change pas le format : la lecture reste intégrale, avec en prime un coût de stockage partagé supérieur à celui d'Amazon S3 et une étape de copie quotidienne à exploiter."
+}

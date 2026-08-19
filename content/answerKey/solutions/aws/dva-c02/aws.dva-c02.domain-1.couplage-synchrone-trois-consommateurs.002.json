@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-1.couplage-synchrone-trois-consommateurs.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Publier chaque commande validée une seule fois sur un bus d'événements Amazon EventBridge personnalisé, puis créer une règle par consommateur avec un modèle d'événement filtrant les champs utiles et une cible dédiée (file Amazon SQS ou fonction AWS Lambda).",
+  "rationale": "Le bus d'événements personnalisé EventBridge découple le producteur des consommateurs : le service de commandes émet un événement unique et ignore qui l'écoute, tandis que chaque équipe déclare sa propre règle, avec un modèle d'événement qui filtre les attributs pertinents et route vers sa cible. Ajouter un quatrième consommateur revient alors à créer une règle, sans toucher au service de commandes, et une panne côté consommateur n'affecte plus la prise de commande grâce aux nouvelles tentatives, aux files d'attente de lettres mortes et à l'archivage puis la relecture des événements. L'interrogation périodique d'une table DynamoDB réintroduit de la latence, consomme de la capacité de lecture en continu et oblige chaque consommateur à gérer sa propre position de lecture. Déporter les appels HTTP dans des fils d'arrière-plan laisse le couplage intact : l'événement disparaît si le processus se termine ou si le consommateur reste indisponible, et aucune reprise n'est possible. Une file SQS unique partagée met les consommateurs en concurrence sur les mêmes messages : chaque message n'est distribué qu'à un seul lecteur, si bien que supprimer ceux qui ne le concernent pas prive définitivement les deux autres équipes de la donnée ; la diffusion amplifiée exige un sujet Amazon SNS ou un bus d'événements avec une file par consommateur."
+}

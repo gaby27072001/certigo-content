@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-3.application-creee-a-la-main-a-reproduire.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application sans serveur (Amazon API Gateway, AWS Lambda, Amazon DynamoDB) a été créée à la main dans la console pour l'environnement de développement. L'équipe doit maintenant la déployer de façon reproductible en recette puis en production, avec des valeurs propres à chaque environnement et un pipeline qui promeut exactement le même artefact. Quelle approche doit-elle retenir ?",
+  "choices": [
+    "Reproduire manuellement en production la configuration observée dans la console de développement après chaque changement.",
+    "Maintenir un modèle AWS CloudFormation totalement distinct et indépendant par environnement, chacun géré par une équipe différente.",
+    "Décrire l'application dans un modèle AWS SAM versionné avec le code, puis déployer la même pile dans chaque environnement à l'aide de paramètres et de configurations dédiées (`sam deploy --config-env`), depuis un pipeline qui promeut l'artefact déjà construit et testé.",
+    "Exporter les ressources de développement en JSON et les réimporter en production avec les identifiants de ressources codés en dur."
+  ]
+}

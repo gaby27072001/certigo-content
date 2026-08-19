@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-2.compute-cloud-run.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Un service Cloud Run avec mise à l'échelle jusqu'à zéro",
+  "rationale": "Cloud Run exécute directement un conteneur HTTP sans état, adapte automatiquement le nombre d'instances et peut le réduire à zéro sans gestion de cluster. Un groupe de VM conserve une charge d'administration, GKE Standard impose l'exploitation d'un cluster et le déclencheur Cloud Storage ne correspond pas à l'API HTTP demandée."
+}

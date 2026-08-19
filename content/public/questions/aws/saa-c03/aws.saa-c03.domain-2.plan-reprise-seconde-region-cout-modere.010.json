@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-2.plan-reprise-seconde-region-cout-modere.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application transactionnelle doit disposer d'un plan de reprise dans une seconde Région AWS. L'objectif de temps de reprise est de trente minutes et l'objectif de point de reprise de cinq minutes. La direction financière refuse de payer en permanence une réplique complète de la production, mais accepte un coût modéré pour la Région secondaire. Quelle stratégie de reprise après sinistre l'architecte doit-il retenir ?",
+  "choices": [
+    "Sauvegarde et restauration : copier chaque nuit les instantanés vers la Région secondaire et y reconstruire l'infrastructure à la demande à partir d'un modèle d'infrastructure en tant que code.",
+    "Lumière pilote : répliquer en continu la base de données vers la Région secondaire et n'y maintenir que le socle minimal, réseau et modèles de déploiement, la couche de calcul étant démarrée et mise à l'échelle au moment de la bascule.",
+    "Veille tiède : maintenir en permanence dans la Région secondaire une copie fonctionnelle à échelle réduite de tous les niveaux, recevant une fraction du trafic de production.",
+    "Actif/actif : déployer la pile complète dans les deux Régions, répartir le trafic par Amazon Route 53 et répliquer les données dans les deux sens."
+  ]
+}

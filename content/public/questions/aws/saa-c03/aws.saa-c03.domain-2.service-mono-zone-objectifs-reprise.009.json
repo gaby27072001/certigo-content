@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-2.service-mono-zone-objectifs-reprise.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application critique s'exécute aujourd'hui dans une seule zone de disponibilité : deux instances Amazon EC2 derrière un Application Load Balancer, une instance Amazon RDS for MySQL mono-AZ, et un état de session conservé en mémoire sur les serveurs. L'entreprise fixe désormais un objectif de temps de reprise de cinq minutes et un objectif de point de reprise proche de zéro, et exige que la perte d'une zone de disponibilité n'interrompe pas le service. Quelle évolution l'architecte doit-il concevoir ?",
+  "choices": [
+    "Répartir le groupe Auto Scaling et l'Application Load Balancer sur au moins deux zones de disponibilité, externaliser l'état de session dans un magasin partagé tel qu'Amazon ElastiCache, et convertir l'instance Amazon RDS en déploiement multi-AZ avec bascule automatique.",
+    "Créer un réplica en lecture Amazon RDS dans une seconde zone de disponibilité et le promouvoir manuellement en cas de panne de la zone principale.",
+    "Planifier des instantanés Amazon RDS toutes les cinq minutes et restaurer le dernier instantané dans une autre zone de disponibilité lorsque la zone principale devient indisponible.",
+    "Doubler la taille des deux instances Amazon EC2 et activer les sauvegardes automatiques quotidiennes de la base de données."
+  ]
+}

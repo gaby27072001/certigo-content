@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-3.documents-volumineux-rafales-espacees.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Un point de terminaison asynchrone SageMaker, qui met les demandes en file, accepte des charges utiles volumineuses et de longues durées de traitement, notifie l'appelant via Amazon SNS et peut réduire sa flotte à zéro instance entre les rafales.",
+  "rationale": "Le point de terminaison asynchrone est précisément conçu pour des charges utiles volumineuses et des temps d'inférence longs : la requête référence l'objet d'entrée déposé sur Amazon S3, SageMaker place la demande dans une file interne, traite le document puis publie le résultat et une notification Amazon SNS. Il autorise des charges utiles bien supérieures à la limite d'un appel synchrone et des durées de traitement de plusieurs minutes, et sa politique de mise à l'échelle peut descendre jusqu'à zéro instance : entre deux rafales espacées de plusieurs heures, plus aucune instance n'est facturée, la file conservant les demandes le temps que la capacité remonte. Un point de terminaison temps réel impose une réponse synchrone dans un délai court et une charge utile de quelques mégaoctets seulement, ce qui exclut à la fois les 400 Mo et les 90 secondes ; il faudrait de surcroît maintenir des instances actives en permanence. L'inférence sans serveur est encore plus contrainte sur la taille de la charge utile et la durée d'invocation, et un démarrage à froid s'ajouterait à un traitement déjà long. La transformation par lots conviendrait à un traitement planifié sur un corpus complet, mais elle répond mal à des rafales imprévisibles : une planification horaire ajoute jusqu'à une heure d'attente et le temps de démarrage du job, sans interface de soumission à la demande ni notification par requête."
+}

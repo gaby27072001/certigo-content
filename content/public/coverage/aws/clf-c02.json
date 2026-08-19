@@ -3,11 +3,61 @@
   "provider": "aws",
   "certification": "aws:clf-c02",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Cloud Concepts", "weightPercent": 24, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Security and Compliance", "weightPercent": 30, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Cloud Technology and Services", "weightPercent": 34, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Billing, Pricing, and Support", "weightPercent": 12, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Cloud Concepts",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.clf-c02.domain-1.portee-globale-elasticite.001",
+        "aws.clf-c02.domain-1.pilier-durabilite.002",
+        "aws.clf-c02.domain-1.caf-resultats-migration.003",
+        "aws.clf-c02.domain-1.couts-variables.004",
+        "aws.clf-c02.domain-1.replication-base-donnees.005"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Security and Compliance",
+      "weightPercent": 30,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.clf-c02.domain-2.rds-responsabilite-partagee.006",
+        "aws.clf-c02.domain-2.documents-conformite.007",
+        "aws.clf-c02.domain-2.audit-appels-api.008",
+        "aws.clf-c02.domain-2.protection-compte-racine.009",
+        "aws.clf-c02.domain-2.moindre-privilege.010",
+        "aws.clf-c02.domain-2.detection-menaces.011"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Cloud Technology and Services",
+      "weightPercent": 34,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.clf-c02.domain-3.infrastructure-reproductible.012",
+        "aws.clf-c02.domain-3.disponibilite-multi-az.013",
+        "aws.clf-c02.domain-3.calcul-evenementiel-serverless.014",
+        "aws.clf-c02.domain-3.base-nosql-cle-valeur.015",
+        "aws.clf-c02.domain-3.filtrage-trafic-instance.016",
+        "aws.clf-c02.domain-3.cycle-vie-objets.017",
+        "aws.clf-c02.domain-3.notifications-pub-sub.018",
+        "aws.clf-c02.domain-3.ml-construction-modeles.021"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Billing, Pricing, and Support",
+      "weightPercent": 12,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.clf-c02.domain-4.capacite-interruptible.019",
+        "aws.clf-c02.domain-4.analyse-depenses-historiques.020",
+        "aws.clf-c02.domain-4.communaute-repost.022"
+      ]
+    }
   ]
 }

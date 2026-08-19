@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-1.ralentissements-intermittents-base-relationnelle.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une instance Amazon RDS for PostgreSQL présente des ralentissements intermittents. L'équipe CloudOps doit identifier les requêtes SQL et les événements d'attente responsables des pics de charge, sans installer d'agent tiers dans la base. Quelle approche fournit cette analyse ?",
+  "choices": [
+    "Activer Performance Insights sur l'instance et analyser la charge de base de données décomposée par événements d'attente, par requêtes SQL et par utilisateurs sur la période des pics.",
+    "S'appuyer sur la métrique CloudWatch CPUUtilization de l'instance, qui désigne la requête SQL à l'origine du pic.",
+    "Activer les journaux d'accès de l'Application Load Balancer placé devant l'application afin d'y retrouver les requêtes SQL lentes.",
+    "Créer une réplique en lecture, la réplication signalant automatiquement les requêtes problématiques."
+  ]
+}

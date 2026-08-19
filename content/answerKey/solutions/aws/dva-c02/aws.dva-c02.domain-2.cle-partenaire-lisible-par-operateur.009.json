@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-2.cle-partenaire-lisible-par-operateur.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Activer le chiffrement des variables d'environnement avec une clé KMS gérée par le client et les auxiliaires de chiffrement, puis déchiffrer la valeur dans le code lors de l'initialisation, en n'accordant `kms:Decrypt` qu'au rôle d'exécution de la fonction.",
+  "rationale": "Lambda chiffre bien les variables d'environnement au repos, mais avec une clé gérée par AWS la console et l'API de configuration restituent la valeur en clair à tout appelant autorisé : l'exigence n'est pas satisfaite. En activant le chiffrement côté client avec une clé KMS gérée par le client, la configuration ne contient plus qu'un texte chiffré ; seul le rôle d'exécution, autorisé à `kms:Decrypt` sur cette clé, peut le déchiffrer au démarrage de l'environnement d'exécution, et la lecture de la configuration ne révèle rien d'exploitable. La politique de clé KMS trace en outre chaque déchiffrement dans AWS CloudTrail. Le base64 est un encodage et non un chiffrement : la valeur se décode en une seule commande. Inclure la clé dans le paquet de déploiement la propage dans le dépôt de code, dans l'historique Git et dans tous les artefacts de construction, ce qui aggrave l'exposition. Se reposer sur le chiffrement par défaut revient à ignorer que la protection porte sur le stockage et non sur la restitution par l'API : c'est précisément le scénario que l'équipe sécurité refuse. AWS Secrets Manager ou les paramètres SecureString de Parameter Store constituent l'alternative recommandée lorsqu'une rotation automatique est requise."
+}

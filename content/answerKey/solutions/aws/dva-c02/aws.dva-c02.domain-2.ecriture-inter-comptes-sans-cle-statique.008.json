@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-2.ecriture-inter-comptes-sans-cle-statique.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Créer dans le compte B un rôle IAM dont la politique de confiance autorise le rôle d'exécution de la fonction du compte A, puis appeler AssumeRole avec AWS STS dans le code pour obtenir des identifiants temporaires avant d'écrire dans le compartiment.",
+  "rationale": "L'accès entre comptes se résout par un rôle IAM assumable : le compte B crée un rôle qui autorise explicitement, dans sa politique de confiance, le rôle d'exécution de la fonction du compte A, et lui accorde les seules actions Amazon S3 nécessaires sur le préfixe visé. Le code appelle AssumeRole via AWS STS, reçoit des identifiants temporaires à durée de vie courte, renouvelés automatiquement, et aucun secret de longue durée n'est stocké ni à faire tourner ; la politique de compartiment du compte B et, le cas échéant, la politique de la clé KMS doivent également autoriser ce rôle. Stocker une clé d'accès permanente dans une variable d'environnement expose un secret durable à quiconque peut lire la configuration de la fonction et impose une rotation manuelle, source d'incidents. Rendre le compartiment public expose les données à l'Internet entier, entre en conflit avec le blocage de l'accès public et le filtrage par adresse IP n'apporte aucune authentification. Un rôle IAM appartient à un compte : son ARN contient l'identifiant de ce compte, il ne peut donc être ni copié ni partagé tel quel entre comptes."
+}

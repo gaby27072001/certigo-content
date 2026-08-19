@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-2.reprise-actif-passif-deux-regions.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Créer des enregistrements Route 53 de type basculement, primaire et secondaire, associés à un contrôle de santé qui surveille le point de terminaison de la Région primaire.",
+  "rationale": "Le routage de basculement de Route 53 associe un enregistrement primaire à un contrôle de santé : tant que le contrôle est sain, la Région primaire répond ; dès qu'il échoue, Route 53 répond avec l'enregistrement secondaire, ce qui réalise exactement la bascule actif-passif demandée. Un routage pondéré 50/50 envoie en permanence la moitié du trafic vers la pile passive et, sans contrôle de santé, continue de répondre avec une cible en panne. Un Application Load Balancer est un service régional : ses groupes cibles ne s'étendent pas à une autre Région, il ne peut donc pas assurer une bascule inter-Régions. Abaisser le TTL accélère la propagation d'un changement, mais ne détecte ni ne déclenche aucune bascule par lui-même."
+}

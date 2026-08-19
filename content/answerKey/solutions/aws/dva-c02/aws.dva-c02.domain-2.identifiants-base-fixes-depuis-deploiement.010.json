@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-2.identifiants-base-fixes-depuis-deploiement.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Stocker les identifiants dans AWS Secrets Manager, activer la rotation automatique avec une fonction de rotation adaptée au moteur, et faire récupérer le secret par l'application au démarrage puis lors d'une erreur d'authentification, avec un cache local à durée de vie courte.",
+  "rationale": "AWS Secrets Manager stocke le secret chiffré par KMS, l'expose via une API contrôlée par IAM et pilote la rotation avec une fonction Lambda de rotation qui met à jour à la fois le secret et l'utilisateur de base de données, en s'appuyant sur les étiquettes de version AWSCURRENT et AWSPENDING. Côté application, la récupération du secret au démarrage, puis de nouveau en cas d'échec d'authentification, permet d'absorber une rotation sans redémarrage ni interruption ; un cache local à durée de vie courte limite le nombre d'appels à l'API et le coût associé. Recourir à des variables d'environnement figées impose un redéploiement à chaque rotation, ce que la contrainte exclut, et laisse le mot de passe visible dans la définition de tâche. Un paramètre de type String n'est pas chiffré, et le partager en lecture à tout le compte viole le principe du moindre privilège ; seul un paramètre SecureString serait envisageable, mais sans rotation intégrée pour le moteur de base de données. Faire générer un mot de passe par chaque instance produirait des identifiants divergents d'une instance à l'autre et casserait les connexions des autres processus."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-4.acces-refuse-lecture-inter-comptes.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Le compte producteur d'une organisation écrit des fichiers dans un compartiment Amazon S3 chiffré côté serveur avec une clé AWS KMS gérée par le client. Une tâche AWS Glue exécutée dans un second compte doit lire ces fichiers. La politique du compartiment autorise déjà le rôle d'exécution de la tâche à effectuer s3:GetObject, mais la tâche échoue avec une erreur d'accès refusé. Quelle action corrige la situation ?",
+  "choices": [
+    "Recopier les objets dans un compartiment appartenant au second compte et chiffré avec le chiffrement par défaut SSE-S3.",
+    "Désactiver le chiffrement côté serveur du compartiment source afin que le rôle du second compte puisse lire les objets.",
+    "Ajouter le rôle d'exécution AWS Glue du second compte à la politique de la clé KMS du compte producteur pour l'action kms:Decrypt, et autoriser cette même action dans la politique IAM attachée au rôle.",
+    "Créer dans le second compte une clé AWS KMS portant le même alias que celle du compte producteur."
+  ]
+}

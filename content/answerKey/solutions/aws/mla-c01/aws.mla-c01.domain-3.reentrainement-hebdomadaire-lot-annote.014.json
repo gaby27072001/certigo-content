@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-3.reentrainement-hebdomadaire-lot-annote.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Un pipeline SageMaker Pipelines composé d'étapes de traitement, d'entraînement et d'évaluation, d'une étape de condition sur l'AUC et d'une étape d'enregistrement du modèle, déclenché par une règle Amazon EventBridge réagissant aux notifications d'événements Amazon S3.",
+  "rationale": "SageMaker Pipelines exprime nativement l'enchaînement demandé : une étape de traitement pour le prétraitement, une étape d'entraînement, une étape d'évaluation qui produit un rapport de métriques, une étape de condition qui compare l'AUC au seuil et une étape d'enregistrement qui n'est franchie que si la condition est vraie. Chaque exécution est journalisée avec ses paramètres, ses artefacts d'entrée et de sortie et son lignage, ce qui satisfait l'exigence de traçabilité. Le déclenchement par événement s'obtient en activant les notifications d'événements Amazon S3 sur le préfixe et en faisant réagir une règle Amazon EventBridge qui démarre l'exécution du pipeline, sans planification à l'aveugle. Une tâche cron sur EC2 exige d'administrer une instance, ignore l'arrivée réelle du lot, ne conserve aucun lignage exploitable et n'offre ni reprise sur échec par étape ni conditionnement structuré. Une fonction Lambda ne peut pas héberger l'entraînement : sa durée d'exécution est plafonnée à quinze minutes et ses ressources de calcul sont sans commune mesure avec un job d'entraînement ; elle convient tout au plus pour déclencher le pipeline. Un notebook lancé à la main réintroduit une dépendance humaine, s'exécute dans un état non reproductible et ne garantit ni l'enregistrement conditionnel ni la traçabilité exigée."
+}

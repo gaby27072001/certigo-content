@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-digital-leader.section-4.choix-plateforme-conteneurs.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-digital-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Déployer les conteneurs sur Cloud Run, dont la plateforme entièrement gérée ajuste automatiquement le nombre d'instances actives selon le trafic reçu.",
+  "rationale": "Cloud Run est le produit serverless que le guide associe à l'exécution de conteneurs sans gestion de serveurs, avec mise à l'échelle automatique adaptée à un trafic irrégulier, ce qui correspond exactement au besoin décrit. Le choix A demande une administration active des nœuds du cluster selon des règles de dimensionnement fixes, ce que l'équipe cherche justement à éviter. Le choix B impose un dimensionnement permanent au pic, contraire à l'objectif d'éviter le provisionnement manuel. Le choix C abandonne les bénéfices des microservices conteneurisés déjà en place, sans répondre au besoin d'échelle automatique."
+}

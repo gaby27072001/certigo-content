@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-2.compute-cloud-run.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une équipe doit déployer une API HTTP conteneurisée et sans état. Le trafic est très irrégulier, l'application doit descendre à zéro instance en l'absence de requêtes et l'équipe ne veut pas administrer de cluster. Quel service faut-il sélectionner ?",
+  "choices": [
+    "Un service Cloud Run avec mise à l'échelle jusqu'à zéro",
+    "Un groupe d'instances géré Compute Engine avec au moins une VM",
+    "Un cluster GKE Standard",
+    "Une fonction Cloud Run avec un déclencheur Cloud Storage"
+  ]
+}

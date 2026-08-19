@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-4.localisation-donnees-personnelles-lac.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Activer Amazon Macie sur les comptes du lac, planifier des tâches de découverte de données sensibles sur les compartiments concernés, et router les résultats vers Amazon EventBridge pour déclencher le durcissement des autorisations.",
+  "rationale": "Amazon Macie est le service géré de découverte de données sensibles dans Amazon S3 : il maintient un inventaire des compartiments et de leur posture de sécurité, applique des identifiants de données gérés pour des types tels que les noms, les numéros de carte bancaire et les identifiants nationaux, échantillonne intelligemment les objets pour maîtriser le coût sur des centaines de téraoctets, et publie chaque résultat dans Amazon EventBridge et AWS Security Hub. Ce flux d'événements permet de déclencher automatiquement une remédiation, par exemple la restriction d'une politique de compartiment ou d'une autorisation Lake Formation. Une tâche AWS Glue à base d'expressions régulières est précisément le détecteur maison écarté : il faudrait écrire et maintenir les motifs, gérer les faux positifs et payer un balayage intégral mensuel, sans aucune alerte à l'apparition d'un objet. Les journaux d'accès au serveur décrivent qui lit quoi, pas ce que contiennent les objets : en déduire la sensibilité relève de la conjecture. L'étiquetage manuel contrôlé par AWS Config vérifie l'existence d'une étiquette déclarative, jamais le contenu réel des fichiers, et repose entièrement sur la bonne foi des équipes productrices."
+}

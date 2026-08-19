@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-4.recherche-erreurs-par-identifiant-correlation.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une application émet des journaux JSON structurés contenant les champs `correlationId`, `level` et `errorCode`, répartis sur plusieurs centaines de flux d'un même groupe de journaux Amazon CloudWatch Logs. Pendant un incident, l'équipe doit retrouver en quelques minutes toutes les erreurs liées à un identifiant de corrélation et les regrouper par code d'erreur. Quelle méthode doit-elle employer ?",
+  "choices": [
+    "Télécharger l'intégralité des flux de journaux et les analyser localement avec un script maison.",
+    "Créer un filtre d'abonnement rétroactif qui rejoue vers une fonction d'analyse les événements déjà écrits dans le groupe de journaux.",
+    "Exécuter une requête CloudWatch Logs Insights sur le groupe de journaux, en s'appuyant sur l'extraction automatique des champs JSON, par exemple `fields @timestamp, @message | filter correlationId = '...' and level = 'ERROR' | stats count() by errorCode`.",
+    "Créer un filtre de métrique comptant les erreurs, ce qui permettra ensuite de consulter le contenu des messages concernés."
+  ]
+}

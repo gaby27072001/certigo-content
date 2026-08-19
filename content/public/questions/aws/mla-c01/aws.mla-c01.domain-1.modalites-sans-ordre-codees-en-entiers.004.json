@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-1.modalites-sans-ordre-codees-en-entiers.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un modèle de régression linéaire prédit la valeur d'un panier. La variable « canal d'acquisition » comporte six modalités sans relation d'ordre (référencement, courriel, affiliation, réseaux sociaux, affichage, direct) et a été encodée en entiers de 0 à 5. Le modèle attribue à cette variable des coefficients incohérents, comme si le canal 5 valait cinq fois le canal 1. Quelle transformation l'ingénieur doit-il appliquer ?",
+  "choices": [
+    "Standardiser les entiers 0 à 5 en centrant et en réduisant la variable afin que son échelle corresponde à celle des variables numériques.",
+    "Appliquer une transformation logarithmique aux entiers 0 à 5 pour atténuer l'effet des modalités les plus élevées.",
+    "Remplacer l'encodage entier par un encodage un-parmi-n (one-hot), par exemple avec une transformation Amazon SageMaker Data Wrangler, afin de créer une colonne indicatrice par modalité.",
+    "Regrouper les entiers 0 à 5 en trois intervalles de valeurs (binning) afin de réduire le nombre de modalités distinctes."
+  ]
+}
