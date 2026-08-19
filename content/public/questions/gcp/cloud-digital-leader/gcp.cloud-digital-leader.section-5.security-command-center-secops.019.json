@@ -10,9 +10,9 @@
   },
   "prompt": "Une équipe de sécurité est submergée par des alertes dispersées sur de nombreux projets Google Cloud et veut disposer d'un endroit unique pour découvrir les mauvaises configurations, prioriser les risques, puis ingérer la télémétrie afin d'accélérer la détection et la réponse aux menaces. Quelle combinaison d'outils répond à ce besoin ?",
   "choices": [
-    "Continuer à consulter manuellement chaque journal de projet, en reportant à plus tard la centralisation des risques dans un outil dédié.",
-    "Router l'ensemble des alertes de sécurité vers Cloud Monitoring, un outil de surveillance d'infrastructure plutôt qu'une plateforme dédiée à la corrélation et à la priorisation des risques de sécurité.",
+    "Centraliser les journaux de chaque projet dans BigQuery et construire des tableaux de bord de risque gérés par l'équipe de sécurité.",
+    "Utiliser Cloud Monitoring pour les alertes et Cloud Logging pour regrouper la télémétrie de sécurité dans un espace commun.",
     "Adopter Security Command Center pour prioriser les risques et Google Security Operations pour accélérer la détection.",
-    "Faire remonter chaque alerte de sécurité par ticket individuel à l'équipe applicative concernée, en laissant chaque équipe trier et prioriser ses propres risques."
+    "Publier les alertes dans Pub/Sub et créer automatiquement un ticket pour l'équipe propriétaire de chaque projet."
   ]
 }

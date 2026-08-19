@@ -10,9 +10,9 @@
   },
   "prompt": "Une banque doit conserver certaines charges réglementées sur son infrastructure sur site pour des raisons de conformité, tout en exécutant ponctuellement des charges analytiques dans le cloud. Quelle architecture répond le mieux à ce cas d'usage ?",
   "choices": [
-    "Conserver l'ensemble des systèmes dans le centre de données sur site actuel, en reportant à plus tard toute connexion vers un environnement cloud pour les charges analytiques.",
+    "Étendre la capacité du centre de données sur site pour absorber aussi les pics analytiques, avec une infrastructure dimensionnée au maximum prévu.",
     "Relier par une architecture hybride l'infrastructure sur site réglementée à Google Cloud pour les charges analytiques ponctuelles.",
-    "Répartir des charges de travail identiques chez plusieurs fournisseurs cloud distincts, chacun opérant indépendamment de l'infrastructure sur site réglementée existante.",
-    "Migrer immédiatement la totalité des charges, y compris celles réglementées, vers un unique fournisseur cloud public."
+    "Répartir les charges analytiques entre plusieurs fournisseurs cloud et synchroniser auprès d'eux une copie des données réglementées.",
+    "Migrer les charges analytiques et réglementées vers un cloud public isolé par des contrôles réseau et des politiques IAM dédiées."
   ]
 }

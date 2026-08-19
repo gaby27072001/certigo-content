@@ -11,8 +11,8 @@
   "prompt": "Une entreprise de logistique veut alimenter des tableaux de bord quasi temps réel à partir de la télémétrie continue de ses camions, en transformant les évènements avant de les visualiser pour ses équipes d'exploitation. Quelle chaîne d'outils correspond le mieux à ce besoin ?",
   "choices": [
     "Ingérer les évènements avec Pub/Sub, les transformer avec Dataflow, puis les visualiser en temps réel dans Looker.",
-    "Charger la télémétrie dans BigQuery par lots nocturnes, puis rafraîchir les tableaux de bord une fois par jour après chaque import.",
-    "Archiver la télémétrie brute dans Cloud Storage à des fins de conservation, puis laisser les équipes d'exploitation interroger les fichiers directement au besoin.",
-    "Traiter les évènements une seule fois par trimestre après leur export vers un disque local."
+    "Charger la télémétrie dans BigQuery par lots nocturnes programmés, avec un rafraîchissement des tableaux de bord une fois par jour.",
+    "Archiver la télémétrie brute dans Cloud Storage à des fins de conservation réglementaire, consultable par requête ponctuelle des équipes.",
+    "Exporter les évènements vers un disque local et les traiter par lots lors d'une revue trimestrielle des performances de la flotte."
   ]
 }

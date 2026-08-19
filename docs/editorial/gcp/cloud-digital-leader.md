@@ -186,8 +186,13 @@ indirectement, la combinaison retenue comme bonne réponse.
 - **Longueur des choix** : les quatre choix de chaque question ont été
   rédigés pour rester de longueur globalement comparable ; la bonne réponse
   n'est la plus longue des quatre choix que sur une minorité des 22
-  questions, afin d'éliminer l'indice positionnel « la réponse la plus longue
-  est toujours correcte ».
+  questions (5/22), afin d'éliminer l'indice positionnel « la réponse la plus
+  longue est toujours correcte ». Elle ne figure également parmi les deux
+  choix les plus courts que sur 11 des 22 questions — une répartition par
+  rang de longueur statistiquement équilibrée (test binomial bilatéral,
+  p = 1, contre p ≈ 0,004 pour une répartition 18/22 non corrigée) —
+  ce qui exclut tout indice exploitable fondé sur la longueur relative des
+  choix, dans un sens comme dans l'autre.
 - **Couverture des sous-objectifs** : les 14 sous-objectifs officiels
   (1.1, 1.2, 2.1, 2.2, 2.3, 3.1, 3.2, 4.1, 4.2, 4.3, 5.1, 5.2, 6.1, 6.2) sont
   tous couverts par au moins une question, comme détaillé dans le tableau
