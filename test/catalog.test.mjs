@@ -227,6 +227,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
   assert.equal(result.coverageCount, 26);
 
   const catalog = readJson(catalogAt(repoRoot));
+  const questionIds = [];
   for (const certification of catalog.certifications) {
     const matrix = readJson(
       resolve(
@@ -239,6 +240,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
       )
     );
     assert.equal(matrix.certification, certification.id);
+    questionIds.push(...matrix.objectives.flatMap((objective) => objective.questionIds));
     if (matrix.status === "planned") {
       assert.ok(matrix.objectives.every((objective) => objective.questionIds.length === 0));
     }
@@ -252,6 +254,7 @@ test("valide exhaustivement le catalogue reel et ses 26 matrices", async () => {
     if (certification.provider === "aws") assert.equal(sum, 100);
     else assert.ok(sum >= 99 && sum <= 101);
   }
+  assert.equal(questionIds.length, new Set(questionIds).size);
 });
 
 test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif", () => {

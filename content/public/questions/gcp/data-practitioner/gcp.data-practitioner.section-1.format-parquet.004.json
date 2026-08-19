@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-1.format-parquet.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe prépare dans Cloud Storage un historique de mesures comportant des dizaines de colonnes. Les analystes liront surtout quelques colonnes à la fois avec BigQuery et souhaitent réduire le volume lu tout en conservant les types. Quel format choisir ?",
+  "choices": [
+    "Parquet, grâce à son stockage en colonnes et à ses métadonnées de schéma",
+    "CSV, car chaque ligne reste lisible sans schéma ni conversion",
+    "JSON délimité par des retours à la ligne, car chaque attribut est répété dans chaque objet",
+    "Avro, car son organisation orientée lignes limite les données décodées par requête"
+  ]
+}

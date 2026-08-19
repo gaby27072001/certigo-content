@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-4.heritage-role-personnalise.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Le groupe « opérateurs-test » reçoit le rôle Editor depuis un dossier, ce qui lui donne accès à tous les projets enfants. Il ne doit désormais pouvoir que consulter et démarrer des VM dans un seul projet de test, et aucun rôle prédéfini n'offre exactement ces permissions. Que faut-il faire ?",
+  "choices": [
+    "Ajouter un rôle Viewer dans le projet de test en conservant Editor au niveau du dossier",
+    "Créer une règle de pare-feu qui bloque le groupe dans les autres projets",
+    "Accorder Owner dans le projet de test afin de remplacer le rôle hérité",
+    "Retirer Editor au dossier et accorder dans le projet un rôle personnalisé minimal"
+  ]
+}

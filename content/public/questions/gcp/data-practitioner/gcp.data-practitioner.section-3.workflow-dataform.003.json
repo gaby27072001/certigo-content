@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-3.workflow-dataform.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une équipe maintient vingt transformations SQL BigQuery avec des dépendances entre tables, des assertions de qualité et un dépôt Git. Elle veut compiler ces dépendances et exécuter chaque matin le workflow dans le bon ordre. Quelle solution est la plus adaptée ?",
+  "choices": [
+    "Définir le projet dans Dataform, créer une configuration de workflow et planifier son invocation",
+    "Créer vingt requêtes planifiées BigQuery indépendantes à la même heure sans dépendances explicites",
+    "Créer un cluster Dataproc permanent et lancer chaque instruction SQL depuis Spark",
+    "Utiliser Eventarc pour déclencher aléatoirement chaque transformation à la réception d'un événement"
+  ]
+}

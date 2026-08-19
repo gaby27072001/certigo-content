@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-2.automl-evaluation.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Conserver un jeu d'évaluation, examiner les métriques avec ML.EVALUATE, puis utiliser ML.PREDICT si elles sont acceptables",
+  "rationale": "Un jeu distinct et ML.EVALUATE permettent de mesurer la généralisation avant l'inférence avec ML.PREDICT. Évaluer sur les données d'entraînement donne une estimation biaisée, la présentation dans Looker ne mesure pas la qualité prédictive et un réentraînement par ligne empêche une validation contrôlée."
+}
