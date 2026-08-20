@@ -110,6 +110,21 @@ function createHistoricalV2Root() {
       certifications: ["ans-c01", "scs-c03"],
       pairCount: 48,
     },
+    {
+      provider: "gcp",
+      certifications: [
+        "cloud-architect",
+        "cloud-database-engineer",
+        "cloud-developer",
+        "cloud-devops-engineer",
+        "cloud-network-engineer",
+        "cloud-security-engineer",
+        "data-engineer",
+        "machine-learning-engineer",
+        "security-operations-engineer",
+      ],
+      pairCount: 216,
+    },
   ];
   for (const wave of wavesAfterRuntimeV2) {
     for (const channel of [
@@ -238,7 +253,7 @@ test("conserve le package v2 courant byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48);
+  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
   assert.equal(result.release, null);
   assert.equal(existsSync(resolve(outDir, "release.json")), false);
   assert.deepEqual(
@@ -247,18 +262,18 @@ test("conserve le package v2 courant byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:d7e4165481258924c0bfcc40e5b5fd7fe9f1abb58a749b5d4128b037b75cf094",
+          "sha256:fde6c76be1130b149f5e379ff520b32bbb49de5c0a0e5b26642f7421042031b7",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:2ed0d90a933e393dc53ad2f98510822461ee9a71ff68ae4f5f8f0c5e337f747d",
+          "sha256:3c36dcaa363e364af36f288b6164278df6e88d427b7608da9b141eabea9c43b6",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "8672db170f87a3241a8e39fa9111691d3d88f248c2b08966dd8519df5332a5c0"
+    "8175bb2509c99d82209558a9206a0c17b9adff2f035305a7e3462fb95557716f"
   );
 });
 
