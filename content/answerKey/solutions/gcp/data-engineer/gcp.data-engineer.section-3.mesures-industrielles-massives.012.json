@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.mesures-industrielles-massives.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Utiliser Bigtable avec une clé préfixée par un identifiant d'appareil réparti puis un composant temporel adapté aux lectures de plage",
+  "rationale": "Bigtable supporte le débit horizontal et les lectures de quelques millisecondes par clé ou plage ; le préfixe réparti évite les points chauds et le composant temporel sert l’historique d’un appareil. Cloud SQL partitionné et indexé reste limité par la montée verticale de son instance principale face à des millions d’écritures par seconde. Les fichiers Parquet horaires nécessitent un index Firestore, des listings et l’ouverture de fichiers, incompatibles avec la latence demandée. Le document Firestore contenant un tableau de mesures devient volumineux et disputé ; ses sous-collections n’éliminent pas la contention sur le document principal.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/bigtable/docs/schema-design-time-series"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-6.abusive-public-api.022",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Une API publique derrière un Application Load Balancer externe subit des injections SQL et des rafales de 2 000 requêtes par seconde provenant de quelques clients, alors que les utilisateurs normaux restent sous 20 requêtes par minute. L'équipe veut d'abord observer les faux positifs, puis bloquer et limiter au niveau de la périphérie. Que configurer ?",
+  "choices": [
+    "Créer des règles de pare-feu VPC ingress qui recherchent les chemins HTTP et signatures SQL dans les paquets, puis limiter chaque source en comptant les connexions au niveau du sous-réseau.",
+    "Attacher une politique backend Cloud Armor, tester les règles WAF préconfigurées en aperçu puis les appliquer, ajouter un rate limiting avec une clé client fiable et journaliser les décisions.",
+    "Augmenter l'allocation dynamique de ports Cloud NAT pour les backends et réduire ses délais d'inactivité, afin d'absorber les requêtes entrantes abusives avant l'équilibreur.",
+    "Déplacer le nom public dans une zone Cloud DNS privée, distribuer cette zone aux utilisateurs légitimes et utiliser un TTL court pour retirer rapidement les clients trop actifs."
+  ]
+}

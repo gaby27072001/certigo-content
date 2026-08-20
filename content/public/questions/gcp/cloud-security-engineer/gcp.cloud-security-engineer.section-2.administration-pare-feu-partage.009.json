@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.administration-pare-feu-partage.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une entreprise utilise déjà un Shared VPC avec vingt projets de service. Les règles de sécurité de base doivent être héritées par les charges de travail actuelles et futures, et seule l'équipe sécurité doit pouvoir modifier les contrôles de pare-feu du réseau partagé. Les équipes applicatives doivent néanmoins déployer leurs VM sur des sous-réseaux délégués. Quelle configuration IAM et de pare-feu convient le mieux ?",
+  "choices": [
+    "Faire associer par l'administrateur d'organisation une stratégie de pare-feu hiérarchique au dossier, réserver roles/compute.securityAdmin à l'équipe sécurité dans le projet hôte et ne déléguer que roles/compute.networkUser sur les sous-réseaux requis",
+    "Accorder roles/compute.networkAdmin aux équipes applicatives dans chaque projet de service et roles/compute.securityAdmin dans le projet hôte, dupliquer le socle sous forme de règles VPC locales, puis synchroniser périodiquement ces règles avec une configuration de référence",
+    "Accorder roles/compute.securityAdmin aux équipes applicatives sur le projet hôte, protéger les règles de base par une convention de nommage, exiger une revue pour chaque changement et déclencher des alertes sur les suppressions ou modifications non approuvées",
+    "Appliquer les règles de base aux tags réseau des VM actuelles dans le projet hôte, automatiser l’ajout de tags sur les nouvelles VM, attribuer le rôle Éditeur aux équipes applicatives dans leurs projets de service et auditer chaque semaine les écarts de configuration constatés"
+  ]
+}

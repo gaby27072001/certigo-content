@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-6.alertes-impact-utilisateur.022",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Définir des SLI de succès et de latence à partir des requêtes, calculer le budget d'erreur du SLO et alerter sur sa consommation avec plusieurs fenêtres de burn rate, tout en gardant les métriques de ressources pour le diagnostic, avec alertes distinctes pour dérives rapides et lentes.",
+  "rationale": "Des SLI de succès et de latence mesurent la promesse utilisateur, le budget d'erreur quantifie la marge du SLO et les alertes de burn rate sur plusieurs fenêtres déclenchent des alertes distinctes pour rupture rapide et dérive lente ; les métriques de ressources restent disponibles pour le diagnostic. Ajouter mémoire et nombre d'instances au seuil CPU multiplie des symptômes techniques non corrélés à l'impact, même si les notifications sont regroupées. Le classement hebdomadaire de journaux par courriel est rétrospectif, subjectif et trop lent pour l'astreinte, sans calcul continu du budget. Un test synthétique depuis une seule région ne représente pas tous les utilisateurs, et une moyenne horaire masque les requêtes lentes ainsi que les erreurs partielles.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring"
+  ]
+}

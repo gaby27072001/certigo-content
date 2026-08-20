@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.edge-domain-outage.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une entreprise exige le SLA de 99,99 % pour Dedicated Cloud Interconnect dans une seule région. Elle veut que la perte d'un edge availability domain dans le metro choisi ne coupe pas la connectivité. Quelle topologie documentée doit-elle déployer ?",
+  "choices": [
+    "Commander une connexion dans chaque edge availability domain du metro, créer quatre VLAN attachments sur ces deux connexions et les répartir entre deux Cloud Routers, car la redondance des routeurs compense l'absence d'une seconde connexion dans chaque domaine.",
+    "Commander quatre connexions dans quatre metros différents, créer un VLAN attachment par connexion dans la même région et utiliser deux Cloud Routers, puis placer les connexions dans un groupe `PRODUCTION_NON_CRITICAL` afin de surveiller la diversité géographique.",
+    "Commander quatre connexions réparties entre les deux paires installation–edge availability domain d'un même metro, créer quatre VLAN attachments dans la région sur au moins un Cloud Router et placer les connexions dans un groupe `PRODUCTION_CRITICAL` validé par Google.",
+    "Commander deux connexions dans une seule installation du metro, créer quatre VLAN attachments dans la région sur un Cloud Router et ajouter deux tunnels Classic VPN, puis déclarer l'ensemble comme groupe `PRODUCTION_CRITICAL`."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.objectif-reprise-non-teste.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une base Cloud SQL régionale dispose d'une réplique interrégionale destinée au sinistre. L'entreprise annonce un RTO de 30 minutes, mais n'a jamais exécuté de reprise. Comment vérifier cet objectif avec le moins de risque pour la production ?",
+  "choices": [
+    "Organiser un exercice planifié sur une réplique de test avec les équipes d'astreinte : mesurer son retard, exécuter la promotion selon le runbook, valider connexions, application et données, chronométrer le RTO réel, puis documenter restauration et retour",
+    "Réaliser un exercice sur table avec les équipes réseau, base et application, puis additionner les durées estimées de chaque étape, ce qui vérifie rôles et décisions mais pas les accès réels, la promotion ni le comportement de l'application",
+    "Restaurer la dernière sauvegarde dans la région de secours et valider l'application sur cette nouvelle instance, ce qui teste restauration et connectivité mais pas la promotion de la réplique interrégionale ni son retard au moment du sinistre",
+    "Mesurer en continu retard de réplication, latence réseau et durée des promotions historiques, puis calculer un RTO prévisionnel, ce qui surveille les prérequis mais ne teste pas l'enchaînement du runbook, la reconnexion et le retour"
+  ]
+}

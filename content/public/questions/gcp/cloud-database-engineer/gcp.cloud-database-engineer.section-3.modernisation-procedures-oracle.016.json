@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.modernisation-procedures-oracle.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un système Oracle contient packages PL/SQL, séquences, vues et procédures stockées. Il doit migrer vers Cloud SQL for PostgreSQL. Le programme veut estimer l'effort de conversion et produire un schéma cible révisable avant de déplacer les données. Quelle approche est la plus adaptée ?",
+  "choices": [
+    "Copier les fichiers de données Oracle dans Cloud Storage puis les présenter directement à PostgreSQL, ce qui évite une exportation logique mais ne convertit ni le format physique, ni les types, ni les objets PL/SQL",
+    "Créer un flux CDC Oracle vers PostgreSQL et laisser la réplication transformer automatiquement packages, vues et procédures, ce qui déplace les changements mais ne garantit aucune conversion sémantique de la logique",
+    "Traduire par script les noms de tables, types courants et séquences, puis considérer les procédures T-SQL compatibles, ce qui produit rapidement du DDL mais n'analyse pas les incompatibilités ni l'effort de remédiation",
+    "Utiliser les espaces de travail de conversion Database Migration Service pour analyser et convertir le schéma Oracle, examiner les problèmes, corriger puis appliquer le DDL validé à la cible"
+  ]
+}

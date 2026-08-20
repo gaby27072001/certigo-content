@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-5.unexplained-egress-spend.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Activer VPC Flow Logs avec échantillonnage et métadonnées adaptés, puis agréger dans Flow Analyzer les octets, sources, destinations et ports sur la période afin d'attribuer la hausse à chaque VM et port distant.",
+  "rationale": "VPC Flow Logs enregistre des échantillons de flux avec compteurs et métadonnées; Flow Analyzer peut agréger sur la période les octets par source, destination et port sans conserver le contenu des paquets. Packet Mirroring copie les paquets complets vers des collecteurs, ce qui apporte une inspection plus intrusive et coûteuse que nécessaire pour cette attribution de volume. Les journaux d'audit d'administration décrivent les opérations du plan de contrôle et ne contiennent pas les octets et ports de chaque connexion de données. Connectivity Tests évalue la joignabilité d'un flux hypothétique; additionner des chemins possibles ne mesure pas le trafic réellement émis ni le coût historique.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-intelligence-center/docs/flow-analyzer/overview"
+  ]
+}

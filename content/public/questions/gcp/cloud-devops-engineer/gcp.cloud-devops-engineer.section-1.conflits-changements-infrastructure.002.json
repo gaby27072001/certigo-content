@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.conflits-changements-infrastructure.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe gère cinquante projets avec Terraform. Deux ingénieurs ont récemment appliqué simultanément des changements incompatibles depuis leur poste, et la production ne correspond plus au dépôt Git. Quel processus faut-il instaurer ?",
+  "choices": [
+    "Versionner les modules et sérialiser les exécutions du pipeline, mais conserver un état local distinct sur chaque agent puis archiver ces états comme artefacts après l'application",
+    "Versionner les modules, utiliser un backend d'état distant verrouillable, faire examiner le plan puis appliquer depuis un pipeline avec une identité dédiée",
+    "Générer depuis Git une suite de commandes gcloud examinée en revue de code, puis l'exécuter manuellement en production sans état déclaratif capable de détecter et réconcilier la dérive",
+    "Utiliser un backend distant verrouillable et une identité dédiée, mais appliquer automatiquement chaque fusion en production sans publier ni faire approuver le plan résultant"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.retard-changements-avant-bascule.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Reporter le basculement, garder la source comme système de référence, analyser métriques et journaux DMS, slot/WAL, transactions longues, réseau et capacité d'application cible, puis ne reprendre le plan qu'après rattrapage stable et validation",
+  "rationale": "Reporter le cutover, conserver la source de référence et diagnostiquer DMS, slot/WAL, transactions longues, réseau et capacité cible protège ensemble RPO, stockage source et cohérence ; le plan ne reprend qu'après rattrapage stable. Augmenter seulement la rétention WAL gagne du temps, mais promouvoir avec du retard rend la cible incomplète. Recréer immédiatement le job abandonne une copie initiale valide sans savoir si le même goulot réapparaîtra. Ouvrir AlloyDB aux écritures avant rattrapage crée deux autorités, des conflits et un ordre indéterminé que la réplication unidirectionnelle ne résout pas.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/database-migration/docs/postgres/diagnose-issues"
+  ]
+}

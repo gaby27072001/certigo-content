@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-1.transition-entrepot-legacy.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise migre progressivement un entrepôt Oracle sur site vers BigQuery. La base source doit rester disponible pendant six semaines, le retard de réplication doit être faible et l'équipe veut comparer les comptages avant la bascule sans développer son propre lecteur de journaux. Quel plan de migration est le plus approprié ?",
+  "choices": [
+    "Exporter chaque nuit un instantané Oracle complet vers Cloud Storage, charger les fichiers dans BigQuery et comparer les comptages avant une coupure planifiée de plusieurs heures",
+    "Migrer Oracle vers Cloud SQL avec Database Migration Service, puis exporter périodiquement Cloud SQL vers BigQuery et convertir manuellement les procédures analytiques",
+    "Déployer Kafka Connect sur un cluster Dataproc persistant, lire Oracle par JDBC avec des horodatages applicatifs et alimenter BigQuery par un connecteur personnalisé",
+    "Réaliser un chargement initial, répliquer le journal Oracle avec Datastream vers BigQuery, valider les tables puis basculer les rapports après réduction du retard de réplication"
+  ]
+}

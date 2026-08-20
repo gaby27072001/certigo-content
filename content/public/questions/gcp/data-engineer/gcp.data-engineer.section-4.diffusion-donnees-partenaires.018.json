@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-4.diffusion-donnees-partenaires.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une équipe doit partager avec plusieurs partenaires un produit de données BigQuery mis à jour quotidiennement. Les partenaires ne doivent pas recevoir de copie exportée, chaque abonnement doit pouvoir être révoqué et les colonnes personnelles doivent être masquées avant publication. Quelle approche répond le mieux à ces contraintes ?",
+  "choices": [
+    "Exporter chaque jour une table masquée vers un bucket privé, créer un lien signé de longue durée par partenaire et révoquer l'accès en supprimant puis recréant les objets",
+    "Publier une vue nettoyée comme listing Analytics Hub, gérer les abonnements révocables avec IAM, conserver les données chez le producteur et ne créer aucune copie partenaire",
+    "Créer un projet par partenaire, y copier quotidiennement les colonnes autorisées et attribuer aux comptes partenaires le rôle BigQuery Data Owner sur leur copie",
+    "Publier une vue autorisée qui conserve les colonnes personnelles, accorder aux partenaires l'accès au jeu de données source et leur demander de masquer ces colonnes côté consommateur"
+  ]
+}

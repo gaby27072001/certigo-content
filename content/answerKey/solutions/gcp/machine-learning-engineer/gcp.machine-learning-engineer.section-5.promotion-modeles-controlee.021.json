@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-5.promotion-modeles-controlee.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Utiliser Cloud Build pour tester et versionner les images, lancer une pipeline Agent Platform traçable, évaluer et approuver le modèle, puis déployer une version de Model Registry.",
+  "rationale": "La chaîne Cloud Build, Agent Platform et Model Registry répond au processus CI/CD/CT : Cloud Build réalise tests et images immuables, Agent Platform exécute un CT traçable, puis évaluation, approbation et Model Registry contrôlent promotion et rollback. Promouvoir manuellement l’artefact issu du notebook sans le reconstruire ni le retester dans la CI ne garantit ni reproductibilité ni conformité du binaire déployé. latest et le seul succès technique effacent l’identité de version et peuvent promouvoir un modèle moins bon. Un entraînement nocturne sans changement de code dépense inutilement et la copie automatique du plus récent contourne les critères d’approbation.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/build/docs/automating-builds/create-manage-triggers"
+  ]
+}

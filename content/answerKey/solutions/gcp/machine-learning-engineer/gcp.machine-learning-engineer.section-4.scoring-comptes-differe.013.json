@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.scoring-comptes-differe.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Enregistrer la version dans Model Registry et lancer une prédiction par lots entre tables BigQuery, sans maintenir un endpoint en ligne en dehors de la fenêtre nocturne.",
+  "rationale": "La prédiction par lots reliée à BigQuery est le mode de service adapté : la prédiction par lots correspond aux 40 millions de lignes et au résultat différé, s’intègre directement à BigQuery et évite une capacité en ligne permanente ; Model Registry fixe la version exécutée. Un endpoint dimensionné pour la nuit fonctionnerait, mais conserver ses réplicas le jour gaspille du coût sans requêtes interactives. Un parc Cloud Run effectuant des millions d’appels synchrones ajoute orchestration, quotas et reprises inutiles. Un cluster Spark permanent peut charger le modèle, mais sa gestion et son maintien entre fenêtres contredisent l’objectif d’éviter les ressources inactives.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/predictions/get-batch-predictions"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-4.recherche-manuels-techniques.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un assistant RAG doit répondre à partir de milliers de manuels techniques. Les documents sont longs, changent régulièrement et les réponses doivent citer les passages retrouvés. L'équipe utilise BigQuery pour l'analyse et veut une recherche sémantique évolutive. Quel pipeline de préparation est le plus adapté ?",
+  "choices": [
+    "Concaténer chaque manuel dans une ligne BigQuery, générer un seul embedding par document et transmettre au modèle le manuel complet ayant la distance minimale",
+    "Découper les documents par nombre fixe de caractères sans chevauchement, indexer uniquement les titres et régénérer quotidiennement tous les embeddings sans suivre les versions",
+    "Générer à l'ingestion un résumé par manuel, indexer les résumés et supprimer les passages sources afin de réduire le stockage et le contexte envoyé",
+    "Découper avec chevauchement, conserver texte et métadonnées, générer des embeddings, créer un index vectoriel BigQuery et réindexer les segments modifiés"
+  ]
+}

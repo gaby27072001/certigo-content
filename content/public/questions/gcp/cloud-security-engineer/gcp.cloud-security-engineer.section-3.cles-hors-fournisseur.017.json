@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.cles-hors-fournisseur.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une institution doit conserver son matériel de clé hors de Google Cloud dans un gestionnaire externe approuvé. Elle veut que les services Google Cloud compatibles utilisent cette clé et qu'une coupure volontaire du gestionnaire externe puisse empêcher les nouveaux déchiffrements. Quelle option choisir ?",
+  "choices": [
+    "Cloud External Key Manager avec une clé externe référencée par Cloud KMS",
+    "Conserver le chiffrement Google par défaut et surveiller ses rotations dans le SIEM",
+    "Créer une CMEK logicielle dans Cloud KMS et sauvegarder une copie chiffrée hors cloud",
+    "Transmettre par une passerelle la clé externe avec chaque requête de service"
+  ]
+}

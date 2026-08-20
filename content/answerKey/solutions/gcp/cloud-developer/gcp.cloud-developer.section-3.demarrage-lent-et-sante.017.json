@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-developer.section-3.demarrage-lent-et-sante.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Configurer une startupProbe pour le chargement, une readinessProbe pour l'aptitude à servir et une livenessProbe réservée aux blocages internes.",
+  "rationale": "La startupProbe protège les 90 secondes de chargement, la readinessProbe retire un pod incapable de servir sans le redémarrer, et la livenessProbe réservée aux blocages internes relance seulement un processus irrécupérable. Un délai initial fixe d'une heure sur la seule vivacité masque trop longtemps un vrai blocage survenu après un démarrage rapide et ne signale pas l'aptitude à recevoir du trafic. Sans sondes, Kubernetes ne sait ni protéger le démarrage ni retirer rapidement un pod non prêt. Une vivacité qui dépend de toutes les API externes transforme une panne transitoire de dépendance en redémarrages en cascade, contrairement au besoin exprimé.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/run/docs/configuring/healthchecks",
+    "https://cloud.google.com/kubernetes-engine/docs/deprecations/exec-probe-timeouts"
+  ]
+}

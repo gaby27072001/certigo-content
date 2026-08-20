@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.controle-reseau-equipes-separees.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer des dossiers par environnement, des projets de service par application et un projet hôte Shared VPC géré par l'équipe réseau ; appliquer les contraintes de résidence au dossier de production",
+  "rationale": "La hiérarchie par dossiers et projets fournit les limites d'administration, tandis que les contraintes posées sur le dossier de production sont héritées ; Shared VPC laisse le réseau à l'équipe centrale et les charges aux projets de service. La variante avec un VPC détenu par chaque équipe satisfait la séparation des projets, mais distribue précisément le contrôle réseau qui doit rester central et multiplie les appairages. La variante avec un hôte unique mais des contraintes répétées par projet perd l'héritage demandé et crée de la dérive de politique. La variante avec un hôte par application duplique sous-réseaux, routes et contrôles, contrairement à l'exigence de moindre duplication.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/vpc/docs/shared-vpc"
+  ]
+}

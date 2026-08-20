@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-1.extraction-factures-variees.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Utiliser un processeur Document AI pour factures, exploiter ses scores de confiance et envoyer rapidement et en priorité les documents incertains en revue humaine.",
+  "rationale": "Le processeur Document AI spécialisé pour les factures est le choix adapté : le processeur Document AI pour factures extrait une structure métier, fournit des scores de confiance et permet de réserver la revue humaine aux cas incertains. Une chaîne Vision OCR plus règles par fournisseur demande beaucoup de maintenance et généralise mal aux nouveaux formats. Des classifieurs BigQuery ML par champ et une reconstruction séparée réinventent une chaîne documentaire complexe au lieu de limiter le développement. Un modèle Gemini avec JSON contraint peut prototyper l’extraction, mais l’acceptation sans seuil ni circuit de revue ne respecte pas l’exigence de validation des documents peu fiables.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/document-ai/docs/processors-list"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.growing-vpc-estate.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Quatre VPC applicatifs doivent communiquer entre eux via une topologie gérée, sans créer six peerings bilatéraux. Aucun réseau sur site n'est impliqué. L'équipe veut que l'ajout d'un cinquième VPC ne nécessite qu'une seule association. Que faut-il configurer ?",
+  "choices": [
+    "Créer un spoke hybride pour chaque VPC, terminer tous les spokes sur un même tunnel Classic VPN et redistribuer les routes par un Cloud Router central.",
+    "Publier un endpoint Private Service Connect dans chaque VPC et demander à toutes les applications d'utiliser ces endpoints pour tout échange IP, y compris les protocoles non servis.",
+    "Établir un peering en étoile autour d'un VPC de transit, activer import et export de routes personnalisées, puis compter sur la transitivité pour relier toutes les branches.",
+    "Créer un hub Network Connectivity Center et placer les spokes VPC dans le même groupe de connectivité afin de fournir le maillage géré entre les réseaux."
+  ]
+}

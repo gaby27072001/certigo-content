@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-5.migration-dags-existants.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Une entreprise possède déjà des centaines de DAG Airflow qui orchestrent BigQuery, Dataflow, contrôles de conformité et notifications. Elle ajoute une étape d’entraînement mensuelle, mais veut conserver les dépendances existantes et éviter d’administrer Airflow. Quel choix minimise la migration et l’exploitation ?",
+  "choices": [
+    "Conserver Airflow autogéré sur Kubernetes, mettre à niveau le cluster et ses dépendances, puis ajouter un opérateur Agent Platform sans modifier les DAG existants.",
+    "Migrer chaque DAG vers une pipeline Agent Platform, réimplémenter les contrôles BigQuery, Dataflow, conformité et notifications, puis retirer Airflow en une seule livraison.",
+    "Exécuter les DAG existants dans Cloud Composer géré et appeler depuis ceux-ci la tâche ou pipeline Agent Platform, sans les réécrire et en préservant les dépendances et contrôles transverses.",
+    "Utiliser Cloud Scheduler et Pub/Sub pour déclencher séparément chaque étape existante, puis reconstruire les dépendances, reprises et notifications dans plusieurs services."
+  ]
+}

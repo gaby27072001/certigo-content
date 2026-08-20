@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.silent-primary-link-failure.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Donner à la liaison principale une priorité annoncée MED plus faible et activer BFD avec des paramètres compatibles sur Cloud Router et les deux équipements pairs.",
+  "rationale": "Une priorité annoncée MED plus faible fait préférer la liaison principale lorsque les autres critères de sélection sont équivalents, tandis que BFD détecte rapidement une panne de forwarding et fait retirer les routes de la session. Des MED identiques n'établissent pas la préférence demandée et augmenter le hold timer ralentit, au lieu d'accélérer, la convergence. Une route statique plus spécifique sans suivi de prochain saut peut continuer à attirer les paquets vers une liaison défaillante jusqu'à l'intervention opérateur. Garder le pair de secours désactivé et le réactiver par une fonction dépend également d'une chaîne de surveillance et d'automatisation, alors que le scénario exige un retrait et un basculement en quelques secondes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-connectivity/docs/router/how-to/configuring-bfd",
+    "https://cloud.google.com/network-connectivity/docs/router/concepts/advertised-routes"
+  ]
+}

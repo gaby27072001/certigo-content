@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.overlapping-cloud-sources.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Dans chaque VPC, créer un sous-réseau de purpose `PRIVATE_NAT` avec une plage de traduction unique, configurer Hybrid NAT pour le trafic vers `172.20.0.0/16`, puis annoncer ou router sur site le retour de chaque plage NAT par la connexion hybride correspondante.",
+  "rationale": "Hybrid NAT, une capacité de Private NAT, traduit les sources des VM Google Cloud qui initient le trafic vers le réseau sur site non chevauchant. Un sous-réseau de purpose `PRIVATE_NAT` et une plage de traduction unique dans chaque VPC donnent au site deux identités sources distinctes; le site doit aussi router le retour de chaque plage NAT par la connexion hybride correspondante. Annoncer deux fois `10.20.0.0/16` sans traduction laisse les hôtes homonymes indiscernables malgré des routes de retour plus spécifiques. Créer localement `172.20.0.0/16` fait chevaucher le VPC avec la destination réelle; ni Private Google Access ni un routage par source sur site ne corrigent ce conflit. Enfin, VPC Network Peering n'est pas transitif et la priorité d'une route de transit ne transforme pas deux sources identiques en espaces distincts.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/nat/docs/private-nat"
+  ]
+}

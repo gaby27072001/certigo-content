@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-1.transition-entrepot-legacy.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Réaliser un chargement initial, répliquer le journal Oracle avec Datastream vers BigQuery, valider les tables puis basculer les rapports après réduction du retard de réplication",
+  "rationale": "Le chargement initial puis la capture du journal Oracle par Datastream maintiennent BigQuery à faible retard pendant la validation et permettent une bascule contrôlée des rapports. Les instantanés complets nocturnes laissent jusqu’à une journée de retard et imposent encore une longue coupure. Passer d’abord par Cloud SQL avec Database Migration Service ajoute une base intermédiaire et des exports périodiques sans flux continu direct vers l’entrepôt. Kafka Connect sur un Dataproc persistant avec lecture JDBC oblige l’équipe à développer et exploiter la capture, les offsets et les reprises que Datastream gère.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/datastream/docs/overview"
+  ]
+}

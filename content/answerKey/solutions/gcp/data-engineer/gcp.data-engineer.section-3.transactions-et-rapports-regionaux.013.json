@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.transactions-et-rapports-regionaux.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Utiliser AlloyDB for PostgreSQL avec haute disponibilité régionale, pool de lecture et moteur colonnaire afin de servir simultanément transactions et rapports récents",
+  "rationale": "AlloyDB conserve la compatibilité PostgreSQL requise, fournit une haute disponibilité régionale et des pools de lecture, et son moteur colonnaire accélère les rapports sur les données transactionnelles récentes. Spanner apporte une réplication mondiale inutile ici et exige d’adapter les extensions au dialecte disponible. Cloud SQL avec un réplica de lecture reste une option PostgreSQL crédible, mais les rapports lourds ne bénéficient ni du moteur colonnaire ni de la même capacité de croissance. BigQuery avec MERGE différé est analytique : il ne peut servir de système transactionnel ACID synchrone pour l’application.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/alloydb/docs/columnar-engine/about"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.transition-messagerie-sur-site.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une plateforme conserve temporairement un cluster Kafka sur site pendant sa modernisation. Elle veut acheminer les nouveaux messages vers Pub/Sub avec reprise sur incident, chiffrement en transit et suivi du décalage, tout en évitant d'écrire et d'exploiter un connecteur personnalisé. Quelle solution choisir ?",
+  "choices": [
+    "Exporter toutes les heures les segments Kafka fermés vers Cloud Storage, charger les fichiers dans BigQuery et dédupliquer chaque lot d'après l'identifiant de message",
+    "Exposer les brokers derrière un équilibreur public avec TLS, puis déployer un consommateur personnalisé par partition qui publie les messages dans Pub/Sub avec rotation manuelle des secrets",
+    "Créer un pipeline Dataflow personnalisé qui consomme chaque partition Kafka, gère lui-même les offsets dans un état externe et republie les événements dans Pub/Sub",
+    "Déployer le connecteur sink Pub/Sub Group officiel dans Kafka Connect, configurer TLS et authentification, puis superviser les offsets et erreurs du connecteur"
+  ]
+}

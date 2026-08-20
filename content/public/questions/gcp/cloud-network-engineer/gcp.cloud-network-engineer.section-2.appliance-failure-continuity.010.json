@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.appliance-failure-continuity.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Deux appliances virtuelles actives doivent inspecter le trafic est-ouest. L'équipe veut conserver un prochain saut stable, répartir les nouveaux flux entre les appliances saines et retirer automatiquement une appliance défaillante. Quelle mise en œuvre convient ?",
+  "choices": [
+    "Créer une route statique vers chaque NIC d'appliance, donner une meilleure priorité à la première route et exécuter un script externe qui modifie les priorités après une alerte.",
+    "Mettre les appliances derrière un équilibreur réseau passthrough interne avec health check, puis utiliser cet équilibreur comme prochain saut des routes d'inspection ciblées.",
+    "Déployer un Application Load Balancer externe avec les appliances comme backends et référencer son adresse anycast comme prochain saut des routes privées est-ouest.",
+    "Associer une IP externe réservée à l'appliance active et utiliser une fonction déclenchée par Monitoring pour détacher puis rattacher cette adresse à l'appliance de secours."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.donnees-test-reidentifiables.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une plateforme de test doit recevoir des numéros de carte issus de la production. Les valeurs doivent conserver leur format pour les tests, rester cohérentes entre les traitements et pouvoir être réidentifiées uniquement par un service fortement contrôlé. Quelle approche convient le mieux ?",
+  "choices": [
+    "Remplacer chaque numéro par une valeur aléatoire de même longueur et conserver une table de correspondance propre au traitement",
+    "Stocker les numéros en clair dans un bucket privé à accès uniforme, limité aux comptes de service des traitements de test",
+    "Calculer un HMAC déterministe avec Cloud KMS, le tronquer puis l’insérer dans un gabarit numérique de même longueur",
+    "Utiliser Sensitive Data Protection avec chiffrement préservant le format et une clé Cloud KMS dont l'accès est strictement limité"
+  ]
+}

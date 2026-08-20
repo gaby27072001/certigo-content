@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.conservation-reglementaire-volume-debug.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une plateforme génère un volume massif de journaux DEBUG, mais les journaux d'audit et de sécurité doivent être consultables pendant un an puis archivés sept ans. Comment réduire les coûts sans perdre les données réglementaires ?",
+  "choices": [
+    "Router les journaux réglementaires vers un bucket central avec une rétention d'un an et vers Cloud Storage pour l'archive, puis exclure les DEBUG non utiles des buckets de stockage",
+    "Router tous les journaux, y compris DEBUG, vers un bucket central conservé sept ans et utiliser des vues pour masquer le bruit, sans réduire le volume réellement stocké",
+    "Conserver les audits un an dans chaque bucket _Default puis exécuter un export manuel annuel vers Cloud Storage, tout en laissant les DEBUG suivre la même rétention et sans garantie d'archive continue",
+    "Transformer les audits en métriques et archiver uniquement les comptes quotidiens pendant sept ans, puis exclure les événements originaux et les DEBUG afin de réduire fortement le stockage"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-architect.section-1.assistant-procedures-internes.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Construire une application de recherche et génération ancrée avec Agent Search, propager les contrôles d'accès documentaires et évaluer précision, citations et taux de résolution sur un jeu de questions validé, avec identité propagée jusqu’à chaque résultat et citation vérifiable.",
+  "rationale": "Agent Search fournit une génération ancrée avec citations vérifiables et peut propager l'identité jusqu'au contrôle d'accès documentaire ; un jeu de questions validé mesure précision et résolution dans le délai du pilote, sans entraîner un modèle. Affiner un modèle par département demande de republier des poids lorsque les droits changent et ne transforme pas ces poids en mécanisme d'autorisation documentaire fiable. L'index vectoriel de toutes les procédures protégé seulement par une instruction système et un attribut déclaré peut restituer un passage interdit, car l'invite ne constitue pas une barrière d'accès. La recherche lexicale applique éventuellement les ACL, mais ne génère pas les réponses demandées, et volumes ou clics ne mesurent ni exactitude ni qualité des citations.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/generative-ai-app-builder/docs/data-source-access-control",
+    "https://cloud.google.com/generative-ai-app-builder/docs/grounded-gen"
+  ]
+}

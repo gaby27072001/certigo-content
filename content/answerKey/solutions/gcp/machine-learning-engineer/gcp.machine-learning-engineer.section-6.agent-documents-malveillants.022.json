@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-6.agent-documents-malveillants.022",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Appliquer le moindre privilège aux outils, isoler les données, filtrer entrées et sorties avec Model Armor, valider les appels côté serveur et tester les injections.",
+  "rationale": "La défense en profondeur combinant moindre privilège, isolation et Model Armor est adaptée : moindre privilège, isolation, Model Armor, validation serveur et tests forment une défense en profondeur qui réduit à la fois la probabilité d’injection et son impact. Des exemples dans le prompt et des regex peuvent compléter la protection, mais restent contournables et un compte large amplifie l’exfiltration. VPC Service Controls limite certains chemins de sortie, sans empêcher un appel interne malveillant effectué avec l’identité commune. Un modèle vérificateur distinct peut détecter des attaques, mais partager les mêmes secrets et privilèges sans contrôle déterministe reproduit le risque.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/security-command-center/docs/model-armor-overview"
+  ]
+}

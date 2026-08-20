@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.traitement-commande-multietape.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Décrire dans Workflows les appels, attentes, branches et nouvelles tentatives, puis démarrer chaque exécution asynchrone avec un état géré et traçable.",
+  "rationale": "Workflows modélise explicitement la séquence, les attentes, les branches et les nouvelles tentatives tout en laissant le client démarrer une exécution asynchrone. Une chorégraphie Pub/Sub pourrait découpler les étapes, mais faire porter à chaque consommateur l'état global, les compensations et les branches disperse l'orchestration et la rend plus difficile à reprendre. Créer un planning Cloud Scheduler par commande détourne un planificateur temporel récurrent et ne gère pas naturellement les résultats ni les branches. Maintenir la requête Cloud Run ouverte conserve le couplage client, même avec un délai étendu, et fragilise la reprise d'un traitement long.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/workflows/docs/reference/syntax/retrying"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gcp.data-engineer.section-3.analyse-lac-multimoteur.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Créer des tables BigLake sur les fichiers et cataloguer les actifs par domaine dans Knowledge Catalog avec accès de table et suivi centralisé des lignages métier",
+  "rationale": "Les tables BigLake donnent à BigQuery et Spark une vue des mêmes fichiers avec des contrôles d’accès de table ; Knowledge Catalog organise les actifs par domaine et centralise métadonnées et lignages métier. Maintenir une copie BigQuery et une copie Delta crée deux vérités à synchroniser quotidiennement. Donner directement Storage Object Viewer applique des droits sur les objets plutôt que sur les tables et le tableur central devient vite obsolète. Copier les fichiers pour chaque moteur, même avec des ACL Terraform, conserve la duplication et le risque de divergence des données et de la gouvernance.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/bigquery/docs/biglake-intro",
+    "https://cloud.google.com/dataplex/docs/introduction"
+  ]
+}

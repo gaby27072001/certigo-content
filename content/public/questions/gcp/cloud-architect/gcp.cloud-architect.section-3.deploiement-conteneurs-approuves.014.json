@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.deploiement-conteneurs-approuves.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une banque déploie des conteneurs sur GKE. Elle veut empêcher tout déploiement d'image non construite par son pipeline approuvé, refuser les images comportant une vulnérabilité critique et conserver une preuve vérifiable de l'approbation. Quelle chaîne de contrôle est la plus adaptée ?",
+  "choices": [
+    "Construire dans Cloud Build, analyser et stocker les images dans Artifact Registry, produire une attestation liée au digest après les contrôles puis imposer cette attestation avec Binary Authorization sur GKE, avant admission de tout pod dans le cluster de production.",
+    "Permettre les builds locaux, pousser chaque image dans un dépôt Artifact Registry privé, exiger un tag signé par le développeur et configurer une règle d'admission GKE qui n'accepte que les images portant le préfixe de dépôt et le tag de version attendu.",
+    "Déployer les images depuis Artifact Registry, exécuter une analyse de vulnérabilités après le démarrage, isoler automatiquement les pods non conformes par NetworkPolicy et envoyer à l'équipe sécurité un rapport permettant d'approuver ou de supprimer le déploiement.",
+    "Utiliser des nœuds GKE privés sans accès Internet, limiter l'identité des nœuds à un dépôt Artifact Registry approuvé et demander au pipeline de remplacer le tag stable seulement après réussite de ses tests, sans attestation ni contrôle d'admission."
+  ]
+}

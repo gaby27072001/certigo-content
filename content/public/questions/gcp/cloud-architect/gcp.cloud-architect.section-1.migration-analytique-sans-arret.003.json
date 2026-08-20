@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.migration-analytique-sans-arret.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise doit alimenter BigQuery depuis une base Oracle sur site de 12 To. La production ne peut être arrêtée que trente minutes et les tableaux de bord doivent ensuite recevoir les changements en moins de cinq minutes. Le réseau privé existe déjà. Quelle stratégie de déplacement de données minimise le risque de migration ?",
+  "choices": [
+    "Planifier un arrêt Oracle, lancer plusieurs exports Data Pump en parallèle, transférer les fichiers vers Cloud Storage, charger BigQuery puis rejouer avec des scripts les transactions consignées pendant le transfert avant de rouvrir la production.",
+    "Effectuer un chargement initial puis capturer en continu les changements Oracle avec Datastream vers une destination compatible, valider la parité et basculer les consommateurs après rattrapage, jusqu'à une cible à jour avant l'arrêt.",
+    "Produire chaque nuit un export CSV complet vers Cloud Storage, puis ajouter des micro-lots de journaux Oracle toutes les quinze minutes et remplacer les partitions BigQuery concernées après chaque arrivée.",
+    "Conserver Oracle comme système analytique, créer des vues matérialisées sur site et faire passer chaque requête de tableau de bord par le réseau privé, avec des réplicas Oracle dédiés à la lecture pour absorber la charge."
+  ]
+}

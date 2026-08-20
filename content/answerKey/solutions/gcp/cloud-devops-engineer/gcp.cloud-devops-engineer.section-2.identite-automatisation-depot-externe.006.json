@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.identite-automatisation-depot-externe.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Configurer Workload Identity Federation avec les revendications du dépôt et de la branche, autoriser l'usurpation d'un compte de service aux rôles minimaux et n'émettre que des jetons temporaires",
+  "rationale": "Workload Identity Federation échange le jeton OIDC borné au dépôt et à la branche contre des identifiants temporaires ; le compte cible ne reçoit que les droits de publication et de déploiement nécessaires. Une clé JSON renouvelée chaque semaine reste un secret persistant copiable dans GitHub et ne satisfait donc pas l'interdiction des clés. La fédération vers le compte Compute Engine Propriétaire élimine la clé, mais viole le moindre privilège et étend fortement le rayon d'impact. Remplacer GitHub Actions par Cloud Build ne respecte pas le pipeline imposé, et les droits non conditionnés sur tous les environnements échouent aussi aux restrictions de dépôt et de branche.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/iam/docs/workload-identity-federation-with-deployment-pipelines"
+  ]
+}

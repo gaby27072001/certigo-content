@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-2.connectivite-hybride-resiliente.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une entreprise centralise le réseau de huit projets applicatifs dans un Shared VPC. Son site principal possède deux accès Internet auprès de fournisseurs distincts. Elle exige un routage dynamique et la continuité de la connectivité si un tunnel ou un équipement Google devient indisponible, sans délai de fourniture d'un circuit dédié. Quelle configuration faut-il provisionner ?",
+  "choices": [
+    "Créer dans chaque projet de service une passerelle Classic VPN avec un tunnel vers le premier fournisseur, distribuer des routes statiques plus prioritaires vers ces tunnels et provisionner à l'avance des tunnels de remplacement vers le second fournisseur pour une activation manuelle.",
+    "Relier tous les projets par appairage VPC à un projet réseau dédié, connecter ce projet au site avec un unique tunnel VPN et publier manuellement les préfixes sur site au moyen de routes personnalisées exportées vers chaque appairage.",
+    "Attribuer une adresse externe à chaque VM, établir depuis chaque projet deux tunnels VPN logiciels vers les fournisseurs sur site et employer des scripts de vérification qui changent les routes statiques lorsqu'une adresse distante cesse de répondre.",
+    "Une passerelle HA VPN dans le projet hôte, Cloud Router avec BGP et des tunnels redondants répartis sur les deux interfaces et les deux équipements sur site, pour assurer un SLA de connectivité sur l’ensemble du Shared VPC."
+  ]
+}

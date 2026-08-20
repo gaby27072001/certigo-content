@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.visibilite-operations-trente-projets.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Les services de trente projets écrivent dans Cloud Logging et Cloud Monitoring. Le centre d'exploitation doit rechercher les journaux de tous les projets, conserver les événements d'audit sept ans et afficher des tableaux de bord communs, sans accorder à ses analystes l'accès aux projets applicatifs. Quelle conception choisir ?",
+  "choices": [
+    "Configurer dans chaque projet un sink vers son propre bucket de sept ans et donner aux analystes un rôle de lecture dans les trente projets ; recopier séparément les tableaux de bord dans chaque espace de métriques",
+    "Créer un projet central pour les tableaux de bord, mais accorder aux analystes le rôle Lecteur de journaux dans chaque projet source et conserver les audits dans les buckets locaux sans routage ni politique de rétention centralisée",
+    "Créer un projet d'observabilité, router les journaux avec un sink agrégé vers un bucket central à rétention adaptée et utiliser un metrics scope commun couvrant tous les projets surveillés",
+    "Router uniquement les journaux applicatifs vers un bucket central et agréger les compteurs dans un metrics scope, mais laisser les journaux d'audit dans les buckets par défaut avec leur rétention courte"
+  ]
+}

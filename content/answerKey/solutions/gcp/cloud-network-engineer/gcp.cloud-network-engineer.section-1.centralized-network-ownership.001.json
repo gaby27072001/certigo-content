@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.centralized-network-ownership.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer un projet hôte Shared VPC par environnement, rattacher les projets de service et déléguer aux identités applicatives l'utilisation des seuls sous-réseaux requis.",
+  "rationale": "Un projet hôte Shared VPC conserve sous-réseaux, routes et pare-feu sous l'autorité centrale, tandis que les projets de service gardent leur facturation et leur cycle de vie; déléguer seulement l'utilisation des sous-réseaux permet aux équipes de créer leurs VM sans administrer le réseau. Le VPC autonome par projet avec tous les peerings multiplie les relations à exploiter et rend chaque équipe responsable de contrôles que le scénario exige de centraliser. Le projet unique centralise certes le réseau, mais supprime l'isolation de projets demandée; tags et comptes de service ne recréent pas cette frontière de facturation et de cycle de vie. Enfin, des spokes hybrides Network Connectivity Center représentent des ressources VPN, Interconnect ou appliances: ils ne remplacent ni les VPC applicatifs ni le modèle de délégation Shared VPC.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/vpc/docs/shared-vpc"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.ecart-binaire-entre-environnements.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Après validation en préproduction, une équipe reconstruit la même version applicative pour la production. Un changement de dépendance a déjà produit des octets différents sous le même tag. Comment rendre la promotion déterministe et vérifiable ?",
+  "choices": [
+    "Reconstruire l'image dans chaque environnement, rendre le tag de version immuable dans Artifact Registry et comparer les fichiers de provenance, sans imposer que la production référence le digest déjà testé",
+    "Copier l'image validée vers un dépôt de production sous le même tag signé, mais laisser l'outil de copie résoudre ce tag mutable au moment de chaque promotion plutôt que d'enregistrer le digest source",
+    "Construire une seule fois, enregistrer l'image et sa provenance dans Artifact Registry, puis promouvoir exactement le même digest entre environnements sans reconstruire l'artefact pour la production.",
+    "Exporter manuellement l'image validée, calculer un checksum sur le poste d'un administrateur puis la pousser sous un nouveau tag de production, en dehors de l'historique et de l'identité du pipeline"
+  ]
+}

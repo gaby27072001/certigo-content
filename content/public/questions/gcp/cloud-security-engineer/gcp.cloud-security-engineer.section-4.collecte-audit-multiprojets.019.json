@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.collecte-audit-multiprojets.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "L'équipe SOC doit recevoir dans un projet central les journaux d'audit de tous les projets existants et futurs d'un dossier Production. Les équipes applicatives ne doivent pas pouvoir modifier la collecte centrale. Quelle configuration est la plus robuste ?",
+  "choices": [
+    "Déployer par pipeline un sink identique dans chaque projet actuel et futur, autoriser son identité sur la destination centrale et laisser aux propriétaires applicatifs l’administration locale des sinks",
+    "Faire copier chaque jour par les applications leurs journaux d’audit vers un bucket central dont le SOC contrôle la rétention et les accès",
+    "Créer au niveau du dossier un sink agrégé incluant les enfants vers une destination centrale, puis accorder à son identité d'écriture les permissions requises sur la destination",
+    "Activer VPC Flow Logs dans chaque projet, les exporter vers le SIEM central et utiliser leurs métadonnées comme preuve des opérations administratives"
+  ]
+}

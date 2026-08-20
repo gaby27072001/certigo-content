@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.decision-bancaire-faible-latence.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un moteur de décision doit répondre en moins de 40 ms depuis un VPC bancaire, sans exposition Internet. Les mêmes caractéristiques client doivent être disponibles à l’entraînement et en ligne, et le trafic passe de 200 à 4 000 requêtes par seconde. Quelle conception est la plus adaptée ?",
+  "choices": [
+    "Déployer un endpoint privé Agent Platform, servir les caractéristiques cohérentes depuis Feature Store, configurer l’autoscaling sur la charge et valider la capacité par des tests.",
+    "Calculer les scores toutes les heures par prédiction en lot, les mettre en cache dans une base à faible latence et accepter leur ancienneté lors des pointes jusqu’à 4 000 requêtes par seconde.",
+    "Déployer un service privé sur GKE qui interroge les tables BigQuery à chaque décision, maintient une logique de caractéristiques Java distincte et autoscale sur le CPU.",
+    "Utiliser un endpoint Agent Platform public protégé par IAM et Private Google Access, puis laisser chaque application reconstruire ses caractéristiques depuis les données brutes."
+  ]
+}

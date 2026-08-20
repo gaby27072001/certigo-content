@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.bidirectional-private-resolution.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer une zone de transfert privée vers les résolveurs sur site et une politique serveur entrante dont les points d'entrée Cloud DNS sont joignables par le réseau hybride.",
+  "rationale": "La zone de transfert privée envoie les requêtes pour le suffixe sur site vers Active Directory, tandis que la politique serveur entrante fournit des points d'entrée régionaux que le réseau hybride peut joindre pour résoudre les zones privées Cloud DNS. Publier des zones DNS, même signées et contenant seulement des adresses RFC 1918, expose les noms et viole l'exigence de confidentialité; DNSSEC protège l'intégrité, pas la visibilité. Un peering DNS relie la résolution entre VPC Google Cloud, mais ne transmet pas à lui seul les requêtes jusqu'à des serveurs sur site. Configurer des résolveurs Active Directory sur des IP publiques ajoute une exposition Internet inutile et leur faire interroger l'adresse de métadonnées n'est pas le mécanisme entrant Cloud DNS pris en charge.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/dns/docs/server-policies-overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.activite-identite-exposee.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "SCC signale qu’une clé de compte de service exposée a pu être utilisée. Aucune alerte ne prouve encore une compromission. Le chasseur doit vérifier rapidement l’hypothèse d’un usage depuis une infrastructure inhabituelle, puis transmettre des éléments exploitables à l’équipe de réponse. Quelle démarche est la meilleure ?",
+  "choices": [
+    "Rechercher l’adresse IP du constat SCC dans tous les journaux disponibles, pivoter uniquement sur les événements qui la contiennent et clore la chasse si aucune occurrence n’est trouvée, sans construire une référence comportementale propre au compte de service",
+    "Attendre qu’une règle existante produise une détection de haute sévérité, puis comparer l’adresse IP, les méthodes API et les ressources visées à l’activité habituelle du compte avant de transmettre le dossier à la réponse à incident",
+    "Formuler les comportements attendus de l’attaquant, rechercher dans les journaux d’audit les usages de l’identité par IP, agent, méthode et chronologie, comparer à sa référence habituelle, pivoter vers les ressources touchées et documenter les preuves",
+    "Révoquer immédiatement toutes les clés du compte de service et isoler les ressources auxquelles il peut accéder, puis reconstruire la chronologie à partir des seules alertes déjà générées afin de privilégier le confinement sur la validation de l’hypothèse"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.dependances-natives-inference.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Construire une image de prédiction immuable avec dépendances, serveur HTTP et tokenisation, la tester, la publier dans Artifact Registry puis la déployer sur Agent Platform.",
+  "rationale": "Le conteneur personnalisé immuable est le mode de déploiement adapté : l’image immuable encapsule bibliothèque native, serveur et tokenisation ; tests et Artifact Registry assurent un déploiement géré reproductible. Télécharger une dépendance au démarrage et appeler un tokenizer réseau introduit dérive, dépendance externe et latence. ONNX peut améliorer la portabilité, mais ne garantit ni la disparition de la bibliothèque ni la cohérence d’une tokenisation réimplémentée par chaque client. GKE avec une image complète est viable techniquement, mais impose l’exploitation du cluster alors qu’un endpoint géré est une contrainte explicite.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/predictions/use-custom-container"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.processus-administration-inhabituel.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Corréler utilisateur, hôte, lignée et ligne de commande du processus avec les journaux d’audit et réseau, comparer à la fenêtre de changement et à la prévalence, puis faire valider le contexte par les équipes poste et cloud",
+  "rationale": "La corrélation entre endpoint, réseau et audit cloud reconstruit la lignée, la ligne de commande et l’appel API, puis confronte leur prévalence à la fenêtre de changement avec les équipes propriétaires. Une mise en liste d’autorisation fondée sur l’absence dans GTI suppose à tort qu’un comportement inédit possède déjà un IOC connu. Un isolement avant examen du contexte peut interrompre une maintenance légitime et altérer l’enquête. La consultation des seules alertes EDR clôturées exclut les événements réseau, cloud et jamais détectés. Ces preuves inter-environnements sont nécessaires pour départager opération approuvée et mouvement latéral.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/investigation/udm-search"
+  ]
+}

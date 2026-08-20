@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-2.disponibilite-charge-vm.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une application ancienne doit rester sur Compute Engine. Elle est sans état, reçoit un trafic variable, doit survivre à la perte d'une zone et être reconstruite à partir d'une configuration reproductible. L'exploitation exige le remplacement automatique des VM défaillantes et des campagnes de correctifs système pendant des fenêtres approuvées. Quelle configuration faut-il mettre en place ?",
+  "choices": [
+    "Déployer un groupe d'instances géré régional à partir d'un modèle d'instance versionné, répartir les VM entre plusieurs zones, activer autoscaling et autohealing derrière l'équilibreur, puis planifier les campagnes de correctifs avec VM Manager en conservant la capacité minimale multizone.",
+    "Créer un groupe d'instances non géré réparti manuellement sur deux zones, enregistrer ses VM derrière un équilibreur avec vérifications d'état et utiliser un playbook d'astreinte pour recréer les instances défaillantes puis appliquer les correctifs par SSH pendant les fenêtres.",
+    "Déployer un groupe d'instances géré zonal avec autoscaling et redémarrage automatique, prendre des snapshots horaires dans une autre zone et restaurer un nouveau groupe depuis le dernier snapshot lorsque la zone principale devient indisponible.",
+    "Créer des VM indépendantes depuis une image commune dans plusieurs zones, les enregistrer manuellement derrière l'équilibreur, utiliser Cloud Scheduler pour ajouter des instances lors des pointes et exécuter successivement un script de correctifs sur chaque VM."
+  ]
+}

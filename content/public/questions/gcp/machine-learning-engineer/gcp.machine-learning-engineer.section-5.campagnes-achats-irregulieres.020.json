@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-5.campagnes-achats-irregulieres.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "La distribution des achats évolue fortement lors de campagnes irrégulières. Un réentraînement quotidien coûte cher et n’améliore pas toujours le modèle. L’entreprise veut automatiser sans déployer une version moins bonne. Quelle politique adopter ?",
+  "choices": [
+    "Réentraîner chaque jour dès qu’une ligne est ajoutée, remplacer automatiquement la production si le job termine et conserver le modèle précédent seulement pendant vingt-quatre heures.",
+    "Conserver le modèle initial jusqu’à une baisse importante des ventes, puis lancer manuellement un entraînement sur toutes les données sans mesurer dérive ni performance par campagne.",
+    "Déclencher après chaque campagne sur une date saisie par un responsable, promouvoir le nouveau modèle s’il dépasse un seuil absolu et ne pas le comparer au champion courant.",
+    "Déclencher selon un volume minimal ou des seuils de dérive mesurés, exécuter une pipeline versionnée, comparer au champion et promouvoir seulement si tous les garde-fous sont satisfaits."
+  ]
+}

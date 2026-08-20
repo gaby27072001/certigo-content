@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.global-web-resilience.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Utiliser un Application Load Balancer externe global avec les deux groupes, health checks, URL map et Cloud CDN activé sur le service backend statique.",
+  "rationale": "L'Application Load Balancer externe global fournit l'unique adresse anycast demandée, centralise la terminaison TLS, applique l'URL map, sélectionne des backends sains entre régions et permet Cloud CDN sur le backend statique. Des équilibreurs passthrough régionaux imposeraient plusieurs frontends, n'offriraient ni proxy HTTP avec URL map ni terminaison TLS par Cloud NAT. Un Application Load Balancer interne reste un frontend privé, même avec accès global; un enregistrement DNS public ne rend pas son adresse privée accessible aux internautes. Le DNS géolocalisé à TTL court peut être associé à une automatisation de santé, mais cette automatisation ne corrige pas les caches des résolveurs, ne fournit pas une adresse anycast unique et laisse TLS distribué sur les VM; il ne fournit pas non plus l'URL map centralisée ni le cache Cloud CDN exigés.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/load-balancing/docs/https",
+    "https://cloud.google.com/cdn/docs/overview"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.backend-prive-derriere-passerelle.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une organisation expose une API Cloud Run uniquement au travers d'une passerelle placée derrière un External Application Load Balancer. Les appels directs à l'URL run.app depuis Internet doivent échouer, et seul le compte de service de la passerelle doit pouvoir invoquer le backend. Quelle configuration appliquer au service Cloud Run ?",
+  "choices": [
+    "Conserver l'ingress all, accorder run.invoker à allUsers et utiliser seulement Cloud Armor sur l'équilibreur, avec une règle bloquant les accès directs connus à l'URL run.app.",
+    "Choisir l'ingress internal, accorder run.invoker à tous les utilisateurs authentifiés et demander aux clients externes d'appeler directement l'URL run.app.",
+    "Choisir l'ingress internal-and-cloud-load-balancing, mais accorder run.invoker à allUsers et à tous les comptes de service du projet pour éviter les refus de la passerelle.",
+    "Choisir l'ingress internal-and-cloud-load-balancing et accorder run.invoker uniquement au compte de la passerelle pour signer chaque appel au backend avec un jeton OIDC valide."
+  ]
+}

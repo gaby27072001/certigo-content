@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.campagne-recherches-catalogue.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Ajouter un pool de lecture AlloyDB, router vers son endpoint les recherches qui tolèrent un léger retard de réplication, puis adapter le nombre et la taille de ses nœuds aux campagnes sans charger le primaire",
+  "rationale": "Un pool de lecture AlloyDB fournit une destination dédiée aux recherches tolérant le retard et décharge le primaire ; adapter ses nœuds traite en plus la variabilité des campagnes. Agrandir le primaire et son pool de connexions laisse lectures et écritures en concurrence sur la même instance. Multiplier les clusters primaires et partitionner les tables crée routage, cohérence et rééquilibrage applicatifs inutiles. Ajouter ou retirer des index peut améliorer certaines requêtes, mais ne sépare pas la capacité de lecture fluctuante du chemin d'écriture stable.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/alloydb/docs/instance-read-pool-create"
+  ]
+}

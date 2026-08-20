@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-1.prevision-ventes-magasins.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer un modèle ARIMA_PLUS dans BigQuery ML, valider les séries historiques, puis produire par magasin les horizons et intervalles attendus avec ML.FORECAST.",
+  "rationale": "ARIMA_PLUS avec ML.FORECAST est le choix adapté : ARIMA_PLUS et ML.FORECAST répondent directement au besoin de séries temporelles, restent en SQL et fournissent des intervalles sans infrastructure à exploiter. Le LSTM sur GKE pourrait prévoir la demande, mais son développement et son exploitation sont incompatibles avec le délai et la préférence pour un service géré. Des réponses répétées de Gemini ne constituent ni un modèle temporel reproductible ni une méthode d’intervalle contrôlée. Une régression AutoML sur des agrégats qui omet l’ordre et la saisonnalité perd précisément la structure indispensable à la prévision.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial"
+  ]
+}

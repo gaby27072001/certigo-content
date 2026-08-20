@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-5.calcul-mensuel-avec-composants-systeme.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Créer par Workflow Template un cluster Dataproc éphémère, installer la bibliothèque et le service auxiliaire par action d'initialisation, exécuter le job puis supprimer le cluster",
+  "rationale": "Un Workflow Template peut créer un cluster Dataproc uniquement pour ce job, appliquer l’action d’initialisation qui installe la bibliothèque et le service système, puis supprimer toutes les ressources. Managed Service for Apache Spark (serverless) évite les clusters, mais ses workers gérés ne sont pas destinés à héberger un service système persistant contrôlé par l’utilisateur. Un cluster autoscalé conservé toute l’année facture encore ses nœuds principaux et maintient le service pendant onze mois inutiles. Des VM créées et configurées manuellement donnent le contrôle système, mais réintroduisent installation, orchestration, dimensionnement et nettoyage à chaque exécution.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows"
+  ]
+}

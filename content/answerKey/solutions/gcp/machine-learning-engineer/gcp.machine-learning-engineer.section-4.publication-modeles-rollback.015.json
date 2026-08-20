@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.publication-modeles-rollback.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Créer des versions sous une ressource Model Registry commune, associer métadonnées, alias d’approbation et historique d’audit complet, puis déployer explicitement la version ou l’alias gouverné.",
+  "rationale": "Le versionnement sous une ressource Model Registry commune répond au besoin de gouvernance : les versions d’une même ressource Model Registry regroupent artefacts et métadonnées, et un alias gouverné permet promotion ou rollback sans recopier le modèle. Des URI immuables et une table de métriques préservent une partie de l’historique, mais l’absence de lien central entre approbation et déploiement ne garantit pas que la production référence toujours la version approuvée. Un projet par entraînement détourne l’isolation de projet et alourdit fortement gouvernance et inventaire. Un dépôt de hashes avec copies entre buckets crée plusieurs sources de vérité et rend le rollback dépendant d’une opération de copie.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/model-registry/versioning"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-6.encrypted-traffic-analysis.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "prompt": "Une organisation doit détecter des signatures applicatives dans le trafic TLS sortant de plusieurs VPC et appliquer des règles communes fondées sur des secure tags. Elle privilégie un service Google géré plutôt qu'une flotte d'appliances virtuelles auto-administrées. Quelle solution choisir ?",
+  "choices": [
+    "Déployer des règles VPC Firewall classiques avec journalisation dans chaque VPC et supposer que les journaux permettent au moteur de déchiffrer TLS avant d'appliquer des signatures applicatives.",
+    "Attacher une edge security policy Cloud Armor à l'adresse de Cloud NAT et utiliser ses règles WAF comme filtre uniforme pour tout protocole sortant des différents VPC.",
+    "Utiliser Cloud NGFW Enterprise avec politiques communes, interception TLS et prévention des intrusions, puis cibler les workloads de chaque VPC au moyen de secure tags, sans aucune appliance tierce autogérée.",
+    "Déployer une appliance multi-NIC unique comme prochain saut de tous les VPC, sans équilibreur ni health check, et répliquer manuellement sa configuration lorsque la VM devient indisponible."
+  ]
+}

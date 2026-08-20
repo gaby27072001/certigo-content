@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-6.risque-version-production.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Utiliser une livraison progressive par canari avec Cloud Deploy, augmenter le trafic par étapes, vérifier automatiquement taux d'erreur et latence à chaque palier, puis promouvoir ou effectuer un rollback, avant toute généralisation aux utilisateurs.",
+  "rationale": "La livraison canari Cloud Deploy expose d'abord une faible part du trafic réel, vérifie automatiquement erreurs et latence à chaque palier puis promeut ou revient en arrière avant généralisation ; elle limite donc le rayon d'impact tout en automatisant la décision. Le rolling update finit par exposer toute la flotte sans paliers de trafic ni porte automatique, et son retour dépend des tickets, de l'observation et d'une action manuelle. Le blue-green teste hors trafic, mais la bascule immédiate de 100 % reproduit le rayon d'impact du précédent incident malgré la possibilité d'un retour complet. Le déploiement global suivi d'une analyse au lendemain détecte trop tard la régression et le retour kubectl manuel ne satisfait pas l'automatisation demandée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/deploy/docs/deployment-strategies/canary"
+  ]
+}

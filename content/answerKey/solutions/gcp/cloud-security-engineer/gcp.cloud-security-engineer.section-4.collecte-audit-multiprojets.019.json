@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.collecte-audit-multiprojets.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Créer au niveau du dossier un sink agrégé incluant les enfants vers une destination centrale, puis accorder à son identité d'écriture les permissions requises sur la destination",
+  "rationale": "Un sink agrégé créé au dossier avec inclusion des enfants collecte les projets actuels et futurs; il reste hors du contrôle des équipes projet et son identité d'écriture autorisée livre les données à la destination centrale. Des sinks par projet déployés par pipeline peuvent dériver et les propriétaires conservant leur administration locale peuvent les modifier ou les désactiver. Une copie applicative quotidienne n'est ni continue, ni exhaustive, ni indépendante des applications. VPC Flow Logs exporté depuis chaque projet contient des métadonnées réseau, pas les journaux d'audit des opérations de tous les services.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/logging/docs/export/aggregated_sinks"
+  ]
+}

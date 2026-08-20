@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.saturation-stockage-imminente.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une instance Cloud SQL subit parfois une saturation du stockage qui précède des erreurs applicatives. L'équipe SRE veut être avertie avant l'impact, suivre son SLO de disponibilité et éviter qu'un quota de projet bloque une future réplique. Quelle mise en œuvre est la plus complète ?",
+  "choices": [
+    "Faire vérifier chaque matin par l'astreinte le stockage, les connexions et les quotas dans les consoles Cloud SQL et IAM, ce qui couvre les signaux mais ne détecte ni saturation nocturne ni violation immédiate du SLO",
+    "Créer des alertes Cloud Monitoring anticipées sur stockage, connexions, latence et erreurs, suivre les SLI/SLO de disponibilité, et surveiller les quotas requis avant la création planifiée d'une réplique",
+    "Créer une alerte uniquement sur l'indisponibilité complète et augmenter automatiquement le quota après incident, ce qui signale l'impact final mais n'anticipe ni épuisement du stockage ni blocage de création d'une réplique",
+    "Activer les Data Access audit logs et alerter sur toute opération administrative ou requête refusée, ce qui améliore l'audit mais ne remplace pas les métriques de capacité, latence, disponibilité et quotas"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-2.volume-pare-feu-excessif.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Après l’intégration d’un pare-feu très bavard, le volume ingéré dans Google SecOps triple. Les analystes n’utilisent que les refus, les changements de configuration et quelques champs de contexte ; les flux autorisés répétitifs ne participent à aucune détection ni enquête. Comment réduire durablement le coût sans créer d’angle mort important ?",
+  "choices": [
+    "Désactiver complètement la source de pare-feu dans Google SecOps, conserver les données sur l’appliance pendant un an et demander aux analystes de les interroger à distance lorsqu’une alerte native indique un incident potentiel",
+    "Conserver tous les événements du pare-feu dans Google SecOps, réduire leur rétention à une journée et créer une alerte budgétaire quotidienne, afin de préserver une journée complète de flux autorisés, de refus et de changements de configuration",
+    "Conserver tous les événements du pare-feu, mais raccourcir fortement leur rétention et supprimer après ingestion les champs non consultés, tout en créant une alerte lorsque le volume quotidien dépasse le budget défini pour la source",
+    "Mesurer l’usage par type d’événement, filtrer ou échantillonner en amont les flux autorisés à faible valeur, conserver intégralement les événements de sécurité et surveiller le volume et la santé de la source"
+  ]
+}

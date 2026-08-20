@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.credit-unique-malgre-relivraison.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Enregistrer atomiquement l'identifiant métier avec le crédit, puis acquitter après le commit afin que toute relivraison reste sans effet fonctionnel.",
+  "rationale": "Enregistrer atomiquement l'identifiant métier avec le crédit rend le traitement idempotent, puis acquitter après le commit permet à Pub/Sub de relivrer sans double crédit lorsqu'un échec survient. Acquitter avant l'écriture supprime la possibilité de relivraison par Pub/Sub; une file locale, même persistante pour l'instance, n'est pas une garantie durable partagée si cette instance disparaît. Supposer une livraison unique contredit le modèle de relivraison du scénario et laisse le crédit vulnérable aux doublons. Une liste en mémoire n'est partagée ni entre instances ni après redémarrage, et sa suppression périodique réautorise les anciens événements.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/pubsub/docs/exactly-once-delivery"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.prevention-exfiltration-donnees.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Un périmètre VPC Service Controls protégeant BigQuery, avec des règles d'entrée et de sortie explicites",
+  "rationale": "VPC Service Controls crée autour de BigQuery une frontière de service dont les règles d'entrée et de sortie réduisent les transferts vers des ressources hors périmètre, même avec des identifiants valides. Refuser au pare-feu les adresses publiques des API ne contrôle pas les autres chemins d'accès aux API et ne définit pas une frontière de données BigQuery. Une CMEK par table contrôle le chiffrement au repos; sa révocation après détection arrive trop tard et affecte aussi les usages légitimes. Une IAM Deny limitée aux projets externes déjà recensés est contournable par un nouveau projet et ne couvre pas toutes les opérations de sortie.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/vpc-service-controls/docs/overview"
+  ]
+}

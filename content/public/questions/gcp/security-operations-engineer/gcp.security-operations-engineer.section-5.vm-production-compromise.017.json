@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.vm-production-compromise.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Une VM de production semble exécuter un binaire malveillant en mémoire et communiquer avec l’extérieur. Le responsable métier autorise un isolement, mais l’équipe doit préserver les preuves et limiter la propagation. Quelle séquence est la plus défendable ?",
+  "choices": [
+    "Redémarrer la VM, bloquer ses destinations, créer une image du disque revenu en ligne et traiter les journaux persistants comme preuve principale, tout en documentant la remise en service et l’accès à l’image",
+    "Supprimer le binaire et ses journaux, isoler la VM, créer un instantané du disque nettoyé et utiliser les alertes SecOps comme chronologie, avec validation du propriétaire et contrôle des hachages",
+    "Maintenir la VM dans un segment surveillé pendant l’acquisition complète, capturer ses communications et ne l’isoler qu’après la copie de la mémoire et des disques, même si elle continue d’émettre vers des systèmes externes",
+    "Documenter l’état et l’heure, acquérir si possible les données volatiles, isoler la VM par un contrôle réseau préparé, créer des instantanés ou images en lecture seule avec chaîne de conservation, puis analyser des copies"
+  ]
+}

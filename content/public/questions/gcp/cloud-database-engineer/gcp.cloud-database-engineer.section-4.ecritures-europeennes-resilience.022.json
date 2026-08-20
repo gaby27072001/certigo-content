@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.ecritures-europeennes-resilience.022",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une application Spanner sert principalement des utilisateurs en Europe, avec un site de reprise en Amérique du Nord. Elle exige une disponibilité multirégionale, mais la latence d'écriture européenne doit rester minimale. Quel paramètre de déploiement faut-il particulièrement évaluer ?",
+  "choices": [
+    "Nommer les bases avec un préfixe européen et activer le routage orienté leader, en supposant que le nom choisit automatiquement la région d'écriture, ce qui ne contrôle pas le placement réel du leader",
+    "Choisir une configuration Spanner multirégionale dont les régions en lecture-écriture assurent la résilience demandée et dont le placement du leader par défaut reste proche de la majorité des écritures européennes",
+    "Créer un bucket Cloud Storage européen et un américain pour sauvegarder les exports Spanner, ce qui aide l'archivage géographique mais n'influence ni quorum, ni leader, ni latence transactionnelle",
+    "Choisir une instance régionale américaine et ajouter un cache applicatif en Europe pour les lectures, ce qui accélère certains accès mais ne fournit pas la disponibilité multirégionale ni des écritures européennes rapides"
+  ]
+}

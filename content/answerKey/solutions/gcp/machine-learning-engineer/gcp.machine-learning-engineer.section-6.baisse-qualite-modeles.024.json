@@ -1,0 +1,19 @@
+{
+  "id": "gcp.machine-learning-engineer.section-6.baisse-qualite-modeles.024",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Surveiller skew, dérives de données et d’attributions, mesurer la qualité à l’arrivée des labels, et évaluer continuellement Gemini par version sur un corpus représentatif avec scores et revue calibrée.",
+  "rationale": "La surveillance combinant dérives, labels retardés et évaluation générative est adaptée : skew et dérives fournissent des alertes précoces sans labels, les labels retardés confirment ensuite la qualité prédictive, et un corpus représentatif avec scores et revue calibrée suit la pertinence générative. Les seules métriques d’infrastructure ne détectent pas une baisse de rappel ou de pertinence quand la latence reste stable. Réentraîner et modifier le prompt selon un calendrier puis promouvoir sur le SLO technique ne mesure aucune qualité. Une revue mensuelle retarde l’alerte et quelques labels non stabilisés ne suffisent pas à diagnostiquer les deux solutions.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/model-monitoring/overview",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/models/evaluation-overview"
+  ]
+}

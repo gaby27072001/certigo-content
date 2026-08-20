@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.reservations-coherentes-mondiales.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une application de réservation mondiale exige des transactions relationnelles ACID, des lectures fortement cohérentes et une disponibilité multirégionale sans partitionnement manuel. Quel stockage faut-il choisir ?",
+  "choices": [
+    "Utiliser Bigtable avec une clé de ligne préfixée par région et faire réconcilier les écritures concurrentes par un service applicatif avant chaque confirmation de réservation.",
+    "Utiliser Spanner dans une configuration multirégionale afin de fournir des transactions relationnelles ACID et des lectures fortement cohérentes.",
+    "Utiliser Firestore en mode natif avec un document par réservation et une fonction planifiée pour résoudre les conflits entre régions.",
+    "Utiliser Cloud Storage avec verrouillage de rétention, représenter chaque transaction par une version immuable d'un objet JSON et faire réconcilier les écritures concurrentes par une fonction."
+  ]
+}

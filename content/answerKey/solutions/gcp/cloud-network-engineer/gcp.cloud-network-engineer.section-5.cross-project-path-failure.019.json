@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-5.cross-project-path-failure.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Exécuter Connectivity Tests avec les endpoints source et destination afin d'analyser routes, pare-feu et autres composants, puis compléter si disponible par le plan de données.",
+  "rationale": "Connectivity Tests analyse un flux défini par ses endpoints et explique les décisions de routage, de pare-feu et d'autres composants; lorsque le scénario le permet, l'analyse de configuration est complétée par une vérification du plan de données. Performance Dashboard montre des tendances agrégées de latence et de perte, mais ne désigne pas la route ni la règle de pare-feu effective. Network Topology visualise les relations et métriques observées; l'absence d'une arête ne constitue pas une simulation du flux ni l'identification précise d'un blocage. Cloud Profiler mesure la consommation CPU du code et n'analyse pas un chemin réseau. Cloud Trace suit la latence et les dépendances des requêtes déjà instrumentées; l'absence d'une trace ne permet pas de distinguer une route manquante d'un refus de pare-feu.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/concepts/overview"
+  ]
+}

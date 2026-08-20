@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-1.delai-triage-multisysteme.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise utilise Security Command Center (SCC) Premium pour la posture et les constats natifs, Google Security Operations pour corréler la télémétrie multicloud, et un outil ITSM pour le suivi réglementaire. Les analystes recopient manuellement les constats SCC dans des dossiers SecOps, puis dans l’ITSM. L’entreprise veut réduire le délai de prise en charge sans supprimer les capacités complémentaires. Quelle architecture faut-il privilégier ?",
+  "choices": [
+    "Conserver SCC comme source des constats, les ingérer dans Google SecOps pour la corrélation, puis déclencher l’ouverture et la mise à jour des tickets ITSM par orchestration avec des identifiants communs",
+    "Centraliser les constats SCC et les événements multicloud dans Google SecOps, puis confier à chaque analyste la création manuelle d’un ticket ITSM détaillé afin de conserver un contrôle humain sur le suivi réglementaire",
+    "Exporter chaque nuit les constats SCC et alertes SecOps vers l’ITSM, les rapprocher par identité et horodatage, puis revenir dans chaque outil pour valider le contexte et corriger les tickets avant leur prise en charge",
+    "Maintenir les outils indépendants, demander aux analystes de rapprocher les constats et alertes, puis de créer et actualiser manuellement les tickets ITSM en suivant les procédures et priorités propres à chaque équipe"
+  ]
+}

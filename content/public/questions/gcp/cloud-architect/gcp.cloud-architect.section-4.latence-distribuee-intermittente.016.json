@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-4.latence-distribuee-intermittente.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une API distribuée dépasse parfois son objectif de latence, mais ni le CPU moyen ni le taux d'erreur global n'augmentent. Les requêtes traversent Cloud Run, Pub/Sub et plusieurs services GKE. L'équipe doit isoler le maillon responsable sans ajouter des journaux manuels non corrélés partout. Quelle démarche est la plus efficace ?",
+  "choices": [
+    "Augmenter les limites CPU et mémoire de tous les services Cloud Run et GKE, accroître le nombre minimal de pods, mesurer de nouveau la latence moyenne pendant une semaine et réduire progressivement les ressources des services dont l'utilisation reste faible.",
+    "Redémarrer successivement Cloud Run puis chaque déploiement GKE pendant une période chargée, relever après chaque action les centiles de latence à l'équilibreur et considérer comme responsable le premier service dont le redémarrage produit une amélioration temporaire.",
+    "Exporter les journaux de l'équilibreur vers BigQuery, calculer les moyennes quotidiennes par URL, comparer les jours lents aux changements de déploiement et ajouter des messages de journalisation détaillés uniquement au service présentant la plus forte moyenne.",
+    "Propager un contexte de trace, instrumenter les services avec OpenTelemetry, corréler Cloud Trace, Logging et Monitoring, puis utiliser Profiler sur le service identifié et vérifier l'hypothèse par un test ciblé, sans modifier la capacité."
+  ]
+}

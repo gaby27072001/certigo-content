@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-architect.section-2.disponibilite-charge-vm.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Déployer un groupe d'instances géré régional à partir d'un modèle d'instance versionné, répartir les VM entre plusieurs zones, activer autoscaling et autohealing derrière l'équilibreur, puis planifier les campagnes de correctifs avec VM Manager en conservant la capacité minimale multizone.",
+  "rationale": "Le MIG régional distribue les VM entre zones, recrée automatiquement une instance défaillante depuis le modèle versionné, adapte la capacité et permet à VM Manager de programmer les correctifs ; il satisfait donc disponibilité zonale, reproductibilité, autohealing et fenêtres de patch. Le groupe non géré répartit la charge, mais son playbook et ses opérations SSH restent manuels et ne garantissent ni remplacement automatique ni configuration identique. Le MIG zonal apporte autoscaling et autohealing dans sa zone, mais la perte de cette zone exige une restauration depuis snapshot, donc il ne survit pas automatiquement à l'incident. Les VM indépendantes et Cloud Scheduler nécessitent inscription, dimensionnement et correction manuels, sans l'état désiré ni l'autohealing d'un groupe géré régional.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/compute/docs/instance-groups/regional-migs",
+    "https://cloud.google.com/compute/docs/os-patch-management/schedule-patch-jobs"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-4.investigation-trafic-est-ouest.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Après une compromission, le SOC doit détecter des signatures d'attaque dans le trafic est-ouest et disposer des métadonnées de flux pour rechercher quelles VM ont communiqué avec une adresse suspecte. Quelle combinaison répond le mieux à ces deux besoins ?",
+  "choices": [
+    "Cloud IDS pour l'inspection et les alertes, complété par VPC Flow Logs centralisés pour les recherches de flux",
+    "Journaliser Cloud NAT et corréler les flux suspects avec les identités déduites des règles IAM actives dans chaque projet",
+    "Appliquer Cloud Armor aux équilibreurs publics et centraliser les journaux de pare-feu pour rechercher les flux entre VM",
+    "Combiner Access Transparency et les journaux administrateur pour identifier les acteurs associés aux connexions suspectes entre VM"
+  ]
+}

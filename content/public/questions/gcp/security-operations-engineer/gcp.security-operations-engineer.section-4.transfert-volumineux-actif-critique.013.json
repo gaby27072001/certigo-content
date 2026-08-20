@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.transfert-volumineux-actif-critique.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une règle signale les téléchargements volumineux. Elle doit générer un risque beaucoup plus élevé lorsque l’utilisateur appartient au groupe des dirigeants ou lorsque l’actif est classé critique, sans dupliquer la règle pour chaque population. Quelle conception est la plus maintenable ?",
+  "choices": [
+    "Coder les dirigeants et actifs critiques dans la règle, appliquer un risque différencié et redéployer après chaque changement RH ou inventaire, avec une revue périodique des valeurs",
+    "Utiliser des listes de référence ou le contexte d’entité maintenus par les sources d’autorité, appliquer des conditions et résultats de risque distincts, puis tester les valeurs absentes et les alias",
+    "Attribuer la sévérité maximale à chaque téléchargement volumineux, puis utiliser la criticité de l’utilisateur ou de l’actif seulement lors du triage manuel par l’analyste",
+    "Créer une règle par population sensible, attribuer à chacune son risque et redéployer automatiquement toutes les règles depuis les systèmes RH et d’inventaire à chaque modification, avec tests séparés"
+  ]
+}

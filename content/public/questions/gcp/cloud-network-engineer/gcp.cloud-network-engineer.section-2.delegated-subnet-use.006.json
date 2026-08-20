@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.delegated-subnet-use.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Dans un Shared VPC, le pipeline d'un projet de service doit créer des VM sur le sous-réseau `apps-prod`, mais il reçoit une erreur d'autorisation lors de l'attachement de l'interface. L'équipe réseau refuse de lui permettre de créer ou modifier des sous-réseaux. Quelle correction est la moins privilégiée ?",
+  "choices": [
+    "Accorder `roles/compute.networkAdmin` au compte de service du pipeline sur le projet hôte entier, puis utiliser une condition IAM pour lui demander de ne modifier que `apps-prod`.",
+    "Accorder `roles/compute.networkUser` au compte de service du pipeline sur le seul sous-réseau `apps-prod` du projet hôte, sans droit de modifier le VPC.",
+    "Accorder `roles/owner` au pipeline sur son projet de service et créer un rôle personnalisé local qui référence l'identifiant du sous-réseau détenu par le projet hôte.",
+    "Recréer `apps-prod` dans le projet de service, puis établir un peering avec le projet hôte afin que l'équipe applicative possède directement le sous-réseau."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.cle-compromise-pipeline-critique.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Une clé compromise d’un compte de service de traitement de données est utilisée pour lire un bucket sensible. Le même compte exécute aussi un pipeline critique. Les preuves indiquent que seule une clé précise a fui. Quelle action de confinement initiale limite le mieux le risque et l’impact ?",
+  "choices": [
+    "Arrêter les pipelines, désactiver le compte et toutes ses clés avant remplacement, restaurer les traitements après l’enquête et analyser chaque identité et accès au bucket, même lorsque les preuves ne désignent qu’une clé, afin de maximiser le confinement",
+    "Laisser brièvement la clé active sous surveillance, limiter l’accès au bucket et la désactiver après une nouvelle tentative ou à la fin de la fenêtre, tout en journalisant et faisant valider les commandes observées",
+    "Désactiver ou supprimer la clé compromise, bloquer les indicateurs et sessions associés, surveiller les autres identifiants du compte et préparer une identité de remplacement pour le pipeline avant toute restriction plus large",
+    "Supprimer le bucket, le compte et leurs journaux, recréer une identité et restaurer les données depuis une sauvegarde saine, puis revalider complètement le pipeline avant sa remise en production"
+  ]
+}

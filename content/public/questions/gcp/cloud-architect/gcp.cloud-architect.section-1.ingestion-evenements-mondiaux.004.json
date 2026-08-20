@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.ingestion-evenements-mondiaux.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une société de jeux lance une fonctionnalité mondiale. Elle reçoit des événements irréguliers, doit absorber des pointes sans perte, enrichir le flux en quelques secondes et conserver les données brutes à bas coût pour de futurs traitements. Les producteurs ne doivent pas dépendre des consommateurs. Quelle architecture est la plus adaptée ?",
+  "choices": [
+    "Écrire les événements dans une instance Cloud SQL partitionnée, ajouter des réplicas en lecture pour les analyses, archiver périodiquement les anciennes lignes dans Cloud Storage et augmenter verticalement l'instance avant chaque lancement mondial.",
+    "Déposer les événements dans des fichiers horaires sur Filestore, déclencher des traitements Dataproc à chaque fermeture de fichier et copier les résultats agrégés dans BigQuery tout en conservant les fichiers comme historique brut.",
+    "Faire appeler par chaque producteur une API Cloud Run qui invoque synchroniquement tous les consommateurs, mémoriser les échecs dans Cloud Tasks et augmenter le nombre maximal de tentatives jusqu'à livraison de chaque événement.",
+    "Publier les événements dans Pub/Sub, les traiter avec Dataflow en streaming, conserver le brut dans Cloud Storage et servir l'analyse dans BigQuery et dimensionner indépendamment chaque étape selon son propre débit."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.exfiltration-endpoint-cloud.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Construire une chronologie reliant compromission, vol du jeton, appels et portée IAM ; préserver les preuves ; associer équipes endpoint, IAM et données pour corriger l’origine, réduire les privilèges, faire tourner les secrets et ajouter des détections validées",
+  "rationale": "Une chronologie multicouche relie compromission de l’hôte, vol du jeton, appels cloud et portée IAM, puis coordonne les équipes endpoint, identité et données pour corriger origine, secrets, privilèges et lacunes de détection. Une remédiation ponctuelle de l’IP, du jeton et des buckets arrête le trafic mais laisse le rôle excessif et le vecteur initial sans correction. La réinstallation de l’hôte considérée comme cause complète néglige les jetons, les autorisations cloud et les autres buckets accessibles. La suppression des constats après remise en privé réduit la visibilité sans produire d’analyse causale. Cette démarche distingue donc cause, facteurs amplificateurs et mesures durables.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/docs/security/incident-response",
+    "https://cloud.google.com/logging/docs/audit"
+  ]
+}

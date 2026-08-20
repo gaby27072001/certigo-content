@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.analyse-lac-multimoteur.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une entreprise possède un lac Parquet dans plusieurs buckets Cloud Storage. Elle veut exposer les mêmes fichiers à BigQuery et Spark, appliquer des contrôles d'accès cohérents au niveau des tables, cataloguer les actifs par domaine et éviter des copies gérées séparément. Quelle architecture est la plus appropriée ?",
+  "choices": [
+    "Charger les fichiers Parquet dans des tables BigQuery natives, créer une seconde copie Delta pour Spark et synchroniser quotidiennement les deux ensembles avec Dataflow",
+    "Exposer directement les URI Cloud Storage à BigQuery et Spark, accorder Storage Object Viewer aux utilisateurs et gérer le catalogue dans un tableur central",
+    "Copier les fichiers pour chaque moteur, synchroniser leurs ACL avec Terraform et désigner la copie BigQuery comme référentiel de gouvernance",
+    "Créer des tables BigLake sur les fichiers et cataloguer les actifs par domaine dans Knowledge Catalog avec accès de table et suivi centralisé des lignages métier"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.global-web-resilience.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un site web HTTPS sert des utilisateurs mondiaux depuis des groupes d'instances gérés situés en Europe et aux États-Unis. Il lui faut une seule adresse anycast, une terminaison TLS, un routage par URL, un basculement interrégional et la mise en cache des objets statiques. Quelle solution choisir ?",
+  "choices": [
+    "Déployer un équilibreur réseau passthrough externe régional par continent, publier leurs adresses en DNS et utiliser Cloud NAT sur chaque backend pour terminer les sessions TLS.",
+    "Utiliser un Application Load Balancer interne régional, activer l'accès global et exposer son adresse privée au moyen d'enregistrements DNS publics destinés aux internautes.",
+    "Utiliser un Application Load Balancer externe global avec les deux groupes, health checks, URL map et Cloud CDN activé sur le service backend statique.",
+    "Publier les IP externes de plusieurs VM par des réponses DNS géolocalisées à TTL court, déployer le certificat sur chaque VM et lancer une automatisation qui retire les VM en échec."
+  ]
+}

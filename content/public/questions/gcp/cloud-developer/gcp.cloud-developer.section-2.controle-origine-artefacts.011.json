@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.controle-origine-artefacts.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une politique de déploiement doit n'accepter que les images construites par un pipeline Cloud Build approuvé à partir du dépôt officiel. Quelle chaîne fournit une preuve vérifiable de l'origine de l'image ?",
+  "choices": [
+    "Autoriser toute image portant le tag latest dans Artifact Registry et protéger uniquement la suppression de ce tag avec un rôle IAM personnalisé.",
+    "Signer dans un wiki le nom du Dockerfile et le SHA du commit, puis demander à l'équipe de production de comparer visuellement ces informations.",
+    "Faire produire la provenance par Cloud Build, stocker l'image dans Artifact Registry et exiger avec Binary Authorization une attestation liée au digest.",
+    "Comparer le hachage du dépôt à celui de la branche principale avant le déploiement, sans conserver d'information sur le constructeur ni les étapes exécutées."
+  ]
+}

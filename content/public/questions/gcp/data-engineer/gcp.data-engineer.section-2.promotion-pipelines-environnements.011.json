@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.promotion-pipelines-environnements.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des DAG Cloud Composer orchestrent Dataflow et BigQuery. Une modification non testée a interrompu la production, et l'équipe veut désormais promouvoir exactement la même révision de développement vers production avec revue, tests et retour arrière. Quelle pratique répond le mieux à cet objectif ?",
+  "choices": [
+    "Synchroniser automatiquement la branche de chaque développeur vers le bucket de DAG de production, puis compter sur l'historique des objets Cloud Storage pour revenir en arrière",
+    "Copier manuellement les DAG validés entre les buckets Composer, exécuter un test après copie et conserver seulement la dernière sauvegarde locale de chaque fichier",
+    "Versionner DAG et tests dans Git, valider en CI, promouvoir le même artefact identifié entre environnements et restaurer une révision connue en cas d'échec",
+    "Utiliser un environnement Composer unique pour développement et production, isoler seulement les tâches par files Airflow et déployer les changements sans artefact versionné"
+  ]
+}

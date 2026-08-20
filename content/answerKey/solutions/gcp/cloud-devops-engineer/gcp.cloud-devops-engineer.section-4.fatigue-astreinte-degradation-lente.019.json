@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.fatigue-astreinte-degradation-lente.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Utiliser des alertes multi-fenêtres sur le burn rate du budget d'erreur, avec page pour la combustion rapide et ticket pour la combustion lente, selon des seuils alignés sur le SLO mesuré",
+  "rationale": "Les alertes multi-fenêtres de burn rate relient le signal au budget : une combustion rapide justifie une page, tandis qu'une tendance lente déclenche un ticket avant l'épuisement. Pager chaque erreur avec un silence nocturne reste sensible aux événements isolés, ignore le volume de trafic et peut masquer un incident pendant le silence. Attendre la violation du SLO sur trente jours intervient après consommation complète du budget et ne fournit aucune anticipation. CPU, mémoire et pods peuvent expliquer une dégradation, mais leurs seuils statiques ne mesurent pas les requêtes qui consomment le budget de disponibilité.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/alerting-on-budget-burn-rate"
+  ]
+}

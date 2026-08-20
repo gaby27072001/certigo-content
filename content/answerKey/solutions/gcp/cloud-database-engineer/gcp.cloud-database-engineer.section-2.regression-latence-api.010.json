@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.regression-latence-api.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Utiliser Query Insights pour corréler charge, requêtes, plans et attentes, puis confirmer dans les vues PostgreSQL les verrous et index manquants avant toute modification de capacité ou de schéma",
+  "rationale": "Query Insights corrèle directement charge, requêtes, plans et attentes, puis les vues PostgreSQL confirment verrous et index avant toute modification : c'est le diagnostic ciblé demandé. Rejouer sur un clone teste la capacité, mais reproduit imparfaitement contention, cache et sessions de l'incident actif. Restaurer une sauvegarde isolée compare des états et charges différents sans attribuer la régression à une requête. Activer log_statement partout et auto_explain à seuil très bas collecte les plans, mais introduit précisément le volume de journaux et la surcharge interdits.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/using-query-insights"
+  ]
+}

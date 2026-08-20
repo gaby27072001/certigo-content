@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-2.identites-utilisateur-fragmentees.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Ingestionner l’annuaire comme données d’entité et définir des alias stables reliant courriel, identifiant de compte et autres identifiants fiables avant de valider les correspondances",
+  "rationale": "L’annuaire ingéré comme contexte d’entité, avec des alias stables validés, relie courriel et compte court afin de consolider événements et risque sur la bonne personne. Des identifiants concaténés dans une description restent de simples chaînes et ne créent aucune relation exploitable par le graphe. Les noms complets injectés dans l’historique sont mutables et non uniques ; ils dégradent la fidélité des événements et peuvent fusionner plusieurs personnes. Les règles séparées par source suivies d’une addition hebdomadaire conservent des scores fragmentés et retardés. Les données d’entité et leurs alias fournissent le seul rapprochement fiable sans altérer les journaux sources.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/investigation/entity-context-in-search"
+  ]
+}

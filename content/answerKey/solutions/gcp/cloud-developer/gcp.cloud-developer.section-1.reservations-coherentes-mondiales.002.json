@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.reservations-coherentes-mondiales.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Utiliser Spanner dans une configuration multirégionale afin de fournir des transactions relationnelles ACID et des lectures fortement cohérentes.",
+  "rationale": "Spanner multirégional est le seul choix proposé qui associe modèle relationnel, transactions ACID, lectures fortement cohérentes et réplication multirégionale gérée. Bigtable offre une excellente montée en charge clé-valeur, mais la réconciliation applicative proposée ne fournit pas le modèle transactionnel relationnel demandé. Firestore est documentaire; ajouter une fonction de résolution de conflits ne lui confère ni schéma SQL ni les transactions mondiales exigées. Des objets Cloud Storage immuables et une fonction de réconciliation constituent un journal d'objets, pas une base relationnelle transactionnelle.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/spanner/docs/instance-configurations"
+  ]
+}

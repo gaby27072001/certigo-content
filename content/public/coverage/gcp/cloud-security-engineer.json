@@ -3,12 +3,71 @@
   "provider": "gcp",
   "certification": "gcp:cloud-security-engineer",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "section-1", "title": "Configuring access", "weightPercent": 25, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-2", "title": "Securing communications and establishing boundary protection", "weightPercent": 22, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-3", "title": "Ensuring data protection", "weightPercent": 23, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-4", "title": "Managing operations", "weightPercent": 19, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-5", "title": "Supporting compliance requirements", "weightPercent": 11, "weightType": "approximate", "questionIds": [] }
+    {
+      "objective": "section-1",
+      "title": "Configuring access",
+      "weightPercent": 25,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-security-engineer.section-1.acces-prestataires-sans-comptes.001",
+        "gcp.cloud-security-engineer.section-1.publication-ci-sans-secret.002",
+        "gcp.cloud-security-engineer.section-1.authentification-centralisee-sessions.003",
+        "gcp.cloud-security-engineer.section-1.acces-admin-intervention.004",
+        "gcp.cloud-security-engineer.section-1.garde-fou-projets-production.005",
+        "gcp.cloud-security-engineer.section-1.acces-astreinte-tracable.006"
+      ]
+    },
+    {
+      "objective": "section-2",
+      "title": "Securing communications and establishing boundary protection",
+      "weightPercent": 22,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-security-engineer.section-2.attaque-applicative-changeante.007",
+        "gcp.cloud-security-engineer.section-2.prevention-exfiltration-donnees.008",
+        "gcp.cloud-security-engineer.section-2.administration-pare-feu-partage.009",
+        "gcp.cloud-security-engineer.section-2.acces-prive-api-depuis-site.010",
+        "gcp.cloud-security-engineer.section-2.correctifs-vm-sans-ip-publique.011"
+      ]
+    },
+    {
+      "objective": "section-3",
+      "title": "Ensuring data protection",
+      "weightPercent": 23,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-security-engineer.section-3.donnees-test-reidentifiables.012",
+        "gcp.cloud-security-engineer.section-3.separation-gestion-cles-stockage.013",
+        "gcp.cloud-security-engineer.section-3.protection-donnees-en-memoire.014",
+        "gcp.cloud-security-engineer.section-3.rotation-secret-sans-image.015",
+        "gcp.cloud-security-engineer.section-3.entrainement-ia-donnees-sensibles.016",
+        "gcp.cloud-security-engineer.section-3.cles-hors-fournisseur.017"
+      ]
+    },
+    {
+      "objective": "section-4",
+      "title": "Managing operations",
+      "weightPercent": 19,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-security-engineer.section-4.admission-images-approuvees.018",
+        "gcp.cloud-security-engineer.section-4.collecte-audit-multiprojets.019",
+        "gcp.cloud-security-engineer.section-4.classification-stockage-obligatoire.020",
+        "gcp.cloud-security-engineer.section-4.investigation-trafic-est-ouest.021"
+      ]
+    },
+    {
+      "objective": "section-5",
+      "title": "Supporting compliance requirements",
+      "weightPercent": 11,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-security-engineer.section-5.environnement-reglemente-regional.022",
+        "gcp.cloud-security-engineer.section-5.controle-acces-personnel-fournisseur.023",
+        "gcp.cloud-security-engineer.section-5.cadrage-audit-paiement.024"
+      ]
+    }
   ]
 }

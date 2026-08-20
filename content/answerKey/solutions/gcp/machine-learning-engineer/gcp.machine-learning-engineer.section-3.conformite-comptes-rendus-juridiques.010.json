@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.conformite-comptes-rendus-juridiques.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Évaluer l’affinage supervisé d’un modèle Gemini pris en charge sur les paires validées, avec test séparé et comparaison coût-qualité contre la référence prompting/RAG.",
+  "rationale": "L’évaluation d’un affinage supervisé sur les paires validées est l’étape adaptée : les 12 000 paires validées et le défaut stable de style justifient d’évaluer un affinage supervisé, à condition de le comparer sur un test séparé à la référence prompting/RAG et à son coût. Ajouter toujours plus d’exemples et de documents au prompt augmente coût et contexte sans garantir la conformité de forme. Entraîner un modèle fondamental depuis zéro est disproportionné pour ce volume et cet objectif. Un validateur qui relance une génération identique détecte le défaut, mais n’en corrige pas la cause, n’exploite pas les exemples disponibles et peut répéter indéfiniment la même non-conformité.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/generative-ai/docs/models/tune-models"
+  ]
+}

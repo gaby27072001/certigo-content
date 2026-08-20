@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-6.ecarts-octroi-credit.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Sous gouvernance, mesurer rappel, faux négatifs et calibration par groupe, analyser attributions et cas limites, valider les seuils métier puis surveiller ces mesures de façon continue dans la durée en production.",
+  "rationale": "L’évaluation désagrégée par groupe avec suivi en production répond au risque d’équité : les métriques désagrégées révèlent les faux négatifs invisibles dans l’AUC globale, tandis que calibration, attributions, revue métier et monitoring relient diagnostic, décision et suivi. Une matrice agrégée et quelques explications de dossiers contestés ne quantifient pas l’écart systémique. Retirer l’attribut de groupe n’élimine pas les variables proxy et empêche de mesurer l’équité. Un seuil identique ou des corrections manuelles visant le taux d’acceptation peuvent dégrader calibration et performance sans traiter les causes ni le dommage signalé.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/explainable-ai/overview"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "gcp.cloud-architect.section-4.gouvernance-changements-production.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Séparer les groupes Cloud Deploy de créateurs et d'approbateurs, exiger l'approbation de la cible de production et conserver ses événements dans Cloud Audit Logs ; pour l'urgence, accorder une élévation break-glass limitée dans le temps, liée à l'incident et suivie d'une revue obligatoire.",
+  "rationale": "Des groupes distincts de créateurs et d'approbateurs imposent la séparation des tâches, l'approbation Cloud Deploy et Cloud Audit Logs rendent acteur et décision attribuables, et une élévation break-glass temporaire liée à l'incident permet l'urgence sans créer un privilège permanent. Donner création et approbation aux mêmes développeurs annule la séparation, les journaux applicatifs ne remplacent pas les journaux d'audit du service et une clé partagée détruit l'attribution individuelle. Une promotion entièrement automatique par une identité Owner ne fournit aucune approbation indépendante, accorde des privilèges excessifs et rend l'urgence dépendante du même principal permanent. Les courriels et les déploiements kubectl contournent le mécanisme d'approbation géré, tandis qu'un administrateur d'urgence permanent sans expiration ni revue immédiate ne borne pas l'exception.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/deploy/docs/promote-release",
+    "https://cloud.google.com/deploy/docs/audit-logs",
+    "https://cloud.google.com/iam/docs/temporary-elevated-access"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.domaine-recemment-signale.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Google Threat Intelligence (GTI) publie un domaine de commande et contrôle observé depuis trois mois. Il n’était pas connu lors de l’ingestion des journaux DNS. L’entreprise conserve douze mois de télémétrie normalisée dans Google SecOps. Comment déterminer correctement l’exposition passée ?",
+  "choices": [
+    "Ajouter immédiatement le domaine à une liste de blocage, rechercher ses occurrences dans les dernières vingt-quatre heures et ouvrir un incident pour chaque correspondance, sans tenir compte de la période d’observation ni du niveau de confiance fournis par GTI",
+    "Vérifier la confiance et la période GTI, rechercher le domaine sur toute la rétention par sous-chaîne dans la charge brute plutôt que dans les champs DNS normalisés, puis pivoter sur les événements correspondants",
+    "Réingérer les douze mois de journaux DNS en remplaçant leur horodatage par la date de publication GTI, exécuter les règles actuelles sur ce nouveau flux et considérer toute correspondance comme une compromission sans vérifier le contexte ni la période de validité",
+    "Vérifier le contexte, la confiance et la période de validité de l’IOC dans GTI, rechercher sa valeur sur toute la rétention dans les champs DNS normalisés, puis pivoter sur les seules correspondances et leurs entités associées"
+  ]
+}

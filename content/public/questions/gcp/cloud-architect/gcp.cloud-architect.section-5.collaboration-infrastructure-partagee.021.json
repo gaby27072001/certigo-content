@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-5.collaboration-infrastructure-partagee.021",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Quatre équipes provisionnent les mêmes fondations réseau. Les exécutions Terraform locales se chevauchent, des secrets de compte de service circulent et les environnements divergent. L'entreprise veut un processus auditable sans clés longues durées. Quelle mise en œuvre faut-il conseiller ?",
+  "choices": [
+    "Conserver l'état dans un bucket partagé sans verrouillage, distribuer une clé JSON commune depuis Secret Manager, demander aux équipes de réserver un créneau d'application dans un calendrier et sauvegarder une copie locale de l'état avant chaque changement.",
+    "Désigner un administrateur qui exécute tous les plans et applications depuis une station durcie, garder l'état et la clé du compte de service sur cette station, faire approuver les sorties par messagerie et publier ensuite les journaux de terminal pour l'audit.",
+    "Créer un état distant et une identité permanente par développeur, limiter chaque identité à son environnement, autoriser les fondations partagées par convention de créneau et exécuter chaque trimestre un plan global destiné à détecter puis réconcilier les divergences.",
+    "Publier des modules versionnés, stocker l'état distant avec verrouillage et accès restreint, exécuter plan et apply dans CI après revue, et fédérer l'identité du pipeline pour usurper un compte de service à privilèges minimaux, selon un workflow central et traçable."
+  ]
+}

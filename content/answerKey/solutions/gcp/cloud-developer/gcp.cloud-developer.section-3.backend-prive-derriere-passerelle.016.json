@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-developer.section-3.backend-prive-derriere-passerelle.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Choisir l'ingress internal-and-cloud-load-balancing et accorder run.invoker uniquement au compte de la passerelle pour signer chaque appel au backend avec un jeton OIDC valide.",
+  "rationale": "L'ingress internal-and-cloud-load-balancing accepte le chemin via l'External Application Load Balancer tout en refusant les accès Internet directs à l'URL run.app; limiter run.invoker au compte de la passerelle ajoute l'autorisation applicative requise. Conserver l'ingress all et rendre l'invocation publique laisse l'URL run.app contourner Cloud Armor et l'équilibreur. L'ingress internal seul n'accepte pas le trafic de l'External Application Load Balancer, et accorder le rôle à tous les utilisateurs authentifiés dépasse l'identité prévue. Le bon mode d'ingress associé à allUsers et à tous les comptes de service protège le chemin réseau, mais ne respecte pas la contrainte selon laquelle seule la passerelle peut invoquer le backend.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/run/docs/securing/ingress",
+    "https://cloud.google.com/run/docs/authenticating/service-to-service"
+  ]
+}

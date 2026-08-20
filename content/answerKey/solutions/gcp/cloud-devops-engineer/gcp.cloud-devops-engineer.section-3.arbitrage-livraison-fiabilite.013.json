@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.arbitrage-livraison-fiabilite.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Suspendre les changements risqués, consacrer l'effort à la fiabilité et ne reprendre la livraison normale qu'après retour dans les seuils définis par la règle d'épuisement convenue",
+  "rationale": "Avec 90 % du budget consommé et un burn rate annonçant l'épuisement, la politique SRE doit suspendre les changements non urgents et consacrer la capacité à restaurer la fiabilité avant de reprendre. Un feature flag à 5 % réduit le rayon d'exposition, mais livre encore un changement non urgent alors que le budget ne permet plus ce risque. Créer une nouvelle fenêtre de SLO commençant au jour du déploiement efface la consommation mesurée et rompt le contrat mensuel au lieu de corriger la fiabilité. Ajouter capacité et astreinte peut aider seulement si cela réduit le burn rate ; livrer sans cette preuve ignore encore la règle de budget d'erreur.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring/alerting-on-budget-burn-rate"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.controle-origine-artefacts.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Faire produire la provenance par Cloud Build, stocker l'image dans Artifact Registry et exiger avec Binary Authorization une attestation liée au digest.",
+  "rationale": "La provenance produite par Cloud Build relie l'artefact à ses entrées et à son processus de construction; Binary Authorization peut alors exiger une attestation associée au digest avant déploiement. Le tag latest est mutable et ne prouve ni la source ni le pipeline qui a construit l'image. Une signature consignée dans un wiki reste détachée de l'artefact et dépend d'une comparaison humaine contournable. Comparer uniquement le hachage du dépôt confirme un état source, mais ne démontre pas que l'image examinée en découle ni que seules les étapes approuvées l'ont produite.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/build/docs/securing-builds/view-build-provenance"
+  ]
+}

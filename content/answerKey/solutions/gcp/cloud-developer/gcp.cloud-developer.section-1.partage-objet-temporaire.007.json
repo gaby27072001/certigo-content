@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.partage-objet-temporaire.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Générer pour l'objet une URL signée V4 dont la durée de validité est limitée à dix minutes, sans modifier les autorisations publiques du bucket.",
+  "rationale": "Une URL signée V4 délègue pendant dix minutes l'accès au seul objet sans rendre le bucket public ni faire transiter son contenu par l'application. Accorder Storage Object Viewer à allUsers ouvre tout le périmètre du rôle au public et dépend d'une révocation IAM différée. Copier le rapport dans un bucket public l'expose également, et une règle de cycle de vie gouverne la suppression plutôt que l'autorisation d'accès. Remettre une clé de compte de service au navigateur divulgue un identifiant réutilisable dont les droits dépassent potentiellement cet objet et cette durée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/storage/docs/access-control/signed-urls"
+  ]
+}

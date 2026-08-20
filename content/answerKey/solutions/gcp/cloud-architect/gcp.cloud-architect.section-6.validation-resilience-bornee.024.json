@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-6.validation-resilience-bornee.024",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-6"
+  },
+  "correct": "Définir des hypothèses liées aux SLO, exécuter des tests de charge et des expériences de panne contrôlées d'abord en préproduction puis sur un faible périmètre autorisé, avec limites d'arrêt, observabilité, procédures de reprise et actions issues d'un postmortem.",
+  "rationale": "Des hypothèses liées aux SLO, des tests de charge et des pannes contrôlées progressant de la préproduction vers un faible périmètre autorisé, avec limites d'arrêt et observabilité, prouvent les mécanismes tout en bornant le risque ; runbooks et postmortem rendent les résultats exploitables. Attendre une panne réelle ne donne aucune assurance avant la période commerciale et laisse scénario, charge et observations au hasard. Supprimer aléatoirement des ressources dans toute la production sans accord ni garde-fou viole le refus explicite d'une expérience non bornée, et les tickets ne constituent pas une mesure de SLO. Restaurer une base et supprimer des pods dans une copie monozone ne teste ni la perte de zone ni l'indisponibilité d'une dépendance, deux contraintes explicites.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/architecture/framework/reliability/perform-testing-for-recovery-from-failures"
+  ]
+}

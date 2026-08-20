@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.collaboration-mobile-deconnectee.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Utiliser Firestore en mode natif avec ses SDK clients, la persistance hors connexion, les écouteurs temps réel, les transactions documentaires et des règles de sécurité adaptées aux profils et documents",
+  "rationale": "Firestore en mode natif fournit directement documents évolutifs, écouteurs temps réel, persistance hors connexion, transactions limitées et exploitation sans serveurs. PostgreSQL sur VM peut représenter les données, mais impose capacité, correctifs, HA et développement complet de la synchronisation. BigQuery accepte les événements à grande échelle, mais vise l'analytique plutôt que les transactions interactives et le fonctionnement déconnecté. Cloud SQL derrière une API sécurise les connexions, mais cache, synchronisation temps réel et résolution hors ligne resteraient entièrement à construire et exploiter.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/firestore/docs/manage-data/enable-offline"
+  ]
+}

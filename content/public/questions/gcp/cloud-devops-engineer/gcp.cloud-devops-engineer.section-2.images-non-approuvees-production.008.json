@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.images-non-approuvees-production.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un cluster GKE de production ne doit accepter que des images analysées, construites par le pipeline officiel et approuvées après les tests. Des développeurs peuvent pousser d'autres images dans le même registre. Quel contrôle empêche effectivement leur exécution ?",
+  "choices": [
+    "Déployer un webhook d'admission qui accepte tout tag préfixé prod- et ouvre un incident si le registre signale ensuite une vulnérabilité, sans vérifier une attestation liée au digest",
+    "Faire échouer le pipeline lorsque Artifact Analysis détecte une vulnérabilité et limiter le push aux développeurs autorisés, mais ne poser aucun contrôle d'admission sur le cluster de production",
+    "Configurer Binary Authorization pour n'autoriser que le dépôt de production, tout en acceptant ses digests sans exiger les attestations de build, de test et d'approbation",
+    "Configurer Artifact Analysis et les attestations du pipeline, puis une politique Binary Authorization qui refuse au cluster tout digest ne portant pas les preuves exigées avant livraison"
+  ]
+}

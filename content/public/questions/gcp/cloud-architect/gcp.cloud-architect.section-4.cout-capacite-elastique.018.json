@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-4.cout-capacite-elastique.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une plateforme possède une charge Compute Engine stable de 600 vCPU et des pointes mensuelles jusqu'à 1 400 vCPU pendant quelques heures. Elle paie actuellement toute la capacité au tarif à la demande et certains projets sans propriétaire représentent 18 % de la facture. Quelle combinaison optimise le coût sans compromettre les pointes ?",
+  "choices": [
+    "Acheter un engagement de trois ans pour 1 400 vCPU, désactiver l'autoscaling afin de garantir ce maximum, répartir les coûts selon les quotas et conserver les projets sans propriétaire jusqu'au prochain exercice budgétaire.",
+    "Convertir toutes les VM en instances Spot, y compris bases et services synchrones, répartir les composants sur plusieurs zones, augmenter les files d'attente et garder un petit groupe standard uniquement pour les opérations d'administration et de contrôle.",
+    "Fixer les quotas selon l'utilisation moyenne, refuser toute hausse automatique pendant les pointes, supprimer les projets sans trafic récent et traiter chaque dépassement par une demande financée et approuvée au cas par cas.",
+    "Dimensionner la charge stable, prendre un engagement adapté à cette base, conserver une capacité autoscalée à la demande ou Spot pour les tâches interruptibles, et imposer labels, budgets, responsables et suivi des écarts réels."
+  ]
+}

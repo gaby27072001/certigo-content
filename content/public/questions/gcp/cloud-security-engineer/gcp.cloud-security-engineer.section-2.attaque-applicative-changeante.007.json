@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.attaque-applicative-changeante.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une application publique derrière un équilibreur de charge d'application externe subit des attaques DDoS de couche 7 dont les sources et les caractéristiques changent rapidement. Des seuils statiques bloquent trop d'utilisateurs légitimes. L'équipe veut détecter automatiquement les anomalies par rapport au trafic habituel et obtenir une signature de règle applicable à la périphérie. Quel contrôle faut-il activer ?",
+  "choices": [
+    "Configurer dans Cloud Armor des interdictions basées sur le débit avec un seuil global fixe, puis ajouter des règles WAF préconfigurées pour chaque vulnérabilité applicative déjà connue",
+    "Analyser avec Cloud IDS une copie du trafic backend et transformer manuellement les alertes récurrentes en règles de pare-feu VPC",
+    "Activer Adaptive Protection dans Cloud Armor afin d'analyser le profil de trafic, signaler les attaques de couche 7 et proposer une signature de règle",
+    "Utiliser reCAPTCHA Enterprise sur les parcours sensibles et refuser les requêtes dont le score est inférieur à un seuil commun à tous les clients"
+  ]
+}

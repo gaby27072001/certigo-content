@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.overlapping-cloud-sources.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Deux VPC issus d'une acquisition utilisent tous deux `10.20.0.0/16`. Des VM de chaque VPC doivent initier des connexions vers un réseau sur site non chevauchant `172.20.0.0/16` par la connectivité hybride existante. Le réseau sur site doit pouvoir distinguer les deux VPC sans les renuméroter. Quelle conception répond à cette exigence ?",
+  "choices": [
+    "Annoncer les deux plages source `10.20.0.0/16` vers le site avec le même MED, puis créer sur site des routes de retour plus spécifiques vers chaque connexion hybride, sans traduire les adresses des VM dans Google Cloud.",
+    "Créer dans chaque VPC un sous-réseau de destination `172.20.0.0/16`, activer Private Google Access, exporter cette plage par BGP et appliquer sur site des règles de routage par source pour départager les préfixes, sans traduire les adresses `10.20.0.0/16` des VM.",
+    "Relier les deux VPC par VPC Network Peering, exporter leurs routes personnalisées vers un VPC de transit et utiliser la priorité des routes du transit pour présenter une seule plage `10.20.0.0/16` au réseau sur site.",
+    "Dans chaque VPC, créer un sous-réseau de purpose `PRIVATE_NAT` avec une plage de traduction unique, configurer Hybrid NAT pour le trafic vers `172.20.0.0/16`, puis annoncer ou router sur site le retour de chaque plage NAT par la connexion hybride correspondante."
+  ]
+}

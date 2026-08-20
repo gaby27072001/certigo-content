@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.scoring-comptes-differe.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Chaque nuit, une banque doit scorer 40 millions de comptes stockés dans BigQuery. Les résultats sont consommés le lendemain matin ; aucune requête interactive n’est prévue et l’équipe veut éviter des instances d’inférence inactives le jour. Quel déploiement choisir ?",
+  "choices": [
+    "Enregistrer la version dans Model Registry et lancer une prédiction par lots entre tables BigQuery, sans maintenir un endpoint en ligne en dehors de la fenêtre nocturne.",
+    "Déployer un endpoint en ligne avec assez de réplicas pour absorber les 40 millions de comptes pendant la nuit, puis conserver ce minimum actif toute la journée pour simplifier l’exploitation.",
+    "Créer un parc Cloud Run qui envoie un appel synchrone par compte vers un endpoint, orchestre les reprises et écrit chaque résultat dans BigQuery malgré l’absence de besoin interactif.",
+    "Maintenir un cluster Spark permanent qui charge le modèle chaque nuit et écrit les scores dans BigQuery."
+  ]
+}

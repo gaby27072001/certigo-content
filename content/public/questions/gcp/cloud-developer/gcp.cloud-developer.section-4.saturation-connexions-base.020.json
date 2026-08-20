@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.saturation-connexions-base.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un service Cloud Run reçoit des pointes de trafic et se connecte à Cloud SQL. La base atteint sa limite de connexions lorsque de nombreuses instances démarrent. Quelle modification réduit ce risque tout en conservant une authentification sécurisée ?",
+  "choices": [
+    "Ouvrir une nouvelle connexion SQL pour chaque requête Cloud Run et compter sur le serveur de base de données pour fermer les connexions devenues inactives.",
+    "Supprimer la limite maximale d'instances Cloud Run afin que chaque requête obtienne une instance et une connexion distinctes pendant les pointes.",
+    "Intégrer le mot de passe administrateur dans l'image pour accélérer l'ouverture des connexions et utiliser un pool non borné dans chaque instance.",
+    "Employer le connecteur Cloud SQL avec IAM, borner le pool de chaque instance et limiter le nombre d'instances Cloud Run selon le budget total de connexions de la base."
+  ]
+}

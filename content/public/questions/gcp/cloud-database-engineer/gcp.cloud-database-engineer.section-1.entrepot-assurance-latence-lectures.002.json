@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.entrepot-assurance-latence-lectures.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une société d'assurance prépare Cloud SQL for PostgreSQL pour un entrepôt opérationnel de 6 To. Les tests montrent que le p95 est limité par les lectures aléatoires, tandis que CPU et mémoire restent sous 45 %. Le directeur financier exige de réduire le coût sans dégrader le SLO. Quelle action faut-il entreprendre en premier ?",
+  "choices": [
+    "Doubler les vCPU et conserver le stockage actuel, en supposant que le calcul supplémentaire réduira les lectures aléatoires, sans vérifier si cette forme fournit les IOPS nécessaires au p95",
+    "Comparer par benchmark les options de stockage sous une charge représentative de lectures aléatoires, mesurer IOPS et p95, puis retenir la configuration la moins coûteuse qui respecte le SLO avec une marge documentée",
+    "Réduire ensemble calcul et stockage jusqu'au seuil du SLO puis remonter d'une taille, une méthode économique mais qui modifie deux variables et risque de provoquer des erreurs et des reprises coûteuses en production",
+    "Exporter chaque nuit les partitions froides vers Cloud Storage pour réduire le volume actif, sans mesurer au préalable l'effet sur les plans, les lectures aléatoires et le délai de restauration"
+  ]
+}

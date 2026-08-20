@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.risque-nouvelle-version-recommandation.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une nouvelle version d’un modèle de recommandation améliore les métriques hors ligne, mais son effet sur le taux de conversion et la latence en production est incertain. Le service reçoit un trafic continu et le risque doit être limité. Quelle stratégie de mise en production utiliser ?",
+  "choices": [
+    "Basculer tout le trafic vers la nouvelle version pendant une fenêtre de faible activité, conserver l’ancienne hors de l’endpoint et restaurer son artefact seulement si les alertes se déclenchent.",
+    "Déployer la nouvelle version sur un endpoint réservé aux employés, comparer conversion et latence avec celles du trafic client historique, puis généraliser si les moyennes sont similaires.",
+    "Servir les deux versions en alternance déterministe selon l’heure, agréger les métriques au niveau de l’endpoint et comparer les périodes sans journaliser la version utilisée par requête.",
+    "Déployer les deux versions, diriger une faible part aléatoire vers la nouvelle, journaliser l’affectation et les métriques, puis augmenter progressivement ou revenir en arrière selon les garde-fous."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.processus-administration-inhabituel.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une requête Google SecOps révèle un processus d’administration rarement observé sur un poste, suivi d’un appel à une API Google Cloud. L’adresse IP n’est pas répertoriée comme malveillante. Comment poursuivre la chasse pour distinguer maintenance légitime et mouvement latéral ?",
+  "choices": [
+    "Classer l’activité comme bénigne parce que l’adresse IP n’apparaît pas dans GTI, ajouter le processus à une liste d’autorisation globale et conserver seulement une alerte sur les futurs appels API réalisés avec un utilisateur différent de celui observé",
+    "Isoler tous les postes exécutant le même processus, bloquer l’adresse IP et révoquer les sessions cloud de leurs utilisateurs, puis vérifier après confinement si les lignes de commande et les fenêtres de changement correspondent à une opération de maintenance approuvée",
+    "Rechercher seulement les alertes EDR déjà clôturées afin de respecter les décisions précédentes",
+    "Corréler utilisateur, hôte, lignée et ligne de commande du processus avec les journaux d’audit et réseau, comparer à la fenêtre de changement et à la prévalence, puis faire valider le contexte par les équipes poste et cloud"
+  ]
+}

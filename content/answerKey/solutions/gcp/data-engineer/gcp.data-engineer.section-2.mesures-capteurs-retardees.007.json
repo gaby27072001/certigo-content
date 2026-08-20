@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.mesures-capteurs-retardees.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Utiliser le temps événementiel avec fenêtres fixes, watermarks, déclencheurs précoces et retard autorisé couvrant vingt minutes, puis réémettre les résultats corrigés",
+  "rationale": "Le temps événementiel, les fenêtres fixes, watermarks, déclencheurs précoces et vingt minutes de retard autorisé publient vite puis réémettent les agrégats corrigés. La fenêtre globale déclenchée par l’horloge du worker utilise le temps de traitement et sa purge perd les arrivées tardives. Remplacer l’horodatage métier par l’heure Pub/Sub affecte les mesures à la mauvaise fenêtre et une table séparée ne corrige pas les résultats. Rescanner toute la journée dans BigQuery peut remplacer des agrégats, mais abandonne le traitement incrémental et fait croître le coût toutes les cinq minutes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/dataflow/docs/concepts/streaming-pipelines"
+  ]
+}

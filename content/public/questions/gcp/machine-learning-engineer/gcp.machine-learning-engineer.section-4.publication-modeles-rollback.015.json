@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-4.publication-modeles-rollback.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Deux équipes publient chaque semaine des modèles de fraude. La production doit toujours référencer une version approuvée, permettre de retrouver son artefact et ses métriques, et revenir rapidement à la version précédente sans recopier les modèles. Quelle organisation adopter ?",
+  "choices": [
+    "Publier chaque artefact sous un URI Cloud Storage immuable, conserver ses métriques dans BigQuery et modifier manuellement la production, sans enregistrer centralement l’approbation qui lie une version au déploiement.",
+    "Créer un projet Google Cloud par semaine d’entraînement, stocker dans ses étiquettes le score et l’approbateur, puis conserver tous les projets pour retrouver les anciennes versions.",
+    "Créer des versions sous une ressource Model Registry commune, associer métadonnées, alias d’approbation et historique d’audit complet, puis déployer explicitement la version ou l’alias gouverné.",
+    "Intégrer le hash et les métriques de chaque artefact dans le dépôt applicatif, recopier le modèle approuvé dans un bucket de production et restaurer une copie archivée en cas de rollback."
+  ]
+}

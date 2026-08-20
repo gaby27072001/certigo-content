@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.acces-admin-intervention.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Les administrateurs d'une plateforme ne doivent obtenir le rôle Administrateur Kubernetes Engine que pendant une intervention approuvée, pour deux heures au maximum, avec justification et piste d'audit. Quelle solution minimise les privilèges permanents ?",
+  "choices": [
+    "Conserver le rôle permanent dans un groupe d’astreinte et exiger un ticket justifié pour chaque usage",
+    "Créer une clé de compte de service administrateur qui expire manuellement après chaque intervention",
+    "Ajouter une condition IAM fondée uniquement sur une plage horaire quotidienne au rôle permanent",
+    "Créer un droit Privileged Access Manager avec approbation, justification et durée maximale de deux heures"
+  ]
+}

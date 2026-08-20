@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.calcul-periodique-irregulier.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un traitement Spark existant lit des fichiers Parquet dans Cloud Storage et s'exécute deux fois par semaine pendant quarante minutes. Il n'a besoin ni de HDFS persistant ni de services toujours actifs. L'équipe veut conserver les API Spark tout en supprimant la gestion et le coût d'un cluster inactif. Quel choix est le plus approprié ?",
+  "choices": [
+    "Soumettre le traitement à Managed Service for Apache Spark (serverless), avec une image d'exécution versionnée, un compte de service dédié et des paramètres immuables par environnement",
+    "Maintenir un cluster Dataproc autoscalé en permanence, avec zéro worker secondaire entre les traitements mais un nœud maître et des workers principaux toujours actifs",
+    "Réécrire les transformations Spark en procédures BigQuery, charger d'abord chaque fichier Parquet dans une table native, maintenir deux implémentations et valider chaque divergence avant promotion",
+    "Créer à la demande un cluster Dataproc, copier les fichiers depuis Cloud Storage, puis arrêter les workers tout en conservant le maître et HDFS entre les exécutions"
+  ]
+}

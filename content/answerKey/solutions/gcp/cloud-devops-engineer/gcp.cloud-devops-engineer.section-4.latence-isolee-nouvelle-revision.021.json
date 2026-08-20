@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.latence-isolee-nouvelle-revision.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Lancer une investigation Gemini Cloud Assist, traiter ses observations et causes probables comme des hypothèses, puis les confirmer avec métriques, traces et journaux segmentés par révision avant de décider d'un rollback",
+  "rationale": "Gemini Cloud Assist peut accélérer l'enquête en corrélant la télémétrie et en proposant des observations ou causes probables, mais celles-ci restent des hypothèses à confirmer dans les métriques, traces et journaux segmentés par révision avant rollback. Accepter une cause générée puis redémarrer toutes les dépendances sans preuve confond assistance à l'analyse et validation opérationnelle, tout en élargissant inutilement l'impact. Ignorer Gemini et regarder seulement CPU et mémoire globaux masque le découpage par révision déjà déterminant et conduit à ajouter de la capacité sans saturation. Un résumé de journaux agrégés peut orienter l'enquête, mais supprimer la révision sur une anomalie non corroborée par métriques et traces détruit des preuves et ne satisfait pas l'exigence d'étayage.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/gemini/docs/cloud-assist/investigations"
+  ]
+}

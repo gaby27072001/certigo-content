@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.banque-residence-europeenne.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Déployer dans une région européenne autorisée par Organization Policy, avec CMEK Cloud KMS compatible, IAM au moindre privilège et Data Access audit logs pour la résidence, le contrôle des clés et la traçabilité",
+  "rationale": "La région européenne contrainte par Organization Policy, une CMEK compatible, IAM au moindre privilège et les journaux Data Access couvrent ensemble résidence, contrôle des clés et audit. Une instance mondiale chiffrée par Google peut placer des données hors de l'Union et ne remet pas le cycle de vie de la clé à l'équipe sécurité. Une instance européenne privée protégée par mot de passe traite l'exposition, mais ni la restriction organisationnelle, ni la CMEK, ni la traçabilité des accès aux données. Chiffrer seulement les exports protège les archives, pas la base active, ses sauvegardes, ses accès ou les futurs déploiements.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/configure-cmek"
+  ]
+}

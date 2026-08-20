@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.acces-prive-api-depuis-site.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Configurer Private Google Access pour les hôtes sur site, annoncer la route vers le VIP restricted.googleapis.com et résoudre les domaines Google vers ce VIP",
+  "rationale": "Private Google Access pour les hôtes sur site achemine les appels par la connectivité hybride; le VIP restricted.googleapis.com expose seulement les API prises en charge par VPC Service Controls. Le proxy Internet à IP publiques conserve une sortie Internet et une liste de domaines n'apporte pas la restriction de services du VIP. Cloud NAT fournit une sortie aux ressources possédant des interfaces dans un VPC; il ne traduit pas directement les paquets émis par les serveurs sur site et viser les adresses publiques ne restreint pas les API. Le VPC de transit et son peering ajoutent un détour, mais les routes vers les plages publiques proposées et l'absence de résolution vers restricted.googleapis.com ne limitent pas les serveurs aux API compatibles demandées.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/vpc/docs/private-google-access-hybrid"
+  ]
+}

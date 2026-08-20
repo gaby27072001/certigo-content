@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.alertes-voyage-vpn.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Mesurer les motifs de faux positifs, enrichir avec les plages VPN et le contexte de session, supprimer uniquement les séquences expliquées, conserver des signaux compensatoires et suivre précision et volume après changement",
+  "rationale": "Un réglage fondé sur des faux positifs étiquetés enrichit les sessions avec les plages VPN, retire uniquement les séquences expliquées, conserve des signaux compensatoires et mesure précision et volume après changement. La désactivation hors campagnes connues crée un angle mort pour les attaques non annoncées. L’exclusion de toutes les sorties VPN suppose qu’un nouvel appareil ou un pays rare accompagnera toujours un compte compromis, ce qui n’est pas garanti lors d’une réutilisation de session légitime. L’augmentation uniforme du seuil de distance poursuit un quota d’alertes sans traiter la cause du bruit ni qualifier les cas supprimés. Seule l’exception contextuelle préserve la couverture tout en réduisant les voyages impossibles expliqués.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/detection/manage-all-rules"
+  ]
+}

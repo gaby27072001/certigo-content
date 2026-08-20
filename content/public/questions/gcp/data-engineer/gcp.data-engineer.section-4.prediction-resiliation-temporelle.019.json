@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-4.prediction-resiliation-temporelle.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une équipe veut entraîner dans BigQuery ML un modèle de risque de résiliation à partir d'historiques temporels. Certaines variables, comme le motif de clôture, ne sont connues qu'après la résiliation. Le modèle devra reproduire les mêmes transformations lors de la prédiction. Quelle préparation est la plus rigoureuse ?",
+  "choices": [
+    "Inclure toutes les colonnes disponibles, effectuer une division aléatoire des mêmes périodes et calculer les variables au moment de l'entraînement avec leur valeur la plus récente",
+    "Supprimer le motif de clôture, mais équilibrer les classes en recopiant des résiliations futures dans les périodes anciennes et évaluer sur un échantillon aléatoire global",
+    "Définir un instant de coupure, exclure les variables postérieures, séparer entraînement et évaluation dans le temps et intégrer les transformations au modèle",
+    "Calculer les variables après la fin de chaque abonnement, remplacer les valeurs manquantes par la cible observée et conserver un jeu d'évaluation provenant des mêmes clients"
+  ]
+}

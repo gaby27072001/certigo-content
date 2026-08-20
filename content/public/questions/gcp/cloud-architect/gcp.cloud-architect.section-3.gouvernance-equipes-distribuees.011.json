@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.gouvernance-equipes-distribuees.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un groupe possède des équipes finance, recherche et commerce dans plusieurs pays. Les administrateurs centraux doivent imposer l'interdiction des IP publiques, chaque équipe doit gérer ses ressources sans pouvoir modifier celles des autres, et les développeurs ne doivent jamais recevoir de rôles primitifs. Quel modèle IAM et de ressources convient ?",
+  "choices": [
+    "Créer un projet partagé, attribuer Editor à des groupes par équipe, séparer les ressources par préfixe et appliquer au projet une règle qui interdit les IP externes, tout en utilisant des conditions IAM sur le nom des ressources pour empêcher les modifications entre domaines et pays.",
+    "Créer une organisation par domaine, déléguer Organization Administrator au responsable de chaque domaine, partager entre eux un compte d'urgence et reproduire dans chaque organisation la contrainte d'IP publique ainsi que les rôles personnalisés nécessaires.",
+    "Créer un projet par charge, accorder directement à chaque développeur les rôles prédéfinis nécessaires, gérer l'interdiction des IP par politique locale dans chaque projet et réviser trimestriellement les attributions individuelles au moyen des journaux d'audit.",
+    "Créer des dossiers par domaine et pays, des projets séparés par charge, appliquer les règles d'organisation au niveau supérieur et attribuer des rôles prédéfinis ou personnalisés minimaux à des groupes, avec délégation documentée au niveau de tous les dossiers."
+  ]
+}

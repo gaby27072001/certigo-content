@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.conservation-journaux-longue-duree.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Des journaux bruts sont écrits dans Cloud Storage. Ils sont interrogés fréquemment pendant 30 jours, rarement jusqu'à un an, puis doivent être supprimés après sept ans pour respecter la politique de conservation. L'équipe veut automatiser les transitions sans modifier les producteurs. Que doit-elle configurer ?",
+  "choices": [
+    "Exécuter chaque nuit une fonction planifiée qui liste tous les objets, les réécrit dans une classe moins coûteuse selon leur âge et supprime ceux dépassant sept ans",
+    "Configurer Object Lifecycle Management pour changer automatiquement la classe selon l'âge puis supprimer les objets à l'échéance, sans exécuter de code de maintenance personnalisé",
+    "Activer Autoclass pour optimiser les classes selon les accès et définir une règle distincte qui supprime les objets exactement trente jours après leur dernière lecture",
+    "Charger les journaux dans des tables BigQuery partitionnées, définir leur expiration à sept ans et conserver indéfiniment les objets originaux en stockage Standard"
+  ]
+}

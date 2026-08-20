@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.entrainement-ia-donnees-sensibles.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une équipe entraîne un modèle Vertex AI avec des données sensibles dans Cloud Storage et BigQuery. Elle doit réduire le risque d'exfiltration, garder le trafic d'API sur des chemins privés et chiffrer les ressources avec des clés contrôlées par l'entreprise. Quel ensemble de contrôles est le plus complet ?",
+  "choices": [
+    "Rendre les données publiques pendant l’entraînement et limiter les requêtes aux adresses IP fixes des notebooks approuvés par le SOC",
+    "Utiliser des notebooks avec IP publiques, protéger leur interface par IAP et limiter leurs comptes de service à la lecture seule des données",
+    "Attribuer les rôles Vertex AI requis, couper les IP publiques des notebooks et utiliser Private Google Access avec le chiffrement Google par défaut",
+    "Placer les services pris en charge dans un périmètre VPC Service Controls, utiliser la connectivité privée et appliquer des CMEK avec des rôles IAM minimaux"
+  ]
+}

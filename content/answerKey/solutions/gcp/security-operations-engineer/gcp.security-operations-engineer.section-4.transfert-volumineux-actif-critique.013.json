@@ -1,0 +1,19 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.transfert-volumineux-actif-critique.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Utiliser des listes de référence ou le contexte d’entité maintenus par les sources d’autorité, appliquer des conditions et résultats de risque distincts, puis tester les valeurs absentes et les alias",
+  "rationale": "Des listes de référence et un contexte d’entité alimentés par les sources d’autorité séparent la logique de détection des populations changeantes, tout en permettant de moduler le risque et de traiter alias ou valeurs absentes. Le codage en dur des dirigeants et actifs exige un redéploiement à chaque évolution RH ou d’inventaire et favorise les données obsolètes. Une sévérité maximale uniforme pour tout transfert volumineux supprime la priorisation fondée sur la criticité demandée. La multiplication des règles par population automatise éventuellement les mises à jour, mais accroît objets, tests et incohérences. Une règle unique appuyée sur un contexte maintenu reste donc la conception la plus fiable et évolutive.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/reference/reference-lists",
+    "https://cloud.google.com/chronicle/docs/detection/context-aware-analytics"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.delais-attente-malgre-conteneurs.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "La proportion, au point d'entrée, de requêtes clientes valides servies sans erreur et sous un seuil de latence défini, calculée sur le trafic réel plutôt que sur le seul état interne des conteneurs",
+  "rationale": "La proportion de requêtes réelles valides, sans erreur et sous le seuil de latence au point d'entrée mesure directement la disponibilité et la rapidité vécues par les clients. Les conteneurs Running et probes réussies décrivent l'intérieur du cluster, mais peuvent rester verts lorsque le chemin complet expire. Les déploiements et tests de readiness indiquent la santé du processus de livraison, pas le résultat des requêtes réelles ni leur distribution de latence. CPU, mémoire, file et pods sont utiles au diagnostic de capacité, mais aucun de ces signaux ne constitue à lui seul un résultat utilisateur pour le SLO.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/stackdriver/docs/solutions/slo-monitoring"
+  ]
+}

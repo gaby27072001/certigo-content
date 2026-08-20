@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-2.synchronisation-connaissances-assistant.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une entreprise prépare un assistant interne avec Gemini Enterprise Agent Platform. Les documents résident dans plusieurs sources prises en charge, changent chaque heure et possèdent des listes de contrôle d'accès que les réponses doivent respecter. L'équipe veut une indexation incrémentale, des reprises observables et le moins de code d'intégration possible. Quelle méthode d'ingestion choisir ?",
+  "choices": [
+    "Développer un pipeline Dataflow qui extrait chaque source, reconstruit les ACL et appelle directement les API d'indexation avec sa propre gestion des reprises",
+    "Configurer dans Gemini Enterprise Agent Platform un connecteur pris en charge, une synchronisation incrémentale avec ACL et la supervision des erreurs d'ingestion",
+    "Exporter chaque nuit les documents en JSON sans identités, remplacer l'index de recherche et suspendre les réponses pendant le chargement",
+    "Créer un connecteur personnalisé Discovery Engine par source, stocker les jetons dans le code et republier tous les documents à chaque changement détecté"
+  ]
+}

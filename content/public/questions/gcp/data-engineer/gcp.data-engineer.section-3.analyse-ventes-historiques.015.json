@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.analyse-ventes-historiques.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une table BigQuery de 200 To contient cinq ans de ventes. La majorité des requêtes filtre une période de quelques jours et un petit ensemble de régions, puis agrège par produit. Les chargements ajoutent les ventes quotidiennement. Quelle conception réduit le volume analysé tout en restant simple à exploiter ?",
+  "choices": [
+    "Créer une table annuelle par région, ajouter les ventes quotidiennes dans la table correspondante et générer dynamiquement des unions limitées aux régions demandées",
+    "Conserver une table non partitionnée, créer un index de recherche sur la date et la région et imposer un ORDER BY avant chaque agrégation par produit",
+    "Partitionner par date de vente, clusteriser par région et exiger un filtre de partition pour éviter les scans globaux sur les cinq années",
+    "Créer des tables agrégées quotidiennes par produit et région, remplacer chaque nuit les cinq années complètes et interdire tout accès à la table détaillée"
+  ]
+}

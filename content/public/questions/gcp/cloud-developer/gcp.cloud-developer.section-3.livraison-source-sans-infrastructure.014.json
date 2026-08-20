@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.livraison-source-sans-infrastructure.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une petite équipe possède une application web avec un Dockerfile dans un dépôt local. Elle veut la construire et la déployer sur Cloud Run en une commande, sans gérer séparément la construction et le registre. Quelle action convient ?",
+  "choices": [
+    "Copier le répertoire source dans Cloud Storage, créer une VM avec Docker, construire manuellement l'image sur cette VM avant chaque version et la pousser dans un registre administré par l'équipe.",
+    "Exécuter gcloud run deploy avec --source afin de confier la construction, le stockage de l'image et la création d'une nouvelle révision aux services gérés.",
+    "Créer directement un pod GKE à partir du répertoire local, sans registre d'images, puis monter le code source dans chaque nouveau nœud du cluster.",
+    "Démarrer le serveur depuis Cloud Shell, ouvrir son port avec Web Preview et maintenir la session active au moyen d'un script pour assurer la disponibilité de l'application."
+  ]
+}

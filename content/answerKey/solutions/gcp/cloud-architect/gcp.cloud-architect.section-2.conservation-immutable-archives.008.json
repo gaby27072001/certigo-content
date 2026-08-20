@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-2.conservation-immutable-archives.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Définir puis verrouiller une politique de conservation de sept ans sur le bucket et ajouter une règle de cycle de vie qui change la classe des objets vers Archive après 90 jours, sans intervention ultérieure des administrateurs.",
+  "rationale": "Une politique de conservation de sept ans verrouillée ne peut plus être réduite ou supprimée et interdit la suppression anticipée des objets ; la règle de cycle de vie vers Archive après 90 jours réduit séparément le coût des données rarement consultées. La conservation administrable associée à des journaux et une alerte ne fait que détecter une action après coup et laisse un administrateur modifier la protection. Le versioning et une condition IAM maintenue annuellement restent modifiables et ne garantissent donc pas une durée irréductible. La copie mensuelle laisse une fenêtre sans réplication et le second bucket, faute de politique verrouillée, peut encore être modifié ou supprimé avant sept ans.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/storage/docs/bucket-lock"
+  ]
+}

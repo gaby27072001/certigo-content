@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.acces-prive-api-depuis-site.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des serveurs sur site reliés à Google Cloud par Cloud Interconnect doivent appeler uniquement les API Google compatibles avec VPC Service Controls. Ils ne doivent pas avoir d'accès Internet général. Quelle conception est la plus adaptée ?",
+  "choices": [
+    "Faire sortir les serveurs par un proxy Internet à adresses publiques fixes, autoriser uniquement les domaines des API Google dans le proxy et résoudre ces domaines avec une zone DNS privée sur site",
+    "Configurer Private Google Access pour les hôtes sur site, annoncer la route vers le VIP restricted.googleapis.com et résoudre les domaines Google vers ce VIP",
+    "Déployer Cloud NAT dans le VPC de transit pour faire sortir les requêtes des serveurs sur site vers les adresses publiques des API Google",
+    "Créer un VPC Network Peering entre le VPC de production et un VPC de transit relié au site, puis publier dans ce transit des routes personnalisées vers les plages publiques des API Google"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.echecs-connexion-changement-iam.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Une règle YARA-L multi-événements corrélée par utilisateur, avec fenêtre temporelle, ordre ou conditions adaptés, contexte géographique et résultat de risque",
+  "rationale": "Une règle YARA-L multi-événements relie les échecs, la réussite inhabituelle et le changement IAM par utilisateur et fenêtre temporelle, puis produit un résultat de risque exploitable. Un tableau de bord laisse à un analyste la vérification manuelle de l’identité et de l’ordre, sans fournir une détection reproductible. Une liste d’utilisateurs ayant subi cinq échecs déclenche sur un changement IAM sans exiger la réussite intermédiaire ni une fenêtre commune, ce qui modifie l’hypothèse. Un contrôle Security Health Analytics sur des ressources sans étiquette évalue la posture, pas cette séquence d’authentification. La corrélation temporelle encode seule toutes les conditions du scénario.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/yara-l/yara-l-2-0-examples"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-4.projet-production-public.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Activer les détecteurs Security Health Analytics ou de gestion de posture pertinents dans SCC, puis intégrer les constats et journaux d’audit à Google SecOps pour corréler auteur, activité et risque",
+  "rationale": "Les contrôles de posture SCC détectent l’exposition publique à partir de l’état réel des ressources, puis Google SecOps corrèle le constat aux journaux d’audit pour identifier l’auteur et les activités associées. Une reconstruction fondée uniquement sur YARA-L et les événements ne garantit pas l’état courant et duplique des détecteurs gérés. Une comparaison trimestrielle d’inventaires est trop lente pour la détection rapide demandée. Une déclaration dans un ticket dépend du propriétaire, reste manuelle et n’offre ni exhaustivité ni indépendance. La combinaison des deux plateformes exploite leurs responsabilités complémentaires sans réimplémentation fragile.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/security-command-center/docs/concepts-security-health-analytics"
+  ]
+}

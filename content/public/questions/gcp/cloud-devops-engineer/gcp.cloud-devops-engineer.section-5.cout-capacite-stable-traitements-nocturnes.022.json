@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-5.cout-capacite-stable-traitements-nocturnes.022",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Un traitement comporte une capacité minimale Compute Engine stable 24 h/24 et des tâches supplémentaires nocturnes, reprenables après interruption. L'équipe veut réduire le coût sans compromettre la capacité minimale. Quel portefeuille est le plus adapté ?",
+  "choices": [
+    "Acheter des engagements couvrant le pic nocturne complet et exécuter toutes les tâches sur des VM réservées, ce qui garantit la capacité mais paie en continu un surplus utilisé quelques heures",
+    "Couvrir la base prévisible avec un engagement d'utilisation adapté et exécuter les tâches reprenables sur des VM Spot avec checkpointing, tout en gardant la capacité minimale sur des VM non interruptibles",
+    "Exécuter base et surplus sur des VM Spot réparties dans plusieurs zones avec checkpointing, sans conserver de capacité non interruptible pour la charge minimale requise 24 h/24",
+    "Garder la base à la demande et réserver des VM standard pour toutes les tâches nocturnes, sans profiter du caractère interruptible du batch ni engager la consommation stable"
+  ]
+}

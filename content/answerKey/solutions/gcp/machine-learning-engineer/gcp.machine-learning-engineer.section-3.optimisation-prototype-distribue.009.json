@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.optimisation-prototype-distribue.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Packager l’entraînement personnalisé sur Agent Platform, puis lancer un réglage centralisé d’hyperparamètres avec espace de recherche, métrique de validation et arrêt des essais faibles.",
+  "rationale": "Le réglage géré d’hyperparamètres répond au besoin d’optimisation distribuée : le réglage géré explore l’espace sur plusieurs machines, optimise la métrique de validation, conserve les essais et peut interrompre ceux qui sont peu prometteurs. Mesurer la latence d’endpoints compare le service, pas la qualité d’apprentissage demandée. Répartir manuellement des combinaisons dans des notebooks est plausible à petite échelle, mais la consignation du seul meilleur résultat détruit reproductibilité et comparaison. Répéter une combinaison aléatoire avec plus de workers accélère éventuellement un essai, sans explorer méthodiquement les hyperparamètres ni appliquer l’arrêt précoce.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf",
+    "https://cloud.google.com/learn/certification/machine-learning-engineer",
+    "https://cloud.google.com/vertex-ai/docs/training/hyperparameter-tuning-overview"
+  ]
+}

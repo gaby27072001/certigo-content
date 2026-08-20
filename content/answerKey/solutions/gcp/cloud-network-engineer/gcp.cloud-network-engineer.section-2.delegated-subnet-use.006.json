@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.delegated-subnet-use.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Accorder `roles/compute.networkUser` au compte de service du pipeline sur le seul sous-réseau `apps-prod` du projet hôte, sans droit de modifier le VPC.",
+  "rationale": "Le rôle `roles/compute.networkUser`, accordé au compte de service sur le seul sous-réseau `apps-prod` du projet hôte, autorise l'attachement d'interfaces sans permettre la modification du VPC et respecte donc le moindre privilège. `compute.networkAdmin` au niveau du projet hôte conserve un rayon d'action sur les autres sous-réseaux, routes et pare-feu; une condition IAM ne réduit pas cet ensemble de permissions au simple usage de `apps-prod` et laisse un blast radius excessif. Être Owner ou détenir un rôle personnalisé uniquement dans le projet de service ne confère aucun droit sur une ressource du projet hôte. Recréer un sous-réseau dans le projet de service puis le relier par peering abandonne le contrôle central du Shared VPC; cela duplique aussi la gestion IP et risque un chevauchement, tandis qu'un peering ne partage jamais la propriété du sous-réseau d'origine.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/vpc/docs/shared-vpc#iam_in_shared_vpc"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.stale-emergency-configuration.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Invalider immédiatement et précisément `/config/app.json` dans Cloud CDN, puis utiliser des noms d'objets versionnés lors des prochains déploiements pour éviter les purges courantes.",
+  "rationale": "Une invalidation ciblée de `/config/app.json` évince immédiatement ce chemin sans vider les autres objets; des noms versionnés évitent ensuite les invalidations lors des déploiements ordinaires. Désactiver puis réactiver Cloud CDN agit beaucoup plus largement, réduit le taux de succès du cache et augmente inutilement la charge sur l'origine. Redémarrer ou remplacer les VM d'origine ne supprime pas les copies déjà stockées dans les caches de périphérie, qui sont indépendants du cycle de vie des backends. Enfin, changer maintenant `Cache-Control` ne modifie pas rétroactivement le TTL enregistré avec l'ancienne réponse: chaque entrée existante peut rester fraîche jusqu'à son expiration ou son invalidation.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/cdn/docs/cache-invalidation-overview"
+  ]
+}

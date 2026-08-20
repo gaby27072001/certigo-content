@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-2.prototypage-reglemente-equipe.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une équipe réglementée partage des prototypes PyTorch. Les données BigQuery ne doivent pas transiter par Internet, les chercheurs ne doivent pas utiliser leurs clés personnelles et l’environnement doit être administrable centralement. Quelle configuration choisir ?",
+  "choices": [
+    "Fournir des notebooks locaux connectés par VPN, distribuer des clés de comptes de service à chaque chercheur et gérer les révocations au moyen d’un registre manuel central.",
+    "Déployer des instances Workbench gérées sans IP publique dans un VPC contrôlé, avec comptes de service au moindre privilège et accès IAM attribués aux groupes.",
+    "Utiliser Colab grand public avec des comptes individuels et exporter des extraits BigQuery pseudonymisés, même si l’environnement échappe à l’administration centrale exigée.",
+    "Installer JupyterHub sur une VM privée unique, partager un compte de service puissant entre les kernels et déléguer à l’équipe ML les mises à jour, les sauvegardes et la haute disponibilité."
+  ]
+}

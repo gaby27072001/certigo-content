@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-5.collaboration-infrastructure-partagee.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Publier des modules versionnés, stocker l'état distant avec verrouillage et accès restreint, exécuter plan et apply dans CI après revue, et fédérer l'identité du pipeline pour usurper un compte de service à privilèges minimaux, selon un workflow central et traçable.",
+  "rationale": "Des modules versionnés et un état distant verrouillé établissent une source cohérente, le plan et l'application CI après revue produisent une piste d'audit, et la fédération avec usurpation d'un compte minimal élimine les clés longues durées ; le workflow central couvre donc concurrence, dérive, audit et secrets. Un bucket sans verrouillage et un calendrier humain n'empêchent pas deux écritures concurrentes, tandis que la clé JSON commune reste durable et faiblement attribuable. La station de l'administrateur centralise un point de défaillance, conserve encore une clé et remplace un processus reproductible par des approbations de messagerie. Un état par développeur crée plusieurs sources de vérité à réconcilier, et les identités permanentes ainsi que les créneaux conventionnels ne résolvent ni secrets ni concurrence sur les fondations communes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/docs/terraform/best-practices/root-modules"
+  ]
+}

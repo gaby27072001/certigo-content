@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.analyse-ventes-historiques.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Partitionner par date de vente, clusteriser par région et exiger un filtre de partition pour éviter les scans globaux sur les cinq années",
+  "rationale": "Le partitionnement par date élimine les jours hors période, le clustering par région réduit les blocs lus et le filtre obligatoire évite un scan des cinq années. Des tables annuelles par région multiplient les objets et imposent des unions dynamiques aux analystes. Un index de recherche n’est pas adapté aux filtres structurés de date et région, et ORDER BY ne réduit pas les octets d’une table non partitionnée. Reconstruire chaque nuit toutes les agrégations coûte cher et interdire la table détaillée empêche les analyses imprévues par produit.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/data-engineer",
+    "https://cloud.google.com/bigquery/docs/partitioned-tables"
+  ]
+}

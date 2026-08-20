@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-5.ecart-normalisation-production.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Un modèle fonctionne en validation mais se dégrade en ligne. L’enquête montre que l’entraînement normalise les montants en Python tandis que le service Java applique une formule légèrement différente. L’équipe construit une pipeline de production. Quelle correction prévient durablement ce problème ?",
+  "choices": [
+    "Réentraîner le modèle sur un jeu contenant alternativement les valeurs normalisées par Python et Java, puis augmenter les époques afin qu’il tolère les deux distributions à l’inférence.",
+    "Versionner une transformation unique réutilisée à l’entraînement et au service, valider schéma et statistiques dans la pipeline, puis bloquer toute promotion divergente.",
+    "Conserver les deux codes et tester quelques montants fixes dans chaque dépôt, avec une tolérance autorisée avant déploiement.",
+    "Calculer toutes les caractéristiques dans BigQuery avant l’entraînement, mais continuer à recalculer la normalisation en Java pour les nouvelles requêtes afin de préserver la faible latence."
+  ]
+}

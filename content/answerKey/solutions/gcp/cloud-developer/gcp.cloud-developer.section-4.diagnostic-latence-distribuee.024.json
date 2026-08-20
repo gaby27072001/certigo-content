@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.diagnostic-latence-distribuee.024",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Propager le contexte de trace dans les appels et les attributs Pub/Sub, exporter des spans et inclure l'identifiant de trace dans les journaux structurés.",
+  "rationale": "Propager le contexte de trace à travers HTTP et les attributs Pub/Sub relie les spans synchrones et asynchrones; l'identifiant dans les journaux structurés permet alors de localiser le segment lent. Rapprocher des messages différents par seconde d'émission est ambigu sous concurrence et ne reconstruit pas causalement une requête. Activer DEBUG partout augmente durablement coût et bruit, et une recherche textuelle sans contexte propagé reste fragile. Un compteur global indique une tendance agrégée, mais aucune dimension de service ni span ne permet d'attribuer la latence à un composant précis.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/trace/docs/trace-context"
+  ]
+}

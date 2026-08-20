@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-4.liste-volumineuse-econome.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Suivre chaque pageToken jusqu'à épuisement, demander seulement les champs utiles lorsque c'est possible et mettre brièvement en cache la liste complète.",
+  "rationale": "Suivre chaque pageToken garantit l'exhaustivité; demander seulement les champs affichés réduit le transfert et un cache court évite des listes répétées tout en respectant la fenêtre de fraîcheur. Ignorer les jetons après une grande première page tronque le résultat et conserver toutes les propriétés gaspille mémoire et bande passante. Des appels parallèles identiques relisent la même première page et le nombre d'éléments reçu ne remplace pas le jeton fourni par l'API. Un appel détaillé par ressource connue produit un schéma N+1 coûteux, consomme davantage de quota et ne découvre pas nécessairement les nouvelles ressources.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/storage/docs/json_api/v1/objects/list"
+  ]
+}

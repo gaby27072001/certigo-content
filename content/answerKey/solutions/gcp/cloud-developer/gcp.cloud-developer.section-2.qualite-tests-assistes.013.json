@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.qualite-tests-assistes.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Faire générer des cas par l'assistant, les relire selon les exigences, compléter les limites et exécuter la suite déterministe dans le pipeline CI.",
+  "rationale": "La génération assistée suivie d'une relecture par rapport aux exigences, de l'ajout des cas limites et d'une exécution CI conserve la responsabilité humaine tout en accélérant la rédaction. Une suite qui compile et touche chaque méthode peut néanmoins contenir des assertions fausses ou ignorer une règle réglementaire. Des instantanés générés sans assertions métier risquent d'entériner une sortie incorrecte lors d'une mise à jour groupée. Modifier des données de production pour tester les hypothèses du modèle crée un risque opérationnel et ne fournit pas un test isolé ou reproductible.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/gemini/docs/codeassist/write-code-gemini"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-2.identites-utilisateur-fragmentees.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Dans Google SecOps, les connexions VPN utilisent l’adresse de courriel comme identité, les événements EDR utilisent un nom de compte court et l’annuaire RH fournit le service et le responsable. Les analystes voient trois entités pour la même personne, ce qui dilue son risque. Que faut-il mettre en place ?",
+  "choices": [
+    "Concaténer le courriel, le compte court et les attributs RH dans la description de chaque événement, puis adapter les règles pour comparer cette chaîne enrichie sans créer de données d’entité",
+    "Ingestionner l’annuaire comme données d’entité et définir des alias stables reliant courriel, identifiant de compte et autres identifiants fiables avant de valider les correspondances",
+    "Remplacer dans l’historique les identités VPN et EDR par le nom complet de l’annuaire, puis recalculer les scores de risque en supposant que ce nom identifie durablement une seule personne",
+    "Créer une règle par source, rapprocher les alertes chaque semaine sur le nom affiché et additionner leurs scores dans un tableau de bord sans relier les données d’entité"
+  ]
+}

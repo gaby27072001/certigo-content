@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-5.tests-messagerie-isoles.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Exécuter les tests locaux et CI contre l'émulateur Pub/Sub avec les bibliothèques clientes, puis valider séparément les vraies API et IAM dans un projet éphémère doté d'une identité de service et supprimé après les tests, avec des rôles IAM minimaux.",
+  "rationale": "L'émulateur Pub/Sub donne aux pull requests une boucle rapide, locale, isolée et sans ressource cloud ; le test séparé dans un projet éphémère valide ensuite les véritables API avec des rôles IAM minimaux avant production, puis son nettoyage préserve l'isolation. Créer des sujets dans le projet de production viole directement l'isolation et peut laisser des ressources orphelines malgré le préfixe et le contrôle nocturne. Un adaptateur simulé teste le métier, mais pas le protocole du service ni les autorisations effectives, et lire Terraform ne prouve pas le comportement IAM. Une préproduction partagée avec identités de développeurs et validation manuelle n'est ni isolée par pull request ni entièrement reproductible, et ne fournit pas la boucle rapide demandée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/pubsub/docs/emulator"
+  ]
+}

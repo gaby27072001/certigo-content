@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.ecarts-financiers-apres-conversion.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Tester types, précision, contraintes, valeurs par défaut, séquences et logique convertie, comparer des sommes de contrôle, puis rejouer des transactions DML représentatives réelles avant le basculement",
+  "rationale": "Valider types, précision, contraintes, valeurs par défaut, séquences et logique, puis comparer les données et rejouer les DML métier vérifie structure et comportement avant bascule. Les seuls nombres de tables et de lignes détectent des omissions grossières, pas une modification de montants ou d'identités. L'absence d'erreur du transport CDC confirme la livraison, pas l'équivalence sémantique dans PostgreSQL. Désactiver contraintes, valeurs par défaut et séquences fait accepter davantage d'écritures, mais masque les écarts et compromet l'intégrité au lieu de corriger la conversion.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/database-migration/docs/postgres/verify-migration"
+  ]
+}

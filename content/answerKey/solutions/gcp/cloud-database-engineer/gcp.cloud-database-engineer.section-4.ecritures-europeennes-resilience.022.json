@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.ecritures-europeennes-resilience.022",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Choisir une configuration Spanner multirégionale dont les régions en lecture-écriture assurent la résilience demandée et dont le placement du leader par défaut reste proche de la majorité des écritures européennes",
+  "rationale": "Choisir une configuration multirégionale dont les régions de vote satisfont la résilience et dont le leader est proche des écritures européennes traite ensemble disponibilité et latence de commit. Le préfixe du nom d'une base ne choisit pas sa région de leader, même avec routage orienté leader. Des buckets d'exports européens et américains concernent la sauvegarde, pas quorum ou placement des transactions. Une instance régionale américaine avec cache européen accélère certaines lectures, mais ne fournit ni disponibilité multirégionale ni trajet d'écriture court.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/spanner/docs/instance-configurations",
+    "https://cloud.google.com/spanner/docs/leader-aware-routing"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-3.conformite-comptes-rendus-juridiques.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un assistant doit produire des comptes rendus dans un format juridique interne très stable. Le prompting avec quelques exemples et une récupération documentaire donnent déjà des faits exacts, mais le modèle ne respecte le style et la structure que dans 78 % des cas. L’entreprise possède 12 000 paires entrée-sortie validées. Quelle étape suivante est la plus justifiée ?",
+  "choices": [
+    "Augmenter fortement le nombre d’exemples et de documents récupérés dans chaque prompt afin de démontrer implicitement le format, même si cela accroît les jetons et ne corrige pas toujours le style.",
+    "Évaluer l’affinage supervisé d’un modèle Gemini pris en charge sur les paires validées, avec test séparé et comparaison coût-qualité contre la référence prompting/RAG.",
+    "Entraîner depuis zéro un modèle fondamental sur les 12 000 paires, avec un cluster d’accélérateurs dédié à cette architecture.",
+    "Ajouter un validateur de format qui rejette les réponses non conformes et demande une nouvelle génération identique, sans exploiter les 12 000 exemples validés ni corriger le comportement du modèle."
+  ]
+}

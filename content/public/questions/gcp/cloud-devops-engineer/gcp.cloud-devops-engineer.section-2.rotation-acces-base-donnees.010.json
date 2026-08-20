@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-2.rotation-acces-base-donnees.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une application Cloud Run utilise un mot de passe de base de données. Le build n'en a pas besoin, le secret doit pouvoir être renouvelé sans reconstruire l'image et seuls les processus en production doivent le lire. Quelle mise en œuvre est recommandée ?",
+  "choices": [
+    "Fournir le secret au build via un montage éphémère qui ne crée pas de couche, puis l'écrire dans la configuration de l'image afin que Cloud Run puisse l'utiliser sans accès à Secret Manager",
+    "Conserver le secret dans Secret Manager et l'injecter à l'exécution avec une identité Cloud Run autorisée sur ce secret ; référencer sa version et la faire évoluer sans reconstruire l'image ni exposer la valeur au pipeline",
+    "Chiffrer le mot de passe avec Cloud KMS, passer le ciphertext comme argument de build et accorder à l'image une clé statique de déchiffrement, ce qui impose toujours une reconstruction lors de la rotation",
+    "Lire Secret Manager depuis le pipeline, écrire la valeur dans une variable Cloud Run versionnée puis retirer au service l'accès au secret, de sorte que chaque rotation exige un nouveau déploiement"
+  ]
+}

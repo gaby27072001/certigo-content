@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.suppression-commandes-recente.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Activer les sauvegardes automatiques et les journaux binaires pour le PITR avec une rétention adaptée au RPO, puis conserver séparément les exports mensuels pendant sept ans selon la politique d'archive",
+  "rationale": "Les sauvegardes automatiques et journaux binaires configurés pour le PITR restaurent près de l'instant de suppression, tandis que les exports mensuels séparés répondent aux sept ans de rétention. Un export mensuel unique satisfait l'archive, mais son RPO peut atteindre un mois. Une réplique en lecture protège certaines pannes, mais reproduit normalement la suppression et n'est pas une sauvegarde contre l'erreur humaine. Les disques internes de Cloud SQL ne sont pas des disques Compute Engine que le client peut prendre en snapshot toutes les cinq minutes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.authentification-centralisee-sessions.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une société utilise Cloud Identity et souhaite que ses employés s'authentifient auprès de son IdP d'entreprise. Elle doit centraliser la révocation, imposer la validation en deux étapes selon le risque et limiter la durée des sessions Google. Quelle approche est la plus appropriée ?",
+  "choices": [
+    "Créer pour chaque employé un compte de service avec une clé individuelle, puis révoquer la clé dans un processus central lors du départ de l’employé",
+    "Conserver l'authentification Google, puis utiliser des conditions IAM fondées sur l'heure, le niveau d'accès et l'appareil pour limiter les autorisations et la durée effective des accès",
+    "Configurer le SSO SAML avec l'IdP, appliquer l'authentification multifacteur selon le risque dans l'IdP et définir la politique de session dans Cloud Identity",
+    "Placer les employés dans un groupe Lecteur au niveau de l’organisation et gérer révocations et durées d’accès par ses appartenances"
+  ]
+}

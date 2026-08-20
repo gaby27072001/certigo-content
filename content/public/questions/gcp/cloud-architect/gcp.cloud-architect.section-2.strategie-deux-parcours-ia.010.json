@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-2.strategie-deux-parcours-ia.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une entreprise lance deux parcours IA. Le premier réentraîne chaque semaine un modèle propriétaire sur GPU, exige des artefacts reproductibles et interdit la promotion si le score régresse. Le second doit étiqueter des images et transcrire des enregistrements avec des fonctions standard, sans entraînement ni assistant destiné aux employés. Quelle architecture convient ?",
+  "choices": [
+    "Exécuter le réentraînement dans un notebook sur une VM GPU persistante avec validation manuelle du score, puis créer des agents Gemini Enterprise et des notebooks NotebookLM afin que les employés produisent et recopient les étiquettes et transcriptions standard.",
+    "Choisir des modèles multimodaux dans Model Garden, les affiner pour les deux parcours sur un cluster GKE équipé de GPU, orchestrer les étapes avec Argo Workflows et exploiter des endpoints dédiés pour le modèle propriétaire comme pour les fonctions standard.",
+    "Orchestrer le modèle propriétaire avec Agent Platform Pipelines, exécuter son entraînement sur AI Hypercomputer avec accélérateurs à la demande et une porte d'évaluation, puis appeler les API Google AI Vision et Speech-to-Text préentraînées pour le parcours standard.",
+    "Créer des Agent Platform Pipelines pour entraîner deux modèles personnalisés sur AI Hypercomputer, tracer leurs métadonnées, évaluer chaque version et exploiter des endpoints accélérés distincts, y compris pour l'étiquetage et la transcription qui ne nécessitent aucune personnalisation."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-5.cle-compromise-pipeline-critique.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Désactiver ou supprimer la clé compromise, bloquer les indicateurs et sessions associés, surveiller les autres identifiants du compte et préparer une identité de remplacement pour le pipeline avant toute restriction plus large",
+  "rationale": "La révocation de la clé confirmée compromise coupe immédiatement le vecteur connu ; le blocage des sessions associées, la surveillance des autres identifiants et une identité de remplacement maintiennent le pipeline avec un confinement extensible. La désactivation de tout le compte et l’arrêt des traitements imposent un impact disproportionné alors que les preuves désignent une seule clé. Le maintien de cette clé active sous surveillance continue d’exposer les données malgré une compromission établie. La suppression du bucket, de l’identité et des journaux détruit service et preuves sans nécessité. Une mesure ciblée est la seule action initiale à la fois rapide, réversible et proportionnée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/iam/docs/keys-create-delete"
+  ]
+}

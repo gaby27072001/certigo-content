@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.suppression-commandes-recente.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Une application Cloud SQL for MySQL doit pouvoir revenir à l'état précédant de dix minutes une suppression accidentelle, avec un RPO maximal de cinq minutes. L'équipe doit aussi conserver une copie mensuelle pendant sept ans. Quelle conception répond aux deux besoins ?",
+  "choices": [
+    "Produire un export logique mensuel et le conserver sept ans, puis l'utiliser pour toute restauration opérationnelle, ce qui répond à l'archive mais offre un RPO pouvant atteindre un mois au lieu de cinq minutes",
+    "Créer une réplique en lecture interrégionale sans sauvegardes et la promouvoir après une suppression, ce qui protège d'une panne régionale mais réplique également l'erreur humaine avant l'intervention",
+    "Activer les sauvegardes automatiques et les journaux binaires pour le PITR avec une rétention adaptée au RPO, puis conserver séparément les exports mensuels pendant sept ans selon la politique d'archive",
+    "Créer toutes les cinq minutes un snapshot du disque sous-jacent depuis Compute Engine et conserver les snapshots mensuels, ce qui semble satisfaire le RPO mais n'est pas possible sur les disques internes du service managé"
+  ]
+}

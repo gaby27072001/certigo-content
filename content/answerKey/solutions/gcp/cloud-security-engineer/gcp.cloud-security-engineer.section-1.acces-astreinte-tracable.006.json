@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.acces-astreinte-tracable.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Autoriser le groupe d'astreinte à emprunter un compte de service BigQuery à privilèges minimaux, sans créer de clé",
+  "rationale": "L'emprunt d'un compte de service produit des identifiants de courte durée sans clé et les journaux conservent l'identité de l'ingénieur délégant ainsi que celle du compte emprunté. Un mot de passe d'utilisateur technique partagé supprime l'attribution individuelle malgré les journaux d'accès. Des clés JSON individuelles restent des secrets durables exportables et leur révocation après usage dépend d'une opération humaine. Le rôle Administrateur BigQuery sur tous les projets de production est beaucoup plus large que la lecture d'un jeu de données; une condition récurrente d'horaires ne le réduit ni à cette ressource ni à une intervention précise.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/iam/docs/service-account-impersonation"
+  ]
+}

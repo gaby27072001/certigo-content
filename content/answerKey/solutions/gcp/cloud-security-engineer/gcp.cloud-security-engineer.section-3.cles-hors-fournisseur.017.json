@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.cles-hors-fournisseur.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Cloud External Key Manager avec une clé externe référencée par Cloud KMS",
+  "rationale": "Cloud EKM permet à Cloud KMS de référencer une clé maintenue dans le gestionnaire externe pour les services compatibles; l'indisponibilité ou le refus externe peut empêcher de nouvelles opérations cryptographiques. Le chiffrement Google par défaut ne donne aucun contrôle client du matériel ni point de coupure externe. Une CMEK logicielle native reste stockée dans Google Cloud, contrairement à l'exigence de résidence. Transmettre la clé à chaque requête via une passerelle distribue son matériel hors du gestionnaire, exige une intégration applicative non native pour chaque service et ne fournit pas le contrôle Cloud KMS demandé.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/kms/docs/ekm"
+  ]
+}

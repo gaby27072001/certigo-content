@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-1.continuite-transactions-regionales.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Déployer Spanner dans une configuration multirégionale, placer les services stateless derrière un équilibreur de charge global et tester régulièrement le basculement régional.",
+  "rationale": "Spanner multirégional réplique synchroniquement les données avec cohérence forte et ne demande pas de promotion de base ; les services stateless derrière l'équilibreur global permettent donc de tenir le RPO, le RTO et l'absence de basculement manuel. Cloud SQL haute disponibilité protège une zone, mais son réplica interrégional asynchrone doit être promu selon le runbook et les sauvegardes nocturnes ne garantissent pas le RPO. Deux bases Firestore indépendantes avec résolution applicative introduisent des conflits, ce qui ne préserve pas la sémantique fortement cohérente des écritures de règlement. PostgreSQL sur VM exige également de promouvoir la réplique et de modifier DNS manuellement, sans garantie de terminer ces opérations dans les quinze minutes.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-architect",
+    "https://cloud.google.com/spanner/docs/instance-configurations"
+  ]
+}

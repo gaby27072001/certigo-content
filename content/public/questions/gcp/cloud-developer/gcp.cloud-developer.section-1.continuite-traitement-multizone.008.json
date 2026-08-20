@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.continuite-traitement-multizone.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un traitement avec état doit fonctionner sur GKE malgré la perte d'une zone. L'application exige un contrôle Kubernetes, et les pods doivent être répartis entre zones avec une capacité de contrôle hautement disponible. Quelle option est la plus adaptée ?",
+  "choices": [
+    "Créer un cluster GKE zonal, fixer les pods et leurs volumes sur un même pool de nœuds, puis recréer manuellement le cluster après une panne de zone.",
+    "Déployer le traitement sur Cloud Run et conserver l'état durable dans le système de fichiers en mémoire de chaque instance entre les requêtes.",
+    "Installer Kubernetes sur des groupes d'instances non gérés dans deux zones et maintenir soi-même le plan de contrôle ainsi que la réplication du stockage.",
+    "Créer un cluster GKE régional, répartir les pods avec des contraintes de topologie et choisir un stockage persistant compatible avec une reprise zonale testée."
+  ]
+}

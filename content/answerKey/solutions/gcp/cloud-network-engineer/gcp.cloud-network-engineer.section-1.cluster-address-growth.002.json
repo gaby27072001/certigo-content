@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-1.cluster-address-growth.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Réserver des plages secondaires distinctes pour pods et services, dimensionner celle des pods selon les pods par nœud et prévoir des plages de pods supplémentaires.",
+  "rationale": "Dans un cluster VPC-native, les nœuds consomment la plage principale, tandis que les pods et les services doivent disposer de plages secondaires séparées; la plage de pods se dimensionne aussi selon le maximum de pods par nœud, et des plages de pods supplémentaires peuvent accompagner la croissance. Une très grande plage principale ne fournit donc aucune adresse de pod. Une plage secondaire commune aux pods et services ne respecte pas ces allocations distinctes, et réduire tardivement les pods par nœud ne corrige pas une capacité initiale insuffisante. Enfin, une annonce Cloud Router rend un préfixe routable, mais ne crée ni plage secondaire ni allocation Alias IP: GKE ne peut pas attribuer aux pods des adresses provenant d'une simple route annoncée.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/kubernetes-engine/docs/concepts/alias-ips"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-4.fatigue-astreinte-degradation-lente.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un service a un SLO de disponibilité sur 30 jours. Les alertes actuelles se déclenchent sur chaque erreur isolée et fatiguent l'astreinte, mais elles détectent mal une dégradation lente qui épuisera le budget. Quelle politique est la plus actionnable ?",
+  "choices": [
+    "Déclencher une page pour chaque erreur après une minute et ajouter un silence nocturne, sans relier le volume d'erreurs au trafic, au budget disponible ou à plusieurs fenêtres d'observation",
+    "Attendre que la disponibilité calculée sur trente jours passe sous le SLO, puis ouvrir un incident unique, sans signal anticipé lorsqu'une combustion rapide ou lente menace le budget",
+    "Utiliser des alertes multi-fenêtres sur le burn rate du budget d'erreur, avec page pour la combustion rapide et ticket pour la combustion lente, selon des seuils alignés sur le SLO mesuré",
+    "Alerter sur CPU, mémoire et nombre de pods avec des seuils statiques, même si ces indicateurs techniques ne mesurent pas les requêtes valides qui consomment le budget d'erreur"
+  ]
+}

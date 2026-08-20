@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-1.pics-trafic-api.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe doit exposer une API HTTP conteneurisée sans état. La charge passe de zéro à plusieurs milliers de requêtes par minute, sans besoin de contrôler les nœuds ni Kubernetes. Quelle architecture minimise l'exploitation tout en adaptant automatiquement la capacité ?",
+  "choices": [
+    "Déployer le conteneur sur Cloud Run avec une concurrence et des limites d'instances adaptées aux variations rapides de trafic.",
+    "Créer un groupe d'instances Compute Engine à taille fixe derrière un équilibreur HTTP et gérer ses modèles d'instance pour chaque mise à jour.",
+    "Créer un cluster GKE Standard et gérer les pools de nœuds ainsi que le nombre de réplicas avec des procédures d'exploitation internes.",
+    "Exécuter un job Cloud Build par requête entrante et conserver son résultat dans Artifact Registry avant de répondre au client HTTP."
+  ]
+}

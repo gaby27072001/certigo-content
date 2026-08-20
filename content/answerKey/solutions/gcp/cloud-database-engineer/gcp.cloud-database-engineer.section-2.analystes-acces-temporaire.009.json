@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.analystes-acces-temporaire.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Activer l'authentification IAM de base, créer un utilisateur IAM distinct et révocable par analyste, puis accorder dans PostgreSQL uniquement SELECT sur le schéma reporting avec les privilèges minimaux requis, sans mot de passe durable",
+  "rationale": "L'authentification IAM de base associée aux privilèges PostgreSQL SELECT du seul schéma reporting supprime les mots de passe durables tout en séparant identité cloud et autorisation SQL. Project Owner centralise le départ, mais accorde des pouvoirs excessifs et ne limite pas les requêtes à SELECT. Un compte PostgreSQL partagé en lecture seule restreint les tables, mais conserve un secret durable et empêche l'attribution individuelle. Cloud SQL Viewer lit les métadonnées de ressource ; il ne crée ni utilisateur de base ni privilège SELECT sur les tables.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/iam-authentication"
+  ]
+}

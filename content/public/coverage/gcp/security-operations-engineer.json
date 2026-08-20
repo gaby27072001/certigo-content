@@ -3,13 +3,79 @@
   "provider": "gcp",
   "certification": "gcp:security-operations-engineer",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "section-1", "title": "Platform operations", "weightPercent": 14, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-2", "title": "Data management", "weightPercent": 14, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-3", "title": "Threat hunting", "weightPercent": 19, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-4", "title": "Detection engineering", "weightPercent": 22, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-5", "title": "Incident response", "weightPercent": 21, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-6", "title": "Observability", "weightPercent": 10, "weightType": "approximate", "questionIds": [] }
+    {
+      "objective": "section-1",
+      "title": "Platform operations",
+      "weightPercent": 14,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.security-operations-engineer.section-1.delai-triage-multisysteme.001",
+        "gcp.security-operations-engineer.section-1.acces-donnees-filiale.002",
+        "gcp.security-operations-engineer.section-1.identites-externes-pipeline.003"
+      ]
+    },
+    {
+      "objective": "section-2",
+      "title": "Data management",
+      "weightPercent": 14,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.security-operations-engineer.section-2.volume-pare-feu-excessif.004",
+        "gcp.security-operations-engineer.section-2.nouveau-champ-hachage-edr.005",
+        "gcp.security-operations-engineer.section-2.identites-utilisateur-fragmentees.006"
+      ]
+    },
+    {
+      "objective": "section-3",
+      "title": "Threat hunting",
+      "weightPercent": 19,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.security-operations-engineer.section-3.activite-identite-exposee.007",
+        "gcp.security-operations-engineer.section-3.domaine-recemment-signale.008",
+        "gcp.security-operations-engineer.section-3.acces-rares-systemes-paiement.009",
+        "gcp.security-operations-engineer.section-3.compte-sauvegarde-risque-eleve.010",
+        "gcp.security-operations-engineer.section-3.processus-administration-inhabituel.011"
+      ]
+    },
+    {
+      "objective": "section-4",
+      "title": "Detection engineering",
+      "weightPercent": 22,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.security-operations-engineer.section-4.echecs-connexion-changement-iam.012",
+        "gcp.security-operations-engineer.section-4.transfert-volumineux-actif-critique.013",
+        "gcp.security-operations-engineer.section-4.alertes-voyage-vpn.014",
+        "gcp.security-operations-engineer.section-4.communications-dns-suspectes.015",
+        "gcp.security-operations-engineer.section-4.projet-production-public.016"
+      ]
+    },
+    {
+      "objective": "section-5",
+      "title": "Incident response",
+      "weightPercent": 21,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.security-operations-engineer.section-5.vm-production-compromise.017",
+        "gcp.security-operations-engineer.section-5.cle-compromise-pipeline-critique.018",
+        "gcp.security-operations-engineer.section-5.incident-dirigeant-interrompu.019",
+        "gcp.security-operations-engineer.section-5.reprises-transfert-regional.020",
+        "gcp.security-operations-engineer.section-5.exfiltration-endpoint-cloud.021"
+      ]
+    },
+    {
+      "objective": "section-6",
+      "title": "Observability",
+      "weightPercent": 10,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.security-operations-engineer.section-6.visibilite-fonctionnement-soc.022",
+        "gcp.security-operations-engineer.section-6.succes-connexion-manquants.023",
+        "gcp.security-operations-engineer.section-6.baisse-alertes-trimestrielle.024"
+      ]
+    }
   ]
 }

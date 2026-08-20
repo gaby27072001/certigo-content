@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-2.partial-egress-inspection.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Créer une route basée sur des règles filtrant la source `10.42.0.0/20` et utilisant l'équilibreur interne des appliances comme prochain saut, avec une priorité adaptée.",
+  "rationale": "Une route basée sur des règles peut sélectionner la source `10.42.0.0/20` et envoyer uniquement ces flux vers l'équilibreur interne qui fournit un prochain saut stable aux appliances. Remplacer la route par défaut pour toutes les VM puis maintenir une liste d'exceptions inverse la sélection demandée et accroît le risque d'acheminer d'autres sous-réseaux vers l'inspection. Une route par défaut exportée depuis un VPC pair ne sélectionne pas la plage source locale, et les pare-feu du pair ne choisissent aucun prochain saut. De même, une règle de pare-feu ingress peut autoriser ou refuser selon source et destination, mais elle ne réécrit pas la décision de routage vers l'adresse d'une appliance.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/vpc/docs/policy-based-routes"
+  ]
+}

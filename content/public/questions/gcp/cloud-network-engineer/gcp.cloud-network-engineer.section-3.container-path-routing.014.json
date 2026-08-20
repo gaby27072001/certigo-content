@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.container-path-routing.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une plateforme GKE doit exposer deux services HTTP par chemins, utiliser un équilibrage Google Cloud géré et envoyer le trafic directement aux pods afin d'éviter un saut supplémentaire par les nœuds. Elle souhaite aussi faire évoluer la configuration vers des fonctions Gateway API. Quelle approche choisir ?",
+  "choices": [
+    "Créer un Service NodePort par application, publier toutes les IP de nœuds dans Cloud DNS et faire implémenter le routage par chemin à un proxy autonome exécuté sur chaque nœud.",
+    "Déployer Gateway et HTTPRoute via le contrôleur GKE, avec des Services utilisant des NEGs conteneur-natifs afin que l'équilibreur atteigne directement les pods.",
+    "Créer un tunnel HA VPN par service entre le frontend et le cluster, puis utiliser des routes personnalisées distinctes pour distribuer chaque chemin HTTP vers ses pods.",
+    "Configurer Cloud NAT avec une adresse de frontend réservée, associer chaque Service à cette adresse et définir des règles NAT différentes selon le chemin de la requête HTTP."
+  ]
+}

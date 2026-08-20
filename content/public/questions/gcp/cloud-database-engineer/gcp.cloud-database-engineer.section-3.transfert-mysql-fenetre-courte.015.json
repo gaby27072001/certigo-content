@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-3.transfert-mysql-fenetre-courte.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une entreprise migre un MySQL 8 de 4 To depuis son centre de données vers Cloud SQL for MySQL. Elle dispose d'une connectivité privée, ne peut arrêter les écritures que 15 minutes et veut que la copie initiale puis les changements soient gérés par un service Google. Quelle stratégie choisir ?",
+  "choices": [
+    "Arrêter MySQL, copier ses fichiers physiques vers une VM Google Cloud puis tenter de les monter dans Cloud SQL, ce qui pourrait limiter le transfert logique mais n'est pas pris en charge par le stockage du service managé",
+    "Commencer un export logique complet au début de la fenêtre de quinze minutes puis l'importer dans Cloud SQL, ce qui est simple et homogène mais ne peut raisonnablement déplacer 4 To dans l'interruption autorisée",
+    "Créer une migration continue Database Migration Service, exécuter la copie initiale pendant l'activité, laisser le CDC rattraper la source, contrôler le retard et la cohérence, puis figer brièvement les écritures avant promotion",
+    "Configurer manuellement une réplique externe Cloud SQL via l'adresse privée de la source et la promouvoir à faible retard, ce qui peut réduire la coupure mais n'apporte pas l'orchestration et les validations gérées demandées"
+  ]
+}

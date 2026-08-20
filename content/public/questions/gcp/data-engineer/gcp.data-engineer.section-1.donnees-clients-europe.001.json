@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-1.donnees-clients-europe.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un groupe européen centralise dans BigQuery des données clients contenant des identifiants personnels. Les analystes doivent interroger les attributs non sensibles, tandis qu'un petit groupe conformité peut voir les colonnes sensibles. Les données et les clés doivent rester dans l'Union européenne, et la classification doit être réutilisable entre jeux de données. Quelle conception répond le mieux à ces exigences avec un minimum de logique applicative ?",
+  "choices": [
+    "Créer les jeux de données BigQuery et les clés Cloud KMS dans l'UE, gérer les tags de stratégie dans Knowledge Catalog et attribuer les accès avec des groupes IAM",
+    "Créer le jeu de données principal dans la multirégion US, pseudonymiser les colonnes avec Cloud DLP, publier des vues autorisées et copier chaque nuit un instantané chiffré dans l'UE",
+    "Centraliser les tables dans un projet mondial, appliquer des règles d'accès conditionnel aux vues et utiliser les journaux d'audit pour détecter les consultations non autorisées",
+    "Conserver les données brutes dans Cloud Storage en Europe, exposer des tables externes BigQuery et gérer séparément dans chaque requête les colonnes accessibles à chaque analyste"
+  ]
+}

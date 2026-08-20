@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-3.saturation-pendant-pic-trimestriel.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Tester la charge, prévoir les besoins, relever les quotas et réserver la capacité de base nécessaire, puis laisser l'autoscaler absorber la demande dans ces limites",
+  "rationale": "Les tests et prévisions quantifient le besoin, la hausse de quota enlève la limite administrative, la réservation sécurise la base critique, et l'autoscaler fournit le surplus sans payer le maximum toute l'année. Relever le quota puis créer manuellement des instances ne réserve aucune capacité régionale et n'a pas été validé sous charge avant le pic. Répartir sur deux zones améliore la résilience zonale, mais ne contourne ni le quota régional déjà saturé ni l'absence de réservation. Les VM Spot avec checkpointing conviennent à du batch interruptible, pas à la capacité garantie exigée par le service interactif pendant un pic prévisible.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/compute/docs/instances/reservations-overview"
+  ]
+}

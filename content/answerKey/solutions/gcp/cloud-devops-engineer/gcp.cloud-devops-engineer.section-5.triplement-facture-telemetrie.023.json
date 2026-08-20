@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-5.triplement-facture-telemetrie.023",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Garder intégralement les erreurs, échantillonner les succès et traces normales, exclure les DEBUG inutiles et adapter la rétention de chaque bucket à son usage",
+  "rationale": "Conserver toutes les erreurs, échantillonner succès et traces ordinaires, exclure DEBUG et adapter les rétentions réduit les volumes à faible valeur sans retirer le contexte rare nécessaire aux incidents. Désactiver journaux et traces laisse seulement des métriques agrégées, insuffisantes pour expliquer une erreur applicative. Conserver 100 % des événements et modifier la durée des tableaux de bord n'agit ni sur ingestion ni sur stockage, causes directes de la facture. Remplacer chaque erreur par un compteur quotidien supprime événement et trace, tandis qu'échantillonner surtout les succès conserve le signal le moins utile à l'enquête.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/trace/docs/trace-sampling"
+  ]
+}

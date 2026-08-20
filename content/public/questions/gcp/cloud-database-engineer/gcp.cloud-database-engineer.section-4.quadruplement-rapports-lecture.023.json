@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.quadruplement-rapports-lecture.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un service de rapports sur Cloud SQL doit absorber une multiplication par quatre des lectures mensuelles sans ralentir les transactions. Les rapports tolèrent quelques secondes de retard. L'équipe veut déployer progressivement et détecter toute insuffisance de la réplication. Quelle mise en œuvre convient le mieux ?",
+  "choices": [
+    "Exécuter tous les rapports sur le primaire, augmenter sa taille avant la clôture et allonger les délais d'expiration, ce qui peut absorber le pic mais laisse les lectures concurrencer les transactions critiques",
+    "Créer une seconde instance principale, copier les données chaque nuit et envoyer les rapports vers cette copie, ce qui décharge le primaire mais fournit des données trop anciennes et aucune supervision du retard continu",
+    "Créer des répliques en lecture dimensionnées, router les rapports tolérant le retard vers elles, puis alerter sur retard, CPU, connexions, stockage et erreurs ciblés avant d'ajuster leur nombre ou leur taille",
+    "Restaurer chaque mois une sauvegarde dans une instance dédiée aux rapports et la redimensionner pour le pic, ce qui isole la charge mais ne respecte pas la tolérance de seulement quelques secondes de retard"
+  ]
+}

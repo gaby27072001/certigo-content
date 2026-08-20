@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-2.preparation-evenements-volumineux.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Un pipeline prépare chaque jour 8 To d’événements JSON depuis Cloud Storage. Il doit appliquer des transformations complexes avec fenêtres, absorber des volumes variables et écrire des exemples TFRecord. L’équipe veut un service géré et reproductible. Quel outil convient le mieux ?",
+  "choices": [
+    "Implémenter les transformations dans Apache Beam sur Dataflow, avec autoscaling, tests et versionnement, puis écrire les exemples TFRecord dans Cloud Storage.",
+    "Dimensionner une instance Colab Enterprise à forte mémoire, y charger successivement les fichiers des 8 To avec pandas et conserver l’état intermédiaire sur le disque du notebook.",
+    "Charger les JSON dans BigQuery, exécuter une procédure SQL planifiée pour les fenêtres complexes, puis exporter quotidiennement les résultats avec un script TFRecord distinct.",
+    "Créer un cluster Dataproc permanent dimensionné pour le pic, développer les transformations Spark et le maintenir actif entre les traitements malgré la variabilité quotidienne."
+  ]
+}

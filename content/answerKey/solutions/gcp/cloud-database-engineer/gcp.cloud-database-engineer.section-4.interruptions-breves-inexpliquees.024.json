@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-4.interruptions-breves-inexpliquees.024",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Corréler opérations et journaux système Cloud SQL, état et signaux HA avec notifications de maintenance, puis appliquer un runbook qui vérifie chronologie, reconnexion, intégrité et rôle servi afin de qualifier failover automatique ou redémarrage planifié",
+  "rationale": "Corréler opérations et journaux Cloud SQL, état et signaux HA, notifications de maintenance et contrôles du runbook établit ensemble cause, chronologie, rôle servi et intégrité après reconnexion. Classer uniquement selon la fenêtre horaire confond maintenance décalée, intervention manuelle et panne non planifiée. La remise à zéro du temps de disponibilité et une requête réussie prouvent un redémarrage et le retour du service, pas un changement de rôle HA. Erreurs clientes, latence et disponibilité du secours mesurent l'impact et le RTO, mais ne distinguent pas à elles seules failover automatique et redémarrage planifié.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/postgres/high-availability"
+  ]
+}

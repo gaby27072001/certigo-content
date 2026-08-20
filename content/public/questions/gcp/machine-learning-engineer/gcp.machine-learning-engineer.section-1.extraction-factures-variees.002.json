@@ -1,0 +1,18 @@
+{
+  "id": "gcp.machine-learning-engineer.section-1.extraction-factures-variees.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:machine-learning-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un assureur reçoit des factures PDF de formats variés. Il doit extraire rapidement les fournisseurs, montants, dates et lignes, conserver une validation humaine pour les documents peu fiables et limiter le développement de modèles. Quelle solution faut-il privilégier ?",
+  "choices": [
+    "Combiner OCR de Vision API et règles propres à chaque fournisseur, puis faire valider tous les champs par une équipe humaine, au prix d’une maintenance élevée quand les formats changent.",
+    "Utiliser un processeur Document AI pour factures, exploiter ses scores de confiance et envoyer rapidement et en priorité les documents incertains en revue humaine.",
+    "Extraire d’abord le texte par OCR, puis entraîner dans BigQuery ML un classifieur par champ et maintenir une logique séparée pour reconstruire les lignes de facture.",
+    "Utiliser un modèle multimodal Gemini du Model Garden avec une sortie JSON contrainte, puis accepter chaque réponse sans mécanisme natif de seuil ni circuit de validation humaine."
+  ]
+}

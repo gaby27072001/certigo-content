@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.protection-donnees-en-memoire.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Des Confidential VMs utilisant une technologie d'environnement d'exécution de confiance prise en charge",
+  "rationale": "Les Confidential VMs utilisent un environnement d'exécution de confiance pour protéger les données en cours d'utilisation dans la mémoire contre le risque visant l'hyperviseur. Shielded VM vérifie l'intégrité du démarrage et CMEK protège les disques, mais ces deux contrôles ne chiffrent pas la mémoire en cours d'utilisation. Supprimer les disques après 30 jours traite la conservation des données au repos, pas la mémoire active. VPC Flow Logs et les alertes SIEM améliorent la visibilité réseau, sans apporter de protection cryptographique à la mémoire.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/confidential-computing/confidential-vm/docs/about-cvm"
+  ]
+}

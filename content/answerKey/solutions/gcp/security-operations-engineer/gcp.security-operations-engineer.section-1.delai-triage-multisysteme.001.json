@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-1.delai-triage-multisysteme.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Conserver SCC comme source des constats, les ingérer dans Google SecOps pour la corrélation, puis déclencher l’ouverture et la mise à jour des tickets ITSM par orchestration avec des identifiants communs",
+  "rationale": "Une chaîne orchestrée conserve SCC comme source des constats, utilise Google SecOps pour la corrélation multicloud et synchronise l’ITSM par identifiant commun ; elle supprime les recopies tout en respectant le rôle de chaque système. La centralisation suivie d’une création manuelle des tickets laisse subsister le principal délai opérationnel. L’export nocturne des constats et alertes vers l’ITSM introduit une latence de plusieurs heures et oblige les analystes à revenir dans les outils de sécurité pour confirmer le contexte. Le maintien de trois silos perpétue à la fois le rapprochement humain et les mises à jour manuelles. Seule l’orchestration de bout en bout satisfait donc l’exigence de rapidité sans sacrifier les capacités complémentaires.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/security-operations-engineer",
+    "https://cloud.google.com/chronicle/docs/soar/marketplace-integrations/google-security-command-center"
+  ]
+}

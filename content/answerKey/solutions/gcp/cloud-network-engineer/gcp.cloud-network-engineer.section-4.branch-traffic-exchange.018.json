@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.branch-traffic-exchange.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Activer le transfert de données site à site pour les spokes hybrides compatibles du hub dans un VPC commun, puis vérifier que annonces et filtres autorisent les préfixes des agences.",
+  "rationale": "Le transfert de données site à site de Network Connectivity Center permet aux spokes hybrides compatibles d’un même VPC d'échanger les routes de leurs sites via le réseau Google; les annonces et filtres doivent laisser passer les préfixes des agences. Exporter les routes dans une étoile de VPC Peerings ne fonctionne pas, car le peering n'est pas transitif entre branches. Private Service Connect expose des services précis à des consommateurs et ne remplace pas la connectivité IP générale entre agences. Enfin, une agence raccordée par HA VPN est représentée par un spoke hybride adossé aux tunnels; la déclarer comme spoke VPC tout en laissant les tunnels hors du hub ne rend pas leurs routes disponibles au transfert site à site.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/data-transfer"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-2.regression-latence-api.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Après une nouvelle version, le p95 d'une API PostgreSQL passe de 60 ms à 900 ms. CPU et mémoire restent normaux, mais les sessions en attente et les lectures disque augmentent. L'équipe doit identifier rapidement les requêtes et plans responsables sans activer une journalisation exhaustive coûteuse. Quelle action est la plus pertinente ?",
+  "choices": [
+    "Comparer un redimensionnement temporaire sur un clone de production en y rejouant les requêtes de l'API, ce qui teste une hypothèse de capacité mais ne relie pas directement les attentes observées aux requêtes et plans de l'incident",
+    "Utiliser Query Insights pour corréler charge, requêtes, plans et attentes, puis confirmer dans les vues PostgreSQL les verrous et index manquants avant toute modification de capacité ou de schéma",
+    "Restaurer la sauvegarde précédant la version dans une instance isolée et comparer son p95 avec la production, ce qui protège les données mais mélange différences de charge, de cache et d'état avec la régression recherchée",
+    "Activer temporairement log_statement pour toutes les requêtes et auto_explain à seuil bas en production, ce qui fournit des plans détaillés mais ajoute la journalisation exhaustive et la charge que l'équipe veut éviter"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.security-operations-engineer.section-3.compte-sauvegarde-risque-eleve.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:security-operations-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Le tableau Risk Analytics place soudainement un compte d’administrateur de sauvegarde en tête du classement. Son score provient de plusieurs détections moyennes sur vingt minutes, sans IOC malveillant confirmé. Quelle est la meilleure décision de chasse ?",
+  "choices": [
+    "Examiner les détections contributrices, la chronologie, la criticité et la référence comportementale de l’entité, puis pivoter vers les hôtes et identités liés avant de décider d’une escalade",
+    "Désactiver immédiatement le compte parce qu’il possède le score agrégé le plus élevé, isoler tous ses hôtes associés et analyser ensuite les détections contributrices, sans attendre une comparaison à la référence comportementale ni une validation du propriétaire",
+    "Ignorer le score tant qu’aucun IOC confirmé n’est présent, demander au propriétaire si une maintenance était prévue et ne consulter les détections contributrices que si une nouvelle alerte de haute sévérité apparaît sur le même compte ou ses hôtes associés",
+    "Réduire le poids de toutes les détections moyennes afin que le compte disparaisse du classement"
+  ]
+}

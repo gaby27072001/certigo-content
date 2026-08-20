@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-architect.section-3.prevention-exfiltration-analytique.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-architect",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Des analystes autorisés consultent BigQuery depuis des postes gérés. Même si leurs identifiants sont compromis, l'entreprise veut empêcher la copie des données vers un projet Google Cloud externe, tout en autorisant l'accès depuis le réseau d'entreprise et des workflows internes approuvés. Quel contrôle doit compléter IAM ?",
+  "choices": [
+    "Accorder BigQuery Data Owner à un groupe d'analystes, employer des vues autorisées pour les tables sensibles, activer les journaux Data Access et déclencher une alerte lorsqu'une tâche écrit dans un ensemble de données qui ne porte pas le label interne approuvé.",
+    "Placer BigQuery et les services de stockage concernés dans un périmètre VPC Service Controls, définir des niveaux d'accès contextuels et déclarer explicitement les flux entrants et sortants nécessaires, même avec une identité pourtant valide compromise.",
+    "Acheminer les postes gérés par Cloud VPN, bloquer les adresses publiques avec des règles de pare-feu hiérarchiques, utiliser Private Google Access pour BigQuery et refuser les connexions réseau qui ne proviennent pas des plages de l'entreprise.",
+    "Chiffrer toutes les tables avec des CMEK, séparer les administrateurs KMS des analystes, désactiver la clé si une copie suspecte est détectée et empêcher les projets externes de recevoir le rôle de chiffrement sur cette clé."
+  ]
+}

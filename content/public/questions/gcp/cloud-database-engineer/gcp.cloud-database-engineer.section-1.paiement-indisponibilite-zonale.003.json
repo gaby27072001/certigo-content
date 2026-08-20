@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.paiement-indisponibilite-zonale.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un service de paiement utilise Cloud SQL for PostgreSQL. Il doit tolérer la perte d'une zone avec un RTO de 5 minutes et un RPO quasi nul, tout en conservant les données dans une seule région. Quelle architecture répond le mieux à ces exigences ?",
+  "choices": [
+    "Déployer une instance zonale avec sauvegardes toutes les heures et restauration automatisée dans une autre zone, ce qui conserve la région mais ne garantit ni un RTO de cinq minutes ni un RPO quasi nul",
+    "Créer une réplique en lecture asynchrone dans une autre zone et prévoir une promotion manuelle, ce qui améliore la reprise mais laisse un retard possible et un RTO dépendant de l'intervention",
+    "Déployer Cloud SQL en haute disponibilité régionale, avec primaire et secours dans deux zones, réplication synchrone et basculement géré pour respecter le RTO de cinq minutes et le RPO quasi nul",
+    "Exporter la base vers Cloud Storage toutes les quinze minutes et automatiser l'import dans une nouvelle zone, ce qui respecte la résidence régionale mais dépasse le RTO et peut perdre les dernières transactions"
+  ]
+}

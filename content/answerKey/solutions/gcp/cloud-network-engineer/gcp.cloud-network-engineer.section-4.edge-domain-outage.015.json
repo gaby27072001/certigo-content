@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.edge-domain-outage.015",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Commander quatre connexions réparties entre les deux paires installation–edge availability domain d'un même metro, créer quatre VLAN attachments dans la région sur au moins un Cloud Router et placer les connexions dans un groupe `PRODUCTION_CRITICAL` validé par Google.",
+  "rationale": "La topologie Dedicated Interconnect documentée pour le SLA 99,99 % dans une région comporte quatre connexions réparties entre les paires installation–edge availability domain d'un même metro, quatre VLAN attachments dans la région, au moins un Cloud Router et un connection group `PRODUCTION_CRITICAL`. Deux connexions seulement ne satisfont pas la redondance physique exigée; répartir leurs attachments entre deux Cloud Routers ne compense pas l'absence d'une seconde connexion dans chaque edge availability domain. Quatre connexions placées dans quatre metros ne correspondent pas à la topologie monorégionale du scénario et `PRODUCTION_NON_CRITICAL` ne valide pas l'objectif 99,99 %. Enfin, deux connexions concentrées dans une installation laissent son edge availability domain comme point de panne; Classic VPN ne remplace pas les quatre connexions requises.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-connectivity/docs/interconnect/how-to/dedicated/creating-9999-availability"
+  ]
+}

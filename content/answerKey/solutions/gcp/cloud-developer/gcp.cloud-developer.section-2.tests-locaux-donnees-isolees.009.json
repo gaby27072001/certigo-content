@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-2.tests-locaux-donnees-isolees.009",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Démarrer l'émulateur Firestore local, appliquer ses variables d'environnement et recréer un jeu de données propre avant chaque suite de tests.",
+  "rationale": "L'émulateur Firestore fournit un endpoint local isolé et réinitialisable, ce qui rend les tests rapides et reproductibles sans accès aux données partagées. Tester en production avec un préfixe réduit les collisions mais n'empêche ni une erreur de portée ni les coûts, et le nettoyage asynchrone laisse de l'état résiduel. Un proxy HTTP artisanal simule des réponses sans reproduire fidèlement le comportement de Firestore ni celui de sa bibliothèque cliente. Des projets permanents par développeur isolent mieux la production, mais restent distants, coûteux et non déterministes si leurs données ne sont réinitialisées qu'hebdomadairement.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/firestore/native/docs/emulator"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-5.proactive-configuration-risk.021",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Utiliser Network Analyzer, qui examine périodiquement la configuration et publie des insights sur les défaillances, chemins sous-optimaux, avertissements d'utilisation et capacité IP des sous-réseaux.",
+  "rationale": "Network Analyzer examine périodiquement la configuration et publie proactivement des insights sur des défaillances, des chemins sous-optimaux et des avertissements d'utilisation, sans exiger un couple source-destination fourni par l'opérateur. Planifier des Connectivity Tests ne garantit pas la découverte de ressources ou de risques inconnus et ces tests ciblent la joignabilité de scénarios définis, pas l'épuisement global des plages. Packet Mirroring observe le trafic réellement émis, mais ne détecte pas à lui seul une plage presque épuisée et ne corrige jamais automatiquement routes ou sous-réseaux. Cloud Trace mesure le parcours et la latence de requêtes applicatives; il ne calcule ni quotas réseau, ni capacité IP, ni qualité de la configuration de routage.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/network-intelligence-center/docs/network-analyzer/overview"
+  ]
+}

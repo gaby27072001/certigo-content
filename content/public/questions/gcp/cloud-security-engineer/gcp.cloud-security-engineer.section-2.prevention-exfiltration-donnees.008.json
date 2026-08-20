@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-2.prevention-exfiltration-donnees.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des analystes autorisés à lire un jeu de données BigQuery sensible ne doivent pas pouvoir copier ces données vers un projet Google Cloud extérieur à l'entreprise, même s'ils disposent d'identifiants valides. Quel mécanisme ajoute une frontière contre cette exfiltration ?",
+  "choices": [
+    "Refuser au pare-feu VPC les connexions HTTPS vers les adresses publiques utilisées par les API Google",
+    "Appliquer une clé CMEK par table et la révoquer dès qu’une copie suspecte est détectée",
+    "Refuser par IAM Deny la création de tâches BigQuery dans les projets externes déjà recensés",
+    "Un périmètre VPC Service Controls protégeant BigQuery, avec des règles d'entrée et de sortie explicites"
+  ]
+}

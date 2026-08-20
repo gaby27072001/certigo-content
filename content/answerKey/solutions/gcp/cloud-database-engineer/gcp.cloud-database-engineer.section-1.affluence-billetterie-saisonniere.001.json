@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-database-engineer.section-1.affluence-billetterie-saisonniere.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-database-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Rejouer une charge représentative avec les pics prévus, choisir une forme offrant une marge mesurée, dimensionner le stockage selon les IOPS et la croissance, puis réévaluer avec Cloud Monitoring",
+  "rationale": "Rejouer une charge représentative est la seule proposition qui dimensionne ensemble calcul, IOPS, croissance et p99, puis prévoit une réévaluation au lieu de figer une hypothèse. Réserver immédiatement la plus grande forme absorbe le pic, mais contredit l'interdiction de surdimensionner durablement. Partir des 8 vCPU moyens avec la seule augmentation automatique du stockage ne couvre pas les 14 vCPU des ventes, car ce mécanisme n'ajoute pas automatiquement du calcul. Dimensionner seulement les 1,8 To et leur croissance ignore mémoire, débit d'E/S et latence sous charge qui déterminent aussi le SLO.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-database-engineer",
+    "https://cloud.google.com/sql/docs/mysql/instance-settings"
+  ]
+}

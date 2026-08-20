@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-5.concurrence-bi-transformations.023",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "prompt": "Dans BigQuery, des transformations nocturnes volumineuses ralentissent les tableaux de bord interactifs de la direction. Les transformations peuvent attendre, mais les tableaux de bord ont un objectif de latence strict. L'entreprise utilise un modèle de capacité et veut isoler les charges sans dupliquer les données. Que doit-elle faire ?",
+  "choices": [
+    "Conserver une affectation commune, exécuter toutes les requêtes en priorité interactive et limiter seulement le nombre de requêtes simultanées émises par chaque tableau de bord",
+    "Copier chaque nuit les tables dans un projet ETL séparé, mais laisser ce projet et la BI consommer la même réservation et soumettre tous les jobs en priorité interactive",
+    "Créer des réservations et affectations distinctes pour la BI et l'ETL avec des projets dédiés, puis soumettre les transformations différables en priorité batch",
+    "Créer une réservation dédiée à chaque transformation nocturne, lui attribuer toute la capacité disponible pendant son exécution et mettre les tableaux de bord en pause"
+  ]
+}

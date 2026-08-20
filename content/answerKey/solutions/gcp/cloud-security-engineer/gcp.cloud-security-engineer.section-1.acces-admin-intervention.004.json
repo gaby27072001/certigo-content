@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.acces-admin-intervention.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Créer un droit Privileged Access Manager avec approbation, justification et durée maximale de deux heures",
+  "rationale": "Privileged Access Manager fournit un droit juste-à-temps avec approbation, justification, expiration à deux heures et événements auditables. Un groupe permanent conserve le privilège hors intervention; tickets et contrôles a posteriori ne l'empêchent pas. Une clé de compte de service administrateur est un secret exportable et son expiration manuelle n'est pas une borne fiable. Une condition IAM quotidienne laisse un rôle permanent récurrent et ne lie l'activation ni à une demande précise, ni à une approbation, ni à une justification.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/iam/docs/pam-overview"
+  ]
+}

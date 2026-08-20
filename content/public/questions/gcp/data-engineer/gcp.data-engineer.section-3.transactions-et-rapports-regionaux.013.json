@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-engineer.section-3.transactions-et-rapports-regionaux.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une application commerciale régionale utilise PostgreSQL et plusieurs extensions compatibles. Son volume va être multiplié par vingt. Elle exige des transactions ACID, une haute disponibilité dans la région et des rapports à faible latence sur les données opérationnelles récentes, sans besoin d'écritures mondiales ni de pipeline de réplication analytique. Quel stockage choisir ?",
+  "choices": [
+    "Utiliser AlloyDB for PostgreSQL avec haute disponibilité régionale, pool de lecture et moteur colonnaire afin de servir simultanément transactions et rapports récents",
+    "Déployer Spanner en multirégion, adapter les extensions PostgreSQL au dialecte disponible et répartir toutes les écritures même si une seule région est requise",
+    "Utiliser Cloud SQL for PostgreSQL en haute disponibilité, ajouter un réplica de lecture et exécuter les rapports lourds sur ce réplica sans moteur colonnaire",
+    "Conserver les transactions dans BigQuery, appliquer les changements avec MERGE toutes les minutes et servir l'application depuis une vue matérialisée"
+  ]
+}

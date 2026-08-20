@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-1.garde-fou-projets-production.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Placer les projets de production dans un dossier dédié et y appliquer une règle d'organisation interdisant les IP externes, en séparant les projets bac à sable dans un autre dossier",
+  "rationale": "Une contrainte Organization Policy appliquée au dossier Production est héritée par les projets actuels et futurs, tandis qu'un dossier distinct laisse au bac à sable sa propre politique. Le pipeline de règles de pare-feu ne contrôle pas la propriété d'adresse IP externe et dépend d'un ajout manuel des nouveaux projets. Attribuer Administrateur réseau sur les VM augmente les privilèges sans imposer la configuration interdite. Une règle IAM Deny par projet vise des permissions de principaux, dérive à l'échelle et n'exprime pas aussi directement la contrainte de ressource requise.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints"
+  ]
+}

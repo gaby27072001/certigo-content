@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-1.integration-prestataires-courte-duree.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Fournir à chaque prestataire une Cloud Workstation issue d'une image contrôlée, reliée au réseau privé, avec IAM individuel, arrêt automatique et suppression en fin de contrat, sans clé locale durable",
+  "rationale": "Cloud Workstations associe une image administrée, un accès réseau privé, une identité IAM individuelle et des politiques d'arrêt ou suppression qui rendent le poste reproductible et révocable. Les VM issues d'un modèle sont cohérentes, mais une clé durable sur le poste et une suppression manuelle maintiennent l'exposition après le contrat. Cloud Shell avec un compte partagé empêche d'attribuer les actions et de révoquer un seul prestataire. Des Workstations utilisant un compte très privilégié partagé et conservant les disques corrigent l'image et le réseau, mais échouent encore au moindre privilège et à la disparition immédiate de l'environnement.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/workstations/docs/architecture"
+  ]
+}

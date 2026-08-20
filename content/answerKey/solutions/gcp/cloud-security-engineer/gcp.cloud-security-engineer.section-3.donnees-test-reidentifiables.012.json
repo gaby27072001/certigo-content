@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-security-engineer.section-3.donnees-test-reidentifiables.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-security-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Utiliser Sensitive Data Protection avec chiffrement préservant le format et une clé Cloud KMS dont l'accès est strictement limité",
+  "rationale": "Le chiffrement préservant le format de Sensitive Data Protection produit avec une clé contrôlée des pseudonymes déterministes, conformes au format attendu et réidentifiables par le seul service autorisé. Une valeur aléatoire et une table propres à chaque traitement empêchent la cohérence entre traitements; la même longueur ne garantit pas non plus toutes les contraintes du format. Un bucket privé laisse les numéros en clair à tous ses lecteurs. Le HMAC proposé est déterministe et de même longueur, mais l'insertion dans un gabarit ne garantit pas les contraintes sémantiques du format et reste non réversible, contrairement à l'exigence de réidentification.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-security-engineer",
+    "https://cloud.google.com/sensitive-data-protection/docs/pseudonymization"
+  ]
+}

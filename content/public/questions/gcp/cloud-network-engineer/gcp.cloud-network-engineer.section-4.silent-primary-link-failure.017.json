@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-network-engineer.section-4.silent-primary-link-failure.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Deux liaisons hybrides annoncent les mêmes préfixes vers un VPC. La liaison principale doit être préférée en fonctionnement normal et le retrait de ses routes doit être détecté en quelques secondes lors d'une panne silencieuse. Quelle configuration appliquer sur Cloud Router et le routeur pair ?",
+  "choices": [
+    "Donner à la liaison principale une priorité annoncée MED plus faible et activer BFD avec des paramètres compatibles sur Cloud Router et les deux équipements pairs.",
+    "Attribuer le même MED aux deux sessions, augmenter fortement le hold timer BGP pour éviter les oscillations et laisser le VPC répartir les flux entre les deux chemins équivalents.",
+    "Créer une route statique plus spécifique vers l'attachement principal, conserver BGP seulement pour la liaison secondaire et retirer la route statique par intervention après une alerte.",
+    "Maintenir la session BGP de secours administrativement désactivée, surveiller la liaison principale avec une sonde externe et demander à une fonction d'activer le pair en cas de panne."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "gcp.cloud-network-engineer.section-3.container-path-routing.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-network-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Déployer Gateway et HTTPRoute via le contrôleur GKE, avec des Services utilisant des NEGs conteneur-natifs afin que l'équilibreur atteigne directement les pods.",
+  "rationale": "Le contrôleur GKE Gateway traduit Gateway et HTTPRoute en ressources d'équilibrage gérées et assure le routage par chemin; les NEGs conteneur-natifs inscrivent les endpoints de pods comme backends, évitant le saut de données par un nœud. Des NodePorts publiés en DNS avec un proxy par nœud imposent une exploitation manuelle, ajoutent précisément ce saut et ne fournissent pas l'évolution Gateway API demandée. Des tunnels HA VPN et des routes IP ne peuvent pas prendre de décision fondée sur un chemin HTTP. Cloud NAT est un service de sortie pour les connexions initiées par les workloads: il n'accepte pas les connexions entrantes, ne sert pas de frontend et n'associe pas de règles aux chemins HTTP.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-network-engineer",
+    "https://cloud.google.com/kubernetes-engine/docs/concepts/gateway-api",
+    "https://cloud.google.com/kubernetes-engine/docs/concepts/container-native-load-balancing"
+  ]
+}

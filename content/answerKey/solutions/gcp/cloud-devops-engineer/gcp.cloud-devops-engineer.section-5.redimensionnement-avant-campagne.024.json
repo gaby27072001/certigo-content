@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-devops-engineer.section-5.redimensionnement-avant-campagne.024",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-devops-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-5"
+  },
+  "correct": "Examiner CPU, mémoire et limites de la fenêtre de huit jours, intégrer la prévision du pic, tester le type proposé, puis déployer un nouveau modèle progressivement avec surveillance et retour possible",
+  "rationale": "Les recommandations de type de machine pour ce groupe d'instances géré utilisent les huit derniers jours de CPU et de mémoire ; il faut donc confronter cette fenêtre au pic futur, tester le type proposé et déployer le nouveau modèle progressivement sous surveillance avec retour possible. Appliquer le type partout immédiatement traite huit jours sans pic mensuel comme une preuve de capacité et reporte la découverte du risque sur la production. Reporter puis ignorer définitivement la recommandation évite le risque immédiat, mais abandonne sans mesure une économie potentiellement valable pour la charge ordinaire. Remplacer toutes les VM avant le pic selon la moyenne et relever les alertes masque la dégradation au lieu de tester la capacité, la mémoire et la durée du batch attendues.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-devops-engineer",
+    "https://cloud.google.com/recommender/docs/vm-instance-group-rightsizing-recommender"
+  ]
+}

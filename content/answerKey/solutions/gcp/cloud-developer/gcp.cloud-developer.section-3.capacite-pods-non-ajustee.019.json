@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-developer.section-3.capacite-pods-non-ajustee.019",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-developer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Définir une valeur resources.requests.cpu réaliste pour chaque conteneur mesuré, conserver la cible d'utilisation CPU du HPA et vérifier les métriques.",
+  "rationale": "Le HPA calcule l'utilisation CPU en pourcentage de resources.requests.cpu; définir une requête réaliste pour chaque conteneur mesuré lui donne donc la référence nécessaire pour ajuster les replicas. Fixer vingt replicas et supprimer le HPA fournit une capacité statique, mais ne s'adapte ni à la hausse ni à la baisse de la charge. Abaisser la cible ou accélérer la collecte ne corrige pas l'absence de requête CPU utilisée comme dénominateur. L'autoscaling du pool ajoute des nœuds lorsque des pods ne peuvent pas être planifiés, mais il ne modifie pas le nombre de replicas du Deployment et ne répare pas la métrique HPA inconnue.",
+  "provenance": [
+    "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf",
+    "https://cloud.google.com/learn/certification/cloud-developer",
+    "https://cloud.google.com/kubernetes-engine/docs/how-to/horizontal-pod-autoscaling"
+  ]
+}
