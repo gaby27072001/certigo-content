@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-4.mot-de-passe-en-clair-dans-le-script.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une tâche AWS Glue se connecte à une base Amazon Aurora PostgreSQL. Le mot de passe du compte de service est aujourd'hui écrit en clair dans le script de la tâche et dupliqué dans un paramètre de celle-ci. La politique de sécurité impose de supprimer tout identifiant en clair et d'effectuer une rotation du mot de passe tous les trente jours sans interrompre le pipeline. Quelle mise en œuvre respecte ces exigences avec le moins d'exploitation manuelle ?",
+  "choices": [
+    "Stocker les identifiants dans AWS Secrets Manager avec une rotation automatique tous les trente jours, référencer le secret depuis la connexion AWS Glue, et n'accorder au rôle d'exécution que l'action secretsmanager:GetSecretValue sur ce secret précis.",
+    "Placer le mot de passe dans une variable d'environnement de la tâche AWS Glue et le remplacer manuellement tous les trente jours.",
+    "Conserver le mot de passe dans un paramètre AWS Systems Manager Parameter Store de type String et le remplacer chaque mois par un script planifié.",
+    "Chiffrer avec AWS KMS un fichier de configuration contenant le mot de passe et le déposer dans le compartiment Amazon S3 des scripts de la tâche."
+  ]
+}

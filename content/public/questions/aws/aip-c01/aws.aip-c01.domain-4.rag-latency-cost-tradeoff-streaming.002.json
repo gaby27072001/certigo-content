@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-4.rag-latency-cost-tradeoff-streaming.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un outil interne de recherche documentaire pour les agents de support affiche un temps de reponse p95 de 9 secondes, principalement parce que l'agent attend la fin complete du pipeline RAG (recuperation, reclassement, generation complete) avant que quoi que ce soit ne s'affiche, et les agents se plaignent que l'outil semble fige. Un sous-ensemble des questions correspond a des demandes recurrentes et hautement previsibles du type 'comment faire pour...'. Les exigences sont : (1) reduire fortement la latence percue par l'utilisateur sans attendre la fin complete de la reponse, (2) precalculer ou autrement accelerer specifiquement le traitement du petit ensemble de questions recurrentes et hautement previsibles identifiees, (3) ameliorer la vitesse et la pertinence de l'etape de recuperation afin que le modele de fondation ne perde pas de temps a etre alimente avec un contexte excessif ou mal classe, et (4) faire tout cela sans simplement passer a un modele plus petit et de moindre qualite pour l'ensemble du systeme, ce que les agents ont deja rejete comme un compromis de qualite de reponse inacceptable. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Faire traiter toutes les requetes par le plus petit modele de fondation disponible, quel que soit le type de question, afin de reduire la latence de generation percue sur l'ensemble du trafic de l'outil de recherche documentaire.",
+    "Diffuser la reponse en flux vers l'agent des les premiers tokens, precalculer et mettre en cache les reponses aux questions recurrentes identifiees, et affiner l'index et le pretraitement des requetes de recuperation.",
+    "Supprimer l'etape de recuperation et adresser la question de l'agent directement au plus grand modele de fondation disponible, ses connaissances internes servant de base aux reponses de procedure.",
+    "Regrouper les requetes de plusieurs agents dans un appel unique au modele de fondation, en attendant qu'un nombre suffisant de questions soit en file d'attente avant de declencher la generation."
+  ]
+}

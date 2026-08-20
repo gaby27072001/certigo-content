@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-5.retrieval-drift-troubleshooting-embeddings.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Comparer les identifiants de modele d'embedding enregistres sur les lots de vecteurs, rejouer un jeu de requetes temoin en lisant les scores k-NN d'OpenSearch, relire les chevauchements produits par le chunking, puis refaire un appel a template fige.",
+  "rationale": "La demarche suit l'ordre de diagnostic impose par le symptome. Confronter les identifiants de modele d'embedding portes par les lots anciens et recents revele le cas le plus probable : deux espaces vectoriels devenus incompatibles apres un changement de modele sans reindexation, ce qui fait remonter d'anciens passages a des distances trompeuses. Rejouer un jeu de requetes temoin en observant les scores k-NN renvoyes par OpenSearch montre si le classement lui-meme a bouge et si les parametres d'index ou de similarite ont ete modifies. La relecture des chevauchements produits par le chunking montre si un fait a ete coupe en deux, ce qui explique des citations partielles et hors sujet. Enfin, rejouer un appel avec un template de generation fige isole la couche responsable avant d'engager une refonte. Le cluster plus grand traite une saturation qui n'a pas ete constatee : la migration coute cher et laisse les vecteurs incompatibles en l'etat. La reecriture du template agit sur la redaction alors que les passages fournis sont deja les mauvais, donc l'assistant continuera de citer les memes documents obsoletes. L'augmentation du nombre de fragments et l'elargissement du contexte n'ameliorent pas le classement : les extraits hors sujet restent presents, en plus grand nombre, ce qui dilue l'attention du modele et alourdit le cout. Sources officielles AWS : https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html https://docs.aws.amazon.com/bedrock/latest/userguide/kb-chunking.html"
+}

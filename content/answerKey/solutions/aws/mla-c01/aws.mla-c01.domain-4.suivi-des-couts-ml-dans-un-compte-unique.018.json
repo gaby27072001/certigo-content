@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-4.suivi-des-couts-ml-dans-un-compte-unique.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Appliquer une stratégie d'étiquetage cohérente (équipe, projet, environnement) sur les ressources ML, activer ces étiquettes comme balises de répartition des coûts, analyser les dépenses par étiquette dans AWS Cost Explorer et créer des budgets AWS Budgets avec notifications par projet.",
+  "rationale": "La répartition des coûts à l'intérieur d'un compte unique repose sur l'étiquetage. Une convention d'étiquettes appliquée systématiquement aux points de terminaison, aux jobs d'entraînement et de traitement, aux buckets et aux volumes doit ensuite être activée comme balise de répartition des coûts dans la gestion de la facturation, afin que les lignes de facture portent ces dimensions. Cost Explorer permet alors de filtrer et de regrouper les dépenses par équipe ou par projet et d'en suivre l'évolution, tandis qu'AWS Budgets définit un budget mensuel par valeur d'étiquette et notifie automatiquement lorsqu'un seuil, réel ou prévu, est franchi : les deux demandes de la direction sont couvertes. Trusted Advisor formule des recommandations d'optimisation utiles mais ne ventile pas la dépense par équipe et n'émet aucune alerte budgétaire par projet. Recréer chaque projet dans son propre compte apporte certes une séparation de facturation, mais c'est une refonte organisationnelle lourde, avec migration des données et duplication des rôles et des réseaux, disproportionnée face à un besoin de visibilité et d'alerte. Compter les invocations dans CloudWatch fournit un indicateur d'usage, pas un coût : la conversion serait une estimation faite maison, ignorant le temps d'instance, le stockage, l'entraînement et le transfert, et donc non opposable à la direction."
+}

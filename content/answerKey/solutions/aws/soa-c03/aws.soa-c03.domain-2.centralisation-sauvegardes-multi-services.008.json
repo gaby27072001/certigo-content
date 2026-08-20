@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-2.centralisation-sauvegardes-multi-services.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Créer un plan AWS Backup définissant fréquence, rétention et copie vers un coffre situé dans une seconde Région, affecter les ressources par étiquettes et exploiter les rapports d'audit du service.",
+  "rationale": "AWS Backup applique une politique unique à des ressources hétérogènes : le plan de sauvegarde porte la fréquence, la fenêtre, la rétention et la copie inter-Régions vers un coffre distant, l'affectation par étiquettes couvre automatiquement les nouvelles ressources et Backup Audit Manager produit les rapports de conformité demandés. Des fonctions Lambda par service réintroduisent du code spécifique à chaque équipe, des rétentions divergentes et aucun rapport unifié. Copier des volumes et des bases dans un compartiment S3 versionné n'est pas un mécanisme de sauvegarde cohérent pour EBS, RDS ou DynamoDB et ne garantit ni la cohérence ni la restaurabilité. Data Lifecycle Manager ne gère que les instantanés EBS et les AMI : il ne couvre ni RDS ni DynamoDB."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-3.surveillance-dataflow.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Examiner le retard système, la fraîcheur et le backlog, puis corréler les étapes dans Cloud Logging",
+  "rationale": "Les métriques Dataflow indiquent si les données s'accumulent et à quelle étape le retard se forme; les journaux apportent ensuite le contexte d'erreur. L'historique BigQuery ne couvre pas toute la chaîne, un redémarrage sans diagnostic peut masquer la cause et Cloud Storage ne remplace ni Pub/Sub ni l'observabilité du job."
+}

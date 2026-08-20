@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-4.acces-refuse-objets-chiffres.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Des objets d'un compartiment Amazon S3 sont chiffrés avec une clé KMS gérée par le client. La politique du compartiment autorise explicitement les rôles applicatifs, mais ces rôles reçoivent une erreur AccessDenied lors du téléchargement des objets. Quelle correction rétablit l'accès ?",
+  "choices": [
+    "Réactiver la rotation annuelle de la clé KMS, sans laquelle les opérations de déchiffrement échouent.",
+    "Réécrire les objets avec le chiffrement SSE-S3, le chiffrement par clé KMS n'autorisant pas la lecture par des rôles applicatifs.",
+    "Accorder aux rôles l'autorisation kms:Decrypt sur la clé gérée par le client, à la fois dans la politique de la clé KMS et dans les politiques IAM des rôles concernés.",
+    "Désactiver le chiffrement par défaut du compartiment afin que les lectures aboutissent."
+  ]
+}

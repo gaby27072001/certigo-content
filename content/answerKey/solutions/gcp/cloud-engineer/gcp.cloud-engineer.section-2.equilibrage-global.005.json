@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-2.equilibrage-global.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Un Application Load Balancer externe global avec certificat géré et vérifications d'état",
+  "rationale": "L'Application Load Balancer externe global fournit une IP anycast, la répartition HTTP(S) entre régions, les contrôles d'état et la terminaison TLS avec certificat géré. Un équilibreur interne n'est pas public, Cloud NAT gère le trafic sortant et une zone DNS privée n'assure ni contrôle d'état ni terminaison TLS."
+}

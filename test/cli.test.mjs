@@ -27,6 +27,7 @@ test("les CLI documentent l'aide avec un code de succes", () => {
     "gen_manifest.mjs",
     "validate_content.mjs",
     "package_content.mjs",
+    "compile_runtime.mjs",
     "check_catalog_freshness.mjs",
     "check_artifact_access.mjs",
   ]) {
@@ -41,6 +42,7 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
     ["gen_manifest.mjs", ["--unknown"]],
     ["validate_content.mjs", ["--root"]],
     ["package_content.mjs", ["--channel"]],
+    ["compile_runtime.mjs", ["--out"]],
     ["check_catalog_freshness.mjs", ["--as-of"]],
     ["check_artifact_access.mjs", ["--policy"]],
   ]) {

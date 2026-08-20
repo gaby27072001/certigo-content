@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-4.degradation-lente-apres-evolution-formulaire.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Activer la capture des données sur le point de terminaison, calculer une référence statistique à partir du jeu d'entraînement avec Amazon SageMaker Model Monitor, planifier des jobs de surveillance de la qualité des données et déclencher une alarme CloudWatch sur les violations détectées.",
+  "rationale": "La dérive de distribution des données d'entrée se détecte en comparant le trafic réel à une référence établie. La capture de données enregistre les requêtes et les réponses du point de terminaison sur Amazon S3 ; un job de référence calcule ensuite, à partir du jeu d'entraînement, les statistiques et les contraintes attendues pour chaque variable ; les jobs planifiés de surveillance de la qualité des données de Model Monitor comparent périodiquement le trafic capturé à cette référence et publient des violations, sur lesquelles une alarme CloudWatch déclenche la notification. L'ensemble est automatique et documenté, ce qui correspond exactement à la demande. Réentraîner chaque nuit masque le symptôme sans jamais révéler la cause : l'équipe ignorerait toujours quelle variable a changé, le coût d'entraînement devient quotidien, et un changement amont erroné se propage alors directement dans le modèle sans aucun garde-fou. Une comparaison visuelle trimestrielle arrive bien trop tard face à une dégradation continue et repose sur une inspection manuelle explicitement écartée. Ajouter des journaux applicatifs collecte des données brutes mais n'apporte ni référence, ni test statistique, ni alerte : il resterait à construire tout le mécanisme de détection que Model Monitor fournit déjà."
+}

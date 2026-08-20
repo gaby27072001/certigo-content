@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-engineer.section-3.cloud-run-trafic.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Répartir le trafic Cloud Run à 10 % vers la nouvelle révision et 90 % vers l'ancienne",
+  "rationale": "Cloud Run peut répartir le trafic entre révisions d'un même service tout en conservant son URL, ce qui convient à un déploiement progressif. Un autre projet change l'URL, DNS n'effectue pas ce partage par révision et la limite d'instances contrôle la capacité, pas le pourcentage de requêtes."
+}

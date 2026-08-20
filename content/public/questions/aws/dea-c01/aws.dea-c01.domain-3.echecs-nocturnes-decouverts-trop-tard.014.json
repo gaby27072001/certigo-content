@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-3.echecs-nocturnes-decouverts-trop-tard.014",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une équipe de données exploite une quarantaine de tâches AWS Glue planifiées la nuit. Les échecs ne sont découverts que le lendemain matin par les analystes, lorsque les tableaux de bord sont vides. L'équipe veut être prévenue immédiatement lorsqu'une tâche échoue ou dépasse son délai, sans écrire ni exploiter de code de surveillance. Quelle mise en œuvre répond au besoin ?",
+  "choices": [
+    "Faire interroger l'API GetJobRuns toutes les minutes par une fonction AWS Lambda planifiée qui compare les statuts avec un état conservé dans Amazon DynamoDB.",
+    "Créer une règle Amazon EventBridge sur l'événement Glue Job State Change filtrant les états FAILED et TIMEOUT, avec pour cible une rubrique Amazon SNS à laquelle l'équipe d'astreinte est abonnée.",
+    "Activer la journalisation continue des tâches dans Amazon CloudWatch Logs et demander à l'équipe de consulter les groupes de journaux chaque matin.",
+    "Configurer un suivi AWS CloudTrail des appels StartJobRun et construire un tableau de bord Amazon QuickSight rafraîchi une fois par jour."
+  ]
+}

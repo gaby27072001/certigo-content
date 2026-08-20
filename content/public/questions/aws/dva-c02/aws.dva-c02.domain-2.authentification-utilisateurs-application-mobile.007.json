@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-2.authentification-utilisateurs-application-mobile.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application mobile publique doit authentifier ses utilisateurs, puis appeler une API REST Amazon API Gateway adossée à des fonctions AWS Lambda ; chaque utilisateur ne doit voir que ses propres données. Aucun identifiant AWS de longue durée ne doit être embarqué dans l'application. Quelle mise en œuvre le développeur doit-il retenir ?",
+  "choices": [
+    "Embarquer dans l'application mobile une clé d'accès IAM de longue durée afin de signer les requêtes envoyées à l'API.",
+    "Authentifier les utilisateurs auprès d'un groupe d'utilisateurs Amazon Cognito, transmettre le jeton JWT dans l'en-tête Authorization et le valider avec un autorisateur Cognito sur la méthode API Gateway, la fonction lisant ensuite les revendications du jeton pour appliquer l'autorisation applicative.",
+    "Distribuer à chaque utilisateur une clé d'API API Gateway et s'en servir comme mécanisme d'authentification des personnes.",
+    "Transmettre l'identifiant de l'utilisateur dans un paramètre de requête et le comparer, dans la fonction Lambda, à la table des utilisateurs."
+  ]
+}

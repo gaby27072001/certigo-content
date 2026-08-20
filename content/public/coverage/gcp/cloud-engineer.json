@@ -3,11 +3,59 @@
   "provider": "gcp",
   "certification": "gcp:cloud-engineer",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "section-1", "title": "Setting up a cloud solution environment", "weightPercent": 20, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-2", "title": "Planning and implementing a cloud solution", "weightPercent": 30, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-3", "title": "Ensuring the successful operation of a cloud solution", "weightPercent": 30, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-4", "title": "Configuring access and security", "weightPercent": 20, "weightType": "approximate", "questionIds": [] }
+    {
+      "objective": "section-1",
+      "title": "Setting up a cloud solution environment",
+      "weightPercent": 20,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-engineer.section-1.hierarchie-politiques.001",
+        "gcp.cloud-engineer.section-1.api-quotas-regions.002",
+        "gcp.cloud-engineer.section-1.budgets-export-facturation.003",
+        "gcp.cloud-engineer.section-1.inventaire-acces-externe.004"
+      ]
+    },
+    {
+      "objective": "section-2",
+      "title": "Planning and implementing a cloud solution",
+      "weightPercent": 30,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-engineer.section-2.compute-cloud-run.001",
+        "gcp.cloud-engineer.section-2.stockage-objets.002",
+        "gcp.cloud-engineer.section-2.base-relationnelle.003",
+        "gcp.cloud-engineer.section-2.pare-feu-connectivite.004",
+        "gcp.cloud-engineer.section-2.equilibrage-global.005",
+        "gcp.cloud-engineer.section-2.terraform-infrastructure.006"
+      ]
+    },
+    {
+      "objective": "section-3",
+      "title": "Ensuring the successful operation of a cloud solution",
+      "weightPercent": 30,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-engineer.section-3.snapshots-compute.001",
+        "gcp.cloud-engineer.section-3.gke-pool-noeuds.002",
+        "gcp.cloud-engineer.section-3.cloud-run-trafic.003",
+        "gcp.cloud-engineer.section-3.cycle-vie-sauvegarde.004",
+        "gcp.cloud-engineer.section-3.sortie-cloud-nat.005",
+        "gcp.cloud-engineer.section-3.diagnostic-journaux.006"
+      ]
+    },
+    {
+      "objective": "section-4",
+      "title": "Configuring access and security",
+      "weightPercent": 20,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.cloud-engineer.section-4.heritage-role-personnalise.001",
+        "gcp.cloud-engineer.section-4.compte-service-vm.002",
+        "gcp.cloud-engineer.section-4.usurpation-temporaire.003",
+        "gcp.cloud-engineer.section-4.identite-gke.004"
+      ]
+    }
   ]
 }

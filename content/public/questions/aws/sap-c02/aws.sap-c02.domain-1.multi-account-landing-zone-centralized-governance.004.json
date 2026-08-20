@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-1.multi-account-landing-zone-centralized-governance.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une organisation possedant deja plus de 40 comptes AWS sous AWS Organizations souhaite standardiser la creation de nouveaux comptes avec des garde-fous preventifs bloquant, par exemple, la desactivation de CloudTrail ou l'utilisation de Regions non autorisees, centraliser les journaux d'audit et de securite dans des comptes dedies, et minimiser la charge operationnelle continue a mesure que de nouvelles unites metier rejoignent l'organisation.",
+  "choices": [
+    "Creer les nouveaux comptes un par un via la console AWS Organizations en suivant un mode operatoire documente, puis appliquer des politiques de controle de service individuellement a chaque compte apres sa creation plutot qu'au niveau de l'unite d'organisation.",
+    "Adopter AWS Control Tower avec Account Factory rattache a la structure Organizations existante, appliquer les controles obligatoires au niveau des unites d'organisation, et s'appuyer sur la journalisation et l'audit centralises integres de Control Tower.",
+    "S'appuyer uniquement sur des permission boundaries IAM appliquees role par role dans chaque compte au lieu de politiques de controle de service au niveau organisation, et demander a chaque equipe de faire suivre ses journaux CloudTrail vers son propre compartiment local.",
+    "Utiliser un agregateur AWS Config seul sur l'ensemble des comptes comme unique garde-fou, sans politique de controle de service ni plan de zone d'atterrissage, et provisionner chaque nouveau compte en clonant les ressources d'un compte existant via des StackSets declenches individuellement pour chaque demande."
+  ]
+}

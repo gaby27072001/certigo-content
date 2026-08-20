@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-3.cross-border-pii-residency-guardrails.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Pseudonymiser les donnees personnelles avec la detection PII d'Amazon Comprehend avant l'envoi, conserver la correspondance dans le systeme RH d'origine, filtrer la sortie avec Amazon Bedrock Guardrails et expirer le texte source via le cycle de vie S3.",
+  "rationale": "Amazon Comprehend detecte les entites personnelles dans le texte d'evaluation et permet de leur substituer des jetons avant la construction du prompt, donc le point de terminaison americain ne recoit jamais les identites europeennes. La table de correspondance jeton-identite reste dans le systeme RH d'origine : seuls les responsables autorises y reassocient un pseudonyme a une personne, et le modele n'a aucun moyen de l'inverser. Les garde-fous Bedrock appliques a la sortie forment le filet de securite exige contre une donnee personnelle regeneree ou reconstituee par le modele, et les regles de cycle de vie S3 font expirer automatiquement le texte source masque a l'issue de la duree de conservation retenue. L'envoi du texte integral accompagne d'une consigne de retrait manuel expose les identites au moment meme de l'appel : la correction intervient apres coup, sur le resume, et depend de la vigilance de chaque responsable. Le chiffre de substitution documente n'est pas une pseudonymisation : la table de conversion est publique, et confier le retablissement des noms au modele place l'inversion hors du systeme d'origine, exactement ce que la regle interdit. L'absence de masquage compensee par un filtre de sortie laisse les donnees personnelles entrer dans le contexte du modele partage, ce qui constitue deja le transfert que la reglementation encadre, quelle que soit la qualite du filtre applique ensuite. Sources officielles AWS : https://docs.aws.amazon.com/comprehend/latest/dg/how-pii.html https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html"
+}

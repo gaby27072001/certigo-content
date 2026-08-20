@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-5.cout-sortie-reseau-lectures-massives.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Des instances situées dans des sous-réseaux privés lisent chaque jour plusieurs téraoctets depuis Amazon S3 en passant par une passerelle NAT. Les frais de traitement des données de la passerelle NAT deviennent le premier poste de coût réseau. L'entreprise veut réduire ce coût tout en gardant le trafic S3 hors d'Internet. Quelle action mettre en œuvre ?",
+  "choices": [
+    "Déplacer les instances dans un sous-réseau public et leur attribuer des adresses IP publiques afin de ne plus utiliser la passerelle NAT.",
+    "Remplacer la passerelle NAT par une instance NAT de plus petite taille en conservant le même chemin réseau.",
+    "Conserver la passerelle NAT et activer S3 Transfer Acceleration pour réduire les frais de traitement des données.",
+    "Créer un point de terminaison de passerelle pour Amazon S3 et ajouter les routes correspondantes dans les tables de routage des sous-réseaux privés."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-1.appels-perdus-lors-des-pics.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer la stratégie de nouvelles tentatives du SDK (mode standard ou adaptatif, nombre maximal de tentatives) pour réessayer les erreurs limitées avec un retrait exponentiel et de la gigue, rendre l'écriture idempotente, puis émettre une métrique lorsque les tentatives sont épuisées.",
+  "rationale": "Les erreurs de limitation de débit sont des erreurs transitoires que le SDK AWS sait traiter nativement : les modes de nouvelles tentatives standard et adaptatif rejouent l'appel avec un retrait exponentiel et de la gigue, ce qui étale les relances et évite que tous les clients repartent au même instant. Le développeur borne le nombre de tentatives, rend l'écriture idempotente (jeton de requête ou expression de condition) et publie une métrique lorsque le budget de tentatives est épuisé, afin de déclencher une alarme et de basculer vers une file de secours. Renvoyer une erreur 500 immédiatement transfère le problème au client et perd l'opération métier, alors que l'appel aurait abouti après quelques dizaines de millisecondes. Signer les requêtes HTTP à la main n'évite en rien la limitation, qui est appliquée côté service, et supprime au passage toute la gestion des identifiants et des reprises offerte par le SDK. Une boucle de relance immédiate et non bornée constitue une tempête de nouvelles tentatives : elle aggrave la saturation de la partition, épuise la durée d'exécution de la fonction et peut faire échouer l'ensemble des appelants."
+}

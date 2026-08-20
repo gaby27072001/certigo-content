@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-4.detection-ressources-exposees-et-non-chiffrees.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une direction conformité exige une évaluation continue des comptes de l'organisation afin de détecter les compartiments Amazon S3 exposés publiquement et les volumes Amazon EBS non chiffrés, avec un état de conformité historisé et consultable. Quelle solution répond à ce besoin ?",
+  "choices": [
+    "Déployer un pack de conformité AWS Config à l'échelle de l'organisation, composé de règles gérées qui évaluent en continu les ressources et publient leur état de conformité.",
+    "Programmer un audit manuel trimestriel à partir des exports de facturation et de captures d'écran de la console.",
+    "Activer CloudTrail Insights, qui empêche la création de ressources non conformes.",
+    "Créer une alarme CloudWatch sur la métrique de conformité publiée par défaut par IAM pour chaque compte."
+  ]
+}

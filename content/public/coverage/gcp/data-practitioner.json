@@ -3,11 +3,59 @@
   "provider": "gcp",
   "certification": "gcp:data-practitioner",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "section-1", "title": "Data Preparation and Ingestion", "weightPercent": 30, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-2", "title": "Data Analysis and Presentation", "weightPercent": 27, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-3", "title": "Data Pipeline Orchestration", "weightPercent": 18, "weightType": "approximate", "questionIds": [] },
-    { "objective": "section-4", "title": "Data Management", "weightPercent": 25, "weightType": "approximate", "questionIds": [] }
+    {
+      "objective": "section-1",
+      "title": "Data Preparation and Ingestion",
+      "weightPercent": 30,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.data-practitioner.section-1.elt-bigquery.001",
+        "gcp.data-practitioner.section-1.nettoyage-dataflow.002",
+        "gcp.data-practitioner.section-1.transfert-hors-ligne.003",
+        "gcp.data-practitioner.section-1.format-parquet.004",
+        "gcp.data-practitioner.section-1.stockage-brut-regional.005",
+        "gcp.data-practitioner.section-1.chargement-bq-cli.006"
+      ]
+    },
+    {
+      "objective": "section-2",
+      "title": "Data Analysis and Presentation",
+      "weightPercent": 27,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.data-practitioner.section-2.notebook-bigquery.001",
+        "gcp.data-practitioner.section-2.metriques-looker.002",
+        "gcp.data-practitioner.section-2.modele-bqml.003",
+        "gcp.data-practitioner.section-2.automl-evaluation.004",
+        "gcp.data-practitioner.section-2.registre-modeles.005"
+      ]
+    },
+    {
+      "objective": "section-3",
+      "title": "Data Pipeline Orchestration",
+      "weightPercent": 18,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.data-practitioner.section-3.surveillance-dataflow.001",
+        "gcp.data-practitioner.section-3.integration-data-fusion.002",
+        "gcp.data-practitioner.section-3.workflow-dataform.003",
+        "gcp.data-practitioner.section-3.evenements-pubsub-eventarc.004"
+      ]
+    },
+    {
+      "objective": "section-4",
+      "title": "Data Management",
+      "weightPercent": 25,
+      "weightType": "approximate",
+      "questionIds": [
+        "gcp.data-practitioner.section-4.moindre-privilege-bigquery.001",
+        "gcp.data-practitioner.section-4.partage-analytics-hub.002",
+        "gcp.data-practitioner.section-4.cycle-vie-stockage.003",
+        "gcp.data-practitioner.section-4.ha-recuperation-cloudsql.004",
+        "gcp.data-practitioner.section-4.chiffrement-cmek.005"
+      ]
+    }
   ]
 }

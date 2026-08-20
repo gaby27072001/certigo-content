@@ -1,0 +1,18 @@
+{
+  "id": "gcp.generative-ai-leader.section-3.ancrage-parametres-echantillonnage-temperature.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Une équipe veut ancrer les réponses d'un agent dans les documents internes propriétaires de l'entreprise plutôt que dans des connaissances générales du monde, et réduire la variabilité créative des réponses générées pour des cas d'usage factuels en ajustant un paramètre d'échantillonnage du modèle. Quelles solutions correspondent le mieux, respectivement, à l'ancrage souhaité et au réglage de la créativité ?",
+  "choices": [
+    "L'ancrage avec des données du monde (world data) répond au premier besoin dans ce scénario, et une augmentation du nombre de tokens de sortie réduit la créativité perçue des réponses générées.",
+    "L'ancrage avec des données d'entreprise de première partie, via le RAG prêt à l'emploi avec Agent Search ou les API RAG, répond au premier besoin, et une température plus basse réduit la variabilité créative des réponses.",
+    "Le grounding avec Google Search ancre les réponses sur les documents internes propriétaires de l'entreprise dans ce scénario, et une valeur de top-p plus élevée réduit la variabilité des réponses générées.",
+    "Les réglages de température ou de top-p n'affectent pas la variabilité des réponses dans ce contexte ; la longueur de sortie détermine si une réponse est perçue comme créative ou factuelle."
+  ]
+}

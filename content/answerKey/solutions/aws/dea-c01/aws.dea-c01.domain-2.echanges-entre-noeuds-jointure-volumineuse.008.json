@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-2.echanges-entre-noeuds-jointure-volumineuse.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Distribuer la table de faits et la dimension sur la clé de jointure commune avec DISTSTYLE KEY, et définir une clé de tri composée commençant par la colonne de date filtrée.",
+  "rationale": "La redistribution DS_BCAST_INNER indique que Redshift doit diffuser la table interne sur tous les nœuds parce que les lignes à joindre ne sont pas colocalisées. Distribuer les deux tables sur la même clé de jointure place les lignes correspondantes sur la même tranche : la jointure devient locale et l'étape de diffusion disparaît. La clé de tri commençant par la colonne de date permet en outre d'éliminer les blocs hors plage grâce aux cartes de zone, ce qui réduit les entrées-sorties du filtre dominant. La distribution ALL duplique intégralement chaque table sur chaque nœud : elle est réservée aux petites dimensions et deviendrait ingérable en stockage comme en temps de chargement pour quatre milliards et deux cents millions de lignes. La distribution EVEN sans clé de tri garantit au contraire que les lignes jointes ne sont pas colocalisées, donc que la redistribution persiste, et supprime tout élagage par date. Redshift Spectrum sur du CSV déporte la lecture vers S3 dans un format non colonnaire : la jointure reste distribuée et les performances se dégradent encore."
+}

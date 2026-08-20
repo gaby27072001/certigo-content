@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-2.loosely-coupled-order-processing-reliability.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Decoupler le service de commande des services de stock et d'expedition via des files Amazon SQS standard consommees au rythme propre a chaque service, isoler en file de lettres mortes les echecs repetes, et faire tourner chaque consommateur en Auto Scaling multi-AZ.",
+  "rationale": "Publier les evenements de commande dans des files SQS consommees independamment par chaque service en aval elimine le couplage fort et les pannes en cascade en laissant chaque service consommer a son propre rythme, la file de lettres mortes isole automatiquement les messages ayant echoue de maniere repetee pour investigation sans bloquer le flux, et des groupes Auto Scaling multi-AZ par consommateur maintiennent la haute disponibilite exigee. Ajouter de la capacite EC2 et allonger le delai d'expiration conserve un appel REST synchrone unique entre les trois services, ce qui laisse subsister le couplage fort et le risque de panne en cascade en cas de ralentissement du service d'expedition. Remplacer les appels REST par des invocations Lambda-a-Lambda synchrones exposees via API Gateway conserve une chaine d'appels synchrones et couplee entre les trois services, sans file ni file de lettres mortes pour isoler les echecs. Une file FIFO unique partagee avec une logique de routage portee par chaque message dans son contenu melange les responsabilites de routage et de traitement, et un delai de visibilite de 0 seconde rend un message visible pour un autre consommateur avant la fin de son traitement, ce qui provoque des traitements dupliques ou concurrents sans isolation fiable des messages en echec repete. Sources officielles AWS : https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html"
+}

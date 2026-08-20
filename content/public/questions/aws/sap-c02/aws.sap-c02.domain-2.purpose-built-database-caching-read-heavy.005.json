@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.purpose-built-database-caching-read-heavy.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une nouvelle fonctionnalite de fil d'actualite social presente un acces extremement oriente lecture, environ 95 pour cent de lectures, exige une latence de lecture au p99 de l'ordre de la milliseconde a tres grande echelle, un modele de donnees simple fonde sur une recherche par cle, le fil d'un utilisateur identifie par son identifiant, avec des attributs flexibles et peu structures, et doit permettre de multiplier le trafic par 50 sur deux ans sans refonte architecturale, alors que le debit d'ecriture reste comparativement faible et stable.",
+  "choices": [
+    "Utiliser une seule instance Amazon RDS pour MySQL de grande taille, dimensionnee des le premier jour pour la charge future anticipee la plus elevee, en n'ajoutant des replicas de lecture que si l'instance devient ulterieurement un goulot d'etranglement.",
+    "Stocker les elements du fil dans Amazon S3 sous forme d'objets JSON identifies par utilisateur, et invoquer S3 Transfer Acceleration, un mecanisme concu pour accelerer les transferts client-compartiment sur de longues distances via les emplacements CloudFront en peripherie, pour tenter de reduire la latence de lecture au sein d'une meme Region.",
+    "Utiliser Amazon DynamoDB comme magasin cle-valeur partitionne par identifiant utilisateur pour des performances constantes de l'ordre de la milliseconde a toute echelle, et ajouter Amazon DynamoDB Accelerator (DAX) en cache devant lui pour decharger les lectures repetees.",
+    "Utiliser Amazon ElastiCache for Redis comme unique systeme d'enregistrement pour les donnees du fil, sans base de donnees Amazon RDS ou DynamoDB durable sous-jacente, en s'appuyant sur des instantanes de persistance pris toutes les 12 heures comme seul mecanisme de durabilite."
+  ]
+}

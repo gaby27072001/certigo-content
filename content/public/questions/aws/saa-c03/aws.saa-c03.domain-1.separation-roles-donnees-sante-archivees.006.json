@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-1.separation-roles-donnees-sante-archivees.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Des données de santé sont archivées dans un compartiment Amazon S3 situé dans un compte « données ». La conformité impose un chiffrement au repos avec une clé dont l'entreprise contrôle la politique, une rotation annuelle automatique du matériel cryptographique, et une séparation des rôles : l'équipe applicative doit pouvoir écrire les objets sans jamais pouvoir modifier ou supprimer la clé, tandis qu'un rôle d'un compte « analytique » doit pouvoir lire les objets. Quelle conception de chiffrement l'architecte doit-il retenir ?",
+  "choices": [
+    "Utiliser le chiffrement côté serveur avec des clés gérées par Amazon S3 et restreindre les usages par une politique de compartiment qui refuse les suppressions d'objets.",
+    "Chiffrer les objets côté client avec une clé symétrique conservée dans un paramètre AWS Systems Manager et partagée avec le compte analytique.",
+    "Chiffrer les objets avec le chiffrement côté serveur par AWS KMS, en utilisant une clé gérée par le client dont la politique de clé autorise le rôle applicatif à chiffrer, autorise le rôle du compte analytique à déchiffrer, réserve les actions d'administration de la clé à l'équipe de sécurité, et pour laquelle la rotation annuelle automatique est activée.",
+    "Activer le chiffrement côté serveur avec des clés fournies par le client et conserver la clé dans le système de gestion de configuration de l'équipe applicative."
+  ]
+}

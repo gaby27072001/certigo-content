@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-2.exactitude-trompeuse-detection-fraude.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Abandonner l'exactitude au profit de la précision et du rappel : suivre la courbe précision-rappel et le score F1 sur la classe minoritaire, et fixer le seuil de décision selon le coût relatif des faux négatifs et des faux positifs.",
+  "rationale": "Avec 0,4 % de positifs, un classifieur qui prédit systématiquement « non frauduleux » atteint 99,6 % d'exactitude : la métrique est entièrement dominée par la classe majoritaire et ne mesure rien d'utile. La précision et le rappel sont calculés sur la classe minoritaire et exposent le compromis réel : le rappel quantifie la part de fraudes détectées, la précision la part d'alertes justifiées, et la courbe précision-rappel décrit ce compromis pour tous les seuils possibles, ce qui la rend bien plus lisible qu'une courbe ROC lorsque les négatifs écrasent les positifs. Le score F1 résume ce couple, et le seuil final doit être arbitré par le coût métier, une fraude manquée et une alerte inutile n'ayant pas la même valeur. Collecter davantage d'historique conserve le même taux de fraude et laisse donc l'exactitude tout aussi trompeuse. La RMSE est une métrique de régression, adaptée à la prédiction d'une valeur continue ; appliquée à une étiquette binaire très déséquilibrée, elle reste dominée par la masse des négatifs et n'éclaire ni le rappel ni la précision. Évaluer sur un jeu rééquilibré à 50/50, qui plus est issu de l'entraînement, mesure la performance sur une distribution qui n'existe pas en production et surestime fortement la qualité réelle du modèle."
+}

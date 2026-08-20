@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-3.socle-commun-quarante-comptes.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une équipe centrale doit déployer un socle identique (rôles IAM, règles AWS Config, journalisation) dans quarante comptes d'une organisation AWS et dans trois Régions, puis propager les mises à jour ultérieures depuis un point unique. Quelle approche utiliser ?",
+  "choices": [
+    "Utiliser des ensembles de piles AWS CloudFormation (StackSets) avec des cibles fondées sur les unités d'organisation d'AWS Organizations, pour déployer et mettre à jour la pile dans tous les comptes et Régions visés.",
+    "Copier le modèle CloudFormation dans chaque compte et lancer manuellement une pile par Région.",
+    "Partager la pile CloudFormation existante avec AWS Resource Access Manager afin qu'elle s'applique aux autres comptes.",
+    "Créer un unique rôle IAM interconnecté et lancer le modèle depuis le compte central, ce qui crée automatiquement les ressources dans les autres comptes."
+  ]
+}

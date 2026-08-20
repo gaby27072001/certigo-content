@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-1.appels-perdus-lors-des-pics.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un microservice écrit en Python appelle Amazon DynamoDB avec le SDK AWS. Lors des pics de trafic, une partie des appels échoue avec une exception de limitation de débit et l'opération métier est perdue. Le développeur doit rendre cet appel résilient sans modifier le modèle de données. Quelle approche doit-il retenir dans le code ?",
+  "choices": [
+    "Intercepter l'exception et renvoyer immédiatement une erreur 500 au client, en laissant l'appelant relancer l'opération lui-même.",
+    "Remplacer les appels du SDK par des requêtes HTTP signées à la main afin de contourner les limites de débit appliquées par le service.",
+    "Configurer la stratégie de nouvelles tentatives du SDK (mode standard ou adaptatif, nombre maximal de tentatives) pour réessayer les erreurs limitées avec un retrait exponentiel et de la gigue, rendre l'écriture idempotente, puis émettre une métrique lorsque les tentatives sont épuisées.",
+    "Ajouter une boucle qui relance l'appel toutes les 50 millisecondes, sans limite de tentatives, tant que l'erreur de limitation persiste."
+  ]
+}

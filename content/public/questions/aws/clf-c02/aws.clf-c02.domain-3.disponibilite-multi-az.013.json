@@ -1,0 +1,18 @@
+{
+  "id": "aws.clf-c02.domain-3.disponibilite-multi-az.013",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:clf-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application doit rester disponible si un seul centre de données connaît une panne. Quelle conception AWS répond le mieux à cette exigence dans une même Région ?",
+  "choices": [
+    "Placer toutes les instances dans un unique subnet",
+    "Répartir l’application sur plusieurs Availability Zones",
+    "Utiliser une seule instance EC2 très grande",
+    "Déplacer automatiquement les fichiers vers un poste local"
+  ]
+}

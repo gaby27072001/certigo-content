@@ -3,12 +3,71 @@
   "provider": "aws",
   "certification": "aws:aip-c01",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Foundation Model Integration, Data Management, and Compliance", "weightPercent": 31, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Implementation and Integration", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "AI Safety, Security, and Governance", "weightPercent": 20, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Operational Efficiency and Optimization for GenAI Applications", "weightPercent": 12, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-5", "title": "Testing, Validation, and Troubleshooting", "weightPercent": 11, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Foundation Model Integration, Data Management, and Compliance",
+      "weightPercent": 31,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aip-c01.domain-1.bedrock-cross-region-circuit-breaker.001",
+        "aws.aip-c01.domain-1.glue-data-quality-ingestion-gate.002",
+        "aws.aip-c01.domain-1.hierarchical-knowledge-base-multitenant.003",
+        "aws.aip-c01.domain-1.hybrid-rerank-retrieval-relevance.004",
+        "aws.aip-c01.domain-1.prompt-management-approval-governance.005",
+        "aws.aip-c01.domain-1.multimodal-claims-processing-pipeline.006",
+        "aws.aip-c01.domain-1.lora-model-registry-rollback.007"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Implementation and Integration",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aip-c01.domain-2.agentcore-mcp-tool-boundary-approval.001",
+        "aws.aip-c01.domain-2.large-model-inference-container-deployment.002",
+        "aws.aip-c01.domain-2.outposts-data-residency-integration.003",
+        "aws.aip-c01.domain-2.streaming-resilient-api-fallback.004",
+        "aws.aip-c01.domain-2.cicd-genai-gateway-rollback.005",
+        "aws.aip-c01.domain-2.intelligent-model-routing-cost-quality.006"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "AI Safety, Security, and Governance",
+      "weightPercent": 20,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aip-c01.domain-3.defense-in-depth-prompt-injection-layers.001",
+        "aws.aip-c01.domain-3.cross-border-pii-residency-guardrails.002",
+        "aws.aip-c01.domain-3.data-lineage-governance-audit-trail.003",
+        "aws.aip-c01.domain-3.bias-drift-fairness-monitoring.004",
+        "aws.aip-c01.domain-3.jailbreak-adversarial-testing-detection.005"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Operational Efficiency and Optimization for GenAI Applications",
+      "weightPercent": 12,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aip-c01.domain-4.semantic-cache-token-cost-latency.001",
+        "aws.aip-c01.domain-4.rag-latency-cost-tradeoff-streaming.002",
+        "aws.aip-c01.domain-4.holistic-observability-token-hallucination.003"
+      ]
+    },
+    {
+      "objective": "domain-5",
+      "title": "Testing, Validation, and Troubleshooting",
+      "weightPercent": 11,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aip-c01.domain-5.regression-quality-gate-model-upgrade.001",
+        "aws.aip-c01.domain-5.retrieval-drift-troubleshooting-embeddings.002",
+        "aws.aip-c01.domain-5.context-window-truncation-diagnostics.003"
+      ]
+    }
   ]
 }

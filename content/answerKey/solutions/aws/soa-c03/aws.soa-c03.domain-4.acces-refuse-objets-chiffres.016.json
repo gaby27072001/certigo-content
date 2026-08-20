@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-4.acces-refuse-objets-chiffres.016",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Accorder aux rôles l'autorisation kms:Decrypt sur la clé gérée par le client, à la fois dans la politique de la clé KMS et dans les politiques IAM des rôles concernés.",
+  "rationale": "Avec SSE-KMS, la lecture d'un objet exige deux autorisations distinctes : l'accès S3 à l'objet et l'autorisation kms:Decrypt sur la clé ; cet accès doit être accordé à la fois par la politique de la clé et par la politique IAM du principal, faute de quoi S3 renvoie AccessDenied malgré une politique de compartiment permissive. La rotation de la clé est transparente et sans effet sur les autorisations : les anciens matériaux de chiffrement restent utilisables pour déchiffrer les objets existants. Repasser en SSE-S3 contournerait le problème en abaissant le niveau de contrôle exigé, alors que SSE-KMS fonctionne dès que les autorisations sont correctes. Désactiver le chiffrement par défaut du compartiment n'affecte que les nouveaux objets et ne déchiffre pas ceux déjà écrits avec la clé KMS."
+}

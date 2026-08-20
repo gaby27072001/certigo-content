@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-1.cluster-nocturne-inactif-facture.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une tâche Apache Spark de préparation de données s'exécute chaque nuit pendant environ trois heures sur un cluster Amazon EMR laissé actif vingt-quatre heures sur vingt-quatre. Le reste du temps le cluster est inactif mais facturé. La tâche est idempotente et peut être relancée sans conséquence si des nœuds disparaissent. L'équipe doit réduire fortement le coût sans allonger notablement la durée du traitement. Que recommander ?",
+  "choices": [
+    "Diviser par deux la taille des instances du cluster permanent et accepter que le traitement dure environ deux fois plus longtemps.",
+    "Remplacer le cluster permanent par un cluster EMR transitoire lancé par le planificateur, avec le nœud primaire et le groupe principal à la demande, les nœuds de tâche sur des instances Spot, et l'arrêt automatique à la fin de l'étape.",
+    "Placer tous les nœuds du cluster, y compris le nœud primaire, sur des instances Spot et maintenir le cluster actif en permanence.",
+    "Acheter des instances réservées sur trois ans pour l'ensemble des nœuds du cluster permanent."
+  ]
+}

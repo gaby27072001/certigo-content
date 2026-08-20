@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-1.immutable-artifact-lineage.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Publier chaque artefact dans un compartiment S3 versionne et chiffre par AWS KMS, propager le triplet (compartiment, cle, versionId) d'une etape a l'autre, et journaliser les acces aux objets dans CloudTrail.",
+  "rationale": "Promouvoir le meme identifiant d'objet S3 versionne et chiffre d'une etape a l'autre garantit que l'artefact valide en developpement est bit-a-bit identique a celui deploye en production (principe build once, deploy many), tout en offrant une piste d'audit complete via CloudTrail et une protection contre l'ecrasement grace au versioning : cela repond exactement aux exigences d'immuabilite, de tracabilite et de cout maitrise. Reconstruire l'artefact a chaque etape rompt cette garantie d'identite : deux constructions successives du meme code source ne sont pas necessairement bit-a-bit identiques (dependances resolues differemment, horodatages de compilation), ce qui invalide la tracabilite exigee par l'audit. Un compartiment sans versioning qui ecrase l'objet a chaque execution supprime toute possibilite de remonter a un artefact anterieur et expose les artefacts a une modification ou un remplacement silencieux, ce qui viole directement l'exigence d'immuabilite. Un depot qui purge automatiquement les versions anterieures apres vingt-quatre heures detruit la lineage necessaire a un audit portant sur des deploiements passes, meme s'il limite le volume conserve. Sources officielles AWS : https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome-introducing-artifacts.html https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html"
+}

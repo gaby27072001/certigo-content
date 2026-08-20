@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-4.ha-recuperation-cloudsql.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "correct": "Cloud SQL en haute disponibilité régionale avec sauvegardes et récupération à un instant précis",
+  "rationale": "La configuration haute disponibilité maintient une instance de secours dans une autre zone et permet un basculement régional, tandis que les sauvegardes et journaux de transactions rendent possible la récupération à un instant précis. Une exportation mensuelle perdrait trop de données, un réplica sans sauvegarde ne couvre pas la restauration et Cloud Storage ne remplace pas une base relationnelle."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-3.data-lineage-governance-audit-trail.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "L'assistant GenAI d'une societe de conseil financier genere des resumes d'investissement citant des documents de recherche internes. Un regulateur demande a l'entreprise de prouver, pour une reponse specifique passee, exactement quels documents source et quelle version de modele ont ete utilises pour la generer, ainsi que qui a accede a l'assistant et quand. L'entreprise n'a actuellement aucun moyen systematique de repondre au-dela d'une recherche manuelle dans les journaux applicatifs. Les exigences sont : (1) enregistrer et suivre les sources de donnees dans un catalogue interrogeable avec des metadonnees d'attribution de source afin que la provenance des documents soit interrogeable, (2) maintenir des journaux de decision et d'acces complets pour chaque invocation du modele, reliant chaque reponse a la version du modele et aux sources recuperees utilisees, (3) maintenir une piste d'audit de qui a accede au systeme et quand, suffisante pour un regulateur, et (4) atteindre cela sans exiger que les ingenieurs reconstruisent manuellement l'historique a partir de journaux applicatifs epars apres chaque requete. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Conserver les journaux applicatifs existants sur le stockage local des instances et charger les ingenieurs de correler les horodatages entre services chaque fois qu'une demande reglementaire est recue.",
+    "Stocker uniquement le texte final de chaque resume genere dans une base de donnees relationnelle, indexee par date et par analyste, afin de pouvoir le produire tel quel a la demande du regulateur.",
+    "Demander a chaque analyste de tenir un tableur recensant les documents qu'il estime avoir servi a chaque resume, et centraliser ces tableurs dans un espace documentaire partage accessible a l'equipe de conformite a la fin de chaque mois.",
+    "Cataloguer les sources dans AWS Glue Data Catalog avec des metadonnees d'attribution, activer la journalisation des invocations de modele Amazon Bedrock vers CloudWatch Logs, et tracer les acces avec AWS CloudTrail."
+  ]
+}

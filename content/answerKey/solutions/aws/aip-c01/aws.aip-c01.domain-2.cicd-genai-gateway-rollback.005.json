@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-2.cicd-genai-gateway-rollback.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Faire transiter chaque livraison par AWS CodePipeline avec une etape AWS CodeBuild d'analyse statique et de tests automatises, conserver la revision precedente pour un redeploiement immediat, et exposer les modeles derriere Amazon API Gateway.",
+  "rationale": "CodePipeline orchestre les etapes et CodeBuild y execute l'analyse statique des templates et la suite de tests : la promotion vers l'environnement de production ne se declenche que si ces etapes reussissent, et la conservation de la revision precedente comme artefact deployable permet de restaurer la version saine en une execution du pipeline. Placer API Gateway devant les modeles cree le point de passage unique qui manquait : quotas et plans d'usage par equipe, journalisation homogene des appels et repartition des couts s'appliquent sans dependre de la discipline de chaque application. Les appels directs avec des identifiants par equipe et une consolidation mensuelle sur tableur laissent les quotas se consommer sans arbitrage, rendent l'attribution des couts retrospective et n'offrent aucun controle avant deploiement. La validation par fil de courriel produit une trace narrative, pas une barriere executable : rien ne verifie techniquement le template promu, la copie manuelle reste faillible et aucune revision anterieure n'est prete a etre restauree. La passerelle deployee seule couvre l'exploitation mais laisse entrer en production des changements ni analyses ni testes, au rythme de chaque equipe, ce qui reconduit les regressions que la direction cherche a supprimer. Sources officielles AWS : https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html https://docs.aws.amazon.com/wellarchitected/latest/generative-ai-lens/generative-ai-lens.html"
+}

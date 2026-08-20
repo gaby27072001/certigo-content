@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-6.guardduty-securityhub-auto-remediation.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-6"
+  },
+  "correct": "Activer GuardDuty dans tous les comptes via un administrateur delegue, agreger dans Security Hub, et invoquer par EventBridge une fonction Lambda d'isolement pour les seuls resultats de severite elevee.",
+  "rationale": "GuardDuty active dans tous les comptes membres avec un administrateur delegue et une agregation dans Security Hub fournit la detection et la priorisation centralisees exigees, tandis qu'une automatisation de confinement reservee aux resultats de severite elevee laisse les severites moyenne et faible en revue humaine dans Security Hub, ce qui equilibre exactement rapidite de reponse, limitation du blast radius et charge operationnelle raisonnable. L'analyse hebdomadaire des journaux par chaque equipe n'offre ni correlation entre comptes, ni priorisation centralisee, ni rapidite de detection, et represente une charge operationnelle considerable a maintenir a l'echelle de l'organisation. Activer GuardDuty dans le seul compte de gestion ne detecte pas les menaces dans les comptes membres, qui necessitent une activation via delegation explicite ; les resultats consultes depuis ce compte ne couvrent donc pas le parc et laissent la majorite des comptes sans detection. Declencher l'isolement reseau des la premiere alerte, quelle que soit la severite, cree un risque de blast radius disproportionne en interrompant potentiellement des activites legitimes sur la base de resultats peu fiables, ce qui contredit directement l'exigence de conserver une revue humaine pour les severites moyenne et faible. Sources officielles AWS : https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html"
+}

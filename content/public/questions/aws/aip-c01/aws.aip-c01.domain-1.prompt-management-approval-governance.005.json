@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.prompt-management-approval-governance.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une entreprise du secteur de la sante, soumise a des obligations reglementaires strictes, constate que plusieurs equipes modifient les prompts de production de facon ad hoc, directement dans le code applicatif sous forme de chaines codees en dur, ce qui a deja provoque des regressions et laisse aucune trace d'audit sur qui a approuve quel changement lors d'une revue de conformite recente. La nouvelle exigence de gouvernance impose : (1) un depot centralise et versionne des templates de prompt permettant un retour en arriere trivial vers une version anterieure connue comme fiable, (2) une etape d'approbation avant qu'une nouvelle version de prompt n'atteigne la production, (3) une tracabilite complete de qui a accede a ou modifie quelle version de prompt et quand, pour une revue de conformite, et (4) que la mise a jour du texte d'un prompt ne necessite pas de redeploiement du code par chaque equipe applicative. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Conserver les prompts en chaines codees en dur dans le code source de chaque application et utiliser la revue de pull request Git existante comme etape d'approbation, en balisant chaque release applicative pour retrouver la formulation deployee.",
+    "Stocker chaque version de prompt en objet texte dans un bucket Amazon S3 prive avec le versionnement d'objets active, et coordonner les modifications entre equipes par messagerie avant d'ecraser le fichier partage.",
+    "Utiliser Amazon Bedrock Guardrails pour n'autoriser que les formulations de prompt inscrites sur une liste d'exemples approuves, et conserver les journaux de filtrage de contenu comme historique des versions et des approbations.",
+    "Utiliser Amazon Bedrock Prompt Management pour versionner des templates parametres promus par un workflow d'approbation, faire referencer une version par les applications, et auditer les appels d'API sur ces templates avec AWS CloudTrail."
+  ]
+}

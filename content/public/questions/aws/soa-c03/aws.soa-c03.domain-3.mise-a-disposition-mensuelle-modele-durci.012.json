@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-3.mise-a-disposition-mensuelle-modele-durci.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une entreprise doit produire chaque mois une AMI renforcée et corrigée, la soumettre à des tests automatisés avant publication, puis la mettre à disposition de plusieurs comptes de l'organisation. Quelle solution offre ce cycle avec le moins d'opérations manuelles ?",
+  "choices": [
+    "Lancer chaque mois une instance de référence, y appliquer les correctifs à la main puis créer l'AMI depuis la console.",
+    "Utiliser AWS Backup pour produire des AMI corrigées à partir des instantanés des instances de production.",
+    "Renoncer à une image de référence et faire installer les correctifs par les données utilisateur d'un modèle de lancement à chaque démarrage d'instance.",
+    "Créer un pipeline EC2 Image Builder combinant une recette avec des composants de renforcement et de correctifs, des composants de test, une planification mensuelle et une configuration de distribution vers les comptes cibles."
+  ]
+}

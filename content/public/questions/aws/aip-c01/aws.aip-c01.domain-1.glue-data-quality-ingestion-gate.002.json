@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.glue-data-quality-ingestion-gate.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une compagnie d'assurance ingere en continu des documents de sinistres structures et non structures pour alimenter un pipeline RAG. Des documents dupliques, corrompus ou avec des champs manquants degradent regulierement la qualite des reponses du modele de fondation. La direction technique impose que la nouvelle chaine d'ingestion : (1) applique un controle qualite automatise et fonde sur des regles avant l'indexation vectorielle, plutot qu'une verification visuelle ponctuelle, (2) bloque l'ingestion des enregistrements qui echouent a des regles strictes tout en laissant passer, avec un marquage, ceux qui echouent seulement a des regles souples, (3) publie les indicateurs qualite dans les tableaux de bord CloudWatch existants sans construire un moteur de regles maison, et (4) tienne la charge sur des millions de documents sans goulot d'etranglement de revision manuelle. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Confier a un ingenieur donnees la revue hebdomadaire d'un echantillon aleatoire de documents dans un tableur partage, consigner les anomalies dans un ticket et rejeter le lot nocturne complet des qu'une anomalie bloquante y est relevee.",
+    "Ecrire une fonction AWS Lambda de validation personnalisee, en expressions regulieres et conditions par champ, invoquee de maniere synchrone dans le chemin de requete RAG avant chaque appel au modele de fondation, avec journalisation dans CloudWatch Logs.",
+    "S'appuyer sur Amazon Comprehend pour extraire les entites de chaque document et utiliser ses scores de confiance comme indicateur de qualite, en fixant un seuil minimal en dessous duquel le document n'est pas indexe dans la base vectorielle.",
+    "Definir des regles declaratives AWS Glue Data Quality (DQDL) sur la completude, l'unicite et le schema pendant l'ingestion, publier leurs resultats en metriques CloudWatch, mettre en quarantaine les echecs stricts et etiqueter les echecs souples."
+  ]
+}

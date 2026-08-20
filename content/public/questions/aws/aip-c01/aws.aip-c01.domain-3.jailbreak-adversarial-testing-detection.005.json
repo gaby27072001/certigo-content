@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-3.jailbreak-adversarial-testing-detection.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "L'equipe de securite d'un chatbot GenAI public souhaite le renforcer proactivement contre les tentatives de jailbreak et d'injection de prompt avant la prochaine version, plutot que d'attendre que de vrais attaquants trouvent des failles en production. Les exigences sont : (1) executer des tests contradictoires automatises et reproductibles contre des schemas connus de jailbreak et d'injection dans le cadre du processus de mise en production, (2) appliquer une classification d'entree en temps reel pour detecter des schemas contradictoires dans le trafic en direct, pas seulement pendant les tests avant mise en production, (3) assainir ou filtrer les entrees suspectes avant qu'elles n'atteignent le modele de fondation plutot que de seulement detecter les problemes apres coup, et (4) maintenir les mecanismes de detection a jour a mesure que de nouvelles techniques de jailbreak sont decouvertes, plutot que de traiter l'ensemble de regles comme statique et definitif. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Executer contre chaque version candidate une bibliotheque de schemas de jailbreak connus, deployer Amazon Bedrock Guardrails avec filtres d'injection et assainissement des entrees, et actualiser periodiquement schemas et configuration.",
+    "Executer juste avant le lancement une campagne de tests pilotee par l'equipe securite a partir d'un corpus de prompts conserve dans un depot, puis consigner les resultats dans le rapport de version diffuse a l'equipe produit.",
+    "Deployer une classification des entrees en temps reel sur le trafic de production, alimentee par un modele de detection gere, et suivre le taux de detections dans un tableau de bord partage avec l'equipe de securite.",
+    "Configurer au lancement une liste de mots-cles bloques couvrant les formulations de contournement connues a ce jour, et l'appliquer a chaque message entrant avant l'appel au modele de fondation."
+  ]
+}

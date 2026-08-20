@@ -1,0 +1,13 @@
+{
+  "id": "aws.clf-c02.domain-2.moindre-privilege.010",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:clf-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Une politique IAM autorisant seulement les actions de lecture nécessaires sur ce compartiment",
+  "rationale": "Le moindre privilège limite les actions et ressources à ce qui est nécessaire. AdministratorAccess et l’accès complet au stockage accordent des droits excessifs, et le root user contourne les bonnes pratiques de délégation et de restriction."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-1.pipeline-canary-blast-radius.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer un deploiement canary (Canary10Percent5Minutes) avec hooks pre-traffic et post-traffic et une alarme composite CloudWatch (erreurs 5xx et latence P99) pilotant le rollback.",
+  "rationale": "Le deploiement canary a 10 % avec hooks pre-traffic/post-traffic et alarme composite limite l'exposition initiale a une fraction du trafic reel, ajoute une validation automatisee avant et apres la bascule partielle, et declenche un rollback sans intervention humaine des que le taux d'erreurs et la latence se degradent conjointement : c'est la seule option qui reduit simultanement le blast radius, accelere la detection et automatise le retour arriere. AllAtOnce expose 100 % du trafic des l'instant zero et fait reposer la detection sur un test de fumee manuel apres coup, ce qui maximise le blast radius et retarde exactement le type de rollback que l'incident precedent a revele comme trop lent. Le deploiement lineaire reduit certes le blast radius progressivement, mais confier le suivi a un ingenieur devant un tableau de bord reintroduit un delai de detection humain et un risque d'erreur d'appreciation pendant toute la fenetre de bascule. Le Blue/Green qui bascule la totalite du trafic apres une approbation manuelle ne reduit pas le blast radius au moment critique de la bascule et ne fournit aucun mecanisme de retour arriere automatique : la revue des journaux intervient apres coup, laissant l'ensemble du trafic expose a une version defectueuse jusqu'a une intervention manuelle. Sources officielles AWS : https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html https://docs.aws.amazon.com/codedeploy/latest/userguide/monitoring-create-alarms.html"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-4.recherche-erreurs-par-identifiant-correlation.018",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Exécuter une requête CloudWatch Logs Insights sur le groupe de journaux, en s'appuyant sur l'extraction automatique des champs JSON, par exemple `fields @timestamp, @message | filter correlationId = '...' and level = 'ERROR' | stats count() by errorCode`.",
+  "rationale": "CloudWatch Logs Insights interroge l'ensemble des flux d'un groupe de journaux sans extraction préalable, découvre automatiquement les champs des événements JSON et propose des commandes d'agrégation : un filtre sur `correlationId` et `level`, suivi d'un `stats count() by errorCode`, fournit la réponse en quelques secondes, et la requête peut être enregistrée puis ajoutée à un tableau de bord pour les incidents suivants. Télécharger les flux et les analyser localement est lent, coûteux en transfert et impraticable sur des centaines de flux pendant une interruption de service. Les filtres d'abonnement ne s'appliquent qu'aux événements écrits après leur création : ils ne rejouent jamais l'historique, ce qui les rend inutiles pour une investigation rétrospective. Un filtre de métrique ne produit que des séries numériques, également à partir des seuls événements futurs, et ne restitue pas le contenu des messages : il sert à déclencher des alarmes, pas à retrouver les enregistrements d'une requête donnée."
+}

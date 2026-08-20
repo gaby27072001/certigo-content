@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-2.identifiants-base-fixes-depuis-deploiement.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application conteneurisée se connecte à une base de données Amazon RDS avec un mot de passe fixe, défini au moment du déploiement. La politique interne impose désormais une rotation automatique des identifiants tous les 30 jours, sans nouveau déploiement de l'application ni interruption de service. Que doit mettre en place le développeur ?",
+  "choices": [
+    "Stocker les identifiants dans AWS Secrets Manager, activer la rotation automatique avec une fonction de rotation adaptée au moteur, et faire récupérer le secret par l'application au démarrage puis lors d'une erreur d'authentification, avec un cache local à durée de vie courte.",
+    "Conserver les identifiants dans des variables d'environnement du conteneur et déclencher un redéploiement mensuel de l'image pour les modifier.",
+    "Placer les identifiants dans un paramètre de type String d'AWS Systems Manager Parameter Store et en accorder la lecture à l'ensemble du compte.",
+    "Générer un mot de passe aléatoire au démarrage de chaque instance de l'application et l'appliquer directement sur la base de données."
+  ]
+}

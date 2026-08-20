@@ -1,0 +1,18 @@
+{
+  "id": "gcp.generative-ai-leader.section-1.qualite-donnees-structurees-non-structurees.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:generative-ai-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une compagnie d'assurance veut entraîner un modèle de fondation à résumer des rapports de sinistres. Elle dispose d'une base de données relationnelle des polices (colonnes strictement définies) et d'une archive de PDF scannés de rapports d'experts rédigés en langage libre. Quelle affirmation décrit correctement ces types de données et un facteur clé de qualité à vérifier avant utilisation ?",
+  "choices": [
+    "Les données non structurées nécessitent surtout un contrôle qualité approfondi avant leur utilisation ; les données d'une base relationnelle structurée sont, par construction, complètes, cohérentes, correctement normalisées et à jour, sans qu'une vérification supplémentaire de la part de l'équipe data science soit véritablement utile.",
+    "La base de polices est non structurée car elle contient des valeurs numériques, tandis que les PDF sont structurés car ils suivent une mise en page identique d'un rapport à l'autre.",
+    "Les deux sources sont équivalentes en matière de préparation : toute donnée numérisée est considérée comme prête pour l'entraînement d'un modèle de fondation, sans contrôle supplémentaire nécessaire.",
+    "La base de polices est un exemple de données structurées à schéma tabulaire fixe, et les rapports PDF sont des données non structurées en texte libre ; dans les deux cas, il faut vérifier la cohérence, l'exhaustivité et la pertinence des données avant utilisation."
+  ]
+}

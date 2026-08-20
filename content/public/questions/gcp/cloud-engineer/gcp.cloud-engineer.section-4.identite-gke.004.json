@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-4.identite-gke.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Un Pod GKE doit publier des messages dans un topic Pub/Sub. Les autres Pods du cluster ne doivent pas obtenir cette autorisation et aucune clé de compte de service ne doit être montée dans le conteneur. Quelle solution faut-il mettre en œuvre ?",
+  "choices": [
+    "Utiliser Workload Identity Federation for GKE avec un ServiceAccount Kubernetes dédié autorisé sur le topic",
+    "Accorder Pub/Sub Admin au compte de service des nœuds GKE utilisé par le pool concerné",
+    "Stocker une clé JSON dans un Secret Kubernetes monté par les Pods du namespace",
+    "Configurer le topic Pub/Sub pour accepter les publications des identités du cluster"
+  ]
+}

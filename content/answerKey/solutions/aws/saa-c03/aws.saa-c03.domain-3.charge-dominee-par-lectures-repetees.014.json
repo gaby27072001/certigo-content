@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-3.charge-dominee-par-lectures-repetees.014",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Ajouter des réplicas en lecture Aurora servis par le point de terminaison de lecture du cluster pour absorber les requêtes de consultation, et placer un cache Amazon ElastiCache devant la base afin de servir les fiches produits les plus demandées.",
+  "rationale": "Le profil de charge oriente la solution : une écrasante majorité de lectures, dont beaucoup sont répétitives. Les réplicas en lecture Aurora partagent le volume de stockage du cluster, se synchronisent avec un retard très faible et sont adressés par le point de terminaison de lecture, qui répartit les connexions entre eux : les consultations quittent l'instance d'écriture, qui retrouve de la marge pour les transactions. Le cache Amazon ElastiCache s'attaque à l'autre moitié du problème : les requêtes identiques répétées sont servies depuis la mémoire, sans aller-retour vers la base, ce qui écrase la latence au 99e centile pour les fiches populaires et réduit encore le nombre de requêtes atteignant le moteur. Les deux mécanismes se cumulent sans toucher au schéma ni au moteur, contrainte posée par l'énoncé. Migrer vers Amazon DynamoDB impose de repenser le modèle de données autour des motifs d'accès et de réécrire les requêtes, ce que l'entreprise exclut explicitement. Agrandir l'instance d'écriture repousse la limite de façon linéaire et coûteuse, sans supprimer le point unique de contention et sans rien faire pour les requêtes répétitives. Exporter vers Amazon S3 et interroger avec Amazon Athena relève de l'analyse : la latence d'une requête est de l'ordre de la seconde et les données seraient vieilles d'une nuit, ce qui ne convient pas à l'affichage de fiches produits."
+}

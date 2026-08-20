@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-1.ecs-bluegreen-auto-rollback.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer un deploiement Blue/Green CodeDeploy pour ECS avec un listener de test, une periode de verification (bake time) et un rollback automatique pilote par des alarmes CloudWatch sur le groupe cible.",
+  "rationale": "Le listener de test permet de valider le nouveau groupe de taches avant toute exposition au trafic de production, la periode de verification observe le comportement reel apres bascule, et les alarmes CloudWatch declenchent un rollback sans intervention humaine des qu'une degradation est mesuree : cette combinaison couvre a la fois la validation pre-production et la detection post-bascule automatisee exigees par l'enonce. Le rolling update natif ECS sait lui aussi revenir en arriere automatiquement, via le circuit breaker de deploiement et via les alarmes CloudWatch de deploiement ; l'option proposee ici ne s'appuie sur aucun de ces mecanismes et confie la surveillance a l'equipe pendant trente minutes, et elle n'offre aucun listener de test permettant de valider la nouvelle version avant qu'elle ne recoive du trafic client. La modification directe via UpdateService avec retour arriere manuel expose immediatement le trafic de production a la nouvelle version sans validation prealable et demande une action humaine reactive en cas d'erreur, ce qui ne reduit ni le risque ni le delai de detection. Le Blue/Green a listener de production unique bascule la totalite du trafic vers une version non validee des l'enregistrement du nouveau groupe cible, sans fenetre d'observation automatisee permettant de declencher un rollback avant un impact client generalise. Sources officielles AWS : https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-alarm-failure.html https://docs.aws.amazon.com/codedeploy/latest/userguide/monitoring-create-alarms.html"
+}

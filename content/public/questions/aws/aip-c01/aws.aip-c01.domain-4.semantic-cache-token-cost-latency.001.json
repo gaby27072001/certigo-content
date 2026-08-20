@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-4.semantic-cache-token-cost-latency.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un assistant de FAQ produit traite des millions de questions clients quasi identiques chaque jour, dont beaucoup sont des reformulations exactes ou quasi exactes d'une meme question sous-jacente ; chacune declenche une invocation complete du modele de fondation incluant un long prompt systeme majoritairement statique. Les couts ont fortement augmente avec le trafic. Les exigences sont : (1) eviter de reinvoquer entierement le modele de fondation pour des requetes semantiquement equivalentes a une question tres recemment traitee, (2) eviter de retraiter (et de repayer) la portion volumineuse et invariante du prompt (instructions systeme et contexte statique) a chaque appel alors que seule la question finale de l'utilisateur differe, (3) garder des reponses correctes et a jour, une reponse en cache pour une question semantiquement proche mais significativement differente ne doit jamais etre renvoyee, et (4) reduire a la fois le cout et la latence de reponse, pas seulement l'un des deux. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Passer a une variante du modele offrant une fenetre de contexte plus large afin d'y placer davantage de contexte statique et de traiter plusieurs questions clientes dans un meme appel groupe.",
+    "Mettre en cache chaque reponse sous une cle calculee sur la chaine exacte de la question dans une table Amazon DynamoDB assortie d'une duree de vie, et invoquer le modele des que la chaine differe d'un caractere.",
+    "Ajouter un cache semantique qui reutilise une reponse recente pour une question suffisamment proche, avec seuil de similarite controle, et activer la mise en cache de prompt Amazon Bedrock pour la partie statique.",
+    "Precalculer un jeu fixe de reponses redigees pour les questions les plus frequentes du catalogue produit et servir uniquement ces reponses, l'appel au modele de fondation etant desactive."
+  ]
+}

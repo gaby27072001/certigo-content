@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-4.traitement-donnees-sante-sans-internet.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une charge de travail ML traite des données de santé. La conformité impose qu'aucun trafic d'entraînement ni d'inférence ne transite par l'Internet public, que les volumes de calcul et les artefacts de modèle soient chiffrés avec une clé gérée par le client, et que l'usage de cette clé soit restreint aux seuls rôles du projet. Quelle configuration l'ingénieur doit-il retenir ?",
+  "choices": [
+    "S'appuyer sur le chiffrement TLS des appels d'API SageMaker, qui protège déjà les données pendant leur transit sur le réseau.",
+    "Chiffrer le bucket Amazon S3 avec le chiffrement côté serveur géré par Amazon S3 (SSE-S3) et laisser les jobs joindre les API par leurs points de terminaison publics.",
+    "Lancer les jobs d'entraînement et les points de terminaison dans des sous-réseaux privés du VPC avec l'isolation réseau des conteneurs activée, joindre Amazon S3 et les API SageMaker par des points de terminaison VPC de passerelle et d'interface, et chiffrer volumes et artefacts avec une clé AWS KMS gérée par le client dont la politique n'autorise que les rôles du projet.",
+    "Placer les points de terminaison dans des sous-réseaux publics protégés par un groupe de sécurité n'autorisant que les adresses IP du siège."
+  ]
+}

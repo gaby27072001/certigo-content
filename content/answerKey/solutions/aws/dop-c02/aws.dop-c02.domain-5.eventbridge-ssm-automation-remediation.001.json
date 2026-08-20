@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-5.eventbridge-ssm-automation-remediation.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Creer une regle Amazon EventBridge sur l'evenement CloudTrail AuthorizeSecurityGroupIngress qui invoque un document AWS Systems Manager Automation revoquant la regle et publiant un evenement d'audit.",
+  "rationale": "Une regle EventBridge declenchee par l'evenement CloudTrail, invoquant un document SSM Automation, corrige automatiquement la regle non conforme en quelques secondes sans intervention humaine, tout en publiant un evenement d'audit exploitable, ce qui repond exactement au besoin de rapidite, d'automatisation et de tracabilite pour ce scenario bien connu et a faible risque. Le ticket avec un delai de traitement de vingt-quatre heures est totalement disproportionne pour un cas bien compris qui devrait etre corrige en quelques secondes, et impose une charge operationnelle inutile a l'equipe d'astreinte. Retirer la permission de modifier les groupes de securite a tous les roles de l'organisation est une mesure disproportionnee qui bloque des cas d'usage legitimes necessitant des ouvertures temporaires sous controle de changement, sans traiter la question de la detection et de l'audit de l'evenement lui-meme. Une alarme qui se contente d'envoyer une notification par courriel exige toujours qu'un humain intervienne pour revoquer la regle, ce qui ne reduit pas suffisamment le delai de correction pour un cas explicitement designe comme automatisable sans reveiller l'astreinte. Sources officielles AWS : https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation.html https://docs.aws.amazon.com/eventbridge/latest/userguide/logging-using-cloudtrail.html https://docs.aws.amazon.com/config/latest/developerguide/remediation.html"
+}

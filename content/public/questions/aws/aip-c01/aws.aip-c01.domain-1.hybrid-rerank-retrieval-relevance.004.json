@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.hybrid-rerank-retrieval-relevance.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un copilote de revue contractuelle doit retrouver des clauses juridiques avec une grande precision. La recherche vectorielle seule renvoie des clauses semantiquement proches mais parfois hors sujet, ce qui degrade la precision, tandis que la recherche par mots-cles seule manque les clauses reformulees. L'equipe exige une conception de recuperation qui : (1) ameliore la pertinence du top-k pour les termes juridiques exacts (par exemple 'force majeure') qui doivent correspondre precisement, (2) capture aussi les clauses paraphrasees semantiquement proches, (3) n'applique un calcul supplementaire couteux que sur une liste restreinte de candidats plutot que sur l'ensemble du corpus, pour maitriser le cout et la latence, et (4) evite d'entrainer ou d'heberger un modele d'embedding ou de reclassement personnalise. Quelle conception repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Utiliser uniquement la recherche vectorielle k-NN d'Amazon OpenSearch Service en portant k a 200, puis transmettre l'integralite de ces 200 fragments dans la fenetre de contexte du modele de fondation avant de generer la reponse.",
+    "Utiliser uniquement la recherche plein texte BM25 d'Amazon OpenSearch Service sur le corpus de clauses juridiques, avec analyse linguistique et dictionnaire de synonymes configures dans l'index, sans generer ni interroger d'embeddings pour la pertinence.",
+    "Executer une recherche hybride mots-cles et vecteurs dans Amazon OpenSearch Service, puis reordonner uniquement les candidats ainsi obtenus avec le modele de reclassement gere d'Amazon Bedrock avant de les transmettre au modele de fondation.",
+    "Entrainer un modele de reclassement cross-encoder sur Amazon SageMaker AI, l'heberger sur un endpoint temps reel et l'appliquer a chaque requete sur tous les fragments de la base de connaissances pour produire le classement final."
+  ]
+}

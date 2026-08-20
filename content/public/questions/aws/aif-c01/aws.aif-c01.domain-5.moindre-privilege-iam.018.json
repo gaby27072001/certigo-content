@@ -1,0 +1,18 @@
+{
+  "id": "aws.aif-c01.domain-5.moindre-privilege-iam.018",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aif-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Une application Amazon Bedrock doit lire un seul préfixe S3 et invoquer un modèle déterminé. Quelle approche respecte le mieux le principe du moindre privilège ?",
+  "choices": [
+    "Utiliser le root user pour éviter les erreurs de permission",
+    "Attacher à un rôle IAM une politique limitée à ce préfixe et aux actions nécessaires",
+    "Partager des clés d’accès permanentes entre développeurs",
+    "Rendre le compartiment S3 public"
+  ]
+}

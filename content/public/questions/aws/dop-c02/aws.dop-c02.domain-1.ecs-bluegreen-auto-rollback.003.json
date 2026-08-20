@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-1.ecs-bluegreen-auto-rollback.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un service Amazon ECS sur Fargate, expose derriere un Application Load Balancer, subit des regressions occasionnelles apres deploiement qui ne sont detectees que plusieurs heures plus tard par les clients, car la validation actuelle repose sur une revue manuelle des journaux. L'equipe veut automatiser au maximum la validation d'une nouvelle version avant qu'elle ne recoive du trafic de production et garantir un retour arriere automatique sans intervention humaine si une degradation est mesuree pendant une periode d'observation suivant la bascule.",
+  "choices": [
+    "Utiliser une mise a jour de service ECS en rolling update (minimumHealthyPercent et maximumPercent), avec une etape d'exploitation qui examine les alarmes CloudWatch pendant les trente minutes suivant la bascule.",
+    "Appeler l'API UpdateService avec la nouvelle definition de tache, puis faire rebasculer l'equipe vers la definition precedente lorsque des erreurs apparaissent dans les journaux applicatifs.",
+    "Configurer un deploiement Blue/Green CodeDeploy pour ECS avec un unique listener de production qui bascule la totalite du trafic des que le nouveau groupe cible est enregistre.",
+    "Configurer un deploiement Blue/Green CodeDeploy pour ECS avec un listener de test, une periode de verification (bake time) et un rollback automatique pilote par des alarmes CloudWatch sur le groupe cible."
+  ]
+}

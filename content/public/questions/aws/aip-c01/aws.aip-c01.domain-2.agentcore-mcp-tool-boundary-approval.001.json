@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-2.agentcore-mcp-tool-boundary-approval.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un agent de passation de commandes construit avec Amazon Bedrock AgentCore peut interroger des catalogues fournisseurs (outil de lecture seule) et emettre des bons de commande au-dela de certains seuils monetaires (outil d'ecriture a risque) via des serveurs d'outils MCP. Un incident recent a montre que l'agent a emis de maniere autonome un bon de commande important sur la base d'une mauvaise interpretation de la demande utilisateur. Les exigences sont : (1) imposer qu'un appel d'outil au-dela d'un seuil monetaire defini exige une approbation humaine explicite avant execution, (2) borner les permissions d'outils de l'agent avec des roles IAM a moindre privilege afin qu'il ne puisse jamais appeler une API destructrice ou d'ecriture qui ne lui a pas ete explicitement accordee, (3) appliquer un arret ou une limite de temps stricte pour qu'une boucle de raisonnement bloquee ne puisse pas s'executer indefiniment en accumulant des appels d'outils, et (4) laisser les consultations de lecture seule a faible risque s'executer de maniere entierement autonome pour que l'experience des requetes courantes reste rapide. Quelle conception satisfait le mieux ces quatre exigences ?",
+  "choices": [
+    "Classer les outils par niveau de risque, soumettre les appels d'ecriture au-dela du seuil a une tache de rappel humain AWS Step Functions, restreindre le role IAM de chaque outil aux actions necessaires et borner le nombre d'etapes de raisonnement.",
+    "Accorder au role d'execution de l'agent des permissions larges sur les systemes d'achat pour eviter toute erreur de permission, journaliser chaque appel d'outil dans AWS CloudTrail et faire relire les bons de commande emis lors de la revue quotidienne.",
+    "Interposer une approbation humaine devant chaque appel d'outil de l'agent, consultations de catalogue comprises, avec notification a l'acheteur de garde et expiration automatique de la demande d'approbation apres quinze minutes.",
+    "Retirer l'outil d'emission de bons de commande a l'agent, le limiter a produire un resume par courriel des achats proposes, et laisser les acheteurs saisir eux-memes les commandes validees dans le systeme d'achat."
+  ]
+}

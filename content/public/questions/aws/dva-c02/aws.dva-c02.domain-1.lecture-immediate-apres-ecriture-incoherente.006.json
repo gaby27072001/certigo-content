@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-1.lecture-immediate-apres-ecriture-incoherente.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Dans un parcours d'inscription, l'application écrit un profil dans Amazon DynamoDB avec PutItem, puis relit immédiatement l'élément avec GetItem pour l'afficher. De façon intermittente, la lecture renvoie l'ancienne valeur ou aucun élément. Quelle correction, la plus directe, le développeur doit-il appliquer à cette lecture ?",
+  "choices": [
+    "Insérer une pause de 500 millisecondes dans le code avant la lecture, le temps que la réplication interne se termine.",
+    "Placer un cluster DynamoDB Accelerator (DAX) devant la table pour que les lectures reflètent immédiatement les écritures.",
+    "Demander une lecture fortement cohérente en positionnant `ConsistentRead` à true sur l'opération GetItem, en acceptant un coût double en unités de capacité de lecture et l'impossibilité d'utiliser ce mode sur un index secondaire global.",
+    "Effectuer la lecture sur un index secondaire global dédié, qui garantit une vue fortement cohérente de la table."
+  ]
+}

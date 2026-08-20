@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-1.relance-service-defaillant-tracable.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Sur une flotte d'instances Amazon EC2, un agent applicatif s'arrête de façon aléatoire. Une alarme CloudWatch détecte déjà la panne grâce à une métrique publiée par l'agent CloudWatch. L'équipe CloudOps veut que le service soit relancé automatiquement, avec une trace auditable de chaque remédiation. Quelle solution répond au besoin ?",
+  "choices": [
+    "Programmer une tâche planifiée sur chaque instance qui redémarre le service toutes les dix minutes, qu'il soit défaillant ou non.",
+    "Configurer l'action d'alarme EC2 « terminer l'instance » pour que l'instance soit supprimée dès que le seuil est franchi.",
+    "Publier l'alarme dans une file Amazon SQS et demander à l'équipe d'astreinte de traiter chaque message manuellement.",
+    "Faire relayer le changement d'état de l'alarme par une règle Amazon EventBridge qui déclenche un runbook AWS Systems Manager Automation chargé de relancer le service sur l'instance concernée et de journaliser l'exécution."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-1.cross-account-pipeline-promotion.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une organisation utilise des comptes AWS separes pour le developpement, le test et la production. Le pipeline CI/CD central doit promouvoir le meme artefact de build du compte de developpement vers les comptes de test puis de production, sans jamais distribuer d'identifiants IAM a long terme entre comptes, en respectant le moindre privilege pour chaque compte cible, et sans multiplier les operations manuelles a chaque promotion.",
+  "choices": [
+    "Creer dans le compte de production un utilisateur IAM dote de cles d'acces a long terme, et communiquer ces cles au compte du pipeline pour qu'il lance les deploiements CloudFormation cibles.",
+    "Configurer dans chaque compte cible un role IAM dedie que CodePipeline assume via sts:AssumeRole, et autoriser ces comptes dans la politique de la cle KMS du compartiment d'artefacts.",
+    "Copier les artefacts de build vers un compartiment S3 temporaire ouvert en lecture publique, puis les telecharger depuis chaque compte cible au moment de la promotion vers l'environnement suivant.",
+    "Deployer dans chaque compte un pipeline CodePipeline autonome qui reconstruit l'application depuis le depot source commun avant de la deployer dans l'environnement local du compte."
+  ]
+}

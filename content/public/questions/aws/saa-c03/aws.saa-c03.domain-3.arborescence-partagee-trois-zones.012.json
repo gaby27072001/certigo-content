@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-3.arborescence-partagee-trois-zones.012",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application de gestion documentaire s'exécute sur une flotte Amazon EC2 en groupe Auto Scaling répartie sur trois zones de disponibilité. Toutes les instances doivent lire et écrire simultanément dans la même arborescence de fichiers, avec des sémantiques POSIX et un verrouillage de fichiers entre les instances. Le volume actuel est de 300 Go mais doit atteindre plusieurs téraoctets à un rythme imprévisible, sans intervention d'exploitation. Quelle solution de stockage l'architecte doit-il retenir ?",
+  "choices": [
+    "Attacher à chaque instance un volume Amazon EBS gp3 de quatre téraoctets et synchroniser les volumes entre eux toutes les quinze minutes.",
+    "Stocker les fichiers dans un compartiment Amazon S3 et monter ce compartiment comme un système de fichiers POSIX complet au moyen des points d'accès Amazon S3.",
+    "Utiliser un volume Amazon EBS io2 attaché en mode multi-attache à l'ensemble des instances des trois zones de disponibilité.",
+    "Utiliser un système de fichiers Amazon EFS régional monté par toutes les instances des trois zones de disponibilité, avec une politique de cycle de vie qui déplace les fichiers rarement consultés vers une classe de stockage à accès peu fréquent."
+  ]
+}

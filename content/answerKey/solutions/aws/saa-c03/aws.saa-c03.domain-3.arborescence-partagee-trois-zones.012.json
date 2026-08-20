@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-3.arborescence-partagee-trois-zones.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Utiliser un système de fichiers Amazon EFS régional monté par toutes les instances des trois zones de disponibilité, avec une politique de cycle de vie qui déplace les fichiers rarement consultés vers une classe de stockage à accès peu fréquent.",
+  "rationale": "Trois exigences se cumulent : accès concurrent en lecture et en écriture depuis plusieurs zones de disponibilité, sémantiques POSIX avec verrouillage, et croissance élastique sans exploitation. Amazon EFS est le seul service de la liste qui satisfasse les trois. Un système de fichiers régional est accessible par des cibles de montage placées dans chaque zone, il présente une véritable sémantique de système de fichiers réseau, verrouillage compris, et sa capacité s'ajuste automatiquement à mesure que les fichiers sont écrits ou supprimés, sans redimensionnement. La politique de cycle de vie vers la classe à accès peu fréquent réduit le coût de la partie dormante sans changer le chemin d'accès des fichiers. Un volume Amazon EBS par instance ne crée pas une vue partagée : chaque instance possède sa propre copie, et une synchronisation périodique produit des conflits d'écriture et une fenêtre de divergence incompatible avec un accès concurrent. Amazon S3 est un stockage d'objets : les points d'accès y gèrent des politiques d'accès, pas une couche POSIX, et le modèle objet n'offre ni renommage atomique de répertoire ni verrouillage de fichier. Le mode multi-attache d'Amazon EBS est limité aux volumes io1 et io2 dans une seule zone de disponibilité, plafonné à un petit nombre d'instances, et il expose un périphérique bloc brut qui exige un système de fichiers en cluster : il ne franchit pas la frontière des zones et ne répond pas au besoin."
+}

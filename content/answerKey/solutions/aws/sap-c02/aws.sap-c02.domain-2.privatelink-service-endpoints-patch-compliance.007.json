@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-2.privatelink-service-endpoints-patch-compliance.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Exposer le microservice via AWS PrivateLink accessible depuis les VPC consommateurs via des interface endpoints, utiliser des gateway endpoints Amazon S3 et Amazon DynamoDB, inscrire la flotte EC2 dans AWS Systems Manager Patch Manager avec une fenetre de maintenance recurrente et un rapport de conformite, et utiliser Session Manager sans jamais ouvrir de port SSH entrant, tout en beneficiant du reseau prive d'AWS de bout en bout entre les comptes consommateurs concernes.",
+  "rationale": "AWS PrivateLink expose le microservice sans jamais faire transiter le trafic par Internet public et s'adapte proprement a de nombreux comptes consommateurs sans peering point a point ni ouverture large de groupes de securite ; les gateway VPC endpoints S3 et DynamoDB evitent les frais de traitement d'une passerelle NAT ; et Systems Manager Patch Manager avec une fenetre de maintenance recurrente et un rapport de conformite, combine a Session Manager, assure la cadence de patch exigee sans jamais ouvrir SSH. Le peering direct avec des regles de groupe de securite largement ouvertes fait transiter S3 et DynamoDB par une passerelle NAT et engendre des frais de traitement evitables, et un port SSH reste ouvert en entree sans aucune cadence recurrente ni rapport de conformite defini pour la flotte EC2. Publier le microservice sur un ALB public fait transiter le trafic par Internet, ce qui contredit directement l'exigence, et s'appuyer uniquement sur le niveau de patch de l'AMI au lancement ne fournit aucune cadence de mise a jour ulterieure ni rapport de conformite. AWS Direct Connect est concu pour relier un site on-premises a AWS et n'est pas l'outil adapte pour exposer un service entre VPC et comptes AWS au sein du reseau AWS, la passerelle NAT engendre des frais evitables, et un bastion SSH dont le groupe de securite autorise 0.0.0.0/0 en entree viole directement l'interdiction d'ouvrir SSH depuis n'importe quelle adresse. Sources officielles AWS : https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html"
+}

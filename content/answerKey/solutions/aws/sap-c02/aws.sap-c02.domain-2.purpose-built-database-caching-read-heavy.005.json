@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-2.purpose-built-database-caching-read-heavy.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Utiliser Amazon DynamoDB comme magasin cle-valeur partitionne par identifiant utilisateur pour des performances constantes de l'ordre de la milliseconde a toute echelle, et ajouter Amazon DynamoDB Accelerator (DAX) en cache devant lui pour decharger les lectures repetees.",
+  "rationale": "DynamoDB est concu comme magasin cle-valeur adapte a l'usage pour des recherches simples par cle a n'importe quelle echelle avec une latence de lecture constante de l'ordre de la milliseconde, ce qui repond directement au modele de donnees et a la croissance par 50 sans refonte architecturale, et DAX en cache en memoire devant DynamoDB reduit encore la latence pour les lectures repetees les plus frequentes. Une instance RDS MySQL unique dimensionnee des le premier jour pour la charge future gaspille des couts pendant longtemps, et redimensionner une instance relationnelle a mesure que le trafic est multiplie par 50 necessite generalement une refonte, ce qui est explicitement exclu. S3 Transfer Acceleration est concu pour accelerer les transferts client-compartiment sur de longues distances geographiques en s'appuyant sur les emplacements CloudFront en peripherie, pas pour reduire la latence de lecture de millions de petites recherches par cle au sein d'une meme Region, ce qui en fait un outil inadapte a ce besoin. Utiliser ElastiCache for Redis comme unique systeme d'enregistrement, sans base de donnees durable sous-jacente, expose a une perte de donnees entre deux instantanes pris toutes les 12 heures, ce qui n'est pas approprie comme magasin principal durable. Sources officielles AWS : https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html"
+}

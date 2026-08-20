@@ -1,7 +1,7 @@
 # Catalogue AWS et Google Cloud au 2026-08-17
 
 Ce document accompagne le fichier machine-readable
-[`content/public/catalog/certifications.json`](../../content/public/catalog/certifications.json).
+[`content/public/catalog/certifications.json`](../../../content/public/catalog/certifications.json).
 La recherche n'utilise que les catalogues, pages de certification et guides
 d'examen officiels AWS et Google Cloud.
 

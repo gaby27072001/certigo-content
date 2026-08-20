@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-4.lectures-repetitives-catalogue-produits.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un catalogue de produits stocké dans Amazon DynamoDB subit une charge de lecture très répétitive : les mêmes éléments sont demandés des milliers de fois par minute alors que leur contenu change rarement. La latence de lecture, de l'ordre de quelques millisecondes, devient pénalisante et le coût des unités de capacité de lecture augmente fortement. Quelle optimisation le développeur doit-il retenir ?",
+  "choices": [
+    "Basculer la table en capacité provisionnée avec une réservation élevée afin d'absorber le volume de lectures.",
+    "Placer un cluster DynamoDB Accelerator (DAX) devant la table et faire passer les lectures par le client DAX, afin de servir les accès répétés depuis un cache en mémoire, en microsecondes, tout en réduisant les unités de capacité de lecture consommées.",
+    "Réutiliser la même connexion HTTP dans le client du SDK, ce qui met en cache les réponses et évite d'appeler le service.",
+    "Ajouter un index secondaire global reprenant les mêmes attributs afin de répartir la charge de lecture sur deux structures."
+  ]
+}

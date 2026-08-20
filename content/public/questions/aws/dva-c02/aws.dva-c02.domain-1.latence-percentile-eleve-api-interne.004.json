@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-1.latence-percentile-eleve-api-interne.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une fonction AWS Lambda écrite en Java expose une API interne. Le code instancie le client du SDK AWS et ouvre la connexion à la base de données à chaque appel, à l'intérieur du gestionnaire ; la fonction dispose de 128 Mo de mémoire et la latence au 99e centile est jugée inacceptable. Quelle combinaison d'actions le développeur doit-il appliquer en priorité ?",
+  "choices": [
+    "Réduire la mémoire allouée pour accélérer le démarrage de l'environnement d'exécution.",
+    "Déplacer l'initialisation du client du SDK et des ressources réutilisables en dehors du gestionnaire, dans la phase d'initialisation, puis augmenter la mémoire allouée afin d'obtenir davantage de puissance de calcul et mesurer le rapport coût/latence sur plusieurs paliers.",
+    "Recréer les objets dans le gestionnaire mais les stocker dans des variables d'environnement afin de les réutiliser d'une invocation à l'autre.",
+    "Définir une concurrence réservée de 1 pour forcer toutes les requêtes à réutiliser un unique environnement d'exécution."
+  ]
+}

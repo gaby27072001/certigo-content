@@ -3,12 +3,67 @@
   "provider": "aws",
   "certification": "aws:soa-c03",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Monitoring, Logging, Analysis, Remediation, and Performance Optimization", "weightPercent": 22, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Reliability and Business Continuity", "weightPercent": 22, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Deployment, Provisioning, and Automation", "weightPercent": 22, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Security and Compliance", "weightPercent": 16, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-5", "title": "Networking and Content Delivery", "weightPercent": 18, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Monitoring, Logging, Analysis, Remediation, and Performance Optimization",
+      "weightPercent": 22,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.soa-c03.domain-1.mesures-hote-indisponibles-flotte-linux.002",
+        "aws.soa-c03.domain-1.ralentissements-intermittents-base-relationnelle.005",
+        "aws.soa-c03.domain-1.reduction-bruit-alertes-nocturnes.001",
+        "aws.soa-c03.domain-1.relance-service-defaillant-tracable.003",
+        "aws.soa-c03.domain-1.saturation-debit-stockage-bloc.004"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Reliability and Business Continuity",
+      "weightPercent": 22,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.soa-c03.domain-2.adaptation-capacite-trafic-imprevisible.006",
+        "aws.soa-c03.domain-2.centralisation-sauvegardes-multi-services.008",
+        "aws.soa-c03.domain-2.reprise-actif-passif-deux-regions.007",
+        "aws.soa-c03.domain-2.suppression-accidentelle-lignes-rpo-court.009"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Deployment, Provisioning, and Automation",
+      "weightPercent": 22,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.soa-c03.domain-3.correctifs-flotte-multi-comptes-conformite.013",
+        "aws.soa-c03.domain-3.deploiement-bloque-apres-derive-manuelle.011",
+        "aws.soa-c03.domain-3.mise-a-disposition-mensuelle-modele-durci.012",
+        "aws.soa-c03.domain-3.socle-commun-quarante-comptes.010"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Security and Compliance",
+      "weightPercent": 16,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.soa-c03.domain-4.acces-refuse-objets-chiffres.016",
+        "aws.soa-c03.domain-4.detection-ressources-exposees-et-non-chiffrees.015",
+        "aws.soa-c03.domain-4.identifiants-statiques-sur-instances.014"
+      ]
+    },
+    {
+      "objective": "domain-5",
+      "title": "Networking and Content Delivery",
+      "weightPercent": 18,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.soa-c03.domain-5.anciennes-versions-servies-apres-mise-en-production.020",
+        "aws.soa-c03.domain-5.cout-sortie-reseau-lectures-massives.018",
+        "aws.soa-c03.domain-5.reponse-https-bloquee-sous-reseau-prive.017",
+        "aws.soa-c03.domain-5.service-actif-actif-meilleur-temps-reponse.019"
+      ]
+    }
   ]
 }

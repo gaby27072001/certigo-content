@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-1.relecture-integrale-journaux-preparation.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une équipe d'ingénierie ML conserve 4 To de journaux d'événements sur Amazon S3 au format CSV compressé en gzip, avec un fichier volumineux par jour et 180 colonnes. Les jobs Amazon SageMaker Processing qui préparent le jeu d'entraînement ne lisent que 12 de ces colonnes, mais leur durée et leur coût augmentent chaque mois car chaque exécution relit l'intégralité des fichiers. Quelle décision de format et d'organisation du stockage l'ingénieur doit-il prendre ?",
+  "choices": [
+    "Conserver le format CSV compressé en gzip et augmenter la taille des instances des jobs SageMaker Processing jusqu'à ce que la durée de préparation redevienne acceptable.",
+    "Convertir le jeu de données en Apache Parquet compressé avec Snappy, le partitionner par date sur Amazon S3, puis ne projeter que les 12 colonnes utiles dans les jobs de préparation.",
+    "Réécrire le jeu de données en Apache Avro non compressé afin de bénéficier d'un format binaire et d'une évolution de schéma lors des lectures partielles.",
+    "Copier chaque jour les fichiers CSV depuis Amazon S3 vers un système de fichiers Amazon EFS monté par les jobs de préparation, sans changer le format des données."
+  ]
+}

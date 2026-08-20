@@ -1,0 +1,18 @@
+{
+  "id": "aws.dea-c01.domain-2.echanges-entre-noeuds-jointure-volumineuse.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un entrepôt Amazon Redshift héberge une table de faits de quatre milliards de lignes jointe à une dimension de deux cents millions de lignes sur un identifiant de compte. Les plans d'exécution montrent systématiquement une étape de redistribution DS_BCAST_INNER et les requêtes, qui filtrent presque toujours sur une plage de dates, durent plusieurs minutes. Quelle modification du modèle physique réduit le plus efficacement les échanges entre nœuds ?",
+  "choices": [
+    "Définir le style de distribution ALL sur la table de faits et sur la dimension pour que chaque nœud dispose d'une copie complète des deux tables.",
+    "Passer les deux tables en distribution EVEN et supprimer toutes les clés de tri afin de laisser l'optimiseur décider à l'exécution.",
+    "Distribuer la table de faits et la dimension sur la clé de jointure commune avec DISTSTYLE KEY, et définir une clé de tri composée commençant par la colonne de date filtrée.",
+    "Convertir la table de faits en table externe Amazon Redshift Spectrum stockée au format CSV dans Amazon S3."
+  ]
+}

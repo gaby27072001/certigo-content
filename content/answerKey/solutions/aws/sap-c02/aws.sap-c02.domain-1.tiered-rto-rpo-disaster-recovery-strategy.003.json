@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-1.tiered-rto-rpo-disaster-recovery-strategy.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Deployer un multi-site active-active avec Aurora Global Database et un routage Route 53 pondere actif-actif avec verifications de sante pour le palier 1, un warm standby avec replique Aurora deja demarree et promotion automatisable pour le palier 2, et une sauvegarde et restauration avec AWS Backup pour le palier 3.",
+  "rationale": "Faire correspondre chaque palier a la strategie de reprise adequate optimise le cout tout en respectant les exigences : le multi-site active-active avec Aurora Global Database et un routage Route 53 pondere actif-actif (ou a valeurs multiples) associe a des verifications de sante atteint le RTO de 5 minutes et le RPO quasi nul du palier 1 en repartissant et en reequilibrant automatiquement le trafic vers les Regions saines ; le warm standby avec une replique Aurora deja demarree satisfait le RTO d'une heure et le RPO de 15 minutes du palier 2 sans payer une capacite pleine en permanence ; et la sauvegarde et restauration avec AWS Backup suffit largement au palier 3 dont le RTO et le RPO de 24 heures sont compatibles avec un redemarrage a partir de copies. Appliquer le multi-site active-active a tous les paliers respecte les objectifs de reprise mais maintient une flotte active en permanence dans chaque Region pour des charges dont le palier 3 tolere un RTO et un RPO de 24 heures. La sauvegarde et restauration pour les trois paliers ne peut pas atteindre le RTO de 5 minutes et le RPO quasi nul exiges par le palier 1, dont la reprise necessiterait des heures apres un lancement manuel de pile. Le pilot light pour le palier 1 laisse la base de donnees dans un etat arrete qu'il faut faire monter en charge lors du sinistre, ce qui depasse generalement les 5 minutes de RTO et ne garantit pas un RPO quasi nul sans replication continue dediee. Sources officielles AWS : https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html"
+}

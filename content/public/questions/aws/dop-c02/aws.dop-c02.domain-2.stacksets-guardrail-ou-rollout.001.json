@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-2.stacksets-guardrail-ou-rollout.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une equipe de plateforme centrale doit deployer une pile de garde-fous obligatoires (journalisation des flux VPC et enregistreur AWS Config) sur environ 200 comptes membres regroupes dans une unite d'organisation AWS Organizations, en garantissant que tout nouveau compte rejoignant cette unite recoit automatiquement la meme pile, avec une charge operationnelle minimale par compte et sans octroyer de permissions administratives completes dans les comptes membres.",
+  "choices": [
+    "Transmettre le modele CloudFormation des garde-fous a chaque proprietaire de compte, accompagne de la procedure de deploiement a suivre dans la console CloudFormation de son propre compte.",
+    "Creer une pile CloudFormation independante dans chaque compte membre a partir d'un jeu unique d'identifiants IAM utilisateur partage entre les equipes chargees du deploiement.",
+    "Utiliser AWS CloudFormation StackSets en permissions auto-gerees (self-managed), avec creation prealable d'un role d'execution dans chacun des deux cents comptes puis dans chaque compte ajoute ensuite.",
+    "Utiliser AWS CloudFormation StackSets en permissions gerees par le service, integrees a AWS Organizations, avec deploiement automatique cible sur l'unite d'organisation concernee."
+  ]
+}

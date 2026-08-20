@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-1.propagation-modifications-commandes-lac.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Activer Amazon DynamoDB Streams sur la table avec la vue NEW_AND_OLD_IMAGES et brancher une fonction AWS Lambda qui écrit les enregistrements de modification dans Amazon S3.",
+  "rationale": "DynamoDB Streams est le mécanisme natif de capture des changements : il publie un enregistrement ordonné par clé de partition pour chaque écriture, la vue NEW_AND_OLD_IMAGES fournit exactement l'image avant et après demandée, et la lecture du flux ne consomme pas la capacité de lecture de la table. Le déclencheur AWS Lambda associé au flux permet d'écrire en continu vers Amazon S3 avec une latence de l'ordre de la seconde. Un Scan complet toutes les cinq minutes relit la table entière à chaque cycle, consomme massivement la capacité de lecture dont dépend l'application transactionnelle et ne détecte pas les suppressions. La restauration à un instant donné crée une nouvelle table en plusieurs minutes voire dizaines de minutes, coûte cher et n'est pas conçue pour une cadence de cinq minutes. Un index secondaire global sur l'horodatage double les écritures et leur coût, ne capture ni les suppressions ni l'image précédente, et Amazon Athena n'interroge pas directement un index DynamoDB."
+}

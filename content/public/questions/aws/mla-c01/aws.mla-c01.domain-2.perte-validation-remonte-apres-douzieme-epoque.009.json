@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-2.perte-validation-remonte-apres-douzieme-epoque.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Pendant l'entraînement d'un réseau de neurones sur 40 000 exemples, la perte d'entraînement continue de décroître alors que la perte de validation atteint son minimum à l'époque 12 puis remonte régulièrement jusqu'à l'époque 60. Quelle combinaison de mesures l'ingénieur doit-il appliquer ?",
+  "choices": [
+    "Ajouter des couches et des neurones afin d'augmenter la capacité du réseau et de mieux ajuster les données.",
+    "Poursuivre l'entraînement au-delà de l'époque 60, la perte de validation finissant généralement par redescendre.",
+    "Sélectionner le modèle final sur la perte d'entraînement, qui reflète le mieux la capacité d'apprentissage du réseau.",
+    "Introduire de la régularisation (abandon de neurones, pénalité L2, augmentation de données) et activer l'arrêt anticipé sur la perte de validation afin de conserver le point de contrôle de l'époque 12."
+  ]
+}

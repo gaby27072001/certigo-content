@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-2.centralisation-sauvegardes-multi-services.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une entreprise doit centraliser les sauvegardes d'instances Amazon EC2, de volumes Amazon EBS, de bases Amazon RDS et de tables Amazon DynamoDB. Les exigences sont une planification et une rétention uniformes, une copie vers une seconde Région et des rapports d'audit exploitables. Quelle solution retenir ?",
+  "choices": [
+    "Écrire une fonction AWS Lambda planifiée par service, chaque équipe implémentant sa propre logique de création et de purge des instantanés.",
+    "Activer la gestion des versions sur un compartiment Amazon S3 et y copier chaque nuit le contenu des volumes et des bases.",
+    "Créer un plan AWS Backup définissant fréquence, rétention et copie vers un coffre situé dans une seconde Région, affecter les ressources par étiquettes et exploiter les rapports d'audit du service.",
+    "Utiliser Amazon Data Lifecycle Manager pour planifier les sauvegardes des tables DynamoDB et des instances RDS."
+  ]
+}

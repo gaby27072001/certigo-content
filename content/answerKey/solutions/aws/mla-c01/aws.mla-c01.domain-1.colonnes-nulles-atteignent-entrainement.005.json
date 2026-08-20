@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-1.colonnes-nulles-atteignent-entrainement.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Définir un ensemble de règles AWS Glue Data Quality en DQDL (complétude, unicité, plages de valeurs), l'évaluer dans le job Glue, faire échouer l'exécution en cas de violation et router le résultat vers Amazon EventBridge puis Amazon SNS.",
+  "rationale": "AWS Glue Data Quality répond exactement aux trois exigences énoncées. Les règles sont écrites en DQDL, un langage déclaratif que l'on stocke avec le code du pipeline et que l'on revoit comme n'importe quel artefact versionné : une règle de complétude sur les colonnes obligatoires et une règle de plage de valeurs sur les montants auraient bloqué les deux incidents. L'évaluation s'exécute à l'intérieur du job Glue, donc avant que les données n'atteignent l'entraînement, et son résultat peut faire échouer l'exécution ; les événements de résultat publiés vers Amazon EventBridge se routent ensuite vers une rubrique Amazon SNS pour l'alerte. Un crawler ne mesure pas la qualité des valeurs : il recense les tables et infère les schémas, si bien qu'une colonne présente mais entièrement nulle ou un montant négatif reste parfaitement conforme au schéma catalogué. Un profilage DataBrew mensuel arrive trop tard et fournit un rapport à interpréter visuellement, sans règle opposable ni mécanisme de blocage. Des requêtes Athena exécutées à la main après coup ne sont ni systématiques ni versionnées, dépendent de la disponibilité d'un ingénieur et n'empêchent pas l'entraînement de démarrer sur des données corrompues."
+}

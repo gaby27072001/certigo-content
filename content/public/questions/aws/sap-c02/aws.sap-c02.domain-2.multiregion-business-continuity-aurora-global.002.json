@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.multiregion-business-continuity-aurora-global.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une plateforme mondiale de commande en ligne deja deployee en multi-Region avec Aurora Global Database et une flotte active dans deux Regions doit pouvoir executer des tests de bascule planifies reguliers sans jamais risquer de laisser aucune Region saine recevoir de trafic, reagir automatiquement a une panne Regionale non planifiee avec le meme mecanisme que lors d'un test planifie, coordonner en une seule action controlee le changement de routage de toutes les ressources associees plutot que d'editer de nombreux enregistrements DNS individuellement, et empecher qu'un operateur ne retire accidentellement le trafic de toutes les Regions en meme temps.",
+  "choices": [
+    "S'appuyer uniquement sur des verifications de sante Route 53 avec une politique de routage de basculement pointant vers une seule paire de Region primaire et secondaire, et forcer artificiellement l'echec de la verification de sante juste avant chaque test planifie pour simuler la bascule, avec une seule paire de Regions couverte par cette politique de basculement.",
+    "Executer les bascules planifiees en modifiant le poids de chaque enregistrement Route 53 associe aux ressources concernees, un par un depuis la console pendant une fenetre de maintenance programmee, et, pour une panne non planifiee, appeler un ingenieur d'astreinte pour reproduire les memes modifications depuis la console.",
+    "Utiliser Amazon Application Recovery Controller (ARC) avec des controles de routage regroupes dans un panneau de controle unique pour basculer en une seule action coordonnee toutes les ressources associees, integres a des verifications de sante Route 53 pour reagir automatiquement a une panne Regionale non planifiee, et des regles de securite qui empechent tout changement retirant simultanement le trafic de toutes les Regions.",
+    "Utiliser uniquement le routage Route 53 fonde sur la latence, sans aucun mecanisme de bascule fonde sur des verifications de sante, et demander aux ingenieurs d'astreinte de desactiver l'ecouteur ALB de la Region primaire depuis la console si une panne survient. Cette configuration couvre uniquement les deux Regions actuellement actives pour l'application."
+  ]
+}

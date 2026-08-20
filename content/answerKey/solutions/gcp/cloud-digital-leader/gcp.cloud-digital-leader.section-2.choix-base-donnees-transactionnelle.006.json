@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-digital-leader.section-2.choix-base-donnees-transactionnelle.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-digital-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Spanner, une base de données relationnelle distribuée mondialement offrant une forte cohérence transactionnelle.",
+  "rationale": "Spanner est le service que le guide associe à une base relationnelle évolutive à l'échelle mondiale avec forte cohérence, ce qui correspond exactement au besoin transactionnel décrit. Le choix A décrit BigQuery, orienté analyse de gros volumes plutôt que transactions à faible latence sur des commandes individuelles. Le choix B propose Bigtable, adapté à l'ingestion NoSQL à grande échelle mais sans les garanties transactionnelles relationnelles requises ici. Le choix D décrit Cloud SQL, une base relationnelle managée qui reste ancrée dans une région unique même avec une réplique secondaire, alors que le distributeur a besoin d'une cohérence transactionnelle maintenue à l'échelle de plusieurs régions."
+}

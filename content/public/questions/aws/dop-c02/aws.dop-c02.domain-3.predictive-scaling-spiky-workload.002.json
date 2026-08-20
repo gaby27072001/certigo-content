@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-3.predictive-scaling-spiky-workload.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application de vente au detail connait des pics de trafic quotidiens previsibles a l'heure du dejeuner en raison de promotions recurrentes, ainsi que des pics imprevus occasionnels lies a des evenements marketing. La politique de scaling actuelle par suivi de cible (target tracking) reagit apres coup, et le delai de demarrage des nouvelles instances (environ trois minutes) provoque une degradation de latence perceptible par les clients au debut de chaque pic. L'equipe veut reduire ce delai pour les pics connus tout en conservant une reponse efficace aux pics imprevus, sans surprovisionner en permanence.",
+  "choices": [
+    "Combiner une politique de scaling predictif calee sur l'historique des pics quotidiens avec une politique de suivi de cible qui absorbe les variations de charge imprevues.",
+    "Maintenir en permanence une capacite fixe alignee sur le pic maximal observe dans l'historique des douze derniers mois, quelle que soit la charge reellement constatee sur le groupe.",
+    "N'utiliser qu'une politique de scaling par palier declenchee par des alarmes CloudWatch portant sur l'utilisation processeur moyenne du groupe Auto Scaling.",
+    "Programmer des actions de scaling a heures fixes chaque jour, calquees sur la fenetre de promotion du dejeuner relevee dans l'historique de trafic de l'application."
+  ]
+}

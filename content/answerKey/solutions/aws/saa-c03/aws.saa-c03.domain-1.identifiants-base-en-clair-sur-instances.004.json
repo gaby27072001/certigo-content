@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-1.identifiants-base-en-clair-sur-instances.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Stocker les identifiants dans AWS Secrets Manager avec la rotation automatique gérée pour Amazon RDS toutes les trente jours, autoriser le rôle IAM du profil d'instance à lire ce secret, et faire récupérer le secret par l'application au démarrage puis lors d'un échec d'authentification.",
+  "rationale": "Le point difficile est la synchronisation : changer le mot de passe côté base sans le changer côté application coupe le service, et l'inverse aussi. La rotation gérée d'AWS Secrets Manager pour Amazon RDS résout ce couplage, car la fonction de rotation modifie le mot de passe dans le moteur de base et met à jour la version du secret dans la même opération, avec des étiquettes de version qui permettent de basculer sans fenêtre d'indisponibilité. L'application lisant le secret au démarrage et le relisant après un échec d'authentification récupère la nouvelle valeur sans redéploiement, ce qui satisfait l'exigence explicite. L'autorisation portée par le rôle IAM du profil d'instance évite tout identifiant statique, et chaque lecture est enregistrée dans AWS CloudTrail, ce qui fournit la traçabilité demandée. Chiffrer le fichier de configuration ne supprime pas le redéploiement mensuel, que l'énoncé exclut, et la rotation annuelle de la clé AWS KMS ne change pas le mot de passe de la base. Les variables d'environnement injectées par les données utilisateur sont lisibles par toute personne ou processus capable d'interroger les métadonnées de l'instance, et remplacer la flotte chaque mois transforme une rotation de secret en opération de production risquée. Le paramètre de type String n'est pas chiffré et, surtout, une fonction Lambda qui se contente de réécrire la valeur du paramètre ne modifie pas le mot de passe réel de la base : le secret stocké et le moteur divergent immédiatement."
+}

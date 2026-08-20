@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-3.configuration-drift-state-manager-compliance.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une equipe d'exploitation gere aujourd'hui la configuration d'une flotte d'instances EC2 en se connectant en SSH sur chaque instance pour installer des paquets ou modifier des fichiers des qu'un changement est necessaire, sans aucune trace de ce qui a ete modifie ni quand, ce qui provoque une derive de configuration entre instances et des incidents recurrents en production. L'equipe veut definir la configuration desiree une seule fois, l'appliquer et la faire respecter automatiquement sur toute la flotte, detecter et corriger toute derive sans connexion SSH, obtenir un rapport de conformite consultable par l'equipe, et s'appuyer sur l'investissement deja fait dans AWS Systems Manager plutot que d'adopter un tout nouvel outil de gestion de configuration tiers.",
+  "choices": [
+    "Continuer a se connecter en SSH sur chaque instance pour appliquer les changements un par un, et adopter une liste de controle partagee dans un document pour noter ce qui a ete modifie sur chaque instance de la flotte. Cette approche s'applique instance par instance sur l'ensemble de la flotte existante.",
+    "Remplacer AWS Systems Manager par une nouvelle plateforme de gestion de configuration tierce necessitant l'installation d'un agent reconstruit depuis zero sur chaque instance de la flotte existante, en migrant les scripts existants d'AWS CodeDeploy vers l'agent de la plateforme tierce, deploye sur chaque instance Amazon EC2 via une nouvelle AMI personnalisee.",
+    "Definir la configuration desiree dans une association AWS Systems Manager State Manager appliquee et reappliquee selon une planification recurrente sur toute la flotte ciblee par balises, sans connexion SSH, et consulter la conformite des associations dans la console Systems Manager.",
+    "Figer la configuration dans une nouvelle image Amazon Machine Image a chaque publication et relancer chaque instance de la flotte des qu'un changement de configuration est necessaire, sans aucun mecanisme de detection de derive entre deux publications."
+  ]
+}

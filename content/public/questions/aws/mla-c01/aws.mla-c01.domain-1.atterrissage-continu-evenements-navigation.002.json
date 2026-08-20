@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-1.atterrissage-continu-evenements-navigation.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une plateforme de commerce en ligne produit environ 20 000 événements de navigation par seconde. L'équipe ML veut que ces événements atterrissent en continu sur Amazon S3 au format Apache Parquet, avec une latence de quelques minutes, sans administrer de serveurs, et veut pouvoir relire les 24 dernières heures d'événements si le traitement aval échoue. Quelle chaîne d'ingestion répond à ces contraintes ?",
+  "choices": [
+    "Faire écrire par l'application un objet Amazon S3 par événement de navigation, puis regrouper ces objets une fois par jour avec un job AWS Glue.",
+    "Publier les événements dans une file Amazon SQS FIFO et déclencher une fonction AWS Lambda qui écrit chaque message dans Amazon S3.",
+    "Envoyer les événements directement à Amazon Data Firehose, sans flux en amont, et compter sur le tampon de livraison pour relire les données en cas d'échec aval.",
+    "Ingérer les événements dans un flux Amazon Kinesis Data Streams dont la rétention est portée à 24 heures, puis brancher Amazon Data Firehose comme consommateur pour convertir en Parquet et livrer par lots dans Amazon S3."
+  ]
+}

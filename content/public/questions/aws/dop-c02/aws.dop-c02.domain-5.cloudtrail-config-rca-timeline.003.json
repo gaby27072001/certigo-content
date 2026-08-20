@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-5.cloudtrail-config-rca-timeline.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Apres un incident nocturne, l'equipe constate que le mode de facturation d'une table Amazon DynamoDB de production a ete modifie de maniere inattendue, provoquant du throttling. Plusieurs outils de deploiement automatises auraient pu effectuer ce changement. L'equipe doit determiner precisement qui ou quel systeme a effectue la modification, a quel moment, et quel etait l'etat de configuration avant et apres, sans perturber davantage la ressource pendant l'investigation.",
+  "choices": [
+    "Rapprocher l'evenement CloudTrail ModifyTable de l'historique de configuration AWS Config de la table, pour etablir l'auteur, l'horodatage et l'etat de configuration avant et apres le changement.",
+    "Interroger un a un les ingenieurs d'astreinte presents cette nuit-la pour reconstituer, a partir de leurs souvenirs, la sequence des interventions menees sur la table DynamoDB.",
+    "Restaurer la table a partir d'une sauvegarde a la demande anterieure a l'incident pour retablir le mode de facturation attendu, puis rebasculer le trafic applicatif vers la table restauree.",
+    "Supprimer la table DynamoDB et la recreer avec la configuration attendue, puis y reimporter les elements depuis l'export S3 le plus recent du magasin de commandes."
+  ]
+}

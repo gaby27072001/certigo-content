@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-4.frais-inter-zones-et-point-unique-defaillance.020",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un VPC réparti sur trois zones de disponibilité héberge des instances dans des sous-réseaux privés, dont le trafic sortant passe par une unique passerelle NAT située dans la première zone. L'analyse de la facture montre des frais élevés de transfert entre zones de disponibilité et un volume important de traitement par la passerelle NAT ; l'examen des flux révèle que la majeure partie du trafic sortant vise Amazon S3 et Amazon DynamoDB dans la même Région. L'entreprise veut réduire ces coûts et supprimer par la même occasion ce point unique de défaillance. Que doit concevoir l'architecte ?",
+  "choices": [
+    "Remplacer la passerelle NAT par une instance NAT hébergée sur une petite instance Amazon EC2 dans la première zone et conserver le routage actuel.",
+    "Attribuer des adresses IP publiques aux instances des sous-réseaux privés et supprimer la passerelle NAT afin d'éliminer les frais de traitement.",
+    "Router le trafic vers Amazon S3 et Amazon DynamoDB au travers d'une connexion AWS Direct Connect afin de le sortir du réseau public.",
+    "Déployer une passerelle NAT par zone de disponibilité et router chaque sous-réseau privé vers celle de sa propre zone, puis ajouter des points de terminaison de passerelle VPC pour Amazon S3 et Amazon DynamoDB afin que ce trafic n'emprunte plus la passerelle NAT."
+  ]
+}
