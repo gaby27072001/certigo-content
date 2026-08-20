@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.ecs-bluegreen-deployment-automated-rollback.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une equipe developpe un nouveau service d'autorisation de paiement conteneurise sur Amazon ECS avec AWS Fargate, expose derriere un Application Load Balancer. Le deploiement doit s'effectuer sans coupure de service avec une bascule de trafic instantanee possible, un retour automatique a la version precedente declenche par des alarmes CloudWatch sur le taux d'erreurs 5xx et la latence sans intervention humaine, une periode d'observation avec du trafic reel avant la bascule complete, et le minimum de scripts personnalises au profit de services geres.",
+  "choices": [
+    "Utiliser un deploiement bleu/vert CodeDeploy pour ECS avec une paire d'ecouteurs de test et de production sur l'ALB, configurer une periode d'observation avant la bascule complete, et rattacher des alarmes CloudWatch au groupe de deploiement pour un retour automatique.",
+    "Effectuer une mise a jour ECS integrale en une seule fois, remplacant toutes les taches en place, et surveiller les tableaux de bord CloudWatch en continu, un operateur redeployant la definition de tache precedente si des erreurs apparaissent en production.",
+    "Faire fonctionner deux services ECS paralleles derriere des groupes cibles distincts et modifier les poids des enregistrements Route 53 pondere un par un depuis la console pour deplacer le trafic, un ingenieur d'astreinte surveillant les journaux et revenant en arriere au besoin.",
+    "Utiliser une fonction AWS Lambda personnalisee declenchee par une regle Amazon EventBridge planifiee qui redeploie le service ECS toutes les heures avec la derniere image disponible, sans validation fondee sur des alarmes CloudWatch avant ou apres chaque basculement."
+  ]
+}

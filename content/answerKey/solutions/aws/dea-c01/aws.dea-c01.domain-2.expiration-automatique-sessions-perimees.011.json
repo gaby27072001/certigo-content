@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-2.expiration-automatique-sessions-perimees.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Activer la durée de vie (TTL) sur la table et renseigner dans chaque élément un attribut d'expiration exprimé en secondes depuis l'époque Unix.",
+  "rationale": "La durée de vie native de DynamoDB correspond exactement au besoin : on désigne un attribut numérique contenant l'horodatage d'expiration en secondes depuis l'époque Unix, et le service supprime les éléments périmés en arrière-plan sans consommer d'unités de capacité d'écriture ni exiger de code. Les suppressions apparaissent dans le flux de la table, ce qui permet de les propager en aval si nécessaire. Une fonction Lambda de purge par Scan relit l'intégralité de la table à chaque exécution, consomme de la capacité de lecture puis d'écriture pour chaque suppression, et devient de plus en plus coûteuse à mesure que la table grandit. Les sauvegardes à la demande servent la reprise après incident : restaurer une table crée une nouvelle table et n'offre aucun filtrage des éléments à l'import. Un index secondaire local doit être défini à la création de la table, partage sa clé de partition, ajoute un coût d'écriture, et DynamoDB n'expose aucune notion de suppression de partition d'index."
+}

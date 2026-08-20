@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-2.intelligent-model-routing-cost-quality.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Configurer le routage intelligent de prompt d'Amazon Bedrock, qui expose un point de terminaison unique et dirige chaque requete vers le modele le plus economique d'une meme famille capable d'atteindre le seuil de qualite configure.",
+  "rationale": "Le routage intelligent de prompt evalue chaque requete au moment de l'appel et estime la qualite de reponse attendue de chaque modele candidat de la famille configuree : une question de FAQ part vers le petit modele, un depannage a plusieurs etapes vers le grand, sans que l'application n'ait a en decider. La capacite est geree par Bedrock, donc il n'y a ni classifieur a entrainer ni heuristique a maintenir, et l'application continue d'appeler un identifiant de routeur unique, ce qui preserve un contrat client stable. Le routage restant confine a une meme famille de modeles, le style et le format des reponses restent homogenes. La fonction Lambda a base de mots-cles et de longueur de message remplace la prediction de qualite par une heuristique fragile : une question courte peut etre complexe, une question longue triviale, et la table de branches doit etre reecrite a chaque evolution du catalogue. L'envoi systematique au modele le plus capable paie le tarif et la latence maximum sur les quatre cinquiemes du trafic, et le cache DynamoDB n'aide que sur des formulations repetees a l'identique. L'affectation par niveau de compte route selon le contrat commercial et non selon la question : le client premium consomme le grand modele pour une FAQ, le client standard reste sur le petit modele pour un incident complexe. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html"
+}

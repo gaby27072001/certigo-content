@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-4.traffic-mirroring-ids.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "VPC Traffic Mirroring avec filtres de session vers des appliances de collecte dimensionnées",
+  "rationale": "Traffic Mirroring copie les paquets des ENI sélectionnées vers une cible d'analyse et permet de filtrer le trafic capturé. Les Flow Logs ne contiennent que des métadonnées et ne peuvent alimenter une inspection payload. CloudTrail décrit les appels d'API, pas les paquets de données."
+}

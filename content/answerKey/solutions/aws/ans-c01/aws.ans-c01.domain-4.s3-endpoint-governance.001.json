@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-4.s3-endpoint-governance.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Un gateway endpoint S3 avec endpoint policy restrictive et une bucket policy exigeant le VPC endpoint attendu",
+  "rationale": "Le gateway endpoint garde le trafic S3 sur le réseau AWS et sa politique limite les actions accessibles depuis les VPC. La bucket policy ajoute un contrôle côté ressource, par exemple avec la condition de VPC endpoint, qui reste effectif si des identifiants sont utilisés depuis ailleurs. Les compartiments S3 n'acceptent pas de groupe de sécurité."
+}

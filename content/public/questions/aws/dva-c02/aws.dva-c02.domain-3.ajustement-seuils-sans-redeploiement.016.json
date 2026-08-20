@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-3.ajustement-seuils-sans-redeploiement.016",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Les seuils métier et les indicateurs de fonctionnalité d'une application sans serveur sont déclarés dans les variables d'environnement des fonctions : chaque ajustement impose une reconstruction, un nouveau déploiement et une fenêtre de changement. L'équipe veut modifier ces valeurs en production de façon progressive, avec validation préalable et annulation automatique en cas de dégradation. Quelle solution répond au besoin ?",
+  "choices": [
+    "Conserver les valeurs dans les variables d'environnement et publier une nouvelle version de fonction à chaque modification.",
+    "Coder les valeurs dans le paquet de déploiement et maintenir une branche de code distincte par environnement.",
+    "Déposer un fichier de configuration dans Amazon S3 et le relire à chaque invocation, sans validation ni mécanisme de retour arrière.",
+    "Externaliser les indicateurs et les seuils dans AWS AppConfig, avec un validateur de configuration, une stratégie de déploiement progressive et un retour arrière automatique déclenché par une alarme CloudWatch, l'application récupérant la configuration via l'extension AppConfig pour Lambda."
+  ]
+}

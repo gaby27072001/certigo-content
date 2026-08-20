@@ -35,9 +35,15 @@ export function isCertificationActiveOn(certification, dateValue) {
   return dateValue <= certification.lifecycle.lastExamOn;
 }
 
+export function isCertificationRecommendedOn(certification, dateValue) {
+  if (!isCertificationActiveOn(certification, dateValue)) return false;
+  if (!certification.lifecycle?.recommendThrough) return true;
+  return dateValue <= certification.lifecycle.recommendThrough;
+}
+
 export function metadataFields(payload) {
   if (
-    payload?.schemaVersion !== "v3" ||
+    !["v3", "v4"].includes(payload?.schemaVersion) ||
     payload.metadata === null ||
     Array.isArray(payload.metadata) ||
     typeof payload.metadata !== "object"

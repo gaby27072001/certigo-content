@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-3.gke-pool-noeuds.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "prompt": "Un cluster GKE Standard exécute des services généraux. Une nouvelle charge nécessite des GPU, mais les autres Pods doivent rester sur les nœuds actuels. Quelle opération est la plus adaptée ?",
+  "choices": [
+    "Ajouter un pool GPU avec taint, puis utiliser tolérances et sélecteurs pour la charge",
+    "Remplacer le pool existant par un pool GPU et replanifier les charges générales",
+    "Créer une règle de pare-feu qui cible les Pods nécessitant un GPU",
+    "Augmenter le nombre maximal de Pods par nœud sans modifier le matériel"
+  ]
+}

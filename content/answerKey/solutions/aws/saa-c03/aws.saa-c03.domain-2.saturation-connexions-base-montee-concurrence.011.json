@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-2.saturation-connexions-base-montee-concurrence.011",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Interposer Amazon RDS Proxy entre les fonctions AWS Lambda et le cluster Aurora afin de mutualiser et de réutiliser les connexions à la base, et de raccourcir l'indisponibilité perçue lors des basculements en conservant les connexions clientes.",
+  "rationale": "Le problème vient du modèle d'exécution : chaque environnement d'exécution de fonction ouvre sa propre connexion, et la concurrence transforme un pic de trafic en pic de connexions, ressource bornée côté moteur. Amazon RDS Proxy est conçu pour ce cas : il maintient un pool de connexions vers le cluster et les réutilise entre les appels, si bien que des milliers d'invocations se partagent un nombre borné de connexions au moteur. Il apporte en outre un gain direct sur le second symptôme, puisqu'il conserve les connexions clientes pendant un basculement et redirige lui-même vers la nouvelle instance principale, ce qui réduit fortement la coupure ressentie. Enfin, il s'insère au niveau de la chaîne de connexion : aucune réécriture applicative ni changement de moteur, comme l'exige l'énoncé. Grossir l'instance relève la limite de connexions de façon proportionnelle mais coûteuse, et réduire la concurrence des fonctions revient à brider volontairement le service aux heures de pointe. Rediriger toutes les requêtes vers le point de terminaison de lecture est incorrect : ce point de terminaison distribue le trafic vers des réplicas en lecture seule, les écritures y échouent. Le cache Amazon ElastiCache peut réduire le nombre de requêtes de lecture, mais il ne borne pas le nombre de connexions ouvertes par les fonctions, ne fait rien pour les écritures, et n'améliore en rien le comportement pendant un basculement."
+}

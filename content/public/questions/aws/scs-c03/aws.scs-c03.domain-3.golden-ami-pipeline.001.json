@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-3.golden-ami-pipeline.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une entreprise doit publier chaque semaine une AMI durcie, appliquer les correctifs, exécuter des tests de sécurité et empêcher la promotion si des vulnérabilités critiques sont détectées. Quelle approche est la plus automatisable ?",
+  "choices": [
+    "Construire manuellement une instance, puis créer une AMI sans pipeline",
+    "Utiliser EC2 Image Builder avec composants de durcissement et tests, intégrer les résultats Amazon Inspector et ne distribuer que les images conformes",
+    "Autoriser chaque équipe à lancer la dernière AMI publique trouvée",
+    "Scanner uniquement les compartiments S3 avec Amazon Macie"
+  ]
+}

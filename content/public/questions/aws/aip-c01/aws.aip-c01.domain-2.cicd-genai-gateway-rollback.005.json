@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-2.cicd-genai-gateway-rollback.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une grande entreprise compte des dizaines d'equipes internes construisant des fonctionnalites GenAI et souhaite un controle centralise : analyse de securite des templates de prompt avant deploiement, tests automatises de non-regression avant promotion, capacite de retour en arriere, et une couche d'abstraction unique (passerelle) pour l'observabilite, la limitation de debit et l'allocation des couts, plutot que chaque equipe appelant Bedrock directement sans supervision. Les exigences sont : (1) qu'un pipeline CI/CD automatise execute des analyses de securite et des tests de non-regression sur tout changement d'un composant GenAI avant qu'il ne puisse etre promu en production, (2) une capacite de retour en arriere si une version promue regresse, (3) une couche de passerelle centralisee devant le modele de fondation pour que le cout, les limites de debit et l'observabilite soient appliques de maniere homogene plutot que chaque equipe appelant Bedrock directement, et (4) eviter un mode totalement manuel et non gouverne ou chacun appelle Bedrock comme il l'entend. Quelle architecture repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Laisser chaque equipe appeler Amazon Bedrock depuis son code avec ses propres identifiants, et consolider chaque fin de mois le cout, l'observabilite et les limites de debit dans un tableur partage par la direction technique.",
+    "Faire transiter chaque livraison par AWS CodePipeline avec une etape AWS CodeBuild d'analyse statique et de tests automatises, conserver la revision precedente pour un redeploiement immediat, et exposer les modeles derriere Amazon API Gateway.",
+    "Faire valider chaque changement de template de prompt par un fil d'approbation par courriel avant promotion, un developpeur reportant ensuite le template en production, le fil de courriel servant de trace pour l'audit de non-regression.",
+    "Deployer la passerelle centralisee pour le cout, l'observabilite et la limitation de debit, et laisser chaque equipe promouvoir ses changements de composant GenAI en production selon son propre rythme de livraison."
+  ]
+}

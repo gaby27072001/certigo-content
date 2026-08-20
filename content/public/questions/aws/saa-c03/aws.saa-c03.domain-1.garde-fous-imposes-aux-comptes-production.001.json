@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-1.garde-fous-imposes-aux-comptes-production.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une entreprise exploite une centaine de comptes AWS regroupés en unités d'organisation avec AWS Organizations. La direction de la sécurité exige que, dans l'unité d'organisation « Production », aucune équipe ne puisse désactiver ou supprimer les journaux AWS CloudTrail, ni créer de ressources en dehors des deux Régions approuvées, y compris lorsqu'un administrateur dispose de droits IAM complets dans son propre compte. La règle doit s'appliquer automatiquement aux nouveaux comptes rattachés à cette unité d'organisation. Quelle conception l'architecte doit-il retenir ?",
+  "choices": [
+    "Attacher dans chaque compte de production une politique IAM gérée qui refuse la suppression des journaux AWS CloudTrail et les appels effectués hors des deux Régions approuvées, puis la rattacher au groupe IAM des administrateurs.",
+    "Activer AWS Config dans chaque compte de production avec des règles gérées qui détectent la désactivation d'AWS CloudTrail et les ressources créées hors des Régions approuvées, puis notifier l'équipe de sécurité par Amazon SNS.",
+    "Appliquer à l'unité d'organisation « Production » une politique de contrôle des services qui refuse explicitement les actions d'arrêt et de suppression d'AWS CloudTrail ainsi que toute action dont la Région demandée n'est pas l'une des deux Régions approuvées.",
+    "Supprimer les utilisateurs IAM administrateurs des comptes de production et n'autoriser l'accès qu'au moyen de rôles inter-comptes assumés depuis le compte de gestion de l'organisation."
+  ]
+}

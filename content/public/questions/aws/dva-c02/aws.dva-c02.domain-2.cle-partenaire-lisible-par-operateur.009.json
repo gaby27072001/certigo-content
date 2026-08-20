@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-2.cle-partenaire-lisible-par-operateur.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une fonction AWS Lambda doit utiliser la clé d'API d'un partenaire externe. L'équipe sécurité exige que cette valeur ne soit jamais lisible en clair par un opérateur disposant de l'autorisation `lambda:GetFunctionConfiguration`. Quelle mise en œuvre répond à cette exigence ?",
+  "choices": [
+    "Encoder la valeur en base64 avant de la placer dans la variable d'environnement de la fonction.",
+    "Placer la clé dans un fichier de configuration inclus dans le paquet de déploiement et versionné avec le code.",
+    "Activer le chiffrement des variables d'environnement avec une clé KMS gérée par le client et les auxiliaires de chiffrement, puis déchiffrer la valeur dans le code lors de l'initialisation, en n'accordant `kms:Decrypt` qu'au rôle d'exécution de la fonction.",
+    "S'appuyer sur le chiffrement au repos appliqué par défaut aux variables d'environnement, qui empêche déjà toute lecture de la valeur."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-2.streaming-resilient-api-fallback.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une application appelle l'API de streaming Amazon Bedrock pour un chat client. En periode de forte charge, des exceptions de limitation (ThrottlingException) surviennent et l'application se contente alors de planter pour les utilisateurs concernes avec une erreur generique. Les exigences sont : (1) reessayer automatiquement les erreurs de limitation transitoires avec un backoff plutot que d'echouer immediatement, (2) appliquer une limitation de debit et une gestion de quotas au niveau de la couche API en amont de l'application pour lisser les pics avant qu'ils n'atteignent Bedrock, (3) fournir une tracabilite observable sur l'ensemble du chemin de requete pour determiner si la lenteur provient de l'appel au modele de fondation ou d'ailleurs, et (4) revenir vers une reponse degradee mais utile plutot qu'un echec opaque une fois les tentatives de reessai epuisees. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Renvoyer immediatement chaque ThrottlingException a l'utilisateur sous forme d'erreur HTTP 500, et utiliser une alarme CloudWatch pour ouvrir un ticket de hausse de quota lorsque le taux depasse un seuil.",
+    "Retirer la limitation de debit configuree sur Amazon API Gateway pour laisser passer davantage de requetes vers Bedrock, augmenter le nombre d'instances et tracer le chemin de requete avec AWS X-Ray pendant les pics.",
+    "Inserer une pause fixe de soixante secondes avant chaque appel a l'API de streaming Bedrock et afficher un message d'attente a l'utilisateur, afin de rester sous le debit qui declenche une ThrottlingException.",
+    "Activer le backoff exponentiel du SDK AWS sur les erreurs de limitation, configurer quotas et limitation sur API Gateway, tracer le chemin de requete avec AWS X-Ray et renvoyer une reponse de repli une fois les reessais epuises."
+  ]
+}

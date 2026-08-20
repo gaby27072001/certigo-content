@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-5.external-key-store.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Une clé KMS dans un external key store connecté aux HSM externes",
+  "rationale": "Un external key store permet à KMS d'utiliser un matériel cryptographique qui reste dans le gestionnaire de clés externe du client. Ce choix transfère au client des responsabilités de disponibilité, performance et exploitation, conformément au scénario. Les clés générées par AWS et les certificats ACM ne satisfont pas l'exigence de garde externe du matériel."
+}

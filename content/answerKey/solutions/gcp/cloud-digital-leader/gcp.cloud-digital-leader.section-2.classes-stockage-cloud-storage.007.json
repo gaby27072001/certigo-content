@@ -1,0 +1,13 @@
+{
+  "id": "gcp.cloud-digital-leader.section-2.classes-stockage-cloud-storage.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-digital-leader",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "correct": "Activer Autoclass pour migrer automatiquement les objets entre classes de stockage selon leur fréquence d'accès.",
+  "rationale": "Autoclass est la fonctionnalité de Cloud Storage citée par le guide qui automatise la transition entre classes de stockage selon la fréquence d'accès, répondant exactement au besoin d'automatisation exprimé. Le choix A applique la classe Archive à l'ensemble des fichiers ; techniquement accessible en quelques millisecondes comme les autres classes, mais chaque récupération dans Archive facture un coût d'accès plus élevé et une suppression anticipée avant la durée minimale de conservation de 365 jours peut être pénalisée, ce qui rend ce choix économiquement inadapté à des fichiers consultés quotidiennement. Le choix B recrée manuellement ce qu'Autoclass automatise, avec un effort opérationnel récurrent et inutile. Le choix C conserve tout en classe Standard, ce qui évite les pénalités d'Archive mais paie un tarif de stockage plus élevé pour des archives vidéo rarement consultées, sans profiter de la bascule automatique vers des classes moins coûteuses qu'offre Autoclass."
+}

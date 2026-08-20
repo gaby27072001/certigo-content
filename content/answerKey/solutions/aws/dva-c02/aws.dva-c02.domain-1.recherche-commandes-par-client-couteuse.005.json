@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-1.recherche-commandes-par-client-couteuse.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Créer un index secondaire global ayant `customerId` comme clé de partition et la date de commande comme clé de tri, puis remplacer l'analyse par une opération Query sur cet index.",
+  "rationale": "Une opération Scan lit l'intégralité de la table avant d'appliquer le filtre : la capacité consommée dépend du volume total et non du nombre d'éléments retournés, ce qui la rend inadaptée à un accès récurrent. Un index secondaire global avec `customerId` en clé de partition et la date en clé de tri transforme cet accès en Query : DynamoDB adresse directement la partition du client et la condition de clé de tri restreint la lecture à la fenêtre de 30 jours, pour un coût proportionnel aux seules données lues. `customerId` présente en outre une cardinalité élevée, ce qui répartit correctement la charge entre les partitions. Une lecture fortement cohérente ne réduit rien : elle double même le coût en unités de capacité et ne change pas le fait que toute la table est parcourue. Un index secondaire local est impossible ici : il partage obligatoirement la clé de partition de la table (`orderId`) et ne peut être créé qu'au moment de la création de la table. Augmenter la capacité provisionnée revient à payer plus cher un motif d'accès inefficace, sans corriger la croissance linéaire de la latence."
+}

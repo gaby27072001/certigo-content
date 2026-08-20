@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-2.cdk-stateful-removal-policy.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Definir RemovalPolicy.RETAIN et activer la protection contre la suppression RDS pour le seul environnement de production, en conservant RemovalPolicy.DESTROY en developpement et en test.",
+  "rationale": "Appliquer RETAIN et la protection de suppression RDS uniquement en production garantit qu'une suppression ou un remplacement accidentel de la ressource lors d'une mise a jour de pile ne detruit pas les donnees clients, tout en conservant DESTROY dans les environnements de developpement et de test pour preserver la rapidite des cycles d'iteration : cette politique differenciee par environnement est le seul choix qui equilibre securite des donnees de production et faible charge operationnelle ailleurs. DESTROY partout, y compris en production, expose directement la base de production a une suppression irreversible au moindre incident de deploiement, ce qui est inacceptable pour des donnees clients. Laisser le comportement par defaut sans politique explicite ni protection cree une ambiguite dependant du type de ressource et de la version de CDK, et ne garantit aucune protection explicite contre une suppression accidentelle lors d'un remplacement de ressource. La protection au niveau de la pile (terminationProtection) empeche uniquement la suppression complete de la pile elle-meme ; elle ne protege pas contre une suppression de la ressource RDS provoquee par un changement d'identifiant logique ou un remplacement de ressource au sein d'une mise a jour de pile, ce qui laisse une lacune critique. Sources officielles AWS : https://docs.aws.amazon.com/cdk/v2/guide/resources.html https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.dea-c01.domain-1.enchainement-etapes-etl-fragile.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dea-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Décrire l'enchaînement dans une machine à états AWS Step Functions, avec des états Choice pour le branchement conditionnel et des politiques Retry et Catch pour les reprises, le tout déclenché par une règle planifiée Amazon EventBridge.",
+  "rationale": "AWS Step Functions est conçu pour ce besoin : la machine à états externalise la logique d'enchaînement, l'état Choice exprime nativement le branchement conditionnel, les champs Retry et Catch gèrent les reprises avec temporisation exponentielle sans écrire de code, et les intégrations optimisées appellent les tâches AWS Glue en mode synchrone, ce qui supprime les temporisations d'attente. L'historique d'exécution et la vue graphique désignent immédiatement l'étape en échec, et une règle EventBridge planifiée déclenche l'ensemble sans serveur. Amazon MWAA répondrait fonctionnellement mais impose de dimensionner, corriger et payer en continu un environnement Airflow, soit une charge opérationnelle disproportionnée pour six étapes. Allonger le délai des fonctions Lambda revient à payer plus longtemps une attente inactive sans résoudre ni les reprises ni la visibilité, et le plafond de quinze minutes reste inférieur à la durée de nombreuses tâches Glue. Une file SQS par étape recrée une orchestration implicite : l'état global reste dispersé, le branchement conditionnel et les reprises restent à coder, et le diagnostic devient plus difficile encore."
+}

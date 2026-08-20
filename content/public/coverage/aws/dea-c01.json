@@ -3,11 +3,59 @@
   "provider": "aws",
   "certification": "aws:dea-c01",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Data Ingestion and Transformation", "weightPercent": 34, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Data Store Management", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Data Operations and Support", "weightPercent": 22, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Data Security and Governance", "weightPercent": 18, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Data Ingestion and Transformation",
+      "weightPercent": 34,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dea-c01.domain-1.alimentation-entrepot-depuis-base-sur-site.006",
+        "aws.dea-c01.domain-1.cluster-nocturne-inactif-facture.007",
+        "aws.dea-c01.domain-1.contention-lecture-consommateurs-multiples.002",
+        "aws.dea-c01.domain-1.cout-octets-analyses-fichiers-quotidiens.003",
+        "aws.dea-c01.domain-1.enchainement-etapes-etl-fragile.004",
+        "aws.dea-c01.domain-1.propagation-modifications-commandes-lac.005",
+        "aws.dea-c01.domain-1.rejeu-evenements-apres-bogue-consommateur.001"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Data Store Management",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dea-c01.domain-2.corrections-a-la-demande-et-etat-anterieur.012",
+        "aws.dea-c01.domain-2.echanges-entre-noeuds-jointure-volumineuse.008",
+        "aws.dea-c01.domain-2.expiration-automatique-sessions-perimees.011",
+        "aws.dea-c01.domain-2.paliers-conservation-journaux-sept-ans.010",
+        "aws.dea-c01.domain-2.partitions-horaires-manquantes-cout-croissant.009"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Data Operations and Support",
+      "weightPercent": 22,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dea-c01.domain-3.echecs-nocturnes-decouverts-trop-tard.014",
+        "aws.dea-c01.domain-3.enregistrements-non-conformes-fournisseur-externe.015",
+        "aws.dea-c01.domain-3.retraitement-fichiers-deja-charges.013",
+        "aws.dea-c01.domain-3.tache-de-melange-unique-interminable.016"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Data Security and Governance",
+      "weightPercent": 18,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dea-c01.domain-4.acces-refuse-lecture-inter-comptes.018",
+        "aws.dea-c01.domain-4.localisation-donnees-personnelles-lac.020",
+        "aws.dea-c01.domain-4.mot-de-passe-en-clair-dans-le-script.019",
+        "aws.dea-c01.domain-4.restriction-colonnes-sensibles-sans-duplication.017"
+      ]
+    }
   ]
 }

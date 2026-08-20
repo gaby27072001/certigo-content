@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-3.service-quota-throttling-queue-buffering-reliability.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une charge de travail existante d'importation de commandes invoque une fonction Lambda de maniere synchrone depuis un point de terminaison API Gateway lors des periodes chargees de la journee ; l'equipe observe un nombre croissant d'erreurs de throttling TooManyRequestsException a mesure que le quota regional d'executions simultanees Lambda du compte se rapproche de sa limite pendant les pics, provoquant des echecs d'importation pour les clients. L'equipe doit ameliorer la fiabilite face a ces pics sans simplement esperer qu'ils ne se reproduisent pas, et doit anticiper une croissance continue de l'ampleur des pics au cours de l'annee a venir.",
+  "choices": [
+    "Ajouter une boucle de nouvelle tentative fixe de trois essais immediats dans l'application cliente des qu'elle recoit une TooManyRequestsException, sans changer le modele d'invocation ni demander de changement de quota au compte concerne, avec un maximum de trois tentatives par requete cliente.",
+    "Diviser la fonction Lambda unique en deux fonctions quasi identiques traitant le meme chemin de requete synchrone et alterner laquelle API Gateway appelle, en s'attendant a ce que le quota effectif double automatiquement pour les deux, en repartissant les deux fonctions AWS Lambda derriere Amazon API Gateway avec des alarmes Amazon CloudWatch identiques sur chacune.",
+    "Reduire le parametre de concurrence reservee de la fonction Lambda a une valeur fixe plus basse qu'aujourd'hui pour limiter davantage le nombre d'executions simultanees autorisees pendant les pics d'importation de commandes, ce qui aggrave le taux de rejet des requetes plutot que de l'ameliorer pendant les periodes chargees.",
+    "Decoupler l'invocation synchrone en placant une file SQS entre API Gateway et la fonction Lambda consommant a concurrence controlee, et soumettre separement une demande d'augmentation de quota Service Quotas dimensionnee pour la croissance future."
+  ]
+}

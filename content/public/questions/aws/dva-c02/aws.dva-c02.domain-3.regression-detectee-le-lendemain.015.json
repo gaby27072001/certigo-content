@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-3.regression-detectee-le-lendemain.015",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un déploiement canari piloté par AWS CodeDeploy a mis en ligne une version de fonction AWS Lambda qui multiplie par dix le taux d'erreur. L'incident n'a été détecté que le lendemain matin, après bascule complète du trafic. L'équipe veut que la prochaine régression soit annulée automatiquement, en quelques minutes. Que doit configurer le développeur ?",
+  "choices": [
+    "Raccourcir la phase canari à une minute afin de réduire le nombre d'erreurs constatées avant la bascule complète.",
+    "Associer au groupe de déploiement CodeDeploy des alarmes CloudWatch sur les erreurs et la latence de l'alias, et activer le retour arrière automatique en cas de déclenchement d'alarme ou d'échec d'un hook de validation, afin que le trafic revienne immédiatement sur la version précédente.",
+    "Supprimer puis recréer la fonction à partir du dernier paquet considéré comme stable dès qu'une anomalie est signalée.",
+    "Définir une alarme CloudWatch qui notifie l'équipe d'astreinte par Amazon SNS, seule action possible pour un déploiement de fonction Lambda."
+  ]
+}

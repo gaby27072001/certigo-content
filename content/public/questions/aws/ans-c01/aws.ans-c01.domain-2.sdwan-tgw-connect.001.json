@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-2.sdwan-tgw-connect.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un fournisseur SD-WAN déploie des appliances virtuelles dans un VPC et doit échanger dynamiquement des milliers de routes avec Transit Gateway au moyen de BGP, sans créer un tunnel IPsec par site. Quel type d'attachement utiliser ?",
+  "choices": [
+    "Un Transit Gateway Connect attachment utilisant GRE et BGP au-dessus de l'attachement de transport",
+    "Un VPC peering par agence sans BGP",
+    "Un Internet Gateway attaché directement aux appliances comme table de routage",
+    "Un interface endpoint PrivateLink pour propager les routes"
+  ]
+}

@@ -3,11 +3,63 @@
   "provider": "aws",
   "certification": "aws:sap-c02",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Design Solutions for Organizational Complexity", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Design for New Solutions", "weightPercent": 29, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Continuous Improvement for Existing Solutions", "weightPercent": 25, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Accelerate Workload Migration and Modernization", "weightPercent": 20, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Design Solutions for Organizational Complexity",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.sap-c02.domain-1.hybrid-dns-direct-connect-failover.001",
+        "aws.sap-c02.domain-1.cross-account-security-controls-identity-federation.002",
+        "aws.sap-c02.domain-1.tiered-rto-rpo-disaster-recovery-strategy.003",
+        "aws.sap-c02.domain-1.multi-account-landing-zone-centralized-governance.004",
+        "aws.sap-c02.domain-1.cost-visibility-purchasing-strategy-tagging.005",
+        "aws.sap-c02.domain-1.shared-services-vpc-segmentation-transit-gateway.006"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Design for New Solutions",
+      "weightPercent": 29,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.sap-c02.domain-2.ecs-bluegreen-deployment-automated-rollback.001",
+        "aws.sap-c02.domain-2.multiregion-business-continuity-aurora-global.002",
+        "aws.sap-c02.domain-2.internet-facing-app-layered-security-controls.003",
+        "aws.sap-c02.domain-2.loosely-coupled-order-processing-reliability.004",
+        "aws.sap-c02.domain-2.purpose-built-database-caching-read-heavy.005",
+        "aws.sap-c02.domain-2.data-transfer-cost-global-content-delivery.006",
+        "aws.sap-c02.domain-2.privatelink-service-endpoints-patch-compliance.007"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Continuous Improvement for Existing Solutions",
+      "weightPercent": 25,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.sap-c02.domain-3.configuration-drift-state-manager-compliance.001",
+        "aws.sap-c02.domain-3.least-privilege-audit-secrets-rotation-security-improvement.002",
+        "aws.sap-c02.domain-3.latency-bottleneck-global-accelerator-rightsizing.003",
+        "aws.sap-c02.domain-3.single-az-rds-single-point-of-failure-remediation.004",
+        "aws.sap-c02.domain-3.service-quota-throttling-queue-buffering-reliability.005",
+        "aws.sap-c02.domain-3.spot-savings-plans-batch-analytics-cost-optimization.006"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Accelerate Workload Migration and Modernization",
+      "weightPercent": 20,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.sap-c02.domain-4.portfolio-7rs-tco-legacy-monolith-assessment.001",
+        "aws.sap-c02.domain-4.database-migration-cdc-minimal-downtime.002",
+        "aws.sap-c02.domain-4.target-platform-containerization-storage-selection.003",
+        "aws.sap-c02.domain-4.decouple-monolith-serverless-modernization.004",
+        "aws.sap-c02.domain-4.petabyte-scale-data-transfer-terminal-migration.005"
+      ]
+    }
   ]
 }

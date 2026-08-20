@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-3.s3-nat-cost.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Créer un gateway VPC endpoint S3 et l'associer aux tables de routage des sous-réseaux, avec une endpoint policy adaptée",
+  "rationale": "Le gateway endpoint fournit un chemin privé vers S3 depuis les tables de routage sélectionnées sans frais de traitement NAT Gateway. La politique d'endpoint peut limiter les compartiments et actions. Exposer les instances ou détourner le trafic par le datacenter augmente le risque, la latence et le coût."
+}

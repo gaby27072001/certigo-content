@@ -1,0 +1,13 @@
+{
+  "id": "aws.mla-c01.domain-2.transcription-et-analyse-appels-sans-corpus.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Enchaîner Amazon Transcribe pour convertir l'audio en texte, puis Amazon Comprehend pour l'extraction d'entités et l'analyse de sentiment, sans entraîner de modèle personnalisé.",
+  "rationale": "L'évaluation de faisabilité doit partir des données disponibles, de la complexité du problème et du délai. Ici, le besoin correspond à deux tâches parfaitement standard couvertes par des services d'IA gérés : Amazon Transcribe réalise la reconnaissance vocale en français, et Amazon Comprehend extrait les entités et le sentiment du texte produit. Aucun corpus annoté n'est requis, l'intégration se limite à des appels d'API, et deux ingénieurs peuvent livrer dans le délai imparti ; le coût est proportionnel à l'usage, sans flotte à entraîner ni à maintenir. Entraîner un modèle acoustique à partir de zéro demande des milliers d'heures d'audio transcrit, une expertise en traitement de la parole et un budget GPU considérable, ce qui est hors de portée du contexte décrit. Annoter plusieurs milliers d'appels à la main consomme précisément le délai disponible et ne résout de toute façon pas la transcription, qui reste le préalable indispensable. Affiner un modèle de fondation Bedrock sur de l'audio brut ne correspond pas au besoin : la chaîne reste à construire, l'affinage suppose des exemples de qualité qui font défaut, et l'effort est disproportionné face à une tâche que des services préexistants traitent immédiatement."
+}

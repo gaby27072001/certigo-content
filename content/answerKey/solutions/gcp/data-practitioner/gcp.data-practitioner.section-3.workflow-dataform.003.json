@@ -1,0 +1,13 @@
+{
+  "id": "gcp.data-practitioner.section-3.workflow-dataform.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-3"
+  },
+  "correct": "Définir le projet dans Dataform, créer une configuration de workflow et planifier son invocation",
+  "rationale": "Dataform versionne les transformations SQL, construit leur graphe de dépendances, exécute des assertions et peut planifier un workflow ordonné. Des requêtes planifiées indépendantes ne garantissent pas les dépendances, Dataproc est inutile pour ce traitement SQL natif et Eventarc n'est pas un ordonnanceur de graphe SQL."
+}

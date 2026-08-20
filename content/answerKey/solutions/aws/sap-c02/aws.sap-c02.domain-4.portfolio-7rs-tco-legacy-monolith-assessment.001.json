@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-4.portfolio-7rs-tco-legacy-monolith-assessment.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Realiser d'abord une decouverte applicative avec AWS Application Discovery Service pour inventorier l'environnement, batir le dossier de cout total de possession avec AWS Migration Evaluator pour comparer le maintien on-premises et AWS, suivre la vague de migration avec AWS Transform, puis reheberger le monolithe tel quel pour respecter l'echeance, en planifiant une refonte future.",
+  "rationale": "AWS Application Discovery Service inventorie l'environnement existant pour la decouverte, AWS Migration Evaluator construit specifiquement le dossier de cout total de possession comparant le maintien on-premises et AWS que la direction financiere exige, et AWS Transform (qui reprend et etend les capacites de suivi de vague de migration) permet de suivre l'avancement de la migration ; le rehebergement tel quel respecte ensuite l'echeance de 6 mois et la disponibilite limitee de l'equipe tout en preservant la possibilite de refondre plus tard vers des services decomposes selon la feuille de route a 18-24 mois. Sauter la decouverte et l'analyse de cout total de possession ignore l'exigence de justification budgetaire, et une refonte complete en microservices ne peut raisonnablement pas etre livree en 6 mois avec une disponibilite d'equipe limitee, ce qui contredit directement les contraintes enoncees. Mettre fin a l'application sans decouverte ni analyse suppose a tort qu'elle n'est plus necessaire alors que rien dans le scenario ne l'indique, ce qui risque de perdre une fonctionnalite metier requise tout en sautant la justification de cout total de possession exigee. Racheter une solution commerciale tierce avec migration complete des donnees et reformation des processus metier represente un effort plus vaste et plus risque a livrer en 6 mois avec une equipe limitee qu'un simple rehebergement, et cette option omet elle aussi la comparaison de cout total de possession exigee. Sources officielles AWS : https://docs.aws.amazon.com/application-discovery/latest/userguide/what-is-appdiscovery.html https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-tools/business-case-migration-evaluator.html https://docs.aws.amazon.com/transform/latest/userguide/what-is-service.html"
+}

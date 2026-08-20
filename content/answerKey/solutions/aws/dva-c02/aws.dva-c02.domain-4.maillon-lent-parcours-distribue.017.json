@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-4.maillon-lent-parcours-distribue.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Activer le suivi actif AWS X-Ray sur l'API et sur la fonction, instrumenter le client du SDK ainsi que les appels HTTP sortants, et ajouter des annotations indexées (identifiant du client, type d'opération) pour filtrer les traces et identifier le sous-segment lent.",
+  "rationale": "AWS X-Ray reconstitue le cheminement complet d'une requête : avec le suivi actif sur l'API et la fonction, et l'instrumentation du SDK et du client HTTP, chaque appel à DynamoDB ou à l'API partenaire apparaît comme un sous-segment horodaté ; la carte de service et la vue des traces montrent immédiatement quel maillon consomme les trois secondes. Les annotations sont des paires clé-valeur indexées : elles permettent de filtrer les traces par identifiant client ou par type d'opération, ce qui répond au besoin du support, alors que les métadonnées ne sont pas indexées et servent uniquement à enrichir une trace déjà retrouvée. Augmenter la rétention des journaux et les relire à la main ne corrèle pas les différents services, ne mesure pas la durée de chaque appel sortant et ne passe pas à l'échelle en situation d'incident. Une latence moyenne quotidienne masque précisément les anomalies intermittentes, visibles au 99e centile et non en moyenne, et n'indique pas quel composant est en cause."
+}

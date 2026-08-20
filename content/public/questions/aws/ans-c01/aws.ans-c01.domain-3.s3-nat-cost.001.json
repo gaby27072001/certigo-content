@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-3.s3-nat-cost.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Des traitements privés dans plusieurs AZ envoient chaque mois des centaines de téraoctets vers Amazon S3 de la même Région en passant par des NAT Gateways. L'équipe veut réduire les coûts de traitement NAT sans rendre les instances publiques. Quelle modification effectuer ?",
+  "choices": [
+    "Créer un gateway VPC endpoint S3 et l'associer aux tables de routage des sous-réseaux, avec une endpoint policy adaptée",
+    "Remplacer les NAT Gateways par une Internet Gateway directement attachée aux instances privées",
+    "Créer un interface endpoint pour chaque objet S3",
+    "Envoyer les données via un VPN vers le datacenter puis vers S3"
+  ]
+}

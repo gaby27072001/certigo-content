@@ -3,11 +3,59 @@
   "provider": "aws",
   "certification": "aws:mla-c01",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Data Preparation for Machine Learning (ML)", "weightPercent": 28, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "ML Model Development", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Deployment and Orchestration of ML Workflows", "weightPercent": 22, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "ML Solution Monitoring, Maintenance, and Security", "weightPercent": 24, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Data Preparation for Machine Learning (ML)",
+      "weightPercent": 28,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c01.domain-1.atterrissage-continu-evenements-navigation.002",
+        "aws.mla-c01.domain-1.colonnes-nulles-atteignent-entrainement.005",
+        "aws.mla-c01.domain-1.divergence-calculs-entrainement-inference.003",
+        "aws.mla-c01.domain-1.documentation-ecarts-population-scoring-credit.006",
+        "aws.mla-c01.domain-1.modalites-sans-ordre-codees-en-entiers.004",
+        "aws.mla-c01.domain-1.relecture-integrale-journaux-preparation.001"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "ML Model Development",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c01.domain-2.exactitude-trompeuse-detection-fraude.010",
+        "aws.mla-c01.domain-2.grille-manuelle-hyperparametres-hors-budget.008",
+        "aws.mla-c01.domain-2.perte-validation-remonte-apres-douzieme-epoque.009",
+        "aws.mla-c01.domain-2.tracabilite-versions-servies-en-production.011",
+        "aws.mla-c01.domain-2.transcription-et-analyse-appels-sans-corpus.007"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Deployment and Orchestration of ML Workflows",
+      "weightPercent": 22,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c01.domain-3.bascule-progressive-nouvelle-version-modele.015",
+        "aws.mla-c01.domain-3.documents-volumineux-rafales-espacees.012",
+        "aws.mla-c01.domain-3.pic-de-midi-et-nuits-inactives.013",
+        "aws.mla-c01.domain-3.reentrainement-hebdomadaire-lot-annote.014"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "ML Solution Monitoring, Maintenance, and Security",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c01.domain-4.degradation-lente-apres-evolution-formulaire.016",
+        "aws.mla-c01.domain-4.role-execution-trop-permissif.019",
+        "aws.mla-c01.domain-4.suivi-des-couts-ml-dans-un-compte-unique.018",
+        "aws.mla-c01.domain-4.temps-de-reponse-au-dela-de-la-cible.017",
+        "aws.mla-c01.domain-4.traitement-donnees-sante-sans-internet.020"
+      ]
+    }
   ]
 }

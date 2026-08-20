@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-4.firewall-manager-governance.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une organisation veut imposer automatiquement des politiques AWS WAF et des règles de groupes de sécurité à tous les comptes d'une OU, y compris aux comptes ajoutés ultérieurement, avec rapports de conformité centraux. Quel service utiliser ?",
+  "choices": [
+    "AWS Firewall Manager avec administrateur délégué et politiques ciblant l'OU",
+    "Une web ACL créée manuellement dans le compte de management uniquement",
+    "Amazon GuardDuty sans intégration Organizations",
+    "Des règles locales non versionnées dans chaque compte"
+  ]
+}

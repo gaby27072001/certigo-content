@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-4.roles-anywhere.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "IAM Roles Anywhere avec un trust anchor, un profil et des rôles à privilèges minimaux",
+  "rationale": "IAM Roles Anywhere échange l'identité X.509 d'une charge externe contre des informations d'identification STS temporaires associées à un rôle. Le trust anchor et le profil limitent les certificats et rôles utilisables. Les clés IAM longues durées contredisent l'exigence et les URL présignées ne généralisent pas l'accès aux API."
+}

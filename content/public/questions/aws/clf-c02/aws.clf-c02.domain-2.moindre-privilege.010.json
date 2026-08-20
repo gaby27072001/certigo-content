@@ -1,0 +1,18 @@
+{
+  "id": "aws.clf-c02.domain-2.moindre-privilege.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:clf-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un analyste doit uniquement lire les objets d’un seul compartiment S3 précis. Quelle politique respecte le mieux le principe du moindre privilège ?",
+  "choices": [
+    "AdministratorAccess sur toutes les ressources du compte",
+    "Accès complet à tous les services de stockage AWS",
+    "Une politique IAM autorisant seulement les actions de lecture nécessaires sur ce compartiment",
+    "Utiliser systématiquement le root user"
+  ]
+}

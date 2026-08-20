@@ -1,0 +1,18 @@
+{
+  "id": "aws.saa-c03.domain-4.documents-profils-acces-evolutifs.017",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une entreprise conserve 400 To de documents dans la classe Amazon S3 Standard. Les documents sont fréquemment consultés pendant leurs trente premiers jours. Ensuite, les consultations deviennent rares mais doivent rester servies en quelques minutes. Au bout d'un an, les documents entrent dans une conservation légale de sept ans pendant laquelle une restitution sous douze heures est acceptable. Enfin, certains lots ont un profil de consultation imprévisible d'un mois à l'autre. Quelle stratégie de coût de stockage l'architecte doit-il concevoir ?",
+  "choices": [
+    "Définir une règle de cycle de vie qui fait passer les objets en S3 Standard-IA après trente jours puis en S3 Glacier Flexible Retrieval après un an, avec une expiration à sept ans, et placer les lots au profil imprévisible en S3 Intelligent-Tiering.",
+    "Conserver l'ensemble des objets en S3 Standard et activer la réplication inter-Régions afin de réduire les coûts de restitution.",
+    "Transférer tous les objets en S3 Glacier Deep Archive dès leur écriture et accepter les délais de restitution associés.",
+    "Définir une règle de cycle de vie qui supprime les objets après trente jours et redemander les documents à leurs producteurs en cas de besoin."
+  ]
+}

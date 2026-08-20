@@ -1,0 +1,13 @@
+{
+  "id": "aws.soa-c03.domain-1.relance-service-defaillant-tracable.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Faire relayer le changement d'état de l'alarme par une règle Amazon EventBridge qui déclenche un runbook AWS Systems Manager Automation chargé de relancer le service sur l'instance concernée et de journaliser l'exécution.",
+  "rationale": "Le motif recommandé consiste à capter l'événement de changement d'état de l'alarme avec EventBridge, puis à invoquer un runbook Systems Manager Automation qui exécute la remédiation sur l'instance concernée ; l'historique d'exécution du runbook et les entrées CloudTrail fournissent la piste d'audit demandée. Redémarrer le service toutes les dix minutes provoque des coupures inutiles, masque la panne au lieu de la tracer et ne réagit pas à l'événement détecté. Terminer l'instance détruit les éléments de diagnostic et transforme un incident logiciel mineur en remplacement de capacité. Envoyer l'alarme dans une file SQS traitée à la main conserve une intervention humaine, ce que l'objectif d'automatisation vise précisément à supprimer."
+}

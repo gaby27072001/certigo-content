@@ -3,11 +3,59 @@
   "provider": "aws",
   "certification": "aws:saa-c03",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Design Secure Architectures", "weightPercent": 30, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Design Resilient Architectures", "weightPercent": 26, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Design High-Performing Architectures", "weightPercent": 24, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Design Cost-Optimized Architectures", "weightPercent": 20, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Design Secure Architectures",
+      "weightPercent": 30,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.saa-c03.domain-1.acces-console-multi-comptes-annuaire-existant.002",
+        "aws.saa-c03.domain-1.garde-fous-imposes-aux-comptes-production.001",
+        "aws.saa-c03.domain-1.identifiants-base-en-clair-sur-instances.004",
+        "aws.saa-c03.domain-1.injection-extraction-et-attaque-volumetrique.005",
+        "aws.saa-c03.domain-1.isolation-niveaux-application-web.003",
+        "aws.saa-c03.domain-1.separation-roles-donnees-sante-archivees.006"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Design Resilient Architectures",
+      "weightPercent": 26,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.saa-c03.domain-2.pics-commerciaux-commandes-perdues.007",
+        "aws.saa-c03.domain-2.plan-reprise-seconde-region-cout-modere.010",
+        "aws.saa-c03.domain-2.saturation-connexions-base-montee-concurrence.011",
+        "aws.saa-c03.domain-2.service-mono-zone-objectifs-reprise.009",
+        "aws.saa-c03.domain-2.trois-traitements-independants-par-parution.008"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Design High-Performing Architectures",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.saa-c03.domain-3.arborescence-partagee-trois-zones.012",
+        "aws.saa-c03.domain-3.charge-dominee-par-lectures-repetees.014",
+        "aws.saa-c03.domain-3.latence-jeu-multiregion-bascule-lente.015",
+        "aws.saa-c03.domain-3.myriade-petits-fichiers-telemetrie.016",
+        "aws.saa-c03.domain-3.pagination-permanente-moteur-analyse.013"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Design Cost-Optimized Architectures",
+      "weightPercent": 20,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.saa-c03.domain-4.base-inactive-hors-pics-trimestriels.019",
+        "aws.saa-c03.domain-4.documents-profils-acces-evolutifs.017",
+        "aws.saa-c03.domain-4.frais-inter-zones-et-point-unique-defaillance.020",
+        "aws.saa-c03.domain-4.trois-profils-consommation-calcul.018"
+      ]
+    }
   ]
 }

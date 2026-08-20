@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-4.cloudwatch-anomaly-detection-seasonal.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une application SaaS presente une forte saisonnalite hebdomadaire (trafic faible le week-end, eleve en semaine) ainsi qu'une croissance progressive du volume global. L'alarme actuelle basee sur un seuil statique unique declenche soit de fausses alertes chaque lundi matin lors de la montee en charge, soit manque de vraies baisses anormales en semaine. L'equipe souhaite un mecanisme d'alerte qui s'adapte automatiquement au profil saisonnier attendu, sans reajustement manuel frequent des seuils.",
+  "choices": [
+    "Definir un seuil statique different pour chaque jour de la semaine, et confier a un ingenieur la mise a jour mensuelle de ces valeurs en fonction des tendances de trafic observees.",
+    "Utiliser la detection d'anomalies CloudWatch sur le nombre de requetes, l'alarme se declenchant lorsque la valeur observee sort de la bande de confiance apprise par le modele.",
+    "Definir un seuil statique unique calcule sur la moyenne de trafic des douze derniers mois et l'appliquer de maniere identique a tous les jours de la semaine.",
+    "Desactiver l'alarme du vendredi soir au lundi matin par une action planifiee, et ne surveiller le nombre de requetes que pendant les jours ouvres."
+  ]
+}

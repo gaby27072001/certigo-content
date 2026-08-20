@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-6.secure-stacksets.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-6"
+  },
+  "correct": "CloudFormation StackSets avec permissions gérées par le service et trusted access Organizations, complété par CloudFormation Guard dans la chaîne de validation",
+  "rationale": "Les StackSets gérés par le service ciblent les OU et peuvent intégrer automatiquement les comptes ajoutés. CloudFormation Guard vérifie les propriétés des modèles avant déploiement, ce qui rend la baseline cohérente et contrôlable. Des commandes manuelles ne garantissent ni répétabilité ni couverture continue."
+}

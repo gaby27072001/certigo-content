@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-2.dnssec-delegation.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une zone publique Route 53 doit être signée avec DNSSEC. L'équipe a activé la signature et créé la clé de signature, mais les résolveurs externes ne construisent toujours pas de chaîne de confiance. Quelle étape manque ?",
+  "choices": [
+    "Publier l'enregistrement DS généré auprès du registrar de la zone parente",
+    "Créer un enregistrement PTR dans une private hosted zone",
+    "Associer la zone publique à un groupe de sécurité",
+    "Désactiver les enregistrements NS de la zone"
+  ]
+}

@@ -3,12 +3,67 @@
   "provider": "aws",
   "certification": "aws:aif-c01",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "Fundamentals of AI and ML", "weightPercent": 20, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Fundamentals of GenAI", "weightPercent": 24, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Applications of Foundation Models", "weightPercent": 28, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Guidelines for Responsible AI", "weightPercent": 14, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-5", "title": "Security, Compliance, and Governance for AI Solutions", "weightPercent": 14, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "Fundamentals of AI and ML",
+      "weightPercent": 20,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aif-c01.domain-1.apprentissage-supervise.001",
+        "aws.aif-c01.domain-1.classification-fraude.002",
+        "aws.aif-c01.domain-1.ml-traditionnel-explicable.003",
+        "aws.aif-c01.domain-1.recall-fraude.004"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Fundamentals of GenAI",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aif-c01.domain-2.optimisation-jetons.005",
+        "aws.aif-c01.domain-2.context-engineering.006",
+        "aws.aif-c01.domain-2.agent-outils-api.007",
+        "aws.aif-c01.domain-2.hallucination-validation.008",
+        "aws.aif-c01.domain-2.bedrock-service-gere.009"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Applications of Foundation Models",
+      "weightPercent": 28,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aif-c01.domain-3.temperature-creativite.010",
+        "aws.aif-c01.domain-3.rag-base-connaissances.011",
+        "aws.aif-c01.domain-3.few-shot-exemples.012",
+        "aws.aif-c01.domain-3.versioning-prompts.013",
+        "aws.aif-c01.domain-3.fine-tuning-donnees.014",
+        "aws.aif-c01.domain-3.evaluation-multidimensionnelle.015"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Guidelines for Responsible AI",
+      "weightPercent": 14,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aif-c01.domain-4.audit-biais-sous-groupes.016",
+        "aws.aif-c01.domain-4.model-card-transparence.017"
+      ]
+    },
+    {
+      "objective": "domain-5",
+      "title": "Security, Compliance, and Governance for AI Solutions",
+      "weightPercent": 14,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.aif-c01.domain-5.moindre-privilege-iam.018",
+        "aws.aif-c01.domain-5.grounding-rag-citations.019",
+        "aws.aif-c01.domain-5.audit-cloudtrail.020"
+      ]
+    }
   ]
 }

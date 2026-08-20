@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-3.service-quota-throttling-queue-buffering-reliability.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Decoupler l'invocation synchrone en placant une file SQS entre API Gateway et la fonction Lambda consommant a concurrence controlee, et soumettre separement une demande d'augmentation de quota Service Quotas dimensionnee pour la croissance future.",
+  "rationale": "Placer une file SQS entre API Gateway et la fonction Lambda tamponne les pics au lieu de les rejeter en laissant la fonction consommer la file a une concurrence controlee, et demander en parallele une augmentation du quota Service Quotas dimensionnee pour la croissance anticipee traite a la fois le probleme immediat et l'evolution future, contrairement a une strategie qui espere simplement que le pic ne se reproduise pas. Ajouter des nouvelles tentatives immediates cote client pendant un throttling soutenu echoue probablement de nouveau et peut aggraver la contention, sans resoudre l'ecart fondamental entre le quota et l'ampleur des pics ni s'adapter a la croissance. Diviser la fonction en deux fonctions quasi identiques n'augmente pas reellement le plafond effectif puisque le quota d'executions simultanees s'applique au niveau du compte regional dans ce contexte, et le chemin synchrone non tamponne reste expose aux pics. Reduire la concurrence reservee abaisse encore le plafond disponible, ce qui aggrave le throttling au lieu de l'ameliorer. Sources officielles AWS : https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-4.documents-profils-acces-evolutifs.017",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Définir une règle de cycle de vie qui fait passer les objets en S3 Standard-IA après trente jours puis en S3 Glacier Flexible Retrieval après un an, avec une expiration à sept ans, et placer les lots au profil imprévisible en S3 Intelligent-Tiering.",
+  "rationale": "L'optimisation consiste à faire coïncider chaque phase de vie du document avec la classe de stockage dont les caractéristiques de restitution suffisent, sans payer davantage. Pendant trente jours, l'accès est fréquent : S3 Standard est justifié. Ensuite, l'accès devient rare mais doit rester immédiat : S3 Standard-IA offre un tarif de stockage nettement inférieur avec une restitution instantanée, au prix d'un coût de récupération par gigaoctet acceptable pour un accès occasionnel. Au bout d'un an, une restitution sous douze heures est tolérée : S3 Glacier Flexible Retrieval devient la classe adaptée et abaisse encore fortement le coût de conservation sur les sept années. L'expiration programmée à sept ans évite de payer indéfiniment des données dont la valeur juridique a cessé. S3 Intelligent-Tiering traite le cas particulier des lots imprévisibles : le service surveille les accès et déplace lui-même les objets entre paliers, ce qui évite d'inventer une règle de cycle de vie pour un profil que l'on ne sait pas décrire. Tout garder en S3 Standard ignore le problème, et la réplication inter-Régions ajoute une copie complète à payer : elle sert la résilience, pas la réduction de coût. Placer les objets en S3 Glacier Deep Archive dès l'écriture casse l'exigence des trente premiers jours, dont la consultation serait soumise à des délais de plusieurs heures, sans compter la durée minimale de facturation propre à cette classe. Supprimer les documents à trente jours viole frontalement l'obligation de conservation de sept ans."
+}

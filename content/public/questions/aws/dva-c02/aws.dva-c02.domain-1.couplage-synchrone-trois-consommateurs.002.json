@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-1.couplage-synchrone-trois-consommateurs.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un service de commandes appelle aujourd'hui de manière synchrone les API REST de trois équipes consommatrices (facturation, logistique, analytique) après chaque commande validée. Une panne d'un seul consommateur fait échouer la prise de commande, et l'ajout d'un consommateur impose de modifier le service. Quelle conception événementielle le développeur doit-il mettre en place ?",
+  "choices": [
+    "Publier chaque commande validée une seule fois sur un bus d'événements Amazon EventBridge personnalisé, puis créer une règle par consommateur avec un modèle d'événement filtrant les champs utiles et une cible dédiée (file Amazon SQS ou fonction AWS Lambda).",
+    "Faire écrire par le service de commandes un enregistrement dans une table Amazon DynamoDB que chaque consommateur interroge toutes les minutes pour détecter les nouveautés.",
+    "Conserver les appels HTTP synchrones mais les exécuter dans des fils d'exécution d'arrière-plan afin de ne pas bloquer la réponse renvoyée au client.",
+    "Créer une file Amazon SQS unique partagée par les trois consommateurs, chacun lisant les messages et supprimant ceux qui ne le concernent pas."
+  ]
+}

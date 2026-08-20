@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-1.chargement-bq-cli.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Un fichier CSV validé se trouve dans Cloud Storage. Un praticien doit le charger une seule fois dans une table BigQuery existante depuis Cloud Shell en indiquant explicitement le format source et le schéma. Quelle action est appropriée ?",
+  "choices": [
+    "Exécuter gcloud storage cp vers l'identifiant de la table BigQuery",
+    "Exécuter gsutil compose pour convertir le fichier en table BigQuery",
+    "Exécuter bq query en utilisant le chemin Cloud Storage comme nom de table native",
+    "Exécuter bq load avec --source_format=CSV, la table cible, l'URI gs:// et le schéma"
+  ]
+}

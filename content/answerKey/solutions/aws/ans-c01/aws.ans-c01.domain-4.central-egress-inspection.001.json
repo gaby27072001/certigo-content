@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-4.central-egress-inspection.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Des endpoints Network Firewall par AZ, un routage zonal cohérent et le mode appliance sur l'attachement Transit Gateway d'inspection",
+  "rationale": "Les endpoints zonaux et le routage aligné évitent les croisements d'AZ inutiles, tandis que le mode appliance préserve l'affinité de flux nécessaire à l'inspection stateful. Un endpoint unique crée un point de défaillance et des coûts inter-AZ. Un chemin direct vers Internet contournerait le contrôle central."
+}

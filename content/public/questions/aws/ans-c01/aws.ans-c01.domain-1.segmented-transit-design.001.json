@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-1.segmented-transit-design.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une organisation possède 120 VPC dans plusieurs comptes et trois Régions. Elle veut une topologie hub-and-spoke, des segments prod et non-prod isolés, des services partagés et un routage inter-Région sans full mesh. Quel design choisir ?",
+  "choices": [
+    "Un Transit Gateway régional partagé via AWS RAM, des tables de routage distinctes par segment et des Transit Gateway peerings inter-Région contrôlés",
+    "Un VPC peering entre chaque paire de VPC",
+    "Une seule table de routage Transit Gateway qui propage tous les attachements",
+    "Une passerelle Internet commune pour le trafic privé inter-Région"
+  ]
+}

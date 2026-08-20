@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-1.elt-bigquery.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe reçoit chaque nuit des fichiers Parquet dans Cloud Storage. Elle doit conserver une copie brute interrogeable, charger rapidement les données dans BigQuery, puis appliquer des jointures et des règles de normalisation en SQL. Quel schéma de traitement répond le mieux à ce besoin ?",
+  "choices": [
+    "Transformer et nettoyer entièrement les fichiers avant tout chargement dans BigQuery selon un schéma ETL",
+    "Charger les données brutes dans BigQuery, puis les transformer en SQL selon un schéma ELT",
+    "Charger, transformer, exporter vers Cloud Storage, puis recharger les résultats selon un schéma ETLT",
+    "Connecter directement l'outil de visualisation aux fichiers bruts sans étape de transformation"
+  ]
+}

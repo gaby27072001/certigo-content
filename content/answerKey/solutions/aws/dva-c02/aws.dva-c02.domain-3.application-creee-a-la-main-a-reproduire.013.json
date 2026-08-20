@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-3.application-creee-a-la-main-a-reproduire.013",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Décrire l'application dans un modèle AWS SAM versionné avec le code, puis déployer la même pile dans chaque environnement à l'aide de paramètres et de configurations dédiées (`sam deploy --config-env`), depuis un pipeline qui promeut l'artefact déjà construit et testé.",
+  "rationale": "L'infrastructure en tant que code est la réponse attendue : un modèle AWS SAM unique, versionné avec le code, décrit les fonctions, l'API et les tables, tandis que les paramètres et les profils de configuration (`sam deploy --config-env`) portent les différences entre développement, recette et production (noms de table, mémoire, niveaux de journalisation). Le pipeline construit l'artefact une seule fois, le stocke, puis le promeut d'un environnement à l'autre : les déploiements deviennent reproductibles, auditables et rejouables, et CloudFormation gère les mises à jour ainsi que les retours arrière de pile. La reproduction manuelle dans la console est exactement le problème à supprimer : elle provoque des dérives de configuration et n'offre aucune traçabilité. Maintenir un modèle indépendant par environnement garantit la divergence progressive des piles et rend impossible toute promotion fiable. Exporter des ressources en JSON et coder en dur les identifiants produit un artefact non paramétrable, lié aux ressources de développement, qui échouera ou pointera vers de mauvaises dépendances en production."
+}

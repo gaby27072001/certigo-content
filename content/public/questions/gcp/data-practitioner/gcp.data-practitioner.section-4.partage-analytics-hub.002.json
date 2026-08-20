@@ -1,0 +1,18 @@
+{
+  "id": "gcp.data-practitioner.section-4.partage-analytics-hub.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:data-practitioner",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-4"
+  },
+  "prompt": "Une entreprise veut publier un dataset BigQuery de référence auprès de plusieurs projets partenaires. Les abonnés doivent découvrir les données et les interroger sans recevoir de copie exportée, tandis que le producteur conserve la maîtrise du partage. Quelle solution utiliser ?",
+  "choices": [
+    "Exporter chaque nuit les tables au format CSV dans un bucket public",
+    "Créer une annonce Analytics Hub dans un échange et autoriser les projets partenaires à s'y abonner",
+    "Activer l'accès uniforme au niveau du bucket sur un bucket vide",
+    "Accorder le rôle Owner du projet producteur à chaque partenaire"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-2.dnssec-delegation.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Publier l'enregistrement DS généré auprès du registrar de la zone parente",
+  "rationale": "La signature de zone produit une clé de signature, mais la chaîne DNSSEC devient vérifiable seulement lorsque le digest DS est publié dans la zone parente via le registrar. Un PTR sert à la résolution inverse et les groupes de sécurité ne s'appliquent pas aux hosted zones. Supprimer les NS casserait la délégation DNS."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-1.tiered-rto-rpo-disaster-recovery-strategy.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une entreprise exploite trois paliers de charges de travail avec des exigences de reprise distinctes : le palier 1 (paiements) impose un RTO de 5 minutes et un RPO quasi nul, le palier 2 (reporting) impose un RTO d'une heure et un RPO de 15 minutes, et le palier 3 (traitements par lots et archives) tolere un RTO et un RPO de 24 heures. L'architecte doit concevoir un plan de reprise apres sinistre adapte a chaque palier sans imposer le cout d'un site multi-actif complet a l'ensemble des charges de travail.",
+  "choices": [
+    "Appliquer une architecture multi-site active-active uniforme aux trois paliers via Aurora Global Database et Route 53, ce qui garantit le RTO et le RPO minimaux partout mais impose une flotte active en permanence dans chaque Region pour les charges les moins critiques.",
+    "Appliquer une strategie de sauvegarde et restauration avec AWS Backup et des instantanes RDS inter-region pour les trois paliers, avec un lancement de piles CloudFormation declenche par un ingenieur apres declaration du sinistre, sans distinction entre les paliers de criticite differente.",
+    "Utiliser une strategie pilot light avec une instance RDS arretee pour le palier 1 necessitant une mise a l'echelle lors du basculement, et une strategie warm standby avec Amazon EC2 Auto Scaling pour les paliers 2 et 3, sans replication continue Aurora dediee pour le palier 1.",
+    "Deployer un multi-site active-active avec Aurora Global Database et un routage Route 53 pondere actif-actif avec verifications de sante pour le palier 1, un warm standby avec replique Aurora deja demarree et promotion automatisable pour le palier 2, et une sauvegarde et restauration avec AWS Backup pour le palier 3."
+  ]
+}

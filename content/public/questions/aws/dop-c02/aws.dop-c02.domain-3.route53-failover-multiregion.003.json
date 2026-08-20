@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-3.route53-failover-multiregion.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application web active-passive est deployee dans deux regions AWS derriere un Application Load Balancer par region. L'activite metier tolere une propagation DNS de quelques minutes en cas de bascule et souhaite explicitement eviter le cout et la complexite operationnelle supplementaires d'une couche reseau anycast globale, le trafic etant exclusivement en HTTP(S). L'equipe doit choisir un mecanisme de bascule automatique vers la region secondaire en cas de defaillance de la region primaire.",
+  "choices": [
+    "Placer AWS Global Accelerator devant les deux regions et laisser son reseau anycast rediriger le trafic au niveau IP vers la region secondaire des que les points de terminaison primaires deviennent malsains.",
+    "Creer un enregistrement Route 53 en routage de basculement, associe a un controle de sante sur l'ALB primaire et assorti d'un TTL faible, pour rediriger le trafic vers la region secondaire.",
+    "Creer un enregistrement Route 53 en routage pondere qui repartit en permanence le trafic a parts egales entre les ALB des deux regions, quel que soit l'etat de sante de chacun.",
+    "Faire modifier l'enregistrement DNS vers l'ALB de la region secondaire par l'ingenieur d'astreinte des que le tableau de bord de supervision signale une panne de la region primaire."
+  ]
+}

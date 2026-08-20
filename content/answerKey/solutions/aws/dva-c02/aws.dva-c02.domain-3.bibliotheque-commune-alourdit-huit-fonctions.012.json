@@ -1,0 +1,13 @@
+{
+  "id": "aws.dva-c02.domain-3.bibliotheque-commune-alourdit-huit-fonctions.012",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Extraire les dépendances communes dans une couche Lambda versionnée et partagée, référencée par les huit fonctions, et empaqueter sous forme d'image de conteneur publiée dans Amazon ECR les fonctions qui dépassent encore les limites du paquet .zip ou qui nécessitent des binaires natifs.",
+  "rationale": "Une couche Lambda regroupe les dépendances communes dans un artefact versionné, distinct du code métier : les huit fonctions la référencent, l'archive de chaque fonction se limite au code applicatif, les téléversements deviennent rapides et la mise à jour de la bibliothèque consiste à publier une nouvelle version de couche. Lorsque la taille reste supérieure aux limites du paquet .zip ou que des binaires natifs doivent être compilés pour correspondre exactement à l'environnement d'exécution, l'empaquetage en image de conteneur publiée dans Amazon ECR autorise jusqu'à 10 Go et reproduit fidèlement l'environnement de construction. Télécharger les dépendances dans /tmp à chaque invocation ajoute une latence importante aux démarrages à froid, consomme le stockage éphémère et place Amazon S3 sur le chemin critique. Committer des binaires compilés alourdit le dépôt, casse la reproductibilité des constructions et ne change rien à la taille du paquet déployé ; le délai d'expiration n'a aucun rapport avec une limite de taille. Fragmenter artificiellement le code en chaîne d'appels ajoute de la latence, du coût et de la complexité sans traiter la duplication des dépendances."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-2.exactitude-trompeuse-detection-fraude.010",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un modèle de détection de fraude est entraîné sur des transactions dont 0,4 % seulement sont frauduleuses. Le modèle affiche 99,6 % d'exactitude mais ne signale presque aucune fraude réelle. L'équipe doit choisir la métrique qui pilotera la sélection du modèle et du seuil de décision. Que doit-elle retenir ?",
+  "choices": [
+    "Conserver l'exactitude comme métrique de sélection et compenser en collectant davantage de transactions historiques.",
+    "Abandonner l'exactitude au profit de la précision et du rappel : suivre la courbe précision-rappel et le score F1 sur la classe minoritaire, et fixer le seuil de décision selon le coût relatif des faux négatifs et des faux positifs.",
+    "Adopter l'erreur quadratique moyenne (RMSE) entre la probabilité prédite et l'étiquette pour mieux refléter la rareté de la fraude.",
+    "Évaluer le modèle sur un jeu d'entraînement rééquilibré à 50/50 et retenir l'exactitude mesurée sur ce jeu."
+  ]
+}

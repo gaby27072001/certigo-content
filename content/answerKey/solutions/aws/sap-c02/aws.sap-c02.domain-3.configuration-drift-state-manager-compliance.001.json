@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-3.configuration-drift-state-manager-compliance.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Definir la configuration desiree dans une association AWS Systems Manager State Manager appliquee et reappliquee selon une planification recurrente sur toute la flotte ciblee par balises, sans connexion SSH, et consulter la conformite des associations dans la console Systems Manager.",
+  "rationale": "Une association AWS Systems Manager State Manager definit la configuration desiree une seule fois et l'applique sur toute la flotte ciblee par balises selon une planification recurrente, corrigeant la derive sans connexion SSH, tout en s'appuyant sur l'investissement existant dans Systems Manager et en fournissant un rapport de conformite des associations consultable par l'equipe. Continuer a se connecter en SSH sur chaque instance une par une, meme avec une liste de controle partagee dans un document, ne fait respecter aucune configuration de facon automatisee et la derive reapparait a chaque nouvelle instance ou changement. Remplacer Systems Manager par une plateforme tierce necessitant un agent reconstruit depuis zero sur toute la flotte abandonne l'investissement existant et impose une migration lourde non justifiee. Figer la configuration dans une nouvelle AMI a chaque publication et relancer toute la flotte a chaque changement ne detecte ni ne corrige la derive qui apparait entre deux publications, et impose un cycle de relance complet pour le moindre changement de configuration. Sources officielles AWS : https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state.html https://docs.aws.amazon.com/systems-manager/latest/userguide/compliance-about.html"
+}

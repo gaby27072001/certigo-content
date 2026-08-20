@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-5.service-actif-actif-meilleur-temps-reponse.019",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Une application est déployée en actif-actif dans une Région européenne et une Région nord-américaine, derrière un Application Load Balancer dans chaque Région. L'objectif est de servir chaque utilisateur depuis la Région qui lui offre le meilleur temps de réponse réseau, et de cesser d'envoyer du trafic vers une Région défaillante. Quelle configuration Amazon Route 53 choisir ?",
+  "choices": [
+    "Un routage par géolocalisation fondé sur le pays d'origine de la requête, qui garantit le temps de réponse le plus faible.",
+    "Un routage pondéré réparti à parts égales entre les deux Régions.",
+    "Un routage basé sur la latence, avec un enregistrement d'alias par Région, chacun associé à un contrôle de santé.",
+    "Un routage à réponses multivaleurs, qui renvoie systématiquement l'enregistrement de la Région la plus proche."
+  ]
+}

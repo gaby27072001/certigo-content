@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-1.evenements-perdus-apres-echec-asynchrone.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une fonction AWS Lambda est invoquée de façon asynchrone par des notifications d'événements Amazon S3. Certaines invocations échouent après les nouvelles tentatives automatiques et les événements correspondants sont perdus, sans trace exploitable. L'équipe veut conserver la charge utile et le motif d'échec pour rejouer les traitements, sans ralentir le flux nominal. Que doit-elle configurer ?",
+  "choices": [
+    "Porter le délai d'expiration de la fonction à 15 minutes pour laisser aux tentatives asynchrones le temps d'aboutir.",
+    "Activer le suivi actif AWS X-Ray sur la fonction, qui rejoue automatiquement les invocations asynchrones ayant échoué.",
+    "Demander à Amazon S3 d'invoquer la fonction de manière synchrone afin que le service appelant conserve l'événement et le renvoie.",
+    "Configurer une destination d'échec (Lambda Destinations) vers une file Amazon SQS ou un sujet Amazon SNS, qui reçoit l'enregistrement d'invocation complet avec la charge utile, le contexte de la réponse et la raison de l'erreur une fois les tentatives épuisées."
+  ]
+}

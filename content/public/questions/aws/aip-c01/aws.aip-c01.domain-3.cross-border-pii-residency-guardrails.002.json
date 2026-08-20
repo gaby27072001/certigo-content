@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-3.cross-border-pii-residency-guardrails.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un assistant GenAI RH d'une multinationale resume des evaluations de performance d'employes des unites europeennes et americaines. La reglementation europeenne sur la vie privee exige que les donnees personnelles des employes europeens soient pseudonymisees avant d'etre envoyees a un point de terminaison de modele partage heberge dans une Region americaine, mais les responsables locaux ont toujours besoin de resumes referencant les employes de maniere exploitable. Les exigences sont : (1) detecter et masquer ou pseudonymiser les donnees personnelles (noms, identifiants employe) avant que le texte d'evaluation ne soit inclus dans un prompt envoye au modele partage, (2) permettre que la correspondance de pseudonymisation ne soit reversible qu'au sein de la region ou du systeme d'origine, jamais par le modele de fondation ni par du personnel exterieur au systeme RH autorise, (3) appliquer un controle supplementaire cote sortie pour intercepter toute donnee personnelle que le modele aurait pu halluciner ou laisser fuiter malgre le masquage, et (4) appliquer une politique de retention pour que le texte source masque ne soit pas conserve indefiniment une fois les resumes generes. Quelle solution repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Transmettre le texte integral des evaluations, noms et identifiants employe compris, au point de terminaison de modele partage, et publier une consigne interne demandant aux responsables de retirer les noms des resumes avant diffusion.",
+    "Pseudonymiser les donnees personnelles avec la detection PII d'Amazon Comprehend avant l'envoi, conserver la correspondance dans le systeme RH d'origine, filtrer la sortie avec Amazon Bedrock Guardrails et expirer le texte source via le cycle de vie S3.",
+    "Remplacer les noms par un chiffre de substitution documente applique dans le prompt, et demander au modele de fondation de retablir les identites reelles au moment de rediger le resume destine aux responsables locaux.",
+    "Envoyer les evaluations sans etape de masquage prealable et configurer Amazon Bedrock Guardrails uniquement sur la sortie du modele, avec un filtre de donnees personnelles bloquant noms et identifiants employe dans le resume genere, complete par une politique de retention."
+  ]
+}

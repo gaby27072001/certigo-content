@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-3.single-az-rds-single-point-of-failure-remediation.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Convertir l'instance Amazon RDS en deploiement Multi-AZ pour un basculement automatique, et remplacer la paire fixe d'instances Amazon EC2 par un groupe Amazon EC2 Auto Scaling reparti sur deux zones de disponibilite derriere l'Application Load Balancer existant, avec verifications de sante, sans modification du code applicatif existant. Cette configuration maintient une capacite minimale de deux instances repartie dans chacune des deux zones de disponibilite.",
+  "rationale": "Le deploiement RDS Multi-AZ fournit une replication synchrone vers une instance de secours et un basculement automatique en cas de perte de la zone primaire, et remplacer la paire fixe d'instances EC2 par un groupe Auto Scaling reparti sur au moins deux zones de disponibilite avec verifications de sante assure un remplacement automatique des instances defaillantes, ce qui permet de survivre a la perte d'une zone sans interruption complete ni reecriture de l'application. Des instantanes manuels plus frequents ne fournissent pas de basculement immediat ni automatique, la restauration reste une operation manuelle et lente, et les deux points de defaillance unique, le calcul et la base de donnees, restent tous deux localises dans une seule zone jusqu'a l'execution d'une reprise manuelle. Une replique de lecture dans la meme zone de disponibilite que la primaire ne protege en rien contre la perte de cette zone, et des instances de secours froid dans la meme zone ne servent a rien non plus puisque c'est l'ensemble de la zone qui devient indisponible, sans compter que le demarrage manuel de secours froid n'est pas un mecanisme d'auto-guerison. Augmenter la taille des instances au sein de la meme unique zone de disponibilite ne fait rien pour se proteger contre la perte de cette zone entiere, et ne traite pas le veritable point de defaillance unique identifie. Sources officielles AWS : https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html"
+}

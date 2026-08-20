@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.prompt-management-approval-governance.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Utiliser Amazon Bedrock Prompt Management pour versionner des templates parametres promus par un workflow d'approbation, faire referencer une version par les applications, et auditer les appels d'API sur ces templates avec AWS CloudTrail.",
+  "rationale": "Amazon Bedrock Prompt Management conserve chaque template dans un depot gere et cree une version immuable a chaque publication : revenir a une formulation connue comme fiable consiste a pointer l'identifiant de version precedent, sans toucher au code. Les applications invoquent le template par sa reference, donc modifier le texte ne declenche aucun redeploiement applicatif, la promotion d'une version passe par une etape d'approbation explicite, et AWS CloudTrail enregistre les appels d'API de creation, de lecture et de modification, ce qui fournit le journal nominatif et horodate attendu en revue de conformite. Les prompts codes en dur relus en pull request restent couples au cycle de release : chaque correction de formulation impose un redeploiement, et l'historique Git decrit des commits de code, pas un cycle de vie de prompt approuve independamment. Le bucket S3 versionne rend certes les anciennes revisions recuperables, mais rien n'empeche une equipe d'ecraser le fichier partage : l'approbation reste une convention par messagerie, non un controle applique, et deux modifications concurrentes se perdent silencieusement. Guardrails filtre le contenu nuisible en entree et en sortie du modele ; il n'a ni notion de version de template, ni etape de promotion, et ses journaux de filtrage tracent des invocations bloquees, pas l'auteur d'un changement de prompt. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+}

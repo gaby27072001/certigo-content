@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-4.flow-log-forensics.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "VPC Flow Logs et Transit Gateway Flow Logs livrés dans S3 en format Parquet avec partitionnement compatible Athena",
+  "rationale": "Les journaux de flux contiennent les métadonnées de communication et l'action accept/reject requises, sans capturer le payload. S3 en Parquet réduit le volume analysé et Athena permet les investigations ad hoc. Traffic Mirroring est utile pour les paquets complets mais serait plus coûteux et inutile ici."
+}

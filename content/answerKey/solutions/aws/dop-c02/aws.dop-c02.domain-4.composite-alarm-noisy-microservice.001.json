@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-4.composite-alarm-noisy-microservice.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Creer une alarme composite CloudWatch exigeant l'etat ALARM simultane d'une alarme sur les erreurs 5xx et d'une alarme sur la latence P99, l'alarme CPU devenant un indicateur sans notification.",
+  "rationale": "L'alarme composite qui exige simultanement un taux d'erreurs 5xx eleve et une latence P99 elevee reproduit exactement le motif observe lors de l'incident manque, offrant un signal a haute fidelite pour les incidents reels, tandis que retirer la notification de l'alarme CPU seule elimine la source principale de fatigue d'alerte sans supprimer sa valeur informative pour le debogage. Relever le seuil CPU a 95 % reduit le bruit de maniere arbitraire mais ne corrige pas le probleme de fond : l'alarme continue de ne rien dire sur les erreurs ou la latence, et pourrait encore manquer ou retarder la detection d'un incident reel. Retirer l'alarme au profit d'une revue quotidienne des tableaux de bord introduit un delai de detection de plusieurs heures, incompatible avec une detection en temps quasi reel, et augmente considerablement la charge operationnelle de l'equipe. Ajouter une alarme 5xx notifiant independamment continue de generer des notifications separees pour des pics benins et ne recree pas specifiquement le motif correle (erreurs et latence simultanees) qui caracterisait l'incident manque. Sources officielles AWS : https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Composite_Alarm.html https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html"
+}

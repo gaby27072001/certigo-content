@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-1.shared-services-vpc-segmentation-transit-gateway.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une organisation possede 60 VPC repartis sur de nombreux comptes et souhaite que des services partages centralises, tels que l'annuaire, le DNS et la supervision, restent joignables depuis chaque VPC spoke, que la segmentation soit stricte de sorte qu'un VPC de developpement ne puisse jamais atteindre les plages CIDR de production meme de maniere transitive, que l'ajout d'un nouveau VPC spoke ne necessite pas de renegocier une connexion avec chaque VPC existant, et que l'inspection centralisee du trafic est-ouest reste possible en un point unique.",
+  "choices": [
+    "Etablir un maillage complet de peering VPC entre chaque paire de VPC devant communiquer, et gerer le controle d'acces uniquement via des groupes de securite referencant les CIDR des VPC pairs concernes par chaque flux applicatif.",
+    "Utiliser une seule Transit Gateway avec une unique table de routage commune partagee par tous les rattachements, developpement, test et production, afin que chaque VPC puisse atteindre tous les autres par defaut, et corriger cela a posteriori via des NACL ajoutees apres coup dans chaque VPC.",
+    "Deployer un VPC hub base sur des passerelles NAT connecte par peering uniquement au VPC de services partages, et connecter chaque autre VPC spoke directement au VPC de production par des connexions de peering supplementaires ajoutees au besoin.",
+    "Construire une topologie hub-and-spoke autour d'une Transit Gateway centrale, rattacher chaque VPC spoke et un VPC de services partages jouant le role de hub, utiliser des tables de routage distinctes par environnement, et inserer un VPC d'inspection avec Gateway Load Balancer."
+  ]
+}

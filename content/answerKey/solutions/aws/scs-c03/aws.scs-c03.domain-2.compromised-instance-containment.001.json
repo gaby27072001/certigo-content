@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-2.compromised-instance-containment.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Associer un groupe de sécurité de quarantaine, capturer les métadonnées et instantanés nécessaires via un runbook Systems Manager, puis poursuivre l'analyse",
+  "rationale": "La quarantaine limite le blast radius tout en conservant la ressource pour la collecte. Un runbook versionné peut enregistrer l'état, prendre des instantanés et appliquer des contrôles de manière cohérente. Terminer ou redémarrer trop tôt détruit des éléments volatils, et désactiver CloudTrail retire une source essentielle."
+}

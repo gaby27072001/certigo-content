@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-5.backup-vault-lock.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "AWS Backup Vault Lock en mode conformité dans un coffre de sauvegarde séparé, avec politiques de copie intercompte",
+  "rationale": "En mode conformité, Vault Lock impose une conservation WORM après la période de grâce et ne peut plus être modifié ou supprimé, même par un administrateur. La copie intercompte réduit le blast radius du compte de production. Un tag ou une alerte ne constitue pas un contrôle d'immuabilité."
+}

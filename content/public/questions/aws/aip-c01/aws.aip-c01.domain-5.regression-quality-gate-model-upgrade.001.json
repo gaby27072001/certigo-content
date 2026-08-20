@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-5.regression-quality-gate-model-upgrade.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Une equipe souhaite mettre a niveau la version du modele de fondation qui alimente sa fonctionnalite de synthese en production vers une version plus recente qui obtient de meilleurs scores sur des classements publics. Lors d'une mise a niveau precedente jugee evidemment meilleure, la qualite de sortie s'est degradee silencieusement pour un type de document interne specifique non represente dans les benchmarks publics, et cela n'a ete detecte que des semaines plus tard via des plaintes utilisateur. Les exigences sont : (1) evaluer la version candidate du modele par rapport au propre jeu de test historique representatif de la production de l'equipe, pas seulement par rapport aux benchmarks publics, (2) comparer automatiquement les sorties de la nouvelle version a celles de la version precedente, ou a des references connues comme fiables, pour detecter les regressions avant la mise en production, (3) conditionner la promotion en production a la reussite de ces controles, plutot que de faire confiance aux seuls scores de benchmark, et (4) permettre malgre tout a l'equipe d'adopter des versions de modele reellement meilleures lorsque les controles reussissent, plutot que de rester bloquee indefiniment sur l'ancienne version. Quelle approche satisfait le mieux ces quatre exigences ?",
+  "choices": [
+    "S'appuyer sur les scores publies par les classements publics comme preuve d'amelioration et promouvoir la nouvelle version dans la fonctionnalite de synthese des sa disponibilite dans la Region.",
+    "Figer la version actuellement en production et refuser toute mise a niveau ulterieure, la regression precedente ayant montre le risque attache a ces changements de modele de fondation.",
+    "Executer la version candidate sur le jeu de test historique de l'equipe, faire relire les sorties obtenues par un ingenieur, et promouvoir la version selon le calendrier de livraison prevu.",
+    "Lancer une tache Amazon Bedrock Evaluations sur le corpus interne archive, confronter ses scores a ceux mesures pour la version en service, et bloquer l'etape de deploiement tant que le seuil retenu n'est pas atteint."
+  ]
+}

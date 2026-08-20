@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-3.aurora-global-database-dr.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application de commerce en ligne s'appuie sur Amazon Aurora MySQL pour ses donnees transactionnelles. La direction exige un plan de reprise apres sinistre inter-regions tolerant une perte de donnees de l'ordre de quelques secondes et un retour en service de l'ordre de quelques minutes lors d'une defaillance regionale complete et non planifiee, la region primaire etant alors inaccessible. Le budget doit rester raisonnable au regard d'une architecture active-active complete. L'equipe doit choisir le mecanisme de replication et de bascule inter-regions correspondant a ces objectifs.",
+  "choices": [
+    "Programmer des instantanes Aurora quotidiens copies vers une seconde region, et restaurer un nouveau cluster a partir du dernier instantane disponible lorsque la region primaire devient inaccessible.",
+    "Deployer une replique en lecture Aurora inter-regions classique et confier a l'equipe d'astreinte sa promotion en cluster autonome lorsque la region primaire devient inaccessible.",
+    "Deployer Aurora Global Database avec une region secondaire en lecture seule, et promouvoir cette region par un basculement inter-regions non planifie lorsque la region primaire devient inaccessible.",
+    "Exploiter deux clusters Aurora independants dans deux regions, alimentes par un traitement ETL nocturne qui recopie chaque nuit les donnees du cluster primaire vers le cluster secondaire."
+  ]
+}

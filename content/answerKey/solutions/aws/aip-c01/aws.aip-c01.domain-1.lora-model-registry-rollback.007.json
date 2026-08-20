@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.lora-model-registry-rollback.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Affiner des adaptateurs LoRA sur le modele de base partage, enregistrer chaque version dans le SageMaker Model Registry avec un statut d'approbation, et ne promouvoir que les versions approuvees vers le point de terminaison de production.",
+  "rationale": "L'adaptation a rang reduit produit un artefact de quelques dizaines de mega-octets qui se substitue a chaud au precedent sur le meme modele de base, donc changer de personnalisation ne suppose pas de redeployer les poids complets. Le SageMaker Model Registry versionne formellement chaque adaptateur, porte un statut d'approbation que le pipeline de deploiement controle avant toute promotion, et conserve les versions anterieures : quand l'evaluation de reference signale une regression, le retour en arriere consiste a repromouvoir la version approuvee precedente. Le reentrainement complet a chaque iteration paie le cout d'un affinage integral pour un changement de personnalisation et remplace le registre par une convention de nommage S3 : rien n'empeche de pointer un checkpoint jamais evalue, et la tracabilite se limite au nom du prefixe. La suppression des checkpoints anterieurs supprime la seule chose qui rend un retour en arriere possible : apres une regression, il ne reste que le reentrainement pour revenir a l'etat connu comme fiable. Le deploiement immediat sans registre ni evaluation deplace la detection de regression sur les codeurs medicaux en production, sans barriere d'approbation ni version de repli, ce qui est precisement le controle de cycle de vie demande. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry.html"
+}

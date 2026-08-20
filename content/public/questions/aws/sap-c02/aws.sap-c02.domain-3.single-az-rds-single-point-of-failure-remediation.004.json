@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-3.single-az-rds-single-point-of-failure-remediation.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une revue d'architecture d'une application web trois tiers existante constate une flotte web EC2 figee a exactement deux instances lancees manuellement dans la meme unique zone de disponibilite, sans groupe Auto Scaling, ainsi qu'une instance RDS mono-AZ avec des sauvegardes automatisees mais sans instance de secours. L'equipe doit corriger ces points de defaillance unique identifies afin d'ameliorer la fiabilite, avec l'exigence de survivre a la perte d'une zone de disponibilite sans interruption complete, sans reecrire l'application.",
+  "choices": [
+    "Prendre des instantanes Amazon RDS plus frequents, toutes les 15 minutes, en conservant les deux memes instances Amazon EC2 fixes derriere l'Application Load Balancer dans l'unique zone de disponibilite, et documenter un mode operatoire de restauration dans une autre zone execute par un ingenieur, en publiant les metriques via Amazon SNS et Amazon CloudWatch, sans configurer d'alarme Amazon CloudWatch sur l'etat de l'unique zone.",
+    "Convertir l'instance Amazon RDS en deploiement Multi-AZ pour un basculement automatique, et remplacer la paire fixe d'instances Amazon EC2 par un groupe Amazon EC2 Auto Scaling reparti sur deux zones de disponibilite derriere l'Application Load Balancer existant, avec verifications de sante, sans modification du code applicatif existant. Cette configuration maintient une capacite minimale de deux instances repartie dans chacune des deux zones de disponibilite.",
+    "Ajouter une replique de lecture Amazon RDS dans la meme zone de disponibilite que l'instance primaire pour decharger le trafic de lecture via l'Application Load Balancer existant, et lancer deux instances Amazon EC2 supplementaires en secours froid dans cette meme zone unique, demarrees par un ingenieur en cas de besoin, avec la meme configuration reseau et les memes groupes de securite que la paire existante.",
+    "Faire passer l'instance Amazon RDS et les deux instances Amazon EC2 fixes a une taille d'instance superieure au sein de la meme unique zone de disponibilite, derriere le meme Application Load Balancer, avec les memes sauvegardes automatisees et les memes verifications de sante que la configuration actuelle, sans changement de zone de disponibilite."
+  ]
+}

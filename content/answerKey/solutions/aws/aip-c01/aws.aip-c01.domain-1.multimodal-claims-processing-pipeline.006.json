@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.multimodal-claims-processing-pipeline.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Transcrire l'audio des appels avec Amazon Transcribe, analyser conjointement photo et texte du sinistre en un seul appel multimodal Amazon Bedrock, et orchestrer l'ingestion par des fonctions Lambda declenchees sur depot Amazon S3.",
+  "rationale": "Amazon Transcribe couvre la conversion vocale a grande echelle sans code de traitement du signal a maintenir, et l'API Converse d'Amazon Bedrock accepte dans un meme message des blocs image et des blocs texte, donc un seul appel d'inference raisonne conjointement sur la photo du degat et le recit du sinistre, sans etape de fusion applicative. Les fonctions Lambda declenchees par les evenements de depot S3 donnent un pipeline unique et evenementiel : le meme flux accueille formulaires, images et audio en aiguillant selon le type d'objet, et la facture suit le nombre de sinistres traites plutot qu'un parc allume en permanence. Les instances EC2 dediees par format tournent et se facturent en continu meme sans sinistre, ajoutent une latence de scrutation d'une minute et figent la logique par format dans trois services a exploiter separement. La concatenation base64 vers un modele purement textuel n'apporte aucune vision : le modele recoit une suite de caracteres qu'il ne peut pas interpreter comme une image, la charge utile explose en tokens et le raisonnement conjoint demande est perdu. La transcription humaine plafonne au debit des transcripteurs, coute par appel et non par volume, et exclut la photo du raisonnement du modele puisque celle-ci est examinee hors du pipeline. Sources officielles AWS : https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html"
+}

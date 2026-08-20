@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.hybrid-dns-design.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Des Route 53 Resolver inbound endpoints pour les requêtes vers AWS, des outbound endpoints avec règles de forwarding vers le DNS sur site, et des redirecteurs conditionnels des deux côtés",
+  "rationale": "Les endpoints entrants exposent le résolveur VPC aux DNS sur site, tandis que les endpoints sortants appliquent les règles de transfert vers les domaines historiques. Le déploiement d'adresses dans plusieurs AZ fournit la disponibilité attendue. Une zone publique divulguerait des noms internes et les fichiers hosts ne sont ni dynamiques ni gérables à l'échelle."
+}

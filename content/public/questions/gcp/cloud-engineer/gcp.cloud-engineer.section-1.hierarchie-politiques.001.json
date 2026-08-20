@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-1.hierarchie-politiques.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Une entreprise possède une organisation Google Cloud avec des dossiers « Production » et « Développement ». Elle veut empêcher la création d'adresses IP externes sur toutes les VM de production, y compris dans les futurs projets, sans affecter le développement. Quelle action faut-il effectuer ?",
+  "choices": [
+    "Créer une règle de pare-feu refusant Internet dans chaque projet de production",
+    "Appliquer au dossier « Production » la contrainte d'organisation qui interdit les adresses IP externes",
+    "Retirer le rôle Compute Admin aux propriétaires des projets de production",
+    "Créer un budget commun pour les projets du dossier « Production »"
+  ]
+}

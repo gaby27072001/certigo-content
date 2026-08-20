@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.loosely-coupled-order-processing-reliability.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un nouveau pipeline de traitement de commandes enchaine aujourd'hui le service de commande, le service de stock et le service d'expedition par des appels REST synchrones, ce qui provoque des pannes en cascade lorsque le service d'expedition ralentit, et un pic de commandes peut saturer les services en aval sans aucun tampon, au risque de perdre des commandes sous forte charge. La conception doit eliminer les pannes en cascade et le couplage fort, garantir qu'aucune commande n'est perdue meme si un service en aval est degrade, isoler automatiquement les messages en echec repete pour investigation, et conserver une haute disponibilite multi-AZ.",
+  "choices": [
+    "Ajouter davantage d'instances Amazon EC2 au service d'expedition derriere son Application Load Balancer, et augmenter le delai d'expiration de l'appel REST synchrone afin que les requetes disposent de plus de temps pour aboutir avant d'echouer, et laisser le service de commande attendre la reponse complete du service d'expedition avant de considerer la requete terminee.",
+    "Decoupler le service de commande des services de stock et d'expedition via des files Amazon SQS standard consommees au rythme propre a chaque service, isoler en file de lettres mortes les echecs repetes, et faire tourner chaque consommateur en Auto Scaling multi-AZ.",
+    "Remplacer les appels synchrones par des invocations AWS Lambda-a-Lambda synchrones directes entre les trois services concernes, exposees derriere Amazon API Gateway, afin de reduire la surcharge reseau percue par le client final lors des pics, en observant les invocations via Amazon CloudWatch et AWS X-Ray, et en isolant chaque service derriere sa propre Amazon API Gateway pour le trafic entrant.",
+    "Introduire une file Amazon SQS FIFO unique partagee par les trois services, chaque message devant porter sa propre logique de routage dans son contenu, et configurer un delai de visibilite de 0 seconde pour un retraitement immediat par n'importe quel service disponible."
+  ]
+}

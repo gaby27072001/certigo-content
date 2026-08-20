@@ -1,0 +1,13 @@
+{
+  "id": "aws.saa-c03.domain-4.frais-inter-zones-et-point-unique-defaillance.020",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:saa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Déployer une passerelle NAT par zone de disponibilité et router chaque sous-réseau privé vers celle de sa propre zone, puis ajouter des points de terminaison de passerelle VPC pour Amazon S3 et Amazon DynamoDB afin que ce trafic n'emprunte plus la passerelle NAT.",
+  "rationale": "Deux coûts distincts se cumulent ici, et la solution doit traiter les deux. Le premier est le transfert entre zones : avec une seule passerelle NAT, tout le trafic sortant des deux autres zones traverse une frontière de zone avant même de sortir, et ce trajet est facturé. Déployer une passerelle NAT dans chaque zone et faire pointer la table de routage de chaque sous-réseau privé vers la passerelle locale supprime ce trajet, tout en éliminant le point unique de défaillance, puisque la perte d'une zone n'emporte plus la sortie des deux autres. Le second est le traitement par la passerelle NAT, facturé au gigaoctet : comme l'essentiel du trafic vise Amazon S3 et Amazon DynamoDB dans la même Région, les points de terminaison de passerelle VPC permettent de router ce trafic directement vers ces services par une entrée de table de routage, sans frais de point de terminaison ni passage par la passerelle NAT. Remplacer la passerelle NAT par une instance NAT abaisse le tarif horaire mais transfère l'exploitation, la mise à l'échelle et la disponibilité à l'équipe, laisse le point unique de défaillance en place et ne change rien au transfert entre zones. Donner des adresses IP publiques aux instances privées supprime la segmentation réseau que l'architecture cherche à maintenir, expose les instances à des connexions entrantes et introduit un coût d'adresse IPv4 publique par instance. AWS Direct Connect sert à raccorder un site externe à AWS : il n'a aucun effet sur un trafic déjà interne à la Région, qui n'emprunte pas la liaison."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.dva-c02.domain-2.journaux-contenant-donnees-clients.011",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dva-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un audit révèle que le service de paiement journalise la charge utile complète de chaque requête, ce qui inclut le numéro de carte, l'adresse électronique et le numéro de téléphone du client. Le développeur doit corriger le comportement de l'application tout en conservant des journaux utiles au dépannage. Quelle mesure doit-il mettre en œuvre en priorité ?",
+  "choices": [
+    "Chiffrer le groupe de journaux Amazon CloudWatch Logs avec une clé KMS, ce qui dispense de toute autre mesure sur le contenu journalisé.",
+    "Ramener la durée de rétention des journaux à un jour pour que les données personnelles disparaissent rapidement.",
+    "Exporter les journaux vers un compartiment Amazon S3 privé et analyser périodiquement leur contenu avec Amazon Macie afin de supprimer les enregistrements sensibles.",
+    "Mettre en place une journalisation structurée qui applique une liste d'autorisation de champs et masque les données sensibles avant l'écriture, en ne conservant que des valeurs tronquées ou hachées et un identifiant de corrélation."
+  ]
+}

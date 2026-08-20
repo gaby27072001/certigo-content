@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-4.roles-anywhere.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Des serveurs industriels hors AWS doivent appeler une API AWS avec des informations d'identification temporaires. Ils disposent déjà de certificats X.509 émis par une PKI privée et l'entreprise refuse les clés d'accès longues durées. Quelle solution utiliser ?",
+  "choices": [
+    "IAM Roles Anywhere avec un trust anchor, un profil et des rôles à privilèges minimaux",
+    "Un utilisateur IAM par serveur avec une clé sans expiration",
+    "Une URL S3 présignée valable dix ans pour toutes les API",
+    "Amazon Cognito user pools avec un mot de passe root partagé"
+  ]
+}

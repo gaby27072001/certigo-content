@@ -1,0 +1,18 @@
+{
+  "id": "aws.soa-c03.domain-2.suppression-accidentelle-lignes-rpo-court.009",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:soa-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une suppression accidentelle de lignes a été commise il y a vingt minutes sur une instance Amazon RDS for MySQL disposant des sauvegardes automatiques. L'objectif de point de reprise (RPO) tolère au maximum cinq minutes de perte de données. Quelle procédure de restauration respecte cette exigence ?",
+  "choices": [
+    "Restaurer le dernier instantané automatique quotidien puis rejouer manuellement les transactions de la journée.",
+    "Lancer une restauration à un instant donné vers une nouvelle instance, en choisissant un horodatage situé juste avant la suppression, puis rebasculer l'application vers cette instance.",
+    "Promouvoir la réplique en lecture existante, qui conserve un état antérieur des données.",
+    "Activer la protection contre la suppression sur l'instance afin de récupérer les lignes effacées."
+  ]
+}

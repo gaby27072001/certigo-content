@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c01.domain-2.transcription-et-analyse-appels-sans-corpus.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un centre de support doit transcrire des enregistrements d'appels en français, puis en extraire les entités citées et la tonalité du client. L'équipe ne dispose d'aucun corpus annoté, compte deux ingénieurs et doit livrer en quelques semaines. Quelle approche de modélisation doit-elle privilégier ?",
+  "choices": [
+    "Entraîner un modèle acoustique de reconnaissance vocale à partir de zéro sur Amazon SageMaker avec des instances GPU.",
+    "Étiqueter manuellement plusieurs milliers d'appels puis entraîner un algorithme intégré SageMaker de classification de texte pour couvrir l'ensemble du besoin.",
+    "Enchaîner Amazon Transcribe pour convertir l'audio en texte, puis Amazon Comprehend pour l'extraction d'entités et l'analyse de sentiment, sans entraîner de modèle personnalisé.",
+    "Affiner un modèle de fondation dans Amazon Bedrock à partir des enregistrements audio bruts, sans étape de transcription."
+  ]
+}

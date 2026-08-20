@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-2.transit-vif-dxgw.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Créer un transit VIF vers un Direct Connect gateway associé au Transit Gateway, puis échanger les routes par BGP",
+  "rationale": "Le transit VIF relie Direct Connect à un Direct Connect gateway qui s'associe au Transit Gateway, donnant accès aux réseaux rattachés selon les routes autorisées. Un private VIF cible une virtual private gateway et ne fournit pas ce modèle de transit multi-VPC. Un public VIF ne doit pas annoncer les préfixes privés des VPC."
+}

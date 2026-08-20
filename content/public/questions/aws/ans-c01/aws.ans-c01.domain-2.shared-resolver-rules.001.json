@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-2.shared-resolver-rules.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une équipe réseau centrale doit implémenter la résolution de domaines sur site pour 60 VPC de comptes membres, sans déployer un outbound Resolver endpoint par VPC. Quelle mise en œuvre est correcte ?",
+  "choices": [
+    "Déployer des Route 53 Resolver outbound endpoints dans un VPC réseau, créer des forwarding rules et partager les règles avec les comptes via AWS RAM",
+    "Partager directement les adresses link-local du résolveur VPC entre Régions",
+    "Créer une private hosted zone du même nom dans chaque VPC sans enregistrement",
+    "Utiliser un NAT Gateway comme serveur DNS faisant autorité"
+  ]
+}

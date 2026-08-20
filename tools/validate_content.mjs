@@ -15,14 +15,27 @@ import {
   isCertificationActiveOn,
 } from "./lib/catalog.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
+import {
+  CONTENT_MODE,
+  detectContentMode,
+  expectedSourcePath,
+  resourceTypeFromSourcePath,
+} from "./lib/resources.mjs";
 
 const QUESTION_SCHEMA = "schemas/question.schema.json";
 const SOLUTION_SCHEMA = "schemas/solution.schema.json";
+const RUNTIME_SCHEMA = "schemas/runtime-resource.schema.json";
 const QUESTION_GLOB = "content/public/questions/**/*.json";
 const SOLUTION_GLOB = "content/answerKey/solutions/**/*.json";
 const PUBLIC_JSON_GLOB = "content/public/**/*.json";
 const COVERAGE_GLOB = "content/public/coverage/**/*.json";
-const FORBIDDEN_PUBLIC_KEYS = ["correct", "rationale"];
+const RUNTIME_GLOB = "content/public/runtime/**/*.json";
+const FORBIDDEN_PUBLIC_KEYS = [
+  "correct",
+  "correctOptionIds",
+  "explanation",
+  "rationale",
+];
 const OFFICIAL_SOURCE_HOSTS = {
   aws: ["aws.amazon.com", "d1.awsstatic.com", "docs.aws.amazon.com"],
   gcp: ["cloud.google.com", "services.google.com", "support.google.com"],
@@ -67,11 +80,16 @@ function toPosix(path) {
 }
 
 function sameMetadata(left, right) {
-  return (
+  const common =
     left?.provider === right?.provider &&
     left?.certification === right?.certification &&
     left?.blueprintVersion === right?.blueprintVersion &&
-    left?.objective === right?.objective
+    left?.objective === right?.objective;
+  if (!common) return false;
+  if (left?.domainId === undefined && right?.domainId === undefined) return true;
+  return (
+    left?.domainId === right?.domainId &&
+    left?.conceptId === right?.conceptId
   );
 }
 
@@ -195,6 +213,25 @@ function validateCatalogSemantics(catalog, err) {
         `[catalog:lifecycle] ${certification.id}: statut ${certification.status} incompatible avec la date du snapshot ${catalog.asOf}`
       );
     }
+    if (certification.status === "active-retiring") {
+      const { lastExamOn, recommendThrough, reviewOn } = certification.lifecycle ?? {};
+      if (!lastExamOn || !reviewOn) {
+        err(
+          `[catalog:lifecycle] ${certification.id}: lastExamOn et reviewOn sont requis pour active-retiring`
+        );
+      } else {
+        if (recommendThrough && recommendThrough > lastExamOn) {
+          err(
+            `[catalog:lifecycle] ${certification.id}: recommendThrough ne peut pas depasser lastExamOn`
+          );
+        }
+        if (reviewOn <= lastExamOn) {
+          err(
+            `[catalog:lifecycle] ${certification.id}: reviewOn doit etre posterieur a lastExamOn`
+          );
+        }
+      }
+    }
 
     checkOfficialUrl(certification.officialUrl, provider, `${certification.id}.officialUrl`, err);
     checkOfficialUrl(certification.guide.url, provider, `${certification.id}.guide.url`, err);
@@ -244,7 +281,7 @@ function validateCatalogSemantics(catalog, err) {
 }
 
 function validateMetadata({ data, file, channel, catalogIndex, err }) {
-  if (data?.schemaVersion !== "v3") {
+  if (!["v3", "v4"].includes(data?.schemaVersion)) {
     const legacyRoot =
       channel === "public"
         ? "content/public/questions/"
@@ -252,6 +289,19 @@ function validateMetadata({ data, file, channel, catalogIndex, err }) {
     const nested = toPosix(file).slice(legacyRoot.length).includes("/");
     if (nested) {
       err(`[namespace:path] ${file}: un payload v2 doit rester a plat`);
+    }
+    return;
+  }
+
+  if (data.schemaVersion === "v4" && channel === "answerKey") {
+    const expectedPath = expectedSourcePath({
+      artifact: "private",
+      mode: CONTENT_MODE.runtime,
+      resourceType: "solution",
+      data,
+    });
+    if (toPosix(file) !== expectedPath) {
+      err(`[namespace:path] ${file}: attendu ${expectedPath}`);
     }
     return;
   }
@@ -307,16 +357,45 @@ function validateMetadata({ data, file, channel, catalogIndex, err }) {
   }
 }
 
-export function correctMatchesChoice(choices, correct) {
+export function correctMatchesChoice(question, solution) {
+  if (question?.schemaVersion === "v4") {
+    const optionIds = new Set(
+      Array.isArray(question.options)
+        ? question.options
+            .map((option) => option?.id)
+            .filter((id) => typeof id === "string")
+        : []
+    );
+    const correctIds = solution?.correctOptionIds;
+    if (
+      !Array.isArray(correctIds) ||
+      correctIds.length === 0 ||
+      !correctIds.every((id) => optionIds.has(id))
+    ) {
+      return false;
+    }
+    if (["mcq", "scenario", "spotTheIssue"].includes(question.itemType)) {
+      return correctIds.length === 1;
+    }
+    return question.itemType === "multi";
+  }
   return (
-    Array.isArray(choices) &&
-    typeof correct === "string" &&
-    choices.some((choice) => typeof choice === "string" && choice === correct)
+    Array.isArray(question?.choices) &&
+    typeof solution?.correct === "string" &&
+    question.choices.some(
+      (choice) => typeof choice === "string" && choice === solution.correct
+    )
   );
 }
 
 export function answerLengthMetrics(choices, correct) {
-  if (!correctMatchesChoice(choices, correct)) return null;
+  if (
+    !Array.isArray(choices) ||
+    typeof correct !== "string" ||
+    !choices.some((choice) => typeof choice === "string" && choice === correct)
+  ) {
+    return null;
+  }
   const lengths = choices.map((choice) => choice.length);
   const correctLength = correct.length;
   const distractorLengths = choices
@@ -333,6 +412,193 @@ export function answerLengthMetrics(choices, correct) {
   };
 }
 
+function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
+    const tracks = runtimeByType.get("track");
+    const domains = runtimeByType.get("domain");
+    const units = runtimeByType.get("unit");
+    const lessons = runtimeByType.get("lesson");
+    const concepts = runtimeByType.get("concept");
+    const trackByCertification = new Map();
+    const referencedDomains = new Set();
+    const referencedUnits = new Set();
+    const referencedLessons = new Set();
+    const referencedConcepts = new Set();
+    const referencedQuestions = new Set();
+
+    for (const { data: track, file } of tracks.values()) {
+      if (trackByCertification.has(track.certificationId)) {
+        err(
+          `[runtime:track] ${file}: plusieurs tracks pour ${track.certificationId}`
+        );
+      } else {
+        trackByCertification.set(track.certificationId, track);
+      }
+      const mappedObjectives = new Set();
+      for (const domainId of track.domainIds ?? []) {
+        const domain = domains.get(domainId)?.data;
+        if (!domain) {
+          err(`[runtime:reference] ${file}: domain absent "${domainId}"`);
+          continue;
+        }
+        referencedDomains.add(domainId);
+        if (
+          domain.certificationId !== track.certificationId ||
+          domain.blueprintVersion !== track.blueprintVersion
+        ) {
+          err(`[runtime:context] ${file}: domain hors contexte "${domainId}"`);
+        }
+        if (mappedObjectives.has(domain.objectiveId)) {
+          err(
+            `[runtime:domain] ${file}: objectif mappe plusieurs fois "${domain.objectiveId}"`
+          );
+        }
+        mappedObjectives.add(domain.objectiveId);
+      }
+      for (const unitId of track.unitIds ?? []) {
+        const unit = units.get(unitId)?.data;
+        if (!unit) {
+          err(`[runtime:reference] ${file}: unit absente "${unitId}"`);
+          continue;
+        }
+        referencedUnits.add(unitId);
+        if (
+          unit.certificationId !== track.certificationId ||
+          unit.blueprintVersion !== track.blueprintVersion ||
+          !track.domainIds.includes(unit.domainId)
+        ) {
+          err(`[runtime:context] ${file}: unit hors contexte "${unitId}"`);
+        }
+      }
+    }
+
+    for (const { data: domain, file } of domains.values()) {
+      const certification = catalogIndex?.certifications.get(domain.certificationId);
+      const objective = certification?.blueprint.objectives.find(
+        (item) => item.id === domain.objectiveId
+      );
+      if (!objective) {
+        err(
+          `[runtime:objective] ${file}: objectif catalogue inconnu "${domain.objectiveId}"`
+        );
+      }
+      if (!referencedDomains.has(domain.id)) {
+        err(`[runtime:orphan] ${file}: domain non reference par un track`);
+      }
+    }
+
+    for (const { data: unit, file } of units.values()) {
+      if (!referencedUnits.has(unit.id)) {
+        err(`[runtime:orphan] ${file}: unit non referencee par un track`);
+      }
+      const domain = domains.get(unit.domainId)?.data;
+      if (!domain) {
+        err(`[runtime:reference] ${file}: domain absent "${unit.domainId}"`);
+      } else if (domain.certificationId !== unit.certificationId) {
+        err(`[runtime:context] ${file}: domain hors certification`);
+      }
+      for (const lessonId of unit.lessonIds ?? []) {
+        const lesson = lessons.get(lessonId)?.data;
+        if (!lesson) {
+          err(`[runtime:reference] ${file}: lesson absente "${lessonId}"`);
+          continue;
+        }
+        referencedLessons.add(lessonId);
+        if (
+          lesson.unitId !== unit.id ||
+          lesson.certificationId !== unit.certificationId ||
+          lesson.blueprintVersion !== unit.blueprintVersion
+        ) {
+          err(`[runtime:context] ${file}: lesson hors contexte "${lessonId}"`);
+        }
+      }
+    }
+
+    for (const { data: lesson, file } of lessons.values()) {
+      if (!referencedLessons.has(lesson.id)) {
+        err(`[runtime:orphan] ${file}: lesson non referencee par une unit`);
+      }
+      const unit = units.get(lesson.unitId)?.data;
+      const domain = unit ? domains.get(unit.domainId)?.data : null;
+      (lesson.blocks ?? []).forEach((block, index) => {
+        const expectedBlockId = `${lesson.id}.block.${String(index + 1).padStart(3, "0")}`;
+        if (block.id !== expectedBlockId) {
+          err(`[runtime:block-order] ${file}: attendu "${expectedBlockId}"`);
+        }
+        const concept = concepts.get(block.conceptId)?.data;
+        if (!concept) {
+          err(`[runtime:reference] ${file}: concept absent "${block.conceptId}"`);
+        } else {
+          referencedConcepts.add(block.conceptId);
+          if (
+            concept.certificationId !== lesson.certificationId ||
+            (domain && concept.domainId !== domain.id)
+          ) {
+            err(`[runtime:context] ${file}: concept hors contexte "${block.conceptId}"`);
+          }
+        }
+        if (block.type !== "check") return;
+        const question = publicIds.get(block.questionId)?.data;
+        if (!question) {
+          err(`[runtime:reference] ${file}: question absente "${block.questionId}"`);
+          return;
+        }
+        referencedQuestions.add(block.questionId);
+        if (
+          question.schemaVersion !== "v4" ||
+          question.metadata?.certification !== lesson.certificationId ||
+          question.metadata?.domainId !== domain?.id ||
+          question.metadata?.conceptId !== block.conceptId
+        ) {
+          err(`[runtime:context] ${file}: question hors contexte "${block.questionId}"`);
+        }
+      });
+    }
+
+    for (const { data: concept, file } of concepts.values()) {
+      const domain = domains.get(concept.domainId)?.data;
+      if (!domain) {
+        err(`[runtime:reference] ${file}: domain absent "${concept.domainId}"`);
+      } else if (
+        domain.certificationId !== concept.certificationId ||
+        domain.blueprintVersion !== concept.blueprintVersion
+      ) {
+        err(`[runtime:context] ${file}: domain hors contexte`);
+      }
+      if (!referencedConcepts.has(concept.id)) {
+        const usedByQuestion = [...publicIds.values()].some(
+          ({ data }) =>
+            data.schemaVersion === "v4" && data.metadata?.conceptId === concept.id
+        );
+        if (!usedByQuestion) {
+          err(`[runtime:orphan] ${file}: concept sans bloc ni question`);
+        }
+      }
+    }
+
+    for (const [questionId, { data: question, file }] of publicIds) {
+      if (question.schemaVersion !== "v4") continue;
+      const domain = domains.get(question.metadata?.domainId)?.data;
+      const concept = concepts.get(question.metadata?.conceptId)?.data;
+      if (!domain || !concept) {
+        err(`[runtime:reference] ${file}: domain ou concept runtime absent`);
+        continue;
+      }
+      if (
+        domain.certificationId !== question.metadata.certification ||
+        domain.objectiveId !== question.metadata.objective ||
+        concept.domainId !== domain.id
+      ) {
+        err(`[runtime:context] ${file}: liens domain/concept/objective divergents`);
+      }
+      const track = trackByCertification.get(question.metadata.certification);
+      if (!track) {
+        err(`[runtime:reference] ${file}: track absent`);
+      } else if (track.mode === "guided" && !referencedQuestions.has(questionId)) {
+        err(`[runtime:orphan] ${file}: question guidee absente des lessons`);
+      }
+    }
+}
+
 export async function validateContent(options = {}) {
   const root = resolve(options.root ?? cwd());
   const errors = [];
@@ -342,6 +608,8 @@ export async function validateContent(options = {}) {
   const validateSolution = compileSchema(root, SOLUTION_SCHEMA);
   const validateCatalog = compileSchema(root, CATALOG_SCHEMA_PATH);
   const validateCoverage = compileSchema(root, COVERAGE_SCHEMA_PATH);
+  const validateRuntime = compileSchema(root, RUNTIME_SCHEMA);
+  const contentMode = detectContentMode(root);
 
   const questionFiles = (await glob(QUESTION_GLOB, { cwd: root, posix: true })).sort(
     compareOrdinal
@@ -354,6 +622,9 @@ export async function validateContent(options = {}) {
     posix: true,
   })).sort(compareOrdinal);
   const coverageFiles = (await glob(COVERAGE_GLOB, { cwd: root, posix: true })).sort(
+    compareOrdinal
+  );
+  const runtimeFiles = (await glob(RUNTIME_GLOB, { cwd: root, posix: true })).sort(
     compareOrdinal
   );
 
@@ -393,6 +664,7 @@ export async function validateContent(options = {}) {
   const publicIds = new Map();
   const answerIds = new Map();
   const answerLengthsByCertification = new Map();
+  const publicLegacyIds = new Map();
 
   for (const file of questionFiles) {
     let data;
@@ -405,6 +677,14 @@ export async function validateContent(options = {}) {
     if (!validateQuestion(data)) {
       formatSchemaErrors("question", file, validateQuestion, err);
     }
+    if (data?.schemaVersion === "v4" && Array.isArray(data.options)) {
+      const optionIds = data.options
+        .map((option) => option?.id)
+        .filter((id) => typeof id === "string");
+      if (new Set(optionIds).size !== optionIds.length) {
+        err(`[integrity:option-id] ${file}: ids d'option dupliques`);
+      }
+    }
     if (typeof data?.id === "string") {
       if (basename(file, ".json") !== data.id) {
         err(`[integrity:path-id] ${file}: nom de fichier different de id "${data.id}"`);
@@ -416,7 +696,23 @@ export async function validateContent(options = {}) {
       } else {
         publicIds.set(data.id, { file, data });
       }
+      if (data.schemaVersion === "v4" && typeof data.legacyId === "string") {
+        if (publicLegacyIds.has(data.legacyId)) {
+          err(
+            `[integrity:legacy-id] ${file}: alias question duplique "${data.legacyId}"`
+          );
+        } else {
+          publicLegacyIds.set(data.legacyId, file);
+        }
+      }
       validateMetadata({ data, file, channel: "public", catalogIndex, err });
+    }
+  }
+  for (const [legacyId, file] of publicLegacyIds) {
+    if (publicIds.has(legacyId)) {
+      err(
+        `[integrity:legacy-id] ${file}: alias "${legacyId}" collisionne avec un id canonique`
+      );
     }
   }
 
@@ -447,17 +743,111 @@ export async function validateContent(options = {}) {
     }
   }
 
+  const runtimeByType = new Map(
+    ["track", "domain", "unit", "lesson", "concept"].map((type) => [
+      type,
+      new Map(),
+    ])
+  );
+  const runtimeLegacyIds = new Map();
+  for (const file of runtimeFiles) {
+    let data;
+    try {
+      ({ data } = loadRegularJson(root, file));
+    } catch (error) {
+      err(`[schema:runtime] ${file}: JSON invalide (${error.message})`);
+      continue;
+    }
+    if (!validateRuntime(data)) {
+      formatSchemaErrors("runtime", file, validateRuntime, err);
+    }
+    const pathResourceType = resourceTypeFromSourcePath(file);
+    const resourceType = data?.resourceType;
+    if (
+      typeof resourceType !== "string" ||
+      !runtimeByType.has(resourceType)
+    ) {
+      err(`[runtime:type] ${file}: resourceType runtime inconnu`);
+      continue;
+    }
+    if (pathResourceType !== resourceType) {
+      err(
+        `[runtime:type] ${file}: dossier ${pathResourceType ?? "inconnu"} divergent de ${resourceType}`
+      );
+    }
+    if (typeof data.id !== "string") continue;
+    if (basename(file, ".json") !== data.id) {
+      err(`[integrity:path-id] ${file}: nom de fichier different de id "${data.id}"`);
+    }
+    const expectedPath = expectedSourcePath({
+      artifact: "public",
+      mode: CONTENT_MODE.runtime,
+      resourceType,
+      data,
+    });
+    if (toPosix(file) !== expectedPath) {
+      err(`[runtime:path] ${file}: attendu ${expectedPath}`);
+    }
+    const resources = runtimeByType.get(resourceType);
+    if (resources.has(data.id)) {
+      err(`[runtime:integrity] id ${resourceType} duplique "${data.id}"`);
+    } else {
+      resources.set(data.id, { file, data });
+    }
+    if (typeof data.legacyId === "string") {
+      if (runtimeLegacyIds.has(data.legacyId)) {
+        err(
+          `[runtime:legacy-id] ${file}: alias duplique "${data.legacyId}" avec ${runtimeLegacyIds.get(data.legacyId)}`
+        );
+      } else {
+        runtimeLegacyIds.set(data.legacyId, file);
+      }
+    }
+    const certification = catalogIndex?.certifications.get(data.certificationId);
+    if (!certification) {
+      err(
+        `[runtime:certification] ${file}: certification inconnue "${data.certificationId}"`
+      );
+      continue;
+    }
+    if (data.blueprintVersion !== certification.blueprint.version) {
+      err(
+        `[runtime:blueprint] ${file}: version ${data.blueprintVersion}, attendu ${certification.blueprint.version}`
+      );
+    }
+    const expectedIdPrefix = `${certification.provider}.${certification.slug}.${resourceType}.`;
+    if (!data.id.startsWith(expectedIdPrefix)) {
+      err(`[runtime:id] ${file}: id doit commencer par "${expectedIdPrefix}"`);
+    }
+    if (
+      ["retired", "replaced"].includes(certification.status) &&
+      !["retired", "replaced"].includes(data.lifecycle?.status)
+    ) {
+      err(`[runtime:lifecycle] ${file}: ressource active sous certification retiree`);
+    }
+  }
+
+  if (
+    contentMode !== CONTENT_MODE.runtime &&
+    [...publicIds.values()].some(({ data }) => data.schemaVersion === "v4")
+  ) {
+    err("[runtime:missing] une question v4 exige un graphe runtime canonique");
+  }
+
   for (const [id, question] of publicIds) {
     if (!answerIds.has(id)) {
       err(`[integrity] question publique "${id}" (${question.file}) SANS solution answerKey`);
       continue;
     }
     const solution = answerIds.get(id);
-    if (!correctMatchesChoice(question.data.choices, solution.data.correct)) {
+    if (!correctMatchesChoice(question.data, solution.data)) {
       err(
-        `[integrity:correct-choice] solution "${id}" (${solution.file}): correct doit correspondre exactement a une valeur de choices dans ${question.file} (egalite stricte, sans conversion de casse, trim ni normalisation Unicode)`
+        `[integrity:correct-choice] solution "${id}" (${solution.file}): la reponse doit correspondre exactement aux options publiques dans ${question.file} (egalite stricte, sans conversion de casse, trim ni normalisation Unicode)`
       );
-    } else if (question.data.schemaVersion === "v3") {
+    } else if (
+      question.data.schemaVersion === "v3" &&
+      Array.isArray(solution.data.provenance)
+    ) {
       const certification = question.data.metadata?.certification;
       const metrics = answerLengthMetrics(
         question.data.choices,
@@ -496,6 +886,10 @@ export async function validateContent(options = {}) {
     if (!publicIds.has(id)) {
       err(`[integrity] solution answerKey "${id}" (${solution.file}) SANS question publique`);
     }
+  }
+
+  if (runtimeFiles.length > 0) {
+    validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err });
   }
 
   const coverageByCertification = new Map();
@@ -638,7 +1032,7 @@ export async function validateContent(options = {}) {
       }
     }
     for (const [id, question] of publicIds) {
-      if (question.data.schemaVersion !== "v3") continue;
+      if (!["v3", "v4"].includes(question.data.schemaVersion)) continue;
       if (
         question.data.metadata === null ||
         Array.isArray(question.data.metadata) ||
@@ -665,6 +1059,7 @@ export async function validateContent(options = {}) {
     pairCount: [...publicIds.keys()].filter((id) => answerIds.has(id)).length,
     certificationCount: catalog?.certifications?.length ?? 0,
     coverageCount: coverageFiles.length,
+    runtimeResourceCount: runtimeFiles.length,
   };
 }
 
@@ -674,6 +1069,7 @@ export function printValidationResult(result) {
   console.log(`  solutions answerKey : ${result.solutionCount}`);
   console.log(`  certifications      : ${result.certificationCount}`);
   console.log(`  matrices couverture : ${result.coverageCount}`);
+  console.log(`  ressources runtime  : ${result.runtimeResourceCount}`);
 
   if (result.errors.length > 0) {
     console.error(`\n${result.errors.length} violation(s) detectee(s) :`);

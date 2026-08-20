@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-3.latency-bottleneck-global-accelerator-rightsizing.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Un backend de jeu en ligne existant utilise un Network Load Balancer regional pour des connexions TCP de joueurs du monde entier ; les utilisateurs eloignes de la Region d'origine signalent une latence elevee et inconstante ainsi que des delais d'attente occasionnels lors des pics, tandis que certaines instances EC2 derriere le NLB affichent une utilisation CPU constamment inferieure a 15 pour cent en permanence. L'equipe doit ameliorer la performance de maniere mesurable par rapport a un accord de niveau de service exigeant une latence de session de jeu inferieure a 100 millisecondes dans le monde entier, en utilisant des services geres AWS plutot qu'en construisant une infrastructure de peripherie personnalisee, tout en reduisant le gaspillage lie au surdimensionnement des instances.",
+  "choices": [
+    "Augmenter le nombre d'instances Amazon EC2 enregistrees derriere le Network Load Balancer dans la meme Region unique pour gerer davantage de connexions, sans rien changer a la maniere dont les joueurs eloignes atteignent cette Region depuis l'autre cote du monde, en repartissant les instances Amazon EC2 derriere un second Network Load Balancer regional, avec Amazon CloudWatch pour surveiller la charge des cibles.",
+    "Remplacer le NLB par Amazon CloudFront devant le backend de jeu afin de mettre en cache les reponses de session de jeu en peripherie du reseau et reduire ainsi la latence percue par les joueurs les plus eloignes, ce qui ne fonctionne pas pour des connexions TCP a etat long typiques des sessions de jeu en ligne interactives.",
+    "Deplacer l'integralite du backend Amazon EC2 vers une seule nouvelle Region physiquement plus proche de la plus grande concentration de joueurs, en arretant le service dans la Region d'origine, et augmenter la taille de chaque instance derriere le Network Load Balancer, avec l'ensemble des joueurs desormais servis depuis cette unique nouvelle Region.",
+    "Placer AWS Global Accelerator devant le Network Load Balancer pour acheminer le trafic via le reseau dorsal mondial vers le point de terminaison sain le plus proche, et redimensionner les instances EC2 sous-utilisees avec AWS Compute Optimizer, tout en conservant le meme Network Load Balancer existant comme point de terminaison enregistre derriere Global Accelerator."
+  ]
+}

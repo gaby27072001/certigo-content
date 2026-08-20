@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/content-release.schema.json",
+  "title": "Certigo immutable content release",
+  "description": "Binds one verified public manifest and one verified private manifest without introducing a hash cycle.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "algorithm",
+    "canonicalization",
+    "publicManifestId",
+    "privateManifestId",
+    "releaseId"
+  ],
+  "properties": {
+    "schema": {
+      "const": "certigo.content.release/v1"
+    },
+    "algorithm": {
+      "const": "sha256"
+    },
+    "canonicalization": {
+      "const": "json-sorted-keys-compact-utf8"
+    },
+    "publicManifestId": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "privateManifestId": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "releaseId": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

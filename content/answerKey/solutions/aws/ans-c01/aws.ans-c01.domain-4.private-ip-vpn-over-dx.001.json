@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-4.private-ip-vpn-over-dx.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Configurer une AWS Site-to-Site VPN à adresses IP privées au-dessus du transit VIF Direct Connect et du Transit Gateway",
+  "rationale": "Une private IP VPN over Direct Connect ajoute IPsec au chemin privé fourni par le transit VIF, Direct Connect gateway et Transit Gateway. Direct Connect seul fournit une liaison dédiée mais pas un chiffrement IPsec automatique. Un public VIF n'est pas destiné à publier les préfixes privés."
+}

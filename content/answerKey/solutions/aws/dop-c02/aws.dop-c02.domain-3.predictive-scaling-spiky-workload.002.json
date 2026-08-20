@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-3.predictive-scaling-spiky-workload.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Combiner une politique de scaling predictif calee sur l'historique des pics quotidiens avec une politique de suivi de cible qui absorbe les variations de charge imprevues.",
+  "rationale": "Le scaling predictif apprend le profil de trafic quotidien recurrent et pre-provisionne la capacite avant le pic connu, eliminant le delai de demarrage des instances au moment critique, tandis que la politique de suivi de cible continue de reagir aux variations imprevues ; cette combinaison est la seule a couvrir a la fois les pics previsibles et les pics inconnus sans surprovisionnement permanent. Maintenir en permanence la capacite du pic maximal historique elimine effectivement le delai de scaling, mais au prix d'un gaspillage de cout considerable le reste du temps, ce qui viole la contrainte de ne pas surprovisionner en permanence. Le step scaling purement reactif souffre du meme delai de demarrage d'instance que la politique actuelle pour les pics connus, puisqu'il attend le franchissement d'un seuil d'alarme avant d'agir, sans anticipation. Le scaling programme a heures fixes traite bien le pic quotidien du dejeuner, mais ne dispose d'aucun mecanisme reactif pour les pics marketing imprevus, laissant l'application vulnerable exactement au type d'evenement que l'equipe cherche aussi a couvrir. Sources officielles AWS : https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+}

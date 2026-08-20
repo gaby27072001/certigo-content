@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.overlapping-private-service.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Publier l'API derrière un NLB comme endpoint service AWS PrivateLink et créer des interface endpoints chez les consommateurs",
+  "rationale": "PrivateLink expose un service précis au moyen d'interfaces dans les VPC consommateurs sans établir de routage réseau transitif. Le modèle fonctionne avec des CIDR consommateurs qui se chevauchent, car les consommateurs se connectent à leurs endpoints locaux. Peering et Transit Gateway exigent des espaces adressables compatibles pour le routage de bout en bout."
+}

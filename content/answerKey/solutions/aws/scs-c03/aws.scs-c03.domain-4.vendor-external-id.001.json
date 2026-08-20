@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-4.vendor-external-id.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Faire confiance au compte AWS précis du fournisseur et exiger dans la politique de confiance un ExternalId unique fourni pour ce client",
+  "rationale": "La confiance limite qui peut appeler AssumeRole, et l'ExternalId unique prouve que le fournisseur agit pour le bon client dans un modèle mutualisé. Un nom de rôle ou une adresse IP ne protège pas l'appel STS contre le confused deputy. Des identifiants root ne doivent jamais être distribués."
+}

@@ -1,28 +1,16 @@
 name: ci-content-package
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      upload_github_artifacts:
+        description: Upload temporary GitHub artifacts (requires available quota)
+        required: false
+        type: boolean
+        default: false
   push:
     branches: [main]
-    paths:
-      - "content/**"
-      - "schemas/**"
-      - "tools/**"
-      - "test/**"
-      - "package.json"
-      - "package-lock.json"
-      - ".nvmrc"
-      - ".github/**"
-  pull_request:
-    paths:
-      - "content/**"
-      - "schemas/**"
-      - "tools/**"
-      - "test/**"
-      - "package.json"
-      - "package-lock.json"
-      - ".nvmrc"
-      - ".github/**"
+  pull_request: {}
 
 concurrency:
   group: ci-content-package-${{ github.ref }}
@@ -90,13 +78,13 @@ jobs:
 
       - name: Resolve public artifact identity
         id: identity
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload_github_artifacts == true }}
         shell: bash
         run: |
           node -e "const fs=require('fs');const m=require('./dist/public/manifest.json');fs.appendFileSync(process.env.GITHUB_OUTPUT,'artifact_name=certigo-content-public-'+m.manifestId.replace(':','-')+'\n');"
 
       - name: Publish public artifact
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload_github_artifacts == true }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: ${{ steps.identity.outputs.artifact_name }}
@@ -133,13 +121,13 @@ jobs:
 
       - name: Resolve private artifact identity
         id: identity
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload_github_artifacts == true }}
         shell: bash
         run: |
           node -e "const fs=require('fs');const m=require('./dist/private/manifest.json');fs.appendFileSync(process.env.GITHUB_OUTPUT,'artifact_name=certigo-content-private-'+m.manifestId.replace(':','-')+'\n');"
 
       - name: Publish private artifact
-        if: ${{ github.event_name != 'pull_request' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload_github_artifacts == true }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: ${{ steps.identity.outputs.artifact_name }}

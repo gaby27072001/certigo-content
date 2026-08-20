@@ -1,0 +1,18 @@
+{
+  "id": "gcp.cloud-engineer.section-2.pare-feu-connectivite.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "gcp",
+    "certification": "gcp:cloud-engineer",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-2"
+  },
+  "prompt": "Des administrateurs doivent ouvrir des sessions SSH sur des VM sans adresse IP externe. L'accès doit passer par Identity-Aware Proxy et ne viser que les VM portant le tag réseau « admin-ssh ». Quelle configuration faut-il créer ?",
+  "choices": [
+    "Une règle d'entrée TCP 22 depuis 0.0.0.0/0 vers les VM portant le tag admin-ssh",
+    "Une règle d'entrée TCP 22 depuis la plage IAP TCP forwarding, ciblant le tag « admin-ssh »",
+    "Une règle de sortie TCP 22 vers la plage IAP, ciblant le tag admin-ssh",
+    "Une adresse IP externe statique et une règle d'entrée pour chaque VM"
+  ]
+}

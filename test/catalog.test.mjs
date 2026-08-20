@@ -18,6 +18,7 @@ import { checkCatalogFreshness } from "../tools/check_catalog_freshness.mjs";
 import { buildManifest, canonicalize } from "../tools/gen_manifest.mjs";
 import {
   isCertificationActiveOn,
+  isCertificationRecommendedOn,
   metadataFields,
   parseDate,
 } from "../tools/lib/catalog.mjs";
@@ -100,6 +101,22 @@ function catalogAt(root) {
   return resolve(root, "content", "public", "catalog", "certifications.json");
 }
 
+function resetCoverageForMetadataTests(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) {
+      resetCoverageForMetadataTests(path);
+    } else if (entry.name.endsWith(".json")) {
+      const matrix = readJson(path);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      if (matrix.status === "complete" || matrix.status === "in-progress") {
+        matrix.status = "planned";
+      }
+      writeJson(path, matrix);
+    }
+  }
+}
+
 function createMetadataRoot() {
   const root = mkdtempSync(join(tmpdir(), "certigo-catalog-"));
   temporaryRoots.push(root);
@@ -114,15 +131,7 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
-  for (const provider of readdirSync(resolve(root, "content", "public", "coverage"))) {
-    const providerRoot = resolve(root, "content", "public", "coverage", provider);
-    for (const file of readdirSync(providerRoot)) {
-      const path = resolve(providerRoot, file);
-      const matrix = readJson(path);
-      for (const objective of matrix.objectives) objective.questionIds = [];
-      writeJson(path, matrix);
-    }
-  }
+  resetCoverageForMetadataTests(resolve(root, "content", "public", "coverage"));
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;
@@ -191,6 +200,7 @@ function addV3Pair(root, overrides = {}) {
     "aif-c01.json"
   );
   const matrix = readJson(matrixPath);
+  matrix.status = "in-progress";
   matrix.objectives[0].questionIds = [id];
   writeJson(matrixPath, matrix);
   return id;
@@ -221,6 +231,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
     (certification) => certification.id === "aws:ans-c01"
   );
   assert.equal(ans.status, "active-retiring");
+  assert.equal(ans.lifecycle.recommendThrough, "2026-08-25");
   assert.equal(ans.lifecycle.lastExamOn, "2026-08-25");
   assert.equal(ans.lifecycle.reviewOn, "2026-08-26");
   assert.equal(
@@ -230,7 +241,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
 });
 
-test("valide le catalogue reel et la vague GCP Professional complete", async () => {
+test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
   assert.equal(result.certificationCount, 26);
@@ -238,6 +249,11 @@ test("valide le catalogue reel et la vague GCP Professional complete", async () 
 
   const catalog = readJson(catalogAt(repoRoot));
   const completedGcpProfessional = [];
+  const expectedSpecialtyDistribution = new Map([
+    ["aws:ans-c01", [7, 6, 5, 6]],
+    ["aws:scs-c03", [4, 4, 4, 5, 4, 3]],
+  ]);
+  const questionIds = [];
   for (const certification of catalog.certifications) {
     const matrix = readJson(
       resolve(
@@ -250,10 +266,20 @@ test("valide le catalogue reel et la vague GCP Professional complete", async () 
       )
     );
     assert.equal(matrix.certification, certification.id);
+    assert.ok(matrix.objectives.every((objective) => Array.isArray(objective.questionIds)));
+    questionIds.push(...matrix.objectives.flatMap((objective) => objective.questionIds));
     const questionCount = matrix.objectives.reduce(
       (total, objective) => total + objective.questionIds.length,
       0
     );
+    const expectedDistribution = expectedSpecialtyDistribution.get(certification.id);
+    if (expectedDistribution) {
+      assert.deepEqual(
+        matrix.objectives.map((objective) => objective.questionIds.length),
+        expectedDistribution
+      );
+      assert.equal(questionCount, 24);
+    }
     if (
       certification.provider === "gcp" &&
       certification.level === "professional"
@@ -264,8 +290,11 @@ test("valide le catalogue reel et la vague GCP Professional complete", async () 
       assert.ok(
         matrix.objectives.every((objective) => objective.questionIds.length > 0)
       );
-    } else if (matrix.status === "planned") {
+    } else if (!expectedDistribution && matrix.status === "planned") {
       assert.equal(questionCount, 0);
+    }
+    if (matrix.status === "complete") {
+      assert.ok(matrix.objectives.every((objective) => objective.questionIds.length > 0));
     }
     const sum = certification.blueprint.objectives.reduce(
       (total, objective) => total + objective.weightPercent,
@@ -275,6 +304,7 @@ test("valide le catalogue reel et la vague GCP Professional complete", async () 
     else assert.ok(sum >= 99 && sum <= 101);
   }
   assert.deepEqual(completedGcpProfessional, expectedGcpProfessional);
+  assert.equal(questionIds.length, new Set(questionIds).size);
 });
 
 test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif", () => {
@@ -285,14 +315,21 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
 
   assert.equal(isCertificationActiveOn(ans, "2026-08-25"), true);
   assert.equal(isCertificationActiveOn(ans, "2026-08-26"), false);
+  assert.equal(isCertificationRecommendedOn(ans, "2026-08-25"), true);
+  assert.equal(isCertificationRecommendedOn(ans, "2026-08-26"), false);
   assert.equal(
     isCertificationActiveOn({ ...ans, status: "retired" }, "2026-08-17"),
+    false
+  );
+  assert.equal(
+    isCertificationRecommendedOn({ ...ans, status: "retired" }, "2026-08-17"),
     false
   );
 
   const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-17" });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:ans-c01"));
+  assert.ok(current.recommendedCertificationIds.includes("aws:ans-c01"));
 
   const transition = checkCatalogFreshness({
     root: repoRoot,
@@ -300,6 +337,8 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
   });
   assert.ok(!transition.activeCertificationIds.includes("aws:ans-c01"));
   assert.ok(transition.excludedCertificationIds.includes("aws:ans-c01"));
+  assert.ok(!transition.recommendedCertificationIds.includes("aws:ans-c01"));
+  assert.ok(transition.nonRecommendedCertificationIds.includes("aws:ans-c01"));
   assert.ok(
     transition.errors.some((error) => error.includes("transition a reverifier"))
   );
@@ -648,6 +687,9 @@ test("rejette les ecarts semantiques du catalogue et les sources non officielles
     (certification) => certification.provider === "gcp"
   ).officialUrl = "https://example.com/fake-gcp";
   catalog.certifications[0].blueprint.objectives[0].weightPercent = 19;
+  catalog.certifications.find(
+    (certification) => certification.id === "aws:ans-c01"
+  ).lifecycle.recommendThrough = "2026-08-27";
   catalog.certifications.reverse();
   writeJson(catalogAt(root), catalog);
   rmSync(resolve(root, "content", "public", "coverage", "aws", "aif-c01.json"));
@@ -657,6 +699,13 @@ test("rejette les ecarts semantiques du catalogue et les sources non officielles
   assert.ok(result.errors.some((error) => error.includes("sourceHosts")));
   assert.ok(result.errors.some((error) => error.includes("hote non officiel")));
   assert.ok(result.errors.some((error) => error.includes("[catalog:weight]")));
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[catalog:lifecycle]") &&
+        error.includes("recommendThrough")
+    )
+  );
   assert.ok(result.errors.some((error) => error.includes("[coverage:missing]")));
 });
 

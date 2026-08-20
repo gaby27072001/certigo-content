@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-2.ipam-automation.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Chaque nouveau compte doit recevoir automatiquement un CIDR VPC non chevauchant depuis un pool régional, avec délégation à l'équipe réseau et déploiement par CloudFormation. Quelle solution réduit le plus le risque d'allocation concurrente ?",
+  "choices": [
+    "Amazon VPC IP Address Manager avec administrateur délégué, pools partagés via AWS RAM et allocations référencées par les modèles",
+    "Une feuille de calcul modifiée manuellement avant chaque déploiement",
+    "Le même CIDR `10.0.0.0/16` codé en dur dans tous les modèles",
+    "Un tirage aléatoire de CIDR dans une fonction sans état central"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-4.organization-access-analyzer.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Le responsable sécurité veut détecter les compartiments S3, clés KMS et rôles accessibles depuis l'extérieur de l'organisation, y compris lorsqu'une nouvelle politique de ressource est déployée dans un compte membre. Quelle configuration choisir ?",
+  "choices": [
+    "Créer un analyseur IAM Access Analyzer de type organisation dans le compte administrateur délégué et traiter ses conclusions",
+    "Exécuter IAM Policy Simulator uniquement dans le compte de management une fois par an",
+    "Activer Amazon Inspector sur les compartiments S3",
+    "Ajouter une règle entrante à tous les groupes de sécurité"
+  ]
+}
