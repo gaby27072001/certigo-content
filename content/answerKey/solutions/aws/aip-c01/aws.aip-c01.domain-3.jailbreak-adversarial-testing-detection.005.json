@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-3.jailbreak-adversarial-testing-detection.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Executer contre chaque version candidate une bibliotheque de schemas de jailbreak connus, deployer Amazon Bedrock Guardrails avec filtres d'injection et assainissement des entrees, et actualiser periodiquement schemas et configuration.",
+  "rationale": "La bibliotheque de schemas rejouee a chaque version candidate rend le test contradictoire automatise et reproductible : la meme campagne s'execute avant chaque mise en production et un regressif redevient visible immediatement. Guardrails ajoute la protection en execution, avec detection des tentatives de jailbreak et d'injection ainsi qu'assainissement des entrees, donc la requete suspecte est traitee avant d'atteindre le modele et pas seulement observee ensuite. Le rituel d'actualisation des schemas et de la configuration maintient les deux couches alignees sur les techniques nouvellement publiees. La session manuelle avant lancement depend de l'imagination d'une personne un jour donne : elle n'est ni rejouable ni comparable d'une version a l'autre, et ne protege rien une fois le service en ligne. La classification en temps reel seule protege bien le trafic, mais laisse chaque version partir sans campagne de test : une regression introduite par un changement de prompt systeme n'est decouverte qu'en production, sur des utilisateurs reels. La liste de mots-cles fixee au lancement se contourne par simple reformulation, encodage ou changement de langue, et son caractere fige la rend rapidement obsolete face aux techniques publiees apres sa redaction. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html"
+}

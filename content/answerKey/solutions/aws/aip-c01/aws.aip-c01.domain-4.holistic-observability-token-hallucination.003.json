@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-4.holistic-observability-token-hallucination.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Publier dans Amazon CloudWatch les metriques de tokens, d'efficacite des prompts et d'hallucination, activer la detection d'anomalies sur les tokens, journaliser les invocations Bedrock et construire des tableaux de bord dedies.",
+  "rationale": "Les metriques publiees dans CloudWatch donnent enfin des series temporelles propres au modele : consommation de tokens en entree et en sortie, rapport entre tokens de prompt et tokens utiles, taux de reponses signalees comme non fondees. La detection d'anomalies apprend le profil normal de consommation et signale une rafale au moment ou elle se produit, ce qui remplace la decouverte a la facture. Les journaux d'invocation de modele conservent le prompt et la reponse de chaque appel, materiau indispensable a l'analyse d'un incident precis, et les tableaux de bord permettent de servir deux publics : latence et volumes pour les ingenieurs, cout et qualite percue pour les parties prenantes. Le maintien de la seule supervision d'infrastructure reconduit l'angle mort constate : un service dont le CPU est calme peut consommer un budget entier en tokens. La revue mensuelle de la facture est structurellement retrospective, agrege les journees et ne permet aucune reaction pendant la rafale. La journalisation seule vers S3 interrogee par Athena fournit le detail forensique mais aucune tendance continue, aucune alerte automatique et aucune restitution lisible pour les parties prenantes. Sources officielles AWS : https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-1.immutable-artifact-lineage.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un audit de conformite exige que chaque artefact de build promu de l'environnement de developpement vers la production dans un pipeline AWS CodePipeline soit strictement identique a chaque etape, tracable de bout en bout, et protege contre toute modification apres sa creation, sans faire exploser les couts de stockage. L'equipe plateforme doit choisir une strategie de gestion des artefacts qui satisfasse ces exigences d'auditabilite et d'immuabilite tout en restant operationnellement simple.",
+  "choices": [
+    "Publier chaque artefact dans un compartiment S3 versionne et chiffre par AWS KMS, propager le triplet (compartiment, cle, versionId) d'une etape a l'autre, et journaliser les acces aux objets dans CloudTrail.",
+    "Reconstruire l'artefact a chaque etape du pipeline a partir du depot source, de sorte que developpement, preproduction et production compilent chacun leur propre binaire avant deploiement.",
+    "Stocker les artefacts dans un compartiment S3 sans versioning et ecraser l'objet existant a chaque execution du pipeline, en conservant un seul objet courant par application.",
+    "Utiliser un depot AWS CodeArtifact qui conserve la derniere version publiee de chaque package, les versions anterieures etant purgees automatiquement au bout de vingt-quatre heures."
+  ]
+}

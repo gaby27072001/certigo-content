@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-1.multi-account-landing-zone-centralized-governance.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Adopter AWS Control Tower avec Account Factory rattache a la structure Organizations existante, appliquer les controles obligatoires au niveau des unites d'organisation, et s'appuyer sur la journalisation et l'audit centralises integres de Control Tower.",
+  "rationale": "AWS Control Tower avec Account Factory automatise la creation de comptes standardises rattaches a la structure Organizations existante, applique les garde-fous preventifs au niveau des unites d'organisation de sorte qu'ils s'appliquent automatiquement a tout nouveau compte, et fournit nativement la journalisation et l'audit centralises requis, ce qui minimise la charge operationnelle a mesure que l'organisation grandit. Creer les comptes manuellement puis appliquer les politiques de controle de service compte par compte ne s'automatise pas, laisse un risque d'oubli a chaque creation, et ne beneficie d'aucun garde-fou herite automatiquement au niveau de l'unite d'organisation. Les permission boundaries IAM operent au niveau du role et non au niveau du compte ou de l'unite d'organisation, elles ne constituent donc pas un garde-fou preventif equivalent, et centraliser les journaux via des compartiments locaux par equipe demultiplie la charge operationnelle au lieu de la reduire. Un agregateur AWS Config est un mecanisme detectif et non preventif, il ne bloque aucune action non conforme avant qu'elle ne se produise, et cloner manuellement des comptes via des StackSets a la demande ne passe pas a l'echelle a mesure que le nombre de demandes augmente. Sources officielles AWS : https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html"
+}

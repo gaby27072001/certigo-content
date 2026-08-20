@@ -1,0 +1,18 @@
+{
+  "id": "aws.sap-c02.domain-2.privatelink-service-endpoints-patch-compliance.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une nouvelle architecture de microservices internes exige que les appels de service a service entre VPC et entre comptes ne transitent jamais par Internet public, que l'acces a Amazon S3 et Amazon DynamoDB depuis des sous-reseaux prives se fasse sans passerelle NAT ni son cout de traitement, et que la flotte EC2 non conteneurisee reste patchee selon une base de conformite definie sur une cadence recurrente avec rapport, sans jamais ouvrir de connexion SSH entrante depuis n'importe quelle adresse.",
+  "choices": [
+    "Exposer le microservice via AWS PrivateLink accessible depuis les VPC consommateurs via des interface endpoints, utiliser des gateway endpoints Amazon S3 et Amazon DynamoDB, inscrire la flotte EC2 dans AWS Systems Manager Patch Manager avec une fenetre de maintenance recurrente et un rapport de conformite, et utiliser Session Manager sans jamais ouvrir de port SSH entrant, tout en beneficiant du reseau prive d'AWS de bout en bout entre les comptes consommateurs concernes.",
+    "Etablir un peering direct entre les VPC consommateurs et le VPC du microservice avec des regles de groupe de securite largement ouvertes, faire transiter S3 et DynamoDB par une passerelle NAT dans chaque VPC, et patcher via un port SSH ouvert en entree, sans cadence recurrente ni rapport de conformite defini, en journalisant les flux avec Amazon VPC Flow Logs et Amazon CloudWatch, et en isolant chaque compte consommateur derriere son propre groupe de securite Amazon EC2, avec AWS Config et Amazon Inspector desactives, laissant la conformite de la flotte totalement invisible.",
+    "Publier le microservice sur un ALB public protege uniquement par une liste blanche d'adresses IP pour les bureaux partenaires, conserver les routes par defaut vers Internet pour l'acces S3 et DynamoDB, et s'appuyer sur le niveau de patch de l'AMI de base au lancement seulement, sans cadence de mise a jour ulterieure definie pour la duree du projet. Cette configuration couvre l'ensemble des comptes partenaires pour la duree du projet.",
+    "Utiliser AWS Direct Connect entre le VPC de chaque compte consommateur et le VPC du microservice pour eviter Internet, configurer une passerelle NAT pour S3 et DynamoDB, et patcher via un hote bastion SSH dont le groupe de securite autorise 0.0.0.0/0 en entree, avec une facturation Direct Connect et NAT Gateway calculee mensuellement pour l'ensemble des comptes consommateurs. Cette configuration relie chaque compte consommateur au VPC du microservice de maniere individuelle."
+  ]
+}

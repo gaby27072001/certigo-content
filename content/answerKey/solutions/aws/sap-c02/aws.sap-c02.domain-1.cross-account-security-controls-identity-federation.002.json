@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-1.cross-account-security-controls-identity-federation.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Activer Amazon GuardDuty et AWS Security Hub avec un compte administrateur delegue dans le compte dedie a la securite et un enregistrement automatique des nouveaux comptes via AWS Organizations, federer l'annuaire Active Directory via IAM Identity Center avec SAML pour les acces humains, creer une paire de cles AWS KMS multi-region primaire et replique pour la charge reglementee, et activer un trail CloudTrail au niveau de l'organisation centralise vers un compte d'archivage des journaux.",
+  "rationale": "L'activation de GuardDuty et Security Hub avec un administrateur delegue et un enregistrement automatique des comptes via AWS Organizations garantit une detection centralisee sans activation manuelle a chaque nouveau compte ; la federation IAM Identity Center avec SAML supprime le besoin d'utilisateurs IAM a long terme en s'appuyant sur l'annuaire Active Directory existant ; une paire de cles KMS multi-region primaire et replique fournit le materiel cryptographique dans les deux Regions exigees par la reglementation ; et un trail CloudTrail d'organisation centralise vers un compte d'archivage repond a l'exigence d'audit consolide. Activer les services manuellement compte par compte et synchroniser des utilisateurs IAM a long terme via un script introduit des identifiants a long terme et une charge d'activation repetee, tandis qu'une cle mono-region ne couvre pas les deux Regions exigees par la reglementation et que des trails locaux dispersent l'audit entre les comptes. Desactiver les fonctionnalites d'organisation de GuardDuty et Security Hub au profit d'un connecteur tiers introduit une detection moins integree au reste de l'organisation, conserve des utilisateurs IAM locaux au lieu de la federation, et une cle mono-region ne repond pas non plus a l'exigence multi-region. Laisser l'activation de GuardDuty et Security Hub au volontariat de chaque equipe ne garantit pas la couverture de tous les comptes, une cle mono-region rechiffree manuellement ne satisfait pas l'exigence reglementaire, et exclure les comptes hors production du CloudTrail centralise laisse des angles morts d'audit. Sources officielles AWS : https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html"
+}

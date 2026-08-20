@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.lora-model-registry-rollback.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une entreprise personnalise un modele de fondation specialise dans le codage medical a l'aide d'adaptateurs LoRA. L'equipe de plateforme exige un processus de personnalisation et de cycle de vie qui : (1) suit et versionne formellement chaque artefact d'adaptateur ou de modele affine, (2) permette un retour en arriere instantane vers une version anterieure connue comme fiable si la nouvelle version affinee regresse sur un jeu d'evaluation de reference apres deploiement, (3) evite de redeployer manuellement l'integralite des poids du modele de base uniquement pour changer d'adaptateur de personnalisation, et (4) garantisse que seule une version de modele approuvee et enregistree puisse etre promue vers le point de terminaison de production. Quelle approche satisfait le mieux ces quatre exigences ?",
+  "choices": [
+    "Reentrainer integralement le modele de base a chaque iteration, deposer chaque checkpoint complet dans un prefixe Amazon S3 nomme par date, puis reporter ce chemin dans la configuration du point de terminaison lors de chaque changement de version.",
+    "Ne conserver que la derniere version affinee et supprimer les checkpoints precedents des qu'un deploiement reussit, afin de limiter les couts de stockage et de garder un artefact unique de reference pour toutes les equipes.",
+    "Affiner des adaptateurs LoRA sur le modele de base partage, enregistrer chaque version dans le SageMaker Model Registry avec un statut d'approbation, et ne promouvoir que les versions approuvees vers le point de terminaison de production.",
+    "Deployer en production chaque nouvel adaptateur des la fin de son entrainement, puis surveiller les tickets de support et les retours des codeurs medicaux pour reperer une eventuelle degradation de la qualite des codes proposes."
+  ]
+}

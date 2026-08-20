@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-2.agentcore-mcp-tool-boundary-approval.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Classer les outils par niveau de risque, soumettre les appels d'ecriture au-dela du seuil a une tache de rappel humain AWS Step Functions, restreindre le role IAM de chaque outil aux actions necessaires et borner le nombre d'etapes de raisonnement.",
+  "rationale": "La classification par risque est ce qui permet de traiter differemment une consultation de catalogue et l'emission d'un bon de commande : la tache de rappel Step Functions suspend l'execution de l'appel d'ecriture jusqu'a la decision humaine, donc l'approbation intervient avant l'effet et non apres, tandis que les consultations continuent de s'executer sans interruption. Un role IAM distinct et minimal par serveur d'outils empeche l'agent d'atteindre une API d'ecriture qui ne lui a pas ete accordee, meme si son raisonnement derape, et la borne d'etapes ou de duree arrete une boucle bloquee avant qu'elle n'accumule les appels. Les permissions larges assorties d'une relecture quotidienne inversent l'ordre du controle : CloudTrail documente le bon de commande errone, il ne l'empeche pas, et la moindre erreur d'interpretation dispose de toute la surface d'achat. L'approbation systematique de tous les appels, y compris en lecture seule, protege bien l'action risquee mais impose une attente humaine et une expiration a quinze minutes sur des consultations sans consequence, ce qui detruit la reactivite attendue sur les requetes courantes. Le retrait pur et simple de l'outil d'achat supprime le risque en supprimant la capacite : les commandes redeviennent une saisie manuelle, alors que la demande est de reactiver l'achat agentique sous controle. Sources officielles AWS : https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/identity.html https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html https://docs.aws.amazon.com/step-functions/latest/dg/callback-task-sample-sqs.html"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-4.composite-alarm-noisy-microservice.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un microservice subit des pics transitoires de CPU frequents qui n'affectent pas l'experience client, mais l'alarme CloudWatch actuelle basee sur un seul seuil de CPUUtilization declenche une alerte a l'astreinte toutes les quelques minutes, provoquant une fatigue d'alerte. Le mois dernier, un incident reel combinant une hausse du taux d'erreurs et de la latence n'a pas ete detecte car l'alarme CPU ne s'est pas declenchee. L'equipe veut un signal a haute fidelite qui reduise le bruit sans manquer les incidents reels de ce type.",
+  "choices": [
+    "Relever le seuil de l'alarme CPUUtilization a 95 % et conserver la notification directe vers l'astreinte pour tout franchissement de ce nouveau seuil.",
+    "Retirer l'alarme CPUUtilization et confier a l'equipe d'exploitation une revue quotidienne des tableaux de bord CloudWatch du microservice concerne.",
+    "Ajouter une alarme sur le taux d'erreurs 5xx a cote de l'alarme CPUUtilization existante, chacune notifiant l'astreinte de maniere independante.",
+    "Creer une alarme composite CloudWatch exigeant l'etat ALARM simultane d'une alarme sur les erreurs 5xx et d'une alarme sur la latence P99, l'alarme CPU devenant un indicateur sans notification."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-1.multimodal-claims-processing-pipeline.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un assureur traite des sinistres combinant des formulaires structures, des photos de degats et des enregistrements audio d'appels au centre de contact. La direction technique exige un pipeline unifie qui : (1) accepte des types de documents melanges sans maintenir des scripts ponctuels distincts par format, (2) transcrit les appels vocaux en texte a grande echelle, (3) permette a un seul appel de modele de fondation multimodal de raisonner conjointement sur la photo du degat et le texte du sinistre, et (4) maintienne un cout de traitement proportionnel au volume, via une architecture evenementielle et sans serveur, plutot qu'une infrastructure toujours active. Quelle conception repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Provisionner une instance Amazon EC2 dediee par type de document, chacune interrogeant chaque minute un dossier partage a la recherche des fichiers de son format et appelant la bibliotheque de traitement correspondante avant de deposer le resultat dans un dossier commun.",
+    "Transcrire l'audio des appels avec Amazon Transcribe, analyser conjointement photo et texte du sinistre en un seul appel multimodal Amazon Bedrock, et orchestrer l'ingestion par des fonctions Lambda declenchees sur depot Amazon S3.",
+    "Encoder chaque image et chaque fichier audio en base64, les concatener avec le formulaire structure dans une charge JSON unique, puis envoyer cette chaine comme prompt a un modele de fondation exclusivement textuel.",
+    "Confier la transcription des appels a une equipe de transcripteurs et transmettre au modele de fondation le seul texte obtenu, les photos de degats etant examinees separement par les gestionnaires de sinistres."
+  ]
+}

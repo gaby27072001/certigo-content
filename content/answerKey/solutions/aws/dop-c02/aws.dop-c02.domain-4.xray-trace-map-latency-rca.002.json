@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-4.xray-trace-map-latency-rca.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Activer le tracage actif AWS X-Ray sur API Gateway, les fonctions Lambda et l'appel sortant vers l'API de paiement, puis lire la carte de traces X-Ray dans la console CloudWatch.",
+  "rationale": "Le tracage actif X-Ray instrumente chaque segment de la requete (API Gateway, chaque fonction Lambda, l'appel externe de paiement) et la carte de traces X-Ray, consultable dans la console CloudWatch, montre directement quel noeud de la chaine concentre la latence, offrant une identification causale de bout en bout avec un minimum de modification de code (activation native, sans agent tiers a gerer). La journalisation ajoutee autour de chaque appel oblige a correler des horodatages eparpilles dans plusieurs groupes de journaux Lambda distincts, ce qui est lent, source d'erreurs et ne s'adapte pas a une architecture distribuee complexe. Porter la retention des metriques agregees a quinze mois donne plus d'historique mais ne resout pas le probleme pose : les metriques restent agregees et ne permettent toujours pas d'isoler le maillon responsable d'une requete individuelle. Un outil de supervision tiers dont l'agent doit etre installe sur chaque fonction ajoute une charge operationnelle de gestion d'agents, un cout supplementaire et des modifications de packaging, alors qu'une solution native AWS deja disponible repond directement au besoin sans cette complexite additionnelle. Sources officielles AWS : https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html https://docs.aws.amazon.com/xray/latest/devguide/xray-console-servicemap.html"
+}

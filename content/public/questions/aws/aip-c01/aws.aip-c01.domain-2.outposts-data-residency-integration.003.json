@@ -1,0 +1,18 @@
+{
+  "id": "aws.aip-c01.domain-2.outposts-data-residency-integration.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un operateur de telecommunications doit faire fonctionner un assistant GenAI de diagnostic reseau qui analyse des journaux reseau d'abonnes proprietaires. La reglementation exige que les journaux bruts d'abonnes ne quittent jamais le centre de donnees sur site de l'operateur, mais l'entreprise souhaite reutiliser la meme architecture applicative basee sur Bedrock, la meme gouvernance de modele et le meme outillage qu'elle exploite deja dans le cloud pour d'autres cas d'usage non reglementes. Les exigences sont : (1) conserver les donnees de journaux bruts reglementees physiquement dans l'installation sur site pour l'inference, (2) pouvoir tout de meme reutiliser les API et modeles d'architecture AWS standard deja construits pour le cloud, (3) n'acheminer vers la gouvernance centralisee des prompts que les prompts et resultats, jamais le jeu de donnees reglemente brut, et (4) eviter une pile sur site totalement deconnectee et independante du plan de controle AWS. Quelle approche repond le mieux a ces quatre exigences ?",
+  "choices": [
+    "Deployer AWS Outposts dans le centre de donnees sur site, y executer le traitement des journaux et l'inference, et n'echanger avec la Region AWS que les prompts assainis et les appels de gouvernance des templates.",
+    "Exporter chaque nuit les journaux reseau bruts vers un bucket Amazon S3 chiffre de la Region la plus proche, protege par des politiques IAM restrictives et un point de terminaison VPC, puis appeler Amazon Bedrock comme pour les autres cas d'usage.",
+    "Construire une pile GenAI entierement sur site, avec son propre hebergement de modele, son propre outillage de gouvernance et son propre catalogue de prompts, sans lien avec le plan de controle AWS.",
+    "Deployer l'assistant de diagnostic dans une zone AWS Wavelength du reseau 5G de l'operateur et y transferer les journaux reseau bruts d'abonnes depuis le centre de donnees sur site avant chaque analyse."
+  ]
+}

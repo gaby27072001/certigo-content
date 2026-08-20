@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-2.internet-facing-app-layered-security-controls.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Attacher AWS WAF avec des groupes de regles gerees et AWS Shield Advanced devant l'ALB, stocker les identifiants dans AWS Secrets Manager avec rotation automatique pour le moteur RDS, chiffrer les donnees au repos avec AWS KMS et en transit avec TLS de bout en bout entre les niveaux, et des roles IAM distincts a moindre privilege pour le niveau web et le niveau travailleur.",
+  "rationale": "AWS WAF avec des groupes de regles gerees combine a Shield Advanced fournit une protection en couches contre le DDoS volumetrique et applicatif ainsi que contre l'injection SQL et le XSS ; Secrets Manager avec rotation automatique pour RDS elimine les identifiants statiques ; le chiffrement KMS au repos combine a TLS en transit de bout en bout protege les donnees entre chaque niveau applicatif ; et des roles IAM distincts et etroitement dimensionnes par niveau appliquent le moindre privilege exige. S'appuyer uniquement sur des groupes de securite ne protege ni contre le DDoS applicatif ni contre l'injection SQL ou le XSS, la rotation manuelle tous les 90 jours n'est pas automatique, les echanges internes en clair exposent les donnees en transit, et un role partage avec AdministratorAccess viole frontalement le moindre privilege. Shield Standard seul, sans WAF, ne couvre pas les exploitations applicatives comme l'injection SQL ou le XSS, la rotation desactivee laisse un identifiant statique, chiffrer seulement les volumes EBS sans chiffrer le trafic interne laisse les donnees en transit exposees, et PowerUserAccess pour les deux roles n'est pas du moindre privilege. Un CDN tiers sans regles WAF ne traite pas les exploitations applicatives, l'absence de rotation laisse un identifiant statique expose, l'absence totale de chiffrement au repos et en transit viole l'exigence de protection de bout en bout, et un acces S3 complet pour le role web viole le moindre privilege. Sources officielles AWS : https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html https://docs.aws.amazon.com/kms/latest/developerguide/overview.html"
+}

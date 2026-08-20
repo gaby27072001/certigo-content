@@ -3,13 +3,79 @@
   "provider": "aws",
   "certification": "aws:dop-c02",
   "blueprintVersion": "2026-08-17",
-  "status": "planned",
+  "status": "complete",
   "objectives": [
-    { "objective": "domain-1", "title": "SDLC Automation", "weightPercent": 22, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-2", "title": "Configuration Management and IaC", "weightPercent": 17, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-3", "title": "Resilient Cloud Solutions", "weightPercent": 15, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-4", "title": "Monitoring and Logging", "weightPercent": 15, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-5", "title": "Incident and Event Response", "weightPercent": 14, "weightType": "exact", "questionIds": [] },
-    { "objective": "domain-6", "title": "Security and Compliance", "weightPercent": 17, "weightType": "exact", "questionIds": [] }
+    {
+      "objective": "domain-1",
+      "title": "SDLC Automation",
+      "weightPercent": 22,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dop-c02.domain-1.pipeline-canary-blast-radius.001",
+        "aws.dop-c02.domain-1.immutable-artifact-lineage.002",
+        "aws.dop-c02.domain-1.ecs-bluegreen-auto-rollback.003",
+        "aws.dop-c02.domain-1.cross-account-pipeline-promotion.004",
+        "aws.dop-c02.domain-1.codeartifact-package-origin-control.005"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "Configuration Management and IaC",
+      "weightPercent": 17,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dop-c02.domain-2.stacksets-guardrail-ou-rollout.001",
+        "aws.dop-c02.domain-2.account-vending-service-catalog.002",
+        "aws.dop-c02.domain-2.cdk-stateful-removal-policy.003",
+        "aws.dop-c02.domain-2.config-aggregator-conformance-packs.004"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Resilient Cloud Solutions",
+      "weightPercent": 15,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dop-c02.domain-3.aurora-global-database-dr.001",
+        "aws.dop-c02.domain-3.predictive-scaling-spiky-workload.002",
+        "aws.dop-c02.domain-3.route53-failover-multiregion.003",
+        "aws.dop-c02.domain-3.sqs-dlq-bulkhead.004"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Monitoring and Logging",
+      "weightPercent": 15,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dop-c02.domain-4.composite-alarm-noisy-microservice.001",
+        "aws.dop-c02.domain-4.xray-trace-map-latency-rca.002",
+        "aws.dop-c02.domain-4.cross-account-log-centralization.003",
+        "aws.dop-c02.domain-4.cloudwatch-anomaly-detection-seasonal.004"
+      ]
+    },
+    {
+      "objective": "domain-5",
+      "title": "Incident and Event Response",
+      "weightPercent": 14,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dop-c02.domain-5.eventbridge-ssm-automation-remediation.001",
+        "aws.dop-c02.domain-5.health-aware-proactive-incident.002",
+        "aws.dop-c02.domain-5.cloudtrail-config-rca-timeline.003"
+      ]
+    },
+    {
+      "objective": "domain-6",
+      "title": "Security and Compliance",
+      "weightPercent": 17,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.dop-c02.domain-6.scp-permission-boundary-least-privilege.001",
+        "aws.dop-c02.domain-6.secrets-manager-rotation-rds.002",
+        "aws.dop-c02.domain-6.guardduty-securityhub-auto-remediation.003",
+        "aws.dop-c02.domain-6.kms-multiregion-vs-cloudhsm.004"
+      ]
+    }
   ]
 }

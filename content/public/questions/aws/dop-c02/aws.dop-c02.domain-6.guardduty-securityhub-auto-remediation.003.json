@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-6.guardduty-securityhub-auto-remediation.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-6"
+  },
+  "prompt": "Une organisation multi-comptes souhaite une detection centralisee des menaces (par exemple, des identifiants EC2 compromis appelant des API inhabituelles ou des resultats de cryptominage) avec une priorisation automatique des resultats sur l'ensemble des comptes, un confinement automatique de premiere reponse pour les resultats de severite elevee, tout en conservant une revue humaine pour les severites moyenne et faible, et une piste d'audit complete.",
+  "choices": [
+    "Confier a chaque equipe de compte l'analyse hebdomadaire de ses propres journaux de flux VPC et CloudTrail a la recherche d'indicateurs de compromission connus dans son perimetre.",
+    "Activer Amazon GuardDuty dans le seul compte de gestion de l'organisation et consulter ses resultats pour l'ensemble des comptes membres depuis ce compte central.",
+    "Activer GuardDuty dans tous les comptes via un administrateur delegue, agreger dans Security Hub, et invoquer par EventBridge une fonction Lambda d'isolement pour les seuls resultats de severite elevee.",
+    "Configurer Security Hub pour declencher l'isolement reseau de la ressource concernee des la premiere alerte GuardDuty, quelle que soit la severite du resultat remonte."
+  ]
+}

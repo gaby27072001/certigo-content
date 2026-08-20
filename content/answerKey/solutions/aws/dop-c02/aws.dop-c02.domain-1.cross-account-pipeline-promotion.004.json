@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-1.cross-account-pipeline-promotion.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer dans chaque compte cible un role IAM dedie que CodePipeline assume via sts:AssumeRole, et autoriser ces comptes dans la politique de la cle KMS du compartiment d'artefacts.",
+  "rationale": "Des roles IAM cross-account assumes via sts:AssumeRole, combines a une politique de cle KMS autorisant explicitement chaque compte cible, permettent au pipeline de promouvoir le meme artefact chiffre sans jamais distribuer d'identifiants a long terme, tout en accordant a chaque compte cible uniquement les permissions necessaires a son role de deploiement : cela satisfait le moindre privilege, l'absence de credentials statiques et la promotion d'un artefact unique. Un utilisateur IAM dote de cles d'acces a long terme communiquees d'un compte a l'autre viole directement l'exigence de ne jamais distribuer d'identifiants a long terme et cree un risque de compromission durable en cas de fuite. Un compartiment S3 temporaire ouvert en lecture publique expose l'artefact a n'importe quel acteur sur Internet, ce qui contredit frontalement le moindre privilege et introduit un risque de sabotage ou de vol de propriete intellectuelle bien plus grave que le probleme initial. Des pipelines autonomes reconstruisant l'application dans chaque compte ne garantissent pas que l'artefact teste en developpement est celui qui atteint la production (le meme code source peut produire des builds differents), ce qui augmente le risque de derive entre environnements et multiplie l'effort operationnel de maintenance des trois pipelines. Sources officielles AWS : https://docs.aws.amazon.com/codepipeline/latest/userguide/pipelines-create-cross-account.html https://docs.aws.amazon.com/codepipeline/latest/userguide/security-iam.html"
+}

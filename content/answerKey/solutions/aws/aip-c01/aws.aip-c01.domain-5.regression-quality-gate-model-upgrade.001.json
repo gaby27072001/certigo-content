@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-5.regression-quality-gate-model-upgrade.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Lancer une tache Amazon Bedrock Evaluations sur le corpus interne archive, confronter ses scores a ceux mesures pour la version en service, et bloquer l'etape de deploiement tant que le seuil retenu n'est pas atteint.",
+  "rationale": "Le corpus interne archive contient les documents reellement traites, dont le type qui avait regresse : une tache d'evaluation Bedrock executee dessus mesure ce que le produit fait, et non ce qu'un classement generique recompense. Comparer ses scores a ceux obtenus par la version deja en service transforme l'appreciation en verdict reproductible, et subordonner l'etape de deploiement a un seuil empeche une degradation d'atteindre les utilisateurs. Le dispositif reste une barriere conditionnelle et non un verrou : une version reellement meilleure franchit le seuil et peut etre adoptee. S'appuyer sur les scores des classements publics reproduit l'erreur d'origine, puisque ces corpus ne contiennent pas les documents internes ou la degradation s'etait produite. Le gel de la version supprime le risque de regression en supprimant aussi tout benefice futur, alors que les modeles evoluent et que les gains de qualite comme de cout resteraient inaccessibles. La relecture par un ingenieur suivie d'une promotion calendaire s'appuie pourtant sur le bon corpus, mais elle ne produit aucune consequence : un ecart constate ne bloque rien, l'appreciation varie d'un relecteur a l'autre, et la mise en production a lieu de toute facon a la date prevue. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation.html"
+}

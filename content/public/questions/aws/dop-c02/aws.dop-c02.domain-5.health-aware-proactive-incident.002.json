@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-5.health-aware-proactive-incident.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Une entreprise exploitant 30 comptes AWS souhaite etre alertee de maniere proactive des problemes ou operations de maintenance planifiees affectant specifiquement ses propres ressources deployees, afin de declencher automatiquement son processus interne de gestion d'incident avant meme que les clients ne remarquent un impact, avec une charge operationnelle minimale de surveillance manuelle.",
+  "choices": [
+    "Faire consulter chaque heure par un ingenieur le tableau de bord public de statut des services AWS, compte par compte, pour les trente comptes exploites par l'entreprise.",
+    "S'abonner au flux generique de statut des services AWS et router ses publications vers le canal de discussion de l'equipe d'exploitation pour lecture au fil de l'eau.",
+    "Construire une alarme composite CloudWatch fondee sur les seules metriques applicatives internes, qui notifie l'astreinte lorsque le taux d'erreurs et la latence de service se degradent ensemble.",
+    "Activer la vue organisationnelle d'AWS Health et creer des regles Amazon EventBridge sur les evenements Health concernant les ressources affectees, pour declencher le processus d'incident."
+  ]
+}

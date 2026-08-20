@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-4.cross-account-log-centralization.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une organisation de 50 comptes AWS (un compte de developpement et un compte de production par equipe) doit centraliser les journaux de flux VPC et les journaux applicatifs dans un compte de journalisation partage pour analyse et retention longue duree, sans accorder a chaque equipe d'acces direct en ecriture au compte central, et avec une charge de maintenance minimale a chaque ajout de nouveau compte.",
+  "choices": [
+    "Faire exporter par chaque equipe ses journaux CloudWatch chaque semaine vers un fichier local, puis televerser ce fichier dans le compartiment S3 du compte de journalisation via la console.",
+    "Creer dans chaque compte membre un role IAM en ecriture directe sur le compartiment S3 du compte de journalisation, chaque equipe configurant ensuite ses propres exports selon ses besoins.",
+    "Creer dans chaque compte un filtre d'abonnement CloudWatch Logs vers un flux Amazon Data Firehose central livrant vers Amazon S3, deploye par un StackSet organisationnel.",
+    "Activer AWS Config dans chaque compte pour capturer l'historique de configuration des ressources et publier ces enregistrements dans le compartiment du compte de journalisation."
+  ]
+}

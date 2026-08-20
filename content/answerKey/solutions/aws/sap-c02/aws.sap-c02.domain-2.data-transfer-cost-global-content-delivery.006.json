@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-2.data-transfer-cost-global-content-delivery.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Diffuser les fichiers via Amazon CloudFront devant le compartiment S3 d'origine pour reduire latence et cout de transfert, activer S3 Transfer Acceleration pour les televersements depuis les bureaux distants, et stocker les ressources en S3 Intelligent-Tiering pour un basculement automatique entre niveaux. Cette distribution CloudFront couvre l'ensemble des emplacements en peripherie disponibles a l'echelle mondiale.",
+  "rationale": "CloudFront devant S3 reduit a la fois la latence percue grace a la mise en cache en peripherie et le cout de transfert de donnees sortant par rapport a une diffusion directe depuis S3, S3 Transfer Acceleration accelere les televersements depuis des bureaux distants via le reseau dorsal AWS sans provisionner de nouvelle infrastructure sur site, et S3 Intelligent-Tiering deplace automatiquement les objets entre niveaux selon l'evolution reelle de leur profil d'acces sans regle de cycle de vie manuelle. Diffuser directement depuis un compartiment S3 unique sans CDN laisse la latence percue par les utilisateurs distants dependre entierement de leur distance geographique a la Region unique, l'absence d'acceleration penalise les televersements distants, et conserver toutes les ressources en S3 Standard en permanence ignore l'opportunite de reduction de cout pour un profil d'acces imprevisible. Deployer le compartiment d'origine dans chaque Region multiplie fortement le cout de stockage et de replication et la charge operationnelle d'une suppression manuelle trimestrielle, sans repondre a l'exigence d'evolution automatique du profil d'acces ni a l'acceleration des televersements distants. AWS Global Accelerator est concu pour des points de terminaison applicatifs TCP ou UDP tels qu'un ALB, un NLB ou une IP elastique, ce n'est pas l'outil standard de reduction de cout pour la diffusion de contenu statique S3, et deplacer systematiquement tous les objets vers Glacier Deep Archive apres 30 jours sans distinction de frequence d'acces provoquerait des delais de recuperation couteux pour les ressources encore frequemment consultees. Sources officielles AWS : https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html https://docs.aws.amazon.com/AmazonS3/latest/userguide/intelligent-tiering.html"
+}

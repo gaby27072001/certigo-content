@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-1.glue-data-quality-ingestion-gate.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Definir des regles declaratives AWS Glue Data Quality (DQDL) sur la completude, l'unicite et le schema pendant l'ingestion, publier leurs resultats en metriques CloudWatch, mettre en quarantaine les echecs stricts et etiqueter les echecs souples.",
+  "rationale": "AWS Glue Data Quality evalue des regles ecrites en DQDL directement dans le job d'ingestion : les operateurs Completeness, Uniqueness et ColumnExists couvrent les documents dupliques, corrompus ou incomplets sans moteur de regles maison, et l'evaluation suit la montee en charge du job Glue sur des millions d'enregistrements. Les resultats de regles sont publies en metriques CloudWatch, donc les tableaux de bord existants sont reutilises tels quels, et le partage entre regles bloquantes et regles d'avertissement permet la quarantaine des echecs stricts avec simple etiquetage des echecs souples. La revue hebdomadaire par echantillon ne couvre qu'une fraction du volume, laisse passer la majorite des documents defectueux et rejette un lot entier sans granularite par enregistrement. La fonction Lambda de validation par expressions regulieres deplace le controle du moment de l'ingestion vers le chemin de requete : chaque question paie la latence de validation, les documents deja indexes restent defectueux, et les metriques doivent etre publiees a la main. Amazon Comprehend evalue la confiance d'extraction d'entites sur du texte, pas la structure : un doublon parfait ou un champ obligatoire absent obtiennent des scores eleves et franchissent le seuil, ce qui laisse le probleme initial intact. Sources officielles AWS : https://docs.aws.amazon.com/glue/latest/dg/glue-data-quality.html https://docs.aws.amazon.com/glue/latest/dg/dqdl.html"
+}

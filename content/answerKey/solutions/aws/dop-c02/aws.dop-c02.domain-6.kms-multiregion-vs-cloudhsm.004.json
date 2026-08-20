@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-6.kms-multiregion-vs-cloudhsm.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-6"
+  },
+  "correct": "Creer une cle KMS multi-region dans la region primaire et sa cle repliquee dans la region secondaire, les deux partageant le meme materiel de cle pour dechiffrer les donnees repliquees.",
+  "rationale": "Une cle KMS multi-region partage le meme materiel cryptographique entre la region primaire et sa replique dans la region secondaire, ce qui permet de dechiffrer directement les donnees deja chiffrees sans aucune operation de rechiffrement lors du basculement, tout en restant entierement geree par AWS KMS et auditee nativement via CloudTrail, sans equipe dediee au materiel cryptographique : cela satisfait simultanement les quatre contraintes de l'enonce. Des cles independantes par region imposent de rechiffrer l'integralite des donnees repliquees avec la cle secondaire au moment du basculement, ce qui viole directement l'exigence de ne pas rechiffrer et allonge le temps de reprise. AWS CloudHSM exige que l'entreprise assure elle-meme la generation, la sauvegarde et la synchronisation du materiel de cle entre les clusters des deux regions, ce qui contredit explicitement la contrainte de ne pas disposer d'une equipe dediee a l'exploitation de materiel cryptographique. Repliquer les donnees sans chiffrement au repos elimine certes la complexite de gestion des cles, mais viole frontalement l'exigence de conformite en matiere de protection des donnees sensibles : le chiffrement en transit ne protege pas les donnees stockees. Sources officielles AWS : https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html https://docs.aws.amazon.com/cloudhsm/latest/userguide/introduction.html"
+}

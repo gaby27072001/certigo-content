@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-3.aurora-global-database-dr.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Deployer Aurora Global Database avec une region secondaire en lecture seule, et promouvoir cette region par un basculement inter-regions non planifie lorsque la region primaire devient inaccessible.",
+  "rationale": "Aurora Global Database replique en continu vers la region secondaire avec un decalage typique de l'ordre de la seconde, ce qui cadre avec une perte de donnees de quelques secondes, et le basculement inter-regions non planifie promeut la region secondaire en cluster primaire en quelques minutes, ce qui cadre avec l'objectif de retour en service annonce, pour un cout inferieur a celui d'une architecture active-active complete puisque la region secondaire reste en lecture seule. Des instantanes quotidiens impliquent une perte de donnees potentielle allant jusqu'a vingt-quatre heures et une restauration de cluster de l'ordre de plusieurs heures, ce qui depasse largement les deux objectifs. Une replique en lecture inter-regions classique promue par l'equipe d'astreinte ajoute au delai de promotion le temps de detection et de decision humaine, sans beneficier de la replication a faible latence ni des mecanismes de bascule propres a Global Database, ce qui rend le retour en service imprevisible. Deux clusters independants alimentes par un traitement ETL nocturne exposent une perte de donnees pouvant approcher vingt-quatre heures et ne constituent pas un mecanisme de bascule, ce qui echoue sur les deux exigences de reprise. Sources officielles AWS : https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html"
+}

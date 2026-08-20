@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-3.defense-in-depth-prompt-injection-layers.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Passer les avis recuperes dans Amazon Comprehend pour classification, activer les filtres et sujets refuses d'Amazon Bedrock Guardrails sur les deux sens de l'echange, puis controler la sortie par une fonction Lambda portant les regles metier.",
+  "rationale": "Les trois controles agissent a des endroits differents du chemin de requete et reposent sur des mecanismes independants : la classification Comprehend ecarte l'avis piege avant qu'il ne devienne du contexte, Guardrails inspecte ce qui entre dans le modele et ce qui en sort, et la fonction Lambda applique des regles metier explicites, dont l'interdiction de restituer le prompt systeme, sur la reponse finale. Une charge utile qui echappe au premier controle rencontre encore les deux suivants, ce qui est exactement la propriete recherchee apres l'incident. Guardrails seul, meme avec un sujet refuse bien redige, redevient un point de controle unique : un motif d'injection inedit qui franchit ses filtres n'est plus arrete par rien, et le texte piege a deja atteint le contexte. Le nettoyage HTML traite un vecteur de balisage, alors que la manipulation observee etait redigee en langage naturel dans le corps d'un avis : le texte assaini reste porteur de l'instruction, et il ne reste ensuite ni controle au niveau du modele ni verification de la reponse. La desactivation de la recuperation supprime la fonction plutot que le risque : l'assistant perd sa capacite a repondre a partir du catalogue, et la protection repose entierement sur l'alignement du modele, sans controle en execution. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html"
+}

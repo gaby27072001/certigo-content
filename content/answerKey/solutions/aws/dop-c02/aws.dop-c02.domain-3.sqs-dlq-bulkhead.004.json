@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-3.sqs-dlq-bulkhead.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Rendre l'appel a l'inventaire asynchrone via une file Amazon SQS standard, dotee d'une politique de nouvelles tentatives et d'une file de messages non distribues (dead-letter queue).",
+  "rationale": "Decoupler l'appel via une file SQS avec une politique de nouvelles tentatives et une dead-letter queue cree une veritable isolation de type bulkhead : une degradation de l'inventaire n'affecte plus le chemin critique de la commande, les nouvelles tentatives sont espacees et controlees plutot que d'amplifier la charge, et les messages en echec definitif sont conserves dans la DLQ pour une analyse de cause racine ulterieure, ce qui satisfait exactement les trois contraintes de l'enonce. Porter le timeout Lambda a quinze minutes ne resout pas le couplage synchrone : la fonction continue de bloquer des ressources facturees plus longtemps en attendant une reponse d'un service deja degrade, sans isoler la defaillance ni permettre de rejouer les echecs plus tard. Une boucle de nouvelles tentatives synchrones dans le code amplifie la charge sur un service inventaire deja en throttling (effet de tempete de nouvelles tentatives), consomme davantage de duree d'execution Lambda et ne fournit aucune isolation ni conservation des echecs pour analyse. Retirer la verification d'inventaire du flux elimine certes la dependance technique, mais une reconciliation differee par lots laisse passer des commandes non honorables et introduit un risque metier majeur de survente, ce qui n'est pas une solution de resilience acceptable au regard des contraintes fonctionnelles de l'application. Sources officielles AWS : https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html"
+}

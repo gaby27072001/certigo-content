@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-4.rag-latency-cost-tradeoff-streaming.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Diffuser la reponse en flux vers l'agent des les premiers tokens, precalculer et mettre en cache les reponses aux questions recurrentes identifiees, et affiner l'index et le pretraitement des requetes de recuperation.",
+  "rationale": "Le streaming attaque la plainte reelle : l'agent voit le texte apparaitre apres quelques centaines de millisecondes au lieu de fixer une interface figee pendant neuf secondes, sans que la qualite du modele ne change. Le precalcul cible le sous-ensemble de questions de procedure repetees, dont la reponse est servie depuis le cache sans traverser le pipeline. L'optimisation de la recuperation, par reglage de l'index vectoriel et normalisation des requetes, reduit a la fois le temps de cette etape et le volume de contexte transmis, donc la generation demarre plus tot et se concentre sur des passages pertinents. Rien de tout cela n'impose de retrograder le modele pour les questions difficiles. Le passage generalise au plus petit modele est precisement le compromis que les agents ont refuse, et il degrade les reponses complexes pour gagner sur une latence deja traitable autrement. La suppression de la recuperation retire la mise a la terre documentaire d'un outil dont la valeur est de citer la documentation interne : les reponses deviennent des generalites non sourcees, et l'affichage reste bloque jusqu'a la fin de la generation. Le regroupement de requetes ajoute une attente de remplissage de lot avant meme le premier token et melange des questions sans rapport dans un meme contexte, ce qui aggrave la latence percue par chaque agent. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/inference-api.html https://docs.aws.amazon.com/opensearch-service/latest/developerguide/knn.html"
+}

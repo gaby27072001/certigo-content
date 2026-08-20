@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-4.cloudwatch-anomaly-detection-seasonal.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Utiliser la detection d'anomalies CloudWatch sur le nombre de requetes, l'alarme se declenchant lorsque la valeur observee sort de la bande de confiance apprise par le modele.",
+  "rationale": "La detection d'anomalies CloudWatch apprend automatiquement le profil saisonnier hebdomadaire a partir de l'historique et ajuste dynamiquement sa bande de confiance, ce qui permet de detecter des ecarts reels quel que soit le jour de la semaine sans reajustement manuel des seuils, repondant exactement a la contrainte d'adaptation automatique. Des seuils statiques differents par jour, mis a jour chaque mois par un ingenieur, exigent un effort recurrent et accumulent un retard par rapport a la croissance progressive du trafic entre deux mises a jour. Un seuil statique unique fonde sur la moyenne annuelle ignore completement la saisonnalite hebdomadaire et garantit mecaniquement des faux positifs le week-end et des faux negatifs en semaine, exactement le probleme que l'equipe cherche a resoudre. Desactiver l'alarme du vendredi soir au lundi matin cree un angle mort de supervision total durant cette periode, ce qui viole l'exigence de detection continue et pourrait masquer un incident reel survenant un samedi ou un dimanche. Sources officielles AWS : https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html"
+}

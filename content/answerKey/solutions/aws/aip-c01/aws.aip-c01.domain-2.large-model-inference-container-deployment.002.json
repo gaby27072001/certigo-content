@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-2.large-model-inference-container-deployment.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Deployer le modele avec les conteneurs LMI (Large Model Inference) de SageMaker AI, qui apportent le partitionnement sur plusieurs GPU, un chargement optimise des poids et le batching continu des requetes.",
+  "rationale": "Les conteneurs LMI de SageMaker AI embarquent les moteurs de service concus pour les modeles de cette taille : le partitionnement tensoriel repartit les 70 milliards de parametres sur les GPU de l'instance, le chargement parallelise des shards remplace le chargement sequentiel a l'origine des 40 minutes de demarrage, et le batching continu regroupe les requetes entrantes token par token sans code d'ordonnancement a ecrire. C'est aussi une image de service dediee aux grands modeles, la ou l'image d'origine visait des estimateurs scikit-learn. Ajouter des coeurs CPU et des processus de travail agit sur un goulot qui n'existe pas ici : la saturation est celle de la memoire GPU, et multiplier les processus fait au contraire charger plusieurs copies des poids sur le meme accelerateur. Le decoupage en un point de terminaison par couche transforme chaque token en dizaines d'allers-retours reseau successifs, avec serialisation des activations intermediaires a chaque saut : la latence devient prohibitive et l'ensemble reste a orchestrer par le client. La quantification hors ligne servie par un script Flask sur EC2 reduit certes l'empreinte memoire, mais laisse a la charge de l'equipe le partitionnement, le chargement optimise, le batching et l'exploitation du serveur, soit exactement le travail que le conteneur gere fournit. Sources officielles AWS : https://docs.aws.amazon.com/sagemaker/latest/dg/large-model-inference.html"
+}

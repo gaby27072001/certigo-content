@@ -89,6 +89,22 @@ function catalogAt(root) {
   return resolve(root, "content", "public", "catalog", "certifications.json");
 }
 
+function resetCoverageForMetadataTests(directory) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) {
+      resetCoverageForMetadataTests(path);
+    } else if (entry.name.endsWith(".json")) {
+      const matrix = readJson(path);
+      for (const objective of matrix.objectives) objective.questionIds = [];
+      if (matrix.status === "complete" || matrix.status === "in-progress") {
+        matrix.status = "planned";
+      }
+      writeJson(path, matrix);
+    }
+  }
+}
+
 function createMetadataRoot() {
   const root = mkdtempSync(join(tmpdir(), "certigo-catalog-"));
   temporaryRoots.push(root);
@@ -103,20 +119,7 @@ function createMetadataRoot() {
     resolve(root, "content", "public", "coverage"),
     { recursive: true }
   );
-  const coverageRoot = resolve(root, "content", "public", "coverage");
-  for (const provider of readdirSync(coverageRoot, { withFileTypes: true })) {
-    if (!provider.isDirectory()) continue;
-    const providerRoot = resolve(coverageRoot, provider.name);
-    for (const file of readdirSync(providerRoot)) {
-      const matrixPath = resolve(providerRoot, file);
-      const matrix = readJson(matrixPath);
-      for (const objective of matrix.objectives) objective.questionIds = [];
-      if (matrix.status === "complete" || matrix.status === "in-progress") {
-        matrix.status = "planned";
-      }
-      writeJson(matrixPath, matrix);
-    }
-  }
+  resetCoverageForMetadataTests(resolve(root, "content", "public", "coverage"));
   mkdirSync(resolve(root, "content", "public", "questions"), { recursive: true });
   mkdirSync(resolve(root, "content", "answerKey", "solutions"), { recursive: true });
   return root;

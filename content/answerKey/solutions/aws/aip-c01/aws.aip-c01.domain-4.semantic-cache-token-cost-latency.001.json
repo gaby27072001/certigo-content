@@ -1,0 +1,13 @@
+{
+  "id": "aws.aip-c01.domain-4.semantic-cache-token-cost-latency.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:aip-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Ajouter un cache semantique qui reutilise une reponse recente pour une question suffisamment proche, avec seuil de similarite controle, et activer la mise en cache de prompt Amazon Bedrock pour la partie statique.",
+  "rationale": "Les deux mecanismes traitent deux gaspillages distincts. Le cache semantique compare l'embedding de la question entrante a ceux des questions recemment servies : au-dessus du seuil de similarite retenu, la reponse deja generee est renvoyee sans invocation du modele, ce qui supprime a la fois le cout et l'attente ; le seuil, associe a une duree de validite courte, empeche qu'une question voisine mais materiellement differente recoive la mauvaise reponse. La mise en cache de prompt de Bedrock couvre les appels restants : le prefixe d'instructions systeme et le contexte partage sont conserves cote service, donc seul le segment variable est retraite et facture. Une fenetre de contexte plus large ne diminue rien : la facturation suit les tokens reellement traites, et grouper des questions dans un meme appel allonge le prefixe sans eviter le retraitement. La cle exacte en DynamoDB ne reconnait que la repetition litterale : une virgule, un synonyme ou un mot d'ordre different provoquent un defaut de cache, alors que ce trafic reformule constitue precisement la majorite des requetes. Le jeu de reponses precalculees repond vite aux cas prevus, mais toute question inedite ou toute evolution du catalogue reste sans reponse correcte, le modele n'etant plus appelable. Sources officielles AWS : https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html"
+}

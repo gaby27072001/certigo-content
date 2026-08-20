@@ -1,0 +1,13 @@
+{
+  "id": "aws.sap-c02.domain-2.ecs-bluegreen-deployment-automated-rollback.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:sap-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Utiliser un deploiement bleu/vert CodeDeploy pour ECS avec une paire d'ecouteurs de test et de production sur l'ALB, configurer une periode d'observation avant la bascule complete, et rattacher des alarmes CloudWatch au groupe de deploiement pour un retour automatique.",
+  "rationale": "Le deploiement bleu/vert CodeDeploy pour ECS bascule le trafic instantanement entre l'environnement bleu et vert via l'ecouteur de production, la periode d'observation permet de valider le nouveau jeu de taches avec du trafic reel avant la bascule complete, et les alarmes CloudWatch rattachees au groupe de deploiement declenchent un retour automatique a la version precedente sans intervention humaine, le tout via un service gere plutot que des scripts personnalises. Une mise a jour integrale en une seule fois ne fournit ni bascule instantanee reversible ni periode d'observation, et le retour arriere depend entierement d'un operateur qui remarque le probleme en surveillant les tableaux de bord. Deux services paralleles bascules par des poids Route 53 ponderes introduisent un delai lie a la mise en cache DNS et au TTL, et le retour arriere reste manuel via l'ingenieur d'astreinte. Une fonction Lambda declenchee par une regle EventBridge planifiee qui redeploie sans aucune alarme CloudWatch ne fournit ni periode d'observation ni validation automatisee avant ou apres le changement. Sources officielles AWS : https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-steps-ecs.html https://docs.aws.amazon.com/codedeploy/latest/userguide/monitoring-create-alarms.html"
+}

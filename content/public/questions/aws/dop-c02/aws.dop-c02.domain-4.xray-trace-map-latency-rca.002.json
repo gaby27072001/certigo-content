@@ -1,0 +1,18 @@
+{
+  "id": "aws.dop-c02.domain-4.xray-trace-map-latency-rca.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Un systeme de commandes distribue enchaine API Gateway, plusieurs fonctions Lambda, Amazon DynamoDB et un appel a une API de paiement externe. Des clients signalent des ralentissements intermittents (pics de latence P99), mais les metriques CloudWatch agregees ne montrent qu'une hausse globale de la latence sans indiquer quel maillon de la chaine en est responsable. L'equipe doit identifier rapidement la cause racine avec un minimum de modifications de code et une visibilite de bout en bout.",
+  "choices": [
+    "Ajouter des instructions de journalisation autour de chaque appel dans le code des fonctions Lambda, puis rapprocher a la main les horodatages releves dans les groupes de journaux CloudWatch Logs.",
+    "Activer le tracage actif AWS X-Ray sur API Gateway, les fonctions Lambda et l'appel sortant vers l'API de paiement, puis lire la carte de traces X-Ray dans la console CloudWatch.",
+    "Porter a quinze mois la periode de retention des metriques de latence CloudWatch afin de disposer d'un historique agrege plus profond sur le systeme de commandes.",
+    "Deployer un outil de supervision applicative tiers et installer son agent sur chaque fonction Lambda de la chaine de commande ainsi que sur la couche API Gateway."
+  ]
+}

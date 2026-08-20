@@ -1,0 +1,13 @@
+{
+  "id": "aws.dop-c02.domain-5.cloudtrail-config-rca-timeline.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:dop-c02",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "correct": "Rapprocher l'evenement CloudTrail ModifyTable de l'historique de configuration AWS Config de la table, pour etablir l'auteur, l'horodatage et l'etat de configuration avant et apres le changement.",
+  "rationale": "Croiser CloudTrail, qui identifie precisement l'appel API ModifyTable, l'identite de l'appelant (utilisateur, role ou systeme automatise) et l'horodatage, avec l'historique de configuration AWS Config, qui restitue l'etat exact avant et apres le changement, permet une reconstitution factuelle et non intrusive de la cause racine, sans perturber davantage la ressource : c'est la methode d'analyse appropriee pour ce type d'incident. Interroger individuellement les ingenieurs d'astreinte est peu fiable, lent, et ne permet pas d'identifier un changement effectue par un systeme automatise plutot qu'un humain, en plus de ne laisser aucune preuve verifiable pour l'audit. Restaurer une sauvegarde puis rebasculer le trafic est une action de remediation, pas une analyse de cause racine ; elle risque en outre de faire perdre des donnees transactionnelles recentes alors que le probleme n'etait qu'un changement de mode de facturation, et n'explique pas l'origine du changement pour prevenir sa recurrence. Supprimer et recreer la table est une action destructive qui provoque une interruption de service et une reimportation partielle depuis un export anterieur, sans fournir aucune explication causale, ce qui viole a la fois la securite de l'operation et l'objectif d'analyse des causes racines. Sources officielles AWS : https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html https://docs.aws.amazon.com/config/latest/developerguide/view-manage-resource-console.html"
+}
