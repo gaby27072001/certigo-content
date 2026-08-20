@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-2.shared-resolver-rules.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Déployer des Route 53 Resolver outbound endpoints dans un VPC réseau, créer des forwarding rules et partager les règles avec les comptes via AWS RAM",
+  "rationale": "Les règles Resolver peuvent être partagées par RAM puis associées aux VPC consommateurs, qui utilisent les endpoints sortants centralisés. Ce modèle réduit les endpoints et conserve la gouvernance des destinations DNS. Le résolveur link-local n'est pas routable entre VPC et une NAT Gateway n'est pas un serveur DNS."
+}

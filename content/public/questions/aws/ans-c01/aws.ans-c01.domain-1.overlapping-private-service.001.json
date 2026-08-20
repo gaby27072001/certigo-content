@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-1.overlapping-private-service.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un fournisseur central doit exposer une API privée à 70 VPC consommateurs dont certains CIDR se chevauchent. Les consommateurs ne doivent accéder qu'à cette API et aucun routage transitif ne doit être créé. Quelle architecture est la plus appropriée ?",
+  "choices": [
+    "Publier l'API derrière un NLB comme endpoint service AWS PrivateLink et créer des interface endpoints chez les consommateurs",
+    "Créer un full mesh de VPC peering entre tous les VPC",
+    "Attacher tous les VPC à une même passerelle Internet",
+    "Propager tous les CIDR qui se chevauchent dans une seule table Transit Gateway"
+  ]
+}

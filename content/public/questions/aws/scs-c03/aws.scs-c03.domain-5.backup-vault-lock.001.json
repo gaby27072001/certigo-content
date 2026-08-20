@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-5.backup-vault-lock.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Les sauvegardes de plusieurs services AWS doivent résister à un administrateur compromis. Après une période de grâce, personne ne doit pouvoir raccourcir la rétention ni supprimer le verrou avant son expiration. Quelle configuration utiliser ?",
+  "choices": [
+    "AWS Backup Vault Lock en mode conformité dans un coffre de sauvegarde séparé, avec politiques de copie intercompte",
+    "Un tag `DoNotDelete=true` sans politique IAM",
+    "Un compartiment S3 standard sans versioning",
+    "Une règle EventBridge qui envoie seulement un e-mail lors d'une suppression"
+  ]
+}

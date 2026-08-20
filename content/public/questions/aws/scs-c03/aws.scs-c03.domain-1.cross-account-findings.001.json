@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-1.cross-account-findings.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "L'équipe sécurité veut appliquer les mêmes contrôles AWS Security Hub à 180 comptes répartis sur plusieurs Régions, centraliser les conclusions dans une Région d'agrégation et éviter une configuration manuelle par compte. Quelle solution est la plus adaptée ?",
+  "choices": [
+    "Désigner un administrateur délégué Security Hub, utiliser la configuration centrale avec des politiques par OU et configurer une Région d'agrégation",
+    "Créer une règle Amazon EventBridge indépendante dans chaque compte sans administrateur délégué",
+    "Activer AWS Config uniquement dans le compte de management de l'organisation",
+    "Copier chaque conclusion dans un compartiment S3 public pour permettre l'analyse intercompte"
+  ]
+}

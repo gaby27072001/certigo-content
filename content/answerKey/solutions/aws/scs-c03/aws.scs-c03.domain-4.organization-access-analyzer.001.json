@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-4.organization-access-analyzer.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Créer un analyseur IAM Access Analyzer de type organisation dans le compte administrateur délégué et traiter ses conclusions",
+  "rationale": "Un analyseur de zone de confiance organisationnelle évalue les politiques de ressource des comptes membres et signale les accès externes. L'administration déléguée évite d'opérer depuis le compte de management. Policy Simulator répond à des requêtes ponctuelles et Inspector ne recherche pas les accès externes aux politiques S3, KMS ou IAM."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-3.symmetric-inspection.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Toutes les communications est-ouest entre VPC doivent traverser AWS Network Firewall dans un VPC d'inspection relié à Transit Gateway. Des flux stateful sont abandonnés lorsque l'aller et le retour utilisent des appliances dans des AZ différentes. Quelle correction appliquer ?",
+  "choices": [
+    "Activer le mode appliance sur l'attachement Transit Gateway d'inspection et aligner les tables de routage par AZ pour conserver la symétrie",
+    "Activer la propagation de toutes les routes dans toutes les tables Transit Gateway",
+    "Remplacer Network Firewall par un compartiment S3",
+    "Désactiver le suivi d'état des règles sans modifier le routage"
+  ]
+}

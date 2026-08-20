@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-1.segmented-transit-design.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Un Transit Gateway régional partagé via AWS RAM, des tables de routage distinctes par segment et des Transit Gateway peerings inter-Région contrôlés",
+  "rationale": "Transit Gateway réduit la connectivité à un modèle hub-and-spoke et AWS RAM permet le partage intercompte. Des tables séparées contrôlent les domaines de routage, et le peering relie explicitement les hubs régionaux. Un full mesh de peerings ne passe pas à l'échelle et une table unique détruit la segmentation."
+}

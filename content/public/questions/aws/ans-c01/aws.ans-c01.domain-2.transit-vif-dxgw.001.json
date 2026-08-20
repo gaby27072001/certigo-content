@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-2.transit-vif-dxgw.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Un datacenter doit atteindre des VPC rattachés à Transit Gateway dans plusieurs comptes par une seule connexion Direct Connect. L'équipe veut éviter un private VIF par VPC. Quelle implémentation utiliser ?",
+  "choices": [
+    "Créer un transit VIF vers un Direct Connect gateway associé au Transit Gateway, puis échanger les routes par BGP",
+    "Créer un public VIF et annoncer les adresses privées de chaque VPC sur Internet",
+    "Créer un interface VPC endpoint pour Direct Connect",
+    "Associer la connexion Direct Connect directement à une Internet Gateway"
+  ]
+}

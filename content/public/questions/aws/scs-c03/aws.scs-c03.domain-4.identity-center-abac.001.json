@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-4.identity-center-abac.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une entreprise fédère son annuaire dans IAM Identity Center pour 200 comptes. Les droits doivent suivre automatiquement le département et l'environnement des employés, sans créer un rôle distinct pour chaque combinaison. Quelle stratégie adopter ?",
+  "choices": [
+    "Configurer les attributs de contrôle d'accès dans IAM Identity Center et des permission sets utilisant des conditions sur principal tags et resource tags",
+    "Créer un utilisateur IAM identique dans chaque compte et partager son mot de passe",
+    "Accorder AdministratorAccess à tous les groupes de l'annuaire",
+    "Utiliser uniquement des Network ACL pour autoriser les appels d'API AWS"
+  ]
+}

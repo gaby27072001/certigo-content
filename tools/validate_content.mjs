@@ -191,6 +191,25 @@ function validateCatalogSemantics(catalog, err) {
         `[catalog:lifecycle] ${certification.id}: statut ${certification.status} incompatible avec la date du snapshot ${catalog.asOf}`
       );
     }
+    if (certification.status === "active-retiring") {
+      const { lastExamOn, recommendThrough, reviewOn } = certification.lifecycle ?? {};
+      if (!lastExamOn || !reviewOn) {
+        err(
+          `[catalog:lifecycle] ${certification.id}: lastExamOn et reviewOn sont requis pour active-retiring`
+        );
+      } else {
+        if (recommendThrough && recommendThrough > lastExamOn) {
+          err(
+            `[catalog:lifecycle] ${certification.id}: recommendThrough ne peut pas depasser lastExamOn`
+          );
+        }
+        if (reviewOn <= lastExamOn) {
+          err(
+            `[catalog:lifecycle] ${certification.id}: reviewOn doit etre posterieur a lastExamOn`
+          );
+        }
+      }
+    }
 
     checkOfficialUrl(certification.officialUrl, provider, `${certification.id}.officialUrl`, err);
     checkOfficialUrl(certification.guide.url, provider, `${certification.id}.guide.url`, err);

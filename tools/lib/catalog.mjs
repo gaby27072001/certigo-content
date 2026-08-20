@@ -35,6 +35,12 @@ export function isCertificationActiveOn(certification, dateValue) {
   return dateValue <= certification.lifecycle.lastExamOn;
 }
 
+export function isCertificationRecommendedOn(certification, dateValue) {
+  if (!isCertificationActiveOn(certification, dateValue)) return false;
+  if (!certification.lifecycle?.recommendThrough) return true;
+  return dateValue <= certification.lifecycle.recommendThrough;
+}
+
 export function metadataFields(payload) {
   if (
     !["v3", "v4"].includes(payload?.schemaVersion) ||

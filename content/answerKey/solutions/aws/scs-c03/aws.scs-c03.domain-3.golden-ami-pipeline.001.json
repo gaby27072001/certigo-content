@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-3.golden-ami-pipeline.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Utiliser EC2 Image Builder avec composants de durcissement et tests, intégrer les résultats Amazon Inspector et ne distribuer que les images conformes",
+  "rationale": "Image Builder fournit une chaîne reproductible de construction, test et distribution d'AMI. Inspector apporte la visibilité sur les vulnérabilités des images et ressources prises en charge, ce qui permet de bloquer la promotion selon la politique. Une construction manuelle ne garantit ni cadence ni traçabilité, et Macie cible les données sensibles dans S3."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-3.vpn-mtu-failover.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application fonctionne sur Direct Connect avec des trames jumbo, mais lors du basculement vers Site-to-Site VPN, les petits paquets passent et les transferts volumineux se figent. Les messages ICMP nécessaires à Path MTU Discovery sont filtrés sur site. Quelle correction est la plus appropriée ?",
+  "choices": [
+    "Autoriser Path MTU Discovery et ajuster le MSS ou la MTU au chemin VPN pour tenir compte de l'overhead IPsec",
+    "Forcer une MTU de 9001 octets sur tous les tunnels VPN",
+    "Désactiver BGP sur Direct Connect uniquement",
+    "Augmenter le TTL DNS de l'application"
+  ]
+}

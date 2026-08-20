@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-4.traffic-mirroring-ids.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une équipe de détection doit fournir à une flotte IDS le payload des paquets provenant seulement des interfaces réseau de serveurs critiques. Les journaux de flux ne suffisent pas. Quelle fonctionnalité utiliser ?",
+  "choices": [
+    "VPC Traffic Mirroring avec filtres de session vers des appliances de collecte dimensionnées",
+    "VPC Flow Logs avec le champ `action` uniquement",
+    "AWS CloudTrail Lake sans source réseau",
+    "Route 53 health checks sur les instances"
+  ]
+}

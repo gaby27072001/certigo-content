@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-2.ipam-automation.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Amazon VPC IP Address Manager avec administrateur délégué, pools partagés via AWS RAM et allocations référencées par les modèles",
+  "rationale": "VPC IPAM centralise l'inventaire et l'allocation des préfixes, applique les règles de pool et empêche les allocations concurrentes qui se chevauchent. L'administration déléguée et RAM conviennent au modèle multi-compte. Les feuilles, valeurs codées en dur et tirages sans état créent des collisions et de la dérive."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-1.global-static-entry.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une application mondiale expose un protocole TCP propriétaire non mis en cache depuis des Network Load Balancers dans trois Régions. Les clients industriels exigent deux adresses IP anycast statiques, un acheminement vers la Région saine la plus proche et un basculement rapide. Quel service placer devant les NLB ?",
+  "choices": [
+    "AWS Global Accelerator avec les NLB comme endpoints régionaux",
+    "Amazon CloudFront avec un comportement de cache de 24 heures",
+    "Une zone privée Route 53 accessible uniquement dans un VPC",
+    "Une passerelle Internet par client industriel"
+  ]
+}

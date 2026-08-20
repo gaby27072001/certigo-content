@@ -1,0 +1,13 @@
+{
+  "id": "aws.ans-c01.domain-2.tgw-route-segmentation.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Associer prod et dev à des tables distinctes, limiter les propagations, ajouter des routes par défaut vers l'inspection et propager seulement les préfixes partagés nécessaires",
+  "rationale": "L'association détermine la table consultée par le trafic entrant d'un attachement, et la propagation contrôle les routes apprises. Des tables séparées et des routes explicites vers l'inspection empêchent la communication directe tout en autorisant les préfixes partagés. La table par défaut commune créerait une connectivité indésirable."
+}

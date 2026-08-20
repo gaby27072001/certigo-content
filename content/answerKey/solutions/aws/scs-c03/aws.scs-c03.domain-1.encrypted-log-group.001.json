@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-1.encrypted-log-group.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Autoriser le principal de service régional CloudWatch Logs dans la politique KMS, avec un contexte de chiffrement limité au groupe de journaux",
+  "rationale": "CloudWatch Logs, et non le code Lambda, utilise la clé pour chiffrer les données du groupe. La politique de clé doit donc autoriser le principal `logs.<region>.amazonaws.com`, idéalement contraint par le contexte de chiffrement du groupe. Une NAT n'est pas requise pour ce mécanisme de service et une clé asymétrique ne chiffre pas les journaux."
+}

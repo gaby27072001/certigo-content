@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-2.forensic-readiness.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "prompt": "Une organisation veut pouvoir enquêter sur un compte compromis même si les administrateurs de ce compte ont modifié ses rôles locaux. Le temps de préparation pendant l'incident doit être minimal. Quelle mesure de préparation est la plus robuste ?",
+  "choices": [
+    "Créer pendant chaque incident un utilisateur IAM administrateur dans le compte compromis",
+    "Préprovisionner par StackSets un rôle de réponse intercompte à confiance restreinte, des runbooks Systems Manager et une journalisation centralisée immuable",
+    "Partager le mot de passe root de chaque compte avec toute l'équipe SOC",
+    "S'appuyer uniquement sur les instantanés automatiques créés par les propriétaires d'applications"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-4.permission-intersection.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "correct": "Examiner les refus explicites et l'intersection entre politique d'identité, permission boundary, session policy, SCP et politique de ressource à l'aide des événements et outils d'analyse IAM",
+  "rationale": "Les autorisations effectives résultent de l'intersection des limites applicables, et un refus explicite l'emporte sur un Allow. Ajouter une autre politique d'identité ne contourne ni boundary, ni session policy, ni SCP. Les journaux CloudTrail et les outils IAM aident à identifier la couche qui bloque l'appel."
+}

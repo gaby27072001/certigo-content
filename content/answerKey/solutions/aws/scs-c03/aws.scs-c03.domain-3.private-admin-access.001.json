@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-3.private-admin-access.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "correct": "Systems Manager Session Manager avec endpoints VPC nécessaires, rôles IAM et journalisation des sessions vers CloudWatch Logs ou S3",
+  "rationale": "Session Manager fournit un accès administrateur sans port entrant ni clé SSH persistante, gouverné par IAM et auditable. Les endpoints VPC permettent de garder le trafic de gestion privé, et la journalisation centralisée répond à l'exigence d'audit. Un bastion ou des adresses publiques réintroduisent une surface exposée et des secrets à gérer."
+}

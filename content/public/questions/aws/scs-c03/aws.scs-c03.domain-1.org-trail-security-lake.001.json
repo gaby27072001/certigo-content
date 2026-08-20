@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-1.org-trail-security-lake.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Une entreprise AWS Organizations doit conserver les événements de gestion de tous les comptes et de toutes les Régions dans un compte d'archivage, intégrer automatiquement les nouveaux comptes et permettre des corrélations OCSF avec les journaux de sécurité. Quelle architecture répond le mieux à ces exigences ?",
+  "choices": [
+    "Créer un journal CloudTrail multi-Région dans chaque compte et laisser chaque équipe choisir son compartiment S3",
+    "Créer un journal d'organisation CloudTrail multi-Région vers un compartiment S3 dédié et protégé, puis déléguer Amazon Security Lake pour agréger les sources de l'organisation",
+    "Activer uniquement l'historique des événements CloudTrail de 90 jours dans le compte de management",
+    "Envoyer seulement les conclusions Amazon GuardDuty vers un groupe CloudWatch Logs central"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-4.flow-log-forensics.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Le SOC doit rechercher pendant un an quels flux ont été acceptés ou refusés entre sous-réseaux et Transit Gateway, avec requêtes Athena à faible coût. Le contenu des paquets n'est pas nécessaire. Quelle solution choisir ?",
+  "choices": [
+    "VPC Flow Logs et Transit Gateway Flow Logs livrés dans S3 en format Parquet avec partitionnement compatible Athena",
+    "VPC Traffic Mirroring de toutes les interfaces vers une appliance sans stockage",
+    "Uniquement les journaux DNS du registrar",
+    "Des métriques CPU EC2 agrégées dans CloudWatch"
+  ]
+}

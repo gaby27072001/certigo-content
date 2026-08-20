@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-5.external-key-store.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-5"
+  },
+  "prompt": "Une charge doit utiliser les API AWS KMS, mais la politique impose que le matériel de clé reste exclusivement dans des HSM exploités sur site. L'entreprise accepte la dépendance de disponibilité et de latence envers son infrastructure. Quelle option répond à cette contrainte ?",
+  "choices": [
+    "Une clé KMS dans un external key store connecté aux HSM externes",
+    "Une clé AWS owned key sans contrôle client",
+    "Une clé KMS multi-Région dont le matériel est généré par AWS",
+    "Un certificat public ACM exporté comme clé de chiffrement de données"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-3.private-admin-access.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Des instances EC2 sensibles n'ont ni adresse publique ni règle entrante. Les administrateurs doivent obtenir un shell à la demande avec contrôle IAM, journal de session chiffré et aucune gestion de clés SSH. Quelle solution convient ?",
+  "choices": [
+    "Systems Manager Session Manager avec endpoints VPC nécessaires, rôles IAM et journalisation des sessions vers CloudWatch Logs ou S3",
+    "Un bastion public partagé avec une clé SSH commune",
+    "EC2 Instance Connect Endpoint avec une règle SSH ouverte à Internet",
+    "Une adresse Elastic IP sur chaque instance et une liste blanche permanente"
+  ]
+}

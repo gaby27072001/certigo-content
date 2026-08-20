@@ -105,6 +105,11 @@ function createHistoricalV2Root() {
       certifications: ["aip-c01", "dop-c02", "sap-c02"],
       pairCount: 72,
     },
+    {
+      provider: "aws",
+      certifications: ["ans-c01", "scs-c03"],
+      pairCount: 48,
+    },
   ];
   for (const wave of wavesAfterRuntimeV2) {
     for (const channel of [
@@ -144,6 +149,9 @@ function createHistoricalV2Root() {
       );
     }
   }
+  delete catalog.certifications.find(
+    (certification) => certification.id === "aws:ans-c01"
+  ).lifecycle.recommendThrough;
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
   for (const { provider, certifications } of wavesAfterRuntimeV2) {
@@ -157,7 +165,7 @@ function createHistoricalV2Root() {
         `${certification}.json`
       );
       const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
-      matrix.status = "planned";
+      matrix.status = certification === "ans-c01" ? "retiring" : "planned";
       for (const objective of matrix.objectives) objective.questionIds = [];
       writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
     }
@@ -230,7 +238,7 @@ test("conserve le package v2 courant byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72);
+  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48);
   assert.equal(result.release, null);
   assert.equal(existsSync(resolve(outDir, "release.json")), false);
   assert.deepEqual(
@@ -239,18 +247,18 @@ test("conserve le package v2 courant byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:22a70252077a1a52d34218b6a3419c237e41e260386e20fd293593e086b7073a",
+          "sha256:d7e4165481258924c0bfcc40e5b5fd7fe9f1abb58a749b5d4128b037b75cf094",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:f6765b9559d9c7acc8e4207ef1351c2db6ac05b2dd99e131bf0e8179d30a3a95",
+          "sha256:2ed0d90a933e393dc53ad2f98510822461ee9a71ff68ae4f5f8f0c5e337f747d",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "2c8a6ab8732a703a84f70bf0dae3f1e51cd443a6a0852af4abb938dcd7d1a431"
+    "8672db170f87a3241a8e39fa9111691d3d88f248c2b08966dd8519df5332a5c0"
   );
 });
 

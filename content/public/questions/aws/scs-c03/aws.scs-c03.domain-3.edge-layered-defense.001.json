@@ -1,0 +1,18 @@
+{
+  "id": "aws.scs-c03.domain-3.edge-layered-defense.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Une API mondiale derrière un ALB subit des attaques volumétriques et des rafales HTTP ciblant des chemins coûteux. L'entreprise veut des règles gérées OWASP, une limitation par client et une protection DDoS avec accès à l'équipe de réponse AWS. Quelle combinaison choisir ?",
+  "choices": [
+    "CloudFront devant l'ALB, une web ACL AWS WAF avec règles gérées et rate-based rules, et AWS Shield Advanced",
+    "Un Network ACL qui autorise tous les ports et Amazon Inspector sur l'ALB",
+    "Une passerelle NAT par Région sans CloudFront",
+    "Uniquement des groupes de sécurité avec une règle par URL HTTP"
+  ]
+}

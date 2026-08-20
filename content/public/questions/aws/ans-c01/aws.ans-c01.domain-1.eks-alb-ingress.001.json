@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-1.eks-alb-ingress.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "prompt": "Un cluster EKS héberge plusieurs services HTTP qui doivent partager une entrée, router selon l'hôte et le chemin, terminer TLS avec ACM et appliquer AWS WAF. Quelle intégration réseau recommander ?",
+  "choices": [
+    "AWS Load Balancer Controller créant un Application Load Balancer avec règles d'écoute et web ACL",
+    "Un Classic Load Balancer distinct par pod",
+    "Un Gateway Load Balancer comme reverse proxy HTTP applicatif",
+    "Un Network Load Balancer sans terminaison TLS ni règles de couche 7"
+  ]
+}

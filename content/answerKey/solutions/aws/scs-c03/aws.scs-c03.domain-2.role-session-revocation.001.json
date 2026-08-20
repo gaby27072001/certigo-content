@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-2.role-session-revocation.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-2"
+  },
+  "correct": "Révoquer les sessions actives du rôle, corriger la politique de confiance et rechercher leur usage dans CloudTrail",
+  "rationale": "Modifier la confiance empêche de nouvelles sessions mais n'invalide pas à elle seule les informations d'identification temporaires déjà émises. La révocation des sessions du rôle ajoute un refus pour les sessions antérieures, puis CloudTrail permet d'en mesurer l'usage. Renommer le rôle ou faire tourner une clé sans rapport ne traite pas les sessions STS existantes."
+}

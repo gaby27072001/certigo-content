@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-4.private-ip-vpn-over-dx.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-4"
+  },
+  "prompt": "Une entreprise utilise Transit Gateway et Direct Connect pour ses réseaux privés. Une nouvelle exigence impose un chiffrement IPsec de bout en bout sur le chemin Direct Connect, sans passer par Internet et en conservant le routage privé. Quelle option est adaptée ?",
+  "choices": [
+    "Configurer une AWS Site-to-Site VPN à adresses IP privées au-dessus du transit VIF Direct Connect et du Transit Gateway",
+    "Supposer que Direct Connect chiffre toujours les trames par défaut",
+    "Créer un public VIF et publier les préfixes privés sur Internet",
+    "Activer HTTPS uniquement sur la console AWS"
+  ]
+}

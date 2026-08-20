@@ -1,0 +1,13 @@
+{
+  "id": "aws.scs-c03.domain-1.dns-egress-detection.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:scs-c03",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-1"
+  },
+  "correct": "Route 53 Resolver query logging ainsi que les VPC Flow Logs et Transit Gateway Flow Logs, livrés au compte de sécurité",
+  "rationale": "Resolver query logging fournit les noms interrogés et le contexte DNS, tandis que les journaux de flux VPC et Transit Gateway donnent les métadonnées réseau nécessaires à la corrélation. Cette combinaison couvre le chemin décrit sans le coût ni la complexité d'une capture de paquets généralisée. Les journaux ALB et S3 n'observent pas ces requêtes DNS."
+}

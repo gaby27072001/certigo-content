@@ -1,0 +1,18 @@
+{
+  "id": "aws.ans-c01.domain-3.dx-bgp-preference.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:ans-c01",
+    "blueprintVersion": "2026-08-17",
+    "objective": "domain-3"
+  },
+  "prompt": "Deux connexions Direct Connect annoncent les mêmes préfixes sur site à AWS. Le trafic AWS vers le datacenter doit préférer la connexion primaire, tout en gardant la seconde en secours sans annoncer de préfixe plus spécifique. Quel mécanisme utiliser ?",
+  "choices": [
+    "Appliquer aux annonces BGP les communautés de préférence locale AWS avec une valeur plus élevée sur la liaison primaire",
+    "Changer uniquement le TTL des enregistrements Route 53 privés",
+    "Ajouter une route statique dans une Internet Gateway",
+    "Utiliser des security groups différents sur les virtual interfaces"
+  ]
+}
