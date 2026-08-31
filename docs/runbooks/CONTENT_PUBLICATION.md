@@ -77,22 +77,21 @@ Pour chaque prefixe, le script :
 
 1. refuse les symlinks et une identite incoherente avec le chemin ;
 2. refuse un conteneur anonyme ;
-3. exige une policy WORM temporelle positive, `Unlocked` ou `Locked`, sans
-   append protege ;
+3. exige une policy WORM temporelle positive et `Locked`, sans append protege ;
 4. cree uniquement les blobs absents avec OAuth et `--overwrite false` ;
 5. relit chaque blob et compare son SHA-256 ;
-6. exige `application/json`, le Cache-Control attendu, un `versionId` et une
-   policy d'immutabilite non vide ou un legal hold ;
+6. exige `application/json`, le Cache-Control attendu, un `versionId`, une
+   policy de blob `Locked` et une retention non vide ou un legal hold ;
 7. compare la liste distante exacte au plan.
 
-Le workflow ne supprime rien, ne verrouille aucune policy et ne deplace aucun
+Le workflow ne supprime rien, ne modifie aucune policy et ne deplace aucun
 alias. Une collision ou un blob supplementaire bloque la publication.
 
 ## Procedure operateur
 
 1. Verifier que #290 est provisionne et que les trois Environments/variables
    correspondent exactement a ses outputs.
-2. Conserver les policies WORM `Unlocked` pendant le pilote staging.
+2. Verifier que les policies WORM sont `Locked` avant le pilote staging.
 3. Lancer le workflow manuellement depuis `main` et approuver separement les
    environnements public, answer-key puis release.
 4. Conserver les trois IDs du job summary et les logs de relecture.

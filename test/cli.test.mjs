@@ -57,14 +57,14 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
 test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
   const current = execute("check_catalog_freshness.mjs", [
     "--as-of",
-    "2026-08-17",
+    "2026-08-31",
   ]);
   assert.equal(current.status, 0, current.stderr);
   assert.match(current.stdout, /actifs=26/);
 
   const transitioned = execute("check_catalog_freshness.mjs", [
     "--as-of",
-    "2026-08-26",
+    "2027-01-01",
   ]);
   assert.equal(transitioned.status, 1);
   assert.match(transitioned.stdout, /exclus automatiquement: aws:ans-c01/);

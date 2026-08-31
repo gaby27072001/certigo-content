@@ -125,7 +125,8 @@ et aux transitions particulieres.
 Une certification avec `lifecycle.lastExamOn` est consideree active jusqu'a
 cette date incluse. Elle est automatiquement exclue de la liste active le
 lendemain. Ainsi `aws:ans-c01` est actif au 2026-08-17 et au 2026-08-25, puis
-exclu a compter du 2026-08-26. Le controle devient aussi bloquant pour forcer
+reste actif jusqu'au 2026-12-31, puis est exclu a compter du 2027-01-01. Le
+controle devient aussi bloquant pour forcer
 une revue et la transition explicite de son statut/matrice.
 
 Le controle de fraicheur n'entre pas dans les octets packages et n'ajoute

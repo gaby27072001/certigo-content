@@ -57,12 +57,13 @@ Le script `tools/publish_blob_artifact.sh` :
 
 1. refuse tout prefixe incoherent avec le `manifestId` ou `releaseId` source ;
 2. refuse un conteneur avec acces anonyme ;
-3. exige une politique WORM temporelle `Unlocked` ou `Locked`, une retention
-   positive et aucun append protege ;
+3. exige une politique WORM temporelle `Locked`, une retention positive et
+   aucun append protege ;
 4. cree uniquement les blobs absents avec `--overwrite false` et
    `--auth-mode login` ;
 5. telecharge chaque blob et compare son SHA-256 aux octets locaux ;
-6. exige un `versionId` et une immutabilite temporelle ou un legal hold ;
+6. exige un `versionId`, une policy de blob `Locked` et une immutabilite
+   temporelle ou un legal hold ;
 7. verifie `Content-Type`, `Cache-Control` et la liste exacte des blobs du
    prefixe.
 

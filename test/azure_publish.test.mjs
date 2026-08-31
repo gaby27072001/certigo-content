@@ -78,8 +78,11 @@ test("interdit les secrets statiques, alias mutables, delete et overwrite", () =
   assert.match(contract, /--overwrite false/);
   assert.match(contract, /sha256sum/);
   assert.match(contract, /versionId/);
+  assert.match(contract, /immutabilityPolicy\.policyMode/);
   assert.match(contract, /immutabilityPolicy\.expiryTime/);
   assert.match(contract, /hasLegalHold/);
+  assert.match(contract, /policy_state}" != "Locked"/);
+  assert.doesNotMatch(contract, /Locked\|Unlocked/);
   assert.doesNotMatch(contract, /az storage blob delete/);
 });
 
@@ -132,7 +135,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 case "\${command}" in
   "storage container show") printf 'None\\n' ;;
-  "storage container immutability-policy") printf 'Unlocked\\t30\\tfalse\\tfalse\\n' ;;
+  "storage container immutability-policy") printf 'Locked\\t30\\tfalse\\tfalse\\n' ;;
   "storage blob exists")
     [[ -f "\${MOCK_STATE}/\${name}" ]] && printf 'true\\n' || printf 'false\\n'
     ;;
@@ -144,7 +147,7 @@ case "\${command}" in
     mkdir -p "\$(dirname "\${file}")"
     cp "\${MOCK_STATE}/\${name}" "\${file}"
     ;;
-  "storage blob show") printf 'application/json\\t%s\\tversion-1\\t2099-01-01T00:00:00Z\\tfalse\\n' "\${MOCK_CACHE}" ;;
+  "storage blob show") printf 'application/json\\t%s\\tversion-1\\tLocked\\t2099-01-01T00:00:00Z\\tfalse\\n' "\${MOCK_CACHE}" ;;
   "storage blob list")
     (cd "\${MOCK_STATE}" && find "\${prefix}" -type f -print | sort)
     ;;

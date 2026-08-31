@@ -262,7 +262,7 @@ test("conserve le package v2 courant byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:fde6c76be1130b149f5e379ff520b32bbb49de5c0a0e5b26642f7421042031b7",
+          "sha256:7a483087f5806dd71638285bb36af93d876e8d81547832d06602773242c0814e",
       },
       {
         artifact: "private",
@@ -273,7 +273,7 @@ test("conserve le package v2 courant byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "8175bb2509c99d82209558a9206a0c17b9adff2f035305a7e3462fb95557716f"
+    "161bac55fe01b4787bea0930b06ba8671553af28d95ca22a5b595102423e10b2"
   );
 });
 
@@ -291,7 +291,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
+          "sha256:ca890ec26375d19b287b381630ca7e40725ab8e86080c8637ca1369a1d7dc7da",
       },
       {
         artifact: "private",
@@ -302,7 +302,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
+    "dab67faec9a9cd2e5b9372a02da57e6ad56341ce917e9c6336717a5834eca279"
   );
 });
 

@@ -100,11 +100,11 @@ IFS=$'\t' read -r policy_state policy_days append_writes append_writes_all < <(
     --output tsv \
     --only-show-errors
 )
-if [[ ! "${policy_state}" =~ ^(Locked|Unlocked)$ ||
+if [[ "${policy_state}" != "Locked" ||
       ! "${policy_days}" =~ ^[1-9][0-9]*$ ||
       "${append_writes}" == "true" ||
       "${append_writes_all}" == "true" ]]; then
-  echo "[azure-publish] politique WORM temporelle sans append protege requise" >&2
+  echo "[azure-publish] politique WORM verrouillee sans append protege requise" >&2
   exit 66
 fi
 
@@ -177,14 +177,14 @@ publish_file() {
     exit 67
   fi
 
-  local remote_content_type remote_cache_control version_id immutable_until legal_hold
-  IFS=$'\t' read -r remote_content_type remote_cache_control version_id immutable_until legal_hold < <(
+  local remote_content_type remote_cache_control version_id policy_mode immutable_until legal_hold
+  IFS=$'\t' read -r remote_content_type remote_cache_control version_id policy_mode immutable_until legal_hold < <(
     az storage blob show \
       --account-name "${storage_account}" \
       --container-name "${storage_container}" \
       --name "${blob_name}" \
       --auth-mode login \
-      --query '[properties.contentSettings.contentType, properties.contentSettings.cacheControl, versionId, immutabilityPolicy.expiryTime, hasLegalHold]' \
+      --query '[properties.contentSettings.contentType, properties.contentSettings.cacheControl, versionId, immutabilityPolicy.policyMode, immutabilityPolicy.expiryTime, hasLegalHold]' \
       --output tsv \
       --only-show-errors
   )
@@ -192,7 +192,8 @@ publish_file() {
         "${remote_cache_control}" != "${cache_control}" ||
         -z "${version_id}" ||
         "${version_id}" == "None" ||
-        "${version_id}" == "null" ]]; then
+        "${version_id}" == "null" ||
+        "${policy_mode}" != "Locked" ]]; then
     echo "[azure-publish] version ou proprietes immuables invalides: ${blob_name}" >&2
     exit 68
   fi
