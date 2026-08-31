@@ -20,16 +20,16 @@ couverture.
 
 ## Cycle de vie
 
-AWS annonce le 2026-08-25 comme dernier jour de passage de l'examen. Le
+AWS annonce le 2026-12-31 comme dernier jour de passage de l'examen. Le
 catalogue conserve donc :
 
 - catalogue de certification : `status: active-retiring` ;
-- `lastExamOn: 2026-08-25` ;
-- `recommendThrough: 2026-08-25` ;
-- `reviewOn: 2026-08-26`.
+- `lastExamOn: 2026-12-31` ;
+- `recommendThrough: 2026-12-31` ;
+- `reviewOn: 2027-01-01`.
 
 Le gate `isCertificationRecommendedOn` autorise la recommandation jusqu'au
-2026-08-25 inclus et l'interdit des le 2026-08-26. Les questions et solutions
+2026-12-31 inclus et l'interdit des le 2027-01-01. Les questions et solutions
 ne sont pas supprimees : elles restent disponibles comme corpus historique,
 avec une matrice `retiring` jusqu'a la transition catalogue `retired`.
 

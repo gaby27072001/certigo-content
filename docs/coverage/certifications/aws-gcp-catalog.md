@@ -21,7 +21,7 @@ d'examen officiels AWS et Google Cloud.
 | DOP-C02 | AWS Certified DevOps Engineer - Professional | Professional | active | version/date non publiees |
 | AIP-C01 | AWS Certified Generative AI Developer - Professional | Professional | active | version/date non publiees |
 | SAP-C02 | AWS Certified Solutions Architect - Professional | Professional | active | version/date non publiees |
-| ANS-C01 | AWS Certified Advanced Networking - Specialty | Specialty | active-retiring, derniere session 2026-08-25 | version/date non publiees |
+| ANS-C01 | AWS Certified Advanced Networking - Specialty | Specialty | active-retiring, derniere session 2026-12-31 | version/date non publiees |
 | SCS-C03 | AWS Certified Security - Specialty | Specialty | active | v1.0, 2026-03-26 |
 
 Domaines officiels :
@@ -119,9 +119,9 @@ snapshot.
 | Specialty | SCS-C03 et ANS-C01 tant que ce dernier reste `active-retiring`, avec conservation historique apres retrait. |
 
 ANS-C01 recoit une vague bornee de scenarios originaux pendant sa phase
-`active-retiring`. `lifecycle.recommendThrough` vaut `2026-08-25` : le gate
+`active-retiring`. `lifecycle.recommendThrough` vaut `2026-12-31` : le gate
 `isCertificationRecommendedOn` l'exclut des recommandations a compter du
-2026-08-26. Les paires restent conservables comme contenu historique et la
+2027-01-01. Les paires restent conservables comme contenu historique et la
 matrice passera a `retired` lors de la revue de cycle de vie.
 
 Chaque vague :

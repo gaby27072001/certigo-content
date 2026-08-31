@@ -223,7 +223,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 
   assert.deepEqual(aws, expectedAws);
   assert.deepEqual(gcp, expectedGcp);
-  assert.equal(catalog.asOf, "2026-08-17");
+  assert.equal(catalog.asOf, "2026-08-31");
   assert.ok(aws.includes("aws:aip-c01"));
   assert.ok(!aws.includes("aws:mls-c01"));
 
@@ -231,9 +231,9 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
     (certification) => certification.id === "aws:ans-c01"
   );
   assert.equal(ans.status, "active-retiring");
-  assert.equal(ans.lifecycle.recommendThrough, "2026-08-25");
-  assert.equal(ans.lifecycle.lastExamOn, "2026-08-25");
-  assert.equal(ans.lifecycle.reviewOn, "2026-08-26");
+  assert.equal(ans.lifecycle.recommendThrough, "2026-12-31");
+  assert.equal(ans.lifecycle.lastExamOn, "2026-12-31");
+  assert.equal(ans.lifecycle.reviewOn, "2027-01-01");
   assert.equal(
     readJson(resolve(repoRoot, "content", "public", "coverage", "aws", "ans-c01.json"))
       .status,
@@ -313,10 +313,10 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
     (certification) => certification.id === "aws:ans-c01"
   );
 
-  assert.equal(isCertificationActiveOn(ans, "2026-08-25"), true);
-  assert.equal(isCertificationActiveOn(ans, "2026-08-26"), false);
-  assert.equal(isCertificationRecommendedOn(ans, "2026-08-25"), true);
-  assert.equal(isCertificationRecommendedOn(ans, "2026-08-26"), false);
+  assert.equal(isCertificationActiveOn(ans, "2026-12-31"), true);
+  assert.equal(isCertificationActiveOn(ans, "2027-01-01"), false);
+  assert.equal(isCertificationRecommendedOn(ans, "2026-12-31"), true);
+  assert.equal(isCertificationRecommendedOn(ans, "2027-01-01"), false);
   assert.equal(
     isCertificationActiveOn({ ...ans, status: "retired" }, "2026-08-17"),
     false
@@ -326,14 +326,14 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
     false
   );
 
-  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-17" });
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-31" });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:ans-c01"));
   assert.ok(current.recommendedCertificationIds.includes("aws:ans-c01"));
 
   const transition = checkCatalogFreshness({
     root: repoRoot,
-    asOf: "2026-08-26",
+    asOf: "2027-01-01",
   });
   assert.ok(!transition.activeCertificationIds.includes("aws:ans-c01"));
   assert.ok(transition.excludedCertificationIds.includes("aws:ans-c01"));
@@ -345,9 +345,9 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
 });
 
 test("detecte catalogue stale, date invalide et catalogue absent", () => {
-  const stale = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-17" });
+  const stale = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-01" });
   assert.ok(stale.errors.some((error) => error.includes("snapshot age")));
-  const before = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-16" });
+  const before = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-30" });
   assert.ok(before.errors.some((error) => error.includes("anterieure")));
   assert.throws(() => parseDate("2026-02-30", "test"), /date invalide/);
   assert.throws(() => parseDate("17-08-2026", "test"), /YYYY-MM-DD/);
@@ -653,7 +653,6 @@ test("retourne des erreurs structurees si metadata v3 manque", async () => {
 test("conserve un enregistrement retire tout en l'excluant des actifs", async () => {
   const root = createMetadataRoot();
   const catalog = readJson(catalogAt(root));
-  catalog.asOf = "2026-08-26";
   const ans = catalog.certifications.find(
     (certification) => certification.id === "aws:ans-c01"
   );
@@ -689,7 +688,7 @@ test("rejette les ecarts semantiques du catalogue et les sources non officielles
   catalog.certifications[0].blueprint.objectives[0].weightPercent = 19;
   catalog.certifications.find(
     (certification) => certification.id === "aws:ans-c01"
-  ).lifecycle.recommendThrough = "2026-08-27";
+  ).lifecycle.recommendThrough = "2027-01-01";
   catalog.certifications.reverse();
   writeJson(catalogAt(root), catalog);
   rmSync(resolve(root, "content", "public", "coverage", "aws", "aif-c01.json"));

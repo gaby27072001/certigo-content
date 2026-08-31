@@ -27,6 +27,7 @@ test("les CLI documentent l'aide avec un code de succes", () => {
     "gen_manifest.mjs",
     "validate_content.mjs",
     "package_content.mjs",
+    "publish_release.mjs",
     "compile_runtime.mjs",
     "check_catalog_freshness.mjs",
     "check_artifact_access.mjs",
@@ -42,6 +43,7 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
     ["gen_manifest.mjs", ["--unknown"]],
     ["validate_content.mjs", ["--root"]],
     ["package_content.mjs", ["--channel"]],
+    ["publish_release.mjs", ["--destination"]],
     ["compile_runtime.mjs", ["--out"]],
     ["check_catalog_freshness.mjs", ["--as-of"]],
     ["check_artifact_access.mjs", ["--policy"]],
@@ -55,14 +57,14 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
 test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
   const current = execute("check_catalog_freshness.mjs", [
     "--as-of",
-    "2026-08-17",
+    "2026-08-31",
   ]);
   assert.equal(current.status, 0, current.stderr);
   assert.match(current.stdout, /actifs=26/);
 
   const transitioned = execute("check_catalog_freshness.mjs", [
     "--as-of",
-    "2026-08-26",
+    "2027-01-01",
   ]);
   assert.equal(transitioned.status, 1);
   assert.match(transitioned.stdout, /exclus automatiquement: aws:ans-c01/);

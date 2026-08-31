@@ -50,6 +50,8 @@ un commit donne.
 | `npm run package:public` | Nettoie et regenere `dist/public` sans supprimer `dist/private`. |
 | `npm run package:private` | Nettoie et regenere `dist/private` sans supprimer `dist/public`. |
 | `npm run package:verify` | Revalide fichiers, tailles, hashes et gate anti-fuite dans `dist/`. |
+| `npm run publish:dry-run -- --destination <dir>` | Valide une release runtime et affiche les trois surfaces sans ecrire. |
+| `npm run publish:local -- --destination <dir>` | Publie en create-only dans trois conteneurs filesystem locaux, descripteur en dernier. |
 | `npm run runtime:compile` | Projette localement le contrat canonique vers les documents runtime historiques. |
 | `npm run policy:artifact-access` | Exige un nom pour chaque download-artifact et refuse le prive hors allow-list explicite. |
 
@@ -107,14 +109,15 @@ etc.) est refusee.
 ## Promotion Azure
 
 La promotion durable vers Azure Blob Storage est manuelle, limitee a `main` et
-protegee par deux GitHub Environments independants. Elle utilise GitHub OIDC,
-publie chaque canal sous son `manifestId`, verifie les SHA-256 apres upload et
-ne cree aucun alias mutable. Elle ne provisionne aucune ressource et
-n'interagit pas avec les deploiements Certigo existants.
+protegee par trois GitHub Environments independants. Elle utilise trois UAMI
+OIDC distinctes, publie les arbres public/prive sous leur `manifestId`, puis le
+descripteur sous son `releaseId` en dernier. Chaque blob est relu et verifie,
+sans overwrite, delete, alias mutable ni upload GitHub automatique.
 
 Les prerequis Azure/GitHub, la retention WORM, le lifecycle et le rollback sont
 documentes dans
-[`ADR-0003`](docs/adr/ADR-0003-azure-immutable-promotion.md).
+[`ADR-0003`](docs/adr/ADR-0003-azure-immutable-promotion.md) et le
+[`runbook de publication`](docs/runbooks/CONTENT_PUBLICATION.md).
 
 ## Securite de l'outillage
 
