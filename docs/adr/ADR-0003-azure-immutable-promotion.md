@@ -2,7 +2,7 @@
 
 - Statut : Propose
 - Date : 2026-08-16
-- Portee : publication externe des paquets `public` et `answerKey`
+- Portee : publication externe des paquets `public`, `answerKey` et du descripteur de release
 - Complete : ADR-0001 et ADR-0002
 
 ## Contexte
@@ -14,7 +14,7 @@ existants : ce depot ne provisionne aucune ressource et ne modifie aucune
 configuration de backend, de CDN ou d'application.
 
 Les noms des comptes Storage, des conteneurs et des identites ne sont pas connus
-dans ce depot. Ils sont donc fournis par deux GitHub Environments proteges.
+dans ce depot. Ils sont donc fournis par trois GitHub Environments proteges.
 
 ## Decision
 
@@ -25,39 +25,45 @@ dans ce depot. Ils sont donc fournis par deux GitHub Environments proteges.
 `refs/heads/main`.
 
 Le job `plan` reconstruit les deux paquets, execute toutes les gates et publie
-leurs `manifestId` dans le resume du run. Les jobs de publication dependent de
-ce plan et utilisent des environnements distincts :
+leurs `manifestId` et le `releaseId` dans le resume du run. Les jobs de
+publication dependent de ce plan et utilisent des environnements distincts :
 
 - `azure-content-public` pour le paquet distribuable ;
-- `azure-content-answer-key` pour le corrige reserve au backend.
+- `azure-content-answer-key` pour le corrige reserve au backend ;
+- `azure-content-release` pour le descripteur, publie uniquement apres succes et
+  verification des deux paquets.
 
 Chaque environnement doit exiger des reviewers, interdire l'auto-approbation,
 interdire le bypass administrateur et autoriser uniquement la branche `main`.
-Une promotion `both` demande donc deux approbations independantes.
 
 ### Adressage et immutabilite
 
 Chaque canal est publie sous la cle suivante :
 
 ```text
-releases/sha256/<rootHash>/manifest.json
-releases/sha256/<rootHash>/<payload path>
+content-public-releases/manifests/<publicManifestId>/manifest.json
+content-public-releases/manifests/<publicManifestId>/<payload path>
+content-private-releases/manifests/<privateManifestId>/manifest.json
+content-private-releases/manifests/<privateManifestId>/<payload path>
+content-release-descriptors/releases/<releaseId>/release.json
 ```
 
-Le `rootHash` est la partie hexadecimale du `manifestId`. Il n'existe aucun
-pointeur `latest`, aucune copie de promotion et aucune reecriture d'une cle
-existante.
+Les IDs conservent leur forme `sha256:<64-hex>` dans le chemin. Il n'existe
+aucun pointeur `latest`, aucune copie de promotion et aucune reecriture d'une
+cle existante. Les deux arbres sont publies et verifies avant le descripteur :
+une panne partielle ne rend donc jamais une release importable.
 
 Le script `tools/publish_blob_artifact.sh` :
 
-1. refuse tout prefixe qui ne suit pas le format SHA-256 ci-dessus ;
+1. refuse tout prefixe incoherent avec le `manifestId` ou `releaseId` source ;
 2. refuse un conteneur avec acces anonyme ;
-3. exige une politique WORM verrouillee, une retention positive et aucun
-   append protege ;
+3. exige une politique WORM temporelle `Unlocked` ou `Locked`, une retention
+   positive et aucun append protege ;
 4. cree uniquement les blobs absents avec `--overwrite false` et
    `--auth-mode login` ;
 5. telecharge chaque blob et compare son SHA-256 aux octets locaux ;
-6. verifie `Content-Type`, `Cache-Control` et la liste exacte des blobs du
+6. exige un `versionId` et une immutabilite temporelle ou un legal hold ;
+7. verifie `Content-Type`, `Cache-Control` et la liste exacte des blobs du
    prefixe.
 
 Une relance est idempotente si et seulement si les blobs existants sont
@@ -70,7 +76,7 @@ La connexion utilise GitHub OIDC avec un jeton court et `azure/login`. Aucune
 cle Storage, chaine de connexion ou secret client n'est accepte. Les actions
 GitHub et la version Azure CLI sont epinglees.
 
-Deux identites Microsoft Entra distinctes sont requises. Chacune recoit un role
+Trois UAMI Microsoft Entra distinctes sont requises. Chacune recoit un role
 custom porte sur son conteneur, limite a la lecture de configuration et a
 `blobs/read`/`blobs/write`. Ce role permet create, list, read et le controle
 WORM, mais pas delete. Le role integre `Storage Blob Data Contributor` n'est
@@ -111,7 +117,7 @@ selectionne un ancien `manifestId` approuve et configure le backend ou la future
 distribution CDN pour lire :
 
 ```text
-https://<account>.blob.core.windows.net/<container>/releases/sha256/<rootHash>/manifest.json
+https://<account>.blob.core.windows.net/content-public-releases/manifests/<publicManifestId>/manifest.json
 ```
 
 Le manifeste et ses payloads sont verifies avant le changement de configuration.
@@ -132,14 +138,14 @@ jamais par ce workflow.
    conteneur, sans append protege. Tester la duree avant verrouillage.
 4. Configurer le lifecycle approuve. Ne pas activer de suppression tant que la
    duree de rollback n'a pas ete formellement decidee.
-5. Creer deux user-assigned managed identities, ou deux applications Entra
-   dediees si une managed identity n'est pas disponible.
+5. Creer trois user-assigned managed identities dediees.
 6. Ajouter une credential federee GitHub par identite avec audience
    `api://AzureADTokenExchange` et sujet lie a l'environnement :
 
    ```text
    repo:gchambaud_microsoft/certigo-content:environment:azure-content-public
    repo:gchambaud_microsoft/certigo-content:environment:azure-content-answer-key
+   repo:gchambaud_microsoft/certigo-content:environment:azure-content-release
    ```
 
    Si le depot utilise les claims OIDC immuables GitHub introduits en 2026,
@@ -171,7 +177,7 @@ jamais par ce workflow.
    /subscriptions/<subscription>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<account>/blobServices/default/containers/<container>
    ```
 
-8. Creer les deux GitHub Environments et y definir les variables suivantes,
+8. Creer les trois GitHub Environments et y definir les variables suivantes,
    avec des valeurs propres a chaque canal :
 
    | Variable | Valeur |
@@ -188,12 +194,15 @@ jamais par ce workflow.
 
    | Variable | Format |
    | --- | --- |
-   | `AZURE_PUBLIC_STORAGE_TARGET` | `<account>/<public-container>` |
-   | `AZURE_ANSWER_KEY_STORAGE_TARGET` | `<account>/<answer-key-container>` |
+   | `CONTENT_PUBLISH_ENABLED` | Doit valoir exactement `true` |
+   | `AZURE_RELEASE_STORAGE_TARGET` | `<account>/content-release-descriptors` |
+   | `AZURE_PUBLIC_STORAGE_TARGET` | `<account>/content-public-releases` |
+   | `AZURE_ANSWER_KEY_STORAGE_TARGET` | `<account>/content-private-releases` |
+   | `AZURE_RELEASE_CLIENT_ID` | Client ID de l'identite descripteur |
    | `AZURE_PUBLIC_CLIENT_ID` | Client ID de l'identite publique |
    | `AZURE_ANSWER_KEY_CLIENT_ID` | Client ID de l'identite answer key |
 
-   Les deux cibles et les deux Client IDs doivent etre distincts. Chaque valeur
+   Les trois cibles et les trois Client IDs doivent etre distincts. Chaque valeur
    d'environnement est comparee aux outputs normalises du job `plan` avant
    connexion. Ne pas dupliquer ces quatre variables dans les environnements :
    la topologie de reference est exclusivement au niveau repository.
