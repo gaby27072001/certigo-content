@@ -11,6 +11,7 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { compileRuntime } from "../tools/compile_runtime.mjs";
 
 const ROOT = join(import.meta.dirname, "..");
 
@@ -78,6 +79,26 @@ describe("runtime lifecycle", () => {
         `Empty coverage for ${cert.id}`
       );
     }
+  });
+
+  it("preserves retired tracks as history without compiling them as active", async () => {
+    const outDir = "dist/runtime-lifecycle-test";
+    const retiredTrack = join(
+      ROOT,
+      "content/public/runtime/tracks/microsoft/ai-900/microsoft.ai-900.track.main.json"
+    );
+    assert.equal(JSON.parse(readFileSync(retiredTrack, "utf8")).lifecycle.status, "retired");
+
+    await compileRuntime({ root: ROOT, outDir });
+    assert.equal(
+      existsSync(join(ROOT, outDir, "public", "microsoft.ai-900.track.main.json")),
+      false
+    );
+    assert.equal(
+      existsSync(join(ROOT, outDir, "public", "microsoft.ai-901.track.main.json")),
+      true
+    );
+    rmSync(join(ROOT, outDir), { recursive: true, force: true });
   });
 
   it("package produces byte-for-byte reproducible output", () => {

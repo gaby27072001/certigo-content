@@ -146,6 +146,9 @@ function createHistoricalV2Root() {
 
   const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
   const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  catalog.asOf = "2026-08-17";
+  catalog.freshness.reviewDueOn = "2026-09-16";
+  catalog.providers.find((provider) => provider.id === "aws").checkedOn = "2026-08-17";
   for (const certification of catalog.certifications) {
     if (
       ![
@@ -164,9 +167,15 @@ function createHistoricalV2Root() {
       );
     }
   }
-  delete catalog.certifications.find(
+  const ans = catalog.certifications.find(
     (certification) => certification.id === "aws:ans-c01"
-  ).lifecycle.recommendThrough;
+  );
+  ans.lifecycle = {
+    reviewOn: "2026-08-26",
+    lastExamOn: "2026-08-25",
+    note: "AWS states that August 25, 2026 is the last day to take the exam.",
+  };
+  ans.provenance.checkedOn = "2026-08-17";
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
   // Remove runtime resources and Microsoft content added after the historical baseline
@@ -307,7 +316,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:ca890ec26375d19b287b381630ca7e40725ab8e86080c8637ca1369a1d7dc7da",
+          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
       },
       {
         artifact: "private",
@@ -318,7 +327,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "dab67faec9a9cd2e5b9372a02da57e6ad56341ce917e9c6336717a5834eca279"
+    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
   );
 });
 

@@ -14,6 +14,7 @@ import { argv, cwd } from "node:process";
 import { pathToFileURL } from "node:url";
 import { glob } from "glob";
 import { canonicalize } from "./gen_manifest.mjs";
+import { isCertificationRecommendedOn } from "./lib/catalog.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import { inspectPublicArtifact } from "./package_content.mjs";
 import {
@@ -425,6 +426,12 @@ export async function compileRuntime(options = {}) {
     const certification = catalog.certifications.find(
       (entry) => entry.id === track.certificationId
     );
+    if (!certification) {
+      throw new Error(
+        `[runtime-compile] certification absente pour ${track.certificationId}`
+      );
+    }
+    if (!isCertificationRecommendedOn(certification, catalog.asOf)) continue;
     const compiled =
       track.mode === "guided"
         ? compileGuidedTrack({
