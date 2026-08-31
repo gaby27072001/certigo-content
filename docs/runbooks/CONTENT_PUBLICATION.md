@@ -47,6 +47,35 @@ Sous Windows, le backend filesystem encode uniquement le `:` des IDs en
 `%3A`; les chemins logiques affiches et les cles Azure restent strictement ceux
 du contrat.
 
+## Runtime v3 - construction locale
+
+Materialiser les ressources runtime a partir du catalogue et de la couverture :
+
+```bash
+npm run runtime:materialize       # genere tracks/domains/concepts + couvertures Microsoft v2
+npm run runtime:check             # verifie que les ressources committees sont a jour
+```
+
+Pipeline complete v3 (validate → test → package → verify → reproductibilite) :
+
+```bash
+npm run validate
+npm test
+npm run package
+npm run package:verify
+npm run package                   # seconde execution : releaseId identique = reproductible
+npm run publish:dry-run -- --destination .local-publication
+```
+
+Le materializer est idempotent et deterministe. `runtime:check` echoue si les
+fichiers generes ne correspondent pas au contenu committe (CI gate).
+
+Les adaptateurs v2 vers v4 et v3 vers v4 (`tools/lib/schema_adapter.mjs`)
+consignent `sourceSchema` dans `dist/runtime-adapter/adapter-report.json`. Ce
+sidecar de preuve n'entre ni dans les documents runtime consommateurs, ni dans
+les manifests public/prive. Leur configuration et leur provenance sont
+documentees dans `config/source-adapters.json`.
+
 ## Gates GitHub
 
 Le workflow `publish-content-azure` est uniquement manuel et uniquement depuis

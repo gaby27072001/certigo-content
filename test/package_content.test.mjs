@@ -146,6 +146,7 @@ function createHistoricalV2Root() {
 
   const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
   const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  catalog.providers.find((provider) => provider.id === "aws").checkedOn = "2026-08-17";
   for (const certification of catalog.certifications) {
     if (
       ![
@@ -164,10 +165,29 @@ function createHistoricalV2Root() {
       );
     }
   }
-  delete catalog.certifications.find(
+  const historicalAns = catalog.certifications.find(
     (certification) => certification.id === "aws:ans-c01"
-  ).lifecycle.recommendThrough;
+  );
+  historicalAns.lifecycle.note =
+    "AWS states that December 31, 2026 is the last day to take the exam.";
+  delete historicalAns.lifecycle.recommendThrough;
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
+
+  // Remove runtime resources and Microsoft content added after the historical baseline
+  const runtimeDir = resolve(root, "content", "public", "runtime");
+  if (existsSync(runtimeDir)) rmSync(runtimeDir, { recursive: true });
+  const msCoverageDir = resolve(root, "content", "public", "coverage", "microsoft");
+  if (existsSync(msCoverageDir)) rmSync(msCoverageDir, { recursive: true });
+  // Remove Microsoft certifications from catalog for historical fidelity
+  const historicalCatalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
+  const historicalCatalog = JSON.parse(readFileSync(historicalCatalogPath, "utf8"));
+  historicalCatalog.certifications = historicalCatalog.certifications.filter(
+    (c) => c.provider !== "microsoft"
+  );
+  // Restore Microsoft provider to original state
+  const msProvider = historicalCatalog.providers.find((p) => p.id === "microsoft");
+  if (msProvider) { msProvider.officialCatalogUrl = null; msProvider.checkedOn = null; }
+  writeFileSync(historicalCatalogPath, `${JSON.stringify(historicalCatalog, null, 2)}\n`);
 
   for (const { provider, certifications } of wavesAfterRuntimeV2) {
     for (const certification of certifications) {
@@ -247,33 +267,33 @@ test("produit deux artefacts byte-identical avec des manifestes distincts", asyn
   assert.deepEqual(privateManifest.files.map((entry) => entry.path), ["solutions/sample.json"]);
 });
 
-test("conserve le package v2 courant byte-identical", async () => {
-  const outDir = mkdtempSync(join(tmpdir(), "certigo-package-v2-golden-"));
+test("conserve le package v3 runtime byte-identical", async () => {
+  const outDir = mkdtempSync(join(tmpdir(), "certigo-package-v3-golden-"));
   temporaryRoots.push(outDir);
 
   const result = await packageContent({ root: repoRoot, outDir });
 
   assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
-  assert.equal(result.release, null);
-  assert.equal(existsSync(resolve(outDir, "release.json")), false);
+  assert.ok(result.release !== null);
+  assert.equal(existsSync(resolve(outDir, "release.json")), true);
   assert.deepEqual(
     result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
     [
       {
         artifact: "public",
         manifestId:
-          "sha256:7a483087f5806dd71638285bb36af93d876e8d81547832d06602773242c0814e",
+          "sha256:dd95aafc2ac3e7859df31cb4e7aee271cf2c25cdcfee1fa23ac3eab8ca7ced79",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:3c36dcaa363e364af36f288b6164278df6e88d427b7608da9b141eabea9c43b6",
+          "sha256:65b1914f4cbeb87d7be9cd939a7cd3d03deb344b408b6ef6de91e0346410f793",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "161bac55fe01b4787bea0930b06ba8671553af28d95ca22a5b595102423e10b2"
+    "4a9e9bc9e9a8462ddcb5e870b0abd0e5b2c064012a588af815d32138d42596a2"
   );
 });
 

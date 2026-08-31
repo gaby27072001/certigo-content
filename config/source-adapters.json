@@ -1,0 +1,32 @@
+{
+  "description": "Versioned adapter configuration for runtime v3 source schema provenance.",
+  "adapters": {
+    "v2-to-v4": {
+      "sourceSchema": "v2",
+      "targetSchema": "v4",
+      "provenance": "content/public/questions/*.json (flat legacy, no metadata)",
+      "classification": "prefix-based mapping via classifyV2Question()",
+      "objectiveMapping": "section-1 (single-section blueprint)",
+      "certifications": [
+        "microsoft:ai-900",
+        "microsoft:ai-901",
+        "microsoft:az-104",
+        "microsoft:az-900",
+        "microsoft:dp-900",
+        "microsoft:sc-900"
+      ],
+      "unclassified": ["l-core-*", "ms900-l-*", "pl900-l-*"],
+      "notes": "Unclassified v2 questions remain packaged but are not mapped to runtime certifications."
+    },
+    "v3-to-v4": {
+      "sourceSchema": "v3",
+      "targetSchema": "v4",
+      "provenance": "content/public/questions/{aws,gcp}/**/*.json (provider-scoped, with metadata)",
+      "classification": "metadata.certification + metadata.objective from question file",
+      "certifications": "Derived from content/public/catalog/certifications.json (aws:* and gcp:* entries)",
+      "notes": "Coverage matrices drive domain/concept mapping."
+    }
+  },
+  "generatedBy": "tools/lib/schema_adapter.mjs",
+  "materializer": "tools/materialize_runtime.mjs"
+}

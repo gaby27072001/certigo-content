@@ -65,7 +65,7 @@
             "uniqueItems": true,
             "items": {
               "type": "string",
-              "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+              "pattern": "^((aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}|[a-z][a-z0-9]*(?:-[a-z0-9]+)+)$"
             }
           }
         }
