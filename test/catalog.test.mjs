@@ -234,6 +234,15 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(ans.lifecycle.recommendThrough, "2026-12-31");
   assert.equal(ans.lifecycle.lastExamOn, "2026-12-31");
   assert.equal(ans.lifecycle.reviewOn, "2027-01-01");
+  assert.equal(ans.provenance.checkedOn, "2026-08-31");
+  assert.ok(
+    ans.provenance.sources.some(
+      (source) =>
+        source.kind === "lifecycle" &&
+        source.url ===
+          "https://aws.amazon.com/certification/certified-advanced-networking-specialty/"
+    )
+  );
   assert.equal(
     readJson(resolve(repoRoot, "content", "public", "coverage", "aws", "ans-c01.json"))
       .status,
