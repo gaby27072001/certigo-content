@@ -28,6 +28,10 @@ function loadJson(path) {
   return JSON.parse(raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw);
 }
 
+function normalizeLineEndings(value) {
+  return value.replace(/\r\n?/g, "\n");
+}
+
 function writeResource(path, data) {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, `${canonicalize(data)}\n`, "utf8");
@@ -253,7 +257,7 @@ export async function materializeRuntime(options = {}) {
       const expected = `${canonicalize(data)}\n`;
       if (
         !existsSync(resolve(root, path)) ||
-        readFileSync(resolve(root, path), "utf8") !== expected
+        normalizeLineEndings(readFileSync(resolve(root, path), "utf8")) !== expected
       ) {
         mismatches++;
       }
@@ -277,7 +281,7 @@ export async function materializeRuntime(options = {}) {
       if (!existsSync(filePath)) {
         mismatches++;
       } else {
-        const actual = readFileSync(filePath, "utf8");
+        const actual = normalizeLineEndings(readFileSync(filePath, "utf8"));
         if (actual !== expected) mismatches++;
       }
     }
@@ -362,6 +366,7 @@ if (isMain) {
     } else {
       const result = await materializeRuntime(options);
       console.log(JSON.stringify(result, null, 2));
+      if (options.check && !result.ok) process.exitCode = 1;
     }
   } catch (error) {
     console.error(error.message);

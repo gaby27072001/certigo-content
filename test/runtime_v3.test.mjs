@@ -8,6 +8,7 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
+  writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -41,6 +42,21 @@ describe("materialize_runtime", () => {
       cwd: ROOT,
       stdio: "pipe",
     });
+    const trackPath = join(
+      temporaryRoot,
+      "content/public/runtime/tracks/microsoft/ai-900/microsoft.ai-900.track.main.json"
+    );
+    const track = readFileSync(trackPath, "utf8");
+    writeFileSync(trackPath, track.replace('"status":"retired"', '"status":"active"'));
+    assert.throws(
+      () =>
+        execFileSync(
+          "node",
+          ["tools/materialize_runtime.mjs", "--root", temporaryRoot, "--check"],
+          { cwd: ROOT, stdio: "pipe" }
+        ),
+      (error) => error.status === 1
+    );
     rmSync(temporaryRoot, { recursive: true, force: true });
   });
 });
