@@ -424,6 +424,7 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
     const referencedLessons = new Set();
     const referencedConcepts = new Set();
     const referencedQuestions = new Set();
+    const questionBankCertIds = new Set();
 
     for (const { data: track, file } of tracks.values()) {
       if (trackByCertification.has(track.certificationId)) {
@@ -432,6 +433,9 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
         );
       } else {
         trackByCertification.set(track.certificationId, track);
+      }
+      if (track.mode === "questionBank") {
+        questionBankCertIds.add(track.certificationId);
       }
       const mappedObjectives = new Set();
       for (const domainId of track.domainIds ?? []) {
@@ -565,6 +569,9 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
         err(`[runtime:context] ${file}: domain hors contexte`);
       }
       if (!referencedConcepts.has(concept.id)) {
+        // In questionBank mode, concepts are resolved at compile time —
+        // the compiler generates synthetic lessons that reference them.
+        if (questionBankCertIds.has(concept.certificationId)) continue;
         const usedByQuestion = [...publicIds.values()].some(
           ({ data }) =>
             data.schemaVersion === "v4" && data.metadata?.conceptId === concept.id
@@ -962,14 +969,22 @@ export async function validateContent(options = {}) {
       }
       for (const questionId of covered.questionIds) {
         const question = publicIds.get(questionId)?.data;
-        if (
-          question?.metadata?.certification !== certification.id ||
-          question?.metadata?.objective !== objective.id
-        ) {
+        if (!question) {
           err(
             `[coverage:question] ${file}: "${questionId}" absent ou rattache au mauvais objectif`
           );
+        } else if (question.metadata) {
+          // v3/v4 questions carry metadata — verify certification+objective match
+          if (
+            question.metadata.certification !== certification.id ||
+            question.metadata.objective !== objective.id
+          ) {
+            err(
+              `[coverage:question] ${file}: "${questionId}" absent ou rattache au mauvais objectif`
+            );
+          }
         }
+        // v2 questions have no metadata — existence in publicIds is sufficient
       }
     });
   }

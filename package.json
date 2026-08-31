@@ -22,6 +22,8 @@
     "publish:local": "node tools/publish_release.mjs",
     "publish:dry-run": "node tools/publish_release.mjs --dry-run",
     "runtime:compile": "node tools/compile_runtime.mjs",
+    "runtime:materialize": "node tools/materialize_runtime.mjs",
+    "runtime:check": "node tools/materialize_runtime.mjs --check",
     "policy:artifact-access": "node tools/check_artifact_access.mjs",
     "test": "node tools/run_tests.mjs"
   },

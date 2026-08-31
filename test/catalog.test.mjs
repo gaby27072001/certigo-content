@@ -244,8 +244,8 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
-  assert.equal(result.certificationCount, 26);
-  assert.equal(result.coverageCount, 26);
+  assert.equal(result.certificationCount, 32);
+  assert.equal(result.coverageCount, 32);
 
   const catalog = readJson(catalogAt(repoRoot));
   const completedGcpProfessional = [];
@@ -377,7 +377,7 @@ test("accepte une paire v3 namespacee et la rattache a sa matrice", async () => 
     treeSnapshot(resolve(root, "dist-first")),
     treeSnapshot(resolve(root, "dist-second"))
   );
-  assert.equal(summary.certificationCount, 26);
+  assert.equal(summary.certificationCount, 32);
   const publicManifest = readJson(
     resolve(root, "dist-first", "public", "manifest.json")
   );
@@ -712,7 +712,7 @@ test("genere un manifeste v2 deterministe incluant catalogue et couverture", asy
   const first = await buildManifest({ root: repoRoot });
   const second = await buildManifest({ root: repoRoot });
   assert.deepEqual(first, second);
-  assert.equal(first.schema, "certigo.content.manifest/v2");
+  assert.equal(first.schema, "certigo.content.manifest/v3");
   assert.ok(
     first.items.some(
       (item) =>

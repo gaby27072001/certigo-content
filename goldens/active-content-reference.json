@@ -1,0 +1,31 @@
+{
+  "description": "Active content reference — deterministic release descriptor for runtime v3 local release.",
+  "generatedBy": "npm run package",
+  "regenerate": "npm run package && node -e \"const r=JSON.parse(require('fs').readFileSync('dist/release.json','utf8')); console.log(JSON.stringify({release:r},null,2))\"",
+  "release": {
+    "releaseId": "sha256:a8a618108e7e088a05e51ea9ad85b9904c57402f2f2379e92cf8a1364205c974",
+    "publicManifestId": "sha256:11946f9c3f914439adf8eb1bbfbacd36cb987f8b29771b6afc627abdca6f3891",
+    "privateManifestId": "sha256:65b1914f4cbeb87d7be9cd939a7cd3d03deb344b408b6ef6de91e0346410f793",
+    "manifestVersion": "v3",
+    "publisherPaths": {
+      "publicManifest": "manifests/sha256:11946f9c3f914439adf8eb1bbfbacd36cb987f8b29771b6afc627abdca6f3891/manifest.json",
+      "privateManifest": "manifests/sha256:65b1914f4cbeb87d7be9cd939a7cd3d03deb344b408b6ef6de91e0346410f793/manifest.json",
+      "release": "releases/sha256:a8a618108e7e088a05e51ea9ad85b9904c57402f2f2379e92cf8a1364205c974/release.json"
+    }
+  },
+  "corpus": {
+    "certifications": 32,
+    "coverageMatrices": 32,
+    "runtimeResources": 890,
+    "questionSolutionPairs": 812,
+    "providers": {
+      "aws": { "certifications": 13 },
+      "gcp": { "certifications": 13 },
+      "microsoft": { "certifications": 6 }
+    },
+    "sourceSchemas": {
+      "v2": { "count": 232, "classified": 146, "unclassified": 86 },
+      "v3": { "count": 580 }
+    }
+  }
+}

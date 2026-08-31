@@ -60,7 +60,7 @@ test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
     "2026-08-31",
   ]);
   assert.equal(current.status, 0, current.stderr);
-  assert.match(current.stdout, /actifs=26/);
+  assert.match(current.stdout, /actifs=31/);
 
   const transitioned = execute("check_catalog_freshness.mjs", [
     "--as-of",

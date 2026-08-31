@@ -16,6 +16,14 @@ import { glob } from "glob";
 import { canonicalize } from "./gen_manifest.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import { inspectPublicArtifact } from "./package_content.mjs";
+import {
+  adaptV2Question,
+  adaptV3Question,
+  classifyV2Question,
+  conceptIdFromQuestionId,
+  domainIdFromObjective,
+  needsAdaptation,
+} from "./lib/schema_adapter.mjs";
 import { validateContent } from "./validate_content.mjs";
 
 function loadJson(path) {
@@ -48,7 +56,10 @@ function objectiveFor(catalog, domain) {
 }
 
 function compileQuestion(question, solution, concept) {
-  if (question.schemaVersion !== "v4" || solution?.schemaVersion !== "v4") {
+  if (
+    question.schemaVersion !== "v4" ||
+    solution?.schemaVersion !== "v4"
+  ) {
     throw new Error(
       `[runtime-compile] la projection canonique exige une paire v4: ${question.id}`
     );
@@ -195,9 +206,9 @@ function compileQuestionBankTrack({
     const domainQuestions = [...questions.values()]
       .filter(
         (question) =>
-          question.schemaVersion === "v4" &&
-          question.metadata.certification === track.certificationId &&
-          question.metadata.domainId === domain.id
+          (question.schemaVersion === "v4" || question._sourceSchema) &&
+          question.metadata?.certification === track.certificationId &&
+          question.metadata?.domainId === domain.id
       )
       .sort((left, right) => compareOrdinal(left.id, right.id));
     const blocks = [];
@@ -334,6 +345,77 @@ export async function compileRuntime(options = {}) {
   const concepts = await loadById(root, "content/public/runtime/concepts/**/*.json");
   const questions = await loadById(root, "content/public/questions/**/*.json");
   const solutions = await loadById(root, "content/answerKey/solutions/**/*.json");
+
+  // Adapter pass: convert v2/v3 questions in-memory to v4-compatible shape
+  const coverageFiles = (await glob("content/public/coverage/**/*.json", { cwd: root, posix: true })).sort(compareOrdinal);
+  const coverageMap = new Map();
+  for (const file of coverageFiles) {
+    const data = loadJson(resolve(root, file));
+    if (data.schema === "certigo.coverage-matrix/v1") {
+      coverageMap.set(data.certification, data);
+    }
+  }
+
+  const adapterReport = {
+    schema: "certigo.runtime.adapter-report/v1",
+    adapted: 0,
+    skipped: 0,
+    entries: [],
+    skippedIds: [],
+  };
+  for (const [qId, question] of questions) {
+    if (!needsAdaptation(question)) continue;
+    const solution = solutions.get(qId);
+    if (!solution) {
+      throw new Error(`[runtime-compile] solution absente pour ${qId}`);
+    }
+
+    let certId, objectiveId;
+    if (question.schemaVersion === "v3" && question.metadata) {
+      certId = question.metadata.certification;
+      objectiveId = question.metadata.objective;
+    } else if (question.schemaVersion === "v2") {
+      certId = classifyV2Question(qId);
+      if (!certId) {
+        adapterReport.skipped++;
+        adapterReport.skippedIds.push(qId);
+        continue;
+      }
+      objectiveId = "section-1";
+    } else {
+      adapterReport.skipped++;
+      continue;
+    }
+
+    const coverage = coverageMap.get(certId);
+    if (!coverage) {
+      throw new Error(`[runtime-compile] couverture absente pour ${certId}`);
+    }
+    const certification = catalog.certifications.find((entry) => entry.id === certId);
+    if (!certification) {
+      throw new Error(`[runtime-compile] certification absente pour ${certId}`);
+    }
+
+    const domainId = domainIdFromObjective(certId, objectiveId);
+    const conceptId = conceptIdFromQuestionId(qId, certId);
+
+    const result = question.schemaVersion === "v3"
+      ? adaptV3Question(question, solution, certId, objectiveId, domainId, conceptId)
+      : adaptV2Question(
+          question,
+          solution,
+          certId,
+          certification.blueprint.version,
+          objectiveId,
+          domainId,
+          conceptId
+        );
+    questions.set(qId, result.question);
+    solutions.set(qId, result.solution);
+    adapterReport.adapted++;
+    adapterReport.entries.push({ id: qId, sourceSchema: question.schemaVersion });
+  }
+
   const publicDocuments = [];
   const privateDocuments = [];
 
@@ -372,11 +454,19 @@ export async function compileRuntime(options = {}) {
   rmSync(outDir, { recursive: true, force: true });
   writeDocuments(outDir, "public", publicDocuments);
   writeDocuments(outDir, "private", privateDocuments);
+  adapterReport.entries.sort((left, right) => compareOrdinal(left.id, right.id));
+  adapterReport.skippedIds.sort(compareOrdinal);
+  writeFileSync(
+    resolve(outDir, "adapter-report.json"),
+    `${canonicalize(adapterReport)}\n`,
+    "utf8"
+  );
   const antiLeakReport = inspectPublicArtifact(resolve(outDir, "public"));
   return {
     output: relative(root, outDir).replaceAll("\\", "/"),
     publicDocumentCount: publicDocuments.length,
     privateDocumentCount: privateDocuments.length,
+    adapterReport: { adapted: adapterReport.adapted, skipped: adapterReport.skipped },
     antiLeakReport,
   };
 }
