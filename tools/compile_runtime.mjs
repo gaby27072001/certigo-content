@@ -206,7 +206,7 @@ function compileQuestionBankTrack({
     const domainQuestions = [...questions.values()]
       .filter(
         (question) =>
-          (question.schemaVersion === "v4" || question._sourceSchema) &&
+          question.schemaVersion === "v4" &&
           question.metadata?.certification === track.certificationId &&
           question.metadata?.domainId === domain.id
       )

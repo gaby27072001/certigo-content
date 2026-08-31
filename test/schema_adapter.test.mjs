@@ -94,6 +94,7 @@ describe("schema_adapter", () => {
       assert.equal(result.question.schemaVersion, "v4");
       assert.equal(result.report.sourceSchema, "v3");
       assert.equal("_sourceSchema" in result.question, false);
+      assert.equal("_sourceSchema" in result.solution, false);
       assert.equal(result.question.itemType, "mcq");
       assert.ok(Array.isArray(result.question.options));
       assert.ok(result.question.options[0].id);

@@ -102,7 +102,6 @@ export function adaptV3Question(question, solution, certificationId, objectiveId
     kind: "answerKey",
     correctOptionIds: [correctOption.id],
     rationale: solution.rationale,
-    _sourceSchema: "v3",
   };
 
   return {
