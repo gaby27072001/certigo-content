@@ -12,11 +12,13 @@ permissions: {}
 
 jobs:
   plan:
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && vars.CONTENT_PUBLISH_ENABLED == 'true' && vars.CONTENT_PUBLISHER_ATTESTED == 'true' }}
+    environment: content-publish-plan
+    runs-on: [self-hosted, Linux, X64, certigo-publisher]
     permissions:
       contents: read
     outputs:
+      approved_sha: ${{ steps.source.outputs.approved_sha }}
       release_id: ${{ steps.identity.outputs.release_id }}
       public_manifest_id: ${{ steps.identity.outputs.public_manifest_id }}
       private_manifest_id: ${{ steps.identity.outputs.private_manifest_id }}
@@ -27,10 +29,22 @@ jobs:
       public_client_id: ${{ steps.topology.outputs.public_client_id }}
       private_client_id: ${{ steps.topology.outputs.private_client_id }}
     steps:
-      - name: Checkout main
+      - name: Checkout approved main commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
+          fetch-depth: 1
+
+      - name: Seal approved source commit
+        id: source
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          ACTUAL_SHA="$(git rev-parse HEAD)"
+          test "${ACTUAL_SHA}" = "${EXPECTED_SHA}"
+          echo "approved_sha=${ACTUAL_SHA}" >> "${GITHUB_OUTPUT}"
 
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -47,6 +61,7 @@ jobs:
         shell: bash
         env:
           CONTENT_PUBLISH_ENABLED: ${{ vars.CONTENT_PUBLISH_ENABLED }}
+          CONTENT_PUBLISHER_ATTESTED: ${{ vars.CONTENT_PUBLISHER_ATTESTED }}
           RELEASE_STORAGE_TARGET: ${{ vars.AZURE_RELEASE_STORAGE_TARGET }}
           PUBLIC_STORAGE_TARGET: ${{ vars.AZURE_PUBLIC_STORAGE_TARGET }}
           PRIVATE_STORAGE_TARGET: ${{ vars.AZURE_ANSWER_KEY_STORAGE_TARGET }}
@@ -55,6 +70,7 @@ jobs:
           PRIVATE_CLIENT_ID: ${{ vars.AZURE_ANSWER_KEY_CLIENT_ID }}
         run: |
           test "${CONTENT_PUBLISH_ENABLED}" = "true"
+          test "${CONTENT_PUBLISHER_ATTESTED}" = "true"
           : "${RELEASE_STORAGE_TARGET:?Configure AZURE_RELEASE_STORAGE_TARGET}"
           : "${PUBLIC_STORAGE_TARGET:?Configure AZURE_PUBLIC_STORAGE_TARGET}"
           : "${PRIVATE_STORAGE_TARGET:?Configure AZURE_ANSWER_KEY_STORAGE_TARGET}"
@@ -93,10 +109,15 @@ jobs:
       - name: Resolve immutable identities
         id: identity
         shell: bash
+        env:
+          APPROVED_SHA: ${{ steps.source.outputs.approved_sha }}
         run: |
           node --input-type=module -e "
             import fs from 'node:fs';
             const report = JSON.parse(fs.readFileSync('dist/reports/package-summary.json', 'utf8'));
+            if (!/^[0-9a-f]{40}$/.test(process.env.APPROVED_SHA ?? '')) {
+              throw new Error('SHA source approuve invalide');
+            }
             for (const field of ['releaseId', 'publicManifestId', 'privateManifestId']) {
               if (!/^sha256:[0-9a-f]{64}$/.test(report[field] ?? '')) {
                 throw new Error('package summary runtime incomplet: ' + field);
@@ -109,6 +130,7 @@ jobs:
             fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
               '## Candidat de publication\n\n' +
               '| Surface | Identite |\n| --- | --- |\n' +
+              '| commit | \`' + process.env.APPROVED_SHA + '\` |\n' +
               '| descriptor | \`' + report.releaseId + '\` |\n' +
               '| public | \`' + report.publicManifestId + '\` |\n' +
               '| answer-key | \`' + report.privateManifestId + '\` |\n');
@@ -116,8 +138,9 @@ jobs:
 
   publish-public:
     needs: plan
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && vars.CONTENT_PUBLISH_ENABLED == 'true' && vars.CONTENT_PUBLISHER_ATTESTED == 'true' }}
     environment: azure-content-public
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-publisher]
     permissions:
       contents: read
       id-token: write
@@ -129,7 +152,14 @@ jobs:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ needs.plan.outputs.approved_sha }}
           persist-credentials: false
+          fetch-depth: 1
+      - name: Verify sealed source commit
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ needs.plan.outputs.approved_sha }}
+        run: test "$(git rev-parse HEAD)" = "${EXPECTED_SHA}"
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
@@ -188,8 +218,9 @@ jobs:
 
   publish-answer-key:
     needs: plan
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && vars.CONTENT_PUBLISH_ENABLED == 'true' && vars.CONTENT_PUBLISHER_ATTESTED == 'true' }}
     environment: azure-content-answer-key
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-publisher]
     permissions:
       contents: read
       id-token: write
@@ -201,7 +232,14 @@ jobs:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ needs.plan.outputs.approved_sha }}
           persist-credentials: false
+          fetch-depth: 1
+      - name: Verify sealed source commit
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ needs.plan.outputs.approved_sha }}
+        run: test "$(git rev-parse HEAD)" = "${EXPECTED_SHA}"
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
@@ -260,8 +298,9 @@ jobs:
 
   publish-release:
     needs: [plan, publish-public, publish-answer-key]
+    if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && vars.CONTENT_PUBLISH_ENABLED == 'true' && vars.CONTENT_PUBLISHER_ATTESTED == 'true' }}
     environment: azure-content-release
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-publisher]
     permissions:
       contents: read
       id-token: write
@@ -273,7 +312,14 @@ jobs:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          ref: ${{ needs.plan.outputs.approved_sha }}
           persist-credentials: false
+          fetch-depth: 1
+      - name: Verify sealed source commit
+        shell: bash
+        env:
+          EXPECTED_SHA: ${{ needs.plan.outputs.approved_sha }}
+        run: test "$(git rev-parse HEAD)" = "${EXPECTED_SHA}"
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:

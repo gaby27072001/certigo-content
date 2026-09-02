@@ -25,10 +25,10 @@ test("les gates CI couvrent chaque push main et pull request", () => {
   for (const workflow of [content, tooling]) {
     assert.deepEqual(
       Object.keys(workflow.on).sort(),
-      ["pull_request", "push", "workflow_dispatch"]
+      ["pull_request_target", "push", "workflow_dispatch"]
     );
     assert.deepEqual(workflow.on.push, { branches: ["main"] });
-    assert.deepEqual(workflow.on.pull_request, {});
+    assert.deepEqual(workflow.on.pull_request_target, {});
   }
 
   assert.match(

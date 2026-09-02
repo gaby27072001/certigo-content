@@ -16,6 +16,8 @@ Tooling and CI produce separate `public` and `private` artifacts with distinct m
 3. Maintain one-to-one mapping between public question IDs and private solutions.
 4. Keep outputs deterministic: avoid machine-specific paths, timestamps, or non-canonical JSON formatting changes that could affect manifest determinism.
 5. Make focused, minimal edits; do not refactor unrelated files.
+6. Keep unprivileged CI on the exact static runner selector `[self-hosted, Linux, X64, certigo-pr-ci]`. Internal pull requests are dispatched by base-trusted `pull_request_target`, rejected unless `head.repo.full_name == github.repository`, then checked out by immutable head SHA. Do not add an environment, OIDC permission, secret reference, Azure action, dynamic selector, fallback, or reusable-workflow bypass to those jobs.
+7. Keep every job in `publish-content-azure` on `[self-hosted, Linux, X64, certigo-publisher]`, gated by `main`, a protected environment, and both publication variables. Publisher checkouts must use the commit sealed by `plan`; never check out a pull-request ref.
 
 ## Setup
 
@@ -47,6 +49,11 @@ Useful targeted commands:
 - `npm run package:private`
 - `npm run policy:artifact-access`
 
+`npm test` includes adversarial workflow-policy tests. They classify every workflow
+and job, reject runner-selector expressions and reusable-workflow bypasses, and
+enforce the PR/publisher permissions, triggers, environments, dependency graph,
+and sealed source commit.
+
 ## Expected change process
 
 1. Update matching JSON pairs in the appropriate public/private locations.
@@ -57,3 +64,4 @@ Useful targeted commands:
 
 - Historical and rollback artifact behavior is documented in `docs/adr/ADR-0002-separated-content-artifacts.md`.
 - CI security checks include `npm audit`, OSV scanning on `package-lock.json`, and SBOM generation for tooling.
+- The physical runner and publication-environment contract is documented in `docs/runbooks/CONTENT_PUBLICATION.md`. Static labels are routing constraints, not proof that the hosts are isolated.

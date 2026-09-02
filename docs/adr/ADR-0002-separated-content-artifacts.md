@@ -105,6 +105,13 @@ Le workflow `publish-content-azure` reste separe, manuel et limite a `main` ;
 il reconstruit et reverifie les paquets au lieu de telecharger un artefact
 GitHub.
 
+La frontiere d'execution est elle aussi separee. Les workflows CI utilisent
+uniquement le label statique `certigo-pr-ci`, sans environment ni identite. Les
+quatre jobs du publisher utilisent uniquement `certigo-publisher`, avec un
+environment protege par job. Aucun selecteur dynamique, fallback ou reusable
+workflow ne peut faire converger les pools. Le contrat physique et
+l'attestation prealable sont fixes par ADR-0003 et le runbook de publication.
+
 ## Rollback
 
 Desactiver `.github/workflows/ci-content-package.yml` et restaurer les etapes de

@@ -55,6 +55,33 @@ un commit donne.
 | `npm run runtime:compile` | Projette localement le contrat canonique vers les documents runtime historiques. |
 | `npm run policy:artifact-access` | Exige un nom pour chaque download-artifact et refuse le prive hors allow-list explicite. |
 
+## Frontiere de confiance des runners
+
+Les workflows utilisent deux selecteurs statiques non interchangeables :
+
+| Classe | Workflows/jobs | Selecteur exact | Privileges |
+| --- | --- | --- | --- |
+| CI non privilegiee | `ci-content-package`, `ci-tooling` | `[self-hosted, Linux, X64, certigo-pr-ci]` | `contents: read`, aucun environment, secret, OIDC ou acces Azure |
+| Publisher trusted | les quatre jobs de `publish-content-azure` | `[self-hosted, Linux, X64, certigo-publisher]` | environments proteges ; OIDC uniquement dans les trois jobs Azure |
+
+Aucune variable, expression `fromJSON`, valeur de repli ou reusable workflow ne
+peut choisir le pool. Les labels historiques `certigo-ci` sont hors contrat. Un
+hote ayant execute du code de pull request ne devient jamais publisher par
+simple relabellisation.
+
+Les pull requests utilisent `pull_request_target` uniquement comme dispatcher
+lu depuis la branche de base. Le garde job compare le depot source au depot
+courant avant toute allocation de runner ; un fork reste donc `skipped`. Pour
+une PR interne seulement, checkout utilise ensuite le SHA immuable
+`github.event.pull_request.head.sha`, sans credential persistante. Ce checkout
+ne doit jamais etre ajoute a un job privilegie.
+
+La publication exige a la fois `CONTENT_PUBLISH_ENABLED=true` et
+`CONTENT_PUBLISHER_ATTESTED=true`. Ces variables doivent rester absentes ou
+fausses tant que l'isolation physique, les environments et les identites ne sont
+pas attestes selon le
+[`runbook de publication`](docs/runbooks/CONTENT_PUBLICATION.md).
+
 Les payloads publies sont canonises et les manifestes n'incluent ni timestamp
 ni chemin dependant de la machine. Deux executions sur le meme commit sont
 identiques octet pour octet. Les artefacts GitHub temporaires sont uniquement
@@ -109,10 +136,14 @@ etc.) est refusee.
 ## Promotion Azure
 
 La promotion durable vers Azure Blob Storage est manuelle, limitee a `main` et
-protegee par trois GitHub Environments independants. Elle utilise trois UAMI
-OIDC distinctes, publie les arbres public/prive sous leur `manifestId`, puis le
-descripteur sous son `releaseId` en dernier. Chaque blob est relu et verifie,
-sans overwrite, delete, alias mutable ni upload GitHub automatique.
+protegee par un environment de plan sans identite puis trois GitHub Environments
+Azure independants. Le plan scelle `github.sha`; chaque job suivant checkout ce
+SHA exact et compare l'identite reconstruite de sa surface ; le job descripteur
+compare les trois identites. La promotion utilise trois UAMI OIDC distinctes,
+publie les arbres public/prive sous leur
+`manifestId`, puis le descripteur sous son `releaseId` en dernier. Chaque blob
+est relu et verifie, sans overwrite, delete, alias mutable ni upload GitHub
+automatique.
 
 Les prerequis Azure/GitHub, la retention WORM, le lifecycle et le rollback sont
 documentes dans

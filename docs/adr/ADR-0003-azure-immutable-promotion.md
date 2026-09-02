@@ -21,20 +21,67 @@ dans ce depot. Ils sont donc fournis par trois GitHub Environments proteges.
 ### Promotion manuelle et revue
 
 `.github/workflows/publish-content-azure.yml` est declenche uniquement par
-`workflow_dispatch`. Tous ses jobs sont bloques si la ref n'est pas
-`refs/heads/main`.
+``workflow_dispatch`. Tous ses jobs sont bloques si l'evenement n'est pas ce
+declencheur, si la ref n'est pas `refs/heads/main`, si
+`CONTENT_PUBLISH_ENABLED` n'est pas `true` ou si
+`CONTENT_PUBLISHER_ATTESTED` n'est pas `true`.
 
 Le job `plan` reconstruit les deux paquets, execute toutes les gates et publie
-leurs `manifestId` et le `releaseId` dans le resume du run. Les jobs de
-publication dependent de ce plan et utilisent des environnements distincts :
+leur commit, leurs `manifestId` et le `releaseId` dans le resume du run. Il
+checkout explicitement `github.sha`, verifie `git rev-parse HEAD`, puis expose
+ce SHA comme `approved_sha`. Chaque job dependant checkout uniquement
+`approved_sha` et reverifie HEAD. Les jobs public et answer-key comparent
+uniquement l'identite reconstruite de leur surface ; le job descripteur compare
+`releaseId` et les deux `manifestId`. Une avance de `main` apres le lancement ne
+change donc pas le candidat approuve.
 
+Les jobs utilisent des environments distincts :
+
+- `content-publish-plan`, sans variable, secret ou identite, pour approuver
+  l'execution du plan sur le pool trusted ;
 - `azure-content-public` pour le paquet distribuable ;
 - `azure-content-answer-key` pour le corrige reserve au backend ;
 - `azure-content-release` pour le descripteur, publie uniquement apres succes et
   verification des deux paquets.
 
-Chaque environnement doit exiger des reviewers, interdire l'auto-approbation,
+Chaque environment doit exiger des reviewers, interdire l'auto-approbation,
 interdire le bypass administrateur et autoriser uniquement la branche `main`.
+
+### Frontiere d'execution
+
+Les workflows de CI et de publication ne partagent aucun pool :
+
+| Classe | Selecteur exact |
+| --- | --- |
+| PR, push `main` et CI manuelle non privilegies | `[self-hosted, Linux, X64, certigo-pr-ci]` |
+| Les quatre jobs de `publish-content-azure` | `[self-hosted, Linux, X64, certigo-publisher]` |
+
+Les selecteurs sont litteraux. `vars`, `fromJSON`, fallback, label
+`certigo-ci` et job `uses:` vers un reusable workflow sont interdits. Les jobs
+CI n'ont aucun environment, secret, `id-token`, action Azure ou acces au pool
+publisher. Le job `plan` n'a que `contents: read`; seuls les trois jobs lies a
+un environment Azure recoivent `id-token: write`.
+
+Pour rendre l'exclusion des forks non modifiable par la pull request,
+`ci-content-package` et `ci-tooling` utilisent `pull_request_target` comme
+dispatcher lu depuis la branche de base. Le garde job exige le meme
+`head.repo.full_name` avant allocation du runner. Ensuite seulement, le job
+checkout le `head.sha` immuable de la PR interne, sans credential persistante.
+Ce pattern est reserve au pool `certigo-pr-ci`; aucun workflow publisher ne
+porte ce trigger ou ce checkout.
+
+Les labels ne constituent pas une isolation physique. Le pool publisher doit
+etre limite cote GitHub au seul workflow approuve sur `refs/heads/main` et
+execute sur des runners ephemeres detruits apres un job. Un hote ayant execute
+une pull request est contamine par definition et ne peut pas devenir publisher
+par relabellisation ou simple nettoyage.
+
+Une registration GitHub distincte ne constitue pas non plus un hote distinct.
+L'attestation mappe chaque registration a son instance compute/VM physique et
+prouve qu'aucun service runner PR, publisher ou d'un autre depot ne cohabite sur
+la meme instance. Le pool PR est lui aussi ephemere ou reimage depuis une image
+attestee entre deux charges non fiables ; sa destruction/reimage ne doit jamais
+affecter une instance publisher.
 
 ### Adressage et immutabilite
 
@@ -88,8 +135,9 @@ modification de la politique d'immutabilite.
 
 Le workflow demande seulement :
 
-- `contents: read` pour reconstruire le paquet ;
-- `id-token: write` dans le job de publication concerne.
+- `contents: read` pour chaque job afin de reconstruire le paquet ;
+- aucun `id-token` pour `plan` ;
+- `id-token: write` uniquement dans le job de publication Azure concerne.
 
 ### Retention et lifecycle
 
@@ -178,8 +226,9 @@ jamais par ce workflow.
    /subscriptions/<subscription>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<account>/blobServices/default/containers/<container>
    ```
 
-8. Creer les trois GitHub Environments et y definir les variables suivantes,
-   avec des valeurs propres a chaque canal :
+8. Creer l'environment `content-publish-plan`, sans variable ni secret, puis les
+   trois GitHub Environments Azure. Leur definir les variables suivantes, avec
+   des valeurs propres a chaque canal Azure :
 
    | Variable | Valeur |
    | --- | --- |
@@ -190,12 +239,13 @@ jamais par ce workflow.
    | `AZURE_STORAGE_ACCOUNT` | Nom du compte Storage |
    | `AZURE_STORAGE_CONTAINER` | Nom du conteneur cible |
 
-9. Definir les quatre variables repository non secretes suivantes. Elles
+9. Definir les huit variables repository non secretes suivantes. Elles
    constituent la topologie attendue et rendent toute collision bloquante :
 
    | Variable | Format |
    | --- | --- |
    | `CONTENT_PUBLISH_ENABLED` | Doit valoir exactement `true` |
+   | `CONTENT_PUBLISHER_ATTESTED` | Doit valoir exactement `true` apres validation et archivage de toute l'attestation runner/identity/environment |
    | `AZURE_RELEASE_STORAGE_TARGET` | `<account>/content-release-descriptors` |
    | `AZURE_PUBLIC_STORAGE_TARGET` | `<account>/content-public-releases` |
    | `AZURE_ANSWER_KEY_STORAGE_TARGET` | `<account>/content-private-releases` |
@@ -203,14 +253,40 @@ jamais par ce workflow.
    | `AZURE_PUBLIC_CLIENT_ID` | Client ID de l'identite publique |
    | `AZURE_ANSWER_KEY_CLIENT_ID` | Client ID de l'identite answer key |
 
-   Les trois cibles et les trois Client IDs doivent etre distincts. Chaque valeur
+   Les trois cibles et les trois Client IDs doivent etre distincts. Les deux
+   gates doivent rester absentes ou fausses jusqu'a la fin de l'attestation.
+   Chaque valeur
    d'environnement est comparee aux outputs normalises du job `plan` avant
-   connexion. Ne pas dupliquer ces quatre variables dans les environnements :
+   connexion. Ne pas dupliquer ces huit variables dans les environnements :
    la topologie de reference est exclusivement au niveau repository.
 10. Configurer les protections GitHub Environment decrites plus haut. Ne pas
    ajouter de secret ou de cle Azure.
-11. Executer une premiere promotion du canal `public`, verifier le manifeste et
-    les logs, puis repeter separement pour `answer-key`.
+11. Provisionner deux classes physiques distinctes. Le pool PR et le pool
+   publisher ne partagent aucun hote, disque, home, work directory, tool cache,
+   cache npm, daemon/socket Docker, reseau privilegie ou service user. Aucun
+   runner ne porte les deux labels uniques ni le label historique
+   `certigo-ci`.
+12. Reimager ou detruire tout hote ayant deja execute une pull request. Le pool
+   PR n'a aucune identite Azure, credential stockee, route publisher, acces
+   IMDS ou acces au runtime/conteneur du publisher.
+13. Utiliser des runners publisher ephemeres/JIT, un job par hote, avec image
+   signee ou provenance verifiable et destruction attestee. Restreindre leur
+   runner group au seul workflow `.github/workflows/publish-content-azure.yml`
+   sur `refs/heads/main`. Bloquer IMDS et toute identite ambiante ; ne stocker
+   aucune credential cloud. Le pre/post-cleanup Azure est une defense
+   supplementaire, jamais une frontiere.
+14. Attester separement le reseau, le service user, les permissions filesystem,
+   l'absence de Docker partage, la purge/destruction apres job et
+   l'impossibilite pour le pool PR de joindre ou administrer le pool
+   publisher.
+15. Archiver le mapping de chaque registration vers une instance compute
+   unique, l'inventaire des runners, la provenance d'image, la preuve de
+   teardown/reimage independante, les politiques reseau/IMDS/Docker, les
+   protections des quatre environments, les sujets OIDC et les attributions
+   RBAC. Ensuite seulement, positionner `CONTENT_PUBLISHER_ATTESTED=true`, puis
+   `CONTENT_PUBLISH_ENABLED=true`.
+16. Executer une premiere promotion du canal `public`, verifier le manifeste et
+   les logs, puis repeter separement pour `answer-key`.
 
 ## Non-objectifs
 
