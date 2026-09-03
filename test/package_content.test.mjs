@@ -146,6 +146,7 @@ function createHistoricalV2Root() {
 
   const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
   const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
+  catalog.asOf = "2026-08-31";
   catalog.providers.find((provider) => provider.id === "aws").checkedOn = "2026-08-17";
   for (const certification of catalog.certifications) {
     if (
@@ -171,6 +172,19 @@ function createHistoricalV2Root() {
   historicalAns.lifecycle.note =
     "AWS states that December 31, 2026 is the last day to take the exam.";
   delete historicalAns.lifecycle.recommendThrough;
+  const historicalMla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+  historicalMla.status = "active";
+  historicalMla.lifecycle = {
+    reviewOn: "2026-09-01",
+    successor: "aws:mla-c02",
+    note: "AWS states that MLA-C02 registration opens September 1, 2026; the English MLA-C01 exam remains available through September 28, 2026.",
+  };
+  historicalMla.provenance.checkedOn = "2026-08-17";
+  historicalMla.provenance.sources.find(
+    (source) => source.kind === "lifecycle"
+  ).url = "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/";
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
   // Remove runtime resources and Microsoft content added after the historical baseline
@@ -282,7 +296,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:dd95aafc2ac3e7859df31cb4e7aee271cf2c25cdcfee1fa23ac3eab8ca7ced79",
+          "sha256:21f7a785ad72176f0f9435e371d4a0a99f11cc2a6ca4cf0e590e154bf6ad58c5",
       },
       {
         artifact: "private",
@@ -293,7 +307,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "4a9e9bc9e9a8462ddcb5e870b0abd0e5b2c064012a588af815d32138d42596a2"
+    "aadfd2a65f670069bb3ba7d7db0fb9fa045c8af449a172e05217b86f39fd1055"
   );
 });
 

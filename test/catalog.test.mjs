@@ -223,7 +223,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 
   assert.deepEqual(aws, expectedAws);
   assert.deepEqual(gcp, expectedGcp);
-  assert.equal(catalog.asOf, "2026-08-31");
+  assert.equal(catalog.asOf, "2026-09-03");
   assert.ok(aws.includes("aws:aip-c01"));
   assert.ok(!aws.includes("aws:mls-c01"));
 
@@ -245,6 +245,29 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
   assert.equal(
     readJson(resolve(repoRoot, "content", "public", "coverage", "aws", "ans-c01.json"))
+      .status,
+    "retiring"
+  );
+
+  const mla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+  assert.equal(mla.status, "active-retiring");
+  assert.equal(mla.lifecycle.recommendThrough, "2026-09-28");
+  assert.equal(mla.lifecycle.lastExamOn, "2027-01-13");
+  assert.equal(mla.lifecycle.reviewOn, "2027-01-14");
+  assert.equal(mla.lifecycle.successor, "aws:mla-c02");
+  assert.equal(mla.provenance.checkedOn, "2026-09-03");
+  assert.ok(
+    mla.provenance.sources.some(
+      (source) =>
+        source.kind === "lifecycle" &&
+        source.url ===
+          "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/"
+    )
+  );
+  assert.equal(
+    readJson(resolve(repoRoot, "content", "public", "coverage", "aws", "mla-c01.json"))
       .status,
     "retiring"
   );
@@ -335,7 +358,7 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
     false
   );
 
-  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-31" });
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-03" });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:ans-c01"));
   assert.ok(current.recommendedCertificationIds.includes("aws:ans-c01"));
@@ -350,6 +373,39 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
   assert.ok(transition.nonRecommendedCertificationIds.includes("aws:ans-c01"));
   assert.ok(
     transition.errors.some((error) => error.includes("transition a reverifier"))
+  );
+});
+
+test("applique les bornes linguistiques de transition MLA-C01", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const mla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+
+  assert.equal(isCertificationActiveOn(mla, "2026-09-28"), true);
+  assert.equal(isCertificationRecommendedOn(mla, "2026-09-28"), true);
+  assert.equal(isCertificationActiveOn(mla, "2026-09-29"), true);
+  assert.equal(isCertificationRecommendedOn(mla, "2026-09-29"), false);
+  assert.equal(isCertificationActiveOn(mla, "2027-01-13"), true);
+  assert.equal(isCertificationActiveOn(mla, "2027-01-14"), false);
+
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-03" });
+  assert.deepEqual(current.errors, []);
+  assert.ok(current.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(current.recommendedCertificationIds.includes("aws:mla-c01"));
+
+  const transitioned = checkCatalogFreshness({
+    root: repoRoot,
+    asOf: "2027-01-14",
+  });
+  assert.ok(!transitioned.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(transitioned.excludedCertificationIds.includes("aws:mla-c01"));
+  assert.ok(
+    transitioned.errors.some(
+      (error) =>
+        error.includes("aws:mla-c01") &&
+        error.includes("transition a reverifier")
+    )
   );
 });
 

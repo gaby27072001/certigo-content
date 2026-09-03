@@ -57,7 +57,7 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
 test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
   const current = execute("check_catalog_freshness.mjs", [
     "--as-of",
-    "2026-08-31",
+    "2026-09-03",
   ]);
   assert.equal(current.status, 0, current.stderr);
   assert.match(current.stdout, /actifs=31/);

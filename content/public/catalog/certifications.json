@@ -1,6 +1,6 @@
 {
   "schema": "certigo.certification-catalog/v1",
-  "asOf": "2026-08-31",
+  "asOf": "2026-09-03",
   "freshness": {
     "maxAgeDays": 30,
     "reviewDueOn": "2026-09-30"
@@ -16,7 +16,7 @@
         "d1.awsstatic.com",
         "docs.aws.amazon.com"
       ],
-      "checkedOn": "2026-08-31"
+      "checkedOn": "2026-09-03"
     },
     {
       "id": "gcp",
@@ -307,7 +307,7 @@
       "officialSlug": "certified-machine-learning-engineer-associate",
       "title": "AWS Certified Machine Learning Engineer - Associate",
       "level": "associate",
-      "status": "active",
+      "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
       "guide": {
         "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html",
@@ -326,16 +326,18 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-09-01",
+        "reviewOn": "2027-01-14",
+        "lastExamOn": "2027-01-13",
+        "recommendThrough": "2026-09-28",
         "successor": "aws:mla-c02",
-        "note": "AWS states that MLA-C02 registration opens September 1, 2026; the English MLA-C01 exam remains available through September 28, 2026."
+        "note": "AWS states that MLA-C02 beta registration opened September 1, 2026; English MLA-C01 remains available through September 28, 2026, while Japanese, Korean, and Simplified Chinese remain available until MLA-C02 general availability on January 14, 2027, when MLA-C01 retires in all languages. Because lastExamOn is an inclusive active-through boundary, the catalog records January 13, 2027 as the final active date."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-03",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" },
           { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html" },
-          { "kind": "lifecycle", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" }
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },
