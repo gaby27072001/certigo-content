@@ -1,4 +1,4 @@
-# Catalogue AWS et Google Cloud au 2026-08-17
+# Catalogue AWS et Google Cloud au 2026-09-03
 
 Ce document accompagne le fichier machine-readable
 [`content/public/catalog/certifications.json`](../../../content/public/catalog/certifications.json).
@@ -16,7 +16,7 @@ d'examen officiels AWS et Google Cloud.
 | SOA-C03 | AWS Certified CloudOps Engineer - Associate | Associate | active | v1.1, 2026-06-01 |
 | DEA-C01 | AWS Certified Data Engineer - Associate | Associate | active | v1.1, 2025-12-12 |
 | DVA-C02 | AWS Certified Developer - Associate | Associate | active jusqu'au 2026-11-30 | v2.1, 2024-12-12 |
-| MLA-C01 | AWS Certified Machine Learning Engineer - Associate | Associate | active ; MLA-C02 annonce | version/date non publiees |
+| MLA-C01 | AWS Certified Machine Learning Engineer - Associate | Associate | active-retiring ; anglais jusqu'au 2026-09-28, retrait global 2027-01-14 | version/date non publiees |
 | SAA-C03 | AWS Certified Solutions Architect - Associate | Associate | active | version/date non publiees |
 | DOP-C02 | AWS Certified DevOps Engineer - Professional | Professional | active | version/date non publiees |
 | AIP-C01 | AWS Certified Generative AI Developer - Professional | Professional | active | version/date non publiees |
@@ -43,9 +43,15 @@ Domaines officiels :
 
 L'index officiel AWS des exam guides est la source d'enumeration. Il inclut
 DVA-C03 avec une note indiquant une ouverture au 2026-12-01 : DVA-C03 est donc
-annonce mais non actif au snapshot. MLA-C02/ME1-C02 sont egalement annonces
-mais non actifs. MLS-C01 est exclu : AWS indique une derniere session au
-2026-03-31. SOA-C02 et SCS-C02 sont remplaces.
+annonce mais non actif au snapshot. Les inscriptions a la beta anglaise de
+MLA-C02 sont ouvertes depuis le 2026-09-01, pour une livraison a partir du
+2026-09-29. MLA-C01 reste disponible en anglais jusqu'au 2026-09-28, puis en
+japonais, coreen et chinois simplifie jusqu'a la disponibilite generale de
+MLA-C02 le 2027-01-14, date a laquelle AWS indique le retrait de MLA-C01 dans
+toutes les langues. Le contrat catalogue stockant un dernier jour actif
+inclusif, `lastExamOn` est donc borne au 2027-01-13. ME1-C02 reste annonce mais
+non actif. MLS-C01 est exclu : AWS indique une derniere session au 2026-03-31.
+SOA-C02 et SCS-C02 sont remplaces.
 
 ### Google Cloud - 14 certifications actives
 
