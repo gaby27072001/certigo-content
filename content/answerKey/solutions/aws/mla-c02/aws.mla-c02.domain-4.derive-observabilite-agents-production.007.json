@@ -1,0 +1,16 @@
+{
+  "id": "aws.mla-c02.domain-4.derive-observabilite-agents-production.007",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-4"
+  },
+  "correct": "Mettre en place une observabilité par agent et par appel d'outil, avec détection des échecs de coordination et des flux tronqués.",
+  "rationale": "Le domaine 4 du guide MLA-C02 attend explicitement la surveillance et l'automatisation de la gestion de la performance et de la coordination des agents, en citant nommément la détection des défaillances de coordination et des flux tronqués. Une observabilité par agent et par appel d'outil rend visible précisément l'échec silencieux décrit, avant même qu'un utilisateur ne le signale, ce qui correspond exactement au besoin exprimé. Allonger le délai d'expiration global des appels ne traite pas la cause de l'échec de l'appel d'outil et pourrait même masquer davantage le symptôme en retardant sa manifestation, sans jamais le détecter activement. Charger un opérateur de relire les journaux chaque matin reste réactif et différé d'une journée entière, alors que l'objectif énoncé est justement de détecter la défaillance dès qu'elle survient. Redémarrer l'ensemble des agents chaque nuit sans lien avec les échecs observés n'apporte aucune détection : un échec survenant après le redémarrage resterait tout aussi invisible jusqu'au signalement d'un utilisateur.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain4.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain4.md"
+  ]
+}

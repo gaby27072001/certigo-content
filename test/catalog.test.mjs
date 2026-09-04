@@ -39,6 +39,7 @@ const expectedAws = [
   "aws:dop-c02",
   "aws:dva-c02",
   "aws:mla-c01",
+  "aws:mla-c02",
   "aws:saa-c03",
   "aws:sap-c02",
   "aws:scs-c03",
@@ -253,8 +254,8 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
-  assert.equal(result.certificationCount, 32);
-  assert.equal(result.coverageCount, 32);
+  assert.equal(result.certificationCount, 33);
+  assert.equal(result.coverageCount, 33);
 
   const catalog = readJson(catalogAt(repoRoot));
   const completedGcpProfessional = [];
@@ -386,7 +387,7 @@ test("accepte une paire v3 namespacee et la rattache a sa matrice", async () => 
     treeSnapshot(resolve(root, "dist-first")),
     treeSnapshot(resolve(root, "dist-second"))
   );
-  assert.equal(summary.certificationCount, 32);
+  assert.equal(summary.certificationCount, 33);
   const publicManifest = readJson(
     resolve(root, "dist-first", "public", "manifest.json")
   );

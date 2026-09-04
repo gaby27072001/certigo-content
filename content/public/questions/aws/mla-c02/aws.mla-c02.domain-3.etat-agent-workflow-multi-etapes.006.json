@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-3.etat-agent-workflow-multi-etapes.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-3"
+  },
+  "prompt": "Un agent Amazon Bedrock conduit un dépannage technique en plusieurs tours de conversation avec l'utilisateur, en appelant des outils externes pour interroger l'état d'un système à chaque étape. L'équipe constate que l'agent redemande systématiquement des informations déjà fournies par l'utilisateur au tour précédent, et semble ignorer les résultats des appels d'outils antérieurs dès que la fonction Lambda qui l'héberge est réinvoquée pour traiter le tour suivant. Quelle modification règle le plus directement ce comportement ?",
+  "choices": [
+    "Faire persister les attributs de session de l'agent dans un magasin externe entre les invocations pour garder le contexte.",
+    "Augmenter la mémoire et le délai d'expiration de la fonction Lambda qui héberge la logique métier de l'agent conversationnel entier.",
+    "Relever la température du modèle de fondation utilisé par l'agent pour obtenir des réponses plus variées à chaque tour de conversation.",
+    "Ajouter des exemples au prompt système de l'agent sans changer la façon dont son état est conservé."
+  ]
+}

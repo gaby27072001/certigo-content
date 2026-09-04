@@ -62,7 +62,7 @@ describe("materialize_runtime", () => {
 });
 
 describe("runtime lifecycle", () => {
-  it("all 32 certifications have at least one runtime concept", () => {
+  it("all catalog certifications have at least one runtime concept", () => {
     const catalog = JSON.parse(
       readFileSync(join(ROOT, "content/public/catalog/certifications.json"), "utf8")
     );

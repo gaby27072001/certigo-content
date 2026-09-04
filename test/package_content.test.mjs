@@ -111,6 +111,11 @@ function createHistoricalV2Root() {
       pairCount: 48,
     },
     {
+      provider: "aws",
+      certifications: ["mla-c02"],
+      pairCount: 8,
+    },
+    {
       provider: "gcp",
       certifications: [
         "cloud-architect",
@@ -273,7 +278,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
+  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
   assert.deepEqual(
@@ -282,18 +287,18 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:dd95aafc2ac3e7859df31cb4e7aee271cf2c25cdcfee1fa23ac3eab8ca7ced79",
+          "sha256:af82c3983c1a303f3bf1ac15ded0f59995d43bda3cc10d9b3e7cfca483e40675",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:65b1914f4cbeb87d7be9cd939a7cd3d03deb344b408b6ef6de91e0346410f793",
+          "sha256:85b3a9c1d823fafade74c64654b80d11fe1c84b731661efe5bbf4eb06d60a8af",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "4a9e9bc9e9a8462ddcb5e870b0abd0e5b2c064012a588af815d32138d42596a2"
+    "12af80d401486517bb1f338b8fd8b1f2ef45e72dad3a2bfd1cb8a1ef5e3833c7"
   );
 });
 
@@ -311,7 +316,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:ca890ec26375d19b287b381630ca7e40725ab8e86080c8637ca1369a1d7dc7da",
+          "sha256:7e9eda1f10694cc78bb8266a4faff4a1c6ca370c31a722d8c25ef12a0b858e44",
       },
       {
         artifact: "private",
@@ -322,7 +327,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "dab67faec9a9cd2e5b9372a02da57e6ad56341ce917e9c6336717a5834eca279"
+    "1bd2aa4e97a0083fb257ee97741fc9bf84dceae5e2658f8a04c6027b5c2691ea"
   );
 });
 

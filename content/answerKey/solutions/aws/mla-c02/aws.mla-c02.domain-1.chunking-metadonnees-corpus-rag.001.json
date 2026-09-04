@@ -1,0 +1,17 @@
+{
+  "id": "aws.mla-c02.domain-1.chunking-metadonnees-corpus-rag.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-1"
+  },
+  "correct": "Découper les documents selon leur structure logique (sections, tableaux) et joindre le titre de section en métadonnée de chaque bloc.",
+  "rationale": "Le guide d'examen MLA-C02 rattache explicitement au domaine 1 la préparation de documents pour la génération augmentée par récupération, notamment les stratégies de découpage et l'extraction de métadonnées. Découper selon la structure logique évite de couper une procédure ou un tableau au milieu, et joindre le titre de section en métadonnée permet à l'assistant de citer correctement l'origine de l'extrait récupéré : les deux symptômes signalés sont donc résolus à la source. Augmenter la taille des blocs recule le problème sans le résoudre : un bloc plus grand peut encore couper une procédure ou un tableau, et ne restaure aucune métadonnée de section. Indexer chaque document entier comme un bloc unique élimine le découpage mais dégrade la précision de la récupération, en renvoyant tout un document alors que seule une section est pertinente, et alourdit inutilement le contexte transmis au modèle. Ajouter un chevauchement entre blocs de taille fixe réduit certaines pertes d'information aux frontières, mais ne tient toujours pas compte de la structure du document et ne restaure aucune métadonnée de section, donc le titre cité reste incorrect.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain1.md et https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02.html",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain1.md",
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02.html"
+  ]
+}

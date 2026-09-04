@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-1.chunking-metadonnees-corpus-rag.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-1"
+  },
+  "prompt": "Une équipe prépare une base de connaissances interne — guides produit au format PDF, pages de wiki et tickets de support archivés — pour un assistant Amazon Bedrock fondé sur la génération augmentée par récupération. Le pipeline d'ingestion découpe actuellement tous les documents en blocs de taille fixe de cinq cents caractères, sans tenir compte de leur structure. Les utilisateurs signalent que l'assistant cite souvent des extraits tronqués au milieu d'une procédure ou d'un tableau, et qu'il perd le titre de la section d'origine lors de la réponse. Quelle évolution du pipeline d'ingestion corrige le plus directement ce problème ?",
+  "choices": [
+    "Découper les documents selon leur structure logique (sections, tableaux) et joindre le titre de section en métadonnée de chaque bloc.",
+    "Augmenter la taille des blocs à deux mille caractères tout en conservant un découpage uniforme, sans chevauchement ni repère structurel.",
+    "Supprimer le découpage et indexer chaque document entier comme un bloc unique pour préserver tout le contexte disponible dans la base.",
+    "Conserver des blocs fixes de cinq cents caractères, mais ajouter un chevauchement de cent caractères entre blocs consécutifs sans repère."
+  ]
+}

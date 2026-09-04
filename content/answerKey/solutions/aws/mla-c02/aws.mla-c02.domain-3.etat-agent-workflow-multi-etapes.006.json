@@ -1,0 +1,16 @@
+{
+  "id": "aws.mla-c02.domain-3.etat-agent-workflow-multi-etapes.006",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-3"
+  },
+  "correct": "Faire persister les attributs de session de l'agent dans un magasin externe entre les invocations pour garder le contexte.",
+  "rationale": "Le domaine 3 du guide MLA-C02 attend explicitement l'implémentation de systèmes de gestion d'état d'agent, en plus du déploiement d'agents pour des tâches spécifiques et de leurs protocoles de communication. Le symptôme décrit — l'agent oublie tout entre deux tours — est la signature classique d'un état conservé uniquement en mémoire locale d'une invocation sans état de la fonction Lambda ; faire persister les attributs de session (identifiants de conversation, résultats d'outils déjà obtenus) dans un magasin externe restaure la continuité entre les invocations. Augmenter la mémoire et le délai d'expiration de la fonction Lambda change ses capacités d'exécution pour un seul appel, mais chaque nouvelle invocation démarre toujours sans le contexte des invocations précédentes : le problème persiste à l'identique. Relever la température du modèle rend ses réponses plus variées, ce qui n'a aucun rapport avec la mémorisation du contexte entre les tours de conversation. Ajouter des exemples au prompt système peut préciser le style attendu des réponses, mais sans changer la façon dont l'état est conservé, l'agent continuera à perdre les informations et les résultats d'outils du tour précédent.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain3.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain3.md"
+  ]
+}

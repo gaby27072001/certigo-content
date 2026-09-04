@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-4.derive-observabilite-agents-production.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-4"
+  },
+  "prompt": "Un système multi-agents en production orchestre plusieurs agents Amazon Bedrock spécialisés qui s'appellent entre eux pour traiter une demande complexe. Environ une fois par semaine, un sous-agent échoue silencieusement lors d'un appel d'outil, ce qui produit une réponse finale tronquée sans qu'aucune alerte ne se déclenche ni qu'aucune erreur explicite ne remonte dans les journaux applicatifs habituels. L'équipe veut détecter ce type de défaillance de coordination dès qu'elle survient plutôt que par des signalements d'utilisateurs. Quelle approche répond le mieux à ce besoin ?",
+  "choices": [
+    "Allonger le délai d'expiration global des appels à tous les agents pour réduire la fréquence des échecs observés en production sur cette architecture.",
+    "Charger un opérateur de relire chaque matin les journaux d'exécution des agents pour les échecs de la veille.",
+    "Redémarrer l'ensemble des agents chaque nuit selon une tâche planifiée, sans lien avec les échecs observés.",
+    "Mettre en place une observabilité par agent et par appel d'outil, avec détection des échecs de coordination et des flux tronqués."
+  ]
+}

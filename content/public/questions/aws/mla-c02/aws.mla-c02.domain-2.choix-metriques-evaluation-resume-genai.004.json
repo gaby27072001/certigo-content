@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-2.choix-metriques-evaluation-resume-genai.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-2"
+  },
+  "prompt": "Une équipe a affiné un modèle de fondation pour produire des résumés abrégés de longs tickets de support, et doit exécuter chaque nuit une évaluation de régression automatique avant tout déploiement, en comparant les résumés générés à un jeu de résumés de référence rédigés par des experts. Une relecture humaine intégrale chaque nuit n'est pas soutenable à ce rythme. Quelle stratégie de mesure automatique reflète le mieux à la fois le chevauchement lexical et la similarité de sens avec les références, tout en réservant un contrôle humain ciblé ?",
+  "choices": [
+    "Ne suivre que la latence moyenne de génération, sans comparer le contenu aux résumés de référence disponibles.",
+    "Mesurer l'exactitude comme pour une tâche de classification, en comptant la part de résumés identiques aux références disponibles.",
+    "Comparer uniquement le nombre de mots des résumés générés à celui des résumés de référence pour juger leur qualité.",
+    "Combiner ROUGE et BERTScore pour mesurer le chevauchement et la similarité sémantique, en relisant à la main les cas les plus faibles."
+  ]
+}

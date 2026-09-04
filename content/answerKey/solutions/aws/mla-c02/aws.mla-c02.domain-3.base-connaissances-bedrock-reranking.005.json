@@ -1,0 +1,16 @@
+{
+  "id": "aws.mla-c02.domain-3.base-connaissances-bedrock-reranking.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-3"
+  },
+  "correct": "Ajouter un reclassement après la récupération vectorielle pour réordonner les blocs selon leur pertinence réelle.",
+  "rationale": "Le domaine 3 du guide MLA-C02 rattache explicitement à la gestion des bases de connaissances Bedrock l'application de configurations de récupération augmentée incluant les stratégies de reclassement. Un reclassement (reranking) réévalue les blocs déjà récupérés avec un modèle plus discriminant que la seule similarité vectorielle, et les réordonne avant de les transmettre au modèle de fondation, ce qui corrige directement le symptôme décrit sans toucher au modèle d'embeddings. Élargir la base de connaissances en ajoutant des documents n'améliore pas le classement des blocs déjà récupérés : le nouveau contenu subirait le même biais de similarité lexicale que celui déjà observé. Réduire à cinq le nombre de blocs récupérés en conservant le même classement risque d'éliminer justement les blocs pertinents mais mal classés, puisque le tri reste fondé sur la similarité vectorielle défaillante. Remplacer la récupération vectorielle par une recherche par mots-clés sur les seuls titres de documents perd la capacité à retrouver un contenu pertinent formulé différemment de la question, ce qui dégraderait le rappel plutôt que d'améliorer la précision.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain3.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain3.md"
+  ]
+}

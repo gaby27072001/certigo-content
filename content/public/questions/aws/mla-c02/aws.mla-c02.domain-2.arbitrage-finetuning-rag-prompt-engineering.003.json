@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-2.arbitrage-finetuning-rag-prompt-engineering.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-2"
+  },
+  "prompt": "Une équipe développe un assistant de support client fondé sur un modèle de fondation d'Amazon Bedrock, chargé de répondre en s'appuyant sur le manuel de politiques internes de l'entreprise. Ce manuel change plusieurs fois par semaine à mesure que de nouvelles règles sont publiées, et l'équipe doit garantir que les réponses reflètent toujours la version la plus récente sans multiplier les cycles de réentraînement coûteux. Quelle approche répond le mieux à cette contrainte de fraîcheur du contenu ?",
+  "choices": [
+    "Réentraîner intégralement le modèle de fondation chaque semaine sur le manuel interne de politiques mis à jour.",
+    "Coller l'intégralité du manuel de politiques dans chaque invite, quelle que soit la question posée à l'agent.",
+    "Conserver le modèle de fondation actuel et brancher une récupération augmentée sur un index des politiques réindexé chaque jour.",
+    "Lancer un préentraînement continu du modèle sur l'ensemble des politiques internes, en tâche de fond chaque nuit sans aucune supervision humaine."
+  ]
+}
