@@ -1,9 +1,11 @@
 # ADR-0003 - Promotion explicite des artefacts immuables vers Azure Blob Storage
 
-- Statut : Propose
+- Statut : Accepte
 - Date : 2026-08-16
 - Portee : publication externe des paquets `public`, `answerKey` et du descripteur de release
 - Complete : ADR-0001 et ADR-0002
+- Mise en oeuvre : fusionnee par les PR #14 et #30 ; activation Azure soumise
+  aux prerequis manuels ci-dessous
 
 ## Contexte
 
@@ -190,7 +192,7 @@ jamais par ce workflow.
    | `AZURE_STORAGE_ACCOUNT` | Nom du compte Storage |
    | `AZURE_STORAGE_CONTAINER` | Nom du conteneur cible |
 
-9. Definir les quatre variables repository non secretes suivantes. Elles
+9. Definir les sept variables repository non secretes suivantes. Elles
    constituent la topologie attendue et rendent toute collision bloquante :
 
    | Variable | Format |
@@ -205,7 +207,7 @@ jamais par ce workflow.
 
    Les trois cibles et les trois Client IDs doivent etre distincts. Chaque valeur
    d'environnement est comparee aux outputs normalises du job `plan` avant
-   connexion. Ne pas dupliquer ces quatre variables dans les environnements :
+   connexion. Ne pas dupliquer ces sept variables dans les environnements :
    la topologie de reference est exclusivement au niveau repository.
 10. Configurer les protections GitHub Environment decrites plus haut. Ne pas
    ajouter de secret ou de cle Azure.
