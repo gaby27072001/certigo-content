@@ -173,18 +173,16 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           audience: api://AzureADTokenExchange
       - name: Publish and verify public blobs
-        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        shell: bash
         env:
           MANIFEST_ID: ${{ needs.plan.outputs.public_manifest_id }}
           AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
           AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
-        with:
-          azcliversion: 2.89.1
-          inlineScript: |
-            bash tools/publish_blob_artifact.sh dist/public \
-              "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
-              "manifests/${MANIFEST_ID}" "public,max-age=31536000,immutable" manifestId
+        run: |
+          bash tools/publish_blob_artifact.sh dist/public \
+            "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
+            "manifests/${MANIFEST_ID}" "public,max-age=31536000,immutable" manifestId
 
   publish-answer-key:
     needs: plan
@@ -245,18 +243,16 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           audience: api://AzureADTokenExchange
       - name: Publish and verify answer key blobs
-        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        shell: bash
         env:
           MANIFEST_ID: ${{ needs.plan.outputs.private_manifest_id }}
           AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
           AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
-        with:
-          azcliversion: 2.89.1
-          inlineScript: |
-            bash tools/publish_blob_artifact.sh dist/private \
-              "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
-              "manifests/${MANIFEST_ID}" "private,no-store" manifestId
+        run: |
+          bash tools/publish_blob_artifact.sh dist/private \
+            "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
+            "manifests/${MANIFEST_ID}" "private,no-store" manifestId
 
   publish-release:
     needs: [plan, publish-public, publish-answer-key]
@@ -328,15 +324,13 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           audience: api://AzureADTokenExchange
       - name: Publish release descriptor last
-        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        shell: bash
         env:
           RELEASE_ID: ${{ needs.plan.outputs.release_id }}
           AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
           AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
-        with:
-          azcliversion: 2.89.1
-          inlineScript: |
-            bash tools/publish_blob_artifact.sh dist/release.json \
-              "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
-              "releases/${RELEASE_ID}" "private,no-store" releaseId
+        run: |
+          bash tools/publish_blob_artifact.sh dist/release.json \
+            "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
+            "releases/${RELEASE_ID}" "private,no-store" releaseId

@@ -57,17 +57,36 @@ test("separe trois UAMI OIDC et publie le descripteur en dernier", () => {
   for (const job of jobs) {
     assert.deepEqual(job.permissions, { contents: "read", "id-token": "write" });
     const login = job.steps.find((step) => step.uses?.startsWith("azure/login@"));
-    const cli = job.steps.find((step) => step.uses?.startsWith("azure/cli@"));
     assert.match(login.uses, /^azure\/login@[0-9a-f]{40}$/);
     assert.equal(login.with.creds, undefined);
     assert.equal(login.with.audience, "api://AzureADTokenExchange");
-    assert.match(cli.uses, /^azure\/cli@[0-9a-f]{40}$/);
-    assert.equal(cli.with.azcliversion, "2.89.1");
+    // La publication passe par l'Azure CLI native du runner, invoquee depuis une
+    // etape `run`. Les runners self-hosted n'ont pas Docker : toute action
+    // conteneur (`azure/cli`, ou un `container:` de job) rend le workflow
+    // inexecutable ici, ce qui n'apparait qu'a l'execution. On l'interdit donc
+    // explicitement plutot que d'epingler une action conteneur precise.
+    const publish = job.steps.find((step) =>
+      step.run?.includes("tools/publish_blob_artifact.sh")
+    );
+    assert.ok(publish, "chaque job doit publier via publish_blob_artifact.sh");
+    assert.equal(publish.shell, "bash");
+    assert.equal(publish.uses, undefined);
+    assert.equal(job.container, undefined);
+    for (const step of job.steps) {
+      assert.doesNotMatch(step.uses ?? "", /^azure\/cli@/);
+      // Invariant reel, independant de la forme : toute action encore utilisee
+      // reste epinglee a un SHA complet. Une etape `run` n'a pas de `uses` et
+      // n'est donc pas concernee, mais ne doit pas relacher la regle.
+      if (step.uses !== undefined) {
+        assert.match(step.uses, /^[^@\s]+@[0-9a-f]{40}$/);
+      }
+    }
   }
   const text = readFileSync(workflowPath, "utf8");
   assert.match(text, /manifests\/\$\{MANIFEST_ID\}/);
   assert.match(text, /releases\/\$\{RELEASE_ID\}/);
   assert.doesNotMatch(text, /upload-artifact/);
+  assert.doesNotMatch(text, /azcliversion/);
 });
 
 test("interdit les secrets statiques, alias mutables, delete et overwrite", () => {
@@ -100,6 +119,20 @@ test("publie et verifie un manifeste versionne avec Azure CLI simule", (context)
     return;
   }
 
+  const result = runFakePublish({});
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /2 blob\(s\) verifies/);
+});
+
+// Harness partage : prepare une source minimale et une Azure CLI simulee, puis
+// execute le script de publication. `wormState`, `azVersion` et `requireLocked`
+// permettent de couvrir le chemin reellement emprunte en production (`Unlocked`)
+// autant que les refus attendus.
+function runFakePublish({
+  wormState = "Locked",
+  azVersion = "2.89.0",
+  requireLocked,
+}) {
   const root = mkdtempSync(resolve(tmpdir(), "certigo-azure-publish-"));
   try {
     const source = resolve(root, "source");
@@ -120,6 +153,13 @@ test("publie et verifie un manifeste versionne avec Azure CLI simule", (context)
       fakeAz,
       `#!/usr/bin/env bash
 set -euo pipefail
+# L'Azure CLI reelle est desormais invoquee directement par le script, qui exige
+# sa presence et un plancher de version. Le simulateur doit donc repondre a
+# \`az version\` comme la vraie CLI.
+if [[ "$1" == "version" ]]; then
+  printf '%s\\n' "\${MOCK_AZ_VERSION:-2.89.0}"
+  exit 0
+fi
 command="$1 $2 $3"
 shift 3
 name=""
@@ -135,7 +175,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 case "\${command}" in
   "storage container show") printf 'None\\n' ;;
-  "storage container immutability-policy") printf 'Locked\\t30\\tfalse\\tfalse\\n' ;;
+  "storage container immutability-policy") printf '%s\\t30\\tfalse\\tfalse\\n' "\${MOCK_WORM_STATE:-Locked}" ;;
   "storage blob exists")
     [[ -f "\${MOCK_STATE}/\${name}" ]] && printf 'true\\n' || printf 'false\\n'
     ;;
@@ -147,7 +187,7 @@ case "\${command}" in
     mkdir -p "\$(dirname "\${file}")"
     cp "\${MOCK_STATE}/\${name}" "\${file}"
     ;;
-  "storage blob show") printf 'application/json\\t%s\\tversion-1\\tLocked\\t2099-01-01T00:00:00Z\\tfalse\\n' "\${MOCK_CACHE}" ;;
+  "storage blob show") printf 'application/json\\t%s\\tversion-1\\t%s\\t2099-01-01T00:00:00Z\\tfalse\\n' "\${MOCK_CACHE}" "\${MOCK_WORM_STATE:-Locked}" ;;
   "storage blob list")
     (cd "\${MOCK_STATE}" && find "\${prefix}" -type f -print | sort)
     ;;
@@ -176,12 +216,42 @@ esac
           PATH: `${bin}:${process.env.PATH}`,
           MOCK_STATE: state,
           MOCK_CACHE: "public,max-age=31536000,immutable",
+          MOCK_WORM_STATE: wormState,
+          MOCK_AZ_VERSION: azVersion,
+          ...(requireLocked === undefined
+            ? {}
+            : { CONTENT_REQUIRE_LOCKED_WORM: requireLocked }),
         },
       }
     );
-    assert.equal(result.status, 0, result.stderr);
-    assert.match(result.stdout, /2 blob\(s\) verifies/);
+    return result;
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+}
+
+// Le pilote publie contre des policies WORM `Unlocked` : ADR-020 interdit le
+// verrouillage avant la preuve complete, et le verrouillage est irreversible.
+// Le chemin reellement emprunte en production doit donc etre couvert, et le
+// plancher de version doit echouer bruyamment plutot que silencieusement.
+test("accepte une retention WORM Unlocked et refuse une Azure CLI trop ancienne", (context) => {
+  if (process.platform === "win32") {
+    context.skip("test d'integration Bash execute sur les runners Linux");
+    return;
+  }
+
+  const unlocked = runFakePublish({ wormState: "Unlocked" });
+  assert.equal(unlocked.status, 0, unlocked.stderr);
+  assert.match(unlocked.stdout, /2 blob\(s\) verifies/);
+
+  const locked = runFakePublish({ wormState: "Locked", requireLocked: "true" });
+  assert.equal(locked.status, 0, locked.stderr);
+
+  const refused = runFakePublish({ wormState: "Unlocked", requireLocked: "true" });
+  assert.equal(refused.status, 66);
+  assert.match(refused.stderr, /CONTENT_REQUIRE_LOCKED_WORM/);
+
+  const stale = runFakePublish({ wormState: "Unlocked", azVersion: "2.88.9" });
+  assert.equal(stale.status, 70);
+  assert.match(stale.stderr, /2\.89\.0 requise/);
 });

@@ -39,6 +39,30 @@ if [[ "${identity_field}" != "manifestId" && "${identity_field}" != "releaseId" 
   exit 65
 fi
 
+# La publication s'appuie sur l'Azure CLI installee sur le runner, et non plus
+# sur l'action conteneur `azure/cli` : les runners self-hosted n'ont pas Docker,
+# donc cette action echouait avant toute ecriture. L'image runner epingle
+# `azure-cli` a une version exacte (apt-mark hold, manifeste toolchain et SBOM,
+# verifies au build par `validate-toolchain.sh`), mais ce script ne peut pas en
+# depend : on exige donc explicitement un plancher de version ici, afin qu'un
+# changement de parc echoue bruyamment plutot que de publier avec un outil au
+# comportement different.
+readonly MINIMUM_AZURE_CLI_VERSION="2.89.0"
+if ! command -v az >/dev/null 2>&1; then
+  echo "[azure-publish] Azure CLI absente du runner" >&2
+  exit 70
+fi
+azure_cli_version="$(az version --query '"azure-cli"' --output tsv 2>/dev/null || true)"
+if [[ ! "${azure_cli_version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+  echo "[azure-publish] version Azure CLI illisible: ${azure_cli_version:-<vide>}" >&2
+  exit 70
+fi
+if [[ "$(printf '%s\n%s\n' "${MINIMUM_AZURE_CLI_VERSION}" "${azure_cli_version}" |
+  sort -V | head -n 1)" != "${MINIMUM_AZURE_CLI_VERSION}" ]]; then
+  echo "[azure-publish] Azure CLI ${azure_cli_version} < ${MINIMUM_AZURE_CLI_VERSION} requise" >&2
+  exit 70
+fi
+
 if [[ -d "${source_path}" ]]; then
   source_root="$(cd "${source_path}" && pwd -P)"
   identity_document="${source_root}/manifest.json"
