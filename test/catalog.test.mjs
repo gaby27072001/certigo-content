@@ -248,6 +248,29 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
       .status,
     "retiring"
   );
+
+  const mla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+  assert.equal(mla.status, "active-retiring");
+  assert.equal(mla.lifecycle.recommendThrough, "2026-09-28");
+  assert.equal(mla.lifecycle.lastExamOn, "2027-01-13");
+  assert.equal(mla.lifecycle.reviewOn, "2027-01-14");
+  assert.equal(mla.lifecycle.successor, "aws:mla-c02");
+  assert.equal(mla.provenance.checkedOn, "2026-09-04");
+  assert.ok(
+    mla.provenance.sources.some(
+      (source) =>
+        source.kind === "lifecycle" &&
+        source.url ===
+          "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/"
+    )
+  );
+  assert.equal(
+    readJson(resolve(repoRoot, "content", "public", "coverage", "aws", "mla-c01.json"))
+      .status,
+    "retiring"
+  );
 });
 
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
@@ -350,6 +373,38 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
   assert.ok(transition.nonRecommendedCertificationIds.includes("aws:ans-c01"));
   assert.ok(
     transition.errors.some((error) => error.includes("transition a reverifier"))
+  );
+});
+
+test("applique les bornes linguistiques de transition MLA-C01", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const mla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+
+  // Dernier jour de MLA-C01 en anglais : encore actif et encore recommande.
+  assert.equal(isCertificationActiveOn(mla, "2026-09-28"), true);
+  assert.equal(isCertificationRecommendedOn(mla, "2026-09-28"), true);
+  // Debut de la livraison beta MLA-C02 : MLA-C01 reste actif (ja/ko/zh-CN)
+  // mais n'est plus recommande.
+  assert.equal(isCertificationActiveOn(mla, "2026-09-29"), true);
+  assert.equal(isCertificationRecommendedOn(mla, "2026-09-29"), false);
+  // Retrait toutes langues a la GA MLA-C02 du 14 janvier 2027.
+  assert.equal(isCertificationActiveOn(mla, "2027-01-13"), true);
+  assert.equal(isCertificationActiveOn(mla, "2027-01-14"), false);
+
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-04" });
+  assert.deepEqual(current.errors, []);
+  assert.ok(current.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(current.recommendedCertificationIds.includes("aws:mla-c01"));
+
+  const transition = checkCatalogFreshness({ root: repoRoot, asOf: "2027-01-14" });
+  assert.ok(!transition.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(transition.excludedCertificationIds.includes("aws:mla-c01"));
+  assert.ok(
+    transition.errors.some((error) =>
+      error.includes("aws:mla-c01: transition a reverifier")
+    )
   );
 });
 

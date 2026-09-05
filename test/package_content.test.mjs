@@ -171,6 +171,19 @@ function createHistoricalV2Root() {
   historicalAns.lifecycle.note =
     "AWS states that December 31, 2026 is the last day to take the exam.";
   delete historicalAns.lifecycle.recommendThrough;
+  const historicalMla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+  historicalMla.status = "active";
+  historicalMla.lifecycle = {
+    reviewOn: "2026-09-01",
+    successor: "aws:mla-c02",
+    note: "AWS states that MLA-C02 registration opens September 1, 2026; the English MLA-C01 exam remains available through September 28, 2026.",
+  };
+  historicalMla.provenance.checkedOn = "2026-08-17";
+  historicalMla.provenance.sources.find(
+    (source) => source.kind === "lifecycle"
+  ).url = "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/";
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
   // Remove runtime resources and Microsoft content added after the historical baseline
@@ -282,7 +295,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:dd95aafc2ac3e7859df31cb4e7aee271cf2c25cdcfee1fa23ac3eab8ca7ced79",
+          "sha256:0a7f04486ddce1983bdc3bdd8580befbbc867b6c25a5da7f55a68c63cbbe6c7f",
       },
       {
         artifact: "private",
@@ -293,7 +306,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "4a9e9bc9e9a8462ddcb5e870b0abd0e5b2c064012a588af815d32138d42596a2"
+    "b94187711fdbe35ba70c9c83a02060e51e6b11ddfa03168dbaef527591cb88e5"
   );
 });
 
