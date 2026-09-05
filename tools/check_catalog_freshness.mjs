@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { argv, cwd } from "node:process";
 import { pathToFileURL } from "node:url";
@@ -13,6 +13,23 @@ import {
   parseDate,
 } from "./lib/catalog.mjs";
 
+export const TRANSITION_EXEMPTIONS_PATH = "config/catalog-transition-exemptions.json";
+
+// Une exemption absente vaut "pas d'exemption", jamais "exempte par defaut" :
+// un fichier manquant doit durcir la gate, pas la neutraliser.
+function loadTransitionExemptions(root) {
+  const path = resolve(root, TRANSITION_EXEMPTIONS_PATH);
+  if (!existsSync(path)) return new Map();
+  const raw = readFileSync(path, "utf8");
+  const document = JSON.parse(raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw);
+  const entries = new Map();
+  for (const exemption of document.exemptions ?? []) {
+    parseDate(exemption.expiresOn, `exemption ${exemption.id}.expiresOn`);
+    entries.set(exemption.id, exemption.expiresOn);
+  }
+  return entries;
+}
+
 export function checkCatalogFreshness(options = {}) {
   const root = resolve(options.root ?? cwd());
   const catalogPath = resolve(root, CATALOG_PATH);
@@ -21,6 +38,7 @@ export function checkCatalogFreshness(options = {}) {
   }
 
   const catalog = loadCatalog(root);
+  const exemptions = loadTransitionExemptions(root);
   const asOf =
     options.asOf ??
     new Date().toISOString().slice(0, 10);
@@ -68,6 +86,28 @@ export function checkCatalogFreshness(options = {}) {
       errors.push(
         `${certification.id}: transition a reverifier depuis le ${certification.lifecycle.reviewOn}`
       );
+    }
+
+    // Silence de cycle de vie. Volontairement independant du controle d'age
+    // ci-dessus : les deux peuvent etre vrais en meme temps et un operateur a
+    // besoin de voir les deux. "sources agees" se corrige en rafraichissant une
+    // date ; "ne declare pas transition" exige d'aller lire la source officielle.
+    if (["active", "active-retiring"].includes(certification.status)) {
+      const declared = certification.lifecycle?.transition;
+      if (!declared) {
+        const expiresOn = exemptions.get(certification.id);
+        if (expiresOn === undefined) {
+          errors.push(
+            `[lifecycle:transition] ${certification.id}: ne declare pas lifecycle.transition et ne figure pas dans ${TRANSITION_EXEMPTIONS_PATH}`
+          );
+        } else if (
+          checkedDate >= parseDate(expiresOn, `exemption ${certification.id}.expiresOn`)
+        ) {
+          errors.push(
+            `[lifecycle:transition] ${certification.id}: exemption expiree le ${expiresOn}; verifier la source officielle et declarer lifecycle.transition ("announced" avec lastExamOn, ou "none-announced")`
+          );
+        }
+      }
     }
   }
 

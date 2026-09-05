@@ -127,6 +127,34 @@ function validateSolutionProvenance({ data, file, catalogIndex, err }) {
   }
 }
 
+function validateTransitionDeclaration(certification, err) {
+  const lifecycle = certification.lifecycle ?? {};
+  const { transition, lastExamOn, successor } = lifecycle;
+  if (transition === undefined) return;
+
+  if (transition === "announced") {
+    if (!lastExamOn) {
+      err(
+        `[catalog:transition] ${certification.id}: transition "announced" exige lastExamOn (date officielle de fin)`
+      );
+    }
+    return;
+  }
+
+  // transition === "none-announced" : affirmation datee qu'aucune succession
+  // n'est publiee. La fraicheur de cette affirmation est portee par
+  // provenance.checkedOn et controlee par maxAgeDays.
+  const declaredDates = ["lastExamOn", "recommendThrough"].filter((key) => lifecycle[key]);
+  if (declaredDates.length > 0 || successor) {
+    err(
+      `[catalog:transition] ${certification.id}: transition "none-announced" est incompatible avec ${[
+        ...declaredDates,
+        ...(successor ? ["successor"] : []),
+      ].join(", ")}; utiliser "announced"`
+    );
+  }
+}
+
 function validateCatalogSemantics(catalog, err) {
   const providerIds = new Set();
   const providers = new Map();
@@ -232,6 +260,8 @@ function validateCatalogSemantics(catalog, err) {
         }
       }
     }
+
+    validateTransitionDeclaration(certification, err);
 
     checkOfficialUrl(certification.officialUrl, provider, `${certification.id}.officialUrl`, err);
     checkOfficialUrl(certification.guide.url, provider, `${certification.id}.guide.url`, err);

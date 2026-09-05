@@ -408,6 +408,141 @@ test("applique les bornes linguistiques de transition MLA-C01", () => {
   );
 });
 
+test("declare la transition de cycle de vie ou une exemption datee", () => {
+  const exemptions = readJson(
+    resolve(repoRoot, "config", "catalog-transition-exemptions.json")
+  );
+  const catalog = readJson(catalogAt(repoRoot));
+  const active = catalog.certifications.filter((certification) =>
+    ["active", "active-retiring"].includes(certification.status)
+  );
+  const exempted = new Map(
+    exemptions.exemptions.map((entry) => [entry.id, entry.expiresOn])
+  );
+
+  // Toute entree active est soit declarante, soit exemptee : aucun silence muet.
+  for (const certification of active) {
+    const declared = Boolean(certification.lifecycle?.transition);
+    assert.equal(
+      declared || exempted.has(certification.id),
+      true,
+      `${certification.id} ne declare pas transition et n'est pas exemptee`
+    );
+  }
+
+  // Invariant central : une exemption qui expire APRES la peremption des sources
+  // serait inerte, l'entree tombant d'abord sur "sources agees" - le mauvais motif.
+  const maxAgeDays = catalog.freshness.maxAgeDays;
+  for (const certification of active) {
+    const expiresOn = exempted.get(certification.id);
+    if (!expiresOn) continue;
+    const staleOn = new Date(
+      parseDate(certification.provenance.checkedOn, "checkedOn").valueOf() +
+        (maxAgeDays + 1) * 86_400_000
+    )
+      .toISOString()
+      .slice(0, 10);
+    assert.ok(
+      expiresOn <= staleOn,
+      `${certification.id}: exemption ${expiresOn} posterieure a la peremption ${staleOn}`
+    );
+  }
+
+  // Les expirations sont etalees : pas de falaise fabriquee.
+  const distinct = new Set(exemptions.exemptions.map((entry) => entry.expiresOn));
+  assert.ok(distinct.size >= 4, `expirations trop groupees: ${distinct.size} date(s)`);
+});
+
+test("distingue peremption des sources et silence de cycle de vie", () => {
+  // Avant toute expiration : gate verte.
+  const today = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-05" });
+  assert.deepEqual(today.errors, []);
+
+  // Apres expiration ET peremption : les DEUX motifs remontent, distincts.
+  const both = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-17" });
+  const silence = both.errors.filter((error) => error.includes("[lifecycle:transition]"));
+  const staleness = both.errors.filter((error) => error.includes("sources agees"));
+  assert.ok(silence.length > 0, "silence de cycle de vie absent");
+  assert.ok(staleness.length > 0, "peremption des sources absente");
+
+  // Un motif ne doit pas masquer l'autre sur une meme entree.
+  const both0817 = "gcp:cloud-architect";
+  assert.ok(silence.some((error) => error.includes(both0817)));
+  assert.ok(staleness.some((error) => error.includes(both0817)));
+
+  // Le message d'exemption expiree oriente vers la source officielle,
+  // pas vers une donnee malformee.
+  assert.ok(
+    silence.some(
+      (error) =>
+        error.includes("exemption expiree") && error.includes("source officielle")
+    )
+  );
+});
+
+test("rejette une declaration de transition incoherente", async () => {
+  const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  const announced = catalog.certifications.find(
+    (certification) => certification.id === "aws:saa-c03"
+  );
+  announced.lifecycle = { transition: "announced" };
+  const silent = catalog.certifications.find(
+    (certification) => certification.id === "aws:dea-c01"
+  );
+  silent.lifecycle = { transition: "none-announced", successor: "aws:dea-c02" };
+  writeJson(catalogAt(root), catalog);
+
+  const result = await validateContent({ root });
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[catalog:transition]") &&
+        error.includes("aws:saa-c03") &&
+        error.includes("lastExamOn")
+    ),
+    "announced sans lastExamOn doit echouer"
+  );
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[catalog:transition]") &&
+        error.includes("aws:dea-c01") &&
+        error.includes("successor")
+    ),
+    "none-announced avec successor doit echouer"
+  );
+});
+
+test("une entree declarante sort de la gate sans exemption", () => {
+  const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  for (const certification of catalog.certifications) {
+    if (!["active", "active-retiring"].includes(certification.status)) continue;
+    certification.lifecycle = {
+      ...(certification.lifecycle ?? {}),
+      transition: certification.lifecycle?.lastExamOn ? "announced" : "none-announced",
+    };
+  }
+  writeJson(catalogAt(root), catalog);
+
+  // Aucun fichier d'exemption dans ce root : l'absence durcit la gate,
+  // donc seule la declaration peut la faire passer.
+  const result = checkCatalogFreshness({ root, asOf: "2026-09-05" });
+  assert.deepEqual(
+    result.errors.filter((error) => error.includes("[lifecycle:transition]")),
+    []
+  );
+});
+
+test("un fichier d'exemptions absent ne vaut pas exemption", () => {
+  const root = createMetadataRoot();
+  const result = checkCatalogFreshness({ root, asOf: "2026-09-05" });
+  const silence = result.errors.filter((error) => error.includes("[lifecycle:transition]"));
+  assert.ok(silence.length > 0, "un fichier absent doit durcir la gate, pas la neutraliser");
+  assert.ok(silence.some((error) => error.includes("ne figure pas dans")));
+});
+
 test("detecte catalogue stale, date invalide et catalogue absent", () => {
   const stale = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-01" });
   assert.ok(stale.errors.some((error) => error.includes("snapshot age")));
