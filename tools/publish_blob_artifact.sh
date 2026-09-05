@@ -135,7 +135,7 @@ if [[ "${#immutability_fields[@]}" -ne 4 ]]; then
   echo "[azure-publish] reponse immutability-policy inattendue: ${#immutability_fields[@]} champ(s)" >&2
   exit 66
 fi
-policy_state="${immutability_fields[0]}"
+policy_state="${immutability_fields[0],,}"
 policy_days="${immutability_fields[1]}"
 append_writes="${immutability_fields[2]}"
 append_writes_all="${immutability_fields[3]}"
@@ -148,19 +148,27 @@ append_writes_all="${immutability_fields[3]}"
 # protege : c'est elle qui empeche reellement l'ecrasement et la suppression.
 # `Locked` n'est exige que lorsque CONTENT_REQUIRE_LOCKED_WORM=true, ce qui doit
 # etre le cas en production apres la preuve staging.
+#
+# Casse : Azure ne repond pas la meme casse selon le plan interroge. Le plan de
+# gestion renvoie `Unlocked` pour l'etat du conteneur, tandis que le plan de
+# donnees renvoie `unlocked` en minuscules pour `immutabilityPolicy.policyMode`
+# d'un blob. Mesure sur le compte reel le 2026-09-05. Une comparaison sensible a
+# la casse faisait donc echouer la verification par blob en exit 68 sur un objet
+# parfaitement valide, apres son upload. Les deux valeurs sont normalisees en
+# minuscules avant comparaison.
 require_locked_worm="${CONTENT_REQUIRE_LOCKED_WORM:-false}"
 if [[ "${require_locked_worm}" != "true" && "${require_locked_worm}" != "false" ]]; then
   echo "[azure-publish] CONTENT_REQUIRE_LOCKED_WORM doit valoir true ou false" >&2
   exit 64
 fi
-if [[ ( "${policy_state}" != "Locked" && "${policy_state}" != "Unlocked" ) ||
+if [[ ( "${policy_state}" != "locked" && "${policy_state}" != "unlocked" ) ||
       ! "${policy_days}" =~ ^[1-9][0-9]*$ ||
       "${append_writes}" == "true" ||
       "${append_writes_all}" == "true" ]]; then
   echo "[azure-publish] politique WORM active sans append protege requise" >&2
   exit 66
 fi
-if [[ "${require_locked_worm}" == "true" && "${policy_state}" != "Locked" ]]; then
+if [[ "${require_locked_worm}" == "true" && "${policy_state}" != "locked" ]]; then
   echo "[azure-publish] policy WORM verrouillee exigee par CONTENT_REQUIRE_LOCKED_WORM" >&2
   exit 66
 fi
@@ -255,7 +263,7 @@ publish_file() {
   local remote_content_type="${blob_fields[0]}"
   local remote_cache_control="${blob_fields[1]}"
   local version_id="${blob_fields[2]}"
-  local policy_mode="${blob_fields[3]}"
+  local policy_mode="${blob_fields[3],,}"
   local immutable_until="${blob_fields[4]}"
   local legal_hold="${blob_fields[5]}"
   if [[ "${remote_content_type}" != "application/json" ||
@@ -263,11 +271,11 @@ publish_file() {
         -z "${version_id}" ||
         "${version_id}" == "None" ||
         "${version_id}" == "null" ||
-        ( "${policy_mode}" != "Locked" && "${policy_mode}" != "Unlocked" ) ]]; then
+        ( "${policy_mode}" != "locked" && "${policy_mode}" != "unlocked" ) ]]; then
     echo "[azure-publish] version ou proprietes immuables invalides: ${blob_name}" >&2
     exit 68
   fi
-  if [[ "${require_locked_worm}" == "true" && "${policy_mode}" != "Locked" ]]; then
+  if [[ "${require_locked_worm}" == "true" && "${policy_mode}" != "locked" ]]; then
     echo "[azure-publish] policyMode verrouille exige: ${blob_name}" >&2
     exit 68
   fi

@@ -100,7 +100,15 @@ test("interdit les secrets statiques, alias mutables, delete et overwrite", () =
   assert.match(contract, /immutabilityPolicy\.policyMode/);
   assert.match(contract, /immutabilityPolicy\.expiryTime/);
   assert.match(contract, /hasLegalHold/);
-  assert.match(contract, /policy_state}" != "Locked"/);
+  // L'exigence de verrou reste affirmee par son MECANISME, pas par le texte
+  // exact de la comparaison. Epingler la chaine `policy_state}" != "Locked"`
+  // interdisait de normaliser la casse, alors que le plan de donnees renvoie
+  // `unlocked` en minuscules la ou le plan de gestion renvoie `Unlocked` : le
+  // test empechait donc la correction du bug qu'il etait cense proteger. La
+  // semantique elle-meme est couverte par les tests d'integration, qui
+  // verifient les codes de sortie reels.
+  assert.match(contract, /CONTENT_REQUIRE_LOCKED_WORM/);
+  assert.match(contract, /!= "locked"/i);
   assert.doesNotMatch(contract, /Locked\|Unlocked/);
   assert.doesNotMatch(contract, /az storage blob delete/);
 });
@@ -125,11 +133,17 @@ test("publie et verifie un manifeste versionne avec Azure CLI simule", (context)
 });
 
 // Harness partage : prepare une source minimale et une Azure CLI simulee, puis
-// execute le script de publication. `wormState`, `azVersion` et `requireLocked`
-// permettent de couvrir le chemin reellement emprunte en production (`Unlocked`)
-// autant que les refus attendus.
+// execute le script de publication. Les parametres couvrent le chemin reellement
+// emprunte en production (`Unlocked`) autant que les refus attendus.
+//
+// `wormState` et `blobPolicyMode` sont DEUX parametres distincts, et par defaut
+// de casse differente, parce qu'Azure repond ainsi : le plan de gestion renvoie
+// `Unlocked` pour l'etat du conteneur, le plan de donnees renvoie `unlocked`
+// pour `immutabilityPolicy.policyMode` d'un blob. Casse relevee sur le compte
+// reel via inspect-content-storage le 2026-09-05.
 function runFakePublish({
   wormState = "Locked",
+  blobPolicyMode = "locked",
   azVersion = "2.89.0",
   requireLocked,
 }) {
@@ -195,7 +209,7 @@ case "\${command}" in
     mkdir -p "\$(dirname "\${file}")"
     cp "\${MOCK_STATE}/\${name}" "\${file}"
     ;;
-  "storage blob show") printf 'application/json\\n%s\\nversion-1\\n%s\\n2099-01-01T00:00:00Z\\nfalse\\n' "\${MOCK_CACHE}" "\${MOCK_WORM_STATE:-Locked}" ;;
+  "storage blob show") printf 'application/json\\n%s\\nversion-1\\n%s\\n2099-01-01T00:00:00Z\\nfalse\\n' "\${MOCK_CACHE}" "\${MOCK_BLOB_POLICY_MODE:-locked}" ;;
   "storage blob list")
     (cd "\${MOCK_STATE}" && find "\${prefix}" -type f -print | sort)
     ;;
@@ -225,6 +239,7 @@ esac
           MOCK_STATE: state,
           MOCK_CACHE: "public,max-age=31536000,immutable",
           MOCK_WORM_STATE: wormState,
+          MOCK_BLOB_POLICY_MODE: blobPolicyMode,
           MOCK_AZ_VERSION: azVersion,
           ...(requireLocked === undefined
             ? {}
@@ -248,18 +263,44 @@ test("accepte une retention WORM Unlocked et refuse une Azure CLI trop ancienne"
     return;
   }
 
-  const unlocked = runFakePublish({ wormState: "Unlocked" });
+  // Casses reelles observees : conteneur capitalise, blob en minuscules.
+  const unlocked = runFakePublish({
+    wormState: "Unlocked",
+    blobPolicyMode: "unlocked",
+  });
   assert.equal(unlocked.status, 0, unlocked.stderr);
   assert.match(unlocked.stdout, /2 blob\(s\) verifies/);
 
-  const locked = runFakePublish({ wormState: "Locked", requireLocked: "true" });
+  const locked = runFakePublish({
+    wormState: "Locked",
+    blobPolicyMode: "locked",
+    requireLocked: "true",
+  });
   assert.equal(locked.status, 0, locked.stderr);
 
-  const refused = runFakePublish({ wormState: "Unlocked", requireLocked: "true" });
+  const refused = runFakePublish({
+    wormState: "Unlocked",
+    blobPolicyMode: "unlocked",
+    requireLocked: "true",
+  });
   assert.equal(refused.status, 66);
   assert.match(refused.stderr, /CONTENT_REQUIRE_LOCKED_WORM/);
 
-  const stale = runFakePublish({ wormState: "Unlocked", azVersion: "2.88.9" });
+  // Image miroir du meme bug : `CONTENT_REQUIRE_LOCKED_WORM=true` face a un blob
+  // verrouille. Ce chemin ne s'emprunte qu'apres un verrouillage irreversible,
+  // donc il ne doit pas dependre de la casse renvoyee par l'API.
+  const lockedLowercaseBlob = runFakePublish({
+    wormState: "LOCKED",
+    blobPolicyMode: "Locked",
+    requireLocked: "true",
+  });
+  assert.equal(lockedLowercaseBlob.status, 0, lockedLowercaseBlob.stderr);
+
+  const stale = runFakePublish({
+    wormState: "Unlocked",
+    blobPolicyMode: "unlocked",
+    azVersion: "2.88.9",
+  });
   assert.equal(stale.status, 70);
   assert.match(stale.stderr, /2\.89\.0 requise/);
 });
