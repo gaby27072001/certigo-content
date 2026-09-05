@@ -149,6 +149,14 @@ function runFakePublish({
     writeFileSync(resolve(source, "questions", "sample.json"), '{"id":"sample"}\n');
 
     const fakeAz = resolve(bin, "az");
+    // Ce double doit reproduire le FORMAT REEL de l'Azure CLI, pas un format
+    // commode. Une projection JMESPath plate avec `--output tsv` emet une valeur
+    // par LIGNE, jamais des colonnes separees par des tabulations. Le double
+    // emettait auparavant des tabulations, si bien que le parseur du script
+    // etait teste contre une sortie que l'outil reel ne produit pas : les cinq
+    // scenarios passaient alors que la publication echouait en production avec
+    // exit 66. Un test qui affirme la bonne chose contre le mauvais monde ne
+    // prouve rien.
     writeFileSync(
       fakeAz,
       `#!/usr/bin/env bash
@@ -175,7 +183,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 case "\${command}" in
   "storage container show") printf 'None\\n' ;;
-  "storage container immutability-policy") printf '%s\\t30\\tfalse\\tfalse\\n' "\${MOCK_WORM_STATE:-Locked}" ;;
+  "storage container immutability-policy") printf '%s\\n30\\nfalse\\nfalse\\n' "\${MOCK_WORM_STATE:-Locked}" ;;
   "storage blob exists")
     [[ -f "\${MOCK_STATE}/\${name}" ]] && printf 'true\\n' || printf 'false\\n'
     ;;
@@ -187,7 +195,7 @@ case "\${command}" in
     mkdir -p "\$(dirname "\${file}")"
     cp "\${MOCK_STATE}/\${name}" "\${file}"
     ;;
-  "storage blob show") printf 'application/json\\t%s\\tversion-1\\t%s\\t2099-01-01T00:00:00Z\\tfalse\\n' "\${MOCK_CACHE}" "\${MOCK_WORM_STATE:-Locked}" ;;
+  "storage blob show") printf 'application/json\\n%s\\nversion-1\\n%s\\n2099-01-01T00:00:00Z\\nfalse\\n' "\${MOCK_CACHE}" "\${MOCK_WORM_STATE:-Locked}" ;;
   "storage blob list")
     (cd "\${MOCK_STATE}" && find "\${prefix}" -type f -print | sort)
     ;;

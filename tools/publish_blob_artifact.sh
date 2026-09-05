@@ -115,7 +115,7 @@ if [[ -n "${public_access}" && "${public_access}" != "None" && "${public_access}
   exit 66
 fi
 
-IFS=$'\t' read -r policy_state policy_days append_writes append_writes_all < <(
+mapfile -t immutability_fields < <(
   az storage container immutability-policy show \
     --resource-group "${resource_group}" \
     --account-name "${storage_account}" \
@@ -124,6 +124,21 @@ IFS=$'\t' read -r policy_state policy_days append_writes append_writes_all < <(
     --output tsv \
     --only-show-errors
 )
+# `--output tsv` sur une projection JMESPath plate emet UNE VALEUR PAR LIGNE, et
+# non des colonnes separees par des tabulations : la tabulation n'apparait que
+# pour un resultat en ligne (tableau imbrique). Lire ces sorties avec
+# `IFS=$'\t' read` ne remplissait donc que la premiere variable et laissait les
+# suivantes vides, ce qui faisait echouer la garde WORM en annoncant un probleme
+# de policy inexistant. On lit desormais ligne par ligne et on verifie le nombre
+# de champs, afin qu'un changement de format echoue explicitement.
+if [[ "${#immutability_fields[@]}" -ne 4 ]]; then
+  echo "[azure-publish] reponse immutability-policy inattendue: ${#immutability_fields[@]} champ(s)" >&2
+  exit 66
+fi
+policy_state="${immutability_fields[0]}"
+policy_days="${immutability_fields[1]}"
+append_writes="${immutability_fields[2]}"
+append_writes_all="${immutability_fields[3]}"
 # ADR-020 interdit de verrouiller la policy WORM tant que l'import, la lecture
 # versionnee et le rollback N-1 ne sont pas prouves, et le verrouillage est
 # irreversible. Exiger `Locked` ici rendait donc la publication impossible :
@@ -219,8 +234,11 @@ publish_file() {
     exit 67
   fi
 
-  local remote_content_type remote_cache_control version_id policy_mode immutable_until legal_hold
-  IFS=$'\t' read -r remote_content_type remote_cache_control version_id policy_mode immutable_until legal_hold < <(
+  local blob_fields
+  # Meme correction que pour la policy de conteneur : projection plate, donc une
+  # valeur par ligne. Ce cas etait plus dangereux, car il echouait APRES l'upload
+  # du blob et aurait signale une immuabilite invalide sur un objet correct.
+  mapfile -t blob_fields < <(
     az storage blob show \
       --account-name "${storage_account}" \
       --container-name "${storage_container}" \
@@ -230,6 +248,16 @@ publish_file() {
       --output tsv \
       --only-show-errors
   )
+  if [[ "${#blob_fields[@]}" -ne 6 ]]; then
+    echo "[azure-publish] reponse blob show inattendue: ${#blob_fields[@]} champ(s)" >&2
+    exit 68
+  fi
+  local remote_content_type="${blob_fields[0]}"
+  local remote_cache_control="${blob_fields[1]}"
+  local version_id="${blob_fields[2]}"
+  local policy_mode="${blob_fields[3]}"
+  local immutable_until="${blob_fields[4]}"
+  local legal_hold="${blob_fields[5]}"
   if [[ "${remote_content_type}" != "application/json" ||
         "${remote_cache_control}" != "${cache_control}" ||
         -z "${version_id}" ||
