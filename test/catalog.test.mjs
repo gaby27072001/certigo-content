@@ -471,9 +471,27 @@ test("declare la transition de cycle de vie ou une exemption datee", () => {
     );
   }
 
-  // Les expirations sont etalees : pas de falaise fabriquee.
+  // Les expirations restent etalees tant que la liste est assez grande pour
+  // qu'un regroupement recree une falaise. La liste ne fait que retrecir au fil
+  // de la campagne, donc exiger un nombre fixe de dates distinctes echouerait
+  // sur un residu legitime : le seuil est proportionnel a ce qui reste.
   const distinct = new Set(exemptions.exemptions.map((entry) => entry.expiresOn));
-  assert.ok(distinct.size >= 4, `expirations trop groupees: ${distinct.size} date(s)`);
+  if (exemptions.exemptions.length >= 10) {
+    assert.ok(
+      distinct.size >= 3,
+      `${exemptions.exemptions.length} exemptions groupees sur ${distinct.size} date(s)`
+    );
+  }
+  const perDate = new Map();
+  for (const entry of exemptions.exemptions) {
+    perDate.set(entry.expiresOn, (perDate.get(entry.expiresOn) ?? 0) + 1);
+  }
+  for (const [expiresOn, count] of perDate) {
+    assert.ok(
+      count <= 12,
+      `${count} exemptions expirent le ${expiresOn}: falaise reconstituee`
+    );
+  }
 });
 
 test("distingue peremption des sources et silence de cycle de vie", () => {

@@ -213,6 +213,22 @@ function createHistoricalV2Root() {
     (source) => source.kind === "lifecycle"
   ).url =
     "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-03/developer-associate-03.html";
+  // Vague 2 de la campagne : les quatre certifications Google Cloud reverifiees
+  // le 2026-09-05 sont ramenees a leur bloc lifecycle d'origine.
+  const brandingNote =
+    "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date.";
+  for (const [id, note] of [
+    ["gcp:cloud-database-engineer", brandingNote],
+    ["gcp:data-engineer", brandingNote],
+    ["gcp:data-practitioner", brandingNote],
+    ["gcp:cloud-digital-leader", "The guide states that this version launched on August 12, 2026."],
+  ]) {
+    const historical = catalog.certifications.find(
+      (certification) => certification.id === id
+    );
+    historical.lifecycle = { reviewOn: "2026-09-16", note };
+    historical.provenance.checkedOn = "2026-08-17";
+  }
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
   // Remove runtime resources and Microsoft content added after the historical baseline
@@ -324,7 +340,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:72182d4eadc039896bdb8c5e7625b649db37208a478edf05d2b939f523cb98d2",
+          "sha256:37f047d3739f8e380728e442efaa906355845469cf1dbb929bbb2cef0eebe707",
       },
       {
         artifact: "private",
@@ -335,7 +351,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "ce32ab7aa60b1565ec1737824be471412d091c3372bacd0522898aa17eaedf5e"
+    "41c2289d9e2c7b29694c93cb546b62a7c0bfcc09c1c9de50b6f320c0fe11f090"
   );
 });
 
