@@ -1,0 +1,131 @@
+name: inspect-content-storage
+
+# Lecture seule du plan de donnees du compte de contenu immuable.
+#
+# Le compte est `publicNetworkAccess: Disabled` et n'est joignable que par le
+# Private Endpoint Blob dans `rg-certigo-ci/vnet-certigo-ci/snet-runners`. Aucune
+# machine hors de ce VNet ne peut donc lire les blobs : depuis l'exterieur,
+# `az storage blob list` echoue avec une erreur de regles reseau, ce qui se
+# confond tres facilement avec un conteneur vide. Ce workflow existe pour donner
+# une reponse mesurable plutot qu'inferee.
+#
+# Il n'ecrit rien : ni upload, ni suppression, ni modification de policy.
+#
+# Un job par conteneur, car chaque identite publisher n'a de droits que sur SON
+# conteneur. `id-certigo-content-reader` les porterait tous les trois, mais elle
+# n'a deliberement aucun credential federe, donc Actions ne peut pas l'assumer :
+# un job unique echouerait en 403 sur deux conteneurs sur trois.
+
+on:
+  workflow_dispatch:
+    inputs:
+      blob_name:
+        description: >-
+          Chemin complet d'un blob dont il faut afficher toutes les proprietes,
+          par exemple manifests/sha256:<id>/manifest.json. Laisser vide pour ne
+          faire que le comptage.
+        required: false
+        default: ""
+      container:
+        description: Conteneur auquel appartient blob_name.
+        required: false
+        default: content-private-releases
+        type: choice
+        options:
+          - content-private-releases
+          - content-public-releases
+          - content-release-descriptors
+
+concurrency:
+  group: inspect-content-storage
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  private:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    environment: azure-content-answer-key
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_LOGIN_PRE_CLEANUP: true
+      AZURE_LOGIN_POST_CLEANUP: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: refs/heads/main
+          persist-credentials: false
+      - uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange
+      - name: Inspect content-private-releases
+        shell: bash
+        env:
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          BLOB_NAME: ${{ inputs.container == 'content-private-releases' && inputs.blob_name || '' }}
+        run: bash tools/inspect_content_storage.sh
+
+  public:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    environment: azure-content-public
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_LOGIN_PRE_CLEANUP: true
+      AZURE_LOGIN_POST_CLEANUP: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: refs/heads/main
+          persist-credentials: false
+      - uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange
+      - name: Inspect content-public-releases
+        shell: bash
+        env:
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          BLOB_NAME: ${{ inputs.container == 'content-public-releases' && inputs.blob_name || '' }}
+        run: bash tools/inspect_content_storage.sh
+
+  descriptors:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    environment: azure-content-release
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      AZURE_LOGIN_PRE_CLEANUP: true
+      AZURE_LOGIN_POST_CLEANUP: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: refs/heads/main
+          persist-credentials: false
+      - uses: azure/login@7184910d9eb2b1c5e48f7073824a90609bb9b6d6 # v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          audience: api://AzureADTokenExchange
+      - name: Inspect content-release-descriptors
+        shell: bash
+        env:
+          AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
+          BLOB_NAME: ${{ inputs.container == 'content-release-descriptors' && inputs.blob_name || '' }}
+        run: bash tools/inspect_content_storage.sh
