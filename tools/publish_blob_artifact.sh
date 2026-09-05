@@ -100,7 +100,8 @@ verification_directory="$(mktemp -d)"
 expected_names="$(mktemp)"
 actual_names="$(mktemp)"
 retry_log="$(mktemp)"
-trap 'rm -rf "${verification_directory}"; rm -f "${expected_names}" "${actual_names}" "${retry_log}"' EXIT
+skipped_log="$(mktemp)"
+trap 'rm -rf "${verification_directory}"; rm -f "${expected_names}" "${actual_names}" "${retry_log}" "${skipped_log}"' EXIT
 
 # Une publication complete emet environ 10 200 appels `az`. A ce volume, une
 # defaillance transitoire est quasi certaine, et le script n'en tolerait aucune :
@@ -244,6 +245,12 @@ publish_file() {
         --output tsv \
         --only-show-errors
   )"
+  if [[ "${exists}" == "true" ]]; then
+    # Chemin create-only : le blob existe deja, on ne re-televerse pas. Compte
+    # dans un fichier plutot qu'une variable, car `publish_file` s'execute dans
+    # le corps d'une boucle et les increments doivent survivre au sous-shell.
+    printf '%s\n' "${blob_name}" >> "${skipped_log}"
+  fi
   if [[ "${exists}" != "true" ]]; then
     if ! az storage blob upload \
         --account-name "${storage_account}" \
@@ -386,6 +393,24 @@ fi
 retry_total="$(grep -c . "${retry_log}" 2>/dev/null || true)"
 retry_total="${retry_total:-0}"
 echo "[azure-publish] tentatives supplementaires: ${retry_total}"
+# Comptes publies INCONDITIONNELLEMENT, y compris a zero. Un compteur qui
+# n'apparait que lorsqu'il est non nul ne permet pas de distinguer « rien a
+# ignorer » de « le chemin create-only ne s'est jamais execute ».
+#
+# Les trois nombres forment une identite verifiable plutot qu'un recit : le
+# nombre de blobs deja presents plus le nombre de blobs televerses doit egaler
+# le nombre total de fichiers traites. Un ecart signale un defaut du chemin
+# create-only, ce qu'une phrase du type « les blobs existants ont ete ignores »
+# ne pourrait jamais reveler.
+skipped_total="$(grep -c . "${skipped_log}" 2>/dev/null || true)"
+skipped_total="${skipped_total:-0}"
+uploaded_total=$(( file_count - skipped_total ))
+echo "[azure-publish] blobs deja presents (ignores): ${skipped_total}"
+echo "[azure-publish] blobs televerses: ${uploaded_total}"
+if [[ "${uploaded_total}" -lt 0 ]]; then
+  echo "[azure-publish] incoherence: ${skipped_total} ignores > ${file_count} traites" >&2
+  exit 69
+fi
 if [[ "${retry_total}" -gt 0 ]]; then
   echo "[azure-publish] detail des tentatives par appel:" >&2
   sort "${retry_log}" | uniq -c | sort -rn | sed 's/^/[azure-publish][retry]   /' >&2
@@ -395,6 +420,8 @@ if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
     echo "### \`${remote_prefix}\`"
     echo
     echo "- blobs verifies : **${file_count}**"
+    echo "- blobs deja presents (ignores) : **${skipped_total}**"
+    echo "- blobs televerses : **${uploaded_total}**"
     echo "- tentatives supplementaires : **${retry_total}**"
     if [[ "${retry_total}" -gt 0 ]]; then
       echo
