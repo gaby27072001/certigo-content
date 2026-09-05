@@ -13,7 +13,7 @@ permissions: {}
 jobs:
   plan:
     if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
     outputs:
@@ -117,7 +117,7 @@ jobs:
   publish-public:
     needs: plan
     environment: azure-content-public
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
       id-token: write
@@ -189,7 +189,7 @@ jobs:
   publish-answer-key:
     needs: plan
     environment: azure-content-answer-key
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
       id-token: write
@@ -261,7 +261,7 @@ jobs:
   publish-release:
     needs: [plan, publish-public, publish-answer-key]
     environment: azure-content-release
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
       id-token: write

@@ -100,11 +100,29 @@ IFS=$'\t' read -r policy_state policy_days append_writes append_writes_all < <(
     --output tsv \
     --only-show-errors
 )
-if [[ "${policy_state}" != "Locked" ||
+# ADR-020 interdit de verrouiller la policy WORM tant que l'import, la lecture
+# versionnee et le rollback N-1 ne sont pas prouves, et le verrouillage est
+# irreversible. Exiger `Locked` ici rendait donc la publication impossible :
+# publier exigeait le lock, le lock exigeait d'avoir publie.
+#
+# On exige toujours une policy de retention active, non nulle et sans append
+# protege : c'est elle qui empeche reellement l'ecrasement et la suppression.
+# `Locked` n'est exige que lorsque CONTENT_REQUIRE_LOCKED_WORM=true, ce qui doit
+# etre le cas en production apres la preuve staging.
+require_locked_worm="${CONTENT_REQUIRE_LOCKED_WORM:-false}"
+if [[ "${require_locked_worm}" != "true" && "${require_locked_worm}" != "false" ]]; then
+  echo "[azure-publish] CONTENT_REQUIRE_LOCKED_WORM doit valoir true ou false" >&2
+  exit 64
+fi
+if [[ ( "${policy_state}" != "Locked" && "${policy_state}" != "Unlocked" ) ||
       ! "${policy_days}" =~ ^[1-9][0-9]*$ ||
       "${append_writes}" == "true" ||
       "${append_writes_all}" == "true" ]]; then
-  echo "[azure-publish] politique WORM verrouillee sans append protege requise" >&2
+  echo "[azure-publish] politique WORM active sans append protege requise" >&2
+  exit 66
+fi
+if [[ "${require_locked_worm}" == "true" && "${policy_state}" != "Locked" ]]; then
+  echo "[azure-publish] policy WORM verrouillee exigee par CONTENT_REQUIRE_LOCKED_WORM" >&2
   exit 66
 fi
 
@@ -193,8 +211,12 @@ publish_file() {
         -z "${version_id}" ||
         "${version_id}" == "None" ||
         "${version_id}" == "null" ||
-        "${policy_mode}" != "Locked" ]]; then
+        ( "${policy_mode}" != "Locked" && "${policy_mode}" != "Unlocked" ) ]]; then
     echo "[azure-publish] version ou proprietes immuables invalides: ${blob_name}" >&2
+    exit 68
+  fi
+  if [[ "${require_locked_worm}" == "true" && "${policy_mode}" != "Locked" ]]; then
+    echo "[azure-publish] policyMode verrouille exige: ${blob_name}" >&2
     exit 68
   fi
   if [[ "${legal_hold}" != "true" ]]; then
