@@ -132,7 +132,7 @@ jobs:
       # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
       # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
       # job Certigo sur la meme VM, deux fois, sur les deux VM.
-      AZURE_CONFIG_DIR: ${{ runner.temp }}/azure-${{ github.run_id }}-${{ github.job }}
+      AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -210,7 +210,7 @@ jobs:
       # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
       # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
       # job Certigo sur la meme VM, deux fois, sur les deux VM.
-      AZURE_CONFIG_DIR: ${{ runner.temp }}/azure-${{ github.run_id }}-${{ github.job }}
+      AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -288,7 +288,7 @@ jobs:
       # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
       # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
       # job Certigo sur la meme VM, deux fois, sur les deux VM.
-      AZURE_CONFIG_DIR: ${{ runner.temp }}/azure-${{ github.run_id }}-${{ github.job }}
+      AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
