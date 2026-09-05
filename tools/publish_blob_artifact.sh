@@ -99,16 +99,65 @@ fi
 verification_directory="$(mktemp -d)"
 expected_names="$(mktemp)"
 actual_names="$(mktemp)"
-trap 'rm -rf "${verification_directory}"; rm -f "${expected_names}" "${actual_names}"' EXIT
+retry_log="$(mktemp)"
+trap 'rm -rf "${verification_directory}"; rm -f "${expected_names}" "${actual_names}" "${retry_log}"' EXIT
+
+# Une publication complete emet environ 10 200 appels `az`. A ce volume, une
+# defaillance transitoire est quasi certaine, et le script n'en tolerait aucune :
+# le run 33960774991 a echoue apres 22 minutes et ~540 fichiers publies, sur un
+# unique refus d'autorisation transitoire, une seule ligne ERROR dans 3 509.
+#
+# Ce defaut n'est visible qu'A L'ECHELLE. Les trois pannes precedentes (Docker,
+# separateur, casse) etaient deterministes et echouaient toutes sur le premier
+# fichier ; aucun test publiant deux fichiers ne pouvait reveler celle-ci.
+#
+# Les tentatives sont donc BRUYANTES et non silencieuses. Un retry muet est un
+# instrument qui masque ce qu'il lisse : il rendrait le systeme plus sain qu'il
+# ne l'est, ce qui est exactement la maladie que ce depot passe sa journee a
+# corriger. Chaque tentative est journalisee avec son appel, son fichier, son
+# rang et le texte d'erreur reel, et le total est publie meme lorsqu'il vaut
+# zero : un zero imprime est une preuve, un zero absent n'est rien.
+readonly RETRY_ATTEMPTS=3
+retry_readonly() {
+  local label="$1"
+  shift
+  local attempt=1
+  local delay=2
+  local output=""
+  local status=0
+  while true; do
+    status=0
+    output="$("$@" 2>&1)" || status="$?"
+    if [[ "${status}" -eq 0 ]]; then
+      printf '%s' "${output}"
+      return 0
+    fi
+    if [[ "${attempt}" -ge "${RETRY_ATTEMPTS}" ]]; then
+      echo "[azure-publish] ${label}: echec definitif apres ${attempt} tentative(s)" >&2
+      printf '%s\n' "${output}" >&2
+      return "${status}"
+    fi
+    # Une ligne par tentative, avec l'erreur reelle : trois modes de defaillance
+    # differents retentes une fois chacun ne sont pas la meme situation qu'un
+    # seul appel instable retente trois fois, et un simple compteur ne peut pas
+    # les distinguer.
+    echo "[azure-publish][retry] ${label} tentative ${attempt}/${RETRY_ATTEMPTS} (az exit ${status}): $(printf '%s' "${output}" | tr '\n' ' ' | cut -c1-200)" >&2
+    printf '%s\t%s\n' "${label}" "$(printf '%s' "${output}" | tr '\n' ' ' | cut -c1-200)" >> "${retry_log}"
+    sleep "${delay}"
+    delay=$(( delay * 2 ))
+    attempt=$(( attempt + 1 ))
+  done
+}
 
 public_access="$(
-  az storage container show \
-    --account-name "${storage_account}" \
-    --name "${storage_container}" \
-    --auth-mode login \
-    --query properties.publicAccess \
-    --output tsv \
-    --only-show-errors
+  retry_readonly "container show ${storage_container}" \
+    az storage container show \
+      --account-name "${storage_account}" \
+      --name "${storage_container}" \
+      --auth-mode login \
+      --query properties.publicAccess \
+      --output tsv \
+      --only-show-errors
 )"
 if [[ -n "${public_access}" && "${public_access}" != "None" && "${public_access}" != "null" ]]; then
   echo "[azure-publish] acces anonyme interdit pour ${storage_container}" >&2
@@ -116,13 +165,14 @@ if [[ -n "${public_access}" && "${public_access}" != "None" && "${public_access}
 fi
 
 mapfile -t immutability_fields < <(
-  az storage container immutability-policy show \
-    --resource-group "${resource_group}" \
-    --account-name "${storage_account}" \
-    --container-name "${storage_container}" \
-    --query '[state, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, allowProtectedAppendWritesAll]' \
-    --output tsv \
-    --only-show-errors
+  retry_readonly "immutability-policy show ${storage_container}" \
+    az storage container immutability-policy show \
+      --resource-group "${resource_group}" \
+      --account-name "${storage_account}" \
+      --container-name "${storage_container}" \
+      --query '[state, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites, allowProtectedAppendWritesAll]' \
+      --output tsv \
+      --only-show-errors
 )
 # `--output tsv` sur une projection JMESPath plate emet UNE VALEUR PAR LIGNE, et
 # non des colonnes separees par des tabulations : la tabulation n'apparait que
@@ -184,14 +234,15 @@ publish_file() {
 
   local exists
   exists="$(
-    az storage blob exists \
-      --account-name "${storage_account}" \
-      --container-name "${storage_container}" \
-      --name "${blob_name}" \
-      --auth-mode login \
-      --query exists \
-      --output tsv \
-      --only-show-errors
+    retry_readonly "blob exists ${blob_name}" \
+      az storage blob exists \
+        --account-name "${storage_account}" \
+        --container-name "${storage_container}" \
+        --name "${blob_name}" \
+        --auth-mode login \
+        --query exists \
+        --output tsv \
+        --only-show-errors
   )"
   if [[ "${exists}" != "true" ]]; then
     if ! az storage blob upload \
@@ -208,14 +259,15 @@ publish_file() {
         --only-show-errors; then
       local raced_exists
       raced_exists="$(
-        az storage blob exists \
-          --account-name "${storage_account}" \
-          --container-name "${storage_container}" \
-          --name "${blob_name}" \
-          --auth-mode login \
-          --query exists \
-          --output tsv \
-          --only-show-errors
+        retry_readonly "blob exists (race) ${blob_name}" \
+          az storage blob exists \
+            --account-name "${storage_account}" \
+            --container-name "${storage_container}" \
+            --name "${blob_name}" \
+            --auth-mode login \
+            --query exists \
+            --output tsv \
+            --only-show-errors
       )"
       if [[ "${raced_exists}" != "true" ]]; then
         echo "[azure-publish] echec de creation: ${blob_name}" >&2
@@ -225,15 +277,16 @@ publish_file() {
   fi
 
   mkdir -p "$(dirname "${remote_path}")"
-  az storage blob download \
-    --account-name "${storage_account}" \
-    --container-name "${storage_container}" \
-    --name "${blob_name}" \
-    --file "${remote_path}" \
-    --auth-mode login \
-    --overwrite true \
-    --output none \
-    --only-show-errors
+  retry_readonly "blob download ${blob_name}" \
+    az storage blob download \
+      --account-name "${storage_account}" \
+      --container-name "${storage_container}" \
+      --name "${blob_name}" \
+      --file "${remote_path}" \
+      --auth-mode login \
+      --overwrite true \
+      --output none \
+      --only-show-errors >/dev/null
 
   local remote_hash
   remote_hash="$(sha256sum "${remote_path}" | cut -d ' ' -f 1)"
@@ -247,14 +300,15 @@ publish_file() {
   # valeur par ligne. Ce cas etait plus dangereux, car il echouait APRES l'upload
   # du blob et aurait signale une immuabilite invalide sur un objet correct.
   mapfile -t blob_fields < <(
-    az storage blob show \
-      --account-name "${storage_account}" \
-      --container-name "${storage_container}" \
-      --name "${blob_name}" \
-      --auth-mode login \
-      --query '[properties.contentSettings.contentType, properties.contentSettings.cacheControl, versionId, immutabilityPolicy.policyMode, immutabilityPolicy.expiryTime, hasLegalHold]' \
-      --output tsv \
-      --only-show-errors
+    retry_readonly "blob show ${blob_name}" \
+      az storage blob show \
+        --account-name "${storage_account}" \
+        --container-name "${storage_container}" \
+        --name "${blob_name}" \
+        --auth-mode login \
+        --query '[properties.contentSettings.contentType, properties.contentSettings.cacheControl, versionId, immutabilityPolicy.policyMode, immutabilityPolicy.expiryTime, hasLegalHold]' \
+        --output tsv \
+        --only-show-errors
   )
   if [[ "${#blob_fields[@]}" -ne 6 ]]; then
     echo "[azure-publish] reponse blob show inattendue: ${#blob_fields[@]} champ(s)" >&2
@@ -308,20 +362,47 @@ if [[ "${file_count}" -eq 0 ]]; then
 fi
 
 sort -o "${expected_names}" "${expected_names}"
-az storage blob list \
-  --account-name "${storage_account}" \
-  --container-name "${storage_container}" \
-  --prefix "${remote_prefix}/" \
-  --auth-mode login \
-  --query '[].name' \
-  --output tsv \
-  --only-show-errors \
+retry_readonly "blob list ${remote_prefix}" \
+  az storage blob list \
+    --account-name "${storage_account}" \
+    --container-name "${storage_container}" \
+    --prefix "${remote_prefix}/" \
+    --auth-mode login \
+    --query '[].name' \
+    --output tsv \
+    --only-show-errors \
   | sort > "${actual_names}"
 
 if ! cmp -s "${expected_names}" "${actual_names}"; then
   echo "[azure-publish] le prefixe distant contient des blobs absents ou supplementaires" >&2
   diff -u "${expected_names}" "${actual_names}" >&2 || true
   exit 69
+fi
+
+# Total publie inconditionnellement, y compris a zero : un zero imprime est une
+# preuve que le chemin a ete instrumente, un zero absent n'est rien. Les libelles
+# distincts sont conserves pour distinguer trois modes de defaillance retentes
+# une fois chacun d'un seul appel instable retente trois fois.
+retry_total="$(grep -c . "${retry_log}" 2>/dev/null || true)"
+retry_total="${retry_total:-0}"
+echo "[azure-publish] tentatives supplementaires: ${retry_total}"
+if [[ "${retry_total}" -gt 0 ]]; then
+  echo "[azure-publish] detail des tentatives par appel:" >&2
+  sort "${retry_log}" | uniq -c | sort -rn | sed 's/^/[azure-publish][retry]   /' >&2
+fi
+if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+  {
+    echo "### \`${remote_prefix}\`"
+    echo
+    echo "- blobs verifies : **${file_count}**"
+    echo "- tentatives supplementaires : **${retry_total}**"
+    if [[ "${retry_total}" -gt 0 ]]; then
+      echo
+      echo '```'
+      sort "${retry_log}" | uniq -c | sort -rn
+      echo '```'
+    fi
+  } >> "${GITHUB_STEP_SUMMARY}"
 fi
 
 echo "[azure-publish] OK - ${file_count} blob(s) verifies sous ${remote_prefix}"
