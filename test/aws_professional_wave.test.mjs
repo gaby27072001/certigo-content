@@ -216,7 +216,20 @@ test("valide les 72 scenarios de la vague AWS Professional", () => {
         `${certification}.json`
       )
     );
-    assert.equal(matrix.status, "complete", `${certification}: matrice complete`);
+    // Une matrice entierement redigee vaut "complete", sauf si le catalogue
+    // declare la certification en retrait : validate_content exige alors
+    // "retiring". L'attente est derivee du catalogue plutot que codee en dur,
+    // pour que le test controle la coherence reelle et non une forme figee.
+    const catalogEntry = readJson(
+      resolve(repoRoot, "content", "public", "catalog", "certifications.json")
+    ).certifications.find((entry) => entry.id === `aws:${certification}`);
+    const expectedMatrixStatus =
+      catalogEntry.status === "active-retiring" ? "retiring" : "complete";
+    assert.equal(
+      matrix.status,
+      expectedMatrixStatus,
+      `${certification}: matrice ${expectedMatrixStatus}`
+    );
     assert.deepEqual(
       matrix.objectives.flatMap((objective) => objective.questionIds).sort(),
       questionIds.sort(),

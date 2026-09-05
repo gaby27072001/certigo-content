@@ -139,13 +139,14 @@
         ]
       },
       "lifecycle": {
+        "transition": "announced",
         "reviewOn": "2027-01-01",
         "lastExamOn": "2026-12-31",
         "recommendThrough": "2026-12-31",
         "note": "AWS states that December 31, 2026 is the last day to take ANS-C01; certifications earned before retirement remain active for three years, no new certifications are issued after retirement, and no replacement exam is announced."
       },
       "provenance": {
-        "checkedOn": "2026-08-31",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-advanced-networking-specialty/" },
           { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01.html" },
@@ -266,7 +267,7 @@
       "officialSlug": "certified-developer-associate",
       "title": "AWS Certified Developer - Associate",
       "level": "associate",
-      "status": "active",
+      "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-developer-associate/",
       "guide": {
         "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html",
@@ -285,17 +286,19 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-12-01",
-        "lastExamOn": "2026-11-30",
+        "transition": "announced",
+        "reviewOn": "2026-12-02",
+        "lastExamOn": "2026-12-01",
+        "recommendThrough": "2026-11-30",
         "successor": "aws:dva-c03",
-        "note": "AWS states that DVA-C03 registration opens December 1, 2026 and DVA-C02 remains in use through November 30, 2026."
+        "note": "AWS announced DVA-C03: registration opens October 27, 2026 and GA delivery begins December 1, 2026. Two official AWS sources disagree on the final DVA-C02 date: the certification page states the last day to take DVA-C02 is December 1, 2026, while the September 2026 offerings announcement lists November 30, 2026 as the last day and December 1, 2026 as DVA-C03 GA. The catalog brackets the uncertainty rather than choosing: recommendThrough is the last day both sources agree the exam is sittable (November 30), and lastExamOn is the latest date any official source claims (December 1). To be re-verified once AWS reconciles the two pages."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-developer-associate/" },
           { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" },
-          { "kind": "lifecycle", "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-03/developer-associate-03.html" }
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },
@@ -326,6 +329,7 @@
         ]
       },
       "lifecycle": {
+        "transition": "announced",
         "reviewOn": "2027-01-14",
         "lastExamOn": "2027-01-13",
         "recommendThrough": "2026-09-28",
@@ -383,7 +387,7 @@
       "officialSlug": "certified-solutions-architect-professional",
       "title": "AWS Certified Solutions Architect - Professional",
       "level": "professional",
-      "status": "active",
+      "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-solutions-architect-professional/",
       "guide": {
         "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html",
@@ -401,11 +405,20 @@
           { "id": "domain-4", "title": "Accelerate Workload Migration and Modernization", "weightPercent": 20, "weightType": "exact" }
         ]
       },
+      "lifecycle": {
+        "transition": "announced",
+        "reviewOn": "2026-11-18",
+        "lastExamOn": "2026-11-17",
+        "recommendThrough": "2026-11-16",
+        "successor": "aws:sap-c03",
+        "note": "AWS announced SAP-C03: registration opens October 27, 2026 and GA delivery begins November 17, 2026. Two official AWS sources disagree on the final SAP-C02 date: the certification page states the last day to take SAP-C02 is November 17, 2026, while the September 2026 offerings announcement lists November 16, 2026 as the last day and November 17, 2026 as SAP-C03 GA. The catalog brackets the uncertainty rather than choosing: recommendThrough is the last day both sources agree the exam is sittable (November 16), and lastExamOn is the latest date any official source claims (November 17). To be re-verified once AWS reconciles the two pages."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-solutions-architect-professional/" },
-          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" }
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" },
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },

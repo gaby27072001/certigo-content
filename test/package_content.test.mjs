@@ -171,6 +171,7 @@ function createHistoricalV2Root() {
   historicalAns.lifecycle.note =
     "AWS states that December 31, 2026 is the last day to take the exam.";
   delete historicalAns.lifecycle.recommendThrough;
+  historicalAns.provenance.checkedOn = "2026-08-31";
   const historicalMla = catalog.certifications.find(
     (certification) => certification.id === "aws:mla-c01"
   );
@@ -184,6 +185,34 @@ function createHistoricalV2Root() {
   historicalMla.provenance.sources.find(
     (source) => source.kind === "lifecycle"
   ).url = "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/";
+  // ans-c01 conserve son bloc lifecycle historique ; sap-c02 et dva-c02 sont
+  // ramenes a leur etat d'avant la campagne de verification 2026-09-05, comme
+  // mla-c01 ci-dessus, pour que le golden v2 reste byte-identical.
+  delete historicalAns.lifecycle.transition;
+  const historicalSap = catalog.certifications.find(
+    (certification) => certification.id === "aws:sap-c02"
+  );
+  historicalSap.status = "active";
+  delete historicalSap.lifecycle;
+  historicalSap.provenance.checkedOn = "2026-08-17";
+  historicalSap.provenance.sources = historicalSap.provenance.sources.filter(
+    (source) => source.kind !== "lifecycle"
+  );
+  const historicalDva = catalog.certifications.find(
+    (certification) => certification.id === "aws:dva-c02"
+  );
+  historicalDva.status = "active";
+  historicalDva.lifecycle = {
+    reviewOn: "2026-12-01",
+    lastExamOn: "2026-11-30",
+    successor: "aws:dva-c03",
+    note: "AWS states that DVA-C03 registration opens December 1, 2026 and DVA-C02 remains in use through November 30, 2026.",
+  };
+  historicalDva.provenance.checkedOn = "2026-08-17";
+  historicalDva.provenance.sources.find(
+    (source) => source.kind === "lifecycle"
+  ).url =
+    "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-03/developer-associate-03.html";
   writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
   // Remove runtime resources and Microsoft content added after the historical baseline
@@ -295,7 +324,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:0a7f04486ddce1983bdc3bdd8580befbbc867b6c25a5da7f55a68c63cbbe6c7f",
+          "sha256:72182d4eadc039896bdb8c5e7625b649db37208a478edf05d2b939f523cb98d2",
       },
       {
         artifact: "private",
@@ -306,7 +335,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "b94187711fdbe35ba70c9c83a02060e51e6b11ddfa03168dbaef527591cb88e5"
+    "ce32ab7aa60b1565ec1737824be471412d091c3372bacd0522898aa17eaedf5e"
   );
 });
 

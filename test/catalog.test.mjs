@@ -234,7 +234,9 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(ans.lifecycle.recommendThrough, "2026-12-31");
   assert.equal(ans.lifecycle.lastExamOn, "2026-12-31");
   assert.equal(ans.lifecycle.reviewOn, "2027-01-01");
-  assert.equal(ans.provenance.checkedOn, "2026-08-31");
+  assert.equal(ans.provenance.checkedOn, "2026-09-05");
+  assert.equal(ans.lifecycle.transition, "announced");
+  assert.equal(ans.lifecycle.successor, undefined);
   assert.ok(
     ans.provenance.sources.some(
       (source) =>
@@ -271,6 +273,27 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
       .status,
     "retiring"
   );
+  assert.equal(mla.lifecycle.transition, "announced");
+
+  // Vague 1 de la campagne de verification : les deux transitions AWS dont les
+  // sources officielles se contredisent sont encadrees et non tranchees.
+  for (const [id, bracket] of [
+    ["aws:sap-c02", { recommendThrough: "2026-11-16", lastExamOn: "2026-11-17" }],
+    ["aws:dva-c02", { recommendThrough: "2026-11-30", lastExamOn: "2026-12-01" }],
+  ]) {
+    const entry = catalog.certifications.find(
+      (certification) => certification.id === id
+    );
+    assert.equal(entry.status, "active-retiring", `${id}: statut`);
+    assert.equal(entry.lifecycle.transition, "announced", `${id}: transition`);
+    assert.equal(entry.lifecycle.recommendThrough, bracket.recommendThrough, `${id}: borne basse`);
+    assert.equal(entry.lifecycle.lastExamOn, bracket.lastExamOn, `${id}: borne haute`);
+    assert.equal(entry.provenance.checkedOn, "2026-09-05", `${id}: date de verification`);
+    assert.ok(
+      entry.lifecycle.recommendThrough < entry.lifecycle.lastExamOn,
+      `${id}: l'encadrement doit rester un intervalle`
+    );
+  }
 });
 
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {

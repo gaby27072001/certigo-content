@@ -15,12 +15,12 @@ d'examen officiels AWS et Google Cloud.
 | CLF-C02 | AWS Certified Cloud Practitioner | Foundational | active | version/date non publiees |
 | SOA-C03 | AWS Certified CloudOps Engineer - Associate | Associate | active | v1.1, 2026-06-01 |
 | DEA-C01 | AWS Certified Data Engineer - Associate | Associate | active | v1.1, 2025-12-12 |
-| DVA-C02 | AWS Certified Developer - Associate | Associate | active jusqu'au 2026-11-30 | v2.1, 2024-12-12 |
+| DVA-C02 | AWS Certified Developer - Associate | Associate | active-retiring, derniere session 2026-11-30 ou 2026-12-01 selon la source AWS | v2.1, 2024-12-12 |
 | MLA-C01 | AWS Certified Machine Learning Engineer - Associate | Associate | active-retiring, anglais jusqu'au 2026-09-28, autres langues jusqu'au 2027-01-13 | version/date non publiees |
 | SAA-C03 | AWS Certified Solutions Architect - Associate | Associate | active | version/date non publiees |
 | DOP-C02 | AWS Certified DevOps Engineer - Professional | Professional | active | version/date non publiees |
 | AIP-C01 | AWS Certified Generative AI Developer - Professional | Professional | active | version/date non publiees |
-| SAP-C02 | AWS Certified Solutions Architect - Professional | Professional | active | version/date non publiees |
+| SAP-C02 | AWS Certified Solutions Architect - Professional | Professional | active-retiring, derniere session 2026-11-16 ou 2026-11-17 selon la source AWS | version/date non publiees |
 | ANS-C01 | AWS Certified Advanced Networking - Specialty | Specialty | active-retiring, derniere session 2026-12-31 | version/date non publiees |
 | SCS-C03 | AWS Certified Security - Specialty | Specialty | active | v1.0, 2026-03-26 |
 
