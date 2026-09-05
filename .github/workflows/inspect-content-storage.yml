@@ -53,6 +53,11 @@ jobs:
     env:
       AZURE_LOGIN_PRE_CLEANUP: true
       AZURE_LOGIN_POST_CLEANUP: true
+      # Meme isolation que pour la publication : `~/.azure` est partage entre
+      # les deux depots sur la meme machine, donc un login concurrent ecraserait
+      # ce cache et l'inspecteur signalerait une lecture impossible qui ne
+      # refleterait rien du stockage.
+      AZURE_CONFIG_DIR: ${{ runner.temp }}/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -82,6 +87,11 @@ jobs:
     env:
       AZURE_LOGIN_PRE_CLEANUP: true
       AZURE_LOGIN_POST_CLEANUP: true
+      # Meme isolation que pour la publication : `~/.azure` est partage entre
+      # les deux depots sur la meme machine, donc un login concurrent ecraserait
+      # ce cache et l'inspecteur signalerait une lecture impossible qui ne
+      # refleterait rien du stockage.
+      AZURE_CONFIG_DIR: ${{ runner.temp }}/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -111,6 +121,11 @@ jobs:
     env:
       AZURE_LOGIN_PRE_CLEANUP: true
       AZURE_LOGIN_POST_CLEANUP: true
+      # Meme isolation que pour la publication : `~/.azure` est partage entre
+      # les deux depots sur la meme machine, donc un login concurrent ecraserait
+      # ce cache et l'inspecteur signalerait une lecture impossible qui ne
+      # refleterait rien du stockage.
+      AZURE_CONFIG_DIR: ${{ runner.temp }}/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
