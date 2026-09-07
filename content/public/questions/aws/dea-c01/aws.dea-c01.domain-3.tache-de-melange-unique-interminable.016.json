@@ -10,9 +10,9 @@
   },
   "prompt": "Une tâche Apache Spark sur Amazon EMR joint une table de transactions à une table de marchands. Sur deux cents tâches de mélange, cent quatre-vingt-dix-neuf se terminent en moins de deux minutes tandis que la dernière tourne pendant plus d'une heure avant d'échouer sur un dépassement de mémoire de l'exécuteur. L'analyse montre qu'un seul identifiant de marchand représente environ soixante pour cent des transactions. Quelle correction traite la cause de l'échec ?",
   "choices": [
-    "Augmenter le délai d'expiration de l'étape Spark et relancer la tâche sans autre modification.",
-    "Ramener le nombre de partitions de mélange à une seule afin qu'une même tâche traite l'ensemble des données.",
+    "Augmenter le délai d'expiration de l'étape Spark et relancer la tâche sans autre modification du script ni de la répartition des données, en espérant que la contention s'atténue.",
+    "Ramener le nombre de partitions de mélange à une seule afin qu'une même tâche traite l'ensemble des données de la jointure en une seule passe, ce qui supprime toute concurrence entre exécuteurs.",
     "Traiter le déséquilibre de la clé de jointure, en salant l'identifiant surreprésenté par un suffixe aléatoire répliqué côté table des marchands, ou en forçant une jointure par diffusion de la petite table.",
-    "Convertir les fichiers d'entrée du format Apache Parquet vers le format CSV afin d'accélérer leur lecture."
+    "Convertir les fichiers d'entrée du format Apache Parquet vers le format CSV afin d'accélérer leur lecture au moment de la jointure entre les deux tables les plus volumineuses du traitement."
   ]
 }
