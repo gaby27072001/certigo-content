@@ -167,7 +167,10 @@ test("conserve le package v3 runtime byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
+  // 146 paires v2 heritees (232 a l'origine, moins les 86 orphelines retirees :
+  // elles portaient sur des certifications absentes du catalogue et n'etaient
+  // atteignables par aucune matrice), puis les vagues v3 successives.
+  assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
   assert.deepEqual(
@@ -176,18 +179,18 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:37f047d3739f8e380728e442efaa906355845469cf1dbb929bbb2cef0eebe707",
+          "sha256:28918f7f7378083fccf8736c4a800c82dfcc096dea3d3d240219d48fb693ba4c",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:65b1914f4cbeb87d7be9cd939a7cd3d03deb344b408b6ef6de91e0346410f793",
+          "sha256:afad5bb534b48a4bdf4be3fcee4474ea40a00ae8796945012d84c32b64154067",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "41c2289d9e2c7b29694c93cb546b62a7c0bfcc09c1c9de50b6f320c0fe11f090"
+    "4feaf54ef42c333e422702afea75df54ba781bf54afd191769fbb1a601bab445"
   );
 });
 
