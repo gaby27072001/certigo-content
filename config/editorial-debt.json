@@ -1,6 +1,6 @@
 {
   "schema": "certigo.editorial-debt/v1",
-  "note": "Paires v3 anterieures a l'activation de la regle editoriale [editorial:answer-length]. Chaque identifiant liste est dispense des controles par question jusqu'a la date indiquee ; au-dela la validation echoue sur l'entree. L'equilibre des rangs d'une certification n'est exige qu'une fois sa dette entierement soldee. Une question creee apres ce registre n'y figure jamais : elle est controlee des sa premiere validation. La liste ne doit que retrecir : un identifiant en sort en corrigeant la question, pas en repoussant sa date.",
+  "note": "Paires v3 anterieures a l'activation de la regle editoriale [editorial:answer-length]. Chaque identifiant liste est dispense des controles par question jusqu'a la date indiquee ; au-dela la validation echoue sur l'entree. L'equilibre des rangs d'une certification n'est exige qu'une fois sa dette entierement soldee. Une question creee apres ce registre n'y figure jamais : elle est controlee des sa premiere validation. La liste ne doit que retrecir : un identifiant en sort en corrigeant la question, pas en repoussant sa date. Toutes les entrees peuvent partager une meme date d'expiration : elles cessent alors de dispenser le meme jour et la validation passe au rouge d'un bloc. C'est une propriete d'une fenetre d'expiration uniforme, pas un accident : des entrees creees ensemble expirent ensemble. Pour constater l'etat a une date future sans attendre l'echeance, executer `node tools/validate_content.mjs --as-of AAAA-MM-JJ` ; le compte varie avec la date et n'est volontairement pas fige ici. Constat non tranche : test/catalog.test.mjs interdit ce regroupement sur le registre de transition (au moins trois dates distinctes des dix entrees, douze au plus par date) et n'exige rien d'equivalent ni sur ce registre-ci ni sur config/legacy-coverage-inventory.json. Mesure du 2026-09-07 : le registre teste est etale sur trois dates, les deux non testes partagent une date unique et expirent donc le meme jour ; la falaise porte sur les deux a la fois, pas sur celui-ci seul. Trois registres, deux regimes, raison non documentee.",
   "debts": [
     {
       "certification": "aws:aif-c01",
@@ -93,7 +93,8 @@
         "aws.dva-c02.domain-4.maillon-lent-parcours-distribue.017",
         "aws.dva-c02.domain-4.publication-metriques-ralentit-invocations.019",
         "aws.dva-c02.domain-4.recherche-erreurs-par-identifiant-correlation.018"
-      ]
+      ],
+      "note": "Depriorisee en derniere position de la file de remediation, pas abandonnee. Cout eleve pour une duree de vie recommandee courte : lifecycle.recommendThrough vaut 2026-11-30. Si le programme avance assez vite elle sera traitee, sinon elle aura ete correctement laissee de cote."
     },
     {
       "certification": "aws:mla-c01",
@@ -118,17 +119,13 @@
         "aws.mla-c01.domain-4.suivi-des-couts-ml-dans-un-compte-unique.018",
         "aws.mla-c01.domain-4.temps-de-reponse-au-dela-de-la-cible.017",
         "aws.mla-c01.domain-4.traitement-donnees-sante-sans-internet.020"
-      ]
+      ],
+      "note": "Remediation abandonnee deliberement, ce n'est pas un oubli. lifecycle.recommendThrough vaut 2026-09-28, soit une duree de vie recommandee plus courte que le delai de reecriture des questions restantes : le travail perimerait avant de servir. lifecycle.lastExamOn (2027-01-13) est plus tardif mais ne concerne que le japonais, le coreen et le chinois simplifie ; la note du catalogue est muette sur le francais, donc rien n'est affirme sur notre langue de livraison. Ne pas reprendre sans revoir ces dates."
     },
     {
       "certification": "aws:saa-c03",
       "expiresOn": "2026-11-30",
       "questionIds": [
-        "aws.saa-c03.domain-2.pics-commerciaux-commandes-perdues.007",
-        "aws.saa-c03.domain-2.plan-reprise-seconde-region-cout-modere.010",
-        "aws.saa-c03.domain-2.saturation-connexions-base-montee-concurrence.011",
-        "aws.saa-c03.domain-2.service-mono-zone-objectifs-reprise.009",
-        "aws.saa-c03.domain-2.trois-traitements-independants-par-parution.008",
         "aws.saa-c03.domain-3.arborescence-partagee-trois-zones.012",
         "aws.saa-c03.domain-3.charge-dominee-par-lectures-repetees.014",
         "aws.saa-c03.domain-3.latence-jeu-multiregion-bascule-lente.015",
