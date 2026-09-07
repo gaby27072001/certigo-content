@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import {
   cpSync,
   mkdirSync,
@@ -1195,5 +1196,68 @@ test("rejette une date d'expiration malformee au lieu de la comparer", async () 
   await assert.rejects(
     () => validateContent({ root, asOf: LEDGER_DAY }),
     /expiresOn invalide/
+  );
+});
+
+// La date d'evaluation des registres n'etait atteignable que par appel
+// programmatique : en ligne de commande, plus rien ne permettait de voir ce que
+// les controles diront une fois les dispenses expirees. Or plusieurs d'entre eux
+// restent eteints tant qu'une dispense subsiste, donc leur silence se lit comme
+// un succes. Ce test exige que le drapeau soit porteur : sur un meme arbre, deux
+// dates encadrant l'expiration doivent produire deux verdicts differents.
+function runValidator(root, extra = []) {
+  const result = spawnSync(
+    process.execPath,
+    [resolve(repoRoot, "tools", "validate_content.mjs"), "--root", root, ...extra],
+    { encoding: "utf8" }
+  );
+  return `${result.stdout ?? ""}${result.stderr ?? ""}`;
+}
+
+test("--as-of date l'evaluation des registres en ligne de commande", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: [
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+      "Court",
+      "Un peu plus",
+      "Encore un peu plus long",
+    ],
+    correct:
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+  });
+  writeLedger(root, "editorial-debt.json", "debts", [
+    {
+      certification: "aws:aif-c01",
+      expiresOn: "2026-11-30",
+      questionIds: [id],
+    },
+  ]);
+
+  // La veille de l'expiration : la dispense tient, la regle se tait.
+  const veille = runValidator(root, ["--as-of", "2026-11-29"]);
+  assert.ok(
+    !veille.includes("[editorial:answer-length]"),
+    `la dispense doit encore tenir la veille:\n${veille}`
+  );
+
+  // Le jour de l'expiration : le meme arbre devient rouge. Sans cet ecart, le
+  // drapeau serait accepte sans rien changer, donc ne prouverait rien.
+  const jourJ = runValidator(root, ["--as-of", "2026-11-30"]);
+  assert.ok(
+    jourJ.includes("[editorial:answer-length]") && jourJ.includes(id),
+    `la dette expiree doit remonter le jour meme:\n${jourJ}`
+  );
+});
+
+test("--as-of refuse une date malformee au lieu de la traiter comme absente", () => {
+  const root = createMetadataRoot();
+
+  // Une date rejetee silencieusement retomberait sur aujourd'hui et rendrait le
+  // drapeau trompeur plutot qu'inoperant.
+  const sortie = runValidator(root, ["--as-of", "30/11/2026"]);
+  assert.ok(
+    sortie.includes("--as-of attend une date AAAA-MM-JJ"),
+    `une date malformee doit etre refusee explicitement:\n${sortie}`
   );
 });

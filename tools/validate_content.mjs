@@ -1208,6 +1208,15 @@ function parseArgs(cliArgs) {
         throw new Error("valeur manquante pour --root");
       }
       options.root = value;
+    } else if (argument === "--as-of") {
+      const value = cliArgs[++index];
+      if (value === undefined || value.startsWith("-")) {
+        throw new Error("valeur manquante pour --as-of");
+      }
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        throw new Error(`--as-of attend une date AAAA-MM-JJ, recu: ${value}`);
+      }
+      options.asOf = value;
     } else if (argument === "--help" || argument === "-h") {
       options.help = true;
     } else {
@@ -1224,7 +1233,21 @@ if (isMain) {
   try {
     const options = parseArgs(argv.slice(2));
     if (options.help) {
-      console.log("Usage: node tools/validate_content.mjs [--root DIR]");
+      console.log(
+        "Usage: node tools/validate_content.mjs [--root DIR] [--as-of AAAA-MM-JJ]"
+      );
+      console.log(
+        "  --as-of  evalue les registres a une date donnee. Les dispenses de"
+      );
+      console.log(
+        "           config/editorial-debt.json expirent, et plusieurs controles"
+      );
+      console.log(
+        "           restent eteints tant qu'une dispense subsiste : dater la"
+      );
+      console.log(
+        "           validation apres l'expiration montre ce qu'ils diront alors."
+      );
     } else {
       const result = await validateContent(options);
       if (!printValidationResult(result)) process.exitCode = 1;
