@@ -31,6 +31,10 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+          # PORTEUR pour `npm test` execute plus bas dans les gates de
+          # publication : le golden de la revision #25 materialise cette
+          # revision via `git archive` et exige l'historique git complet.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
