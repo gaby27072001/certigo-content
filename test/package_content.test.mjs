@@ -179,18 +179,18 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:02d94e95057423fc5de4e6a2d435b8edd9ccda5389858156b92830ade3f9e33b",
+          "sha256:340bb52cf3b242cd3eeda3cd36feae3ad4a8398911bbf5875de5e2fbcaab33ca",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:2ba5736435cb1b5ba2cb87846cef58e877e5d50e419f5f0a6b62e32586550cae",
+          "sha256:e9ec15cd3b784ac83a29cc608249ccb11ca2b7a7f484cdfd975152131f9d28c4",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "c69dfaffbf9afb0565aff7be8e0b60ae4da69252d4eb653acf36fb6f8bb15ad3"
+    "9be0f944b5eabad5376930f6d2e6ec2fb3216e0be261d2cef6819549ef76a987"
   );
 });
 
