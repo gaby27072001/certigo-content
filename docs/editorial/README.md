@@ -64,6 +64,17 @@ appliquee. **Le residu est donc mesure, pas etabli.** Les valeurs exactes
 changent a chaque corpus : les relire avec la commande plutot que de les figer
 ici.
 
+Une mesure anterieure de ces memes traits a circule avec des valeurs beaucoup
+plus tranchees — de l'ordre de 7 cas sur 8 pour les conjonctions. **Elles ne se
+reproduisent pas** avec la commande ci-dessus, et la difference n'est pas un
+desaccord d'echantillon : l'instrument d'alors tirait son controle negatif par
+`sort()` a comparateur aleatoire, ce qui ne produit pas une permutation uniforme,
+et ne verifiait pas l'equilibre du tirage. Sur un corpus dont toutes les bonnes
+reponses occupaient le meme index, ce controle preservait donc une part du signal
+qu'il etait cense detruire. **C'est la premiere mesure qui etait fausse, pas la
+seconde.** Si ces anciens nombres reapparaissent dans un historique ou une
+discussion, ils n'ont pas ete reproduits et ne doivent pas etre repris.
+
 Corriger un trait sur un seuil brut reviendrait a editer le contenu jusqu'a ce
 que le detecteur se taise. C'est optimiser l'instrument, pas le corpus.
 

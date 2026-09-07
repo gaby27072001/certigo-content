@@ -11,8 +11,8 @@
   "prompt": "Le catalogue d'un site de commerce en ligne repose sur un cluster Amazon Aurora PostgreSQL. Le trafic est constitué à 92 % de lectures, dont une forte proportion de requêtes identiques portant sur les mêmes fiches produits populaires. L'instance d'écriture est saturée et la latence au 99e centile se dégrade. L'entreprise veut réduire cette latence et décharger l'instance d'écriture sans modifier le modèle de données ni le moteur relationnel. Que doit concevoir l'architecte ?",
   "choices": [
     "Ajouter des réplicas en lecture Aurora servis par le point de terminaison de lecture du cluster pour absorber les requêtes de consultation, et placer un cache Amazon ElastiCache devant la base afin de servir les fiches produits les plus demandées.",
-    "Migrer le catalogue vers Amazon DynamoDB et réécrire les requêtes relationnelles sous forme d'accès par clé.",
-    "Porter l'instance d'écriture Aurora à la plus grande classe d'instance disponible et laisser l'ensemble du trafic la solliciter.",
-    "Exporter chaque nuit le catalogue vers Amazon S3 et faire interroger ces fichiers par Amazon Athena depuis les pages du site."
+    "Migrer le catalogue vers Amazon DynamoDB et réécrire l'ensemble des requêtes relationnelles sous forme d'accès par clé primaire, en acceptant la refonte du modèle de données et des traitements analytiques que cette bascule impose aux équipes applicatives.",
+    "Porter l'instance d'écriture Aurora à la plus grande classe d'instance disponible et laisser l'intégralité du trafic de lecture et d'écriture continuer à la solliciter, la capacité supplémentaire de calcul et de mémoire devant absorber à elle seule les requêtes répétées.",
+    "Exporter chaque nuit l'intégralité du catalogue vers Amazon S3 au format colonnaire et faire interroger ces fichiers par Amazon Athena directement depuis les pages du site, de manière à ne plus solliciter le cluster relationnel pour les consultations de fiches produits."
   ]
 }
