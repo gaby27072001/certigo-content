@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-6"
   },
-  "prompt": "Une baseline réseau et IAM doit être déployée dans chaque compte d'une OU, mise à jour automatiquement lorsque l'OU change et contrôlée avant déploiement par des règles d'infrastructure as code. Quelle approche est la plus adaptée ?",
+  "prompt": "Une équipe déploie un socle de sécurité par modèle dans tous les comptes de l'organisation. Elle veut que tout compte nouvellement rattaché à une unité d'organisation reçoive automatiquement le socle, sans créer au préalable de rôle d'exécution dans ce compte ni exécuter d'action manuelle. Quelle configuration répond à ce besoin ?",
   "choices": [
-    "CloudFormation StackSets avec permissions gérées par le service et trusted access Organizations, complété par CloudFormation Guard dans la chaîne de validation",
-    "Des commandes AWS CLI copiées dans un document partagé et exécutées à la main",
-    "Une AMI publique pour créer les rôles IAM",
-    "Une bucket policy S3 qui crée automatiquement des VPC"
+    "Un jeu de piles à permissions autogérées, dont les rôles d'administration et d'exécution sont provisionnés par un modèle exécuté à l'arrivée du compte",
+    "Un jeu de piles à permissions gérées par le service, ciblant les unités d'organisation avec le déploiement automatique vers les nouveaux comptes",
+    "Un produit AWS Service Catalog partagé à l'organisation, dont le lancement est déclenché par une règle réagissant au rattachement d'un compte",
+    "Un modèle déployé par une fonction déclenchée à la création du compte, qui assume un rôle d'amorçage préexistant dans chacun des comptes cibles"
   ]
 }

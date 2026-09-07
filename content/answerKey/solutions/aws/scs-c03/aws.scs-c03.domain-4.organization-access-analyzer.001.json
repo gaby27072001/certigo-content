@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Créer un analyseur IAM Access Analyzer de type organisation dans le compte administrateur délégué et traiter ses conclusions",
-  "rationale": "Un analyseur de zone de confiance organisationnelle évalue les politiques de ressource des comptes membres et signale les accès externes. L'administration déléguée évite d'opérer depuis le compte de management. Policy Simulator répond à des requêtes ponctuelles et Inspector ne recherche pas les accès externes aux politiques S3, KMS ou IAM."
+  "correct": "Deux analyseurs AWS IAM Access Analyzer, l'un d'accès externe à l'échelle de l'organisation, l'autre d'accès non utilisé, consultés chaque trimestre",
+  "rationale": "IAM Access Analyzer propose des analyseurs distincts pour l'accès externe et pour l'accès non utilisé : le premier applique un raisonnement logique aux politiques basées sur les ressources afin d'identifier les partages hors du périmètre, le second recense les permissions dormantes, sans requête à écrire. Le simulateur de politiques évalue une décision précise et n'énumère pas les partages externes. Une règle AWS Config vérifie une conformité déclarée mais ne raisonne pas sur l'accessibilité effective. Le rapport d'identifiants couvre les utilisateurs et leurs identifiants, pas les partages de ressources ni le détail des permissions dormantes. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain4.html ; https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html"
 }

@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "correct": "Désigner un administrateur délégué Security Hub, utiliser la configuration centrale avec des politiques par OU et configurer une Région d'agrégation",
-  "rationale": "La configuration centrale de Security Hub permet à l'administrateur délégué d'appliquer des politiques aux comptes et OU, y compris aux nouveaux comptes. L'agrégation inter-Région consolide les conclusions dans une Région opérationnelle. EventBridge seul ne configure pas les standards, et un déploiement AWS Config isolé dans le compte de management ne configure ni les contrôles ni les conclusions Security Hub des comptes membres."
+  "correct": "Activer Amazon Security Lake depuis un administrateur délégué, qui normalise les sources au format OCSF dans un compartiment S3 détenu par le compte",
+  "rationale": "Security Lake centralise les sources AWS et tierces dans un lac détenu par le compte, convertit les données en Parquet et applique le schéma ouvert OCSF, ce qui correspond à l'exigence de normalisation du SIEM. Detective construit un graphe d'investigation à partir des journaux mais n'expose pas un flux normalisé destiné à l'ingestion externe. Un agrégateur AWS Config remonte des éléments de configuration, pas des conclusions de sécurité, et son schéma n'est pas OCSF. Audit Manager collecte des preuves rattachées à des contrôles, une granularité qui ne remplace pas un flux de journaux continu. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain1.html ; https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html"
 }

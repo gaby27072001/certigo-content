@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "L'équipe sécurité veut appliquer les mêmes contrôles AWS Security Hub à 180 comptes répartis sur plusieurs Régions, centraliser les conclusions dans une Région d'agrégation et éviter une configuration manuelle par compte. Quelle solution est la plus adaptée ?",
+  "prompt": "Une organisation de 180 comptes répartis sur quatre Régions doit livrer ses journaux de sécurité à un SIEM tiers qui exige un schéma normalisé. L'équipe refuse d'installer un agent dans chaque compte et veut conserver la propriété des données dans ses propres compartiments. Quelle approche répond à ces contraintes ?",
   "choices": [
-    "Désigner un administrateur délégué Security Hub, utiliser la configuration centrale avec des politiques par OU et configurer une Région d'agrégation",
-    "Créer une règle Amazon EventBridge indépendante dans chaque compte sans administrateur délégué",
-    "Activer AWS Config uniquement dans le compte de management de l'organisation",
-    "Copier chaque conclusion dans un compartiment S3 public pour permettre l'analyse intercompte"
+    "Activer Amazon Security Lake depuis un administrateur délégué, qui normalise les sources au format OCSF dans un compartiment S3 détenu par le compte",
+    "Activer Amazon Detective dans le compte de sécurité, dont le graphe de comportement alimentera directement le connecteur du SIEM tiers",
+    "Déployer un agrégateur AWS Config multi-comptes, dont les éléments de configuration seront exportés vers le SIEM par un flux planifié",
+    "Souscrire AWS Audit Manager avec un cadre personnalisé, dont les preuves collectées seront transmises au SIEM à l'issue de chaque évaluation"
   ]
 }

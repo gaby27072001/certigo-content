@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Une entreprise AWS Organizations doit conserver les événements de gestion de tous les comptes et de toutes les Régions dans un compte d'archivage, intégrer automatiquement les nouveaux comptes et permettre des corrélations OCSF avec les journaux de sécurité. Quelle architecture répond le mieux à ces exigences ?",
+  "prompt": "Après un incident, l'équipe constate qu'un administrateur d'un compte membre avait arrêté la collecte des événements de gestion dans son propre compte, laissant une zone d'ombre de plusieurs jours. La direction exige que ce scénario devienne impossible sans retirer aux équipes l'autonomie sur leurs ressources applicatives. Que mettre en place ?",
   "choices": [
-    "Créer un journal CloudTrail multi-Région dans chaque compte et laisser chaque équipe choisir son compartiment S3",
-    "Créer un journal d'organisation CloudTrail multi-Région vers un compartiment S3 dédié et protégé, puis déléguer Amazon Security Lake pour agréger les sources de l'organisation",
-    "Activer uniquement l'historique des événements CloudTrail de 90 jours dans le compte de management",
-    "Envoyer seulement les conclusions Amazon GuardDuty vers un groupe CloudWatch Logs central"
+    "Répliquer la piste existante dans chaque compte membre et surveiller son état par une règle AWS Config remédiée automatiquement en cas d'arrêt",
+    "Déléguer l'administration d'Amazon GuardDuty au compte de sécurité et activer la protection contre la désactivation des détecteurs membres",
+    "Restreindre la console des comptes membres par une politique de session afin que les actions de journalisation exigent une authentification renforcée",
+    "Créer une piste d'organisation depuis le compte de gestion et bloquer les actions d'arrêt de journalisation par une politique de contrôle de service"
   ]
 }

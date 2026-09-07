@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Des instances EC2 sensibles n'ont ni adresse publique ni règle entrante. Les administrateurs doivent obtenir un shell à la demande avec contrôle IAM, journal de session chiffré et aucune gestion de clés SSH. Quelle solution convient ?",
+  "prompt": "Un audit impose de supprimer tout port d'administration ouvert en entrée, de retirer les hôtes rebond et de cesser la distribution de clés privées, tout en conservant un accès interactif aux serveurs pour l'équipe d'exploitation et une trace nominative de chaque connexion. Quelle solution couvre ces quatre exigences ?",
   "choices": [
-    "Systems Manager Session Manager avec endpoints VPC nécessaires, rôles IAM et journalisation des sessions vers CloudWatch Logs ou S3",
-    "Un bastion public partagé avec une clé SSH commune",
-    "EC2 Instance Connect Endpoint avec une règle SSH ouverte à Internet",
-    "Une adresse Elastic IP sur chaque instance et une liste blanche permanente"
+    "AWS Systems Manager Session Manager, qui ouvre une session sortante depuis l'agent et journalise l'identité associée à chaque connexion",
+    "AWS Client VPN avec authentification par certificat, qui place les administrateurs sur le réseau privé avant l'ouverture de la session distante",
+    "Amazon Connect couplé à un groupe de sécurité restreint, qui limite l'origine des connexions aux plages déclarées par l'équipe d'exploitation",
+    "AWS Verified Access avec une politique de confiance, qui évalue la posture du poste avant d'autoriser l'ouverture du port d'administration"
   ]
 }

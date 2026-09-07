@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Amazon Detective pour analyser les entités, comportements et relations à partir des données de sécurité",
-  "rationale": "Detective construit un graphe comportemental à partir de sources telles que GuardDuty, CloudTrail et les journaux de flux, ce qui facilite l'analyse de portée et de cause racine. Il ne remplace pas la conservation des preuves, mais accélère leur corrélation. Les autres services ne reconstruisent pas une chronologie d'incident."
+  "correct": "Amazon Detective, dont le graphe de comportement relie la conclusion à un historique d'activité couvrant jusqu'à un an",
+  "rationale": "Detective collecte automatiquement les journaux, applique une analyse statistique et graphique et donne accès à un historique remontant jusqu'à un an, en reliant ses visualisations aux conclusions GuardDuty : c'est le service conçu pour l'analyse de cause racine sans travail d'ingestion. Security Hub agrège et priorise des conclusions mais ne reconstitue pas la trajectoire d'un principal. Security Lake fournirait l'historique, au prix exact que l'énoncé exclut, puisqu'il faut écrire les requêtes. AWS Config retrace l'état des ressources, pas les actions d'un principal. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain2.html ; https://docs.aws.amazon.com/detective/latest/userguide/what-is-detective.html"
 }

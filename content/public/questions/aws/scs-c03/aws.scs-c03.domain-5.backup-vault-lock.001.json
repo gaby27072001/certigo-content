@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-5"
   },
-  "prompt": "Les sauvegardes de plusieurs services AWS doivent résister à un administrateur compromis. Après une période de grâce, personne ne doit pouvoir raccourcir la rétention ni supprimer le verrou avant son expiration. Quelle configuration utiliser ?",
+  "prompt": "Une équipe a placé un coffre AWS Backup en mode conformité et la période de grâce est écoulée depuis plusieurs semaines. Elle découvre que la durée de rétention retenue est trop longue et veut savoir ce qui reste possible sans attendre l'expiration des points de récupération déjà présents. Quelle réponse est exacte ?",
   "choices": [
-    "AWS Backup Vault Lock en mode conformité dans un coffre de sauvegarde séparé, avec politiques de copie intercompte",
-    "Un tag `DoNotDelete=true` sans politique IAM",
-    "Un compartiment S3 standard sans versioning",
-    "Une règle EventBridge qui envoie seulement un e-mail lors d'une suppression"
+    "Le verrou peut être assoupli par l'utilisateur racine du compte, qui conserve le droit de réduire la rétention d'un coffre qu'il possède",
+    "Le verrou peut être levé par une demande à l'assistance AWS, qui vérifie l'identité du propriétaire avant d'appliquer la nouvelle rétention",
+    "Le verrou est définitif, mais un coffre devenu vide reste supprimable, ce qui n'aide pas tant qu'il contient des points de récupération",
+    "Le verrou est définitif, et le coffre reste indestructible jusqu'à l'expiration du dernier point de récupération qu'il contient encore"
   ]
 }

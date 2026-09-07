@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Systems Manager Session Manager avec endpoints VPC nécessaires, rôles IAM et journalisation des sessions vers CloudWatch Logs ou S3",
-  "rationale": "Session Manager fournit un accès administrateur sans port entrant ni clé SSH persistante, gouverné par IAM et auditable. Les endpoints VPC permettent de garder le trafic de gestion privé, et la journalisation centralisée répond à l'exigence d'audit. Un bastion ou des adresses publiques réintroduisent une surface exposée et des secrets à gérer."
+  "correct": "AWS Systems Manager Session Manager, qui ouvre une session sortante depuis l'agent et journalise l'identité associée à chaque connexion",
+  "rationale": "Session Manager fournit une gestion sécurisée des nœuds sans ouvrir de port entrant, sans hôte rebond et sans clé privée à distribuer, tout en produisant des journaux nominatifs d'accès : les quatre exigences sont couvertes par le service seul. Un accès réseau privé par tunnel résout l'exposition publique mais laisse le port d'administration ouvert côté serveur et conserve le besoin d'identifiants de connexion. Le troisième service cité gère des centres de contact et n'a aucun rapport avec l'administration de serveurs. Verified Access contrôle l'accès à des applications et, dans la formulation proposée, aboutit encore à ouvrir un port d'administration. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain3.html ; https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html"
 }

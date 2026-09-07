@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "correct": "Créer un journal d'organisation CloudTrail multi-Région vers un compartiment S3 dédié et protégé, puis déléguer Amazon Security Lake pour agréger les sources de l'organisation",
-  "rationale": "Un journal d'organisation couvre les comptes actuels et futurs, et le mode multi-Région évite les angles morts régionaux. Le compte d'archivage impose la séparation des responsabilités, tandis que Security Lake normalise et centralise les sources prises en charge au format OCSF. Les autres options fragmentent la collecte ou ne conservent qu'un sous-ensemble des événements."
+  "correct": "Créer une piste d'organisation depuis le compte de gestion et bloquer les actions d'arrêt de journalisation par une politique de contrôle de service",
+  "rationale": "Une piste d'organisation est définie dans le compte de gestion et s'applique à tous les comptes membres, qui ne peuvent ni la modifier ni l'arrêter ; une politique de contrôle de service refusant les actions d'arrêt ferme le contournement résiduel. Répliquer une piste par compte laisse chaque administrateur local maître de son instance, ce qui reproduit la faille constatée. Déléguer GuardDuty protège la détection de menaces, pas l'enregistrement des événements de gestion. Une politique de session restreint une session précise et ne survit pas à l'usage d'un autre principal disposant du droit d'arrêt. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain1.html ; https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html"
 }

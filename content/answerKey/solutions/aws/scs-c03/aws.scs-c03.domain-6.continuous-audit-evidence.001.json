@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-6"
   },
-  "correct": "AWS Config avec agrégateur et conformance packs, associé à AWS Audit Manager dans un compte administrateur délégué",
-  "rationale": "Config évalue en continu l'état des ressources, les conformance packs regroupent les règles et l'agrégateur consolide les comptes et Régions. Audit Manager collecte et organise les preuves selon des contrôles de framework. Une collecte manuelle ou des outils réseau ne fournissent pas cette chaîne de conformité."
+  "correct": "Le guide d'examen cite AWS Audit Manager, mais sa documentation indique que le service n'accepte plus de nouveaux clients : la divergence est réelle",
+  "rationale": "La compétence 6.3.2 du guide d'examen cite explicitement AWS Audit Manager et AWS Artifact pour collecter et organiser des preuves, tandis que la page d'accueil du guide du service annonce qu'il n'est plus ouvert aux nouveaux clients : les deux pages sont officielles et divergent, ce qu'un candidat doit savoir sans le résoudre à leur place. Réduire la question à AWS Artifact ignore la première moitié de la compétence citée. AWS Config évalue la conformité de ressources et n'est pas présenté comme service de collecte de preuves dans cette compétence. Security Hub agrège des conclusions de sécurité et relève de la compétence précédente. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain6.html ; https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html"
 }

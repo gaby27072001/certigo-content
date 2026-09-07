@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-5"
   },
-  "correct": "Une clé KMS dans un external key store connecté aux HSM externes",
-  "rationale": "Un external key store permet à KMS d'utiliser un matériel cryptographique qui reste dans le gestionnaire de clés externe du client. Ce choix transfère au client des responsabilités de disponibilité, performance et exploitation, conformément au scénario. Les clés générées par AWS et les certificats ACM ne satisfont pas l'exigence de garde externe du matériel."
+  "correct": "Un magasin de clés externe conserve le matériel dans le gestionnaire de l'entreprise, où les opérations sont exécutées via un mandataire dédié",
+  "rationale": "Dans un magasin de clés externe, les opérations de chiffrement et de déchiffrement sont exécutées par le gestionnaire de clés de l'entreprise ; AWS KMS n'interagit jamais directement avec lui et ne peut ni créer, ni consulter, ni gérer, ni supprimer ces clés, tout passant par le mandataire fourni par l'entreprise. Un magasin adossé à AWS CloudHSM garde le matériel dans une grappe hébergée par le fournisseur, ce que le régulateur refuse. Une clé importée réside dans AWS KMS, qui effectue les opérations. Le chiffrement côté client protège les données mais retire aux services AWS la capacité de les traiter, contrairement à l'exigence. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain5.html ; https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html"
 }

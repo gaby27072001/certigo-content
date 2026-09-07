@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Plusieurs conclusions GuardDuty relient une adresse IP, un rôle IAM et trois instances sur une période de six heures. Le SOC veut reconstruire les relations et la chronologie avant de confirmer la cause racine. Quel service doit compléter les journaux conservés ?",
+  "prompt": "Une conclusion Amazon GuardDuty signale un appel d'API inhabituel effectué par un rôle, sans préciser si le comportement est nouveau ni quelles autres ressources le même principal a touchées au cours des mois précédents. L'équipe veut reconstituer cette trajectoire sans construire de chaîne d'ingestion ni écrire de requêtes. Que retenir ?",
   "choices": [
-    "Amazon Detective pour analyser les entités, comportements et relations à partir des données de sécurité",
-    "AWS Budgets pour regrouper les coûts par étiquette",
-    "Amazon Route 53 Domains pour renouveler les noms de domaine",
-    "AWS Artifact pour télécharger des rapports de conformité"
+    "AWS Security Hub, dont les normes agrégées replacent la conclusion dans un score de posture consolidé pour le compte concerné",
+    "Amazon Detective, dont le graphe de comportement relie la conclusion à un historique d'activité couvrant jusqu'à un an",
+    "Amazon Security Lake, dont le lac normalisé permet d'interroger l'historique complet des sources ingérées par le compte",
+    "AWS Config, dont l'historique de configuration retrace les modifications successives subies par chacune des ressources concernées"
   ]
 }

@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Une entreprise fédère son annuaire dans IAM Identity Center pour 200 comptes. Les droits doivent suivre automatiquement le département et l'environnement des employés, sans créer un rôle distinct pour chaque combinaison. Quelle stratégie adopter ?",
+  "prompt": "Une entreprise veut que l'accès aux compartiments d'un compte dépende du service d'appartenance de chaque collaborateur, déjà présent comme attribut dans son annuaire d'entreprise. Elle refuse de créer un jeu de permissions par service et veut que l'arrivée d'un nouveau service ne demande aucune modification de politique. Quelle approche retenir ?",
   "choices": [
-    "Configurer les attributs de contrôle d'accès dans IAM Identity Center et des permission sets utilisant des conditions sur principal tags et resource tags",
-    "Créer un utilisateur IAM identique dans chaque compte et partager son mot de passe",
-    "Accorder AdministratorAccess à tous les groupes de l'annuaire",
-    "Utiliser uniquement des Network ACL pour autoriser les appels d'API AWS"
+    "Créer un jeu de permissions par service dans AWS IAM Identity Center et automatiser leur création à partir des groupes synchronisés depuis l'annuaire",
+    "Définir des chemins IAM correspondant aux services et écrire une politique par chemin, appliquée aux rôles générés dans chacun des comptes cibles",
+    "Sélectionner l'attribut dans les attributs pour le contrôle d'accès, puis écrire une politique comparant l'étiquette de session à celle de la ressource",
+    "Publier l'attribut dans le jeton d'identité du fournisseur externe et écrire une politique de confiance qui restreint l'assomption du rôle par service"
   ]
 }

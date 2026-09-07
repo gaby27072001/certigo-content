@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "correct": "Route 53 Resolver query logging ainsi que les VPC Flow Logs et Transit Gateway Flow Logs, livrés au compte de sécurité",
-  "rationale": "Resolver query logging fournit les noms interrogés et le contexte DNS, tandis que les journaux de flux VPC et Transit Gateway donnent les métadonnées réseau nécessaires à la corrélation. Cette combinaison couvre le chemin décrit sans le coût ni la complexité d'une capture de paquets généralisée. Les journaux ALB et S3 n'observent pas ces requêtes DNS."
+  "correct": "Associer un groupe de règles Route 53 Resolver DNS Firewall au réseau virtuel afin de filtrer les domaines interrogeables et de journaliser les tentatives",
+  "rationale": "DNS Firewall filtre les requêtes sortantes qui passent par le Resolver du réseau virtuel et vise explicitement l'exfiltration par résolution de noms, en refusant les domaines malveillants connus et en journalisant l'activité. Network Firewall inspecte les flux réseau mais ne voit pas le contenu des requêtes traitées par le Resolver interne, qui n'emprunte pas le chemin filtré. Une liste de contrôle d'accès bloquant le port 53 casse la résolution légitime sans distinguer les domaines. Un point de terminaison de type interface rend privé l'accès à un service AWS, sans jamais examiner les noms demandés. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain1.html ; https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-dns-firewall.html"
 }

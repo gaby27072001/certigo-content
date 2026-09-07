@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Un fournisseur SaaS doit assumer un rôle dans le compte de chaque client depuis son propre compte AWS mutualisé. Comment réduire le risque de confused deputy ?",
+  "prompt": "Un éditeur de logiciel de supervision demande à ses clients de créer un rôle qu'il assumera depuis son propre compte. Un architecte remarque que si l'éditeur assume ce rôle sur la seule foi de son identifiant de compte, un autre client de l'éditeur pourrait le pousser à agir sur des ressources qui ne lui appartiennent pas. Que faut-il exiger ?",
   "choices": [
-    "Faire confiance au compte AWS précis du fournisseur et exiger dans la politique de confiance un ExternalId unique fourni pour ce client",
-    "Faire confiance à `*` tant que le nom du rôle contient le nom du fournisseur",
-    "Créer une clé d'accès root et l'envoyer au fournisseur",
-    "Autoriser seulement l'adresse IP publique du fournisseur dans un groupe de sécurité"
+    "Un identifiant externe unique par client, imposé comme condition dans la politique de confiance du rôle assumé par l'éditeur",
+    "Une authentification multifacteur exigée dans la politique de confiance, afin que l'éditeur prouve la présence d'un opérateur humain",
+    "Une durée de session réduite dans la politique de confiance, afin que les identifiants obtenus par l'éditeur expirent rapidement",
+    "Une restriction d'adresse source dans la politique de confiance, afin que seules les plages publiées par l'éditeur soient acceptées"
   ]
 }

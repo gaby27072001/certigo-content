@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Révoquer les sessions actives du rôle, corriger la politique de confiance et rechercher leur usage dans CloudTrail",
-  "rationale": "Modifier la confiance empêche de nouvelles sessions mais n'invalide pas à elle seule les informations d'identification temporaires déjà émises. La révocation des sessions du rôle ajoute un refus pour les sessions antérieures, puis CloudTrail permet d'en mesurer l'usage. Renommer le rôle ou faire tourner une clé sans rapport ne traite pas les sessions STS existantes."
+  "correct": "Le rôle est issu d'un jeu de permissions, la révocation doit donc être effectuée depuis IAM Identity Center pour l'utilisateur concerné",
+  "rationale": "Les rôles créés à partir d'un jeu de permissions IAM Identity Center ne sont pas modifiables dans IAM : la révocation des sessions actives se fait dans IAM Identity Center, pour l'utilisateur concerné. Un rôle lié à un service ne peut effectivement pas voir ses sessions révoquées, mais ce n'est pas le cas ici, et recréer une politique de confiance n'invalide pas les jetons déjà émis. Réduire la durée maximale de session ne s'applique qu'aux sessions futures et laisse intacte la session compromise. Une limite de permissions borne les droits accessibles et n'empêche nullement l'attachement de la politique de refus en ligne. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain2.html ; https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_revoke-sessions.html"
 }

@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Activer le mode appliance sur l'attachement Transit Gateway d'inspection et aligner les tables de routage par AZ pour conserver la symétrie",
-  "rationale": "Une inspection stateful exige que les deux sens d'un flux passent par le même chemin d'appliance. Le mode appliance de l'attachement VPC du VPC d'inspection et un routage zonal cohérent permettent à Transit Gateway de préserver cette affinité. Propager toutes les routes peut contourner l'inspection, et désactiver l'état dégrade le contrôle sans résoudre l'architecture."
+  "correct": "Un équilibreur de charge de type passerelle, qui maintient l'adhérence de flux vers une même appliance et échange tout le trafic en protocole GENEVE",
+  "rationale": "L'équilibreur de charge de type passerelle opère au niveau réseau, écoute tous les paquets, maintient l'adhérence de flux vers une appliance donnée selon un uplet configurable et échange le trafic avec les appliances en protocole GENEVE sur le port 6081, ce qui garantit la symétrie exigée. Un équilibreur de charge réseau répartit des connexions mais ne restitue pas les deux sens d'un même flux à la même appliance dans une insertion transparente. Une passerelle de transit route entre réseaux virtuels sans notion d'adhérence à une appliance. Un point de terminaison de type interface publie un service et n'inspecte aucun paquet. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain3.html ; https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html"
 }

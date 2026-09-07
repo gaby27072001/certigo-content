@@ -27,7 +27,25 @@ const expectedDomains = {
     "domain-3": 6,
     "domain-4": 5,
   },
+  "scs-c03": {
+    "domain-1": 4,
+    "domain-2": 4,
+    "domain-3": 4,
+    "domain-4": 5,
+    "domain-5": 4,
+    "domain-6": 3,
+  },
 };
+
+// Le total est derive de expectedDomains plutot qu'ecrit en dur : le perimetre
+// de ce test etait un litteral qui grandissait moins vite que le contenu
+// garde. Ajouter une certification ci-dessus etend desormais le controle sans
+// qu'un second nombre puisse rester en arriere.
+const expectedTotal = Object.values(expectedDomains).reduce(
+  (total, domains) =>
+    total + Object.values(domains).reduce((sum, count) => sum + count, 0),
+  0
+);
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
@@ -53,7 +71,7 @@ function overlap(left, right) {
   return total === 0 ? 0 : shared / total;
 }
 
-test("valide les 72 scenarios de la vague AWS Professional", () => {
+test("valide les scenarios AWS places sous garde-fou editorial", () => {
   const prompts = new Set();
 
   for (const [certification, domainCounts] of Object.entries(expectedDomains)) {
@@ -237,5 +255,5 @@ test("valide les 72 scenarios de la vague AWS Professional", () => {
     );
   }
 
-  assert.equal(prompts.size, 72);
+  assert.equal(prompts.size, expectedTotal);
 });

@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-6"
   },
-  "correct": "CloudFormation StackSets avec permissions gérées par le service et trusted access Organizations, complété par CloudFormation Guard dans la chaîne de validation",
-  "rationale": "Les StackSets gérés par le service ciblent les OU et peuvent intégrer automatiquement les comptes ajoutés. CloudFormation Guard vérifie les propriétés des modèles avant déploiement, ce qui rend la baseline cohérente et contrôlable. Des commandes manuelles ne garantissent ni répétabilité ni couverture continue."
+  "correct": "Un jeu de piles à permissions gérées par le service, ciblant les unités d'organisation avec le déploiement automatique vers les nouveaux comptes",
+  "rationale": "Le modèle de permissions géré par le service s'appuie sur AWS Organizations : le compte administrateur est le compte de gestion ou un administrateur délégué, les relations de confiance sont établies pour lui, et le ciblage par unité d'organisation avec déploiement automatique couvre les comptes rattachés ensuite sans action manuelle. Le modèle autogéré exige justement la création préalable des rôles d'administration et d'exécution que l'énoncé exclut. Un produit de catalogue demande un lancement, fût-il déclenché, et ne gère pas le cycle de vie des piles. La quatrième option repose sur un rôle d'amorçage préexistant, ce que l'énoncé interdit. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain6.html ; https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html"
 }

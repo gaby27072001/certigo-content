@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "IAM Roles Anywhere avec un trust anchor, un profil et des rôles à privilèges minimaux",
-  "rationale": "IAM Roles Anywhere échange l'identité X.509 d'une charge externe contre des informations d'identification STS temporaires associées à un rôle. Le trust anchor et le profil limitent les certificats et rôles utilisables. Les clés IAM longues durées contredisent l'exigence et les URL présignées ne généralisent pas l'accès aux API."
+  "correct": "Enregistrer l'autorité de certification interne comme ancrage de confiance IAM Roles Anywhere et présenter un certificat X.509 par serveur",
+  "rationale": "IAM Roles Anywhere permet à des charges de travail extérieures à AWS d'obtenir des identifiants temporaires en présentant un certificat X.509 émis par une autorité enregistrée comme ancrage de confiance, ce qui réutilise l'infrastructure à clés publiques existante et supprime les clés à longue durée de vie. L'enregistrement comme nœud hybride répond au besoin pour les actions Systems Manager mais impose l'agent que l'énoncé exclut. Une fédération par jeton web suppose un fournisseur d'identité web, absent ici. Provisionner un utilisateur par serveur conserve précisément les identifiants à longue durée de vie que l'entreprise veut éliminer. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain4.html ; https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html"
 }

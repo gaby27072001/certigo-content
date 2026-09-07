@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "GuardDuty signale une instance EC2 qui communique avec une infrastructure de commande et contrôle. L'équipe doit stopper rapidement les communications, préserver les volumes pour analyse et éviter de détruire les preuves en mémoire avant la collecte initiale. Quelle automatisation lancer en premier ?",
+  "prompt": "Une instance Amazon EC2 exposée publiquement présente un comportement de balayage sortant. L'équipe doit interrompre l'activité malveillante immédiatement tout en préservant la mémoire vive et les processus en cours pour l'analyse, et sait que l'instance porte un profil dont les identifiants temporaires ont pu être volés. Quelle séquence retenir ?",
   "choices": [
-    "Terminer immédiatement l'instance et supprimer ses volumes",
-    "Associer un groupe de sécurité de quarantaine, capturer les métadonnées et instantanés nécessaires via un runbook Systems Manager, puis poursuivre l'analyse",
-    "Redémarrer l'instance avec la même AMI et conserver son groupe de sécurité",
-    "Désactiver CloudTrail afin de réduire le bruit pendant l'enquête"
+    "Remplacer le groupe de sécurité par un groupe sans règle autorisée, puis révoquer les sessions du rôle porté par le profil d'instance",
+    "Arrêter l'instance pour figer son état, puis détacher le profil d'instance afin d'invalider les identifiants temporaires déjà distribués",
+    "Retirer l'instance de son groupe cible Elastic Load Balancing, puis appliquer un correctif via AWS Systems Manager Patch Manager",
+    "Créer un instantané Amazon EBS chiffré du volume racine, puis remplacer l'instance par une image durcie produite par EC2 Image Builder"
   ]
 }
