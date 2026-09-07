@@ -10,9 +10,9 @@
   },
   "prompt": "Une table Amazon DynamoDB conserve les sessions applicatives d'un service en ligne. Une session n'a plus aucune valeur métier au-delà de quatre-vingt-dix jours, mais la table croît sans limite et le coût de stockage devient significatif. L'équipe cherche à supprimer automatiquement les éléments périmés sans consommer de capacité d'écriture ni écrire de code de purge. Quelle solution retenir ?",
   "choices": [
-    "Planifier une fonction AWS Lambda horaire qui exécute un Scan de la table et supprime les éléments périmés par lots avec BatchWriteItem.",
-    "Activer les sauvegardes à la demande de la table puis la restaurer chaque trimestre en excluant les éléments les plus anciens.",
+    "Planifier une fonction AWS Lambda horaire qui exécute un Scan complet de la table et supprime les éléments périmés par lots avec BatchWriteItem.",
+    "Activer les sauvegardes à la demande de la table, puis la restaurer chaque trimestre dans une nouvelle table en excluant les éléments les plus anciens.",
     "Activer la durée de vie (TTL) sur la table et renseigner dans chaque élément un attribut d'expiration exprimé en secondes depuis l'époque Unix.",
-    "Créer un index secondaire local sur la date de création et supprimer périodiquement les partitions les plus anciennes de cet index."
+    "Créer un index secondaire local sur la date de création de la session et supprimer périodiquement les partitions les plus anciennes de cet index secondaire."
   ]
 }
