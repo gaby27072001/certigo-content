@@ -41,6 +41,35 @@ const OFFICIAL_SOURCE_HOSTS = {
   gcp: ["cloud.google.com", "services.google.com", "support.google.com"],
   microsoft: ["learn.microsoft.com"],
 };
+export const EDITORIAL_DEBT_PATH = "config/editorial-debt.json";
+export const LEGACY_COVERAGE_INVENTORY_PATH =
+  "config/legacy-coverage-inventory.json";
+
+// Un registre absent vaut "aucune dispense", jamais "tout est dispense" :
+// supprimer le fichier doit durcir la validation, pas la neutraliser.
+function loadLedger(root, path, collection, asOf) {
+  const absolute = resolve(root, path);
+  const byCertification = new Map();
+  if (!existsSync(absolute)) return byCertification;
+  const raw = readFileSync(absolute, "utf8");
+  const document = JSON.parse(
+    raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw
+  );
+  for (const entry of document[collection] ?? []) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(entry.expiresOn ?? "")) {
+      throw new Error(
+        `[ledger] ${path}: ${entry.certification} porte une date expiresOn invalide (${entry.expiresOn})`
+      );
+    }
+    // Une entree expiree cesse de dispenser : la dette redevient une erreur.
+    if (asOf >= entry.expiresOn) continue;
+    byCertification.set(
+      entry.certification,
+      new Set(entry.questionIds ?? [])
+    );
+  }
+  return byCertification;
+}
 
 function loadJson(absPath) {
   const raw = readFileSync(absPath, "utf8");
@@ -647,6 +676,14 @@ export async function validateContent(options = {}) {
   const validateCoverage = compileSchema(root, COVERAGE_SCHEMA_PATH);
   const validateRuntime = compileSchema(root, RUNTIME_SCHEMA);
   const contentMode = detectContentMode(root);
+  const asOf = options.asOf ?? new Date().toISOString().slice(0, 10);
+  const editorialDebt = loadLedger(root, EDITORIAL_DEBT_PATH, "debts", asOf);
+  const legacyCoverage = loadLedger(
+    root,
+    LEGACY_COVERAGE_INVENTORY_PATH,
+    "inventories",
+    asOf
+  );
 
   const questionFiles = (await glob(QUESTION_GLOB, { cwd: root, posix: true })).sort(
     compareOrdinal
@@ -881,10 +918,7 @@ export async function validateContent(options = {}) {
       err(
         `[integrity:correct-choice] solution "${id}" (${solution.file}): la reponse doit correspondre exactement aux options publiques dans ${question.file} (egalite stricte, sans conversion de casse, trim ni normalisation Unicode)`
       );
-    } else if (
-      question.data.schemaVersion === "v3" &&
-      Array.isArray(solution.data.provenance)
-    ) {
+    } else if (question.data.schemaVersion === "v3") {
       const certification = question.data.metadata?.certification;
       const metrics = answerLengthMetrics(
         question.data.choices,
@@ -892,7 +926,11 @@ export async function validateContent(options = {}) {
       );
       if (typeof certification === "string" && metrics !== null) {
         const entries = answerLengthsByCertification.get(certification) ?? [];
-        entries.push({ id, ...metrics });
+        entries.push({
+          id,
+          ...metrics,
+          exempt: editorialDebt.get(certification)?.has(id) === true,
+        });
         answerLengthsByCertification.set(certification, entries);
       }
     }
@@ -1013,8 +1051,17 @@ export async function validateContent(options = {}) {
               `[coverage:question] ${file}: "${questionId}" absent ou rattache au mauvais objectif`
             );
           }
+        } else if (
+          legacyCoverage.get(certification.id)?.has(questionId) !== true
+        ) {
+          // Une question v2 ne porte aucune metadonnee : rien dans le fichier ne
+          // la rattache a une certification. L'inventaire est donc le seul
+          // rattachement verifiable, et son absence doit echouer — sinon
+          // n'importe quelle question peut etre reliee a n'importe quel examen.
+          err(
+            `[coverage:question] ${file}: "${questionId}" est une question heritee (v2) absente de ${LEGACY_COVERAGE_INVENTORY_PATH} pour ${certification.id}`
+          );
         }
-        // v2 questions have no metadata — existence in publicIds is sufficient
       }
     });
   }
@@ -1027,6 +1074,7 @@ export async function validateContent(options = {}) {
     if (referencedQuestionCount === 0) continue;
     const entries = answerLengthsByCertification.get(certification) ?? [];
     for (const entry of entries) {
+      if (entry.exempt) continue;
       if (entry.choiceCount !== 4) {
         err(
           `[editorial:answer-length] paire "${entry.id}": exactement quatre choix sont requis`
@@ -1044,7 +1092,13 @@ export async function validateContent(options = {}) {
         );
       }
     }
+    // L'equilibre des rangs est un invariant de cohorte : il n'a de sens qu'une
+    // fois la dette de la certification soldee. Tant qu'il reste des questions
+    // dispensees, la cohorte est incomplete et le mesurer punirait la
+    // correction progressive au lieu de la recompenser.
+    const exemptCount = entries.filter((entry) => entry.exempt).length;
     if (
+      exemptCount === 0 &&
       entries.every((entry) => entry.choiceCount === 4) &&
       entries.length >= 4
     ) {
@@ -1099,6 +1153,17 @@ export async function validateContent(options = {}) {
 
   return {
     errors,
+    ledger: {
+      asOf,
+      editorialDebtCount: [...editorialDebt.values()].reduce(
+        (total, ids) => total + ids.size,
+        0
+      ),
+      legacyCoverageCount: [...legacyCoverage.values()].reduce(
+        (total, ids) => total + ids.size,
+        0
+      ),
+    },
     questionCount: questionFiles.length,
     solutionCount: solutionFiles.length,
     pairCount: [...publicIds.keys()].filter((id) => answerIds.has(id)).length,
@@ -1115,6 +1180,11 @@ export function printValidationResult(result) {
   console.log(`  certifications      : ${result.certificationCount}`);
   console.log(`  matrices couverture : ${result.coverageCount}`);
   console.log(`  ressources runtime  : ${result.runtimeResourceCount}`);
+  if (result.ledger) {
+    console.log(
+      `  dette dispensee     : ${result.ledger.editorialDebtCount} paire(s) editoriale(s), ${result.ledger.legacyCoverageCount} question(s) v2 heritee(s) (au ${result.ledger.asOf})`
+    );
+  }
 
   if (result.errors.length > 0) {
     console.error(`\n${result.errors.length} violation(s) detectee(s) :`);

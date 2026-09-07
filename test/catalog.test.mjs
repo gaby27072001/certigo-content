@@ -974,3 +974,189 @@ test("genere un manifeste v2 deterministe incluant catalogue et couverture", asy
   );
   assert.equal(validate(first), true, JSON.stringify(validate.errors));
 });
+
+// --- Registres de dette : garde-fous [coverage:question] et [editorial:answer-length] ---
+// Ces tests fixent les deux trous observes avant leur correction : une question v2
+// pouvait etre rattachee a n'importe quelle certification, et la regle editoriale
+// n'etait mesuree que si la solution portait une provenance.
+
+const LEDGER_DAY = "2026-09-07";
+
+function addLegacyPair(root, id) {
+  writeJson(resolve(root, "content", "public", "questions", `${id}.json`), {
+    id,
+    schemaVersion: "v2",
+    kind: "public",
+    prompt: `Question ${id}`,
+    choices: ["Alpha", "Bravo", "Charlie", "Delta"],
+  });
+  writeJson(resolve(root, "content", "answerKey", "solutions", `${id}.json`), {
+    id,
+    schemaVersion: "v2",
+    kind: "answerKey",
+    correct: "Alpha",
+    rationale: "Parce que.",
+  });
+  return id;
+}
+
+function bindToMatrix(root, provider, certification, ids) {
+  const path = resolve(
+    root,
+    "content",
+    "public",
+    "coverage",
+    provider,
+    `${certification}.json`
+  );
+  const matrix = readJson(path);
+  matrix.objectives[0].questionIds = ids;
+  writeJson(path, matrix);
+}
+
+function writeLedger(root, file, collection, entries) {
+  writeJson(resolve(root, "config", file), {
+    schema: `certigo.${collection}/v1`,
+    note: "fixture",
+    [collection]: entries,
+  });
+}
+
+const legacyErrors = (result) =>
+  result.errors.filter(
+    (error) =>
+      error.includes("[coverage:question]") && error.includes("(v2)")
+  );
+
+test("refuse une question v2 rattachee a une certification qui ne l'inventorie pas", async () => {
+  const root = createMetadataRoot();
+  const intrus = addLegacyPair(root, "l-core-mos-word-expert-check-1");
+  bindToMatrix(root, "microsoft", "sc-900", [intrus]);
+
+  // 1. Sans inventaire : le rattachement n'est prouve par rien, donc refuse.
+  const sansInventaire = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    legacyErrors(sansInventaire).some((error) => error.includes(intrus)),
+    "une question v2 hors inventaire doit etre refusee"
+  );
+
+  // 2. Inventoriee sous une AUTRE certification : toujours refusee. Sans cela
+  //    l'inventaire serait une liste blanche globale et non un rattachement.
+  writeLedger(root, "legacy-coverage-inventory.json", "inventories", [
+    {
+      certification: "microsoft:az-900",
+      expiresOn: "2026-11-30",
+      questionIds: [intrus],
+    },
+  ]);
+  const mauvaiseCertification = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    legacyErrors(mauvaiseCertification).some((error) => error.includes(intrus)),
+    "l'inventaire doit rattacher a une certification precise"
+  );
+
+  // 3. Inventoriee sous la bonne certification : acceptee.
+  writeLedger(root, "legacy-coverage-inventory.json", "inventories", [
+    {
+      certification: "microsoft:sc-900",
+      expiresOn: "2026-11-30",
+      questionIds: [intrus],
+    },
+  ]);
+  const inventoriee = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.deepEqual(legacyErrors(inventoriee), []);
+
+  // 4. Le lendemain de l'expiration, la dispense cesse.
+  const expiree = await validateContent({ root, asOf: "2026-11-30" });
+  assert.ok(
+    legacyErrors(expiree).some((error) => error.includes(intrus)),
+    "une entree expiree ne doit plus dispenser"
+  );
+});
+
+test("un inventaire absent durcit la validation au lieu de la neutraliser", async () => {
+  const root = createMetadataRoot();
+  const id = addLegacyPair(root, "l-core-orphelin-check-1");
+  bindToMatrix(root, "microsoft", "sc-900", [id]);
+
+  const result = await validateContent({ root, asOf: LEDGER_DAY });
+
+  assert.ok(legacyErrors(result).some((error) => error.includes(id)));
+});
+
+test("mesure la regle editoriale meme sans provenance sur la solution", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: [
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+      "Court",
+      "Un peu plus",
+      "Encore un peu plus long",
+    ],
+    correct:
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+    provenance: undefined,
+  });
+  // Le champ provenance reste absent : c'est exactement la cohorte que la
+  // regle ignorait auparavant.
+  const solutionPath = resolve(
+    root,
+    "content",
+    "answerKey",
+    "solutions",
+    "aws",
+    "aif-c01",
+    `${id}.json`
+  );
+  const solution = readJson(solutionPath);
+  delete solution.provenance;
+  writeJson(solutionPath, solution);
+
+  const sansRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    sansRegistre.errors.some(
+      (error) =>
+        error.includes("[editorial:answer-length]") &&
+        error.includes(id) &&
+        error.includes("ratio")
+    ),
+    "une paire sans provenance doit etre soumise a la regle editoriale"
+  );
+
+  // Inscrite au registre de dette : toleree, mais nommement et jusqu'a une date.
+  writeLedger(root, "editorial-debt.json", "debts", [
+    {
+      certification: "aws:aif-c01",
+      expiresOn: "2026-11-30",
+      questionIds: [id],
+    },
+  ]);
+  const avecRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.deepEqual(
+    avecRegistre.errors.filter((error) =>
+      error.includes("[editorial:answer-length]")
+    ),
+    []
+  );
+
+  const expire = await validateContent({ root, asOf: "2026-12-01" });
+  assert.ok(
+    expire.errors.some(
+      (error) =>
+        error.includes("[editorial:answer-length]") && error.includes(id)
+    ),
+    "une dette expiree redevient une erreur"
+  );
+});
+
+test("rejette une date d'expiration malformee au lieu de la comparer", async () => {
+  const root = createMetadataRoot();
+  writeLedger(root, "editorial-debt.json", "debts", [
+    { certification: "aws:aif-c01", expiresOn: "30/11/2026", questionIds: [] },
+  ]);
+
+  await assert.rejects(
+    () => validateContent({ root, asOf: LEDGER_DAY }),
+    /expiresOn invalide/
+  );
+});

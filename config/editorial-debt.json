@@ -1,0 +1,360 @@
+{
+  "schema": "certigo.editorial-debt/v1",
+  "note": "Paires v3 anterieures a l'activation de la regle editoriale [editorial:answer-length]. Chaque identifiant liste est dispense des controles par question jusqu'a la date indiquee ; au-dela la validation echoue sur l'entree. L'equilibre des rangs d'une certification n'est exige qu'une fois sa dette entierement soldee. Une question creee apres ce registre n'y figure jamais : elle est controlee des sa premiere validation. La liste ne doit que retrecir : un identifiant en sort en corrigeant la question, pas en repoussant sa date.",
+  "debts": [
+    {
+      "certification": "aws:aif-c01",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.aif-c01.domain-1.classification-fraude.002",
+        "aws.aif-c01.domain-1.ml-traditionnel-explicable.003",
+        "aws.aif-c01.domain-1.recall-fraude.004",
+        "aws.aif-c01.domain-2.bedrock-service-gere.009",
+        "aws.aif-c01.domain-2.context-engineering.006",
+        "aws.aif-c01.domain-2.hallucination-validation.008",
+        "aws.aif-c01.domain-2.optimisation-jetons.005",
+        "aws.aif-c01.domain-3.evaluation-multidimensionnelle.015",
+        "aws.aif-c01.domain-3.fine-tuning-donnees.014",
+        "aws.aif-c01.domain-3.rag-base-connaissances.011",
+        "aws.aif-c01.domain-3.temperature-creativite.010",
+        "aws.aif-c01.domain-3.versioning-prompts.013",
+        "aws.aif-c01.domain-4.audit-biais-sous-groupes.016",
+        "aws.aif-c01.domain-4.model-card-transparence.017",
+        "aws.aif-c01.domain-5.grounding-rag-citations.019",
+        "aws.aif-c01.domain-5.moindre-privilege-iam.018"
+      ]
+    },
+    {
+      "certification": "aws:aip-c01",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.aip-c01.domain-3.defense-in-depth-prompt-injection-layers.001",
+        "aws.aip-c01.domain-4.holistic-observability-token-hallucination.003",
+        "aws.aip-c01.domain-5.context-window-truncation-diagnostics.003",
+        "aws.aip-c01.domain-5.retrieval-drift-troubleshooting-embeddings.002"
+      ]
+    },
+    {
+      "certification": "aws:ans-c01",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.ans-c01.domain-1.dx-ha-routing.001",
+        "aws.ans-c01.domain-1.eks-alb-ingress.001",
+        "aws.ans-c01.domain-1.hybrid-dns-design.001",
+        "aws.ans-c01.domain-1.network-observability-baseline.001",
+        "aws.ans-c01.domain-1.overlapping-private-service.001",
+        "aws.ans-c01.domain-1.segmented-transit-design.001",
+        "aws.ans-c01.domain-2.dnssec-delegation.001",
+        "aws.ans-c01.domain-2.ipam-automation.001",
+        "aws.ans-c01.domain-2.sdwan-tgw-connect.001",
+        "aws.ans-c01.domain-2.shared-resolver-rules.001",
+        "aws.ans-c01.domain-2.tgw-route-segmentation.001",
+        "aws.ans-c01.domain-2.transit-vif-dxgw.001",
+        "aws.ans-c01.domain-3.dx-bgp-preference.001",
+        "aws.ans-c01.domain-3.reachability-analysis.001",
+        "aws.ans-c01.domain-3.s3-nat-cost.001",
+        "aws.ans-c01.domain-3.subnet-ip-exhaustion.001",
+        "aws.ans-c01.domain-3.vpn-mtu-failover.001",
+        "aws.ans-c01.domain-4.central-egress-inspection.001",
+        "aws.ans-c01.domain-4.firewall-manager-governance.001",
+        "aws.ans-c01.domain-4.flow-log-forensics.001",
+        "aws.ans-c01.domain-4.private-ip-vpn-over-dx.001",
+        "aws.ans-c01.domain-4.s3-endpoint-governance.001",
+        "aws.ans-c01.domain-4.traffic-mirroring-ids.001"
+      ]
+    },
+    {
+      "certification": "aws:clf-c02",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.clf-c02.domain-1.caf-resultats-migration.003",
+        "aws.clf-c02.domain-1.couts-variables.004",
+        "aws.clf-c02.domain-1.portee-globale-elasticite.001",
+        "aws.clf-c02.domain-1.replication-base-donnees.005",
+        "aws.clf-c02.domain-2.audit-appels-api.008",
+        "aws.clf-c02.domain-2.detection-menaces.011",
+        "aws.clf-c02.domain-2.documents-conformite.007",
+        "aws.clf-c02.domain-2.moindre-privilege.010",
+        "aws.clf-c02.domain-2.protection-compte-racine.009",
+        "aws.clf-c02.domain-2.rds-responsabilite-partagee.006",
+        "aws.clf-c02.domain-3.base-nosql-cle-valeur.015",
+        "aws.clf-c02.domain-3.calcul-evenementiel-serverless.014",
+        "aws.clf-c02.domain-3.cycle-vie-objets.017",
+        "aws.clf-c02.domain-3.infrastructure-reproductible.012",
+        "aws.clf-c02.domain-3.ml-construction-modeles.021",
+        "aws.clf-c02.domain-3.notifications-pub-sub.018",
+        "aws.clf-c02.domain-4.capacite-interruptible.019"
+      ]
+    },
+    {
+      "certification": "aws:dea-c01",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.dea-c01.domain-1.alimentation-entrepot-depuis-base-sur-site.006",
+        "aws.dea-c01.domain-1.cluster-nocturne-inactif-facture.007",
+        "aws.dea-c01.domain-1.contention-lecture-consommateurs-multiples.002",
+        "aws.dea-c01.domain-1.cout-octets-analyses-fichiers-quotidiens.003",
+        "aws.dea-c01.domain-1.enchainement-etapes-etl-fragile.004",
+        "aws.dea-c01.domain-1.propagation-modifications-commandes-lac.005",
+        "aws.dea-c01.domain-2.corrections-a-la-demande-et-etat-anterieur.012",
+        "aws.dea-c01.domain-2.echanges-entre-noeuds-jointure-volumineuse.008",
+        "aws.dea-c01.domain-2.paliers-conservation-journaux-sept-ans.010",
+        "aws.dea-c01.domain-2.partitions-horaires-manquantes-cout-croissant.009",
+        "aws.dea-c01.domain-3.echecs-nocturnes-decouverts-trop-tard.014",
+        "aws.dea-c01.domain-3.enregistrements-non-conformes-fournisseur-externe.015",
+        "aws.dea-c01.domain-3.retraitement-fichiers-deja-charges.013",
+        "aws.dea-c01.domain-3.tache-de-melange-unique-interminable.016",
+        "aws.dea-c01.domain-4.acces-refuse-lecture-inter-comptes.018",
+        "aws.dea-c01.domain-4.localisation-donnees-personnelles-lac.020",
+        "aws.dea-c01.domain-4.mot-de-passe-en-clair-dans-le-script.019",
+        "aws.dea-c01.domain-4.restriction-colonnes-sensibles-sans-duplication.017"
+      ]
+    },
+    {
+      "certification": "aws:dop-c02",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.dop-c02.domain-4.composite-alarm-noisy-microservice.001",
+        "aws.dop-c02.domain-4.xray-trace-map-latency-rca.002",
+        "aws.dop-c02.domain-5.eventbridge-ssm-automation-remediation.001",
+        "aws.dop-c02.domain-6.guardduty-securityhub-auto-remediation.003",
+        "aws.dop-c02.domain-6.kms-multiregion-vs-cloudhsm.004",
+        "aws.dop-c02.domain-6.scp-permission-boundary-least-privilege.001"
+      ]
+    },
+    {
+      "certification": "aws:dva-c02",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.dva-c02.domain-1.appels-perdus-lors-des-pics.001",
+        "aws.dva-c02.domain-1.couplage-synchrone-trois-consommateurs.002",
+        "aws.dva-c02.domain-1.evenements-perdus-apres-echec-asynchrone.003",
+        "aws.dva-c02.domain-1.latence-percentile-eleve-api-interne.004",
+        "aws.dva-c02.domain-1.lecture-immediate-apres-ecriture-incoherente.006",
+        "aws.dva-c02.domain-1.recherche-commandes-par-client-couteuse.005",
+        "aws.dva-c02.domain-2.authentification-utilisateurs-application-mobile.007",
+        "aws.dva-c02.domain-2.cle-partenaire-lisible-par-operateur.009",
+        "aws.dva-c02.domain-2.ecriture-inter-comptes-sans-cle-statique.008",
+        "aws.dva-c02.domain-2.identifiants-base-fixes-depuis-deploiement.010",
+        "aws.dva-c02.domain-2.journaux-contenant-donnees-clients.011",
+        "aws.dva-c02.domain-3.ajustement-seuils-sans-redeploiement.016",
+        "aws.dva-c02.domain-3.application-creee-a-la-main-a-reproduire.013",
+        "aws.dva-c02.domain-3.bibliotheque-commune-alourdit-huit-fonctions.012",
+        "aws.dva-c02.domain-3.exposition-progressive-nouvelle-version.014",
+        "aws.dva-c02.domain-3.regression-detectee-le-lendemain.015",
+        "aws.dva-c02.domain-4.lectures-repetitives-catalogue-produits.020",
+        "aws.dva-c02.domain-4.maillon-lent-parcours-distribue.017",
+        "aws.dva-c02.domain-4.publication-metriques-ralentit-invocations.019",
+        "aws.dva-c02.domain-4.recherche-erreurs-par-identifiant-correlation.018"
+      ]
+    },
+    {
+      "certification": "aws:mla-c01",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.mla-c01.domain-1.atterrissage-continu-evenements-navigation.002",
+        "aws.mla-c01.domain-1.colonnes-nulles-atteignent-entrainement.005",
+        "aws.mla-c01.domain-1.divergence-calculs-entrainement-inference.003",
+        "aws.mla-c01.domain-1.documentation-ecarts-population-scoring-credit.006",
+        "aws.mla-c01.domain-1.modalites-sans-ordre-codees-en-entiers.004",
+        "aws.mla-c01.domain-2.exactitude-trompeuse-detection-fraude.010",
+        "aws.mla-c01.domain-2.grille-manuelle-hyperparametres-hors-budget.008",
+        "aws.mla-c01.domain-2.perte-validation-remonte-apres-douzieme-epoque.009",
+        "aws.mla-c01.domain-2.tracabilite-versions-servies-en-production.011",
+        "aws.mla-c01.domain-2.transcription-et-analyse-appels-sans-corpus.007",
+        "aws.mla-c01.domain-3.bascule-progressive-nouvelle-version-modele.015",
+        "aws.mla-c01.domain-3.documents-volumineux-rafales-espacees.012",
+        "aws.mla-c01.domain-3.pic-de-midi-et-nuits-inactives.013",
+        "aws.mla-c01.domain-3.reentrainement-hebdomadaire-lot-annote.014",
+        "aws.mla-c01.domain-4.degradation-lente-apres-evolution-formulaire.016",
+        "aws.mla-c01.domain-4.role-execution-trop-permissif.019",
+        "aws.mla-c01.domain-4.suivi-des-couts-ml-dans-un-compte-unique.018",
+        "aws.mla-c01.domain-4.temps-de-reponse-au-dela-de-la-cible.017",
+        "aws.mla-c01.domain-4.traitement-donnees-sante-sans-internet.020"
+      ]
+    },
+    {
+      "certification": "aws:saa-c03",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.saa-c03.domain-1.garde-fous-imposes-aux-comptes-production.001",
+        "aws.saa-c03.domain-1.identifiants-base-en-clair-sur-instances.004",
+        "aws.saa-c03.domain-1.injection-extraction-et-attaque-volumetrique.005",
+        "aws.saa-c03.domain-1.isolation-niveaux-application-web.003",
+        "aws.saa-c03.domain-1.separation-roles-donnees-sante-archivees.006",
+        "aws.saa-c03.domain-2.pics-commerciaux-commandes-perdues.007",
+        "aws.saa-c03.domain-2.plan-reprise-seconde-region-cout-modere.010",
+        "aws.saa-c03.domain-2.saturation-connexions-base-montee-concurrence.011",
+        "aws.saa-c03.domain-2.service-mono-zone-objectifs-reprise.009",
+        "aws.saa-c03.domain-2.trois-traitements-independants-par-parution.008",
+        "aws.saa-c03.domain-3.arborescence-partagee-trois-zones.012",
+        "aws.saa-c03.domain-3.charge-dominee-par-lectures-repetees.014",
+        "aws.saa-c03.domain-3.latence-jeu-multiregion-bascule-lente.015",
+        "aws.saa-c03.domain-3.myriade-petits-fichiers-telemetrie.016",
+        "aws.saa-c03.domain-3.pagination-permanente-moteur-analyse.013",
+        "aws.saa-c03.domain-4.base-inactive-hors-pics-trimestriels.019",
+        "aws.saa-c03.domain-4.documents-profils-acces-evolutifs.017",
+        "aws.saa-c03.domain-4.frais-inter-zones-et-point-unique-defaillance.020",
+        "aws.saa-c03.domain-4.trois-profils-consommation-calcul.018"
+      ]
+    },
+    {
+      "certification": "aws:sap-c02",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.sap-c02.domain-1.cross-account-security-controls-identity-federation.002",
+        "aws.sap-c02.domain-2.loosely-coupled-order-processing-reliability.004",
+        "aws.sap-c02.domain-2.multiregion-business-continuity-aurora-global.002",
+        "aws.sap-c02.domain-3.least-privilege-audit-secrets-rotation-security-improvement.002",
+        "aws.sap-c02.domain-3.service-quota-throttling-queue-buffering-reliability.005",
+        "aws.sap-c02.domain-3.single-az-rds-single-point-of-failure-remediation.004",
+        "aws.sap-c02.domain-3.spot-savings-plans-batch-analytics-cost-optimization.006",
+        "aws.sap-c02.domain-4.decouple-monolith-serverless-modernization.004",
+        "aws.sap-c02.domain-4.petabyte-scale-data-transfer-terminal-migration.005",
+        "aws.sap-c02.domain-4.portfolio-7rs-tco-legacy-monolith-assessment.001"
+      ]
+    },
+    {
+      "certification": "aws:scs-c03",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.scs-c03.domain-1.cross-account-findings.001",
+        "aws.scs-c03.domain-1.dns-egress-detection.001",
+        "aws.scs-c03.domain-1.encrypted-log-group.001",
+        "aws.scs-c03.domain-1.org-trail-security-lake.001",
+        "aws.scs-c03.domain-2.compromised-instance-containment.001",
+        "aws.scs-c03.domain-2.detective-root-cause.001",
+        "aws.scs-c03.domain-2.forensic-readiness.001",
+        "aws.scs-c03.domain-2.role-session-revocation.001",
+        "aws.scs-c03.domain-3.edge-layered-defense.001",
+        "aws.scs-c03.domain-3.golden-ami-pipeline.001",
+        "aws.scs-c03.domain-3.private-admin-access.001",
+        "aws.scs-c03.domain-3.symmetric-inspection.001",
+        "aws.scs-c03.domain-4.identity-center-abac.001",
+        "aws.scs-c03.domain-4.organization-access-analyzer.001",
+        "aws.scs-c03.domain-4.permission-intersection.001",
+        "aws.scs-c03.domain-4.roles-anywhere.001",
+        "aws.scs-c03.domain-4.vendor-external-id.001",
+        "aws.scs-c03.domain-5.backup-vault-lock.001",
+        "aws.scs-c03.domain-5.multi-region-secret-rotation.001",
+        "aws.scs-c03.domain-5.s3-tls-enforcement.001",
+        "aws.scs-c03.domain-6.continuous-audit-evidence.001",
+        "aws.scs-c03.domain-6.delegated-security-admin.001",
+        "aws.scs-c03.domain-6.secure-stacksets.001"
+      ]
+    },
+    {
+      "certification": "aws:soa-c03",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "aws.soa-c03.domain-1.mesures-hote-indisponibles-flotte-linux.002",
+        "aws.soa-c03.domain-1.ralentissements-intermittents-base-relationnelle.005",
+        "aws.soa-c03.domain-1.reduction-bruit-alertes-nocturnes.001",
+        "aws.soa-c03.domain-1.relance-service-defaillant-tracable.003",
+        "aws.soa-c03.domain-1.saturation-debit-stockage-bloc.004",
+        "aws.soa-c03.domain-2.adaptation-capacite-trafic-imprevisible.006",
+        "aws.soa-c03.domain-2.centralisation-sauvegardes-multi-services.008",
+        "aws.soa-c03.domain-2.reprise-actif-passif-deux-regions.007",
+        "aws.soa-c03.domain-2.suppression-accidentelle-lignes-rpo-court.009",
+        "aws.soa-c03.domain-3.correctifs-flotte-multi-comptes-conformite.013",
+        "aws.soa-c03.domain-3.deploiement-bloque-apres-derive-manuelle.011",
+        "aws.soa-c03.domain-3.mise-a-disposition-mensuelle-modele-durci.012",
+        "aws.soa-c03.domain-3.socle-commun-quarante-comptes.010",
+        "aws.soa-c03.domain-4.acces-refuse-objets-chiffres.016",
+        "aws.soa-c03.domain-4.detection-ressources-exposees-et-non-chiffrees.015",
+        "aws.soa-c03.domain-4.identifiants-statiques-sur-instances.014",
+        "aws.soa-c03.domain-5.anciennes-versions-servies-apres-mise-en-production.020",
+        "aws.soa-c03.domain-5.cout-sortie-reseau-lectures-massives.018",
+        "aws.soa-c03.domain-5.reponse-https-bloquee-sous-reseau-prive.017"
+      ]
+    },
+    {
+      "certification": "gcp:associate-google-workspace-administrator",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "gcp.associate-google-workspace-administrator.section-1.domaine-filiale-ressources-salles.004",
+        "gcp.associate-google-workspace-administrator.section-1.groupes-boite-collaborative.003",
+        "gcp.associate-google-workspace-administrator.section-1.structure-unites-organisationnelles.002",
+        "gcp.associate-google-workspace-administrator.section-1.transfert-depart-utilisateur.001",
+        "gcp.associate-google-workspace-administrator.section-2.collaboration-externe-services.003",
+        "gcp.associate-google-workspace-administrator.section-2.disque-partage-quota-confiance.002",
+        "gcp.associate-google-workspace-administrator.section-2.transport-tls-partenaire.001",
+        "gcp.associate-google-workspace-administrator.section-3.dlp-donnees-sensibles.002",
+        "gcp.associate-google-workspace-administrator.section-3.vault-litige-depart.001",
+        "gcp.associate-google-workspace-administrator.section-4.acces-contextuel-session.001",
+        "gcp.associate-google-workspace-administrator.section-4.regle-activite-partage.003",
+        "gcp.associate-google-workspace-administrator.section-4.role-administrateur-delegue.002",
+        "gcp.associate-google-workspace-administrator.section-4.sso-application-tierce.004",
+        "gcp.associate-google-workspace-administrator.section-5.chrome-inscription-extensions.002",
+        "gcp.associate-google-workspace-administrator.section-6.diagnostic-livraison-gmail.002",
+        "gcp.associate-google-workspace-administrator.section-6.incident-services-workspace.001"
+      ]
+    },
+    {
+      "certification": "gcp:cloud-digital-leader",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "gcp.cloud-digital-leader.section-1.avantages-transformation-numerique.001",
+        "gcp.cloud-digital-leader.section-1.regions-zones-latence.004",
+        "gcp.cloud-digital-leader.section-2.classes-stockage-cloud-storage.007",
+        "gcp.cloud-digital-leader.section-3.ia-agentique-explicabilite.010",
+        "gcp.cloud-digital-leader.section-4.choix-plateforme-conteneurs.014",
+        "gcp.cloud-digital-leader.section-4.strategie-migration-cloud.013",
+        "gcp.cloud-digital-leader.section-6.capex-opex-hierarchie-ressources.021",
+        "gcp.cloud-digital-leader.section-6.observabilite-fiabilite-sre.022"
+      ]
+    },
+    {
+      "certification": "gcp:cloud-engineer",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "gcp.cloud-engineer.section-1.api-quotas-regions.002",
+        "gcp.cloud-engineer.section-1.hierarchie-politiques.001",
+        "gcp.cloud-engineer.section-1.inventaire-acces-externe.004",
+        "gcp.cloud-engineer.section-2.base-relationnelle.003",
+        "gcp.cloud-engineer.section-2.compute-cloud-run.001",
+        "gcp.cloud-engineer.section-2.equilibrage-global.005",
+        "gcp.cloud-engineer.section-2.pare-feu-connectivite.004",
+        "gcp.cloud-engineer.section-3.cloud-run-trafic.003",
+        "gcp.cloud-engineer.section-3.cycle-vie-sauvegarde.004",
+        "gcp.cloud-engineer.section-3.gke-pool-noeuds.002",
+        "gcp.cloud-engineer.section-3.snapshots-compute.001",
+        "gcp.cloud-engineer.section-3.sortie-cloud-nat.005",
+        "gcp.cloud-engineer.section-4.compte-service-vm.002",
+        "gcp.cloud-engineer.section-4.identite-gke.004",
+        "gcp.cloud-engineer.section-4.usurpation-temporaire.003"
+      ]
+    },
+    {
+      "certification": "gcp:data-practitioner",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "gcp.data-practitioner.section-1.chargement-bq-cli.006",
+        "gcp.data-practitioner.section-1.nettoyage-dataflow.002",
+        "gcp.data-practitioner.section-1.transfert-hors-ligne.003",
+        "gcp.data-practitioner.section-2.automl-evaluation.004",
+        "gcp.data-practitioner.section-2.modele-bqml.003",
+        "gcp.data-practitioner.section-2.notebook-bigquery.001",
+        "gcp.data-practitioner.section-3.surveillance-dataflow.001",
+        "gcp.data-practitioner.section-4.chiffrement-cmek.005",
+        "gcp.data-practitioner.section-4.cycle-vie-stockage.003",
+        "gcp.data-practitioner.section-4.ha-recuperation-cloudsql.004",
+        "gcp.data-practitioner.section-4.moindre-privilege-bigquery.001",
+        "gcp.data-practitioner.section-4.partage-analytics-hub.002"
+      ]
+    },
+    {
+      "certification": "gcp:generative-ai-leader",
+      "expiresOn": "2026-11-30",
+      "questionIds": [
+        "gcp.generative-ai-leader.section-1.choix-modele-fondation-imagen-veo.005",
+        "gcp.generative-ai-leader.section-1.couches-paysage-ia-generative.004",
+        "gcp.generative-ai-leader.section-1.gemini-gemma-cas-usage-entreprise.006",
+        "gcp.generative-ai-leader.section-2.ai-hypercomputer-controle-donnees-democratisation.008",
+        "gcp.generative-ai-leader.section-2.customer-engagement-suite-experience-client.011",
+        "gcp.generative-ai-leader.section-3.surveillance-continue-derive-modele.015",
+        "gcp.generative-ai-leader.section-4.ia-responsable-anonymisation-explicabilite.020"
+      ]
+    }
+  ]
+}
