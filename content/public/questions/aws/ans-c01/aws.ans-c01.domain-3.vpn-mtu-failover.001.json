@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Une application fonctionne sur Direct Connect avec des trames jumbo, mais lors du basculement vers Site-to-Site VPN, les petits paquets passent et les transferts volumineux se figent. Les messages ICMP nécessaires à Path MTU Discovery sont filtrés sur site. Quelle correction est la plus appropriée ?",
+  "prompt": "Après une bascule d'AWS Direct Connect vers un Site-to-Site VPN de secours, les sessions applicatives qui transfèrent de gros volumes se figent, alors que les requêtes courtes et le protocole ICMP passent sans difficulté. Le routage est correct et les deux tunnels sont établis. Quelle cause explique le mieux ce comportement ?",
   "choices": [
-    "Autoriser Path MTU Discovery et ajuster le MSS ou la MTU au chemin VPN pour tenir compte de l'overhead IPsec",
-    "Forcer une MTU de 9001 octets sur tous les tunnels VPN",
-    "Désactiver BGP sur Direct Connect uniquement",
-    "Augmenter le TTL DNS de l'application"
+    "La passerelle de transit limite le débit des flux longs et interrompt les transferts les plus volumineux",
+    "Le VPN ne prend pas en charge TCP au-delà d'une certaine taille de fenêtre",
+    "Les groupes de sécurité appliquent des règles distinctes selon le chemin emprunté",
+    "L'unité de transmission du tunnel vaut 1446 octets et les paquets non fragmentables sont rejetés"
   ]
 }

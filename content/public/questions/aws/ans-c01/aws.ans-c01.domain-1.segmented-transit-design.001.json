@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Une organisation possède 120 VPC dans plusieurs comptes et trois Régions. Elle veut une topologie hub-and-spoke, des segments prod et non-prod isolés, des services partagés et un routage inter-Région sans full mesh. Quel design choisir ?",
+  "prompt": "Une organisation exploite cent vingt VPC répartis sur plusieurs comptes et trois Régions. Elle veut une topologie en étoile, une isolation stricte entre le segment de production et le segment hors production, un accès commun à des services partagés, et une communication entre Régions qui n'impose pas un maillage complet. Quelle conception retenir ?",
   "choices": [
-    "Un Transit Gateway régional partagé via AWS RAM, des tables de routage distinctes par segment et des Transit Gateway peerings inter-Région contrôlés",
-    "Un VPC peering entre chaque paire de VPC",
-    "Une seule table de routage Transit Gateway qui propage tous les attachements",
-    "Une passerelle Internet commune pour le trafic privé inter-Région"
+    "Une passerelle de transit par compte, les passerelles étant reliées entre elles par des appairages directs",
+    "Une passerelle de transit par Région, tous les attachements étant associés à la table de routage par défaut",
+    "Une passerelle de transit par Région partagée par AWS RAM, avec des tables de routage distinctes par segment",
+    "Un VPC de transit à routeurs virtuels, chaque VPC applicatif y étant relié par un tunnel IPsec"
   ]
 }

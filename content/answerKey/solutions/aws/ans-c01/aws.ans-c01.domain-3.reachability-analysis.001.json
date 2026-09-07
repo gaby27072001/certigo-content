@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "VPC Reachability Analyzer entre l'interface source et l'interface de l'endpoint",
-  "rationale": "Reachability Analyzer modélise le chemin à partir de la configuration réseau et indique le composant bloquant sans injecter de trafic. Il est adapté aux routes, NACL, groupes de sécurité et interfaces. Les autres services ne réalisent pas d'analyse de chemin VPC."
+  "correct": "VPC Reachability Analyzer, qui analyse la configuration du chemin sans émettre de paquet",
+  "rationale": "Reachability Analyzer construit un modèle du chemin à partir de la configuration effective et désigne le composant bloquant, groupe de sécurité, liste de contrôle réseau, table de routage ou attachement, sans qu'aucun paquet soit émis et sans modifier l'environnement, ce qui correspond exactement aux deux contraintes. Les journaux de flux ne consignent que le trafic réellement observé : sans émission de test, il n'y a rien à filtrer, et un paquet arrêté par une table de routage peut ne produire aucun enregistrement. La duplication de trafic copie des paquets existants et suppose donc, elle aussi, un trafic à observer. Les métriques du Network Load Balancer décrivent l'état de ses cibles enregistrées et resteraient normales alors même que le client ne l'atteint jamais. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain3.html ; https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html"
 }

@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Tous les VPC applicatifs doivent sortir vers Internet par un VPC egress central où AWS Network Firewall inspecte les flux de manière stateful. Le trafic arrive par Transit Gateway et doit rester symétrique entre les AZ. Quel design est requis ?",
+  "prompt": "Tout le trafic sortant vers Internet de quarante VPC doit traverser un point d'inspection unique appliquant un filtrage par nom de domaine, et les journaux doivent conserver l'adresse source réelle de l'instance à l'origine du flux. Les VPC sont déjà rattachés à une passerelle de transit. Quelle conception répond à ces exigences ?",
   "choices": [
-    "Des endpoints Network Firewall par AZ, un routage zonal cohérent et le mode appliance sur l'attachement Transit Gateway d'inspection",
-    "Un endpoint Network Firewall unique dans une AZ avec routage asymétrique",
-    "Une propagation de route directe des VPC applicatifs vers une Internet Gateway locale",
-    "Un VPC peering transitif entre tous les VPC"
+    "Une passerelle NAT et une liste de contrôle réseau restrictive déployées dans chacun des quarante VPC",
+    "Un proxy sortant sur EC2 dans chaque VPC, les instances étant configurées pour l'utiliser",
+    "Un VPC d'inspection central hébergeant AWS Network Firewall, cible d'une route par défaut unique",
+    "Un Gateway Load Balancer déployé dans chaque VPC applicatif, précédant la passerelle NAT locale"
   ]
 }

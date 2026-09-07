@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Une banque exige une connectivité hybride tolérant la perte d'un équipement, d'une liaison et d'un site Direct Connect. Le trafic normal doit utiliser Direct Connect, avec un secours chiffré rapidement disponible. Quel design satisfait le mieux ces exigences ?",
+  "prompt": "Une banque exige une connectivité hybride qui survive à la panne d'un équipement, d'une liaison et d'un site de colocation complet. En fonctionnement normal le trafic doit emprunter AWS Direct Connect, et un chemin chiffré doit prendre le relais automatiquement. Quelle conception offre le niveau de résilience demandé ?",
   "choices": [
-    "Deux connexions Direct Connect sur des équipements et sites distincts vers un Direct Connect gateway et Transit Gateway, plus un Site-to-Site VPN de secours avec politiques BGP cohérentes",
-    "Une seule connexion Direct Connect avec deux private VIF sur le même routeur",
-    "Un seul Site-to-Site VPN sans tunnels redondants",
-    "Deux VPC peerings entre le datacenter et AWS"
+    "Deux interfaces virtuelles privées établies sur une même connexion Direct Connect, vers deux passerelles",
+    "Une connexion Direct Connect par site de colocation, les deux aboutissant au même routeur du client",
+    "Une connexion Direct Connect doublée d'un tunnel IPsec vers la même passerelle client unique",
+    "Deux connexions Direct Connect sur des équipements et des sites distincts, complétées par un VPN de secours"
   ]
 }

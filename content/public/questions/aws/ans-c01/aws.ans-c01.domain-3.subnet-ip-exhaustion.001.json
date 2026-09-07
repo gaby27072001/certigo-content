@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Un cluster EKS ne peut plus augmenter le nombre de pods parce que les sous-réseaux privés principaux manquent d'adresses, mais le VPC ne peut pas être recréé. Quelle évolution offre de la capacité avec le moins d'interruption ?",
+  "prompt": "Un groupe de mise à l'échelle automatique échoue à lancer de nouvelles instances dans un sous-réseau existant, faute d'adresses disponibles. Le VPC est déjà relié par une passerelle de transit et son bloc d'adresses ne peut pas être élargi. L'équipe veut ajouter de la capacité d'adressage sans recréer le VPC ni interrompre les instances en service. Quelle démarche suivre ?",
   "choices": [
-    "Associer un CIDR secondaire non chevauchant au VPC, créer de nouveaux sous-réseaux et configurer le CNI pour utiliser cette capacité selon le plan retenu",
-    "Modifier le CIDR principal du VPC en place",
-    "Attribuer une Elastic IP publique à chaque pod",
-    "Supprimer les routes locales de la table VPC"
+    "Ajouter un bloc d'adresses IPv4 secondaire au VPC et y créer des sous-réseaux",
+    "Modifier le masque du sous-réseau saturé pour élargir la plage d'adresses couverte",
+    "Créer un second VPC, l'appairer au premier puis y déplacer progressivement les instances",
+    "Attribuer des adresses IP secondaires aux interfaces réseau rattachées aux instances actives"
   ]
 }

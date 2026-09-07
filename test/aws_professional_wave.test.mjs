@@ -35,6 +35,12 @@ const expectedDomains = {
     "domain-5": 4,
     "domain-6": 3,
   },
+  "ans-c01": {
+    "domain-1": 7,
+    "domain-2": 6,
+    "domain-3": 5,
+    "domain-4": 6,
+  },
 };
 
 // Le total est derive de expectedDomains plutot qu'ecrit en dur : le perimetre

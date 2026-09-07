@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Les serveurs sur site doivent résoudre `corp.aws` hébergé dans une private hosted zone, et les instances VPC doivent résoudre `legacy.corp` servi par les DNS sur site. La solution doit être hautement disponible dans deux AZ. Quel design choisir ?",
+  "prompt": "Les serveurs d'un centre de données doivent résoudre les noms d'une zone hébergée privée Route 53 associée à un VPC, et les instances de ce VPC doivent résoudre un domaine interne servi par les serveurs DNS du centre de données. La résolution doit rester disponible en cas de perte d'une zone de disponibilité. Quelle conception répond à l'ensemble de ces besoins ?",
   "choices": [
-    "Des Route 53 Resolver inbound endpoints pour les requêtes vers AWS, des outbound endpoints avec règles de forwarding vers le DNS sur site, et des redirecteurs conditionnels des deux côtés",
-    "Associer une zone publique Route 53 à tous les noms internes",
-    "Configurer le serveur DNS fourni par DHCP comme cible directe depuis Internet",
-    "Créer uniquement un enregistrement `/etc/hosts` sur chaque instance"
+    "Un serveur DNS relais sur EC2 dans une seule zone de disponibilité, cible des deux sens de résolution",
+    "Des endpoints entrants et sortants Route 53 Resolver, avec une adresse dans deux zones distinctes",
+    "L'adresse du résolveur VPC déclarée comme redirecteur dans les serveurs DNS du centre de données",
+    "Une zone hébergée publique Route 53 portant les mêmes noms, interrogeable depuis les deux environnements"
   ]
 }

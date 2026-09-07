@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Créer un transit VIF vers un Direct Connect gateway associé au Transit Gateway, puis échanger les routes par BGP",
-  "rationale": "Le transit VIF relie Direct Connect à un Direct Connect gateway qui s'associe au Transit Gateway, donnant accès aux réseaux rattachés selon les routes autorisées. Un private VIF cible une virtual private gateway et ne fournit pas ce modèle de transit multi-VPC. Un public VIF ne doit pas annoncer les préfixes privés des VPC."
+  "correct": "Une interface virtuelle de transit vers une passerelle Direct Connect associée à la passerelle",
+  "rationale": "L'interface virtuelle de transit est le type prévu pour atteindre une passerelle de transit : elle se rattache à une passerelle Direct Connect, laquelle est associée à la passerelle de transit, et les préfixes sont échangés par BGP sur cette seule connexion, quel que soit le nombre de VPC ou de comptes. Une interface virtuelle publique donne accès aux plages publiques des services AWS ; annoncer des préfixes privés par ce chemin ne fournit pas d'accès aux VPC et exposerait un adressage interne. Une interface virtuelle privée par passerelle privée virtuelle est exactement le modèle que l'énoncé cherche à éviter, puisqu'il en faut une par VPC. PrivateLink publie des services applicatifs derrière des endpoints d'interface et ne constitue pas un mode de raccordement pour Direct Connect. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain2.html ; https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-gateways-intro.html"
 }

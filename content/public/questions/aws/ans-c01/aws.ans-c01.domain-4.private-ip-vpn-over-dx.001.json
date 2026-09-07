@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Une entreprise utilise Transit Gateway et Direct Connect pour ses réseaux privés. Une nouvelle exigence impose un chiffrement IPsec de bout en bout sur le chemin Direct Connect, sans passer par Internet et en conservant le routage privé. Quelle option est adaptée ?",
+  "prompt": "Une réglementation impose que tout le trafic hybride soit chiffré en transit, y compris sur AWS Direct Connect, et que le tunnel n'emprunte à aucun moment l'Internet public. Les extrémités du tunnel doivent porter des adresses privées, et la solution doit desservir des VPC rattachés à une passerelle de transit. Quelle mise en œuvre satisfait ces exigences ?",
   "choices": [
-    "Configurer une AWS Site-to-Site VPN à adresses IP privées au-dessus du transit VIF Direct Connect et du Transit Gateway",
-    "Supposer que Direct Connect chiffre toujours les trames par défaut",
-    "Créer un public VIF et publier les préfixes privés sur Internet",
-    "Activer HTTPS uniquement sur la console AWS"
+    "Un Site-to-Site VPN classique établi par-dessus une interface virtuelle publique Direct Connect",
+    "Le chiffrement MACsec activé sur le port physique, complété par un appairage entre les VPC",
+    "Un Site-to-Site VPN à adresses IP privées, établi sur une interface virtuelle de transit adossée",
+    "Un tunnel IPsec monté entre des appliances EC2 déployées de part et d'autre du lien"
   ]
 }
