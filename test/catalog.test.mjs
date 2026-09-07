@@ -495,6 +495,13 @@ test("declare la transition de cycle de vie ou une exemption datee", () => {
 });
 
 test("distingue peremption des sources et silence de cycle de vie", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const expiredExemptions = new Set(
+    readJson(resolve(repoRoot, "config", "catalog-transition-exemptions.json"))
+      .exemptions.filter((entry) => entry.expiresOn <= "2026-09-17")
+      .map((entry) => entry.id)
+  );
+
   // Avant toute expiration : gate verte.
   const today = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-05" });
   assert.deepEqual(today.errors, []);
@@ -506,10 +513,40 @@ test("distingue peremption des sources et silence de cycle de vie", () => {
   assert.ok(silence.length > 0, "silence de cycle de vie absent");
   assert.ok(staleness.length > 0, "peremption des sources absente");
 
-  // Un motif ne doit pas masquer l'autre sur une meme entree.
-  const both0817 = "gcp:cloud-architect";
-  assert.ok(silence.some((error) => error.includes(both0817)));
-  assert.ok(staleness.some((error) => error.includes(both0817)));
+  // Un motif ne doit pas masquer l'autre sur une meme entree. L'entree est
+  // derivee du catalogue, non codee en dur : la campagne de fraicheur retire
+  // une a une les entrees muettes, donc un identifiant fige transforme un
+  // succes de campagne en echec de test - c'est ce qui est arrive a
+  // gcp:cloud-architect. La derivation garde la force de l'assertion, parce
+  // qu'elle exige d'abord qu'une telle entree existe : sans ce garde-fou, une
+  // liste vide ferait passer le test sans rien mesurer.
+  const silentAndStale = catalog.certifications.filter((certification) => {
+    if (!["active", "active-retiring"].includes(certification.status)) return false;
+    if (certification.lifecycle?.transition) return false;
+    if (!expiredExemptions.has(certification.id)) return false;
+    const staleOn = new Date(
+      Date.parse(certification.provenance.checkedOn) +
+        (catalog.freshness.maxAgeDays + 1) * 86_400_000
+    )
+      .toISOString()
+      .slice(0, 10);
+    return staleOn <= "2026-09-17";
+  });
+  assert.ok(
+    silentAndStale.length > 0,
+    "aucune entree a la fois muette et perimee au 2026-09-17 : " +
+      "le test ne mesure plus rien et doit basculer sur un catalogue synthetique"
+  );
+  for (const certification of silentAndStale) {
+    assert.ok(
+      silence.some((error) => error.includes(certification.id)),
+      `${certification.id} : silence de cycle de vie absent`
+    );
+    assert.ok(
+      staleness.some((error) => error.includes(certification.id)),
+      `${certification.id} : peremption des sources absente`
+    );
+  }
 
   // Le message d'exemption expiree oriente vers la source officielle,
   // pas vers une donnee malformee.
