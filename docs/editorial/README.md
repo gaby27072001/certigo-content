@@ -293,6 +293,64 @@ avec la faussete parce que le concept correle avec la faussete. La gater
 punirait une question neuve et correcte. **Toute fuite lexicale statistiquement
 reelle n'est pas a corriger.**
 
+#### La periodicite : une seconde fuite inherente, a NE PAS reparer
+
+Le motif `tout-le-reste` apparie deux tournures que le francais confond et que
+le domaine separe : `tous les utilisateurs` (quantificateur) et
+`toutes les 5 minutes` (periodicite). Un appariement sur cinq etait temporel, ce
+qui a d'abord ete pris pour une contamination du motif. **Mesure par rebattage
+d'etiquettes, 3000 tirages, graine fixe, controle d'identite verifie :**
+
+| sens du motif | observe | attendu sous rebattage | p |
+|---|---|---|---|
+| `tout-le-reste` entier | 21 | 7.1 `[p95=10]` | 0.000 |
+| quantificateur seul | 21 | 7.5 `[p95=11]` | 0.000 |
+| periodicite seule | 10 | 6.2 `[p95=8]` | 0.005 |
+
+**Les deux sens portent.** Le chiffre de 21 corpus tient au seul sens
+quantificateur : la periodicite ne l'a pas gonfle. Et les ensembles de corpus
+concernes sont **disjoints** — ce sont deux phenomenes, pas un motif large.
+
+**Le mecanisme, lu dans les phrases appariees et non postule.** L'hypothese de
+depart — « le sondage periodique contre l'evenementiel » — s'est revelee trop
+etroite : c'est le cas majoritaire pris pour le tout. Ce que les distracteurs
+font reellement, c'est **substituer une cadence fixe a un mecanisme reactif ou
+gere** :
+
+- interroger une table, une API ou un prefixe `toutes les minutes` au lieu de
+  reagir a un evenement — le cas le plus frequent ;
+- relancer un appel `toutes les 50 millisecondes`, sans plafond ni gigue ;
+- redeployer un service `toutes les heures` sans validation fonctionnelle ;
+- prendre des instantanes `toutes les 12 heures` comme **seul** mecanisme de
+  durabilite ;
+- faire tourner un secret `tous les 90 jours` **par un ingenieur**.
+
+Le vocabulaire temporel suit donc l'erreur qu'il decrit. **C'est une propriete
+du domaine, pas du motif** : en cloud, une boucle d'interrogation est presque
+toujours la mauvaise architecture.
+
+> **Avertissement a qui lira « fuite temporelle, p=0.005 » et voudra la
+> corriger : reformuler les periodicites abimerait le corpus.** Ces cadences
+> sont l'erreur que la question enseigne a reconnaitre, au meme titre que
+> « accorder l'acces a tous les utilisateurs ». La famille est en regime
+> `INHERENT` : **mesuree et rapportee, jamais bloquante.**
+
+#### Exclusivite mesuree et seuil de la garde ne sont pas le meme comptage
+
+Les effectifs ci-dessus, comme les 17 corpus du niveau absolu, comptent
+l'**exclusivite** — le mot absent des bonnes reponses et present dans au moins
+**un** distracteur. La garde livree exige en plus `SEUIL_QUESTIONS = 3`
+questions. L'ecart n'est pas marginal :
+
+| famille | exclusivite (`D >= 1`) | seuil de garde (`D >= 3`) |
+|---|---|---|
+| quantificateur | 21 corpus | 14 corpus |
+| periodicite | 10 corpus | 1 corpus |
+
+**Une famille peut donc etre significative et n'atteindre presque jamais le
+seuil.** Ne pas lire un effectif d'exclusivite comme un nombre d'echecs CI
+attendus.
+
 Et la regle de classement `manuel => corriger / cron => consigner` est une
 heuristique de lecture, pas un critere : **`script` la casse.** Classe comme une
 technologie, il sort a p=0.002, parce qu'il s'ecrit ici « un script maison »,
@@ -336,6 +394,29 @@ une dette consignee, non traitee.
 ne sait lire que la disposition imbriquee, et son temoin de bruit tire sans
 graine — il n'est donc pas reproductible d'une execution a l'autre. La garde de
 CI n'utilise ni l'un ni l'autre.
+
+### Un instrument doit prouver qu'il peut varier
+
+Trois releves de ce programme ont rendu un vert qui ne mesurait rien, et aucun
+n'a ete arrete par la relecture :
+
+- `releverRacine` retourne une **enveloppe** `{corpus, nbCorpus, nbQuestions}`.
+  Une sonde qui la passe telle quelle au comparateur mesure trois cles au lieu
+  de trente-trois corpus, et annonce zero regression.
+- un motif derive a la main s'est retrouve **sur-echappe** (`\\d` pour `\d`) :
+  il n'appariait rien et aurait rendu « aucune occurrence temporelle ».
+- un filtre par type de fichier a masque 146 questions **sans le signaler**.
+
+D'ou les trois exigences appliquees ici, toutes trois presentes dans
+`tools/lex_baseline.mjs` et `test/lexical_leak.test.mjs` :
+
+    plancher de lecture   refuser de conclure si le corpus lu est trop petit
+    controle d identite   la reference comparee a son propre contenu rend 0/0/0
+                          ET zero corpus inconnu
+    autotest de motif     quelques chaines connues, avant la premiere execution
+
+Le troisieme est le moins cher : les deux premiers rattrapent un resultat faux
+**apres** l'avoir produit, l'autotest empeche qu'il existe.
 
 ## Pourquoi le processus ne converge pas de lui-meme
 
