@@ -10,9 +10,9 @@
   },
   "prompt": "Un bucket Cloud Storage reçoit des exports quotidiens. Pour réduire les coûts, les objets doivent passer automatiquement en classe Archive après 90 jours puis être supprimés après 7 ans. Quelle configuration faut-il appliquer ?",
   "choices": [
-    "Une alerte Cloud Monitoring sur le nombre d'objets",
-    "Une règle de conservation verrouillée de 90 jours suivie d'une suppression manuelle",
-    "Une tâche cron sur une VM qui télécharge et recharge chaque objet",
+    "Une alerte Cloud Monitoring sur le nombre d'objets du bucket et sur leur âge moyen constaté",
+    "Une règle de conservation verrouillée de 90 jours, suivie d'une suppression tardive",
+    "Une tâche cron planifiée sur une VM qui télécharge puis recharge chaque objet en classe Archive",
     "Configurer le cycle de vie du bucket pour archiver après 90 jours et supprimer après 7 ans"
   ]
 }

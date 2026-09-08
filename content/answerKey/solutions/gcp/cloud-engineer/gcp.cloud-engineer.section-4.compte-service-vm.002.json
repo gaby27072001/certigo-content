@@ -9,5 +9,9 @@
     "objective": "section-4"
   },
   "correct": "Associer un compte de service dédié à la VM et lui accorder Storage Object Viewer sur le bucket",
-  "rationale": "Une VM obtient automatiquement des jetons pour son compte de service attaché ; un rôle de lecture accordé au seul bucket respecte le moindre privilège sans clé dans le code. Une clé Owner est dangereuse, Editor sur le compte par défaut est trop large et l'accès public supprime le contrôle d'identité."
+  "rationale": "Une VM obtient automatiquement des jetons pour son compte de service attaché ; un rôle de lecture accordé au seul bucket respecte le moindre privilège sans clé dans le code. Une clé Owner est dangereuse, Editor sur le compte par défaut est trop large et l'accès public supprime le contrôle d'identité.",
+  "provenance": [
+    "https://cloud.google.com/compute/docs/access/service-accounts",
+    "https://cloud.google.com/storage/docs/access-control/iam-roles"
+  ]
 }

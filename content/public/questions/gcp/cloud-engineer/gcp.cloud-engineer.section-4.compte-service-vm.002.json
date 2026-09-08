@@ -10,9 +10,9 @@
   },
   "prompt": "Une application exécutée sur une VM doit lire des objets dans un bucket Cloud Storage précis. L'équipe veut éviter les identifiants intégrés au code et appliquer le moindre privilège. Quelle configuration faut-il utiliser ?",
   "choices": [
-    "Placer une clé JSON d'un propriétaire de projet dans les métadonnées de démarrage",
+    "Placer une clé JSON d'un propriétaire du projet dans les métadonnées de démarrage de la VM cible",
     "Associer un compte de service dédié à la VM et lui accorder Storage Object Viewer sur le bucket",
-    "Utiliser le compte de service Compute Engine par défaut avec le rôle Editor",
-    "Rendre les objets du bucket accessibles publiquement"
+    "Conserver le compte de service Compute Engine par défaut de la VM avec le rôle Editor sur le projet",
+    "Rendre les objets du bucket accessibles publiquement en lecture pour tous les utilisateurs d'Internet"
   ]
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Une nouvelle révision Cloud Run doit être testée en production sur 10 % des requêtes, tandis que l'ancienne révision continue de traiter les 90 % restants. L'URL publique ne doit pas changer. Que faut-il faire ?",
   "choices": [
-    "Déployer la nouvelle révision dans un autre projet avec une nouvelle URL",
+    "Déployer la nouvelle révision dans un autre projet avec une nouvelle URL publique",
     "Répartir le trafic Cloud Run à 10 % vers la nouvelle révision et 90 % vers l'ancienne",
-    "Modifier Cloud DNS pour alterner entre deux adresses IP",
-    "Fixer le nombre maximal d'instances de la nouvelle révision à 10"
+    "Modifier les enregistrements Cloud DNS pour alterner entre les adresses IP des deux révisions",
+    "Fixer le nombre maximal d'instances de la nouvelle révision à 10 afin de limiter sa part de trafic"
   ]
 }

@@ -11,8 +11,8 @@
   "prompt": "Un Pod GKE doit publier des messages dans un topic Pub/Sub. Les autres Pods du cluster ne doivent pas obtenir cette autorisation et aucune clé de compte de service ne doit être montée dans le conteneur. Quelle solution faut-il mettre en œuvre ?",
   "choices": [
     "Utiliser Workload Identity Federation for GKE avec un ServiceAccount Kubernetes dédié autorisé sur le topic",
-    "Accorder Pub/Sub Admin au compte de service des nœuds GKE utilisé par le pool concerné",
-    "Stocker une clé JSON dans un Secret Kubernetes monté par les Pods du namespace",
-    "Configurer le topic Pub/Sub pour accepter les publications des identités du cluster"
+    "Accorder le rôle Pub/Sub Admin au compte de service des nœuds GKE utilisé par le pool concerné",
+    "Stocker une clé JSON de compte de service dans un Secret Kubernetes monté par les Pods du namespace",
+    "Configurer le topic Pub/Sub afin qu'il accepte les publications de toutes les identités du cluster GKE concerné"
   ]
 }

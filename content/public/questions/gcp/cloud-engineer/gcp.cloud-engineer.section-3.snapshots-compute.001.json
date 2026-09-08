@@ -10,9 +10,9 @@
   },
   "prompt": "Une VM Compute Engine héberge un service avec des données sur un disque persistant. L'équipe veut créer automatiquement une sauvegarde incrémentale quotidienne du disque et conserver les sauvegardes pendant 14 jours. Quelle action opérationnelle faut-il effectuer ?",
   "choices": [
-    "Créer chaque jour une image de conteneur dans Artifact Registry",
-    "Copier le disque vers un disque local SSD et redémarrer la VM",
+    "Créer chaque jour une image de conteneur du service dans Artifact Registry",
+    "Copier chaque jour le disque persistant vers un disque local SSD puis redémarrer la VM",
     "Associer au disque une planification quotidienne de snapshots conservés 14 jours",
-    "Planifier la suppression de la VM au bout de 14 jours sans créer de snapshots"
+    "Planifier la suppression automatique de la VM au bout de 14 jours sans créer aucun snapshot"
   ]
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Des administrateurs doivent ouvrir des sessions SSH sur des VM sans adresse IP externe. L'accès doit passer par Identity-Aware Proxy et ne viser que les VM portant le tag réseau « admin-ssh ». Quelle configuration faut-il créer ?",
   "choices": [
-    "Une règle d'entrée TCP 22 depuis 0.0.0.0/0 vers les VM portant le tag admin-ssh",
+    "Une règle d'entrée TCP 22 depuis 0.0.0.0/0 vers toutes les VM portant le tag admin-ssh",
     "Une règle d'entrée TCP 22 depuis la plage IAP TCP forwarding, ciblant le tag « admin-ssh »",
-    "Une règle de sortie TCP 22 vers la plage IAP, ciblant le tag admin-ssh",
-    "Une adresse IP externe statique et une règle d'entrée pour chaque VM"
+    "Une règle de sortie TCP 22 vers la plage IAP TCP forwarding, ciblant les VM taguées admin-ssh",
+    "Une adresse IP externe statique par VM et une règle d'entrée TCP 22 dédiée pour chacune d'elles"
   ]
 }

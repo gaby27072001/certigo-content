@@ -11,8 +11,8 @@
   "prompt": "Des VM privées d'un sous-réseau doivent télécharger des mises à jour depuis Internet sans recevoir d'adresse IP externe et sans accepter de connexions entrantes depuis Internet. Quelle ressource faut-il configurer ?",
   "choices": [
     "Cloud NAT sur un Cloud Router pour la région et le sous-réseau concernés",
-    "Une adresse IP externe éphémère sur chaque VM",
-    "Un Application Load Balancer externe devant les VM",
-    "Une zone publique Cloud DNS associée au sous-réseau"
+    "Une adresse IP externe éphémère attribuée à chacune des VM du sous-réseau",
+    "Un Application Load Balancer externe placé devant les VM privées du sous-réseau",
+    "Une zone publique Cloud DNS associée au sous-réseau hébergeant les VM privées concernées"
   ]
 }
