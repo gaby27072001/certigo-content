@@ -10,9 +10,9 @@
   },
   "prompt": "Des fichiers d'audit dans Cloud Storage sont consultés fréquemment pendant 30 jours, rarement après 90 jours et doivent être supprimés après 365 jours conformément à la politique interne. L'équipe veut automatiser ce comportement. Que doit-elle configurer ?",
   "choices": [
-    "Une requête BigQuery planifiée qui supprime les lignes correspondant aux noms de fichiers",
-    "Un transfert Storage Transfer Service quotidien vers un nouveau bucket Standard",
+    "Une requête BigQuery planifiée qui supprime les lignes correspondant aux noms de fichiers d'audit concernés",
+    "Un transfert Storage Transfer Service quotidien vers un nouveau bucket de classe Standard dédié",
     "Des règles de cycle de vie qui changent la classe de stockage après 90 jours et suppriment les objets après 365 jours",
-    "Une règle de conservation de 365 jours comme unique mécanisme de changement de classe et de suppression"
+    "Une règle de conservation de 365 jours comme unique mécanisme de changement de classe et de suppression des objets"
   ]
 }

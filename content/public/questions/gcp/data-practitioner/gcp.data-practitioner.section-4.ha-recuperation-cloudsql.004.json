@@ -10,9 +10,9 @@
   },
   "prompt": "Une base Cloud SQL de production doit continuer à servir l'application après la défaillance d'une zone. L'équipe doit aussi pouvoir restaurer la base à un instant précis après une suppression accidentelle de lignes. Quelle configuration répond aux deux exigences ?",
   "choices": [
-    "Une instance à zone unique avec une exportation CSV mensuelle vers Cloud Storage",
+    "Une instance à zone unique avec une exportation CSV mensuelle vers un bucket Cloud Storage",
     "Cloud SQL en haute disponibilité régionale avec sauvegardes et récupération à un instant précis",
-    "Un réplica en lecture dans la même zone sans sauvegardes ni journaux de transactions",
-    "Un bucket Cloud Storage birégional utilisé à la place de la base relationnelle"
+    "Un réplica en lecture dans la même zone, sans sauvegardes ni journaux de transactions",
+    "Un bucket Cloud Storage birégional utilisé à la place de la base relationnelle de production actuelle"
   ]
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Une entreprise veut publier un dataset BigQuery de référence auprès de plusieurs projets partenaires. Les abonnés doivent découvrir les données et les interroger sans recevoir de copie exportée, tandis que le producteur conserve la maîtrise du partage. Quelle solution utiliser ?",
   "choices": [
-    "Exporter chaque nuit les tables au format CSV dans un bucket public",
+    "Exporter chaque nuit les tables au format CSV dans un bucket Cloud Storage ouvert à tous",
     "Créer une annonce Analytics Hub dans un échange et autoriser les projets partenaires à s'y abonner",
-    "Activer l'accès uniforme au niveau du bucket sur un bucket vide",
-    "Accorder le rôle Owner du projet producteur à chaque partenaire"
+    "Activer l'accès uniforme au niveau du bucket sur un bucket Cloud Storage vide et dédié",
+    "Accorder le rôle Owner du projet producteur à chaque partenaire abonné au dataset de référence publié"
   ]
 }
