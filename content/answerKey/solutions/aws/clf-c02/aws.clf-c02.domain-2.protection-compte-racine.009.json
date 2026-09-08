@@ -9,5 +9,5 @@
     "objective": "domain-2"
   },
   "correct": "Activer MFA sur le root user et utiliser des identités IAM pour les tâches courantes",
-  "rationale": "AWS recommande de protéger le root user avec MFA et de ne pas l’employer pour le travail quotidien. Une clé root permanente et un mot de passe partagé augmentent l’exposition de privilèges, tandis que désactiver les politiques IAM empêche une délégation contrôlée."
+  "rationale": "AWS recommande de protéger le root user avec MFA et de ne pas l’employer pour le travail quotidien. Une clé d’accès permanente placée dans des scripts expose des privilèges très étendus, confier la gestion des autorisations au root user prive l’équipe de la délégation contrôlée qu’offrent les politiques IAM, et réserver le root user aux opérations courantes va à l’encontre de la pratique recommandée."
 }

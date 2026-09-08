@@ -9,5 +9,5 @@
     "objective": "domain-2"
   },
   "correct": "Une politique IAM autorisant seulement les actions de lecture nécessaires sur ce compartiment",
-  "rationale": "Le moindre privilège limite les actions et ressources à ce qui est nécessaire. AdministratorAccess et l’accès complet au stockage accordent des droits excessifs, et le root user contourne les bonnes pratiques de délégation et de restriction."
+  "rationale": "Le moindre privilège limite les actions et les ressources à ce qui est nécessaire. Une politique gérée AdministratorAccess attachée à l’identité IAM de l’analyste accorde des droits sans rapport avec la tâche, un accès en lecture et en écriture sur les services de stockage du compte de production dépasse largement la consultation demandée, et les identifiants du root user ne doivent pas servir à un accès quotidien."
 }

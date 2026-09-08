@@ -9,5 +9,5 @@
     "objective": "domain-3"
   },
   "correct": "Amazon Simple Notification Service (Amazon SNS)",
-  "rationale": "Amazon SNS distribue les messages publiés vers plusieurs abonnés ou endpoints. Amazon EFS est un système de fichiers, AWS CodeBuild compile du code, et Amazon EC2 fournit du calcul. Une file SQS reçoit des messages, mais SNS assure la diffusion fan-out."
+  "rationale": "Amazon SNS distribue les messages publiés vers plusieurs abonnés ou endpoints, ce qui correspond au modèle de publication-abonnement. Une file Amazon Simple Queue Service (Amazon SQS) standard sert à découpler un producteur d’un consommateur, Amazon Elastic File System (Amazon EFS) One Zone est un système de fichiers, et Amazon Simple Storage Service (Amazon S3) Standard est une classe de stockage d’objets."
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Un analyste doit uniquement lire les objets d’un seul compartiment S3 précis. Quelle politique respecte le mieux le principe du moindre privilège ?",
   "choices": [
-    "AdministratorAccess sur toutes les ressources du compte",
-    "Accès complet à tous les services de stockage AWS",
+    "Une politique gérée AdministratorAccess attachée à l’identité IAM utilisée par l’analyste",
+    "Un accès en lecture et en écriture sur les services de stockage AWS du compte de production",
     "Une politique IAM autorisant seulement les actions de lecture nécessaires sur ce compartiment",
-    "Utiliser systématiquement le root user"
+    "L’utilisation des identifiants du root user pour consulter les objets de ce compartiment"
   ]
 }
