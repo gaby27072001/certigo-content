@@ -138,6 +138,112 @@ le cas aujourd'hui.
 Corriger un trait sur un seuil brut reviendrait a editer le contenu jusqu'a ce
 que le detecteur se taise. C'est optimiser l'instrument, pas le corpus.
 
+## Troisieme axe : l'exclusivite lexicale
+
+Une famille de mots presente **uniquement dans les distracteurs** est un indice
+utilisable sans connaitre la matiere : on elimine ce qui parle de travail
+manuel. C'est un axe distinct de la position et de la longueur, et il se mesure
+separement.
+
+    node tools/lex_leak.mjs <editeur> <certification>     # etat sur disque
+    node tools/lex_diff.mjs <editeur> <certification> <ref>  # disque vs un ref git
+
+`lex_diff` distingue `INTRODUITE PAR MOI` d'une dette heritee et ne sort en
+erreur que dans le premier cas : une dette preexistante n'est pas une
+regression, et confondre les deux rend l'outil inutilisable comme garde.
+
+Les deux outils sortent en erreur sur la **famille**, jamais sur un token isole,
+et `lex_leak --selftest` refuse de servir tant qu'il n'a pas separe deux cas
+connus (marqueur exclusif -> vu ; marqueur non exclusif -> ignore).
+
+### Le mecanisme suppose, et la prediction qui n'a pas ete confirmee
+
+**Observation** : a la mesure du 2026-09-08, les corpus qui fuient sur cet axe
+sont largement ceux qui ont deja ete remedies en longueur. La dette de longueur
+et la dette lexicale apparaissent **anti-correlees**.
+
+**Explication supposee** : corriger la longueur consiste a rallonger les
+distracteurs, et ce qui rallonge naturellement une mauvaise reponse
+d'architecture cloud, c'est la description d'un procede manuel.
+
+Cette explication est une hypothese, pas un resultat, et elle a ete **testee** :
+
+    dfbe433 rallonge les distracteurs de aws:aif-c01
+    longueur moyenne des distracteurs  34.2 -> 50.2  (20 questions)
+    prediction : la fuite lexicale doit augmenter
+    mesure     : 0 famille avant, 0 famille apres  -> NON CONFIRMEE
+
+Le test est **confondu** : l'auteur de ce commit suivait les memes conventions
+et a pu eviter deliberement ce vocabulaire. Il ne refute donc pas proprement
+l'explication — mais il ne la soutient pas non plus, et c'etait le seul test
+naturel disponible.
+
+**A retenir : la correlation est mesuree, le mecanisme ne l'est pas.** Ne pas
+citer ce mecanisme comme un acquis, et ne pas construire de garde dessus.
+
+### Ce qui ne depend pas du mecanisme
+
+La consequence pratique tient meme si l'explication est fausse, parce qu'elle ne
+depend que de la correlation observee : conditionner une garde lexicale a
+`exemptCount === 0`, comme le sont les gardes de rang et de position,
+**inverse** ici. Les corpus sans dispense sont precisement ceux qui fuient. La
+garde protectrice serait le declencheur.
+
+### L'experience naturelle : la propreté vient du test, pas du merite
+
+`test/aws_professional_wave.test.mjs` porte deja une garde lexicale, de motif
+`/\bmanuel(?:le)?(?:ment)?\b/i`, mais **codee en dur sur cinq certifications**
+(`expectedDomains`). A la mesure du 2026-09-08 : les cinq gardees etaient a
+zero, et treize des vingt et une non gardees fuyaient. Le compte n'est pas fige
+ici — la commande l'est.
+
+**Les corpus propres le sont parce qu'un test a refuse de passer.** Ce n'est pas
+un constat de qualite editoriale.
+
+Et le resultat qui condamne l'approche par liste de motifs : **deux des cinq
+certifications gardees fuient une famille differente** — `tableur` et `ticket`
+sur l'une, `un a un` sur l'autre. Fermer `manuel` n'a pas supprime l'indice, il
+l'a **deplace vers le mot suivant**. C'est le mecanisme central de ce programme,
+observe ici a l'interieur d'un seul axe, et il precede tout travail de cette
+session.
+
+Etendre la garde a `tableur` deplacerait donc la fuite une fois de plus. La
+seule sortie est d'investir dans les distracteurs jusqu'a ce qu'aucun
+vocabulaire ne leur soit exclusif — **chantier consigne, non commence**.
+
+### Comment on corrige, quand on corrige
+
+La semantique de la garde est la **non-exclusivite**, pas le bannissement :
+elle echoue sur `keyedCount === 0 && distractorCount > 0`. On fait donc
+apparaitre la famille dans **au moins une bonne reponse**, naturellement, a
+`String.length` **strictement identique** — sinon le rang et le ratio bougent et
+on rouvre l'axe qu'on venait de fermer. La modification porte en meme temps sur
+le `choices` public et le `correct` prive.
+
+Ne pas deviner la chaine : calculer la longueur de queue requise depuis la tete,
+puis construire pour tenir.
+
+### Residu mesure sur cet axe, non corrige
+
+En architecture cloud, le travail manuel **est** l'anti-modele. Toute mention
+naturelle de `manuel` dans une bonne reponse est donc une negation, et un
+candidat pourrait en principe apprendre « l'option qui rejette le travail manuel
+gagne ».
+
+Ce residu n'est pas corrige, et la raison tient a la regle d'arret : executer
+cette heuristique suppose de **savoir deja** que le procede manuel est
+l'anti-modele. C'est de la connaissance du sujet, pas un indice sans contenu.
+Le corriger reviendrait a retirer la matiere de la question.
+
+### Condition d'extension de la garde
+
+La garde n'est pas etendue tant que la mesure n'est pas a zero partout : une
+garde qui echoue des sa mise en service sur onze corpus tenus par trois sessions
+paralleles ne protege rien, elle bloque. **Elle s'etend dans la PR meme qui
+amene la mesure a zero sur les vingt-six cohortes**, et pas avant.
+
+Jusque-la les deux outils sont livres **en mesure seule, sans garde**.
+
 ## Pourquoi le processus ne converge pas de lui-meme
 
 Une bonne reponse bien specifiee enumere des etapes, et les etapes se joignent
