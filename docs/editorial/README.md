@@ -466,6 +466,49 @@ contre *je n'ai pas lu la source*.
 Un rendu markdown d'une page editeur peut supprimer silencieusement une
 banniere ; lire le HTML brut.
 
+### Le HTML brut ne suffit pas non plus : le rendu plausible et incomplet
+
+Mesure du 2026-09-08 sur les quatre pages de certification Microsoft du
+catalogue (`azure-fundamentals`, `azure-administrator`, `azure-data-fundamentals`,
+`security-compliance-and-identity-fundamentals`) : un `fetch` HTTP rend
+42 800 a 44 400 octets, soit **4 564 a 5 049 caracteres de texte** parsemes de
+marqueurs `Loading...`. Un rendu navigateur des **memes** URL rend
+**7 186 a 8 114 caracteres**. Le champ `Retirement date` n'apparait que dans le
+second.
+
+> Le talon HTTP 200 se trahit par sa taille. Celui-ci non : il rend un texte
+> **credible et incomplet**. Ni vide, ni en erreur — simplement amoindri.
+> C'est le plus difficile a detecter, parce qu'il ressemble a une lecture.
+
+Consequence pratique : sur `learn.microsoft.com`, **ne jamais conclure a
+l'absence d'un champ depuis un fetch brut**. Comparer le volume de texte aux
+deux bandes ci-dessus ; si la lecture tombe dans la bande basse, elle n'a pas
+eu lieu. Meme famille de page, meme cause : `learn.microsoft.com/credentials/browse/`
+rend 18 928 octets pour **603 caracteres** de texte.
+
+Corollaire general : un plancher de taille en **octets** ne protege pas d'un
+sous-rendu, parce que le HTML d'accompagnement pese seul le plancher. Le
+discriminant utile est le volume de **texte extrait**, compare a une lecture
+connue de la meme famille de page.
+
+### Le motif trouve la phrase, la lecture trouve son sujet
+
+Mesure du 2026-09-08 sur les huit certifications AWS du catalogue : six pages
+portent la phrase `will be retired`, et **aucune des six ne retire son examen**.
+Chacune retire des **langues de passage** — italien et allemand pour `aif-c01`
+et `clf-c02`, italien pour `saa-c03`, coreen pour `dop-c02`, chinois simplifie,
+espagnol (Amerique latine) et portugais (Bresil) pour `scs-c03`, chinois
+simplifie et coreen pour `soa-c03`.
+
+Un motif applique seul aurait bascule **six entrees** en `active-retiring` a
+tort. Le francais n'est retire sur aucune : il est offert et epargne sur
+`aif-c01`, `clf-c02` et `saa-c03`, et n'est pas offert sur les cinq autres.
+
+> Verifier que le texte porte l'affirmation, pas seulement qu'il parle du
+> sujet. Sur une page de certification AWS, lire le champ `Languages offered`
+> **avant** d'interpreter une phrase de retrait : la phrase suit ce champ et
+> s'y rapporte souvent.
+
 ## Encadrer une contradiction plutot que l'arbitrer
 
 Quand deux pages officielles se contredisent, le catalogue **pose les deux
@@ -481,6 +524,29 @@ possibilite : l'incertitude pese sur celui qui decide, pas sur l'apprenant.
 Corollaire : classer des certifications « par duree de vie restante » n'est pas
 une operation unique. Il faut nommer le champ, sinon l'ordre depend d'un choix
 non declare.
+
+### La contradiction intra-page
+
+La contradiction n'oppose pas toujours deux pages. Mesure du 2026-09-08 sur
+`learn.microsoft.com/credentials/certifications/exams/ai-900/` : la banniere
+indique « *The certification requirements have changed. The AI-900 exam was
+retired on June 30, 2026, and has been replaced by AI-901.* », tandis que le
+champ structure de la **meme page** affiche « *Retirement date: none* ».
+
+> Un parseur va chercher le champ structure en premier, parce qu'il est propre.
+> Il aurait conclu « aucun retrait » sur un examen ferme depuis trois mois.
+
+Ici l'encadrement ne s'applique pas : les deux enonces ne bornent pas une
+incertitude, l'un est faux. La banniere en prose porte l'affirmation ; le champ
+structure est perime. Le catalogue retient la banniere et **consigne la
+contradiction** dans `lifecycle.note`, pour que la prochaine relecture ne
+refasse pas le trajet.
+
+Constat associe, meme entree : la source `certification-page` declaree pour
+`microsoft:ai-900` decrit desormais AI-901. Une source peut cesser de porter
+l'affirmation pour laquelle elle est citee **sans jamais devenir invalide** —
+elle repond 200, elle est complete, elle parle du bon produit. D'ou la source
+`lifecycle` ajoutee sur l'entree.
 
 ## Falaise d'expiration des registres
 
@@ -500,3 +566,39 @@ Constat non tranche : `test/catalog.test.mjs` interdit ce regroupement sur
 `config/catalog-transition-exemptions.json` (au moins trois dates distinctes des
 dix entrees, douze au plus par date) et n'exige rien d'equivalent sur les deux
 autres registres. Trois registres, deux regimes, raison non documentee.
+
+## Une echeance se dichotomise, elle ne se deduit pas
+
+`tools/check_catalog_freshness.mjs` applique **plusieurs verrous independants**,
+et le plus proche n'est pas celui qu'on calcule spontanement :
+
+| verrou | source | message |
+| --- | --- | --- |
+| age des sources | `provenance.checkedOn` + `freshness.maxAgeDays` | `sources agees de N jour(s)` |
+| exemption de transition | `config/catalog-transition-exemptions.json` | `[lifecycle:transition] ... exemption expiree` |
+| snapshot | `asOf` + `maxAgeDays` **OU** `reviewDueOn` | `snapshot age de N jour(s)` |
+| catalogue fournisseur | `providers[].checkedOn` + `maxAgeDays` | `catalogue fournisseur X age de N jour(s)` |
+
+Mesure du 2026-09-08 : la campagne des quatorze visait le 2026-09-16, calcule
+depuis `checkedOn + 30`. La gate echouait en realite le **2026-09-13**, sur les
+exemptions. `--as-of 2026-09-12` rendait 0, `--as-of 2026-09-13` rendait 1.
+Trois jours d'ecart, et **rafraichir les dates seules n'aurait rien repare** :
+le registre d'exemptions ne se quitte qu'en declarant `lifecycle.transition`.
+
+> Ne pas deduire une echeance d'une formule. Faire varier `--as-of` jusqu'a la
+> bascule, puis **lire les messages** : un code de sortie dit qu'il y a un
+> probleme, jamais lequel, ni combien il y en a.
+
+Le verrou `snapshot` merite une mention particuliere : il declenche sur un
+**OU** de deux conditions, donc avancer `asOf` seul ne le ferme pas si
+`reviewDueOn` est depasse. Mesure du 2026-09-08 pour le 2026-10-01 : `asOf`
+seul laisse deux erreurs, `asOf` + `reviewDueOn` en laisse une, et il faut y
+ajouter `providers[aws].checkedOn` pour atteindre zero.
+
+`asOf` n'est pas qu'un marqueur de fraicheur : `compile_runtime.mjs` et
+`validate_content.mjs` s'en servent comme **date d'evaluation** pour decider
+quelles certifications sont actives et recommandees. L'avancer est un acte
+semantique. Mesure du 2026-09-08 avec `asOf` porte au 2026-10-08 : `validate`
+et `runtime:check` restent verts, 903 ressources, 0 divergence, aucun fichier
+perdu — mais le `manifestId` public change, puisque le catalogue est lui-meme
+empaquete.
