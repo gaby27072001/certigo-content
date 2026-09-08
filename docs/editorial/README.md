@@ -200,6 +200,20 @@ ici — la commande l'est.
 **Les corpus propres le sont parce qu'un test a refuse de passer.** Ce n'est pas
 un constat de qualite editoriale.
 
+**Correction du 2026-09-08 — cette phrase a ete surinterpretee.** Elle a servi
+d'argument principal en faveur d'une extension de la garde, jusqu'a ce qu'on
+verifie le cas qu'elle citait : `aws:saa-c03`, passe de zero a trois familles en
+fuite dans une PR fusionnee, est **verte** au regard de cette garde. Une de ses
+bonnes reponses contient `manuel`, donc la condition `keyedCount === 0` est
+fausse et la garde se tait. **Elle n'aurait pas attrape la regression qu'on lui
+attribuait.**
+
+Pire : les cinq certifications gardees sont a zero *occurrence*, pas a zero
+*desequilibre*. La remediation n'a pas equilibre le mot, elle l'a supprime — la
+garde passe parce que le mot n'existe plus. **Elle n'a jamais eu l'occasion de
+mordre depuis sa mise en service.** Le contraste entre cohortes gardees et non
+gardees subsiste ; ce qu'il prouve, non.
+
 Et le resultat qui condamne l'approche par liste de motifs : **deux des cinq
 certifications gardees fuient une famille differente** — `tableur` et `ticket`
 sur l'une, `un a un` sur l'autre. Fermer `manuel` n'a pas supprime l'indice, il
@@ -235,14 +249,93 @@ cette heuristique suppose de **savoir deja** que le procede manuel est
 l'anti-modele. C'est de la connaissance du sujet, pas un indice sans contenu.
 Le corriger reviendrait a retirer la matiere de la question.
 
-### Condition d'extension de la garde
+### La garde differentielle, livree le 2026-09-08
 
-La garde n'est pas etendue tant que la mesure n'est pas a zero partout : une
-garde qui echoue des sa mise en service sur onze corpus tenus par trois sessions
-paralleles ne protege rien, elle bloque. **Elle s'etend dans la PR meme qui
-amene la mesure a zero sur les vingt-six cohortes**, et pas avant.
+La condition posee plus haut — *« la garde s'etend dans la PR meme qui amene la
+mesure a zero partout, et pas avant »* — supposait qu'une garde ne peut exister
+qu'en **niveau absolu**. C'est cette supposition qui etait fausse, pas la
+condition.
 
-Jusque-la les deux outils sont livres **en mesure seule, sans garde**.
+Mesure prealable, sur les 33 corpus (734 questions) :
+
+| | valeur |
+|---|---|
+| corpus qui rougiraient en niveau absolu | **17 sur 33** |
+| attendu sous rebattage (3000 tirages, graine fixe) | 6.3 `[p5=3 p95=9]` |
+| p | 0.000 |
+
+Le taux de base explique donc ~6 des 17 ; les ~11 autres portent un signal reel.
+Une garde absolue exigerait onze campagnes avant que la CI reverdisse, et **une
+garde rouge en permanence dresse a passer outre** : elle ne protege rien.
+
+La garde livree compare a une **reference figee** (`config/lexical-baseline.json`)
+et n'echoue que sur une **aggravation**. Elle est verte le jour un par
+construction, n'exige aucune remediation prealable, et attrape exactement le cas
+`saa-c03` que la garde par motif laissait passer.
+
+    npm test                      # inclut test/lexical_leak.test.mjs
+    npm run lex:baseline          # resserre la reference apres une amelioration
+
+**Trois regimes, et le troisieme est la decouverte.** Voir `FAMILLES_CLASSEES`
+dans `tools/lex_leak.mjs` :
+
+| regime | exemple | traitement |
+|---|---|---|
+| `JUGEMENT` | `manuel`, `script`, `absolu`, `uniquement`, `vague` | **gate** |
+| `INHERENT` | `tout-le-reste` | mesure, **jamais bloquant** |
+| `TECHNO` | `cron`, `ticket` | mesure, sous le bruit |
+
+`tout-le-reste` (`tous les`, `l'ensemble des`) est la fuite **la plus forte du
+depot** — 21 corpus contre 7.4 attendus — devant `manuel`. Elle n'est pourtant
+pas gatee : en cloud, « accorder a tous les utilisateurs » n'est pas une
+maladresse de style, **c'est l'erreur que la question teste**. Le mot correle
+avec la faussete parce que le concept correle avec la faussete. La gater
+punirait une question neuve et correcte. **Toute fuite lexicale statistiquement
+reelle n'est pas a corriger.**
+
+Et la regle de classement `manuel => corriger / cron => consigner` est une
+heuristique de lecture, pas un critere : **`script` la casse.** Classe comme une
+technologie, il sort a p=0.002, parce qu'il s'ecrit ici « un script maison »,
+« un script shell », « un script local partage ». Le classement porte sur le sens
+au dictionnaire, la fuite porte sur l'usage — seule la mesure arbitre.
+
+### Les deux sens, et leurs seuils inegaux
+
+La garde d'origine ne mesurait que `bonne === 0 && distracteurs > 0`. La fuite
+inverse existe : `par exemple` exclusif aux **bonnes reponses** sur quatre
+corpus, ou une bonne reponse nomme une instance concrete d'une approche juste
+tandis qu'un distracteur enonce platement une approche fausse. *« Prends
+l'option qui donne un exemple »* s'execute aussi bien de tete.
+
+Les deux sens n'ont pas le meme cout par occurrence :
+
+    exclusif aux DISTRACTEURS   0.75^k < 0.05  ->  k >= 11
+    exclusif a la BONNE REPONSE 0.25^k < 0.05  ->  k >= 3
+
+**Une occurrence cote bonne reponse est environ quatre fois plus surprenante.**
+Une garde unidirectionnelle est donc aveugle a la preuve la moins chere.
+
+Le seuil retenu est neanmoins de **3 questions dans les deux sens**, et non 11
+d'un cote : appliquer 11 rendrait la garde vide — exactement le defaut mesure
+sur la garde d'origine. La significativite collective etant deja etablie, ce
+seuil ne sert qu'a ecarter le cas non exploitable.
+
+### Une region du depot que personne n'avait mesuree
+
+L'enumeration a revele **146 questions Azure a plat** a la racine de
+`content/public/questions/` (`ai900`, `ai901`, `az104`, `az900`, `dp900`,
+`sc900`), en `schemaVersion` v2. Elles etaient hors de toute campagne et hors
+des gardes de longueur, qui ne portent que sur v3. Un releve qui filtrait les
+repertoires les avait ecartees **en silence** — un filtre de type rend un zero
+indiscernable d'une absence.
+
+La garde differentielle les couvre. **Leur contenu n'a pas ete touche** ; c'est
+une dette consignee, non traitee.
+
+**Limite connue :** la CLI historique `node tools/lex_leak.mjs <editeur> <cert>`
+ne sait lire que la disposition imbriquee, et son temoin de bruit tire sans
+graine — il n'est donc pas reproductible d'une execution a l'autre. La garde de
+CI n'utilise ni l'un ni l'autre.
 
 ## Pourquoi le processus ne converge pas de lui-meme
 

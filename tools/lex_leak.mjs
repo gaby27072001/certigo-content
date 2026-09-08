@@ -22,17 +22,76 @@ import path from "node:path";
 // Familles multi-mots nommees comme correlees a la faussete dans un corpus
 // d'infrastructure. Le balayage generique ne les voit pas : ce sont des
 // locutions, pas des tokens.
-const FAMILLES = [
-  ["manuel", /\bmanuel(?:le)?(?:ment)?\b/i],
-  ["a la main", /\bà la main\b/i],
-  ["ad hoc", /\bad hoc\b/i],
-  ["ponctuellement", /\bponctuel(?:le)?(?:ment)?\b/i],
-  ["par un ingenieur", /\bpar un (?:ingénieur|opérateur|administrateur)\b/i],
-  ["tableur", /\btableur\b/i],
-  ["ticket", /\bticket/i],
-  ["un a un", /\b(?:une? à une?|un par un|compte par compte)\b/i],
-  ["script maison", /\bscript maison\b/i],
+//
+// SENS. « D » = fuite si la famille n'apparait QUE dans des distracteurs
+// (« ecarte l'option qui dit manuel »). « C » = fuite si elle n'apparait QUE
+// dans des bonnes reponses (« prends l'option qui donne un exemple »). Les deux
+// sont executables de tete ; l'outil d'origine ne mesurait que le premier.
+//
+// REGIME. Trois natures, etablies par permutation sur les 33 corpus du depot
+// (3000 tirages, graine fixe — voir tools/lex_baseline.mjs) :
+//
+//   JUGEMENT  le mot est un marqueur de style corrle a la faussete.
+//             -> GATE : une aggravation echoue.
+//   INHERENT  le mot corrle a la faussete parce que le CONCEPT corrle a la
+//             faussete. « accorder a tous les utilisateurs » n'est pas une
+//             maladresse de style : c'est l'erreur que la question TESTE.
+//             -> RAPPORT : une famille inherente peut legitimement croitre
+//             quand on ajoute une bonne question. La gater punirait un corpus
+//             qui s'ameliore.
+//   TECHNO    le mot nomme une technologie, et sa correlation ne depasse pas
+//             le bruit de frequence. -> RAPPORT.
+//
+// La regle « manuel => corriger / cron => consigner » est une heuristique de
+// LECTURE, pas un critere : `script` est un nom de technologie employe comme
+// jugement (« un script maison », « un script local partage »), et il sort a
+// p=0.002. Le classement porte sur le sens au dictionnaire, la fuite porte sur
+// l'usage — seule la mesure arbitre. D'ou ce champ, explicite et revisable.
+export const FAMILLES_CLASSEES = [
+  // --- GATE : jugement de valeur, correlation etablie au-dela du bruit
+  { nom: "manuel", sens: "D", regime: "JUGEMENT", gate: true, motif: /\bmanuel(?:le(?:s|ment)?|s)?\b/i },
+  { nom: "script", sens: "D", regime: "JUGEMENT", gate: true, motif: /\bscripts?\b/i },
+  { nom: "absolu", sens: "D", regime: "JUGEMENT", gate: true, motif: /\b(?:toujours|jamais|aucune?|systématiquement|exclusivement|impossible)\b/i },
+  { nom: "uniquement", sens: "D", regime: "JUGEMENT", gate: true, motif: /\b(?:uniquement|seulement)\b/i },
+  { nom: "vague", sens: "C", regime: "JUGEMENT", gate: true, motif: /\b(?:par exemple|notamment)\b|\betc\./i },
+
+  // --- RAPPORT : inherent au domaine, mesure mais jamais bloquant
+  { nom: "tout-le-reste", sens: "D", regime: "INHERENT", gate: false, motif: /\b(?:l'ensemble des|la totalité|tous les|toutes les)\b/i },
+
+  // --- RAPPORT : technologie, correlation dans le bruit
+  { nom: "cron", sens: "D", regime: "TECHNO", gate: false, motif: /\bcron\b/i },
+  { nom: "ticket", sens: "D", regime: "TECHNO", gate: false, motif: /\bticket/i },
+
+  // --- RAPPORT : jugement, mais correlation marginale (p entre 0.03 et 0.07)
+  { nom: "a la main", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bà la main\b/i },
+  { nom: "ad hoc", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bad hoc\b/i },
+  { nom: "ponctuellement", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bponctuel(?:le)?(?:ment)?\b/i },
+  { nom: "par un ingenieur", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bpar un (?:ingénieur|opérateur|administrateur)\b/i },
+  { nom: "tableur", sens: "D", regime: "JUGEMENT", gate: false, motif: /\b(?:tableur|feuille de calcul)\b/i },
+  { nom: "sans verifier", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bsans vérifier\b/i },
+  { nom: "un a un", sens: "D", regime: "JUGEMENT", gate: false, motif: /\b(?:une? à une?|un par un|compte par compte)\b/i },
+  { nom: "script maison", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bscript maison\b/i },
 ];
+
+// Vue historique, conservee pour la CLI `node lex_leak.mjs <vendor> <cert>`
+// documentee dans docs/editorial/README.md. Elle ne connait pas le sens : elle
+// ne mesure que « exclusif aux distracteurs », comme a l'origine.
+const FAMILLES = FAMILLES_CLASSEES.map((f) => [f.nom, f.motif]);
+
+// Seuil de declenchement, en NOMBRE DE QUESTIONS, pour qu'une exclusivite
+// compte comme une fuite.
+//
+// Pourquoi 3 dans les deux sens, alors que la significativite par corpus est
+// asymetrique : une occurrence isolee a 3 chances sur 4 de tomber dans un
+// distracteur, donc il faut k>=11 pour que « exclusif aux distracteurs »
+// surprenne a lui seul (0.75^11 = 0.042), contre k>=3 dans l'autre sens
+// (0.25^3 = 0.016). Appliquer k>=11 ici rendrait le gate VIDE — exactement le
+// defaut mesure sur le garde d'origine, vert parce que le mot avait disparu et
+// non parce qu'il etait reparti. La significativite collective est deja etablie
+// (17 corpus rouges contre 6.3 attendus, p=0.000) ; ce seuil-ci ne sert donc
+// qu'a ecarter le cas non exploitable : sous 3 questions, « ecarte l'option qui
+// dit manuel » ne se joue pas de tete.
+export const SEUIL_QUESTIONS = 3;
 
 function normalise(mot) {
   return mot.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -45,23 +104,186 @@ function tokens(texte) {
 }
 
 export function charger(vendor, cert) {
-  const pub = path.join("content", "public", "questions", vendor, cert);
-  const key = path.join("content", "answerKey", "solutions", vendor, cert);
-  const fichiers = fs.readdirSync(pub).filter((f) => f.endsWith(".json")).sort();
+  return chargerCorpus(".", { id: `${vendor}:${cert}`, disposition: "imbrique", vendor, cert });
+}
+
+// --- Enumeration et lecture generiques ------------------------------------
+//
+// Le depot porte DEUX dispositions, et la seconde a ete invisible longtemps :
+//
+//   imbrique   content/public/questions/<vendor>/<cert>/*.json
+//   a plat     content/public/questions/<prefixe>-*.json      (146 questions
+//              Azure, schemaVersion v2, jamais touchees par une campagne)
+//
+// Elles avaient ete manquees parce qu'un releve filtrait les repertoires : un
+// filtre de TYPE ecarte en silence ce qui n'a pas la forme attendue, et rend un
+// zero indiscernable d'une absence. On enumere donc les entrees sans filtre de
+// type et on branche sur ce qu'on trouve.
+function estRepertoire(p) {
+  return fs.statSync(p).isDirectory();
+}
+
+export function enumererCorpus(racine) {
+  const base = path.join(racine, "content", "public", "questions");
+  const corpus = [];
+  const platParPrefixe = new Map();
+
+  for (const entree of fs.readdirSync(base).sort()) {
+    const complet = path.join(base, entree);
+    if (estRepertoire(complet)) {
+      for (const cert of fs.readdirSync(complet).sort()) {
+        if (!estRepertoire(path.join(complet, cert))) continue;
+        corpus.push({
+          id: `${entree}:${cert}`,
+          disposition: "imbrique",
+          vendor: entree,
+          cert,
+        });
+      }
+      continue;
+    }
+    if (!entree.endsWith(".json")) continue;
+    const prefixe = entree.split("-")[0];
+    if (!platParPrefixe.has(prefixe)) platParPrefixe.set(prefixe, []);
+    platParPrefixe.get(prefixe).push(entree);
+  }
+
+  for (const [prefixe, fichiers] of [...platParPrefixe].sort()) {
+    corpus.push({
+      id: `azure:${prefixe}`,
+      disposition: "plat",
+      prefixe,
+      fichiers: fichiers.sort(),
+    });
+  }
+  return corpus.sort((a, b) => a.id.localeCompare(b.id));
+}
+
+export function chargerCorpus(racine, corpus) {
+  const racinePub = path.join(racine, "content", "public", "questions");
+  const racineKey = path.join(racine, "content", "answerKey", "solutions");
+  let entrees;
+  if (corpus.disposition === "imbrique") {
+    const dir = path.join(racinePub, corpus.vendor, corpus.cert);
+    entrees = fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith(".json"))
+      .sort()
+      .map((f) => ({
+        nom: f,
+        pub: path.join(dir, f),
+        key: path.join(racineKey, corpus.vendor, corpus.cert, f),
+      }));
+  } else {
+    entrees = corpus.fichiers.map((f) => ({
+      nom: f,
+      pub: path.join(racinePub, f),
+      key: path.join(racineKey, f),
+    }));
+  }
+
   const out = [];
-  for (const f of fichiers) {
-    const q = JSON.parse(fs.readFileSync(path.join(pub, f), "utf8"));
-    const s = JSON.parse(fs.readFileSync(path.join(key, f), "utf8"));
+  for (const e of entrees) {
+    const q = JSON.parse(fs.readFileSync(e.pub, "utf8"));
+    if (!Array.isArray(q.choices)) continue;
+    const s = JSON.parse(fs.readFileSync(e.key, "utf8"));
     const choix = q.choices.map((c) => (typeof c === "string" ? c : c.text));
     const i = choix.indexOf(s.correct);
-    if (i < 0) throw new Error(`${f}: reponse correcte introuvable parmi les choix`);
+    if (i < 0) throw new Error(`${e.nom}: reponse correcte introuvable parmi les choix`);
     out.push({
-      fichier: f,
+      fichier: e.nom,
       bonne: choix[i],
       distracteurs: choix.filter((_, j) => j !== i),
     });
   }
+  if (out.length === 0) {
+    // Un zero de lecture doit crier. Sans ce refus, un chemin faux rend
+    // « aucune fuite » et le garde devient un vert qui ne mesure rien.
+    throw new Error(`${corpus.id}: 0 question lue — refus de rendre une mesure vide`);
+  }
   return out;
+}
+
+// Compte, PAR QUESTION et dans les deux sens, les familles classees.
+// Une locution repetee trois fois dans un meme distracteur reste une seule
+// question exploitable : on compte donc la question, pas l'occurrence.
+export function mesurerFamilles(paires) {
+  const compte = {};
+  for (const f of FAMILLES_CLASSEES) compte[f.nom] = { C: 0, D: 0 };
+  for (const p of paires) {
+    for (const f of FAMILLES_CLASSEES) {
+      if (f.motif.test(p.bonne)) compte[f.nom].C += 1;
+      if (p.distracteurs.some((d) => f.motif.test(d))) compte[f.nom].D += 1;
+    }
+  }
+  return compte;
+}
+
+// Ampleur de la fuite pour une famille, dans SON sens. Zero = pas de fuite.
+// Le sens compte : une famille presente des deux cotes ne fuit dans aucun,
+// meme si elle est desequilibree — c'est le desequilibre TOTAL qui fournit une
+// regle executable sans lire la question.
+export function ampleurFuite(compte, famille, seuil = SEUIL_QUESTIONS) {
+  const { C, D } = compte;
+  if (famille.sens === "D") {
+    return C === 0 && D >= seuil ? D : 0;
+  }
+  return D === 0 && C >= seuil ? C : 0;
+}
+
+// Releve complet d'une racine de contenu : toutes dispositions, tous corpus.
+// Rend `{ corpus, nbCorpus, nbQuestions }` — la meme structure que la reference
+// figee, pour que le releve du jour et la reference soient comparables sans
+// conversion intermediaire.
+export function releverRacine(racine) {
+  const liste = enumererCorpus(racine);
+  const corpus = {};
+  let nbQuestions = 0;
+  for (const c of liste) {
+    const paires = chargerCorpus(racine, c);
+    nbQuestions += paires.length;
+    const compte = mesurerFamilles(paires);
+    const familles = {};
+    for (const f of FAMILLES_CLASSEES) {
+      const { C, D } = compte[f.nom];
+      // Une famille absente des deux cotes n'a rien a figer, et l'omettre garde
+      // la reference lisible a la revue.
+      if (C === 0 && D === 0) continue;
+      familles[f.nom] = { C, D, ampleur: ampleurFuite({ C, D }, f) };
+    }
+    corpus[c.id] = { questions: paires.length, familles };
+  }
+  return { corpus, nbCorpus: liste.length, nbQuestions };
+}
+
+// Compare un releve a la reference figee et rend une STRUCTURE, pas un verdict.
+// La decision d'echouer appartient au test ; cette fonction se contente de
+// classer, ce qui la rend testable dans les deux sens avec des entrees
+// synthetiques — un comparateur qu'on n'a vu que rendre « rien a signaler » ne
+// prouve rien quand il rend « rien a signaler » sur le depot.
+export function comparer(reference, releve) {
+  const regressions = [];
+  const ameliorations = [];
+  const corpusInconnus = [];
+  const gatees = new Map(FAMILLES_CLASSEES.filter((f) => f.gate).map((f) => [f.nom, f]));
+
+  for (const [idCorpus, actuel] of Object.entries(releve)) {
+    const ref = reference[idCorpus];
+    if (!ref) {
+      // Un corpus neuf n'a pas de reference : on ne peut pas dire s'il empire.
+      // Il doit etre fige explicitement, sinon il entrerait dans le depot en
+      // echappant au garde — la faille meme qu'on repare ici.
+      corpusInconnus.push(idCorpus);
+      continue;
+    }
+    for (const [nom, famille] of gatees) {
+      const av = ref.familles?.[nom]?.ampleur ?? 0;
+      const ap = actuel.familles?.[nom]?.ampleur ?? 0;
+      if (ap > av) regressions.push({ corpus: idCorpus, famille: nom, sens: famille.sens, avant: av, apres: ap });
+      else if (ap < av) ameliorations.push({ corpus: idCorpus, famille: nom, avant: av, apres: ap });
+    }
+  }
+  return { regressions, ameliorations, corpusInconnus };
 }
 
 export function mesurer(paires, min) {

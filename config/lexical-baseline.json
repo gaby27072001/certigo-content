@@ -1,0 +1,940 @@
+{
+  "note": "Reference figee des fuites lexicales. Ne se met a jour qu'a la baisse. Regenerer avec `npm run lex:baseline`, jamais a la main.",
+  "seuilQuestions": 3,
+  "famillesGatees": [
+    "manuel (D)",
+    "script (D)",
+    "absolu (D)",
+    "uniquement (D)",
+    "vague (C)"
+  ],
+  "corpus": {
+    "aws:aif-c01": {
+      "familles": {},
+      "questions": 20
+    },
+    "aws:aip-c01": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 6,
+          "ampleur": 6
+        },
+        "script": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "tableur": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "ticket": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 6,
+          "ampleur": 6
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 4,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "aws:ans-c01": {
+      "familles": {
+        "tout-le-reste": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "vague": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "aws:clf-c02": {
+      "familles": {
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 0,
+          "ampleur": 0
+        },
+        "vague": {
+          "C": 1,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 22
+    },
+    "aws:dea-c01": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "script": {
+          "C": 1,
+          "D": 3,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 1,
+          "D": 12,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "aws:dop-c02": {
+      "familles": {
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tableur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 1,
+          "D": 5,
+          "ampleur": 0
+        },
+        "un a un": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "aws:dva-c02": {
+      "familles": {
+        "manuel": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "script maison": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "vague": {
+          "C": 2,
+          "D": 0,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "aws:mla-c01": {
+      "familles": {
+        "cron": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "par un ingenieur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tableur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "vague": {
+          "C": 1,
+          "D": 0,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "aws:mla-c02": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 8
+    },
+    "aws:saa-c03": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 1,
+          "D": 3,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 2,
+          "D": 11,
+          "ampleur": 0
+        },
+        "un a un": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "vague": {
+          "C": 1,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "aws:sap-c02": {
+      "familles": {
+        "absolu": {
+          "C": 4,
+          "D": 3,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "tableur": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 3,
+          "D": 14,
+          "ampleur": 0
+        },
+        "un a un": {
+          "C": 0,
+          "D": 5,
+          "ampleur": 5
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 8,
+          "ampleur": 8
+        }
+      },
+      "questions": 24
+    },
+    "aws:scs-c03": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "aws:soa-c03": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 6,
+          "ampleur": 6
+        },
+        "manuel": {
+          "C": 1,
+          "D": 5,
+          "ampleur": 0
+        },
+        "par un ingenieur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "script maison": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tableur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 7,
+          "ampleur": 7
+        },
+        "un a un": {
+          "C": 1,
+          "D": 3,
+          "ampleur": 0
+        },
+        "vague": {
+          "C": 1,
+          "D": 0,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "azure:ai900": {
+      "familles": {},
+      "questions": 12
+    },
+    "azure:ai901": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "manuel": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 11,
+          "ampleur": 11
+        }
+      },
+      "questions": 33
+    },
+    "azure:az104": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        }
+      },
+      "questions": 20
+    },
+    "azure:az900": {
+      "familles": {
+        "absolu": {
+          "C": 1,
+          "D": 0,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        }
+      },
+      "questions": 36
+    },
+    "azure:dp900": {
+      "familles": {
+        "tout-le-reste": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        }
+      },
+      "questions": 33
+    },
+    "azure:sc900": {
+      "familles": {},
+      "questions": 12
+    },
+    "gcp:associate-google-workspace-administrator": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        }
+      },
+      "questions": 20
+    },
+    "gcp:cloud-architect": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 7,
+          "ampleur": 7
+        },
+        "script": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "tableur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "tout-le-reste": {
+          "C": 1,
+          "D": 14,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 7,
+          "ampleur": 7
+        }
+      },
+      "questions": 24
+    },
+    "gcp:cloud-database-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "manuel": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "ponctuellement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "sans verifier": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 1,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 7,
+          "ampleur": 7
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 7,
+          "ampleur": 0
+        },
+        "vague": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "gcp:cloud-developer": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 6,
+          "ampleur": 6
+        },
+        "sans verifier": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 8,
+          "ampleur": 8
+        },
+        "uniquement": {
+          "C": 4,
+          "D": 5,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "gcp:cloud-devops-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "manuel": {
+          "C": 0,
+          "D": 9,
+          "ampleur": 9
+        },
+        "par un ingenieur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "sans verifier": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 1,
+          "D": 0,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 1,
+          "D": 9,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 7,
+          "ampleur": 7
+        }
+      },
+      "questions": 24
+    },
+    "gcp:cloud-digital-leader": {
+      "familles": {
+        "manuel": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "ponctuellement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        }
+      },
+      "questions": 22
+    },
+    "gcp:cloud-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "cron": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "gcp:cloud-network-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 1,
+          "D": 1,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 1,
+          "D": 2,
+          "ampleur": 0
+        },
+        "script": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 8,
+          "ampleur": 8
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 5,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "gcp:cloud-security-engineer": {
+      "familles": {
+        "manuel": {
+          "C": 0,
+          "D": 5,
+          "ampleur": 5
+        },
+        "ticket": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 4,
+          "ampleur": 4
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 3,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "gcp:data-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 1,
+          "D": 1,
+          "ampleur": 0
+        },
+        "cron": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 9,
+          "ampleur": 9
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tableur": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 12,
+          "ampleur": 12
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 6,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "gcp:data-practitioner": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "gcp:generative-ai-leader": {
+      "familles": {
+        "script": {
+          "C": 1,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "vague": {
+          "C": 1,
+          "D": 0,
+          "ampleur": 0
+        }
+      },
+      "questions": 20
+    },
+    "gcp:machine-learning-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 7,
+          "ampleur": 7
+        },
+        "script": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "ticket": {
+          "C": 0,
+          "D": 1,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 1,
+          "D": 9,
+          "ampleur": 0
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 6,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    },
+    "gcp:security-operations-engineer": {
+      "familles": {
+        "absolu": {
+          "C": 0,
+          "D": 2,
+          "ampleur": 0
+        },
+        "manuel": {
+          "C": 0,
+          "D": 9,
+          "ampleur": 9
+        },
+        "sans verifier": {
+          "C": 0,
+          "D": 3,
+          "ampleur": 3
+        },
+        "ticket": {
+          "C": 1,
+          "D": 3,
+          "ampleur": 0
+        },
+        "tout-le-reste": {
+          "C": 0,
+          "D": 8,
+          "ampleur": 8
+        },
+        "uniquement": {
+          "C": 1,
+          "D": 3,
+          "ampleur": 0
+        }
+      },
+      "questions": 24
+    }
+  }
+}
