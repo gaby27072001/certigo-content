@@ -10,9 +10,9 @@
   },
   "prompt": "Plusieurs centaines d'instances Amazon EC2, réparties sur plusieurs comptes, doivent recevoir les correctifs du système d'exploitation pendant des fenêtres de maintenance définies, avec un état de conformité consultable par application. Quelle approche retenir ?",
   "choices": [
-    "Se connecter en SSH ou RDP à chaque instance pendant la fenêtre de maintenance pour appliquer les correctifs.",
-    "Construire une AMI corrigée et remplacer l'ensemble des instances à chaque bulletin de sécurité, sans suivi de conformité.",
-    "Créer une règle Amazon EventBridge qui redémarre les instances chaque semaine, le redémarrage installant les correctifs disponibles.",
-    "Utiliser Patch Manager d'AWS Systems Manager avec une base de référence de correctifs, des groupes de correctifs définis par étiquettes et des fenêtres de maintenance, puis suivre l'état via les rapports de conformité des correctifs."
+    "Se connecter en SSH ou en RDP à chacune des instances pendant la fenêtre de maintenance déclarée pour y appliquer les correctifs, puis consigner le résultat obtenu dans un tableur partagé entre les équipes applicatives.",
+    "Construire une AMI corrigée et remplacer l'ensemble des instances à chaque bulletin de sécurité publié, sans conserver le moindre suivi de conformité par application ni par compte de l'organisation.",
+    "Créer une règle Amazon EventBridge qui redémarre les instances chaque semaine, le redémarrage installant de lui-même les correctifs du système d'exploitation disponibles à cet instant sur les dépôts.",
+    "Utiliser Patch Manager d'AWS Systems Manager avec une base de référence des correctifs et des fenêtres de maintenance qui les installent sans intervention manuelle, puis en suivre l'état via les rapports de conformité du parc entier."
   ]
 }

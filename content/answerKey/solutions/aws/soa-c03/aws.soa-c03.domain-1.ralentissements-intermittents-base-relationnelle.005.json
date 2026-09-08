@@ -9,5 +9,8 @@
     "objective": "domain-1"
   },
   "correct": "Activer Performance Insights sur l'instance et analyser la charge de base de données décomposée par événements d'attente, par requêtes SQL et par utilisateurs sur la période des pics.",
-  "rationale": "Performance Insights est le service RDS intégré qui échantillonne l'activité du moteur et affiche la charge active moyenne décomposée par événement d'attente, par instruction SQL, par hôte et par utilisateur : c'est précisément ce qui permet de désigner la requête responsable d'un pic, sans agent supplémentaire. CPUUtilization est une métrique agrégée au niveau de l'instance : elle signale une saturation mais jamais l'instruction qui en est la cause. Les journaux d'accès de l'Application Load Balancer contiennent des requêtes HTTP et aucune information sur le SQL exécuté. Une réplique en lecture peut décharger le trafic de lecture, mais elle ne réalise aucun diagnostic et ne signale aucune requête."
+  "rationale": "Performance Insights est le service RDS intégré qui échantillonne l'activité du moteur et affiche la charge active moyenne décomposée par événement d'attente, par instruction SQL, par hôte et par utilisateur : c'est précisément ce qui permet de désigner la requête responsable d'un pic, sans agent supplémentaire. CPUUtilization est une métrique agrégée au niveau de l'instance : elle signale une saturation mais jamais l'instruction qui en est la cause. Les journaux d'accès de l'Application Load Balancer contiennent des requêtes HTTP et aucune information sur le SQL exécuté. Une réplique en lecture peut décharger le trafic de lecture, mais elle ne réalise aucun diagnostic et ne signale aucune requête.",
+  "provenance": [
+    "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html"
+  ]
 }

@@ -9,5 +9,8 @@
     "objective": "domain-3"
   },
   "correct": "Créer un pipeline EC2 Image Builder combinant une recette avec des composants de renforcement et de correctifs, des composants de test, une planification mensuelle et une configuration de distribution vers les comptes cibles.",
-  "rationale": "EC2 Image Builder automatise la chaîne complète : recette (image de base, composants de renforcement et de correctifs), construction, tests automatisés, versionnage de l'image et configuration de distribution qui publie et partage l'AMI dans les Régions et comptes visés, le tout selon une planification. La construction manuelle mensuelle est lente, non reproductible et sans tests systématiques. AWS Backup protège des ressources existantes : il ne construit pas une image de référence renforcée et testée. Installer les correctifs au démarrage via les données utilisateur allonge le temps de mise en service, rend les instances non déterministes et ne fournit aucun artefact versionné à partager."
+  "rationale": "EC2 Image Builder automatise la chaîne complète : recette (image de base, composants de renforcement et de correctifs), construction, tests automatisés, versionnage de l'image et configuration de distribution qui publie et partage l'AMI dans les Régions et comptes visés, le tout selon une planification. La construction manuelle mensuelle est lente, non reproductible et sans tests systématiques. AWS Backup protège des ressources existantes : il ne construit pas une image de référence renforcée et testée. Installer les correctifs au démarrage via les données utilisateur allonge le temps de mise en service, rend les instances non déterministes et ne fournit aucun artefact versionné à partager.",
+  "provenance": [
+    "https://docs.aws.amazon.com/imagebuilder/latest/userguide/what-is-image-builder.html"
+  ]
 }

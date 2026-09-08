@@ -10,9 +10,9 @@
   },
   "prompt": "Des instances situées dans des sous-réseaux privés lisent chaque jour plusieurs téraoctets depuis Amazon S3 en passant par une passerelle NAT. Les frais de traitement des données de la passerelle NAT deviennent le premier poste de coût réseau. L'entreprise veut réduire ce coût tout en gardant le trafic S3 hors d'Internet. Quelle action mettre en œuvre ?",
   "choices": [
-    "Déplacer les instances dans un sous-réseau public et leur attribuer des adresses IP publiques afin de ne plus utiliser la passerelle NAT.",
-    "Remplacer la passerelle NAT par une instance NAT de plus petite taille en conservant le même chemin réseau.",
-    "Conserver la passerelle NAT et activer S3 Transfer Acceleration pour réduire les frais de traitement des données.",
+    "Déplacer les instances dans un sous-réseau public et leur attribuer des adresses IP publiques pour ne plus passer par la passerelle NAT.",
+    "Remplacer la passerelle NAT par une instance NAT de plus petite taille, en conservant le même chemin réseau.",
+    "Conserver la passerelle NAT et activer S3 Transfer Acceleration, dont l'objet est de réduire les frais de traitement des données facturés par la passerelle NAT.",
     "Créer un point de terminaison de passerelle pour Amazon S3 et ajouter les routes correspondantes dans les tables de routage des sous-réseaux privés."
   ]
 }

@@ -44,6 +44,36 @@ operationnelle :
 > l'axe des rangs. C'est le retrait qui allume le controle. L'ordre est donc
 > impose : retrait d'abord, validation ensuite.
 
+### D'ou vient le desequilibre : mesure, et non reconstitution
+
+On pourrait croire qu'une campagne passee a rattrape les positions sur tout le
+corpus en oubliant `ans-c01`. **La mesure dit autre chose.** En relisant chaque
+certification au commit qui l'a introduite :
+
+| cohorte | premier commit | positions a l'origine | positions au HEAD |
+| --- | --- | --- | --- |
+| `aws:soa-c03` | `7d950f7` | 5/5/5/5 | 5/5/5/5 |
+| `aws:dva-c02` | `6146ec2` | 5/5/5/5 | 5/5/5/5 |
+| `aws:aif-c01` | `d38a0e1` | 5/5/5/5 | 5/5/5/5 |
+| `aws:ans-c01` | `e2d371b` | **24/0/0/0** | 6/6/6/6 |
+
+Les trois premieres sont **identiques a l'origine et aujourd'hui** : elles n'ont
+jamais ete rattrapees, elles ont ete **redigees** equilibrees. L'equilibre des
+positions est donc une convention de redaction, pas une remediation ; et
+`ans-c01`, seule a 24/0/0/0 des son premier commit, vient d'un procede de
+redaction different. La ligne `ans-c01` sert aussi de temoin positif : elle
+prouve que la mesure sait imprimer autre chose qu'un equilibre, sans quoi une
+colonne entiere de `5/5/5/5` serait indiscernable d'un instrument casse.
+
+Ce que cela confirme malgre tout : **fermer un axe ne supprime pas la fuite.**
+Des corpus equilibres en position depuis leur premiere ligne presentaient des
+rangs de longueur aussi degrades que `0/0/0/20`. L'attention portee a un axe
+visible n'a rien appris sur l'autre.
+
+Portee de la mesure : 4 cohortes relues au premier commit sur les 26 qui
+possedent des paires v3 a quatre choix. Les 6 certifications restantes sont en
+v2 heritee et ne sont pas mesurables ainsi.
+
 ## Le residu mesure, et pourquoi il n'est pas corrige
 
     node tools/audit_answer_leak.mjs <provider> <slug>
@@ -74,6 +104,36 @@ reponses occupaient le meme index, ce controle preservait donc une part du signa
 qu'il etait cense detruire. **C'est la premiere mesure qui etait fausse, pas la
 seconde.** Si ces anciens nombres reapparaissent dans un historique ou une
 discussion, ils n'ont pas ete reproduits et ne doivent pas etre repris.
+
+### Serie par cohorte, a tenir a jour
+
+L'axe des acronymes est celui qui ressort le plus souvent. Une valeur isolee ne
+decide de rien ; c'est la **serie** qui informe. Releve du 2026-09-08, cohortes
+entierement remediees, controle negatif entre parentheses :
+
+| cohorte | acronymes | conjonctions | mot le plus long |
+| --- | --- | --- | --- |
+| `aws:dea-c01` | 14/18 **p=0,015** (0,76) | 11/16 p=0,105 (0,30) | 10/19 p=0,500 (0,92) |
+| `aws:saa-c03` | 11/14 **p=0,029** (0,93) | 6/15 p=0,849 (0,87) | 9/18 p=0,593 (0,98) |
+| `aws:ans-c01` | 12/21 p=0,332 (0,67) | 8/15 p=0,500 (0,94) | 13/21 p=0,192 (0,42) |
+| `aws:scs-c03` | 8/19 p=0,820 (0,59) | 8/14 p=0,395 (0,91) | 9/21 p=0,808 (0,67) |
+
+**L'axe ne se generalise pas** : deux cohortes sur quatre ressortent sous 5 %,
+les deux autres sont franchement au-dessus (0,33 et 0,82). Douze tests, deux
+sous le seuil, aucune correction pour tests multiples — on en attendait 0,6.
+Les controles negatifs, eux, restent tous entre 0,59 et 0,98, ce qui est le
+comportement attendu d'un controle qui ne detecte rien.
+
+Regle de relecture : **ne pas ajouter de ligne sans relancer la commande sur
+toutes les cohortes deja listees.** Les comptes bougent quand une cohorte est
+remediee — une meme cohorte mesuree a mi-parcours et une fois terminee ne donne
+pas le meme couple `reel/total`. Une ligne recopiee d'un rapport anterieur est
+une affirmation, pas une mesure.
+
+Le seuil de decision n'est pas statistique : si l'axe ressortait sur une large
+majorite de cohortes, il cesserait d'etre un residu et deviendrait une propriete
+du corpus, qu'il faudrait alors trancher en connaissance de cause. Ce n'est pas
+le cas aujourd'hui.
 
 Corriger un trait sur un seuil brut reviendrait a editer le contenu jusqu'a ce
 que le detecteur se taise. C'est optimiser l'instrument, pas le corpus.
