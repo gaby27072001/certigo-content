@@ -147,7 +147,11 @@ function main() {
   }
 
   console.log(`=== ${provider}:${slug} — n=${n} — graine ${seed} ===`);
-  console.log(`axes controles par la CI :`);
+  // La porte des deux controles de cohorte est `exemptCount === 0` : tant que la
+  // certification porte des dispenses, NI la position NI le rang ne sont mesures.
+  // Le libelle doit donc nommer cette condition, sinon il annonce une protection
+  // que la cohorte en dette n'a pas.
+  console.log(`axes controles par la CI, une fois la dette de la cohorte soldee :`);
   console.log(`  positions      ${positions.join("/")}`);
   console.log(`  rangs longueur ${ranks.join("/")}`);
   console.log(`axes hors controle, mesures et NON corriges (voir docs/editorial/README.md) :`);

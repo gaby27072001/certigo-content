@@ -848,6 +848,92 @@ test("controle aussi les rangs lorsque le total n'est pas divisible par quatre",
   );
 });
 
+test("rejette une distribution desequilibree des positions de la bonne reponse", async () => {
+  const root = createMetadataRoot();
+  // Chaque question place sa bonne reponse a l'index 0, mais avec un rang de
+  // longueur different : les rangs sont donc parfaitement equilibres (1/1/1/1)
+  // tandis que les positions sont degenerees (4/0/0/0). Seule la position varie,
+  // donc seul le controle de position peut faire echouer ce cas.
+  const lengths = [90, 100, 105, 110];
+  const ids = lengths.map((_, rank) => {
+    const ordered = [lengths[rank], ...lengths.filter((_, i) => i !== rank)];
+    const choices = ordered.map((length, choiceIndex) =>
+      String.fromCharCode(97 + choiceIndex).repeat(length)
+    );
+    return addV3Pair(root, {
+      id: `aws.aif-c01.domain-1.answer-position.00${rank + 1}`,
+      choices,
+      correct: choices[0],
+    });
+  });
+  completeAifMatrix(root, ids);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[editorial:answer-position]") &&
+        error.includes("positions de la bonne reponse 4/0/0/0") &&
+        error.includes("attendu 1/1/1/1")
+    )
+  );
+  // Forme complete : le meme appel doit voir le cas ABSENT. Les rangs sont
+  // equilibres, donc aucune erreur de rang ne doit apparaitre — sans quoi le
+  // test passerait pour la mauvaise raison.
+  assert.ok(
+    !result.errors.some((error) => error.includes("rangs de longueur")),
+    "les rangs sont equilibres : aucune erreur de rang ne doit etre levee"
+  );
+});
+
+test("les positions ne sont plus controlees des qu'une question reste au registre de dette", async () => {
+  // Meme corpus degenere que le test precedent, a une seule variable pres : un
+  // identifiant de la certification figure au registre. Le controle de cohorte
+  // s'eteint alors entierement — angle mort assume et documente dans le code.
+  const root = createMetadataRoot();
+  const lengths = [90, 100, 105, 110];
+  const ids = lengths.map((_, rank) => {
+    const ordered = [lengths[rank], ...lengths.filter((_, i) => i !== rank)];
+    const choices = ordered.map((length, choiceIndex) =>
+      String.fromCharCode(97 + choiceIndex).repeat(length)
+    );
+    return addV3Pair(root, {
+      id: `aws.aif-c01.domain-1.answer-position-debt.00${rank + 1}`,
+      choices,
+      correct: choices[0],
+    });
+  });
+  completeAifMatrix(root, ids);
+
+  // 1. Sans registre : la degenerescence 4/0/0/0 est bien vue.
+  const sansRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    sansRegistre.errors.some((error) =>
+      error.includes("[editorial:answer-position]")
+    ),
+    "temoin : sans registre le controle de position doit voir le desequilibre"
+  );
+
+  // 2. Avec un seul identifiant inscrit : le controle s'eteint pour toute la
+  // cohorte, y compris pour les trois questions qui ne sont pas dispensees.
+  writeLedger(root, "editorial-debt.json", "debts", [
+    {
+      certification: "aws:aif-c01",
+      expiresOn: "2026-11-30",
+      questionIds: [ids[0]],
+    },
+  ]);
+  const avecRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.deepEqual(
+    avecRegistre.errors.filter((error) =>
+      error.includes("[editorial:answer-position]")
+    ),
+    [],
+    "un seul identifiant au registre suffit a eteindre le controle de position"
+  );
+});
+
 test("applique les controles editoriaux a une matrice in-progress publiee", async () => {
   const root = createMetadataRoot();
   const id = addV3Pair(root, {

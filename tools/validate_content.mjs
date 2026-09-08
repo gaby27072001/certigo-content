@@ -468,6 +468,7 @@ export function answerLengthMetrics(choices, correct) {
     distinct: new Set(lengths).size === lengths.length,
     rank: [...lengths].sort((left, right) => left - right).indexOf(correctLength),
     ratio: correctLength / meanDistractorLength,
+    position: choices.indexOf(correct),
   };
 }
 
@@ -1096,6 +1097,15 @@ export async function validateContent(options = {}) {
     // fois la dette de la certification soldee. Tant qu'il reste des questions
     // dispensees, la cohorte est incomplete et le mesurer punirait la
     // correction progressive au lieu de la recompenser.
+    //
+    // ANGLE MORT ASSUME, ET MESURE. Les deux controles de cohorte ci-dessous
+    // (rangs ET positions) sont MUETS tant qu'une seule question de la
+    // certification figure au registre de dette : un identifiant residuel
+    // suffit a les eteindre entierement, et `validate` rend alors VERT sur un
+    // corpus desequilibre. Ils protegent les cohortes ENTIEREMENT remediees
+    // contre une regression future, pas les cohortes en cours de traitement.
+    // Sequence obligatoire pour une remediation : vider le registre PUIS
+    // valider. Un vert obtenu avant le retrait ne dit rien de ces deux axes.
     const exemptCount = entries.filter((entry) => entry.exempt).length;
     if (
       exemptCount === 0 &&
@@ -1117,6 +1127,27 @@ export async function validateContent(options = {}) {
             : `chaque rang entre ${minimumPerRank} et ${maximumPerRank}`;
         err(
           `[editorial:answer-length] ${certification}: rangs de longueur ${ranks.join("/")}, attendu ${expected}`
+        );
+      }
+      // Meme invariant de cohorte, meme porte et memes bornes, applique a la
+      // POSITION de la bonne reponse. Le rang mesure si elle se repere a sa
+      // longueur ; la position mesure si elle se repere a son index. Les deux
+      // sont exploitables sans lire l'enonce, et un corpus peut etre equilibre
+      // sur l'un tout en etant degenere sur l'autre : les bornes sont donc
+      // partagees, mais les deux distributions sont comptees separement.
+      const positions = [0, 0, 0, 0];
+      for (const entry of entries) positions[entry.position]++;
+      if (
+        positions.some(
+          (count) => count < minimumPerRank || count > maximumPerRank
+        )
+      ) {
+        const expectedPositions =
+          minimumPerRank === maximumPerRank
+            ? `${minimumPerRank}/${minimumPerRank}/${minimumPerRank}/${minimumPerRank}`
+            : `chaque position entre ${minimumPerRank} et ${maximumPerRank}`;
+        err(
+          `[editorial:answer-position] ${certification}: positions de la bonne reponse ${positions.join("/")}, attendu ${expectedPositions}`
         );
       }
     }
