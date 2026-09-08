@@ -9,5 +9,5 @@
     "objective": "domain-3"
   },
   "correct": "La température",
-  "rationale": "Une température plus élevée rend généralement les sorties moins déterministes et plus diverses. La rétention CloudTrail concerne l’audit, AWS KMS protège des clés, et le nombre de comptes AWS n’est pas un paramètre d’inférence."
+  "rationale": "Une température plus élevée rend généralement les sorties moins déterministes et plus diverses. Un rôle IAM porte des autorisations, un quota de compte borne la consommation d’un service, et une clé KMS protège des données ; aucun de ces leviers n’agit sur l’aléa d’inférence."
 }

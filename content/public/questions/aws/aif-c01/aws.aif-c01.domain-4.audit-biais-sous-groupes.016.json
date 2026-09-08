@@ -10,9 +10,9 @@
   },
   "prompt": "Un modèle d’éligibilité semble globalement performant, mais l’organisation veut vérifier qu’il ne pénalise pas une population donnée. Quelle action est la plus pertinente ?",
   "choices": [
-    "Regarder uniquement l’accuracy globale",
-    "Augmenter la température d’inférence",
-    "Supprimer les labels historiques sans analyse",
+    "Suivre l’accuracy globale calculée sur le jeu de validation complet, période après période",
+    "Augmenter la température d’inférence afin de diversifier les décisions rendues par le modèle",
+    "Retirer du jeu d’entraînement les libellés historiques jugés douteux avant de réentraîner le modèle",
     "Comparer les résultats et métriques entre sous-groupes pertinents, avec un audit humain"
   ]
 }
