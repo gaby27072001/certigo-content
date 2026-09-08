@@ -11,8 +11,8 @@
   "prompt": "Quatre applications d'analyse indépendantes consomment le même flux Amazon Kinesis Data Streams de cinq partitions. Depuis l'ajout de la quatrième application, les journaux montrent de nombreuses exceptions ReadProvisionedThroughputExceeded et la latence de bout en bout dépasse une minute pour toutes les applications, alors que le volume écrit par les producteurs n'a pas augmenté. Quelle solution corrige le problème tout en gardant les quatre applications indépendantes ?",
   "choices": [
     "Enregistrer chaque application comme consommateur à diffusion amplifiée (enhanced fan-out) et lire via SubscribeToShard, afin d'attribuer à chacune un débit de lecture dédié de 2 Mo/s par partition.",
-    "Doubler le nombre de partitions du flux et laisser les quatre applications continuer à appeler GetRecords sur le débit de lecture partagé.",
-    "Fusionner les quatre applications en une seule fonction AWS Lambda qui écrit ses résultats dans quatre tables Amazon DynamoDB distinctes.",
-    "Augmenter la taille de lot de chaque appel GetRecords et espacer les appels à un toutes les cinq secondes pour chaque application."
+    "Doubler le nombre de partitions du flux et laisser les quatre applications continuer d'appeler GetRecords sur le débit de lecture partagé de chacune des partitions ainsi créées.",
+    "Fusionner les quatre applications en une seule fonction AWS Lambda, qui lit le flux une fois puis écrit ses résultats dans quatre tables Amazon DynamoDB distinctes, une par application aval consommatrice.",
+    "Augmenter la taille de lot demandée à chaque appel GetRecords et espacer ces appels à un toutes les cinq secondes pour chacune des quatre applications consommatrices du flux, afin de réduire le nombre total d'appels."
   ]
 }

@@ -9,5 +9,8 @@
     "objective": "domain-2"
   },
   "correct": "Créer une stratégie de mise à l'échelle par suivi de cible sur la métrique d'utilisation CPU moyenne du groupe, avec une valeur cible de 60 %.",
-  "rationale": "Le suivi de cible crée et gère lui-même les alarmes CloudWatch nécessaires et ajuste la capacité pour maintenir la métrique choisie autour de la valeur cible : c'est la stratégie adaptée quand l'objectif s'exprime comme une valeur à tenir et que la charge est imprévisible. Une action planifiée suppose des variations connues à l'avance et ne répond pas à des pics aléatoires. Fixer la capacité au pic historique gaspille des ressources en dehors des pointes et ne protège pas d'un pic supérieur. La mise à l'échelle par paliers sur le trafic réseau exige de définir et d'entretenir manuellement des seuils qui ne correspondent pas à l'objectif d'utilisation CPU demandé."
+  "rationale": "Le suivi de cible crée et gère lui-même les alarmes CloudWatch nécessaires et ajuste la capacité pour maintenir la métrique choisie autour de la valeur cible : c'est la stratégie adaptée quand l'objectif s'exprime comme une valeur à tenir et que la charge est imprévisible. Une action planifiée suppose des variations connues à l'avance et ne répond pas à des pics aléatoires. Fixer la capacité au pic historique gaspille des ressources en dehors des pointes et ne protège pas d'un pic supérieur. La mise à l'échelle par paliers sur le trafic réseau exige de définir et d'entretenir manuellement des seuils qui ne correspondent pas à l'objectif d'utilisation CPU demandé.",
+  "provenance": [
+    "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html"
+  ]
 }

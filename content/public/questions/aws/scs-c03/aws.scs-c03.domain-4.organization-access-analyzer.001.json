@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Le responsable sécurité veut détecter les compartiments S3, clés KMS et rôles accessibles depuis l'extérieur de l'organisation, y compris lorsqu'une nouvelle politique de ressource est déployée dans un compte membre. Quelle configuration choisir ?",
+  "prompt": "Une équipe doit produire chaque trimestre la liste des ressources de l'organisation accessibles depuis l'extérieur, et séparément la liste des rôles dont les permissions ne sont plus utilisées depuis quatre-vingt-dix jours. Elle veut éviter d'écrire des requêtes sur les journaux et d'interpréter manuellement des politiques. Que mettre en place ?",
   "choices": [
-    "Créer un analyseur IAM Access Analyzer de type organisation dans le compte administrateur délégué et traiter ses conclusions",
-    "Exécuter IAM Policy Simulator uniquement dans le compte de management une fois par an",
-    "Activer Amazon Inspector sur les compartiments S3",
-    "Ajouter une règle entrante à tous les groupes de sécurité"
+    "Un simulateur de politiques IAM exécuté par lot sur chaque rôle, dont les résultats seront comparés d'un trimestre à l'autre par un script interne",
+    "Une règle AWS Config par type de ressource, dont les évaluations trimestrielles signaleront les politiques trop permissives et les rôles inactifs",
+    "Un rapport d'identifiants téléchargé chaque trimestre, dont les colonnes d'activité permettront de distinguer les rôles inutilisés des rôles partagés",
+    "Deux analyseurs AWS IAM Access Analyzer, l'un d'accès externe à l'échelle de l'organisation, l'autre d'accès non utilisé, consultés chaque trimestre"
   ]
 }

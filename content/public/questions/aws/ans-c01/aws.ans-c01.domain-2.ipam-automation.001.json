@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Chaque nouveau compte doit recevoir automatiquement un CIDR VPC non chevauchant depuis un pool régional, avec délégation à l'équipe réseau et déploiement par CloudFormation. Quelle solution réduit le plus le risque d'allocation concurrente ?",
+  "prompt": "Chaque nouveau compte d'une organisation doit recevoir automatiquement une plage d'adresses VPC ne recouvrant aucune plage déjà attribuée, tirée d'un pool régional, l'attribution devant être effectuée au moment du déploiement par AWS CloudFormation. Plusieurs équipes déploient en parallèle. Quelle solution réduit le plus le risque de double attribution ?",
   "choices": [
-    "Amazon VPC IP Address Manager avec administrateur délégué, pools partagés via AWS RAM et allocations référencées par les modèles",
-    "Une feuille de calcul modifiée manuellement avant chaque déploiement",
-    "Le même CIDR `10.0.0.0/16` codé en dur dans tous les modèles",
-    "Un tirage aléatoire de CIDR dans une fonction sans état central"
+    "Une fonction AWS Lambda qui tire une plage au hasard puis vérifie son absence dans les VPC",
+    "Un paramètre AWS Systems Manager Parameter Store contenant la prochaine plage libre, lu par les modèles",
+    "Un tableau de suivi partagé, tenu par l'équipe réseau et consulté avant chaque création de compte",
+    "Amazon VPC IP Address Manager, avec des pools régionaux partagés par AWS Resource Access Manager"
   ]
 }

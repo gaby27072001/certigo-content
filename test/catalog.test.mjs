@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import {
   cpSync,
   mkdirSync,
@@ -235,7 +236,9 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(ans.lifecycle.recommendThrough, "2026-12-31");
   assert.equal(ans.lifecycle.lastExamOn, "2026-12-31");
   assert.equal(ans.lifecycle.reviewOn, "2027-01-01");
-  assert.equal(ans.provenance.checkedOn, "2026-08-31");
+  assert.equal(ans.provenance.checkedOn, "2026-09-05");
+  assert.equal(ans.lifecycle.transition, "announced");
+  assert.equal(ans.lifecycle.successor, undefined);
   assert.ok(
     ans.provenance.sources.some(
       (source) =>
@@ -249,6 +252,50 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
       .status,
     "retiring"
   );
+
+  const mla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+  assert.equal(mla.status, "active-retiring");
+  assert.equal(mla.lifecycle.recommendThrough, "2026-09-28");
+  assert.equal(mla.lifecycle.lastExamOn, "2027-01-13");
+  assert.equal(mla.lifecycle.reviewOn, "2027-01-14");
+  assert.equal(mla.lifecycle.successor, "aws:mla-c02");
+  assert.equal(mla.provenance.checkedOn, "2026-09-04");
+  assert.ok(
+    mla.provenance.sources.some(
+      (source) =>
+        source.kind === "lifecycle" &&
+        source.url ===
+          "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/"
+    )
+  );
+  assert.equal(
+    readJson(resolve(repoRoot, "content", "public", "coverage", "aws", "mla-c01.json"))
+      .status,
+    "retiring"
+  );
+  assert.equal(mla.lifecycle.transition, "announced");
+
+  // Vague 1 de la campagne de verification : les deux transitions AWS dont les
+  // sources officielles se contredisent sont encadrees et non tranchees.
+  for (const [id, bracket] of [
+    ["aws:sap-c02", { recommendThrough: "2026-11-16", lastExamOn: "2026-11-17" }],
+    ["aws:dva-c02", { recommendThrough: "2026-11-30", lastExamOn: "2026-12-01" }],
+  ]) {
+    const entry = catalog.certifications.find(
+      (certification) => certification.id === id
+    );
+    assert.equal(entry.status, "active-retiring", `${id}: statut`);
+    assert.equal(entry.lifecycle.transition, "announced", `${id}: transition`);
+    assert.equal(entry.lifecycle.recommendThrough, bracket.recommendThrough, `${id}: borne basse`);
+    assert.equal(entry.lifecycle.lastExamOn, bracket.lastExamOn, `${id}: borne haute`);
+    assert.equal(entry.provenance.checkedOn, "2026-09-05", `${id}: date de verification`);
+    assert.ok(
+      entry.lifecycle.recommendThrough < entry.lifecycle.lastExamOn,
+      `${id}: l'encadrement doit rester un intervalle`
+    );
+  }
 });
 
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
@@ -352,6 +399,228 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
   assert.ok(
     transition.errors.some((error) => error.includes("transition a reverifier"))
   );
+});
+
+test("applique les bornes linguistiques de transition MLA-C01", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const mla = catalog.certifications.find(
+    (certification) => certification.id === "aws:mla-c01"
+  );
+
+  // Dernier jour de MLA-C01 en anglais : encore actif et encore recommande.
+  assert.equal(isCertificationActiveOn(mla, "2026-09-28"), true);
+  assert.equal(isCertificationRecommendedOn(mla, "2026-09-28"), true);
+  // Debut de la livraison beta MLA-C02 : MLA-C01 reste actif (ja/ko/zh-CN)
+  // mais n'est plus recommande.
+  assert.equal(isCertificationActiveOn(mla, "2026-09-29"), true);
+  assert.equal(isCertificationRecommendedOn(mla, "2026-09-29"), false);
+  // Retrait toutes langues a la GA MLA-C02 du 14 janvier 2027.
+  assert.equal(isCertificationActiveOn(mla, "2027-01-13"), true);
+  assert.equal(isCertificationActiveOn(mla, "2027-01-14"), false);
+
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-04" });
+  assert.deepEqual(current.errors, []);
+  assert.ok(current.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(current.recommendedCertificationIds.includes("aws:mla-c01"));
+
+  const transition = checkCatalogFreshness({ root: repoRoot, asOf: "2027-01-14" });
+  assert.ok(!transition.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(transition.excludedCertificationIds.includes("aws:mla-c01"));
+  assert.ok(
+    transition.errors.some((error) =>
+      error.includes("aws:mla-c01: transition a reverifier")
+    )
+  );
+});
+
+test("declare la transition de cycle de vie ou une exemption datee", () => {
+  const exemptions = readJson(
+    resolve(repoRoot, "config", "catalog-transition-exemptions.json")
+  );
+  const catalog = readJson(catalogAt(repoRoot));
+  const active = catalog.certifications.filter((certification) =>
+    ["active", "active-retiring"].includes(certification.status)
+  );
+  const exempted = new Map(
+    exemptions.exemptions.map((entry) => [entry.id, entry.expiresOn])
+  );
+
+  // Toute entree active est soit declarante, soit exemptee : aucun silence muet.
+  for (const certification of active) {
+    const declared = Boolean(certification.lifecycle?.transition);
+    assert.equal(
+      declared || exempted.has(certification.id),
+      true,
+      `${certification.id} ne declare pas transition et n'est pas exemptee`
+    );
+  }
+
+  // Invariant central : une exemption qui expire APRES la peremption des sources
+  // serait inerte, l'entree tombant d'abord sur "sources agees" - le mauvais motif.
+  const maxAgeDays = catalog.freshness.maxAgeDays;
+  for (const certification of active) {
+    const expiresOn = exempted.get(certification.id);
+    if (!expiresOn) continue;
+    const staleOn = new Date(
+      parseDate(certification.provenance.checkedOn, "checkedOn").valueOf() +
+        (maxAgeDays + 1) * 86_400_000
+    )
+      .toISOString()
+      .slice(0, 10);
+    assert.ok(
+      expiresOn <= staleOn,
+      `${certification.id}: exemption ${expiresOn} posterieure a la peremption ${staleOn}`
+    );
+  }
+
+  // Les expirations restent etalees tant que la liste est assez grande pour
+  // qu'un regroupement recree une falaise. La liste ne fait que retrecir au fil
+  // de la campagne, donc exiger un nombre fixe de dates distinctes echouerait
+  // sur un residu legitime : le seuil est proportionnel a ce qui reste.
+  const distinct = new Set(exemptions.exemptions.map((entry) => entry.expiresOn));
+  if (exemptions.exemptions.length >= 10) {
+    assert.ok(
+      distinct.size >= 3,
+      `${exemptions.exemptions.length} exemptions groupees sur ${distinct.size} date(s)`
+    );
+  }
+  const perDate = new Map();
+  for (const entry of exemptions.exemptions) {
+    perDate.set(entry.expiresOn, (perDate.get(entry.expiresOn) ?? 0) + 1);
+  }
+  for (const [expiresOn, count] of perDate) {
+    assert.ok(
+      count <= 12,
+      `${count} exemptions expirent le ${expiresOn}: falaise reconstituee`
+    );
+  }
+});
+
+test("distingue peremption des sources et silence de cycle de vie", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const expiredExemptions = new Set(
+    readJson(resolve(repoRoot, "config", "catalog-transition-exemptions.json"))
+      .exemptions.filter((entry) => entry.expiresOn <= "2026-09-17")
+      .map((entry) => entry.id)
+  );
+
+  // Avant toute expiration : gate verte.
+  const today = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-05" });
+  assert.deepEqual(today.errors, []);
+
+  // Apres expiration ET peremption : les DEUX motifs remontent, distincts.
+  const both = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-17" });
+  const silence = both.errors.filter((error) => error.includes("[lifecycle:transition]"));
+  const staleness = both.errors.filter((error) => error.includes("sources agees"));
+  assert.ok(silence.length > 0, "silence de cycle de vie absent");
+  assert.ok(staleness.length > 0, "peremption des sources absente");
+
+  // Un motif ne doit pas masquer l'autre sur une meme entree. L'entree est
+  // derivee du catalogue, non codee en dur : la campagne de fraicheur retire
+  // une a une les entrees muettes, donc un identifiant fige transforme un
+  // succes de campagne en echec de test - c'est ce qui est arrive a
+  // gcp:cloud-architect. La derivation garde la force de l'assertion, parce
+  // qu'elle exige d'abord qu'une telle entree existe : sans ce garde-fou, une
+  // liste vide ferait passer le test sans rien mesurer.
+  const silentAndStale = catalog.certifications.filter((certification) => {
+    if (!["active", "active-retiring"].includes(certification.status)) return false;
+    if (certification.lifecycle?.transition) return false;
+    if (!expiredExemptions.has(certification.id)) return false;
+    const staleOn = new Date(
+      Date.parse(certification.provenance.checkedOn) +
+        (catalog.freshness.maxAgeDays + 1) * 86_400_000
+    )
+      .toISOString()
+      .slice(0, 10);
+    return staleOn <= "2026-09-17";
+  });
+  assert.ok(
+    silentAndStale.length > 0,
+    "aucune entree a la fois muette et perimee au 2026-09-17 : " +
+      "le test ne mesure plus rien et doit basculer sur un catalogue synthetique"
+  );
+  for (const certification of silentAndStale) {
+    assert.ok(
+      silence.some((error) => error.includes(certification.id)),
+      `${certification.id} : silence de cycle de vie absent`
+    );
+    assert.ok(
+      staleness.some((error) => error.includes(certification.id)),
+      `${certification.id} : peremption des sources absente`
+    );
+  }
+
+  // Le message d'exemption expiree oriente vers la source officielle,
+  // pas vers une donnee malformee.
+  assert.ok(
+    silence.some(
+      (error) =>
+        error.includes("exemption expiree") && error.includes("source officielle")
+    )
+  );
+});
+
+test("rejette une declaration de transition incoherente", async () => {
+  const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  const announced = catalog.certifications.find(
+    (certification) => certification.id === "aws:saa-c03"
+  );
+  announced.lifecycle = { transition: "announced" };
+  const silent = catalog.certifications.find(
+    (certification) => certification.id === "aws:dea-c01"
+  );
+  silent.lifecycle = { transition: "none-announced", successor: "aws:dea-c02" };
+  writeJson(catalogAt(root), catalog);
+
+  const result = await validateContent({ root });
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[catalog:transition]") &&
+        error.includes("aws:saa-c03") &&
+        error.includes("lastExamOn")
+    ),
+    "announced sans lastExamOn doit echouer"
+  );
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[catalog:transition]") &&
+        error.includes("aws:dea-c01") &&
+        error.includes("successor")
+    ),
+    "none-announced avec successor doit echouer"
+  );
+});
+
+test("une entree declarante sort de la gate sans exemption", () => {
+  const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  for (const certification of catalog.certifications) {
+    if (!["active", "active-retiring"].includes(certification.status)) continue;
+    certification.lifecycle = {
+      ...(certification.lifecycle ?? {}),
+      transition: certification.lifecycle?.lastExamOn ? "announced" : "none-announced",
+    };
+  }
+  writeJson(catalogAt(root), catalog);
+
+  // Aucun fichier d'exemption dans ce root : l'absence durcit la gate,
+  // donc seule la declaration peut la faire passer.
+  const result = checkCatalogFreshness({ root, asOf: "2026-09-05" });
+  assert.deepEqual(
+    result.errors.filter((error) => error.includes("[lifecycle:transition]")),
+    []
+  );
+});
+
+test("un fichier d'exemptions absent ne vaut pas exemption", () => {
+  const root = createMetadataRoot();
+  const result = checkCatalogFreshness({ root, asOf: "2026-09-05" });
+  const silence = result.errors.filter((error) => error.includes("[lifecycle:transition]"));
+  assert.ok(silence.length > 0, "un fichier absent doit durcir la gate, pas la neutraliser");
+  assert.ok(silence.some((error) => error.includes("ne figure pas dans")));
 });
 
 test("detecte catalogue stale, date invalide et catalogue absent", () => {
@@ -580,6 +849,92 @@ test("controle aussi les rangs lorsque le total n'est pas divisible par quatre",
   );
 });
 
+test("rejette une distribution desequilibree des positions de la bonne reponse", async () => {
+  const root = createMetadataRoot();
+  // Chaque question place sa bonne reponse a l'index 0, mais avec un rang de
+  // longueur different : les rangs sont donc parfaitement equilibres (1/1/1/1)
+  // tandis que les positions sont degenerees (4/0/0/0). Seule la position varie,
+  // donc seul le controle de position peut faire echouer ce cas.
+  const lengths = [90, 100, 105, 110];
+  const ids = lengths.map((_, rank) => {
+    const ordered = [lengths[rank], ...lengths.filter((_, i) => i !== rank)];
+    const choices = ordered.map((length, choiceIndex) =>
+      String.fromCharCode(97 + choiceIndex).repeat(length)
+    );
+    return addV3Pair(root, {
+      id: `aws.aif-c01.domain-1.answer-position.00${rank + 1}`,
+      choices,
+      correct: choices[0],
+    });
+  });
+  completeAifMatrix(root, ids);
+
+  const result = await validateContent({ root });
+
+  assert.ok(
+    result.errors.some(
+      (error) =>
+        error.includes("[editorial:answer-position]") &&
+        error.includes("positions de la bonne reponse 4/0/0/0") &&
+        error.includes("attendu 1/1/1/1")
+    )
+  );
+  // Forme complete : le meme appel doit voir le cas ABSENT. Les rangs sont
+  // equilibres, donc aucune erreur de rang ne doit apparaitre — sans quoi le
+  // test passerait pour la mauvaise raison.
+  assert.ok(
+    !result.errors.some((error) => error.includes("rangs de longueur")),
+    "les rangs sont equilibres : aucune erreur de rang ne doit etre levee"
+  );
+});
+
+test("les positions ne sont plus controlees des qu'une question reste au registre de dette", async () => {
+  // Meme corpus degenere que le test precedent, a une seule variable pres : un
+  // identifiant de la certification figure au registre. Le controle de cohorte
+  // s'eteint alors entierement — angle mort assume et documente dans le code.
+  const root = createMetadataRoot();
+  const lengths = [90, 100, 105, 110];
+  const ids = lengths.map((_, rank) => {
+    const ordered = [lengths[rank], ...lengths.filter((_, i) => i !== rank)];
+    const choices = ordered.map((length, choiceIndex) =>
+      String.fromCharCode(97 + choiceIndex).repeat(length)
+    );
+    return addV3Pair(root, {
+      id: `aws.aif-c01.domain-1.answer-position-debt.00${rank + 1}`,
+      choices,
+      correct: choices[0],
+    });
+  });
+  completeAifMatrix(root, ids);
+
+  // 1. Sans registre : la degenerescence 4/0/0/0 est bien vue.
+  const sansRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    sansRegistre.errors.some((error) =>
+      error.includes("[editorial:answer-position]")
+    ),
+    "temoin : sans registre le controle de position doit voir le desequilibre"
+  );
+
+  // 2. Avec un seul identifiant inscrit : le controle s'eteint pour toute la
+  // cohorte, y compris pour les trois questions qui ne sont pas dispensees.
+  writeLedger(root, "editorial-debt.json", "debts", [
+    {
+      certification: "aws:aif-c01",
+      expiresOn: "2026-11-30",
+      questionIds: [ids[0]],
+    },
+  ]);
+  const avecRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.deepEqual(
+    avecRegistre.errors.filter((error) =>
+      error.includes("[editorial:answer-position]")
+    ),
+    [],
+    "un seul identifiant au registre suffit a eteindre le controle de position"
+  );
+});
+
 test("applique les controles editoriaux a une matrice in-progress publiee", async () => {
   const root = createMetadataRoot();
   const id = addV3Pair(root, {
@@ -743,4 +1098,253 @@ test("genere un manifeste v2 deterministe incluant catalogue et couverture", asy
     readJson(resolve(repoRoot, "schemas", "manifest.schema.json"))
   );
   assert.equal(validate(first), true, JSON.stringify(validate.errors));
+});
+
+// --- Registres de dette : garde-fous [coverage:question] et [editorial:answer-length] ---
+// Ces tests fixent les deux trous observes avant leur correction : une question v2
+// pouvait etre rattachee a n'importe quelle certification, et la regle editoriale
+// n'etait mesuree que si la solution portait une provenance.
+
+const LEDGER_DAY = "2026-09-07";
+
+function addLegacyPair(root, id) {
+  writeJson(resolve(root, "content", "public", "questions", `${id}.json`), {
+    id,
+    schemaVersion: "v2",
+    kind: "public",
+    prompt: `Question ${id}`,
+    choices: ["Alpha", "Bravo", "Charlie", "Delta"],
+  });
+  writeJson(resolve(root, "content", "answerKey", "solutions", `${id}.json`), {
+    id,
+    schemaVersion: "v2",
+    kind: "answerKey",
+    correct: "Alpha",
+    rationale: "Parce que.",
+  });
+  return id;
+}
+
+function bindToMatrix(root, provider, certification, ids) {
+  const path = resolve(
+    root,
+    "content",
+    "public",
+    "coverage",
+    provider,
+    `${certification}.json`
+  );
+  const matrix = readJson(path);
+  matrix.objectives[0].questionIds = ids;
+  writeJson(path, matrix);
+}
+
+function writeLedger(root, file, collection, entries) {
+  writeJson(resolve(root, "config", file), {
+    schema: `certigo.${collection}/v1`,
+    note: "fixture",
+    [collection]: entries,
+  });
+}
+
+const legacyErrors = (result) =>
+  result.errors.filter(
+    (error) =>
+      error.includes("[coverage:question]") && error.includes("(v2)")
+  );
+
+test("refuse une question v2 rattachee a une certification qui ne l'inventorie pas", async () => {
+  const root = createMetadataRoot();
+  const intrus = addLegacyPair(root, "l-core-mos-word-expert-check-1");
+  bindToMatrix(root, "microsoft", "sc-900", [intrus]);
+
+  // 1. Sans inventaire : le rattachement n'est prouve par rien, donc refuse.
+  const sansInventaire = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    legacyErrors(sansInventaire).some((error) => error.includes(intrus)),
+    "une question v2 hors inventaire doit etre refusee"
+  );
+
+  // 2. Inventoriee sous une AUTRE certification : toujours refusee. Sans cela
+  //    l'inventaire serait une liste blanche globale et non un rattachement.
+  writeLedger(root, "legacy-coverage-inventory.json", "inventories", [
+    {
+      certification: "microsoft:az-900",
+      expiresOn: "2026-11-30",
+      questionIds: [intrus],
+    },
+  ]);
+  const mauvaiseCertification = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    legacyErrors(mauvaiseCertification).some((error) => error.includes(intrus)),
+    "l'inventaire doit rattacher a une certification precise"
+  );
+
+  // 3. Inventoriee sous la bonne certification : acceptee.
+  writeLedger(root, "legacy-coverage-inventory.json", "inventories", [
+    {
+      certification: "microsoft:sc-900",
+      expiresOn: "2026-11-30",
+      questionIds: [intrus],
+    },
+  ]);
+  const inventoriee = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.deepEqual(legacyErrors(inventoriee), []);
+
+  // 4. Le lendemain de l'expiration, la dispense cesse.
+  const expiree = await validateContent({ root, asOf: "2026-11-30" });
+  assert.ok(
+    legacyErrors(expiree).some((error) => error.includes(intrus)),
+    "une entree expiree ne doit plus dispenser"
+  );
+});
+
+test("un inventaire absent durcit la validation au lieu de la neutraliser", async () => {
+  const root = createMetadataRoot();
+  const id = addLegacyPair(root, "l-core-orphelin-check-1");
+  bindToMatrix(root, "microsoft", "sc-900", [id]);
+
+  const result = await validateContent({ root, asOf: LEDGER_DAY });
+
+  assert.ok(legacyErrors(result).some((error) => error.includes(id)));
+});
+
+test("mesure la regle editoriale meme sans provenance sur la solution", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: [
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+      "Court",
+      "Un peu plus",
+      "Encore un peu plus long",
+    ],
+    correct:
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+    provenance: undefined,
+  });
+  // Le champ provenance reste absent : c'est exactement la cohorte que la
+  // regle ignorait auparavant.
+  const solutionPath = resolve(
+    root,
+    "content",
+    "answerKey",
+    "solutions",
+    "aws",
+    "aif-c01",
+    `${id}.json`
+  );
+  const solution = readJson(solutionPath);
+  delete solution.provenance;
+  writeJson(solutionPath, solution);
+
+  const sansRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.ok(
+    sansRegistre.errors.some(
+      (error) =>
+        error.includes("[editorial:answer-length]") &&
+        error.includes(id) &&
+        error.includes("ratio")
+    ),
+    "une paire sans provenance doit etre soumise a la regle editoriale"
+  );
+
+  // Inscrite au registre de dette : toleree, mais nommement et jusqu'a une date.
+  writeLedger(root, "editorial-debt.json", "debts", [
+    {
+      certification: "aws:aif-c01",
+      expiresOn: "2026-11-30",
+      questionIds: [id],
+    },
+  ]);
+  const avecRegistre = await validateContent({ root, asOf: LEDGER_DAY });
+  assert.deepEqual(
+    avecRegistre.errors.filter((error) =>
+      error.includes("[editorial:answer-length]")
+    ),
+    []
+  );
+
+  const expire = await validateContent({ root, asOf: "2026-12-01" });
+  assert.ok(
+    expire.errors.some(
+      (error) =>
+        error.includes("[editorial:answer-length]") && error.includes(id)
+    ),
+    "une dette expiree redevient une erreur"
+  );
+});
+
+test("rejette une date d'expiration malformee au lieu de la comparer", async () => {
+  const root = createMetadataRoot();
+  writeLedger(root, "editorial-debt.json", "debts", [
+    { certification: "aws:aif-c01", expiresOn: "30/11/2026", questionIds: [] },
+  ]);
+
+  await assert.rejects(
+    () => validateContent({ root, asOf: LEDGER_DAY }),
+    /expiresOn invalide/
+  );
+});
+
+// La date d'evaluation des registres n'etait atteignable que par appel
+// programmatique : en ligne de commande, plus rien ne permettait de voir ce que
+// les controles diront une fois les dispenses expirees. Or plusieurs d'entre eux
+// restent eteints tant qu'une dispense subsiste, donc leur silence se lit comme
+// un succes. Ce test exige que le drapeau soit porteur : sur un meme arbre, deux
+// dates encadrant l'expiration doivent produire deux verdicts differents.
+function runValidator(root, extra = []) {
+  const result = spawnSync(
+    process.execPath,
+    [resolve(repoRoot, "tools", "validate_content.mjs"), "--root", root, ...extra],
+    { encoding: "utf8" }
+  );
+  return `${result.stdout ?? ""}${result.stderr ?? ""}`;
+}
+
+test("--as-of date l'evaluation des registres en ligne de commande", async () => {
+  const root = createMetadataRoot();
+  const id = addV3Pair(root, {
+    choices: [
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+      "Court",
+      "Un peu plus",
+      "Encore un peu plus long",
+    ],
+    correct:
+      "Une reponse correcte nettement plus longue que toutes les autres options",
+  });
+  writeLedger(root, "editorial-debt.json", "debts", [
+    {
+      certification: "aws:aif-c01",
+      expiresOn: "2026-11-30",
+      questionIds: [id],
+    },
+  ]);
+
+  // La veille de l'expiration : la dispense tient, la regle se tait.
+  const veille = runValidator(root, ["--as-of", "2026-11-29"]);
+  assert.ok(
+    !veille.includes("[editorial:answer-length]"),
+    `la dispense doit encore tenir la veille:\n${veille}`
+  );
+
+  // Le jour de l'expiration : le meme arbre devient rouge. Sans cet ecart, le
+  // drapeau serait accepte sans rien changer, donc ne prouverait rien.
+  const jourJ = runValidator(root, ["--as-of", "2026-11-30"]);
+  assert.ok(
+    jourJ.includes("[editorial:answer-length]") && jourJ.includes(id),
+    `la dette expiree doit remonter le jour meme:\n${jourJ}`
+  );
+});
+
+test("--as-of refuse une date malformee au lieu de la traiter comme absente", () => {
+  const root = createMetadataRoot();
+
+  // Une date rejetee silencieusement retomberait sur aujourd'hui et rendrait le
+  // drapeau trompeur plutot qu'inoperant.
+  const sortie = runValidator(root, ["--as-of", "30/11/2026"]);
+  assert.ok(
+    sortie.includes("--as-of attend une date AAAA-MM-JJ"),
+    `une date malformee doit etre refusee explicitement:\n${sortie}`
+  );
 });

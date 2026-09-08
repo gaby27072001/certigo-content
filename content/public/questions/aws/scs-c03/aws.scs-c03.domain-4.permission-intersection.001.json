@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Une session de rôle reçoit un refus pour `s3:PutObject` alors que sa politique d'identité autorise l'action. Le rôle possède une permission boundary, la session a une session policy et le compte appartient à une OU avec SCP. Quelle méthode de diagnostic est correcte ?",
+  "prompt": "Une équipe veut déléguer la création de rôles à des développeurs, sans qu'un rôle ainsi créé puisse jamais dépasser un périmètre défini centralement, même si son auteur lui attache une politique très large. La délégation doit rester utilisable au quotidien et ne pas dépendre d'une revue humaine à chaque création. Quel mécanisme retenir ?",
   "choices": [
-    "Ajouter immédiatement une seconde politique d'identité Allow identique",
-    "Examiner les refus explicites et l'intersection entre politique d'identité, permission boundary, session policy, SCP et politique de ressource à l'aide des événements et outils d'analyse IAM",
-    "Supprimer CloudTrail afin que l'appel ne soit plus journalisé",
-    "Modifier le groupe de sécurité du compartiment S3"
+    "Une politique de session appliquée lors de l'assomption, qui restreint les permissions effectives de la session à l'intersection avec le périmètre",
+    "Une politique de contrôle de service attachée à l'unité d'organisation, qui interdit aux développeurs les actions de création de rôle non conformes",
+    "Une limite de permissions imposée aux rôles créés, qui borne les permissions effectives à l'intersection avec la politique basée sur l'identité",
+    "Une politique basée sur les ressources placée sur chaque ressource sensible, qui n'autorise que les rôles explicitement nommés par l'équipe centrale"
   ]
 }

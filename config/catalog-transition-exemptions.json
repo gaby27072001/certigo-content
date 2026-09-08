@@ -1,0 +1,58 @@
+{
+  "schema": "certigo.catalog-transition-exemptions/v1",
+  "note": "Entrees actives qui ne declarent pas encore lifecycle.transition. Chaque exemption expire a la date indiquee, apres quoi la gate echoue sur l'entree et exige une verification aupres des sources officielles. La liste ne doit que retrecir : une entree en sort en declarant transition, pas en repoussant sa date. Une date peut etre tiree en avant pour preserver l'etalement des echeances, jamais repoussee.",
+  "exemptions": [
+    {
+      "id": "aws:aif-c01",
+      "expiresOn": "2026-09-14"
+    },
+    {
+      "id": "aws:aip-c01",
+      "expiresOn": "2026-09-13"
+    },
+    {
+      "id": "aws:clf-c02",
+      "expiresOn": "2026-09-14"
+    },
+    {
+      "id": "aws:dea-c01",
+      "expiresOn": "2026-09-13"
+    },
+    {
+      "id": "aws:dop-c02",
+      "expiresOn": "2026-09-13"
+    },
+    {
+      "id": "aws:saa-c03",
+      "expiresOn": "2026-09-13"
+    },
+    {
+      "id": "aws:scs-c03",
+      "expiresOn": "2026-09-13"
+    },
+    {
+      "id": "aws:soa-c03",
+      "expiresOn": "2026-09-13"
+    },
+    {
+      "id": "microsoft:ai-901",
+      "expiresOn": "2026-09-16"
+    },
+    {
+      "id": "microsoft:az-104",
+      "expiresOn": "2026-09-16"
+    },
+    {
+      "id": "microsoft:az-900",
+      "expiresOn": "2026-09-16"
+    },
+    {
+      "id": "microsoft:dp-900",
+      "expiresOn": "2026-09-16"
+    },
+    {
+      "id": "microsoft:sc-900",
+      "expiresOn": "2026-09-16"
+    }
+  ]
+}

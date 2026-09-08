@@ -57,17 +57,36 @@ test("separe trois UAMI OIDC et publie le descripteur en dernier", () => {
   for (const job of jobs) {
     assert.deepEqual(job.permissions, { contents: "read", "id-token": "write" });
     const login = job.steps.find((step) => step.uses?.startsWith("azure/login@"));
-    const cli = job.steps.find((step) => step.uses?.startsWith("azure/cli@"));
     assert.match(login.uses, /^azure\/login@[0-9a-f]{40}$/);
     assert.equal(login.with.creds, undefined);
     assert.equal(login.with.audience, "api://AzureADTokenExchange");
-    assert.match(cli.uses, /^azure\/cli@[0-9a-f]{40}$/);
-    assert.equal(cli.with.azcliversion, "2.89.1");
+    // La publication passe par l'Azure CLI native du runner, invoquee depuis une
+    // etape `run`. Les runners self-hosted n'ont pas Docker : toute action
+    // conteneur (`azure/cli`, ou un `container:` de job) rend le workflow
+    // inexecutable ici, ce qui n'apparait qu'a l'execution. On l'interdit donc
+    // explicitement plutot que d'epingler une action conteneur precise.
+    const publish = job.steps.find((step) =>
+      step.run?.includes("tools/publish_blob_artifact.sh")
+    );
+    assert.ok(publish, "chaque job doit publier via publish_blob_artifact.sh");
+    assert.equal(publish.shell, "bash");
+    assert.equal(publish.uses, undefined);
+    assert.equal(job.container, undefined);
+    for (const step of job.steps) {
+      assert.doesNotMatch(step.uses ?? "", /^azure\/cli@/);
+      // Invariant reel, independant de la forme : toute action encore utilisee
+      // reste epinglee a un SHA complet. Une etape `run` n'a pas de `uses` et
+      // n'est donc pas concernee, mais ne doit pas relacher la regle.
+      if (step.uses !== undefined) {
+        assert.match(step.uses, /^[^@\s]+@[0-9a-f]{40}$/);
+      }
+    }
   }
   const text = readFileSync(workflowPath, "utf8");
   assert.match(text, /manifests\/\$\{MANIFEST_ID\}/);
   assert.match(text, /releases\/\$\{RELEASE_ID\}/);
   assert.doesNotMatch(text, /upload-artifact/);
+  assert.doesNotMatch(text, /azcliversion/);
 });
 
 test("interdit les secrets statiques, alias mutables, delete et overwrite", () => {
@@ -81,7 +100,15 @@ test("interdit les secrets statiques, alias mutables, delete et overwrite", () =
   assert.match(contract, /immutabilityPolicy\.policyMode/);
   assert.match(contract, /immutabilityPolicy\.expiryTime/);
   assert.match(contract, /hasLegalHold/);
-  assert.match(contract, /policy_state}" != "Locked"/);
+  // L'exigence de verrou reste affirmee par son MECANISME, pas par le texte
+  // exact de la comparaison. Epingler la chaine `policy_state}" != "Locked"`
+  // interdisait de normaliser la casse, alors que le plan de donnees renvoie
+  // `unlocked` en minuscules la ou le plan de gestion renvoie `Unlocked` : le
+  // test empechait donc la correction du bug qu'il etait cense proteger. La
+  // semantique elle-meme est couverte par les tests d'integration, qui
+  // verifient les codes de sortie reels.
+  assert.match(contract, /CONTENT_REQUIRE_LOCKED_WORM/);
+  assert.match(contract, /!= "locked"/i);
   assert.doesNotMatch(contract, /Locked\|Unlocked/);
   assert.doesNotMatch(contract, /az storage blob delete/);
 });
@@ -100,6 +127,26 @@ test("publie et verifie un manifeste versionne avec Azure CLI simule", (context)
     return;
   }
 
+  const result = runFakePublish({});
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /2 blob\(s\) verifies/);
+});
+
+// Harness partage : prepare une source minimale et une Azure CLI simulee, puis
+// execute le script de publication. Les parametres couvrent le chemin reellement
+// emprunte en production (`Unlocked`) autant que les refus attendus.
+//
+// `wormState` et `blobPolicyMode` sont DEUX parametres distincts, et par defaut
+// de casse differente, parce qu'Azure repond ainsi : le plan de gestion renvoie
+// `Unlocked` pour l'etat du conteneur, le plan de donnees renvoie `unlocked`
+// pour `immutabilityPolicy.policyMode` d'un blob. Casse relevee sur le compte
+// reel via inspect-content-storage le 2026-09-05.
+function runFakePublish({
+  wormState = "Locked",
+  blobPolicyMode = "locked",
+  azVersion = "2.89.0",
+  requireLocked,
+}) {
   const root = mkdtempSync(resolve(tmpdir(), "certigo-azure-publish-"));
   try {
     const source = resolve(root, "source");
@@ -116,10 +163,25 @@ test("publie et verifie un manifeste versionne avec Azure CLI simule", (context)
     writeFileSync(resolve(source, "questions", "sample.json"), '{"id":"sample"}\n');
 
     const fakeAz = resolve(bin, "az");
+    // Ce double doit reproduire le FORMAT REEL de l'Azure CLI, pas un format
+    // commode. Une projection JMESPath plate avec `--output tsv` emet une valeur
+    // par LIGNE, jamais des colonnes separees par des tabulations. Le double
+    // emettait auparavant des tabulations, si bien que le parseur du script
+    // etait teste contre une sortie que l'outil reel ne produit pas : les cinq
+    // scenarios passaient alors que la publication echouait en production avec
+    // exit 66. Un test qui affirme la bonne chose contre le mauvais monde ne
+    // prouve rien.
     writeFileSync(
       fakeAz,
       `#!/usr/bin/env bash
 set -euo pipefail
+# L'Azure CLI reelle est desormais invoquee directement par le script, qui exige
+# sa presence et un plancher de version. Le simulateur doit donc repondre a
+# \`az version\` comme la vraie CLI.
+if [[ "$1" == "version" ]]; then
+  printf '%s\\n' "\${MOCK_AZ_VERSION:-2.89.0}"
+  exit 0
+fi
 command="$1 $2 $3"
 shift 3
 name=""
@@ -135,7 +197,7 @@ while [[ "$#" -gt 0 ]]; do
 done
 case "\${command}" in
   "storage container show") printf 'None\\n' ;;
-  "storage container immutability-policy") printf 'Locked\\t30\\tfalse\\tfalse\\n' ;;
+  "storage container immutability-policy") printf '%s\\n30\\nfalse\\nfalse\\n' "\${MOCK_WORM_STATE:-Locked}" ;;
   "storage blob exists")
     [[ -f "\${MOCK_STATE}/\${name}" ]] && printf 'true\\n' || printf 'false\\n'
     ;;
@@ -147,7 +209,7 @@ case "\${command}" in
     mkdir -p "\$(dirname "\${file}")"
     cp "\${MOCK_STATE}/\${name}" "\${file}"
     ;;
-  "storage blob show") printf 'application/json\\t%s\\tversion-1\\tLocked\\t2099-01-01T00:00:00Z\\tfalse\\n' "\${MOCK_CACHE}" ;;
+  "storage blob show") printf 'application/json\\n%s\\nversion-1\\n%s\\n2099-01-01T00:00:00Z\\nfalse\\n' "\${MOCK_CACHE}" "\${MOCK_BLOB_POLICY_MODE:-locked}" ;;
   "storage blob list")
     (cd "\${MOCK_STATE}" && find "\${prefix}" -type f -print | sort)
     ;;
@@ -176,12 +238,69 @@ esac
           PATH: `${bin}:${process.env.PATH}`,
           MOCK_STATE: state,
           MOCK_CACHE: "public,max-age=31536000,immutable",
+          MOCK_WORM_STATE: wormState,
+          MOCK_BLOB_POLICY_MODE: blobPolicyMode,
+          MOCK_AZ_VERSION: azVersion,
+          ...(requireLocked === undefined
+            ? {}
+            : { CONTENT_REQUIRE_LOCKED_WORM: requireLocked }),
         },
       }
     );
-    assert.equal(result.status, 0, result.stderr);
-    assert.match(result.stdout, /2 blob\(s\) verifies/);
+    return result;
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+}
+
+// Le pilote publie contre des policies WORM `Unlocked` : ADR-020 interdit le
+// verrouillage avant la preuve complete, et le verrouillage est irreversible.
+// Le chemin reellement emprunte en production doit donc etre couvert, et le
+// plancher de version doit echouer bruyamment plutot que silencieusement.
+test("accepte une retention WORM Unlocked et refuse une Azure CLI trop ancienne", (context) => {
+  if (process.platform === "win32") {
+    context.skip("test d'integration Bash execute sur les runners Linux");
+    return;
+  }
+
+  // Casses reelles observees : conteneur capitalise, blob en minuscules.
+  const unlocked = runFakePublish({
+    wormState: "Unlocked",
+    blobPolicyMode: "unlocked",
+  });
+  assert.equal(unlocked.status, 0, unlocked.stderr);
+  assert.match(unlocked.stdout, /2 blob\(s\) verifies/);
+
+  const locked = runFakePublish({
+    wormState: "Locked",
+    blobPolicyMode: "locked",
+    requireLocked: "true",
+  });
+  assert.equal(locked.status, 0, locked.stderr);
+
+  const refused = runFakePublish({
+    wormState: "Unlocked",
+    blobPolicyMode: "unlocked",
+    requireLocked: "true",
+  });
+  assert.equal(refused.status, 66);
+  assert.match(refused.stderr, /CONTENT_REQUIRE_LOCKED_WORM/);
+
+  // Image miroir du meme bug : `CONTENT_REQUIRE_LOCKED_WORM=true` face a un blob
+  // verrouille. Ce chemin ne s'emprunte qu'apres un verrouillage irreversible,
+  // donc il ne doit pas dependre de la casse renvoyee par l'API.
+  const lockedLowercaseBlob = runFakePublish({
+    wormState: "LOCKED",
+    blobPolicyMode: "Locked",
+    requireLocked: "true",
+  });
+  assert.equal(lockedLowercaseBlob.status, 0, lockedLowercaseBlob.stderr);
+
+  const stale = runFakePublish({
+    wormState: "Unlocked",
+    blobPolicyMode: "unlocked",
+    azVersion: "2.88.9",
+  });
+  assert.equal(stale.status, 70);
+  assert.match(stale.stderr, /2\.89\.0 requise/);
 });

@@ -10,9 +10,9 @@
   },
   "prompt": "Un système de publication éditoriale doit déclencher trois traitements indépendants à chaque parution d'un article : indexation pour la recherche, génération de vignettes et notification des partenaires. D'autres consommateurs seront ajoutés plus tard. Chaque traitement doit pouvoir tomber en panne, rattraper son retard et rejouer ses échecs sans affecter les autres, et l'ajout d'un consommateur ne doit pas nécessiter de modification du producteur. Quelle architecture l'architecte doit-il concevoir ?",
   "choices": [
-    "Faire appeler successivement les trois services par le producteur au moyen d'appels HTTP synchrones, avec des tentatives en cas d'échec.",
-    "Écrire l'événement dans une file Amazon SQS unique et faire lire cette file par les trois consommateurs.",
-    "Déposer un fichier d'événement sur Amazon S3 et faire scruter le préfixe toutes les minutes par les trois consommateurs.",
+    "Faire appeler successivement les trois services par le producteur au moyen d'appels HTTP synchrones, avec des tentatives automatiques en cas d'échec de l'un d'eux.",
+    "Écrire l'événement dans une file Amazon SQS unique et faire lire cette file par les trois consommateurs concurrents.",
+    "Déposer un fichier d'événement sur Amazon S3 et faire scruter le préfixe toutes les minutes par chacun des trois consommateurs, qui traitent les objets nouvellement déposés.",
     "Publier l'événement sur un sujet Amazon SNS auquel sont abonnées trois files Amazon SQS, une par consommateur, chacune dotée de sa propre file d'attente de lettres mortes."
   ]
 }

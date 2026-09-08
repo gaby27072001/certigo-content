@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Un rôle IAM fédéré a émis des sessions temporaires avant que sa relation d'approbation compromise soit corrigée. Les sessions peuvent rester valides plusieurs heures. Quelle action contient le risque le plus directement ?",
+  "prompt": "Les identifiants d'un rôle assumé via un jeu de permissions AWS IAM Identity Center ont fuité. L'équipe ouvre la console IAM, localise le rôle généré et cherche à révoquer ses sessions actives depuis l'onglet prévu à cet effet, mais l'opération est refusée. Quelle explication est correcte et quelle action faut-il mener ?",
   "choices": [
-    "Renommer le rôle IAM uniquement",
-    "Révoquer les sessions actives du rôle, corriger la politique de confiance et rechercher leur usage dans CloudTrail",
-    "Faire tourner une clé d'accès IAM qui n'est pas utilisée par le rôle",
-    "Supprimer les journaux CloudTrail qui contiennent l'ARN du rôle"
+    "Le rôle est lié à un service, la révocation exige donc de supprimer la politique de confiance avant de la recréer avec une nouvelle condition",
+    "Le rôle est issu d'un jeu de permissions, la révocation doit donc être effectuée depuis IAM Identity Center pour l'utilisateur concerné",
+    "Le rôle possède une durée de session maximale trop longue, la révocation exige donc de réduire cette durée avant de réitérer l'opération",
+    "Le rôle est protégé par une limite de permissions, la révocation exige donc de détacher cette limite avant d'attacher la politique de refus"
   ]
 }

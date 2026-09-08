@@ -10,9 +10,9 @@
   },
   "prompt": "Une équipe CloudOps reçoit chaque nuit des dizaines de notifications Amazon SNS parce que trois alarmes Amazon CloudWatch distinctes (utilisation CPU des instances, latence cible de l'Application Load Balancer, erreurs HTTP 5xx) passent en ALARM pendant le même incident. L'équipe souhaite n'être alertée qu'une seule fois, et uniquement lorsque les trois conditions sont simultanément remplies. Quelle solution répond au besoin avec le minimum d'effort opérationnel ?",
   "choices": [
-    "Porter la période d'évaluation des trois alarmes à 15 minutes afin d'espacer les notifications envoyées à Amazon SNS.",
-    "Créer une règle Amazon EventBridge planifiée qui appelle l'API DescribeAlarms toutes les heures et envoie un courriel lorsque plusieurs alarmes sont actives.",
+    "Porter la période d'évaluation de chacune des trois alarmes à quinze minutes afin d'espacer les notifications envoyées à Amazon SNS, chaque alarme continuant de notifier de son côté lors de l'incident.",
+    "Créer une règle Amazon EventBridge planifiée qui appelle l'API DescribeAlarms toutes les heures, compare les états obtenus et envoie un courriel lorsqu'elle constate que plusieurs alarmes sont actives en même temps.",
     "Créer une alarme composite CloudWatch dont la règle combine les trois alarmes existantes avec l'opérateur AND, puis n'attacher l'action Amazon SNS qu'à cette alarme composite.",
-    "Remplacer les trois alarmes par une alarme unique sur une métrique personnalisée publiée par un script planifié sur chaque instance."
+    "Remplacer les trois alarmes par une alarme unique portant sur une métrique personnalisée qu'un script publierait depuis chaque instance après avoir agrégé lui-même les trois conditions surveillées."
   ]
 }

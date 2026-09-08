@@ -139,13 +139,14 @@
         ]
       },
       "lifecycle": {
+        "transition": "announced",
         "reviewOn": "2027-01-01",
         "lastExamOn": "2026-12-31",
         "recommendThrough": "2026-12-31",
         "note": "AWS states that December 31, 2026 is the last day to take ANS-C01; certifications earned before retirement remain active for three years, no new certifications are issued after retirement, and no replacement exam is announced."
       },
       "provenance": {
-        "checkedOn": "2026-08-31",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-advanced-networking-specialty/" },
           { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01.html" },
@@ -266,7 +267,7 @@
       "officialSlug": "certified-developer-associate",
       "title": "AWS Certified Developer - Associate",
       "level": "associate",
-      "status": "active",
+      "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-developer-associate/",
       "guide": {
         "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html",
@@ -285,17 +286,19 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-12-01",
-        "lastExamOn": "2026-11-30",
+        "transition": "announced",
+        "reviewOn": "2026-12-02",
+        "lastExamOn": "2026-12-01",
+        "recommendThrough": "2026-11-30",
         "successor": "aws:dva-c03",
-        "note": "AWS states that DVA-C03 registration opens December 1, 2026 and DVA-C02 remains in use through November 30, 2026."
+        "note": "AWS announced DVA-C03: registration opens October 27, 2026 and GA delivery begins December 1, 2026. Two official AWS sources disagree on the final DVA-C02 date: the certification page states the last day to take DVA-C02 is December 1, 2026, while the September 2026 offerings announcement lists November 30, 2026 as the last day and December 1, 2026 as DVA-C03 GA. The catalog brackets the uncertainty rather than choosing: recommendThrough is the last day both sources agree the exam is sittable (November 30), and lastExamOn is the latest date any official source claims (December 1). To be re-verified once AWS reconciles the two pages."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-developer-associate/" },
           { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" },
-          { "kind": "lifecycle", "url": "https://docs.aws.amazon.com/aws-certification/latest/developer-associate-03/developer-associate-03.html" }
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },
@@ -307,7 +310,7 @@
       "officialSlug": "certified-machine-learning-engineer-associate",
       "title": "AWS Certified Machine Learning Engineer - Associate",
       "level": "associate",
-      "status": "active",
+      "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
       "guide": {
         "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html",
@@ -326,16 +329,19 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-09-01",
+        "transition": "announced",
+        "reviewOn": "2027-01-14",
+        "lastExamOn": "2027-01-13",
+        "recommendThrough": "2026-09-28",
         "successor": "aws:mla-c02",
-        "note": "AWS states that MLA-C02 registration opens September 1, 2026; the English MLA-C01 exam remains available through September 28, 2026."
+        "note": "AWS opened MLA-C02 beta registration on September 1, 2026. The last day to take MLA-C01 in English is September 28, 2026, and MLA-C02 beta delivery begins September 29, 2026. MLA-C01 remains available in Japanese, Korean, and Simplified Chinese until MLA-C02 GA delivery on January 14, 2027, when MLA-C01 retires in all languages. lastExamOn is an inclusive active-through boundary, so the final active date is January 13, 2027."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-04",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" },
           { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html" },
-          { "kind": "lifecycle", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" }
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },
@@ -418,7 +424,7 @@
       "officialSlug": "certified-solutions-architect-professional",
       "title": "AWS Certified Solutions Architect - Professional",
       "level": "professional",
-      "status": "active",
+      "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-solutions-architect-professional/",
       "guide": {
         "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html",
@@ -436,11 +442,20 @@
           { "id": "domain-4", "title": "Accelerate Workload Migration and Modernization", "weightPercent": 20, "weightType": "exact" }
         ]
       },
+      "lifecycle": {
+        "transition": "announced",
+        "reviewOn": "2026-11-18",
+        "lastExamOn": "2026-11-17",
+        "recommendThrough": "2026-11-16",
+        "successor": "aws:sap-c03",
+        "note": "AWS announced SAP-C03: registration opens October 27, 2026 and GA delivery begins November 17, 2026. Two official AWS sources disagree on the final SAP-C02 date: the certification page states the last day to take SAP-C02 is November 17, 2026, while the September 2026 offerings announcement lists November 16, 2026 as the last day and November 17, 2026 as SAP-C03 GA. The catalog brackets the uncertainty rather than choosing: recommendThrough is the last day both sources agree the exam is sittable (November 16), and lastExamOn is the latest date any official source claims (November 17). To be re-verified once AWS reconciles the two pages."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-solutions-architect-professional/" },
-          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" }
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html" },
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },
@@ -557,8 +572,12 @@
           { "id": "section-6", "title": "Monitoring and troubleshooting common issues", "weightPercent": 13, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"The Associate Google Workspace Administrator exam is now open for registration.\" That announces booking availability, not a lifecycle change: it names no new exam code, no successor and no end date. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/associate-google-workspace-administrator" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/associate_google_workspace_administrator_exam_guide_english.pdf" }
@@ -593,8 +612,12 @@
           { "id": "section-6", "title": "Ensuring solution and operations excellence", "weightPercent": 12.5, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam was updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" That is a product-naming refresh, not a lifecycle transition: it names no new exam code, no successor and no end date. The tense is itself evidence: on 2026-09-05 the equivalent Google Cloud banner read \"will soon be updated\", and on 2026-09-07 this page reads \"was updated\", so the rename has landed for this exam. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-architect" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_architect_exam_guide_english.pdf" }
@@ -628,11 +651,11 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-09-16",
-        "note": "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date."
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam will soon be updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" That is a content refresh of product naming, not a lifecycle transition, and Google gives no date for it. Freshness of this finding is carried by provenance.checkedOn."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-database-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_database_engineer_exam_guide_english.pdf" }
@@ -665,8 +688,12 @@
           { "id": "section-4", "title": "Integrating applications with Google Cloud services", "weightPercent": 21, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam was updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" That is a product-naming refresh, not a lifecycle transition: it names no new exam code, no successor and no end date. The tense is itself evidence: on 2026-09-05 the equivalent Google Cloud banner read \"will soon be updated\", and on 2026-09-07 this page reads \"was updated\", so the rename has landed for this exam. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-developer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_developer_exam_guide_english.pdf" }
@@ -700,8 +727,12 @@
           { "id": "section-5", "title": "Optimizing performance and cost", "weightPercent": 12, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries no exam-lifecycle banner; its single banner slot holds a Google Developer Program promotion. Because that slot is single, a promotion can occupy the place a lifecycle notice would take, so the banner is not on its own a reliable channel for this question. The conclusion here rests instead on a full-text scan of the whole visible page, which found none of the retirement vocabulary that the same scan does find on certification pages that do announce one. Anyone re-checking this entry should scan the full page, not just the banner. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-devops-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_devops_engineer_exam_guide_english.pdf" }
@@ -737,11 +768,11 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-09-16",
-        "note": "The guide states that this version launched on August 12, 2026."
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. Unlike the other Google Cloud data certifications checked on the same date, this page carries no branding-update banner. The guide states that this version launched on August 12, 2026. Freshness of this finding is carried by provenance.checkedOn."
       },
       "provenance": {
-        "checkedOn": "2026-08-18",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-digital-leader" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/cloud_digital_leader_exam_guide_english.pdf" }
@@ -774,8 +805,12 @@
           { "id": "section-4", "title": "Configuring access and security", "weightPercent": 20, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam was updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" That is a product-naming refresh, not a lifecycle transition: it names no new exam code, no successor and no end date. The tense is itself evidence: on 2026-09-05 the equivalent Google Cloud banner read \"will soon be updated\", and on 2026-09-07 this page reads \"was updated\", so the rename has landed for this exam. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/associate_cloud_engineer_exam_guide_english.pdf" }
@@ -810,8 +845,12 @@
           { "id": "section-6", "title": "Configuring, implementing and managing a cloud network security solution", "weightPercent": 13, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries no exam-lifecycle banner; its single banner slot holds a Google Developer Program promotion. Because that slot is single, a promotion can occupy the place a lifecycle notice would take, so the banner is not on its own a reliable channel for this question. The conclusion here rests instead on a full-text scan of the whole visible page, which found none of the retirement vocabulary that the same scan does find on certification pages that do announce one. Anyone re-checking this entry should scan the full page, not just the banner. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-network-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/042426_professional_cloud_network_engineer_exam_guide_english.pdf" }
@@ -845,8 +884,12 @@
           { "id": "section-5", "title": "Supporting compliance requirements", "weightPercent": 11, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries no exam-lifecycle banner; its single banner slot holds a Google Developer Program promotion. Because that slot is single, a promotion can occupy the place a lifecycle notice would take, so the banner is not on its own a reliable channel for this question. The conclusion here rests instead on a full-text scan of the whole visible page, which found none of the retirement vocabulary that the same scan does find on certification pages that do announce one. Anyone re-checking this entry should scan the full page, not just the banner. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/cloud-security-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_cloud_security_engineer_exam_guide_english.pdf" }
@@ -881,11 +924,11 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-09-16",
-        "note": "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date."
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam will soon be updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" That is a content refresh of product naming, not a lifecycle transition, and Google gives no date for it. Freshness of this finding is carried by provenance.checkedOn."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/data-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_data_engineer_exam_guide_english.pdf" }
@@ -919,11 +962,11 @@
         ]
       },
       "lifecycle": {
-        "reviewOn": "2026-09-16",
-        "note": "The official page announces a forthcoming branding update; the linked guide remains current on the catalog as-of date."
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam will soon be updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" That is a content refresh of product naming, not a lifecycle transition, and Google gives no date for it. Freshness of this finding is carried by provenance.checkedOn."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-05",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/data-practitioner" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/v1.0_associate_data_practitioner_exam_guide_english.pdf" }
@@ -956,8 +999,12 @@
           { "id": "section-4", "title": "Business strategies for a successful gen AI solution", "weightPercent": 15, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries the banner \"This exam was recently updated to reflect branding changes. Refer to the exam guide to review product names used on the exam.\" That is a product-naming refresh, not a lifecycle transition: it names no new exam code, no successor and no end date. Its wording differs from the variant carried by the other Google Cloud pages checked the same day, a reminder that this banner is not a fixed string. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-18",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/generative-ai-leader" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/generative_ai_leader_exam_guide_english.pdf" }
@@ -993,10 +1040,11 @@
         ]
       },
       "lifecycle": {
-        "note": "The official page identifies this guide as the current update for the Gemini Enterprise Agent Platform transition."
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries two notices. The top banner reads \"This exam was updated to reflect recent branding changes. Refer to the exam guide to review product names used on the exam.\" A second notice reads \"This exam was updated to reflect the transition from Vertex AI to Gemini Enterprise Agent Platform, updates to Google Cloud's data and analytics stack, and prioritizes Google Cloud native solutions. Please refer to the new exam guide for products covered in the new exam.\" This is the only page checked in this batch containing the word \"transition\", and it denotes a product-platform migration reflected in exam content, not an exam lifecycle transition: the certification is neither retired nor replaced, and no new exam code or end date is given. Preserving the finding previously recorded on this entry: the official page identifies the guide referenced here as the current update for that Gemini Enterprise Agent Platform transition, and on 2026-09-07 that guide URL still matches the one the page links. Because exam content did change, blueprint.version 2026-08-17 may lag the current guide; that was not re-derived here and is reported as unverified. Freshness of this finding is carried by provenance.checkedOn."
       },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/machine-learning-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_machine_learning_engineer_exam_guide_english_new.pdf" }
@@ -1031,8 +1079,12 @@
           { "id": "section-6", "title": "Observability", "weightPercent": 10, "weightType": "approximate" }
         ]
       },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified on the official certification page: no successor, no retirement and no last-exam date are announced. The page carries no exam-lifecycle banner; its single banner slot holds a Google Developer Program promotion. Because that slot is single, a promotion can occupy the place a lifecycle notice would take, so the banner is not on its own a reliable channel for this question. The conclusion here rests instead on a full-text scan of the whole visible page, which found none of the retirement vocabulary that the same scan does find on certification pages that do announce one. Anyone re-checking this entry should scan the full page, not just the banner. Freshness of this finding is carried by provenance.checkedOn."
+      },
       "provenance": {
-        "checkedOn": "2026-08-17",
+        "checkedOn": "2026-09-07",
         "sources": [
           { "kind": "certification-page", "url": "https://cloud.google.com/learn/certification/security-operations-engineer" },
           { "kind": "exam-guide", "url": "https://services.google.com/fh/files/misc/professional_security_operations_engineer_exam_guide_english.pdf" }

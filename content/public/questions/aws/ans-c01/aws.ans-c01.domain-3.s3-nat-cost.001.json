@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Des traitements privés dans plusieurs AZ envoient chaque mois des centaines de téraoctets vers Amazon S3 de la même Région en passant par des NAT Gateways. L'équipe veut réduire les coûts de traitement NAT sans rendre les instances publiques. Quelle modification effectuer ?",
+  "prompt": "Des instances placées dans des sous-réseaux privés transfèrent chaque jour plusieurs téraoctets vers un compartiment Amazon S3 situé dans la même Région. La facture de la passerelle NAT devient le premier poste de dépense réseau. L'équipe veut supprimer ce coût sans exposer les instances à Internet. Quelle modification apporter ?",
   "choices": [
-    "Créer un gateway VPC endpoint S3 et l'associer aux tables de routage des sous-réseaux, avec une endpoint policy adaptée",
-    "Remplacer les NAT Gateways par une Internet Gateway directement attachée aux instances privées",
-    "Créer un interface endpoint pour chaque objet S3",
-    "Envoyer les données via un VPN vers le datacenter puis vers S3"
+    "Placer les instances dans des sous-réseaux publics et leur attribuer directement des adresses IP Elastic",
+    "Créer un point de terminaison de passerelle pour Amazon S3 et l'associer aux tables de routage privées",
+    "Créer un point de terminaison d'interface PrivateLink pour Amazon S3 dans chacun des sous-réseaux concernés",
+    "Activer l'accélération de transfert sur le compartiment afin que le trafic évite la passerelle NAT"
   ]
 }

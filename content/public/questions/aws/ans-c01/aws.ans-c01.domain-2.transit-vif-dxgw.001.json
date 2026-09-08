@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Un datacenter doit atteindre des VPC rattachés à Transit Gateway dans plusieurs comptes par une seule connexion Direct Connect. L'équipe veut éviter un private VIF par VPC. Quelle implémentation utiliser ?",
+  "prompt": "Un centre de données doit joindre des VPC rattachés à une passerelle de transit, répartis sur plusieurs comptes, en n'utilisant qu'une seule connexion AWS Direct Connect. L'équipe réseau veut éviter de créer une interface virtuelle privée par VPC et souhaite que les préfixes soient échangés dynamiquement. Quelle mise en œuvre choisir ?",
   "choices": [
-    "Créer un transit VIF vers un Direct Connect gateway associé au Transit Gateway, puis échanger les routes par BGP",
-    "Créer un public VIF et annoncer les adresses privées de chaque VPC sur Internet",
-    "Créer un interface VPC endpoint pour Direct Connect",
-    "Associer la connexion Direct Connect directement à une Internet Gateway"
+    "Une interface virtuelle publique annonçant les préfixes privés des VPC vers le routeur du centre de données",
+    "Une interface virtuelle privée associée directement à chaque passerelle réseau privée virtuelle de VPC",
+    "Un endpoint d'interface PrivateLink dédié à Direct Connect, créé dans chacun des comptes concernés",
+    "Une interface virtuelle de transit vers une passerelle Direct Connect associée à la passerelle"
   ]
 }

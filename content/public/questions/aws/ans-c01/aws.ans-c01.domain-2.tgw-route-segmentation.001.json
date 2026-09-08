@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Les attachements prod et dev d'un Transit Gateway ne doivent jamais communiquer directement. Les deux segments doivent toutefois atteindre un VPC d'inspection, puis des services partagés autorisés. Comment configurer les tables Transit Gateway ?",
+  "prompt": "Sur une passerelle de transit, les attachements de production et de développement ne doivent jamais se joindre directement. Les deux segments doivent en revanche atteindre un VPC d'inspection, puis un ensemble limité de services partagés. L'équipe veut obtenir ce résultat par la configuration du routage de la passerelle. Comment procéder ?",
   "choices": [
-    "Associer prod et dev à des tables distinctes, limiter les propagations, ajouter des routes par défaut vers l'inspection et propager seulement les préfixes partagés nécessaires",
-    "Associer et propager tous les attachements dans la table par défaut",
-    "Désactiver toutes les tables de routage et utiliser seulement les NACL",
-    "Configurer une route statique identique vers prod et dev dans chaque VPC sans inspection"
+    "Associer chaque segment à sa propre table de routage, avec une route par défaut vers le VPC d'inspection",
+    "Conserver la table par défaut et filtrer les flux entre segments par des listes de contrôle réseau",
+    "Associer les deux segments à une même table, puis retirer les routes indésirables de chaque VPC",
+    "Créer un appairage de VPC entre production et développement, restreint aux seuls préfixes des services partagés"
   ]
 }

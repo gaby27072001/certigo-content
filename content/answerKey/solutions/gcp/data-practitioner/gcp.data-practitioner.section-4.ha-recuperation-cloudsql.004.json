@@ -9,5 +9,9 @@
     "objective": "section-4"
   },
   "correct": "Cloud SQL en haute disponibilité régionale avec sauvegardes et récupération à un instant précis",
-  "rationale": "La configuration haute disponibilité maintient une instance de secours dans une autre zone et permet un basculement régional, tandis que les sauvegardes et journaux de transactions rendent possible la récupération à un instant précis. Une exportation mensuelle perdrait trop de données, un réplica sans sauvegarde ne couvre pas la restauration et Cloud Storage ne remplace pas une base relationnelle."
+  "rationale": "La configuration haute disponibilité maintient une instance de secours dans une autre zone et permet un basculement régional, tandis que les sauvegardes et journaux de transactions rendent possible la récupération à un instant précis. Une exportation mensuelle perdrait trop de données, un réplica sans sauvegarde ne couvre pas la restauration et Cloud Storage ne remplace pas une base relationnelle.",
+  "provenance": [
+    "https://cloud.google.com/sql/docs/mysql/high-availability",
+    "https://cloud.google.com/sql/docs/mysql/backup-recovery/pitr"
+  ]
 }

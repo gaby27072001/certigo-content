@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "CloudFront devant l'ALB, une web ACL AWS WAF avec règles gérées et rate-based rules, et AWS Shield Advanced",
-  "rationale": "CloudFront absorbe et distribue le trafic à l'edge, WAF applique des contrôles de couche 7 comme les règles gérées et les limites de débit, et Shield Advanced apporte une protection et une assistance DDoS renforcées. Les groupes de sécurité et NACL ne filtrent pas les chemins HTTP. Inspector évalue des vulnérabilités, pas le trafic entrant d'un ALB."
+  "correct": "AWS Shield Advanced, qui étend la protection aux ressources déclarées et ouvre l'escalade vers une équipe spécialisée pendant l'attaque",
+  "rationale": "Shield Advanced est le service souscrit qui étend la protection contre les menaces externes aux ressources déclarées, couvre les tentatives d'exploitation applicative en plus des attaques volumétriques et donne accès à une escalade vers des spécialistes pendant l'événement. Firewall Manager distribue des politiques à l'échelle de l'organisation mais n'apporte ni protection étendue ni assistance pendant une attaque. GuardDuty détecte et notifie sans jamais bloquer le trafic incriminé. Network Firewall protège les flux d'un réseau virtuel, alors que le trafic décrit est absorbé en périphérie avant d'atteindre ce niveau. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain3.html ; https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-summary.html"
 }

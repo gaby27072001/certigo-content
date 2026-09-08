@@ -10,9 +10,9 @@
   },
   "prompt": "Une application est déployée en actif-passif dans deux Régions AWS : la pile secondaire est démarrée mais ne reçoit pas de trafic. L'entreprise exige une bascule automatique du nom de domaine public vers la Région secondaire si le point de terminaison primaire devient indisponible. Quelle configuration Amazon Route 53 mettre en place ?",
   "choices": [
-    "Configurer une stratégie de routage pondéré 50/50 entre les deux Régions, sans contrôle de santé.",
+    "Configurer une stratégie de routage pondéré 50/50 entre les deux Régions, sans associer le moindre contrôle de santé aux enregistrements.",
     "Créer des enregistrements Route 53 de type basculement, primaire et secondaire, associés à un contrôle de santé qui surveille le point de terminaison de la Région primaire.",
-    "Placer les deux Régions derrière un unique Application Load Balancer, qui redirige le trafic vers l'autre Région en cas de panne.",
-    "Réduire la durée de vie (TTL) des enregistrements à 60 secondes, ce qui suffit à rediriger le trafic lors d'une panne."
+    "Placer les deux Régions derrière un unique Application Load Balancer, en comptant sur lui pour rediriger le trafic vers l'autre Région dès qu'une panne survient dans la première.",
+    "Réduire la durée de vie (TTL) des enregistrements à soixante secondes, en considérant que cette seule mesure suffit à rediriger le trafic des utilisateurs lors d'une panne régionale."
   ]
 }

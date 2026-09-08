@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "AWS Firewall Manager avec administrateur délégué et politiques ciblant l'OU",
-  "rationale": "Firewall Manager applique et audite centralement des politiques de sécurité réseau sur les comptes et ressources ciblés par Organizations. Les nouveaux comptes de l'OU entrent automatiquement dans le périmètre. Une ressource créée dans un seul compte ou des règles manuelles ne gouvernent pas l'organisation."
+  "correct": "AWS Firewall Manager, avec une politique de groupes de sécurité appliquée à l'organisation",
+  "rationale": "Firewall Manager applique des politiques de groupes de sécurité à l'échelle d'une organisation AWS, prend automatiquement en charge les comptes ajoutés ensuite, et peut corriger les ressources non conformes sans intervention, ce qui couvre les trois exigences. AWS Config détecte et signale, et peut déclencher une remédiation, mais la règle doit être déployée compte par compte ou par un pack de conformité, et le service ne constitue pas en lui-même le mécanisme d'application transverse recherché. Une politique de contrôle des services bloque l'appel d'API à venir mais laisse intactes les règles déjà en place, sans les corriger. GuardDuty analyse des menaces à partir de journaux et signale des comportements suspects ; il n'inspecte pas la configuration des groupes de sécurité et ne la modifie jamais. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain4.html ; https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html"
 }

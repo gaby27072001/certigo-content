@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-5"
   },
-  "prompt": "Une charge doit utiliser les API AWS KMS, mais la politique impose que le matériel de clé reste exclusivement dans des HSM exploités sur site. L'entreprise accepte la dépendance de disponibilité et de latence envers son infrastructure. Quelle option répond à cette contrainte ?",
+  "prompt": "Un régulateur impose que le matériel cryptographique protégeant certaines données reste hors de l'infrastructure du fournisseur et sous le contrôle exclusif de l'entreprise, tout en permettant aux services AWS de chiffrer et déchiffrer normalement. L'équipe veut comprendre où s'effectuent réellement les opérations. Quelle description est exacte ?",
   "choices": [
-    "Une clé KMS dans un external key store connecté aux HSM externes",
-    "Une clé AWS owned key sans contrôle client",
-    "Une clé KMS multi-Région dont le matériel est généré par AWS",
-    "Un certificat public ACM exporté comme clé de chiffrement de données"
+    "Un magasin de clés personnalisé adossé à AWS CloudHSM conserve le matériel dans une grappe dédiée que l'entreprise administre seule dans son compte",
+    "Une clé importée dans AWS KMS conserve le matériel généré par l'entreprise, qui garde la possibilité de le supprimer pour rendre la clé inutilisable",
+    "Un chiffrement côté client avec la bibliothèque de chiffrement AWS conserve le matériel dans l'application, qui demeure seule à manipuler les données",
+    "Un magasin de clés externe conserve le matériel dans le gestionnaire de l'entreprise, où les opérations sont exécutées via un mandataire dédié"
   ]
 }

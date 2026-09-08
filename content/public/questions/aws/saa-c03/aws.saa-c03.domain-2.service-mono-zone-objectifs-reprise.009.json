@@ -11,8 +11,8 @@
   "prompt": "Une application critique s'exécute aujourd'hui dans une seule zone de disponibilité : deux instances Amazon EC2 derrière un Application Load Balancer, une instance Amazon RDS for MySQL mono-AZ, et un état de session conservé en mémoire sur les serveurs. L'entreprise fixe désormais un objectif de temps de reprise de cinq minutes et un objectif de point de reprise proche de zéro, et exige que la perte d'une zone de disponibilité n'interrompe pas le service. Quelle évolution l'architecte doit-il concevoir ?",
   "choices": [
     "Répartir le groupe Auto Scaling et l'Application Load Balancer sur au moins deux zones de disponibilité, externaliser l'état de session dans un magasin partagé tel qu'Amazon ElastiCache, et convertir l'instance Amazon RDS en déploiement multi-AZ avec bascule automatique.",
-    "Créer un réplica en lecture Amazon RDS dans une seconde zone de disponibilité et le promouvoir manuellement en cas de panne de la zone principale.",
-    "Planifier des instantanés Amazon RDS toutes les cinq minutes et restaurer le dernier instantané dans une autre zone de disponibilité lorsque la zone principale devient indisponible.",
-    "Doubler la taille des deux instances Amazon EC2 et activer les sauvegardes automatiques quotidiennes de la base de données."
+    "Créer un réplica en lecture Amazon RDS dans une seconde zone de disponibilité et le promouvoir manuellement en instance principale lorsque la zone d'origine devient indisponible, en reconfigurant ensuite la chaîne de connexion applicative.",
+    "Planifier des instantanés Amazon RDS toutes les cinq minutes et restaurer le dernier instantané disponible dans une autre zone de disponibilité dès que la zone principale devient inaccessible, puis rattacher les serveurs applicatifs à la base restaurée.",
+    "Doubler la taille des deux instances Amazon EC2, activer les sauvegardes automatiques quotidiennes de la base de données et conserver les deux instances dans leur zone actuelle, la capacité supplémentaire absorbant la charge en cas d'incident."
   ]
 }

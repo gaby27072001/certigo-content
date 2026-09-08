@@ -8,6 +8,9 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Utiliser des ensembles de piles AWS CloudFormation (StackSets) avec des cibles fondées sur les unités d'organisation d'AWS Organizations, pour déployer et mettre à jour la pile dans tous les comptes et Régions visés.",
-  "rationale": "Les StackSets sont conçus pour piloter un même modèle sur plusieurs comptes et plusieurs Régions ; avec les autorisations gérées par le service et un ciblage par unité d'organisation, les comptes existants comme les comptes ajoutés ultérieurement reçoivent la pile, et une mise à jour du StackSet se propage à toutes les instances de pile. Copier le modèle et lancer les piles à la main dans quarante comptes est ingérable et diverge dès la première mise à jour. AWS RAM partage certaines ressources (sous-réseaux, portefeuilles Service Catalog, règles de résolveur, entre autres), pas des piles CloudFormation. Un rôle interconnecté permet à un opérateur d'agir dans un autre compte, mais une pile reste confinée au compte et à la Région où elle est créée : elle ne crée pas de ressources ailleurs."
+  "correct": "Utiliser des ensembles de piles AWS CloudFormation (StackSets) ciblant les unités d'organisation d'AWS Organizations, pour déployer et tenir à jour la pile dans les comptes et les Régions sans agir compte par compte.",
+  "rationale": "Les StackSets sont conçus pour piloter un même modèle sur plusieurs comptes et plusieurs Régions ; avec les autorisations gérées par le service et un ciblage par unité d'organisation, les comptes existants comme les comptes ajoutés ultérieurement reçoivent la pile, et une mise à jour du StackSet se propage à toutes les instances de pile. Copier le modèle et lancer les piles à la main dans quarante comptes est ingérable et diverge dès la première mise à jour. AWS RAM partage certaines ressources (sous-réseaux, portefeuilles Service Catalog, règles de résolveur, entre autres), pas des piles CloudFormation. Un rôle interconnecté permet à un opérateur d'agir dans un autre compte, mais une pile reste confinée au compte et à la Région où elle est créée : elle ne crée pas de ressources ailleurs.",
+  "provenance": [
+    "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html"
+  ]
 }

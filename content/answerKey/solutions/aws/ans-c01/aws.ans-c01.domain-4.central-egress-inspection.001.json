@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Des endpoints Network Firewall par AZ, un routage zonal cohérent et le mode appliance sur l'attachement Transit Gateway d'inspection",
-  "rationale": "Les endpoints zonaux et le routage aligné évitent les croisements d'AZ inutiles, tandis que le mode appliance préserve l'affinité de flux nécessaire à l'inspection stateful. Un endpoint unique crée un point de défaillance et des coûts inter-AZ. Un chemin direct vers Internet contournerait le contrôle central."
+  "correct": "Un VPC d'inspection central hébergeant AWS Network Firewall, cible d'une route par défaut unique",
+  "rationale": "Un VPC d'inspection central portant AWS Network Firewall, désigné par une route par défaut dans la table de routage de la passerelle de transit, place l'ensemble du trafic sortant sur un point de contrôle unique ; le service applique des règles de filtrage par nom de domaine et journalise l'adresse source d'origine, puisque la traduction n'intervient qu'après l'inspection. Une passerelle NAT par VPC multiplie les points de sortie au lieu de les réunir, et une liste de contrôle réseau filtre par adresse et par port, jamais par nom de domaine. Un proxy déclaré dans la configuration des instances est contournable dès qu'une charge ne l'honore pas, ce qui ne garantit pas le passage obligatoire. Un Gateway Load Balancer par VPC applicatif décentralise l'inspection alors que l'énoncé demande un point unique. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain4.html ; https://docs.aws.amazon.com/network-firewall/latest/developerguide/what-is-aws-network-firewall.html"
 }

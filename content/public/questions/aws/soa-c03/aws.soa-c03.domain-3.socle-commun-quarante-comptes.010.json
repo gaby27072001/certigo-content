@@ -10,9 +10,9 @@
   },
   "prompt": "Une équipe centrale doit déployer un socle identique (rôles IAM, règles AWS Config, journalisation) dans quarante comptes d'une organisation AWS et dans trois Régions, puis propager les mises à jour ultérieures depuis un point unique. Quelle approche utiliser ?",
   "choices": [
-    "Utiliser des ensembles de piles AWS CloudFormation (StackSets) avec des cibles fondées sur les unités d'organisation d'AWS Organizations, pour déployer et mettre à jour la pile dans tous les comptes et Régions visés.",
-    "Copier le modèle CloudFormation dans chaque compte et lancer manuellement une pile par Région.",
-    "Partager la pile CloudFormation existante avec AWS Resource Access Manager afin qu'elle s'applique aux autres comptes.",
-    "Créer un unique rôle IAM interconnecté et lancer le modèle depuis le compte central, ce qui crée automatiquement les ressources dans les autres comptes."
+    "Utiliser des ensembles de piles AWS CloudFormation (StackSets) ciblant les unités d'organisation d'AWS Organizations, pour déployer et tenir à jour la pile dans les comptes et les Régions sans agir compte par compte.",
+    "Copier le modèle CloudFormation dans chacun des quarante comptes visés et lancer manuellement une pile par Région, puis répéter intégralement l'opération à chaque mise à jour ultérieure du socle commun ainsi défini par l'équipe.",
+    "Partager la pile CloudFormation existante avec AWS Resource Access Manager afin qu'elle s'applique d'elle-même aux autres comptes de l'organisation ainsi qu'aux trois Régions visées par l'équipe centrale, sans autre réglage.",
+    "Créer un unique rôle IAM interconnecté et lancer le modèle depuis le compte central, en comptant sur ce rôle pour créer automatiquement les ressources voulues dans les trente-neuf autres comptes de l'organisation cible."
   ]
 }

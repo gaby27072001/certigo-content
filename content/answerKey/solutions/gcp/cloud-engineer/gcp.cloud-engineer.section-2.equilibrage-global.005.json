@@ -9,5 +9,8 @@
     "objective": "section-2"
   },
   "correct": "Un Application Load Balancer externe global avec certificat géré et vérifications d'état",
-  "rationale": "L'Application Load Balancer externe global fournit une IP anycast, la répartition HTTP(S) entre régions, les contrôles d'état et la terminaison TLS avec certificat géré. Un équilibreur interne n'est pas public, Cloud NAT gère le trafic sortant et une zone DNS privée n'assure ni contrôle d'état ni terminaison TLS."
+  "rationale": "L'Application Load Balancer externe global fournit une IP anycast, la répartition HTTP(S) entre régions, les contrôles d'état et la terminaison TLS avec certificat géré. Un équilibreur interne n'est pas public, Cloud NAT gère le trafic sortant et une zone DNS privée n'assure ni contrôle d'état ni terminaison TLS.",
+  "provenance": [
+    "https://cloud.google.com/load-balancing/docs/https"
+  ]
 }

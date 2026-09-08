@@ -41,6 +41,35 @@ const OFFICIAL_SOURCE_HOSTS = {
   gcp: ["cloud.google.com", "services.google.com", "support.google.com"],
   microsoft: ["learn.microsoft.com"],
 };
+export const EDITORIAL_DEBT_PATH = "config/editorial-debt.json";
+export const LEGACY_COVERAGE_INVENTORY_PATH =
+  "config/legacy-coverage-inventory.json";
+
+// Un registre absent vaut "aucune dispense", jamais "tout est dispense" :
+// supprimer le fichier doit durcir la validation, pas la neutraliser.
+function loadLedger(root, path, collection, asOf) {
+  const absolute = resolve(root, path);
+  const byCertification = new Map();
+  if (!existsSync(absolute)) return byCertification;
+  const raw = readFileSync(absolute, "utf8");
+  const document = JSON.parse(
+    raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw
+  );
+  for (const entry of document[collection] ?? []) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(entry.expiresOn ?? "")) {
+      throw new Error(
+        `[ledger] ${path}: ${entry.certification} porte une date expiresOn invalide (${entry.expiresOn})`
+      );
+    }
+    // Une entree expiree cesse de dispenser : la dette redevient une erreur.
+    if (asOf >= entry.expiresOn) continue;
+    byCertification.set(
+      entry.certification,
+      new Set(entry.questionIds ?? [])
+    );
+  }
+  return byCertification;
+}
 
 function loadJson(absPath) {
   const raw = readFileSync(absPath, "utf8");
@@ -123,6 +152,34 @@ function validateSolutionProvenance({ data, file, catalogIndex, err }) {
       file,
       err,
       "[solution:provenance]"
+    );
+  }
+}
+
+function validateTransitionDeclaration(certification, err) {
+  const lifecycle = certification.lifecycle ?? {};
+  const { transition, lastExamOn, successor } = lifecycle;
+  if (transition === undefined) return;
+
+  if (transition === "announced") {
+    if (!lastExamOn) {
+      err(
+        `[catalog:transition] ${certification.id}: transition "announced" exige lastExamOn (date officielle de fin)`
+      );
+    }
+    return;
+  }
+
+  // transition === "none-announced" : affirmation datee qu'aucune succession
+  // n'est publiee. La fraicheur de cette affirmation est portee par
+  // provenance.checkedOn et controlee par maxAgeDays.
+  const declaredDates = ["lastExamOn", "recommendThrough"].filter((key) => lifecycle[key]);
+  if (declaredDates.length > 0 || successor) {
+    err(
+      `[catalog:transition] ${certification.id}: transition "none-announced" est incompatible avec ${[
+        ...declaredDates,
+        ...(successor ? ["successor"] : []),
+      ].join(", ")}; utiliser "announced"`
     );
   }
 }
@@ -232,6 +289,8 @@ function validateCatalogSemantics(catalog, err) {
         }
       }
     }
+
+    validateTransitionDeclaration(certification, err);
 
     checkOfficialUrl(certification.officialUrl, provider, `${certification.id}.officialUrl`, err);
     checkOfficialUrl(certification.guide.url, provider, `${certification.id}.guide.url`, err);
@@ -409,6 +468,7 @@ export function answerLengthMetrics(choices, correct) {
     distinct: new Set(lengths).size === lengths.length,
     rank: [...lengths].sort((left, right) => left - right).indexOf(correctLength),
     ratio: correctLength / meanDistractorLength,
+    position: choices.indexOf(correct),
   };
 }
 
@@ -617,6 +677,14 @@ export async function validateContent(options = {}) {
   const validateCoverage = compileSchema(root, COVERAGE_SCHEMA_PATH);
   const validateRuntime = compileSchema(root, RUNTIME_SCHEMA);
   const contentMode = detectContentMode(root);
+  const asOf = options.asOf ?? new Date().toISOString().slice(0, 10);
+  const editorialDebt = loadLedger(root, EDITORIAL_DEBT_PATH, "debts", asOf);
+  const legacyCoverage = loadLedger(
+    root,
+    LEGACY_COVERAGE_INVENTORY_PATH,
+    "inventories",
+    asOf
+  );
 
   const questionFiles = (await glob(QUESTION_GLOB, { cwd: root, posix: true })).sort(
     compareOrdinal
@@ -851,10 +919,7 @@ export async function validateContent(options = {}) {
       err(
         `[integrity:correct-choice] solution "${id}" (${solution.file}): la reponse doit correspondre exactement aux options publiques dans ${question.file} (egalite stricte, sans conversion de casse, trim ni normalisation Unicode)`
       );
-    } else if (
-      question.data.schemaVersion === "v3" &&
-      Array.isArray(solution.data.provenance)
-    ) {
+    } else if (question.data.schemaVersion === "v3") {
       const certification = question.data.metadata?.certification;
       const metrics = answerLengthMetrics(
         question.data.choices,
@@ -862,7 +927,11 @@ export async function validateContent(options = {}) {
       );
       if (typeof certification === "string" && metrics !== null) {
         const entries = answerLengthsByCertification.get(certification) ?? [];
-        entries.push({ id, ...metrics });
+        entries.push({
+          id,
+          ...metrics,
+          exempt: editorialDebt.get(certification)?.has(id) === true,
+        });
         answerLengthsByCertification.set(certification, entries);
       }
     }
@@ -983,8 +1052,17 @@ export async function validateContent(options = {}) {
               `[coverage:question] ${file}: "${questionId}" absent ou rattache au mauvais objectif`
             );
           }
+        } else if (
+          legacyCoverage.get(certification.id)?.has(questionId) !== true
+        ) {
+          // Une question v2 ne porte aucune metadonnee : rien dans le fichier ne
+          // la rattache a une certification. L'inventaire est donc le seul
+          // rattachement verifiable, et son absence doit echouer — sinon
+          // n'importe quelle question peut etre reliee a n'importe quel examen.
+          err(
+            `[coverage:question] ${file}: "${questionId}" est une question heritee (v2) absente de ${LEGACY_COVERAGE_INVENTORY_PATH} pour ${certification.id}`
+          );
         }
-        // v2 questions have no metadata — existence in publicIds is sufficient
       }
     });
   }
@@ -997,6 +1075,7 @@ export async function validateContent(options = {}) {
     if (referencedQuestionCount === 0) continue;
     const entries = answerLengthsByCertification.get(certification) ?? [];
     for (const entry of entries) {
+      if (entry.exempt) continue;
       if (entry.choiceCount !== 4) {
         err(
           `[editorial:answer-length] paire "${entry.id}": exactement quatre choix sont requis`
@@ -1014,7 +1093,22 @@ export async function validateContent(options = {}) {
         );
       }
     }
+    // L'equilibre des rangs est un invariant de cohorte : il n'a de sens qu'une
+    // fois la dette de la certification soldee. Tant qu'il reste des questions
+    // dispensees, la cohorte est incomplete et le mesurer punirait la
+    // correction progressive au lieu de la recompenser.
+    //
+    // ANGLE MORT ASSUME, ET MESURE. Les deux controles de cohorte ci-dessous
+    // (rangs ET positions) sont MUETS tant qu'une seule question de la
+    // certification figure au registre de dette : un identifiant residuel
+    // suffit a les eteindre entierement, et `validate` rend alors VERT sur un
+    // corpus desequilibre. Ils protegent les cohortes ENTIEREMENT remediees
+    // contre une regression future, pas les cohortes en cours de traitement.
+    // Sequence obligatoire pour une remediation : vider le registre PUIS
+    // valider. Un vert obtenu avant le retrait ne dit rien de ces deux axes.
+    const exemptCount = entries.filter((entry) => entry.exempt).length;
     if (
+      exemptCount === 0 &&
       entries.every((entry) => entry.choiceCount === 4) &&
       entries.length >= 4
     ) {
@@ -1033,6 +1127,27 @@ export async function validateContent(options = {}) {
             : `chaque rang entre ${minimumPerRank} et ${maximumPerRank}`;
         err(
           `[editorial:answer-length] ${certification}: rangs de longueur ${ranks.join("/")}, attendu ${expected}`
+        );
+      }
+      // Meme invariant de cohorte, meme porte et memes bornes, applique a la
+      // POSITION de la bonne reponse. Le rang mesure si elle se repere a sa
+      // longueur ; la position mesure si elle se repere a son index. Les deux
+      // sont exploitables sans lire l'enonce, et un corpus peut etre equilibre
+      // sur l'un tout en etant degenere sur l'autre : les bornes sont donc
+      // partagees, mais les deux distributions sont comptees separement.
+      const positions = [0, 0, 0, 0];
+      for (const entry of entries) positions[entry.position]++;
+      if (
+        positions.some(
+          (count) => count < minimumPerRank || count > maximumPerRank
+        )
+      ) {
+        const expectedPositions =
+          minimumPerRank === maximumPerRank
+            ? `${minimumPerRank}/${minimumPerRank}/${minimumPerRank}/${minimumPerRank}`
+            : `chaque position entre ${minimumPerRank} et ${maximumPerRank}`;
+        err(
+          `[editorial:answer-position] ${certification}: positions de la bonne reponse ${positions.join("/")}, attendu ${expectedPositions}`
         );
       }
     }
@@ -1069,6 +1184,17 @@ export async function validateContent(options = {}) {
 
   return {
     errors,
+    ledger: {
+      asOf,
+      editorialDebtCount: [...editorialDebt.values()].reduce(
+        (total, ids) => total + ids.size,
+        0
+      ),
+      legacyCoverageCount: [...legacyCoverage.values()].reduce(
+        (total, ids) => total + ids.size,
+        0
+      ),
+    },
     questionCount: questionFiles.length,
     solutionCount: solutionFiles.length,
     pairCount: [...publicIds.keys()].filter((id) => answerIds.has(id)).length,
@@ -1085,6 +1211,11 @@ export function printValidationResult(result) {
   console.log(`  certifications      : ${result.certificationCount}`);
   console.log(`  matrices couverture : ${result.coverageCount}`);
   console.log(`  ressources runtime  : ${result.runtimeResourceCount}`);
+  if (result.ledger) {
+    console.log(
+      `  dette dispensee     : ${result.ledger.editorialDebtCount} paire(s) editoriale(s), ${result.ledger.legacyCoverageCount} question(s) v2 heritee(s) (au ${result.ledger.asOf})`
+    );
+  }
 
   if (result.errors.length > 0) {
     console.error(`\n${result.errors.length} violation(s) detectee(s) :`);
@@ -1108,6 +1239,15 @@ function parseArgs(cliArgs) {
         throw new Error("valeur manquante pour --root");
       }
       options.root = value;
+    } else if (argument === "--as-of") {
+      const value = cliArgs[++index];
+      if (value === undefined || value.startsWith("-")) {
+        throw new Error("valeur manquante pour --as-of");
+      }
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        throw new Error(`--as-of attend une date AAAA-MM-JJ, recu: ${value}`);
+      }
+      options.asOf = value;
     } else if (argument === "--help" || argument === "-h") {
       options.help = true;
     } else {
@@ -1124,7 +1264,21 @@ if (isMain) {
   try {
     const options = parseArgs(argv.slice(2));
     if (options.help) {
-      console.log("Usage: node tools/validate_content.mjs [--root DIR]");
+      console.log(
+        "Usage: node tools/validate_content.mjs [--root DIR] [--as-of AAAA-MM-JJ]"
+      );
+      console.log(
+        "  --as-of  evalue les registres a une date donnee. Les dispenses de"
+      );
+      console.log(
+        "           config/editorial-debt.json expirent, et plusieurs controles"
+      );
+      console.log(
+        "           restent eteints tant qu'une dispense subsiste : dater la"
+      );
+      console.log(
+        "           validation apres l'expiration montre ce qu'ils diront alors."
+      );
     } else {
       const result = await validateContent(options);
       if (!printValidationResult(result)) process.exitCode = 1;

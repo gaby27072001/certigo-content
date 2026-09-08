@@ -10,9 +10,9 @@
   },
   "prompt": "Un pipeline ETL enchaîne six étapes : un crawler AWS Glue, une validation, puis selon son résultat une tâche de correction ou une tâche de chargement, un rafraîchissement d'agrégats et une notification finale. Aujourd'hui l'enchaînement repose sur des fonctions AWS Lambda qui s'appellent entre elles et attendent la fin de l'étape précédente par des temporisations. Les dépassements de délai sont fréquents, les reprises sur erreur sont écrites à la main et personne ne sait à quelle étape un traitement a échoué. L'équipe veut une orchestration sans serveur, observable et à faible charge opérationnelle. Quelle solution choisir ?",
   "choices": [
-    "Déployer un environnement Amazon MWAA de grande taille et réécrire l'enchaînement sous forme de DAG Apache Airflow.",
+    "Déployer un environnement Amazon MWAA de grande taille et réécrire l'intégralité de l'enchaînement sous forme de DAG Apache Airflow planifié chaque nuit, en confiant la reprise sur erreur aux relances natives d'Airflow.",
     "Décrire l'enchaînement dans une machine à états AWS Step Functions, avec des états Choice pour le branchement conditionnel et des politiques Retry et Catch pour les reprises, le tout déclenché par une règle planifiée Amazon EventBridge.",
-    "Conserver l'enchaînement de fonctions Lambda et porter le délai d'expiration de chacune à quinze minutes.",
-    "Créer une file Amazon SQS par étape et laisser chaque fonction Lambda publier elle-même le message déclenchant l'étape suivante."
+    "Conserver l'enchaînement de fonctions Lambda et porter le délai d'expiration de chacune d'elles à quinze minutes, de façon que les traitements les plus longs disposent de la marge nécessaire pour aboutir sans échec.",
+    "Créer une file Amazon SQS par étape et laisser chaque fonction Lambda publier elle-même le message qui déclenche l'étape suivante, la file assurant la reprise des messages qui n'ont pas été traités."
   ]
 }

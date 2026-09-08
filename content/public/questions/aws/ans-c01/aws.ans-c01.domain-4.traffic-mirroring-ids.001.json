@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Une équipe de détection doit fournir à une flotte IDS le payload des paquets provenant seulement des interfaces réseau de serveurs critiques. Les journaux de flux ne suffisent pas. Quelle fonctionnalité utiliser ?",
+  "prompt": "Un système de détection d'intrusion doit analyser la charge utile complète des paquets d'un sous-ensemble d'instances EC2, sans être placé sur le chemin du trafic et sans qu'aucun agent soit installé sur ces instances. L'analyse est menée hors ligne par une flotte de collecteurs. Quelle solution retenir ?",
   "choices": [
-    "VPC Traffic Mirroring avec filtres de session vers des appliances de collecte dimensionnées",
-    "VPC Flow Logs avec le champ `action` uniquement",
-    "AWS CloudTrail Lake sans source réseau",
-    "Route 53 health checks sur les instances"
+    "Des journaux de flux VPC au niveau de l'interface, transmis vers la flotte de collecteurs",
+    "La duplication de trafic VPC depuis les interfaces, vers un Network Load Balancer de collecte",
+    "AWS Network Firewall placé en coupure sur le chemin du trafic, avec ses règles avancées",
+    "Un Gateway Load Balancer inséré sur le chemin, dirigeant le trafic vers les collecteurs par GENEVE"
   ]
 }

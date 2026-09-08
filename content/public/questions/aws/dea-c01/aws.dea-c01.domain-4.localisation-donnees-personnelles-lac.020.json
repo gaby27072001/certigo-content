@@ -10,9 +10,9 @@
   },
   "prompt": "Un lac de données regroupe plusieurs centaines de téraoctets provenant de dizaines d'équipes. La conformité exige de savoir quels préfixes Amazon S3 contiennent des données à caractère personnel telles que des noms, des numéros de carte bancaire ou des identifiants nationaux, d'être alertée lorsque de nouveaux objets sensibles apparaissent, et de déclencher automatiquement un durcissement des autorisations. L'équipe veut un service géré et refuse de développer puis de maintenir un détecteur maison. Quelle solution proposer ?",
   "choices": [
-    "Exécuter chaque mois une tâche AWS Glue qui applique des expressions régulières à l'ensemble des objets pour repérer les données à caractère personnel.",
+    "Exécuter chaque mois une tâche AWS Glue qui applique des expressions régulières à l'ensemble des objets pour repérer les données à caractère personnel, puis consigner les correspondances.",
     "Activer Amazon Macie sur les comptes du lac, planifier des tâches de découverte de données sensibles sur les compartiments concernés, et router les résultats vers Amazon EventBridge pour déclencher le durcissement des autorisations.",
-    "Activer les journaux d'accès au serveur Amazon S3 et analyser les schémas de lecture avec Amazon Athena afin de déduire quels préfixes sont sensibles.",
-    "Étiqueter manuellement chaque compartiment lors de sa création et s'appuyer sur AWS Config pour vérifier la présence de l'étiquette."
+    "Activer les journaux d'accès au serveur Amazon S3 et analyser les schémas de lecture avec Amazon Athena afin de déduire quels préfixes sont sensibles à partir de la fréquence des consultations.",
+    "Étiqueter manuellement chaque compartiment lors de sa création et s'appuyer sur AWS Config pour vérifier la présence de l'étiquette, en confiant aux équipes productrices elles-mêmes le soin de déclarer les données à caractère personnel."
   ]
 }

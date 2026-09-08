@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Une application mondiale expose un protocole TCP propriétaire non mis en cache depuis des Network Load Balancers dans trois Régions. Les clients industriels exigent deux adresses IP anycast statiques, un acheminement vers la Région saine la plus proche et un basculement rapide. Quel service placer devant les NLB ?",
+  "prompt": "Un éditeur industriel expose un protocole TCP propriétaire, non mis en cache, depuis des Network Load Balancers déployés dans trois Régions AWS. Ses clients doivent inscrire dans leurs pare-feu deux adresses IP fixes valables pour l'ensemble des Régions, et le basculement vers une Région saine ne doit pas dépendre de la durée de cache DNS des postes clients. Quelle solution répond à ces deux contraintes ?",
   "choices": [
-    "AWS Global Accelerator avec les NLB comme endpoints régionaux",
-    "Amazon CloudFront avec un comportement de cache de 24 heures",
-    "Une zone privée Route 53 accessible uniquement dans un VPC",
-    "Une passerelle Internet par client industriel"
+    "AWS Global Accelerator, les Network Load Balancers régionaux étant déclarés comme endpoints",
+    "Amazon CloudFront avec une origine par Région et la mise en cache désactivée sur le comportement",
+    "Des adresses IP Elastic par Région, publiées par des enregistrements Route 53 pondérés par capacité",
+    "Des enregistrements Route 53 de basculement adossés à des contrôles de santé, avec un TTL de soixante secondes"
   ]
 }

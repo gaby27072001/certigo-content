@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Un gateway endpoint S3 avec endpoint policy restrictive et une bucket policy exigeant le VPC endpoint attendu",
-  "rationale": "Le gateway endpoint garde le trafic S3 sur le réseau AWS et sa politique limite les actions accessibles depuis les VPC. La bucket policy ajoute un contrôle côté ressource, par exemple avec la condition de VPC endpoint, qui reste effectif si des identifiants sont utilisés depuis ailleurs. Les compartiments S3 n'acceptent pas de groupe de sécurité."
+  "correct": "Une politique de point de terminaison conditionnée par l'organisation propriétaire",
+  "rationale": "La politique attachée au point de terminaison filtre toute requête qui l'emprunte : la condition portant sur l'identifiant de l'organisation propriétaire de la ressource n'autorise que les compartiments détenus par l'organisation, quelle que soit l'identité employée par l'instance, ce qui tient même en cas de compromission. Une politique de compartiment ne protège que les compartiments que l'organisation contrôle déjà ; elle est sans effet sur un compartiment tiers, qui appartient à autrui. Un groupe de sécurité restreint la destination à la plage d'adresses du service et ne distingue pas un compartiment d'un autre, tous partageant ces adresses. Une politique de contrôle des services encadre les identités des comptes de l'organisation, mais elle ne s'applique pas au trafic qui traverse le point de terminaison sous une identité extérieure. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain4.html ; https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html"
 }

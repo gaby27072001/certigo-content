@@ -11,8 +11,8 @@
   "prompt": "Une instance Amazon RDS for PostgreSQL présente des ralentissements intermittents. L'équipe CloudOps doit identifier les requêtes SQL et les événements d'attente responsables des pics de charge, sans installer d'agent tiers dans la base. Quelle approche fournit cette analyse ?",
   "choices": [
     "Activer Performance Insights sur l'instance et analyser la charge de base de données décomposée par événements d'attente, par requêtes SQL et par utilisateurs sur la période des pics.",
-    "S'appuyer sur la métrique CloudWatch CPUUtilization de l'instance, qui désigne la requête SQL à l'origine du pic.",
-    "Activer les journaux d'accès de l'Application Load Balancer placé devant l'application afin d'y retrouver les requêtes SQL lentes.",
-    "Créer une réplique en lecture, la réplication signalant automatiquement les requêtes problématiques."
+    "S'appuyer sur la métrique CloudWatch CPUUtilization de l'instance de base de données, dont la valeur agrégée désigne la requête SQL responsable du pic ainsi que l'événement d'attente correspondant.",
+    "Activer les journaux d'accès de l'Application Load Balancer placé devant l'application afin d'y retrouver, requête HTTP par requête HTTP, les instructions SQL lentes et leurs temps d'attente.",
+    "Créer une réplique en lecture de l'instance et laisser le mécanisme de réplication signaler de lui-même les requêtes problématiques, la réplique servant par ailleurs à absorber la charge de lecture."
   ]
 }

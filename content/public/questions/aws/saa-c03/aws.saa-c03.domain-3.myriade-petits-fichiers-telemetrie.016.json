@@ -10,9 +10,9 @@
   },
   "prompt": "Une plateforme industrielle reçoit environ 200 000 événements de télémétrie par seconde. Aujourd'hui, chaque appareil dépose un petit fichier JSON sur Amazon S3 : les requêtes d'analyse deviennent lentes et coûteuses car elles parcourent des millions d'objets. L'équipe veut une ingestion durable, une mise à disposition en quasi-temps réel pour le suivi opérationnel, un archivage sur Amazon S3 interrogeable en SQL, et une maîtrise du volume de données parcouru par requête. Quelle chaîne d'ingestion l'architecte doit-il concevoir ?",
   "choices": [
-    "Conserver l'écriture directe des appareils sur Amazon S3 et lancer chaque nuit un traitement de fusion des petits fichiers.",
-    "Ingérer les événements dans une table Amazon DynamoDB et exporter cette table vers Amazon S3 une fois par jour pour l'analyse.",
+    "Conserver l'écriture directe des appareils sur Amazon S3 et lancer chaque nuit un traitement de fusion qui regroupe les petits fichiers JSON en objets plus volumineux, afin de réduire le nombre d'objets parcourus par requête.",
+    "Ingérer les événements dans une table Amazon DynamoDB dimensionnée pour le débit d'écriture, puis exporter cette table vers Amazon S3 une fois par jour afin que les requêtes d'analyse portent sur un jeu de données consolidé.",
     "Ingérer le flux dans Amazon Kinesis Data Streams, le livrer par Amazon Data Firehose vers Amazon S3 avec regroupement par tampon, conversion au format Apache Parquet et partitionnement par date, puis interroger les données avec Amazon Athena.",
-    "Envoyer les événements vers une file Amazon SQS et déclencher à chaque message une fonction AWS Lambda qui écrit un fichier JSON sur Amazon S3."
+    "Envoyer les événements vers une file Amazon SQS et déclencher à chaque message une fonction AWS Lambda qui écrit un fichier JSON sur Amazon S3, la file absorbant les pics d'arrivée et la fonction assurant la mise à disposition des données en quasi-temps réel."
   ]
 }

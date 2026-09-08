@@ -10,9 +10,9 @@
   },
   "prompt": "Une base Oracle hébergée dans un centre de données privé alimente les opérations d'un assureur. L'équipe de données doit copier ces tables vers Amazon S3 pour alimenter un entrepôt Amazon Redshift, avec une interruption de service quasi nulle et un décalage inférieur à quelques minutes une fois la copie initiale terminée. Quelle approche respecte ces contraintes ?",
   "choices": [
-    "Exporter chaque nuit un vidage complet de la base Oracle vers Amazon S3 avec AWS DataSync, puis recharger intégralement les tables cibles.",
-    "Créer une diffusion Amazon Data Firehose configurée pour interroger directement les tables Oracle toutes les minutes.",
-    "Transférer la base avec AWS Snowball Edge, puis planifier des exports différentiels rédigés manuellement par les administrateurs Oracle.",
+    "Exporter chaque nuit un vidage complet de la base Oracle vers Amazon S3 à l'aide d'AWS DataSync, puis recharger intégralement les tables cibles.",
+    "Créer une diffusion Amazon Data Firehose configurée pour interroger directement les tables Oracle toutes les minutes et déposer les lignes lues dans l'entrepôt cible.",
+    "Transférer la base avec AWS Snowball Edge, puis planifier des exports différentiels rédigés à la main par les administrateurs Oracle et rejoués chaque nuit dans l'entrepôt.",
     "Créer une tâche AWS Database Migration Service de type charge complète et réplication continue, avec la journalisation supplémentaire activée sur la source Oracle."
   ]
 }

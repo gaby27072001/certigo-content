@@ -97,3 +97,29 @@ retourne HTTP 200 pendant le controle de la vague.
 
 Cette vague est destinee a une PR draft empilee sur la fondation multi-cloud.
 Elle ne declenche ni publication ni fusion.
+
+## Ce que l'equilibrage d'axes ne prouve pas (mesure du 2026-09-07)
+
+Cette vague satisfait les sept heuristiques d'axe connues : la bonne reponse
+est la plus longue dans exactement 25,0 % des cas, la plus courte dans 25,0 %,
+et les rangs de longueur sont equilibres par certification.
+
+Un classifieur logit conditionnel entraine sur onze traits de surface, valide
+par une validation croisee decoupee par question, la separe malgre tout a
+**59,7 %** pour une chance de 25 %. Le meme classifieur, labels permutes,
+retombe a 23-29 % : il sait donc atteindre le hasard, et sa valeur haute n'est
+pas un artefact de surapprentissage.
+
+Le poids dominant est la **ponctuation** (+1,22), un axe que personne n'avait
+nomme. La bonne reponse enumere ; avec les longueurs plafonnees, l'enumeration
+ressort en virgules au lieu de caracteres.
+
+Consequence pour la redaction a venir : equilibrer un axe nomme apres l'autre
+ne converge pas vers l'indiscernabilite, cela **deplace la fuite**. On contraint
+une mesure, pas la propriete sous-jacente. La conformite a cette liste de
+regles est un plancher, jamais une preuve.
+
+Corollaire : le classifieur doit rester un detecteur et ne jamais devenir une
+fonction objectif, sinon la fuite migre vers le douzieme trait. Garder deux ou
+trois traits hors du modele pendant la redaction, puis les mesurer, est le seul
+controle disponible contre ce biais.

@@ -9,5 +9,8 @@
     "objective": "section-3"
   },
   "correct": "Cloud NAT sur un Cloud Router pour la région et le sous-réseau concernés",
-  "rationale": "Cloud NAT fournit aux VM sans IP externe une traduction d'adresses pour les connexions sortantes et ne permet pas de nouvelles connexions entrantes non sollicitées. Des IP externes violent l'exigence, un équilibreur sert le trafic entrant et Cloud DNS assure la résolution de noms, pas la connectivité sortante."
+  "rationale": "Cloud NAT fournit aux VM sans IP externe une traduction d'adresses pour les connexions sortantes et ne permet pas de nouvelles connexions entrantes non sollicitées. Des IP externes violent l'exigence, un équilibreur sert le trafic entrant et Cloud DNS assure la résolution de noms, pas la connectivité sortante.",
+  "provenance": [
+    "https://cloud.google.com/nat/docs/overview"
+  ]
 }

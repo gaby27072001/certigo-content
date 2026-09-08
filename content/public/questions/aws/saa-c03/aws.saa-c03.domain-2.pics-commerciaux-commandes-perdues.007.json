@@ -10,9 +10,9 @@
   },
   "prompt": "Une application de prise de commandes appelle de façon synchrone un service de traitement qui met de deux à dix secondes par commande. Lors des opérations commerciales, le débit d'arrivée est multiplié par vingt pendant quelques heures : le service sature, les appels expirent et des commandes sont définitivement perdues. L'entreprise veut absorber ces pics sans perdre une seule commande, en laissant le traitement s'effectuer à son propre rythme. Quelle conception l'architecte doit-il proposer ?",
   "choices": [
-    "Augmenter le délai d'expiration du client HTTP et la taille des instances du service de traitement afin d'absorber les pics.",
+    "Augmenter le délai d'expiration du client HTTP ainsi que la taille des instances du service de traitement afin d'absorber les pics commerciaux sans modifier le couplage entre les deux niveaux.",
     "Faire publier chaque commande par le niveau web dans une file Amazon SQS, faire consommer cette file par un groupe Auto Scaling dimensionné sur la profondeur de la file, et associer une file d'attente de lettres mortes aux messages en échec répété.",
-    "Faire écrire les commandes par le niveau web dans une table Amazon DynamoDB, puis faire interroger cette table toutes les cinq minutes par une tâche de traitement planifiée.",
-    "Placer un Application Load Balancer devant le service de traitement et activer côté client des tentatives automatiques jusqu'à acceptation de la commande."
+    "Faire écrire les commandes par le niveau web dans une table Amazon DynamoDB, puis faire interroger cette table toutes les cinq minutes par une tâche de traitement planifiée qui reprend les enregistrements non encore traités et les marque au fur et à mesure.",
+    "Placer un Application Load Balancer devant le service de traitement, activer côté client des tentatives automatiques jusqu'à acceptation de la commande, et augmenter le nombre d'instances enregistrées auprès du groupe cible pour que la file d'attente côté client se résorbe pendant les pics."
   ]
 }

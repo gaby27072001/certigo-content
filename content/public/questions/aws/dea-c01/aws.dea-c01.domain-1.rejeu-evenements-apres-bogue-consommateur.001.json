@@ -10,9 +10,9 @@
   },
   "prompt": "Une plateforme de télémétrie ingère ses événements dans un flux Amazon Kinesis Data Streams conservé avec la durée de rétention par défaut de 24 heures. Un bogue de désérialisation introduit il y a 18 heures dans l'application consommatrice a produit des agrégats erronés dans le lac de données. Le correctif est prêt et l'équipe de données veut rejouer les événements depuis l'instant où le bogue a été introduit, puis se donner une marge plus large pour de futurs incidents. Quelle approche répond au besoin ?",
   "choices": [
-    "Reconfigurer les producteurs pour qu'ils réémettent dans le flux les événements des 18 dernières heures reconstitués depuis leurs journaux applicatifs.",
-    "Créer une diffusion Amazon Data Firehose sur le flux : elle restitue automatiquement au nouveau consommateur les enregistrements déjà lus.",
+    "Reconfigurer les producteurs pour qu'ils réémettent dans le flux les événements des dernières 18 heures, reconstitués depuis leurs journaux applicatifs locaux.",
+    "Créer une diffusion Amazon Data Firehose sur le flux : elle restitue d'elle-même au nouveau consommateur les enregistrements que les autres consommateurs ont déjà lus.",
     "Allonger la rétention du flux à sept jours, puis redémarrer le consommateur corrigé avec un itérateur de position AT_TIMESTAMP fixé au début de l'incident.",
-    "Migrer le flux vers une file Amazon SQS FIFO, dont les messages restent relisibles pendant quatorze jours après leur consommation."
+    "Migrer le flux vers une file Amazon SQS FIFO, dont les messages restent relisibles pendant quatorze jours après avoir été consommés une première fois par un lecteur."
   ]
 }

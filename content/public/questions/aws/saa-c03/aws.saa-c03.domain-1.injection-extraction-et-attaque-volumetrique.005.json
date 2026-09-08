@@ -11,8 +11,8 @@
   "prompt": "Un site public sert son trafic par Amazon CloudFront devant un Application Load Balancer. L'équipe a subi coup sur coup des tentatives d'injection SQL sur un formulaire de recherche, une extraction massive de contenu provenant d'une poignée d'adresses IP, et une attaque volumétrique qui a fait exploser la facture de mise à l'échelle. La direction demande un filtrage applicatif maintenu par AWS, une limitation du débit par adresse IP, ainsi qu'une assistance spécialisée et une protection contre les coûts liés aux attaques. Que doit mettre en place l'architecte ?",
   "choices": [
     "Associer une ACL web AWS WAF à la distribution Amazon CloudFront avec les groupes de règles gérés par AWS, dont la protection contre l'injection SQL, et une règle de limitation de débit par adresse IP, puis souscrire AWS Shield Advanced pour la réponse assistée et la protection contre les frais liés aux attaques.",
-    "Remplacer l'Application Load Balancer par un Network Load Balancer et filtrer les requêtes suspectes au moyen d'ACL réseau appliquées aux sous-réseaux publics.",
-    "Activer Amazon GuardDuty et Amazon Inspector sur le compte, puis bloquer manuellement dans les groupes de sécurité les adresses IP signalées par ces services.",
-    "Faire valider et assainir les paramètres du formulaire par le code applicatif uniquement, et augmenter la capacité maximale du groupe Auto Scaling pour absorber le trafic d'attaque."
+    "Remplacer l'Application Load Balancer par un Network Load Balancer et filtrer les requêtes suspectes au moyen d'ACL réseau appliquées aux sous-réseaux publics, en y refusant une à une les plages d'adresses à l'origine du trafic anormal constaté.",
+    "Activer Amazon GuardDuty et Amazon Inspector sur le compte, puis bloquer manuellement dans les groupes de sécurité les adresses IP signalées par ces deux services, en confiant l'opération à l'astreinte de l'équipe d'exploitation pendant toute la durée de l'attaque.",
+    "Faire valider et assainir les paramètres du formulaire par le code applicatif uniquement, augmenter la capacité maximale du groupe Auto Scaling afin d'absorber le trafic d'attaque, et redimensionner la base de données pour qu'elle soutienne le surcroît de requêtes engendré par cette montée en charge soudaine et par les tentatives répétées d'injection."
   ]
 }

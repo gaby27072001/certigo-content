@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Amazon VPC IP Address Manager avec administrateur délégué, pools partagés via AWS RAM et allocations référencées par les modèles",
-  "rationale": "VPC IPAM centralise l'inventaire et l'allocation des préfixes, applique les règles de pool et empêche les allocations concurrentes qui se chevauchent. L'administration déléguée et RAM conviennent au modèle multi-compte. Les feuilles, valeurs codées en dur et tirages sans état créent des collisions et de la dérive."
+  "correct": "Amazon VPC IP Address Manager, avec des pools régionaux partagés par AWS Resource Access Manager",
+  "rationale": "VPC IP Address Manager tient l'état des plages attribuées et délivre les allocations, ce qui rend l'attribution atomique du point de vue des demandeurs : deux déploiements simultanés obtiennent deux plages différentes, et les pools sont partagés aux comptes par AWS RAM. Une fonction Lambda qui tire puis vérifie réalise une lecture suivie d'une écriture sans exclusion mutuelle : deux exécutions concurrentes peuvent observer le même état libre et attribuer la même plage. Un paramètre Parameter Store lu puis mis à jour présente la même fenêtre de concurrence, sauf à implémenter soi-même un verrou. Un tableau de suivi manuel ne comporte aucun mécanisme d'exclusion et reproduit le problème que l'automatisation doit supprimer. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain2.html ; https://docs.aws.amazon.com/vpc/latest/ipam/what-it-is-ipam.html"
 }

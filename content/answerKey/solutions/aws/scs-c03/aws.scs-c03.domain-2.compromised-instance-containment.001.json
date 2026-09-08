@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Associer un groupe de sécurité de quarantaine, capturer les métadonnées et instantanés nécessaires via un runbook Systems Manager, puis poursuivre l'analyse",
-  "rationale": "La quarantaine limite le blast radius tout en conservant la ressource pour la collecte. Un runbook versionné peut enregistrer l'état, prendre des instantanés et appliquer des contrôles de manière cohérente. Terminer ou redémarrer trop tôt détruit des éléments volatils, et désactiver CloudTrail retire une source essentielle."
+  "correct": "Remplacer le groupe de sécurité par un groupe sans règle autorisée, puis révoquer les sessions du rôle porté par le profil d'instance",
+  "rationale": "Un groupe de sécurité sans règle autorisée coupe le trafic sans éteindre l'instance, ce qui préserve la mémoire vive, et la révocation des sessions du rôle invalide les identifiants temporaires déjà émis. Arrêter l'instance détruit la mémoire volatile, précisément ce que l'énoncé demande de conserver ; détacher le profil empêche l'obtention de nouveaux identifiants mais laisse valides ceux déjà distribués jusqu'à leur expiration. Retirer l'instance d'un groupe cible interrompt le trafic entrant sans rien changer au trafic sortant observé. Un instantané préserve le disque, pas la mémoire, et ne stoppe pas l'activité en cours. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain2.html ; https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_revoke-sessions.html"
 }

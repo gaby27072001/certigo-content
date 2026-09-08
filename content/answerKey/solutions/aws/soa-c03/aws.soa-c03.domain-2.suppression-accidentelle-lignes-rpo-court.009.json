@@ -9,5 +9,8 @@
     "objective": "domain-2"
   },
   "correct": "Lancer une restauration à un instant donné vers une nouvelle instance, en choisissant un horodatage situé juste avant la suppression, puis rebasculer l'application vers cette instance.",
-  "rationale": "Les sauvegardes automatiques RDS conservent les journaux de transactions et autorisent une restauration à un instant donné avec une granularité de l'ordre de la seconde dans la période de rétention : restaurer à un horodatage situé juste avant la suppression crée une nouvelle instance qui respecte largement un RPO de cinq minutes. Repartir de l'instantané quotidien peut perdre plusieurs heures de données et impose un rejeu manuel risqué. Une réplique en lecture suit la source de manière asynchrone mais quasi continue : la suppression y a déjà été répliquée, donc la promouvoir ne restitue pas les lignes. La protection contre la suppression empêche de détruire l'instance de base de données ; elle n'a aucun effet sur des lignes supprimées par une instruction SQL."
+  "rationale": "Les sauvegardes automatiques RDS conservent les journaux de transactions et autorisent une restauration à un instant donné avec une granularité de l'ordre de la seconde dans la période de rétention : restaurer à un horodatage situé juste avant la suppression crée une nouvelle instance qui respecte largement un RPO de cinq minutes. Repartir de l'instantané quotidien peut perdre plusieurs heures de données et impose un rejeu manuel risqué. Une réplique en lecture suit la source de manière asynchrone mais quasi continue : la suppression y a déjà été répliquée, donc la promouvoir ne restitue pas les lignes. La protection contre la suppression empêche de détruire l'instance de base de données ; elle n'a aucun effet sur des lignes supprimées par une instruction SQL.",
+  "provenance": [
+    "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html"
+  ]
 }

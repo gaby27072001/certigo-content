@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Une organisation veut imposer automatiquement des politiques AWS WAF et des règles de groupes de sécurité à tous les comptes d'une OU, y compris aux comptes ajoutés ultérieurement, avec rapports de conformité centraux. Quel service utiliser ?",
+  "prompt": "Une équipe sécurité doit garantir qu'aucun groupe de sécurité, dans aucun compte d'une organisation AWS, n'autorise le port d'administration distante depuis n'importe quelle adresse. La règle doit s'appliquer automatiquement aux comptes créés plus tard, et les écarts doivent être corrigés sans intervention manuelle. Quel service impose ce résultat ?",
   "choices": [
-    "AWS Firewall Manager avec administrateur délégué et politiques ciblant l'OU",
-    "Une web ACL créée manuellement dans le compte de management uniquement",
-    "Amazon GuardDuty sans intégration Organizations",
-    "Des règles locales non versionnées dans chaque compte"
+    "AWS Config avec une règle gérée détectant les groupes de sécurité trop permissifs",
+    "Une politique de contrôle des services interdisant l'appel d'API qui autorise ce port",
+    "Amazon GuardDuty, dont les résultats signalent les connexions venues d'adresses inconnues",
+    "AWS Firewall Manager, avec une politique de groupes de sécurité appliquée à l'organisation"
   ]
 }

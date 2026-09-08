@@ -9,5 +9,8 @@
     "objective": "section-1"
   },
   "correct": "Exécuter bq load avec --source_format=CSV, la table cible, l'URI gs:// et le schéma",
-  "rationale": "La commande bq load crée un job de chargement BigQuery depuis Cloud Storage et accepte le format ainsi que le schéma explicites. gcloud storage cp et gsutil compose manipulent des objets Cloud Storage, tandis que bq query exécute du SQL et ne transforme pas une URI en table native sans configuration supplémentaire."
+  "rationale": "La commande bq load crée un job de chargement BigQuery depuis Cloud Storage et accepte le format ainsi que le schéma explicites. gcloud storage cp et gsutil compose manipulent des objets Cloud Storage, tandis que bq query exécute du SQL et ne transforme pas une URI en table native sans configuration supplémentaire.",
+  "provenance": [
+    "https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv"
+  ]
 }

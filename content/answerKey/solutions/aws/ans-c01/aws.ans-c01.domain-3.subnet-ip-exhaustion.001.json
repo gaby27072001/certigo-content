@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Associer un CIDR secondaire non chevauchant au VPC, créer de nouveaux sous-réseaux et configurer le CNI pour utiliser cette capacité selon le plan retenu",
-  "rationale": "Un CIDR secondaire ajoute de l'espace adressable sans remplacer le VPC. De nouveaux sous-réseaux et une configuration CNI adaptée permettent aux pods ou nœuds d'utiliser cette capacité progressivement. Le CIDR principal ne peut pas être modifié en place et des adresses publiques par pod ne résolvent pas l'allocation privée."
+  "correct": "Ajouter un bloc d'adresses IPv4 secondaire au VPC et y créer des sous-réseaux",
+  "rationale": "Un VPC accepte des blocs d'adresses IPv4 secondaires : on en ajoute un, on y crée des sous-réseaux, on met à jour les tables de routage et on propage le nouveau préfixe vers la passerelle de transit, sans toucher aux instances en service. Le masque d'un sous-réseau existant ne se modifie pas après création : la plage est figée, et l'opération proposée n'existe pas. Créer un second VPC et migrer les instances répond au besoin mais impose un déplacement des charges, alors que l'énoncé demande précisément d'éviter l'interruption, et l'appairage ajoute une topologie parallèle à la passerelle déjà en place. Attribuer des adresses secondaires aux interfaces existantes consomme des adresses de la même plage saturée et aggrave donc l'épuisement au lieu de le résoudre. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain3.html ; https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html"
 }

@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Après une modification IaC, une instance ne peut plus joindre un interface VPC endpoint. L'équipe veut identifier si une route, un NACL, un groupe de sécurité ou la configuration de l'endpoint bloque le chemin, sans envoyer de paquets en production. Quel outil utiliser en premier ?",
+  "prompt": "Une instance EC2 ne parvient pas à joindre un Network Load Balancer situé dans un autre VPC relié par une passerelle de transit. L'environnement est en production et l'équipe ne veut ni émettre de trafic de test, ni modifier une règle pour observer ce qui change. Elle veut identifier le composant qui bloque le chemin. Quel outil apporte cette réponse ?",
   "choices": [
-    "VPC Reachability Analyzer entre l'interface source et l'interface de l'endpoint",
-    "AWS Cost Explorer avec regroupement par service",
-    "Amazon Macie sur le compartiment de journaux",
-    "Une rotation des certificats ACM"
+    "Les journaux de flux VPC, filtrés sur les enregistrements dont l'action vaut REJECT",
+    "La duplication de trafic VPC, la copie étant analysée dans une appliance de capture dédiée",
+    "VPC Reachability Analyzer, qui analyse la configuration du chemin sans émettre de paquet",
+    "Les métriques Amazon CloudWatch du Network Load Balancer, notamment les hôtes déclarés sains"
   ]
 }

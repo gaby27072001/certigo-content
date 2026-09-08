@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Avant une migration, l'équipe doit établir une baseline du débit, des pertes et des chemins hybrides, puis conserver une visibilité sur les routes Transit Gateway et diagnostiquer les chemins non atteignables. Quel ensemble de services est le plus complet ?",
+  "prompt": "Avant une migration, une équipe doit établir une référence chiffrée du trafic hybride, conserver ensuite la visibilité sur les routes échangées par une passerelle de transit, et pouvoir déterminer sans émettre de paquets pourquoi un chemin donné n'aboutit pas. Quel ensemble d'outils couvre ces trois besoins successifs ?",
   "choices": [
-    "Métriques CloudWatch Direct Connect et VPN, VPC et Transit Gateway Flow Logs, Transit Gateway Network Manager et VPC Reachability Analyzer",
-    "Uniquement CloudTrail management events",
-    "AWS Artifact et Cost Explorer sans métriques réseau",
-    "Une capture manuelle sur un poste utilisateur après la migration"
+    "Les événements de gestion AWS CloudTrail, complétés par les tableaux de bord Amazon CloudWatch",
+    "Les métriques CloudWatch de Direct Connect, les journaux de flux VPC, puis Reachability Analyzer",
+    "La duplication de trafic VPC sur toutes les interfaces, analysée dans une appliance dédiée",
+    "AWS Trusted Advisor pour les quotas réseau, associé à AWS Config pour l'historique des configurations"
   ]
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Les journaux bruts d'une plateforme sont stockés dans Amazon S3 en classe S3 Standard. Ils sont consultés plusieurs fois par jour pendant trente jours, puis rarement mais avec une restitution attendue en millisecondes jusqu'à cent quatre-vingts jours. Au-delà, la conformité impose de les conserver sept ans au total avec un accès exceptionnel tolérant plusieurs heures de restitution, puis de les supprimer. L'équipe veut appliquer cette règle automatiquement et au moindre coût. Que doit-elle configurer ?",
   "choices": [
-    "Activer uniquement S3 Intelligent-Tiering et compter sur ses transitions automatiques pour supprimer les objets au bout de sept ans.",
+    "Activer uniquement S3 Intelligent-Tiering sur le compartiment et compter sur ses transitions automatiques entre niveaux d'accès pour supprimer les objets au terme des sept années de conservation.",
     "Définir une règle de cycle de vie S3 qui fait transiter les objets vers S3 Standard-IA à trente jours, vers S3 Glacier Deep Archive à cent quatre-vingts jours, puis les fait expirer à deux mille cinq cent cinquante-cinq jours.",
-    "Copier chaque nuit vers un autre compartiment, avec une tâche AWS Glue, les objets de plus de trente jours et supprimer les originaux.",
-    "Activer la gestion des versions du compartiment et supprimer manuellement une fois par an les versions de plus de sept ans."
+    "Copier chaque nuit vers un autre compartiment, à l'aide d'une tâche AWS Glue planifiée, les objets de plus de trente jours, puis supprimer les originaux une fois la copie confirmée par la tâche Glue.",
+    "Activer la gestion des versions du compartiment et confier à un opérateur la suppression manuelle, une fois par an, de toutes les versions d'objets ayant dépassé les sept années d'ancienneté révolues."
   ]
 }

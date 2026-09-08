@@ -11,8 +11,8 @@
   "prompt": "Après la mise en production de nouveaux fichiers CSS et JavaScript, une partie des utilisateurs continue de recevoir les anciennes versions servies par Amazon CloudFront, dont la durée de vie du cache est de vingt-quatre heures. L'équipe veut corriger l'incident immédiatement et éviter qu'il ne se reproduise à chaque déploiement. Que faire ?",
   "choices": [
     "Créer une invalidation CloudFront sur les chemins concernés pour traiter l'incident en cours, puis adopter des noms de fichiers versionnés afin que chaque déploiement produise de nouvelles clés de cache.",
-    "Définir une durée de vie de zéro seconde sur l'ensemble de la distribution afin de supprimer toute mise en cache.",
-    "Attendre l'expiration naturelle de la durée de vie de vingt-quatre heures, aucune autre action n'étant possible.",
-    "Supprimer puis recréer la distribution CloudFront à chaque déploiement pour vider le cache."
+    "Définir une durée de vie de zéro seconde sur l'ensemble de la distribution afin de supprimer toute forme de mise en cache des fichiers statiques servis aux utilisateurs du site.",
+    "Attendre l'expiration naturelle de la durée de vie de vingt-quatre heures, aucune autre action n'étant réellement possible sur une distribution CloudFront déjà mise en service par l'équipe.",
+    "Supprimer puis recréer entièrement la distribution CloudFront à chaque déploiement applicatif, de manière à repartir systématiquement d'un cache vide côté points de présence."
   ]
 }

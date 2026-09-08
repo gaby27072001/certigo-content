@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "VPC Traffic Mirroring avec filtres de session vers des appliances de collecte dimensionnées",
-  "rationale": "Traffic Mirroring copie les paquets des ENI sélectionnées vers une cible d'analyse et permet de filtrer le trafic capturé. Les Flow Logs ne contiennent que des métadonnées et ne peuvent alimenter une inspection payload. CloudTrail décrit les appels d'API, pas les paquets de données."
+  "correct": "La duplication de trafic VPC depuis les interfaces, vers un Network Load Balancer de collecte",
+  "rationale": "La duplication de trafic copie les paquets, charge utile comprise, depuis l'interface réseau d'une instance vers une cible qui peut être un Network Load Balancer réparti sur une flotte de collecteurs. Elle n'exige aucun agent et reste hors du chemin : une panne des collecteurs n'interrompt pas le trafic de production. Les journaux de flux ne contiennent que des métadonnées d'en-tête, jamais la charge utile, et ne peuvent donc pas alimenter une analyse de contenu. AWS Network Firewall inspecte en coupure, ce que l'énoncé exclut explicitement. Le Gateway Load Balancer est également une insertion en coupure : il achemine le trafic réel vers les appliances par GENEVE, si bien qu'une défaillance d'appliance affecte directement le trafic des instances. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain4.html ; https://docs.aws.amazon.com/vpc/latest/mirroring/what-is-traffic-mirroring.html"
 }

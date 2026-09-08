@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Un Transit Gateway Connect attachment utilisant GRE et BGP au-dessus de l'attachement de transport",
-  "rationale": "Transit Gateway Connect est conçu pour les appliances SD-WAN et utilise GRE avec BGP pour fournir une intégration dynamique et scalable. Le peering VPC ne fournit pas de propagation BGP et PrivateLink expose des services, pas un domaine de routage. Une Internet Gateway ne remplace pas l'intégration au Transit Gateway."
+  "correct": "Un attachement Connect de la passerelle de transit, porté par l'attachement du VPC, en GRE avec sessions BGP",
+  "rationale": "L'attachement Connect est prévu pour ce cas : il s'appuie sur un attachement de VPC ou de Direct Connect existant comme transport, établit des tunnels GRE vers les appliances et porte des sessions BGP par-dessus. GRE n'ajoute pas de chiffrement, ce qui évite la double encapsulation chiffrée, et le débit dépasse celui d'un tunnel IPsec unique. Le Site-to-Site VPN offre bien du BGP, mais il chiffre en IPsec un trafic déjà chiffré et reste plafonné par tunnel. L'appairage ne fait pas de BGP : les routes y sont statiques, ce que l'énoncé exclut, et il ne passe pas par les appliances. L'interface virtuelle de transit est un objet Direct Connect qui se rattache à une passerelle Direct Connect depuis un routeur situé chez le client ; elle ne se déclare pas depuis un VPC. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain2.html ; https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html"
 }

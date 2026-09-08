@@ -9,5 +9,8 @@
     "objective": "section-2"
   },
   "correct": "Une règle d'entrée TCP 22 depuis la plage IAP TCP forwarding, ciblant le tag « admin-ssh »",
-  "rationale": "Le tunnel IAP arrive sur les VM depuis la plage d'adresses dédiée ; la règle d'entrée sur le port 22 et le tag limite donc précisément la source et les cibles. Ouvrir 0.0.0.0/0 est excessif, une règle de sortie est dans le mauvais sens et des IP externes contredisent l'exigence."
+  "rationale": "Le tunnel IAP arrive sur les VM depuis la plage d'adresses dédiée ; la règle d'entrée sur le port 22 et le tag limite donc précisément la source et les cibles. Ouvrir 0.0.0.0/0 est excessif, une règle de sortie est dans le mauvais sens et des IP externes contredisent l'exigence.",
+  "provenance": [
+    "https://cloud.google.com/iap/docs/using-tcp-forwarding"
+  ]
 }

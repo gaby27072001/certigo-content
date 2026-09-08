@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Une zone publique Route 53 doit être signée avec DNSSEC. L'équipe a activé la signature et créé la clé de signature, mais les résolveurs externes ne construisent toujours pas de chaîne de confiance. Quelle étape manque ?",
+  "prompt": "Une zone hébergée publique Route 53 doit être protégée par DNSSEC. L'équipe a activé la signature de la zone et créé la clé de signature de clé, mais les résolveurs qui valident les signatures ne parviennent toujours pas à établir une chaîne de confiance jusqu'à cette zone. Quelle étape a été omise ?",
   "choices": [
-    "Publier l'enregistrement DS généré auprès du registrar de la zone parente",
-    "Créer un enregistrement PTR dans une private hosted zone",
-    "Associer la zone publique à un groupe de sécurité",
-    "Désactiver les enregistrements NS de la zone"
+    "Augmenter la durée de vie des enregistrements pour laisser les clés se propager",
+    "Activer la validation DNSSEC sur les endpoints entrants Route 53 Resolver du VPC",
+    "Publier l'enregistrement de signataire de délégation dans la zone parente",
+    "Remplacer les serveurs de noms attribués par Route 53 par des serveurs personnalisés"
   ]
 }
