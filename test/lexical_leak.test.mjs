@@ -200,3 +200,82 @@ test("aucune fuite lexicale gatee n'empire par rapport a la reference figee", ()
     "aggravation d'une fuite lexicale gatee : allonger ou equilibrer, ne pas figer la regression"
   );
 });
+
+// Un motif ne renseigne que la ou sa sortie peut VARIER avec ce qu'elle mesure.
+// Deux motifs de ce fichier ont vecu sans jamais matcher une seule fois —
+// `/\bà la main\b/i` et l'alternative `la totalité` de `tout-le-reste` — parce
+// qu'en JS `\b` est defini sur [A-Za-z0-9_] et qu'une lettre accentuee est un
+// NON-mot : `\bà` et `é\b` ne peuvent pas former de frontiere en prose
+// francaise. Ils n'echouaient pas et ne rendaient pas un zero suspect. Ils ne
+// participaient jamais, et rien dans la sortie ne les distinguait d'une absence
+// legitime — l'instrument vide le plus discret possible.
+//
+// D'ou ce tableau : CHAQUE famille declare un temoin PRESENT et un temoin
+// ABSENT. Ajouter une famille sans temoins fait rougir ce test, ce qui est le
+// seul moment ou le defaut est bon marche a corriger.
+const TEMOINS = {
+  manuel: ["reprendre manuellement chaque entree", "reprendre chaque entree"],
+  script: ["un script de bascule planifie", "une bascule planifiee"],
+  absolu: ["relancer systématiquement l'appel", "relancer l'appel une fois"],
+  uniquement: ["servir uniquement le trafic interne", "servir le trafic interne"],
+  vague: ["par exemple une file dediee", "une file dediee"],
+  "tout-le-reste": ["accorder a tous les utilisateurs", "accorder a l'appelant"],
+  cron: ["une tache cron horaire", "une tache horaire"],
+  ticket: ["ouvrir un ticket de suivi", "ouvrir un suivi"],
+  "a la main": ["reprendre à la main chaque entree", "reprendre chaque entree"],
+  "ad hoc": ["une bascule ad hoc", "une bascule planifiee"],
+  ponctuellement: ["verifier ponctuellement la file", "verifier la file"],
+  "par un ingenieur": ["valide par un ingénieur de garde", "valide par le pipeline"],
+  tableur: ["consigner dans un tableur partage", "consigner dans la table"],
+  "sans verifier": ["appliquer sans vérifier la signature", "appliquer apres controle"],
+  "un a un": ["migrer les tables une à une", "migrer les tables par lot"],
+  "script maison": ["un script maison de bascule", "un service gere de bascule"],
+};
+
+test("aucun motif n'est mort : chaque famille voit un cas PRESENT et un cas ABSENT", () => {
+  // Exhaustivite : le tableau doit suivre FAMILLES_CLASSEES, sans quoi une
+  // famille neuve echapperait au controle en silence.
+  assert.deepEqual(
+    FAMILLES_CLASSEES.map((f) => f.nom).filter((n) => !(n in TEMOINS)),
+    [],
+    "famille sans temoins declares — ajouter une entree dans TEMOINS"
+  );
+
+  const morts = [];
+  const bavards = [];
+  for (const f of FAMILLES_CLASSEES) {
+    const [present, absent] = TEMOINS[f.nom];
+    if (!f.motif.test(present)) morts.push(`${f.nom} : « ${present} » non reconnu`);
+    if (f.motif.test(absent)) bavards.push(`${f.nom} : « ${absent} » reconnu a tort`);
+  }
+
+  assert.deepEqual(morts, [], "motif MORT : il ne peut plus rien mesurer (verifier les \\b autour des accents)");
+  assert.deepEqual(bavards, [], "motif trop large : il matche un temoin qui ne porte pas la famille");
+});
+
+test("« la totalité » redevient mesurable, et le temporel reste compte", () => {
+  const famille = FAMILLES_CLASSEES.find((f) => f.nom === "tout-le-reste");
+
+  // L'alternative ressuscitee par la borne accent-compatible.
+  assert.ok(famille.motif.test("basculer la totalité du trafic"), "« la totalité » doit redevenir mesurable");
+
+  // Les autres alternatives, temoins que la borne n'a rien casse.
+  for (const t of ["accorder a tous les utilisateurs", "present sur toutes les copies", "chiffrer l'ensemble des objets"]) {
+    assert.ok(famille.motif.test(t), `quantificateur non reconnu : « ${t} »`);
+  }
+
+  // LE TEMPOREL EST COMPTE, ET C'EST VOULU. Permutation du 2026-09-08 :
+  // tlr-temporel obs 10 / nul 6.2 / p = 0.005. Le sondage periodique est
+  // lui-meme une mauvaise reponse classique face a l'evenementiel, donc le
+  // vocabulaire temporel suit l'erreur qu'il decrit. Exclure ces tournures
+  // retirerait un signal mesure : mesurer une COMPOSITION ne rend pas un
+  // verdict de VALIDITE. Ce test existe pour qu'un futur « nettoyage » du
+  // motif rougisse au lieu de passer.
+  for (const t of ["relancer toutes les 50 millisecondes", "interroger la table toutes les 5 minutes"]) {
+    assert.ok(famille.motif.test(t), `periodicite non comptee : « ${t} » — signal p=0.005, ne pas exclure`);
+  }
+
+  // Temoin ABSENT, sans quoi les assertions ci-dessus ne prouveraient que le
+  // motif matche tout.
+  assert.ok(!famille.motif.test("accorder ce droit a l'appelant"), "temoin absent reconnu a tort");
+});

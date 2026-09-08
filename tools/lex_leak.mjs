@@ -47,6 +47,44 @@ import path from "node:path";
 // jugement (« un script maison », « un script local partage »), et il sort a
 // p=0.002. Le classement porte sur le sens au dictionnaire, la fuite porte sur
 // l'usage — seule la mesure arbitre. D'ou ce champ, explicite et revisable.
+// ATTENTION AUX FRONTIERES DE MOT ET AUX ACCENTS.
+//
+// En JS, `\b` est defini sur [A-Za-z0-9_]. Une lettre accentuee est donc un
+// NON-mot, et deux non-mots cote a cote ne forment aucune frontiere :
+//
+//   /\bà la main\b/i   ne matche JAMAIS « reprendre à la main » — avant le `à`
+//                      il y a un espace, non-mot lui aussi.
+//   /…la totalité\b/i  ne matche JAMAIS « la totalité du trafic » — apres le
+//                      `é` il y a un espace, non-mot lui aussi.
+//
+// Ces deux motifs ont vecu sans jamais matcher une seule fois. Ils n echouaient
+// pas et ne rendaient pas un zero suspect : ils ne participaient jamais, et
+// rien dans la sortie ne les distinguait d une absence legitime.
+//
+// D ou ces deux bornes, a utiliser DES QU une alternative commence ou finit par
+// une lettre accentuee. `test/lexical_leak.test.mjs` impose a chaque famille un
+// temoin present et un temoin absent : une alternative morte y rougit.
+const AV = "(?<![0-9A-Za-zÀ-ÖØ-öø-ÿ_])"; // frontiere gauche, accents compris
+const AP = "(?![0-9A-Za-zÀ-ÖØ-öø-ÿ_])"; // frontiere droite, accents compris
+
+// LE VOCABULAIRE TEMPOREL DE `tout-le-reste` EST UN SIGNAL, PAS DU BRUIT.
+// Ce motif appareille deux usages grammaticalement distincts :
+//
+//   quantificateur  « accorder a tous les utilisateurs »
+//   periodicite     « interroger toutes les 5 minutes »
+//
+// Il est tentant d exclure le second comme un faux positif. Permutation du
+// 2026-09-08, 3000 tirages, controle d identite OK, famille scindee :
+//
+//   tout-le-reste  obs 21  nul 7.1  p = 0.000
+//   tlr-quantif    obs 21  nul 7.5  p = 0.000
+//   tlr-temporel   obs 10  nul 6.2  p = 0.005   <- significatif
+//
+// Le sondage periodique est LUI-MEME une mauvaise reponse classique face a
+// l evenementiel : le vocabulaire temporel suit l erreur qu il decrit. Exclure
+// « toutes les <nombre|unite> » retirerait un signal mesure. Mesurer une
+// COMPOSITION ne rend pas un verdict de VALIDITE — ne pas separer ces deux
+// usages sans repermuter.
 export const FAMILLES_CLASSEES = [
   // --- GATE : jugement de valeur, correlation etablie au-dela du bruit
   { nom: "manuel", sens: "D", regime: "JUGEMENT", gate: true, motif: /\bmanuel(?:le(?:s|ment)?|s)?\b/i },
@@ -56,14 +94,15 @@ export const FAMILLES_CLASSEES = [
   { nom: "vague", sens: "C", regime: "JUGEMENT", gate: true, motif: /\b(?:par exemple|notamment)\b|\betc\./i },
 
   // --- RAPPORT : inherent au domaine, mesure mais jamais bloquant
-  { nom: "tout-le-reste", sens: "D", regime: "INHERENT", gate: false, motif: /\b(?:l'ensemble des|la totalité|tous les|toutes les)\b/i },
+  { nom: "tout-le-reste", sens: "D", regime: "INHERENT", gate: false, motif: new RegExp(`${AV}(?:l'ensemble des|la totalité|tous les|toutes les)${AP}`, "i") },
+
 
   // --- RAPPORT : technologie, correlation dans le bruit
   { nom: "cron", sens: "D", regime: "TECHNO", gate: false, motif: /\bcron\b/i },
   { nom: "ticket", sens: "D", regime: "TECHNO", gate: false, motif: /\bticket/i },
 
   // --- RAPPORT : jugement, mais correlation marginale (p entre 0.03 et 0.07)
-  { nom: "a la main", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bà la main\b/i },
+  { nom: "a la main", sens: "D", regime: "JUGEMENT", gate: false, motif: new RegExp(`${AV}à la main${AP}`, "i") },
   { nom: "ad hoc", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bad hoc\b/i },
   { nom: "ponctuellement", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bponctuel(?:le)?(?:ment)?\b/i },
   { nom: "par un ingenieur", sens: "D", regime: "JUGEMENT", gate: false, motif: /\bpar un (?:ingénieur|opérateur|administrateur)\b/i },
