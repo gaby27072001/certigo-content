@@ -1,0 +1,49 @@
+{
+  "schema": "certigo.coverage-matrix/v1",
+  "provider": "aws",
+  "certification": "aws:mla-c02",
+  "blueprintVersion": "2026-09-04",
+  "status": "in-progress",
+  "objectives": [
+    {
+      "objective": "domain-1",
+      "title": "Data Preparation for ML and AI",
+      "weightPercent": 28,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c02.domain-1.chunking-metadonnees-corpus-rag.001",
+        "aws.mla-c02.domain-1.dimensionnement-base-vectorielle-embeddings.002"
+      ]
+    },
+    {
+      "objective": "domain-2",
+      "title": "ML Model and Foundation Model (FM) Development",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c02.domain-2.arbitrage-finetuning-rag-prompt-engineering.003",
+        "aws.mla-c02.domain-2.choix-metriques-evaluation-resume-genai.004"
+      ]
+    },
+    {
+      "objective": "domain-3",
+      "title": "Deployment and Orchestration of ML and AI Workflows",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c02.domain-3.base-connaissances-bedrock-reranking.005",
+        "aws.mla-c02.domain-3.etat-agent-workflow-multi-etapes.006"
+      ]
+    },
+    {
+      "objective": "domain-4",
+      "title": "Operating, Monitoring, and Securing ML and AI Solutions",
+      "weightPercent": 24,
+      "weightType": "exact",
+      "questionIds": [
+        "aws.mla-c02.domain-4.derive-observabilite-agents-production.007",
+        "aws.mla-c02.domain-4.role-execution-moindre-privilege-bedrock.008"
+      ]
+    }
+  ]
+}

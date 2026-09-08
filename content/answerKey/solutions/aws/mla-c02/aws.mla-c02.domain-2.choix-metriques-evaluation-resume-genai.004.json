@@ -1,0 +1,16 @@
+{
+  "id": "aws.mla-c02.domain-2.choix-metriques-evaluation-resume-genai.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-2"
+  },
+  "correct": "Combiner ROUGE et BERTScore pour mesurer le chevauchement et la similarité sémantique, en relisant à la main les cas les plus faibles.",
+  "rationale": "Le domaine 2 du guide MLA-C02 cite explicitement ROUGE et BERTScore parmi les métriques d'évaluation du traitement du langage naturel, ainsi que l'implémentation de cadres d'évaluation humaine intégrés pour les cas qui le justifient. ROUGE capture le chevauchement de n-grammes avec les résumés de référence, BERTScore capture la similarité sémantique même en cas de reformulation, et réserver la relecture humaine aux résumés les plus faiblement notés rend le contrôle ciblé et soutenable chaque nuit, au lieu d'une relecture intégrale. Ne suivre que la latence moyenne ignore complètement la qualité du contenu généré : un résumé rapide mais incorrect ou hors sujet passerait sans être détecté. Mesurer l'exactitude comme une classification binaire (identique ou non à la référence) est inadapté à un texte généré, où deux formulations différentes peuvent être également correctes ; cette mesure rejetterait à tort presque tous les résumés valides. Comparer uniquement le nombre de mots ne dit rien du contenu : un résumé de longueur proche de la référence peut être entièrement faux, et un résumé plus court peut être parfaitement fidèle.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain2.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain2.md"
+  ]
+}

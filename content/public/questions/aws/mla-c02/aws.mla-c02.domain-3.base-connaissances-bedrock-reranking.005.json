@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-3.base-connaissances-bedrock-reranking.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-3"
+  },
+  "prompt": "Une application de génération augmentée par récupération s'appuie sur une base de connaissances Amazon Bedrock qui renvoie les vingt blocs les plus proches par similarité vectorielle pour chaque question posée. L'équipe constate que le modèle cite fréquemment des blocs seulement marginalement pertinents, classés en tête uniquement parce qu'ils partagent du vocabulaire avec la question, alors que des blocs plus pertinents apparaissent plus bas dans la liste retournée. Le modèle d'embeddings ne peut pas être changé dans l'immédiat. Quelle évolution améliore le plus directement la précision des blocs finalement transmis au modèle de fondation ?",
+  "choices": [
+    "Élargir la base de connaissances Bedrock en y ajoutant des documents sans modifier l'étape de récupération existante.",
+    "Ajouter un reclassement après la récupération vectorielle pour réordonner les blocs selon leur pertinence réelle.",
+    "Réduire à cinq le nombre de blocs récupérés par requête tout en conservant le classement fondé sur la seule similarité vectorielle.",
+    "Remplacer la récupération vectorielle par une recherche par mots-clés exacts sur les titres de documents de la base de connaissances."
+  ]
+}

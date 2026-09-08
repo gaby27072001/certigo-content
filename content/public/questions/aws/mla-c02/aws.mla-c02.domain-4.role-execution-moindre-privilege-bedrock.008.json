@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-4.role-execution-moindre-privilege-bedrock.008",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-4"
+  },
+  "prompt": "Un audit de sécurité examine une application qui appelle Amazon Bedrock à l'aide d'une clé d'API Bedrock statique de longue durée, intégrée dans la configuration de déploiement et partagée par plusieurs composants du système. L'audit exige que l'accès aux modèles de fondation suive le principe du moindre privilège, et que les identifiants utilisés puissent être révoqués et tracés individuellement sans interrompre les autres composants. Que doit faire l'équipe pour répondre à cette exigence ?",
+  "choices": [
+    "Conserver la clé d'API Bedrock existante mais la faire pivoter chaque mois selon une tâche planifiée automatisée.",
+    "Chiffrer la clé d'API Bedrock au repos dans Amazon DynamoDB tout en continuant à l'utiliser sans limite de portée.",
+    "Remplacer la clé d'API Bedrock de longue durée par un rôle IAM assumé, limité aux seules actions et modèles nécessaires.",
+    "Stocker la clé d'API Bedrock dans le dépôt de code avec un accès restreint aux branches protégées par des permissions."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "aws.mla-c02.domain-2.arbitrage-finetuning-rag-prompt-engineering.003",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-2"
+  },
+  "correct": "Conserver le modèle de fondation actuel et brancher une récupération augmentée sur un index des politiques réindexé chaque jour.",
+  "rationale": "Le domaine 2 du guide MLA-C02 exige de sélectionner des schémas d'architecture de récupération augmentée en fonction des besoins du cas d'usage et d'évaluer les compromis entre solutions personnalisées, modèles gérés et modèles de fondation. Un contenu source qui change plusieurs fois par semaine correspond exactement au cas où la récupération augmentée l'emporte sur le réentraînement : réindexer chaque jour un magasin de documents est rapide et peu coûteux, alors que le modèle lui-même reste stable. Réentraîner intégralement le modèle chaque semaine impose un cycle d'entraînement coûteux et récurrent alors que les politiques changent à un rythme encore plus rapide, ce qui laisserait de toute façon des fenêtres où le modèle serait en retard sur la dernière règle publiée. Coller l'intégralité du manuel dans chaque invite gaspille des jetons sur des sections sans rapport avec la question posée, augmente la latence et le coût de chaque appel, et se heurte à la limite de contexte du modèle à mesure que le manuel grossit. Un préentraînement continu est une opération d'infrastructure lourde, pensée pour adapter un modèle à un domaine sur la durée, pas pour synchroniser un contenu qui change de jour en jour : il resterait en décalage avec la dernière version des politiques tout en coûtant largement plus cher qu'une réindexation quotidienne.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain2.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain2.md"
+  ]
+}

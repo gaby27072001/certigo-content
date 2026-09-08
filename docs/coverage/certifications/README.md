@@ -9,7 +9,9 @@ chaque certification couverte :
 - [AZ-104 Microsoft Azure Administrator](az-104.md) ;
 - [DP-900 Microsoft Azure Data Fundamentals](dp-900.md) ;
 - [catalogue AWS et Google Cloud](aws-gcp-catalog.md), avec les 26 matrices du
-  snapshot 2026-08-17.
+  snapshot 2026-08-17 ;
+- [vague pilote AWS MLA-C02](aws-mla-c02-pilot-wave.md), matrice partielle
+  pour une certification bêta tout juste annoncée.
 
 Les sources de premiere partie restent detaillees dans chaque document. Les
 regles communes d'identite, de provenance, de versioning et de cycle de vie

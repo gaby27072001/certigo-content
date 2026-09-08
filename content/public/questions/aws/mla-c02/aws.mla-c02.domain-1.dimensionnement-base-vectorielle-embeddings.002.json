@@ -1,0 +1,18 @@
+{
+  "id": "aws.mla-c02.domain-1.dimensionnement-base-vectorielle-embeddings.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-1"
+  },
+  "prompt": "Une équipe de plateforme ML doit choisir un magasin vectoriel pour indexer les embeddings d'environ quarante millions de blocs de documents provenant de plusieurs bases de connaissances internes. La recherche des plus proches voisins doit répondre en moins de cent millisecondes sous forte charge. L'équipe exploite déjà en production un cluster Amazon OpenSearch Service pour la recherche plein texte de son site interne, ainsi qu'une instance Amazon RDS pour ses données transactionnelles. Quelle option de stockage vectoriel adopter pour cette échelle, sans introduire un nouveau service à opérer ?",
+  "choices": [
+    "Stocker les vecteurs comme attributs dans Amazon DynamoDB et comparer chaque requête à la table entière par balayage complet.",
+    "Configurer un index k-NN dans le cluster Amazon OpenSearch Service déjà exploité, dimensionné pour cette échelle de recherche.",
+    "Sérialiser chaque vecteur en objet JSON distinct sur Amazon S3 et calculer la similarité en téléchargeant puis comparant les objets.",
+    "Ajouter une colonne pgvector sur l'instance Amazon RDS existante et effectuer une recherche exacte de plus proches voisins, sans index."
+  ]
+}

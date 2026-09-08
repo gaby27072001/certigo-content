@@ -1,0 +1,17 @@
+{
+  "id": "aws.mla-c02.domain-1.dimensionnement-base-vectorielle-embeddings.002",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-1"
+  },
+  "correct": "Configurer un index k-NN dans le cluster Amazon OpenSearch Service déjà exploité, dimensionné pour cette échelle de recherche.",
+  "rationale": "Le domaine 1 du guide MLA-C02 attend explicitement la configuration de bases vectorielles évolutives, en citant nommément Amazon OpenSearch Service parmi les options recommandées. Son index k-NN effectue une recherche approximative des plus proches voisins conçue pour des dizaines de millions de vecteurs avec une latence sous-cent-millisecondes, et l'équipe l'exploite déjà en production, ce qui évite d'opérer un nouveau service. Stocker les vecteurs comme attributs DynamoDB et comparer par balayage complet impose de parcourir la table entière à chaque requête : le coût et la latence croissent linéairement avec les quarante millions de blocs, bien au-delà de la cible de latence. Sérialiser chaque vecteur en objet S3 individuel et télécharger puis comparer chaque objet est encore plus lent, puisque chaque comparaison implique un appel réseau vers le stockage objet. Ajouter pgvector à l'instance RDS existante sans index impose une recherche exacte qui compare la requête à chaque ligne de la table : cela reste correct fonctionnellement mais ne tient pas la latence ni le débit requis à cette échelle sans un index dédié, que le choix ne prévoit pas.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain1.md et https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/mla-02-in-scope-services.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain1.md",
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/mla-02-in-scope-services.md"
+  ]
+}

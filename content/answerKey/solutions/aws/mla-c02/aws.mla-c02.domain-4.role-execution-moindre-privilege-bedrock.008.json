@@ -1,0 +1,16 @@
+{
+  "id": "aws.mla-c02.domain-4.role-execution-moindre-privilege-bedrock.008",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "aws",
+    "certification": "aws:mla-c02",
+    "blueprintVersion": "2026-09-04",
+    "objective": "domain-4"
+  },
+  "correct": "Remplacer la clé d'API Bedrock de longue durée par un rôle IAM assumé, limité aux seules actions et modèles nécessaires.",
+  "rationale": "Le domaine 4 du guide MLA-C02 attend explicitement la configuration de l'accès au moindre privilège aux artefacts ML/IA et la sélection du type d'identifiant approprié pour accéder aux modèles de fondation, en opposant précisément les clés d'API Bedrock aux identifiants IAM. Un rôle IAM assumé peut être limité par une politique aux seules actions et modèles réellement nécessaires, chaque composant peut assumer son propre rôle pour permettre une révocation et une traçabilité individuelles via AWS CloudTrail, sans affecter les autres composants qui utiliseraient un rôle distinct. Faire pivoter chaque mois la clé d'API existante réduit la fenêtre d'exposition en cas de fuite, mais la clé reste partagée par plusieurs composants et continue de porter une portée large : ni le moindre privilège ni la traçabilité individuelle exigés par l'audit ne sont satisfaits. Chiffrer la clé au repos dans DynamoDB protège son stockage mais ne change rien à la portée de la clé une fois déchiffrée et utilisée pour appeler Bedrock, ni à son partage entre composants. Stocker la clé dans le dépôt de code, même avec un accès restreint aux branches protégées, expose un identifiant statique et partagé à toute personne ayant accès au dépôt, ce qui est contraire à l'exigence de traçabilité individuelle et de révocation ciblée.\n\nSources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain4.md",
+  "provenance": [
+    "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02-domain4.md"
+  ]
+}
