@@ -12,7 +12,7 @@
   "choices": [
     "Faire traiter toutes les requetes par le plus petit modele de fondation disponible, quel que soit le type de question, afin de reduire la latence de generation percue sur l'ensemble du trafic de l'outil de recherche documentaire.",
     "Diffuser la reponse en flux vers l'agent des les premiers tokens, precalculer et mettre en cache les reponses aux questions recurrentes identifiees, et affiner l'index et le pretraitement des requetes de recuperation.",
-    "Supprimer l'etape de recuperation et adresser la question de l'agent directement au plus grand modele de fondation disponible, ses connaissances internes servant de base aux reponses de procedure.",
+    "Supprimer l'etape de recuperation et adresser la question de l'agent directement au plus grand modele de fondation disponible, ses connaissances internes servant de base aux reponses de procedure. Les procedures internes restent alors absentes du contexte transmis au modele.",
     "Regrouper les requetes de plusieurs agents dans un appel unique au modele de fondation, en attendant qu'un nombre suffisant de questions soit en file d'attente avant de declencher la generation."
   ]
 }

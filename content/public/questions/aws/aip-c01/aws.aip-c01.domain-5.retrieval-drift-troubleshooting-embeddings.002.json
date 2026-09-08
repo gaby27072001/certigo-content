@@ -12,7 +12,7 @@
   "choices": [
     "Provisionner un cluster de base de donnees vectorielle plus grand et y migrer l'ensemble des vecteurs, la baisse de pertinence observee suggerant une saturation de l'index et de la recherche vectorielle aux heures de forte affluence sur le corpus interne.",
     "Comparer les identifiants de modele d'embedding enregistres sur les lots de vecteurs, rejouer un jeu de requetes temoin en lisant les scores k-NN d'OpenSearch, relire les chevauchements produits par le chunking, puis refaire un appel a template fige.",
-    "Reecrire le template de prompt cote generation en renforcant les consignes de citation, afin que l'assistant privilegie les fragments recents et ecarte les extraits hors sujet du contexte transmis.",
-    "Augmenter le nombre de fragments recuperes a chaque requete et elargir le contexte transmis, afin que les passages pertinents figurent parmi les extraits fournis au modele de fondation."
+    "Reecrire le template de prompt cote generation en renforcant les consignes de citation, afin que l'assistant privilegie les fragments recents et ecarte les extraits hors sujet du contexte transmis. Aucune verification n'est faite du cote des vecteurs ni du modele d'embedding utilise.",
+    "Augmenter le nombre de fragments recuperes a chaque requete et elargir le contexte transmis, afin que les passages pertinents figurent parmi les extraits fournis au modele de fondation. Le contexte transmis grossit donc sans que la qualite des vecteurs soit examinee."
   ]
 }

@@ -13,6 +13,6 @@
     "Reentrainer integralement le modele de base a chaque iteration, deposer chaque checkpoint complet dans un prefixe Amazon S3 nomme par date, puis reporter ce chemin dans la configuration du point de terminaison lors de chaque changement de version.",
     "Ne conserver que la derniere version affinee et supprimer les checkpoints precedents des qu'un deploiement reussit, afin de limiter les couts de stockage et de garder un artefact unique de reference pour toutes les equipes.",
     "Affiner des adaptateurs LoRA sur le modele de base partage, enregistrer chaque version dans le SageMaker Model Registry avec un statut d'approbation, et ne promouvoir que les versions approuvees vers le point de terminaison de production.",
-    "Deployer en production chaque nouvel adaptateur des la fin de son entrainement, puis surveiller les tickets de support et les retours des codeurs medicaux pour reperer une eventuelle degradation de la qualite des codes proposes."
+    "Deployer en production chaque nouvel adaptateur des la fin de son entrainement, puis surveiller les tickets de support et les retours des codeurs medicaux pour reperer une eventuelle degradation de la qualite des codes proposes. Aucun registre ne conserve le statut d'approbation des versions deployees."
   ]
 }

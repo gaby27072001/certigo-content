@@ -12,7 +12,7 @@
   "choices": [
     "Classer les outils par niveau de risque, soumettre les appels d'ecriture au-dela du seuil a une tache de rappel humain AWS Step Functions, restreindre le role IAM de chaque outil aux actions necessaires et borner le nombre d'etapes de raisonnement.",
     "Accorder au role d'execution de l'agent des permissions larges sur les systemes d'achat pour eviter toute erreur de permission, journaliser chaque appel d'outil dans AWS CloudTrail et faire relire les bons de commande emis lors de la revue quotidienne.",
-    "Interposer une approbation humaine devant chaque appel d'outil de l'agent, consultations de catalogue comprises, avec notification a l'acheteur de garde et expiration automatique de la demande d'approbation apres quinze minutes.",
-    "Retirer l'outil d'emission de bons de commande a l'agent, le limiter a produire un resume par courriel des achats proposes, et laisser les acheteurs saisir eux-memes les commandes validees dans le systeme d'achat."
+    "Interposer une approbation humaine devant chaque appel d'outil de l'agent, consultations de catalogue comprises, avec notification a l'acheteur de garde et expiration automatique de la demande d'approbation apres quinze minutes. Les requetes courantes perdent alors leur experience rapide.",
+    "Retirer l'outil d'emission de bons de commande a l'agent, le limiter a produire un resume par courriel des achats proposes, et laisser les acheteurs saisir eux-memes les commandes validees dans le systeme d'achat. L'agent perd ainsi toute capacite d'action sur le systeme d'achat cible."
   ]
 }

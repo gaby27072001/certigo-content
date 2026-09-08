@@ -12,7 +12,7 @@
   "choices": [
     "Conserver les prompts en chaines codees en dur dans le code source de chaque application et utiliser la revue de pull request Git existante comme etape d'approbation, en balisant chaque release applicative pour retrouver la formulation deployee.",
     "Stocker chaque version de prompt en objet texte dans un bucket Amazon S3 prive avec le versionnement d'objets active, et coordonner les modifications entre equipes par messagerie avant d'ecraser le fichier partage.",
-    "Utiliser Amazon Bedrock Guardrails pour n'autoriser que les formulations de prompt inscrites sur une liste d'exemples approuves, et conserver les journaux de filtrage de contenu comme historique des versions et des approbations.",
+    "Utiliser Amazon Bedrock Guardrails pour n'autoriser que les formulations de prompt inscrites sur une liste d'exemples approuves, et conserver les journaux de filtrage de contenu comme historique des versions et des approbations. La liste d'exemples approuves tient alors lieu d'historique de versions.",
     "Utiliser Amazon Bedrock Prompt Management pour versionner des templates parametres promus par un workflow d'approbation, faire referencer une version par les applications, et auditer les appels d'API sur ces templates avec AWS CloudTrail."
   ]
 }

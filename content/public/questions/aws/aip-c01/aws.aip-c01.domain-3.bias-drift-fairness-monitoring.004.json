@@ -12,7 +12,7 @@
   "choices": [
     "Conserver le rapport d'equite produit avant le lancement comme reference permanente pour les metriques de biais, les poids du modele n'ayant pas change depuis la mise en production.",
     "Faire relire chaque trimestre un echantillon de recommandations par un responsable du recrutement, qui compare les taux observes entre groupes demographiques et transmet ses constats aux equipes produit et conformite avant les revues de direction.",
-    "Calculer chaque nuit, par une requete Amazon Athena, un ratio maison de recommandations par groupe et le consigner dans un rapport de conformite examine lors des revues trimestrielles.",
+    "Calculer chaque nuit, par une requete Amazon Athena, un ratio maison de recommandations par groupe et le consigner dans un rapport de conformite examine lors des revues trimestrielles. Ce ratio maison n'est rattache a aucune baseline etablie sur le jeu de reference.",
     "Planifier un moniteur de derive de biais Amazon SageMaker Clarify sur les donnees capturees par l'endpoint, avec une baseline etablie sur le jeu de reference, et notifier l'equipe par une alarme Amazon CloudWatch."
   ]
 }
