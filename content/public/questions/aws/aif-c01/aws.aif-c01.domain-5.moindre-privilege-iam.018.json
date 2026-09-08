@@ -10,9 +10,9 @@
   },
   "prompt": "Une application Amazon Bedrock doit lire un seul préfixe S3 et invoquer un modèle déterminé. Quelle approche respecte le mieux le principe du moindre privilège ?",
   "choices": [
-    "Utiliser le root user pour éviter les erreurs de permission",
+    "Utiliser les identifiants root du compte afin d’éviter les erreurs de permission",
     "Attacher à un rôle IAM une politique limitée à ce préfixe et aux actions nécessaires",
-    "Partager des clés d’accès permanentes entre développeurs",
-    "Rendre le compartiment S3 public"
+    "Partager des clés d’accès permanentes entre les développeurs du projet",
+    "Rendre le compartiment S3 accessible en lecture anonyme pour simplifier les appels applicatifs"
   ]
 }
