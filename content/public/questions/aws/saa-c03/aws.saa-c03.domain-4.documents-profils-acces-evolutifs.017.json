@@ -11,8 +11,8 @@
   "prompt": "Une entreprise conserve 400 To de documents dans la classe Amazon S3 Standard. Les documents sont fréquemment consultés pendant leurs trente premiers jours. Ensuite, les consultations deviennent rares mais doivent rester servies en quelques minutes. Au bout d'un an, les documents entrent dans une conservation légale de sept ans pendant laquelle une restitution sous douze heures est acceptable. Enfin, certains lots ont un profil de consultation imprévisible d'un mois à l'autre. Quelle stratégie de coût de stockage l'architecte doit-il concevoir ?",
   "choices": [
     "Définir une règle de cycle de vie qui fait passer les objets en S3 Standard-IA après trente jours puis en S3 Glacier Flexible Retrieval après un an, avec une expiration à sept ans, et placer les lots au profil imprévisible en S3 Intelligent-Tiering.",
-    "Conserver l'ensemble des objets en S3 Standard et activer la réplication inter-Régions afin de réduire les coûts de restitution.",
-    "Transférer tous les objets en S3 Glacier Deep Archive dès leur écriture et accepter les délais de restitution associés.",
-    "Définir une règle de cycle de vie qui supprime les objets après trente jours et redemander les documents à leurs producteurs en cas de besoin."
+    "Conserver l'ensemble des objets en classe S3 Standard et activer la réplication inter-Régions vers une seconde Région, afin que les restitutions soient servies depuis la copie la plus proche et que le coût de stockage baisse significativement.",
+    "Transférer l'ensemble des objets en S3 Glacier Deep Archive dès leur écriture au moyen d'une règle de cycle de vie sans délai, puis accepter les délais de restitution associés pendant les trente premiers jours de consultation fréquente.",
+    "Définir une règle de cycle de vie qui fait expirer les objets au bout de trente jours, puis redemander aux producteurs les documents nécessaires à la conservation légale au moment où une restitution est effectivement réclamée."
   ]
 }

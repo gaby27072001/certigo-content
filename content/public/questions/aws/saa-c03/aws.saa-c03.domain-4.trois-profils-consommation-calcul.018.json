@@ -10,9 +10,9 @@
   },
   "prompt": "L'analyse de la facture Amazon EC2 d'une entreprise fait apparaître trois profils distincts : un socle de quarante instances en fonctionnement continu, dont le maintien est prévu pour au moins trois ans ; un traitement par lots nocturne interruptible, qui reprend sur un point de contrôle après une interruption ; et des environnements de test lancés de façon imprévisible quelques heures par mois. Quelle combinaison de modèles d'achat l'architecte doit-il recommander ?",
   "choices": [
-    "Acheter des instances réservées standard sur trois ans pour la totalité de la capacité observée, socle, lots nocturnes et environnements de test compris.",
+    "Acheter des instances réservées standard sur trois ans pour la totalité de la capacité observée, socle continu, traitement par lots nocturne et environnements de test compris, afin d'obtenir la remise maximale sur l'ensemble du parc observé.",
     "Couvrir le socle par des Savings Plans Compute sur trois ans, exécuter le traitement par lots interruptible sur des instances Spot avec reprise sur point de contrôle, et laisser les environnements de test en tarification à la demande.",
-    "Exécuter l'intégralité des charges de travail sur des instances Spot et relancer automatiquement tout traitement interrompu.",
-    "Rester en tarification à la demande pour l'ensemble du parc et compenser le coût par une mise à l'échelle automatique agressive."
+    "Exécuter l'intégralité des charges de travail sur des instances Spot, y compris le socle continu, et relancer automatiquement tout traitement interrompu, de manière à profiter en permanence de la remise la plus élevée du catalogue Amazon EC2.",
+    "Rester en tarification à la demande pour l'ensemble du parc, sans aucun engagement de durée, et compenser le coût par une mise à l'échelle automatique agressive qui retire des instances dès que l'utilisation processeur moyenne du groupe redescend."
   ]
 }
