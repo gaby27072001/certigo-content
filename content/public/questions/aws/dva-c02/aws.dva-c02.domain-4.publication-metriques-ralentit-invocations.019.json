@@ -10,9 +10,9 @@
   },
   "prompt": "Une fonction AWS Lambda très sollicitée publie six métriques métier par invocation en appelant l'API PutMetricData de manière synchrone. La durée d'exécution augmente, des erreurs de limitation de débit apparaissent sur l'API CloudWatch et la facture de surveillance grimpe. Quelle solution le développeur doit-il mettre en œuvre ?",
   "choices": [
-    "Appeler PutMetricData depuis un fil d'exécution d'arrière-plan sans attendre la réponse, ce qui supprime tout coût et toute limitation.",
-    "Publier une métrique personnalisée par identifiant de commande afin de disposer du détail le plus fin possible.",
-    "Se contenter des métriques fournies par défaut par Lambda, qui couvrent déjà les indicateurs métier de l'application.",
+    "Appeler l'API PutMetricData depuis un fil d'exécution d'arrière-plan de la fonction AWS Lambda sans attendre la réponse, ce qui retire ces six appels du chemin critique et supprime à la fois les erreurs de limitation de débit et la facture de surveillance qui grimpe.",
+    "Publier une métrique personnalisée CloudWatch par identifiant de commande, en conservant les six mesures métier par invocation, afin de disposer du détail le plus fin possible sur la durée d'exécution de la fonction et de repérer précisément les appels limités par l'API CloudWatch.",
+    "Se contenter des métriques publiées par défaut par AWS Lambda pour cette fonction très sollicitée, qui couvrent déjà les six indicateurs métier de l'application et suppriment tout appel synchrone à l'API PutMetricData ainsi que la facture de surveillance associée.",
     "Émettre les mesures dans les journaux au format de métriques intégré (EMF) de CloudWatch, sous la forme d'une seule ligne structurée par invocation avec un nombre maîtrisé de dimensions, CloudWatch extrayant ensuite les métriques de façon asynchrone."
   ]
 }

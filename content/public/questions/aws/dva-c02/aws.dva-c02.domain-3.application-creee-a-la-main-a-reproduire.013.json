@@ -10,9 +10,9 @@
   },
   "prompt": "Une application sans serveur (Amazon API Gateway, AWS Lambda, Amazon DynamoDB) a été créée à la main dans la console pour l'environnement de développement. L'équipe doit maintenant la déployer de façon reproductible en recette puis en production, avec des valeurs propres à chaque environnement et un pipeline qui promeut exactement le même artefact. Quelle approche doit-elle retenir ?",
   "choices": [
-    "Reproduire manuellement en production la configuration observée dans la console de développement après chaque changement.",
-    "Maintenir un modèle AWS CloudFormation totalement distinct et indépendant par environnement, chacun géré par une équipe différente.",
+    "Reproduire dans la console de recette puis de production, écran par écran, la configuration de l'application sans serveur observée dans l'environnement de développement, et refaire cette opération après chaque changement apporté à l'API Amazon API Gateway, aux fonctions AWS Lambda ou à la table Amazon DynamoDB.",
+    "Maintenir un modèle AWS CloudFormation totalement distinct et indépendant pour le développement, la recette et la production, chacun décrivant sa propre API Amazon API Gateway et ses propres fonctions AWS Lambda, et confier chaque modèle à une équipe différente qui le fait évoluer de son côté.",
     "Décrire l'application dans un modèle AWS SAM versionné avec le code, puis déployer la même pile dans chaque environnement à l'aide de paramètres et de configurations dédiées (`sam deploy --config-env`), depuis un pipeline qui promeut l'artefact déjà construit et testé.",
-    "Exporter les ressources de développement en JSON et les réimporter en production avec les identifiants de ressources codés en dur."
+    "Exporter en JSON les ressources de développement créées dans la console, puis les réimporter en recette et en production en conservant les identifiants de ressources codés en dur, le pipeline reconstruisant un artefact propre à chaque environnement avant chacun de ses déploiements en recette et en production."
   ]
 }

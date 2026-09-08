@@ -10,9 +10,9 @@
   },
   "prompt": "Les seuils métier et les indicateurs de fonctionnalité d'une application sans serveur sont déclarés dans les variables d'environnement des fonctions : chaque ajustement impose une reconstruction, un nouveau déploiement et une fenêtre de changement. L'équipe veut modifier ces valeurs en production de façon progressive, avec validation préalable et annulation automatique en cas de dégradation. Quelle solution répond au besoin ?",
   "choices": [
-    "Conserver les valeurs dans les variables d'environnement et publier une nouvelle version de fonction à chaque modification.",
-    "Coder les valeurs dans le paquet de déploiement et maintenir une branche de code distincte par environnement.",
-    "Déposer un fichier de configuration dans Amazon S3 et le relire à chaque invocation, sans validation ni mécanisme de retour arrière.",
+    "Conserver les seuils métier et les indicateurs de fonctionnalité dans les variables d'environnement des fonctions et publier une nouvelle version de fonction à chaque modification, la fenêtre de changement planifiée servant alors d'étape de validation préalable des valeurs.",
+    "Coder les seuils métier et les indicateurs de fonctionnalité directement dans le paquet de déploiement de l'application sans serveur et maintenir une branche de code distincte par environnement, chaque ajustement en production passant par une reconstruction complète et un nouveau déploiement en production.",
+    "Déposer un fichier de configuration contenant les seuils métier et les indicateurs de fonctionnalité dans Amazon S3 et le relire à chaque invocation des fonctions, sans validation préalable des valeurs ni annulation automatique du changement en cas de dégradation.",
     "Externaliser les indicateurs et les seuils dans AWS AppConfig, avec un validateur de configuration, une stratégie de déploiement progressive et un retour arrière automatique déclenché par une alarme CloudWatch, l'application récupérant la configuration via l'extension AppConfig pour Lambda."
   ]
 }

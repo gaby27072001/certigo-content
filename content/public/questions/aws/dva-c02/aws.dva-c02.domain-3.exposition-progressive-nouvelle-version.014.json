@@ -11,8 +11,8 @@
   "prompt": "Une fonction AWS Lambda de production est appelée par Amazon API Gateway via un alias `prod`. L'équipe veut exposer une nouvelle version à une petite fraction du trafic pendant dix minutes, surveiller son comportement, puis basculer la totalité du trafic, sans que les clients aient à modifier l'ARN qu'ils invoquent. Quelle méthode doit-elle utiliser ?",
   "choices": [
     "Publier une nouvelle version de la fonction et configurer le routage pondéré de l'alias `prod` pour envoyer 10 % des invocations vers cette version, par exemple avec `AutoPublishAlias` et une préférence de déploiement de type Canary10Percent10Minutes dans AWS SAM.",
-    "Déployer la nouvelle version dans une seconde fonction et demander aux équipes clientes de basculer manuellement l'ARN qu'elles appellent.",
-    "Mettre à jour le code de `$LATEST` et observer les métriques pendant dix minutes avant d'annoncer officiellement le changement.",
-    "Créer un second étage API Gateway et laisser chaque client tirer au sort l'étage qu'il appelle."
+    "Déployer la nouvelle version dans une seconde fonction AWS Lambda et demander à chaque équipe cliente de remplacer elle-même l'ARN qu'elle invoque, d'abord pour une petite fraction du trafic puis pour la totalité au bout de dix minutes.",
+    "Mettre à jour le code de `$LATEST` sur la fonction AWS Lambda de production, observer notamment les erreurs pendant dix minutes, puis annoncer le changement aux équipes clientes une fois que la totalité du trafic est servie par le nouveau code de production.",
+    "Créer un second étage Amazon API Gateway pointant vers la nouvelle version et laisser chaque client tirer au sort l'étage qu'il appelle, jusqu'à ce que la totalité du trafic de production ait basculé au bout de dix minutes."
   ]
 }

@@ -11,8 +11,8 @@
   "prompt": "Une application conteneurisée se connecte à une base de données Amazon RDS avec un mot de passe fixe, défini au moment du déploiement. La politique interne impose désormais une rotation automatique des identifiants tous les 30 jours, sans nouveau déploiement de l'application ni interruption de service. Que doit mettre en place le développeur ?",
   "choices": [
     "Stocker les identifiants dans AWS Secrets Manager, activer la rotation automatique avec une fonction de rotation adaptée au moteur, et faire récupérer le secret par l'application au démarrage puis lors d'une erreur d'authentification, avec un cache local à durée de vie courte.",
-    "Conserver les identifiants dans des variables d'environnement du conteneur et déclencher un redéploiement mensuel de l'image pour les modifier.",
-    "Placer les identifiants dans un paramètre de type String d'AWS Systems Manager Parameter Store et en accorder la lecture à l'ensemble du compte.",
-    "Générer un mot de passe aléatoire au démarrage de chaque instance de l'application et l'appliquer directement sur la base de données."
+    "Conserver les identifiants de la base de données Amazon RDS dans des variables d'environnement du conteneur et déclencher un redéploiement mensuel de l'image pour les modifier, en plaçant la fenêtre de bascule mensuelle en dehors des heures ouvrées du service.",
+    "Placer les identifiants dans un paramètre de type String d'AWS Systems Manager Parameter Store et en accorder la lecture à l'ensemble du compte, l'application relisant le paramètre à chaque connexion afin de prendre en compte une nouvelle valeur sans redéploiement de l'application conteneurisée.",
+    "Générer un mot de passe aléatoire au démarrage de chaque instance de l'application conteneurisée et l'appliquer directement sur la base de données Amazon RDS, ce qui renouvelle la valeur à une cadence plus rapide que le cycle de 30 jours de la politique."
   ]
 }

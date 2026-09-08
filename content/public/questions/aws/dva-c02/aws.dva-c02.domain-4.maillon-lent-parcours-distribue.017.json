@@ -11,8 +11,8 @@
   "prompt": "Une requête client traverse Amazon API Gateway, une fonction AWS Lambda, une table Amazon DynamoDB puis une API partenaire externe. Certains appels dépassent trois secondes de façon intermittente, sans que l'équipe sache quel maillon est responsable, et le support doit pouvoir isoler les traces d'un client précis. Que doit mettre en place le développeur ?",
   "choices": [
     "Activer le suivi actif AWS X-Ray sur l'API et sur la fonction, instrumenter le client du SDK ainsi que les appels HTTP sortants, et ajouter des annotations indexées (identifiant du client, type d'opération) pour filtrer les traces et identifier le sous-segment lent.",
-    "Ajouter à chaque segment des métadonnées X-Ray volumineuses, seules données utilisables comme critère de recherche dans la console.",
-    "Porter la rétention des journaux CloudWatch à un an et relire manuellement les journaux d'invocation lors de chaque incident.",
-    "Activer les journaux d'accès de l'API et suivre la latence moyenne quotidienne dans un tableau de bord."
+    "Ajouter à chaque segment X-Ray des métadonnées volumineuses décrivant la requête client et l'appel à l'API partenaire externe, ces métadonnées étant les seules données utilisables comme critère de recherche pour isoler les traces d'un client précis.",
+    "Porter la rétention des journaux CloudWatch de la fonction AWS Lambda à un an et relire ces journaux d'invocation ligne à ligne lors de chaque incident, afin de retrouver lequel des maillons traversés dépasse les trois secondes de façon intermittente.",
+    "Activer les journaux d'accès d'Amazon API Gateway et suivre la latence moyenne quotidienne de la requête client dans un tableau de bord, cette moyenne révélant quel maillon est responsable des dépassements intermittents observés."
   ]
 }

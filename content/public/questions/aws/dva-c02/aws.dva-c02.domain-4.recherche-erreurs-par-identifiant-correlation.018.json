@@ -10,9 +10,9 @@
   },
   "prompt": "Une application émet des journaux JSON structurés contenant les champs `correlationId`, `level` et `errorCode`, répartis sur plusieurs centaines de flux d'un même groupe de journaux Amazon CloudWatch Logs. Pendant un incident, l'équipe doit retrouver en quelques minutes toutes les erreurs liées à un identifiant de corrélation et les regrouper par code d'erreur. Quelle méthode doit-elle employer ?",
   "choices": [
-    "Télécharger l'intégralité des flux de journaux et les analyser localement avec un script maison.",
-    "Créer un filtre d'abonnement rétroactif qui rejoue vers une fonction d'analyse les événements déjà écrits dans le groupe de journaux.",
+    "Télécharger l'intégralité des centaines de flux du groupe de journaux Amazon CloudWatch Logs et les analyser localement avec un script maison écrit pour l'occasion qui filtre les événements JSON sur l'identifiant de corrélation puis regroupe les erreurs par code d'erreur.",
+    "Créer un filtre d'abonnement rétroactif qui rejoue vers la fonction d'analyse les événements JSON déjà écrits dans le groupe de journaux, afin d'en extraire notamment les erreurs portant l'identifiant de corrélation recherché pendant l'incident.",
     "Exécuter une requête CloudWatch Logs Insights sur le groupe de journaux, en s'appuyant sur l'extraction automatique des champs JSON, par exemple `fields @timestamp, @message | filter correlationId = '...' and level = 'ERROR' | stats count() by errorCode`.",
-    "Créer un filtre de métrique comptant les erreurs, ce qui permettra ensuite de consulter le contenu des messages concernés."
+    "Définir un filtre de métrique comptant les erreurs par niveau dans le groupe de journaux Amazon CloudWatch Logs, ce qui permettra alors de consulter le contenu des messages concernés et de les regrouper par code d'erreur pour l'identifiant de corrélation recherché pendant l'incident."
   ]
 }

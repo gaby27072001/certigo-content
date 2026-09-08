@@ -10,9 +10,9 @@
   },
   "prompt": "Une fonction AWS Lambda exécutée dans le compte A doit écrire des rapports dans un compartiment Amazon S3 appartenant au compte B. L'équipe envisage de créer un utilisateur IAM dans le compte B et de placer sa clé d'accès dans une variable d'environnement de la fonction. Quelle approche le développeur doit-il privilégier ?",
   "choices": [
-    "Conserver la clé d'accès de l'utilisateur IAM du compte B dans une variable d'environnement et la faire tourner manuellement chaque trimestre.",
-    "Ouvrir le compartiment du compte B en lecture et en écriture à tout le monde, puis restreindre l'accès par filtrage d'adresses IP.",
-    "Copier le rôle d'exécution de la fonction dans le compte B en réutilisant exactement le même ARN de rôle.",
+    "Conserver la clé d'accès de l'utilisateur IAM du compte B dans une variable d'environnement de la fonction et planifier son remplacement chaque trimestre par une tâche dédiée qui met à jour la configuration de la fonction du compte A.",
+    "Ouvrir le compartiment Amazon S3 du compte B en lecture et en écriture à tout le monde, puis restreindre l'accès par un filtrage d'adresses IP dans la politique de compartiment, de façon que seule la plage utilisée par la fonction du compte A y dépose des rapports.",
+    "Recréer le rôle d'exécution de la fonction dans le compte B en réutilisant exactement le même ARN de rôle, afin que les écritures de rapports émises depuis le compte A soient reconnues comme locales par le compartiment Amazon S3.",
     "Créer dans le compte B un rôle IAM dont la politique de confiance autorise le rôle d'exécution de la fonction du compte A, puis appeler AssumeRole avec AWS STS dans le code pour obtenir des identifiants temporaires avant d'écrire dans le compartiment."
   ]
 }

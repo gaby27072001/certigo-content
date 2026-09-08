@@ -11,8 +11,8 @@
   "prompt": "Une table Amazon DynamoDB de commandes utilise `orderId` comme clé de partition. Une nouvelle fonctionnalité doit lister les commandes d'un client donné sur les 30 derniers jours. Le développeur a implémenté une opération Scan avec un filtre sur `customerId` : la latence croît avec le volume et le coût de lecture explose. Quelle correction doit-il apporter ?",
   "choices": [
     "Créer un index secondaire global ayant `customerId` comme clé de partition et la date de commande comme clé de tri, puis remplacer l'analyse par une opération Query sur cet index.",
-    "Conserver l'opération Scan mais demander une lecture fortement cohérente afin de réduire le volume de données parcouru.",
-    "Créer un index secondaire local sur `customerId` pour interroger la table existante sans modifier sa clé de partition.",
-    "Augmenter fortement la capacité de lecture provisionnée de la table pour que l'analyse s'exécute plus rapidement."
+    "Conserver l'opération Scan avec son filtre sur `customerId` mais demander une lecture fortement cohérente, afin que la table renvoie les commandes du client sans parcourir les copies secondaires.",
+    "Créer un index secondaire local ayant `customerId` comme clé de tri pour interroger la table de commandes existante sans modifier sa clé de partition `orderId`.",
+    "Augmenter fortement la capacité de lecture provisionnée de la table de commandes et relever la borne haute de la mise à l'échelle automatique, afin que l'opération Scan filtrée s'exécute plus rapidement."
   ]
 }

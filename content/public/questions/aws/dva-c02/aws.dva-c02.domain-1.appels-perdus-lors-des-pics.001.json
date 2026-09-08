@@ -10,9 +10,9 @@
   },
   "prompt": "Un microservice écrit en Python appelle Amazon DynamoDB avec le SDK AWS. Lors des pics de trafic, une partie des appels échoue avec une exception de limitation de débit et l'opération métier est perdue. Le développeur doit rendre cet appel résilient sans modifier le modèle de données. Quelle approche doit-il retenir dans le code ?",
   "choices": [
-    "Intercepter l'exception et renvoyer immédiatement une erreur 500 au client, en laissant l'appelant relancer l'opération lui-même.",
-    "Remplacer les appels du SDK par des requêtes HTTP signées à la main afin de contourner les limites de débit appliquées par le service.",
+    "Intercepter l'exception de limitation de débit dans le microservice écrit en Python et renvoyer immédiatement une erreur 500 au client, en précisant dans le contrat de l'API que l'appelant doit relancer lui-même l'opération métier perdue lors des pics observés.",
+    "Remplacer les appels du SDK AWS par des requêtes HTTP signées directement avec Signature Version 4 et les répartir sur plusieurs points de terminaison, afin que les limites de débit imposées par Amazon DynamoDB soient évaluées séparément pour chaque signature émise par le microservice écrit en Python.",
     "Configurer la stratégie de nouvelles tentatives du SDK (mode standard ou adaptatif, nombre maximal de tentatives) pour réessayer les erreurs limitées avec un retrait exponentiel et de la gigue, rendre l'écriture idempotente, puis émettre une métrique lorsque les tentatives sont épuisées.",
-    "Ajouter une boucle qui relance l'appel toutes les 50 millisecondes, sans limite de tentatives, tant que l'erreur de limitation persiste."
+    "Entourer l'appel d'une boucle qui relance l'opération toutes les 50 millisecondes, sans limite de tentatives ni gigue, jusqu'à ce que le service cesse de renvoyer l'exception de limitation de débit et que l'opération métier finisse par aboutir sans perte."
   ]
 }

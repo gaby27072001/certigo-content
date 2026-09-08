@@ -10,9 +10,9 @@
   },
   "prompt": "Un catalogue de produits stocké dans Amazon DynamoDB subit une charge de lecture très répétitive : les mêmes éléments sont demandés des milliers de fois par minute alors que leur contenu change rarement. La latence de lecture, de l'ordre de quelques millisecondes, devient pénalisante et le coût des unités de capacité de lecture augmente fortement. Quelle optimisation le développeur doit-il retenir ?",
   "choices": [
-    "Basculer la table en capacité provisionnée avec une réservation élevée afin d'absorber le volume de lectures.",
+    "Basculer la table du catalogue de produits en capacité provisionnée avec une réservation d'unités de capacité de lecture élevée, afin d'absorber le volume de lectures répétitives des mêmes éléments et d'en réduire le coût sur la durée.",
     "Placer un cluster DynamoDB Accelerator (DAX) devant la table et faire passer les lectures par le client DAX, afin de servir les accès répétés depuis un cache en mémoire, en microsecondes, tout en réduisant les unités de capacité de lecture consommées.",
-    "Réutiliser la même connexion HTTP dans le client du SDK, ce qui met en cache les réponses et évite d'appeler le service.",
-    "Ajouter un index secondaire global reprenant les mêmes attributs afin de répartir la charge de lecture sur deux structures."
+    "Réutiliser la même connexion HTTP dans le client du SDK qui interroge Amazon DynamoDB, ce qui met en cache les réponses des éléments les plus demandés et évite d'appeler le service pour les lectures répétées du catalogue de produits dont le contenu change rarement.",
+    "Ajouter un index secondaire global reprenant les mêmes attributs du catalogue de produits, afin de répartir la charge de lecture répétitive sur deux structures distinctes et de réduire les unités de capacité de lecture consommées."
   ]
 }

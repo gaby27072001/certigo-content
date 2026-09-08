@@ -10,9 +10,9 @@
   },
   "prompt": "Dans un parcours d'inscription, l'application écrit un profil dans Amazon DynamoDB avec PutItem, puis relit immédiatement l'élément avec GetItem pour l'afficher. De façon intermittente, la lecture renvoie l'ancienne valeur ou aucun élément. Quelle correction, la plus directe, le développeur doit-il appliquer à cette lecture ?",
   "choices": [
-    "Insérer une pause de 500 millisecondes dans le code avant la lecture, le temps que la réplication interne se termine.",
-    "Placer un cluster DynamoDB Accelerator (DAX) devant la table pour que les lectures reflètent immédiatement les écritures.",
+    "Insérer dans le parcours d'inscription une pause de 500 millisecondes entre le PutItem et le GetItem, durée calibrée sur le temps de réplication interne observé, afin que le profil écrit soit présent sur toutes les copies de la table avant la relecture.",
+    "Placer un cluster DynamoDB Accelerator (DAX) devant la table de profils et écrire à travers lui, afin que le cache serve la valeur du profil qui vient d'être écrite plutôt qu'une copie plus ancienne de l'élément de profil.",
     "Demander une lecture fortement cohérente en positionnant `ConsistentRead` à true sur l'opération GetItem, en acceptant un coût double en unités de capacité de lecture et l'impossibilité d'utiliser ce mode sur un index secondaire global.",
-    "Effectuer la lecture sur un index secondaire global dédié, qui garantit une vue fortement cohérente de la table."
+    "Effectuer la relecture du profil sur un index secondaire global dédié projetant tous les attributs, dont la vue est maintenue de façon fortement cohérente avec la table de base et renvoie donc la dernière écriture confirmée par PutItem du parcours d'inscription."
   ]
 }
