@@ -497,58 +497,57 @@ test("declare la transition de cycle de vie ou une exemption datee", () => {
 });
 
 test("distingue peremption des sources et silence de cycle de vie", () => {
-  const catalog = readJson(catalogAt(repoRoot));
-  const expiredExemptions = new Set(
-    readJson(resolve(repoRoot, "config", "catalog-transition-exemptions.json"))
-      .exemptions.filter((entry) => entry.expiresOn <= "2026-09-17")
-      .map((entry) => entry.id)
+  // Catalogue synthetique. Ce test mesure le comportement de la gate, pas
+  // l'etat d'avancement de la campagne de fraicheur. Adosse au depot reel, il
+  // etait condamne a mourir de son propre succes : la campagne retire une a
+  // une les entrees muettes, et le jour ou la derniere sort du catalogue il
+  // n'y a plus aucun silence a observer. Le test construit donc lui-meme les
+  // deux conditions qu'il oppose, et reste vrai quel que soit le catalogue.
+  const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  const target = catalog.certifications.find(
+    (certification) => certification.id === "aws:saa-c03"
+  );
+  assert.ok(target, "entree temoin absente du catalogue");
+  assert.ok(
+    ["active", "active-retiring"].includes(target.status),
+    "l'entree temoin doit etre soumise a la gate de transition"
   );
 
+  // Muette par construction, et perimee au 2026-09-17 (31 jours).
+  delete target.lifecycle;
+  target.provenance.checkedOn = "2026-08-17";
+  writeJson(catalogAt(root), catalog);
+
+  mkdirSync(resolve(root, "config"), { recursive: true });
+  writeJson(resolve(root, "config", "catalog-transition-exemptions.json"), {
+    schema: "certigo.catalog-transition-exemptions/v1",
+    exemptions: [{ id: target.id, expiresOn: "2026-09-13" }],
+  });
+
   // Avant toute expiration : gate verte.
-  const today = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-05" });
+  const today = checkCatalogFreshness({ root, asOf: "2026-09-05" });
   assert.deepEqual(today.errors, []);
 
   // Apres expiration ET peremption : les DEUX motifs remontent, distincts.
-  const both = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-17" });
+  const both = checkCatalogFreshness({ root, asOf: "2026-09-17" });
   const silence = both.errors.filter((error) => error.includes("[lifecycle:transition]"));
   const staleness = both.errors.filter((error) => error.includes("sources agees"));
   assert.ok(silence.length > 0, "silence de cycle de vie absent");
   assert.ok(staleness.length > 0, "peremption des sources absente");
 
-  // Un motif ne doit pas masquer l'autre sur une meme entree. L'entree est
-  // derivee du catalogue, non codee en dur : la campagne de fraicheur retire
-  // une a une les entrees muettes, donc un identifiant fige transforme un
-  // succes de campagne en echec de test - c'est ce qui est arrive a
-  // gcp:cloud-architect. La derivation garde la force de l'assertion, parce
-  // qu'elle exige d'abord qu'une telle entree existe : sans ce garde-fou, une
-  // liste vide ferait passer le test sans rien mesurer.
-  const silentAndStale = catalog.certifications.filter((certification) => {
-    if (!["active", "active-retiring"].includes(certification.status)) return false;
-    if (certification.lifecycle?.transition) return false;
-    if (!expiredExemptions.has(certification.id)) return false;
-    const staleOn = new Date(
-      Date.parse(certification.provenance.checkedOn) +
-        (catalog.freshness.maxAgeDays + 1) * 86_400_000
-    )
-      .toISOString()
-      .slice(0, 10);
-    return staleOn <= "2026-09-17";
-  });
+  // Un motif ne doit pas masquer l'autre sur une meme entree : "sources
+  // agees" se corrige en rafraichissant une date, "ne declare pas transition"
+  // exige d'aller lire la source officielle. Les confondre ferait passer la
+  // gate au vert en n'attestant plus rien.
   assert.ok(
-    silentAndStale.length > 0,
-    "aucune entree a la fois muette et perimee au 2026-09-17 : " +
-      "le test ne mesure plus rien et doit basculer sur un catalogue synthetique"
+    silence.some((error) => error.includes(target.id)),
+    `${target.id} : silence de cycle de vie absent`
   );
-  for (const certification of silentAndStale) {
-    assert.ok(
-      silence.some((error) => error.includes(certification.id)),
-      `${certification.id} : silence de cycle de vie absent`
-    );
-    assert.ok(
-      staleness.some((error) => error.includes(certification.id)),
-      `${certification.id} : peremption des sources absente`
-    );
-  }
+  assert.ok(
+    staleness.some((error) => error.includes(target.id)),
+    `${target.id} : peremption des sources absente`
+  );
 
   // Le message d'exemption expiree oriente vers la source officielle,
   // pas vers une donnee malformee.
@@ -616,10 +615,24 @@ test("une entree declarante sort de la gate sans exemption", () => {
 });
 
 test("un fichier d'exemptions absent ne vaut pas exemption", () => {
+  // Le silence est cree par le test, pas emprunte au catalogue : une fois la
+  // campagne de fraicheur terminee, plus aucune entree du depot n'est muette,
+  // et un test qui comptait sur elles cesserait de mesurer l'absence de
+  // fichier pour ne plus mesurer que l'etat de la campagne.
   const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  const target = catalog.certifications.find((certification) =>
+    ["active", "active-retiring"].includes(certification.status)
+  );
+  assert.ok(target, "aucune entree soumise a la gate de transition");
+  delete target.lifecycle;
+  writeJson(catalogAt(root), catalog);
+
+  // Aucun fichier d'exemption dans ce root : l'absence doit durcir la gate.
   const result = checkCatalogFreshness({ root, asOf: "2026-09-05" });
   const silence = result.errors.filter((error) => error.includes("[lifecycle:transition]"));
   assert.ok(silence.length > 0, "un fichier absent doit durcir la gate, pas la neutraliser");
+  assert.ok(silence.some((error) => error.includes(target.id)));
   assert.ok(silence.some((error) => error.includes("ne figure pas dans")));
 });
 
