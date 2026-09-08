@@ -10,8 +10,8 @@
   },
   "prompt": "Une equipe utilise AWS CDK pour definir son infrastructure, incluant une instance Amazon RDS contenant des donnees clients de production. Lors d'un refactoring de la construction CDK, l'equipe redoute qu'une erreur de mise a jour de pile ne supprime accidentellement la base de donnees de production, tout en souhaitant conserver la possibilite de detruire rapidement les piles de developpement et de test pour accelerer les cycles d'iteration courts.",
   "choices": [
-    "Definir RemovalPolicy.DESTROY sur la ressource RDS dans tous les environnements, de sorte que la commande cdk destroy produise le meme resultat partout, y compris en production.",
-    "Laisser CloudFormation appliquer son comportement par defaut a la ressource RDS, la construction CDK n'exprimant ni politique de suppression ni protection propre a l'instance.",
+    "Definir RemovalPolicy.DESTROY sur la ressource RDS dans tous les environnements, de sorte que la commande cdk destroy produise exactement le meme resultat partout, y compris en production.",
+    "Laisser CloudFormation appliquer son comportement par defaut a la ressource RDS, la construction CDK n'exprimant ni politique de suppression ni protection contre la suppression sur l'instance.",
     "Definir RemovalPolicy.RETAIN et activer la protection contre la suppression RDS pour le seul environnement de production, en conservant RemovalPolicy.DESTROY en developpement et en test.",
     "Activer terminationProtection sur la pile CloudFormation de production, la ressource RDS conservant par ailleurs la politique de suppression heritee de la construction CDK."
   ]

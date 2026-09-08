@@ -11,7 +11,7 @@
   "prompt": "L'equipe de securite souhaite que toute modification d'un groupe de securite autorisant 0.0.0.0/0 sur le port 22, dans n'importe quel compte de l'organisation, soit corrigee automatiquement et rapidement, sans necessiter de reveiller un ingenieur d'astreinte pour ce cas bien connu et a faible risque a automatiser, tout en conservant une trace complete de l'evenement et de la correction a des fins d'audit.",
   "choices": [
     "Ouvrir un ticket dans l'outil de gestion des incidents des qu'AWS Config signale une regle non conforme, pour traitement par l'equipe d'astreinte dans un delai de vingt-quatre heures.",
-    "Retirer la permission ec2:AuthorizeSecurityGroupIngress de tous les roles IAM de l'organisation au moyen d'une politique appliquee a la racine de l'organisation.",
+    "Retirer la permission ec2:AuthorizeSecurityGroupIngress de tous les roles IAM de l'organisation au moyen d'une politique appliquee a la racine et heritee par les unites.",
     "Creer une regle Amazon EventBridge sur l'evenement CloudTrail AuthorizeSecurityGroupIngress qui invoque un document AWS Systems Manager Automation revoquant la regle et publiant un evenement d'audit.",
     "Creer une alarme CloudWatch sur le nombre d'appels AuthorizeSecurityGroupIngress qui adresse une notification par courriel a la liste de diffusion de l'equipe de securite."
   ]

@@ -12,7 +12,7 @@
   "choices": [
     "Placer AWS Global Accelerator devant les deux regions et laisser son reseau anycast rediriger le trafic au niveau IP vers la region secondaire des que les points de terminaison primaires deviennent malsains.",
     "Creer un enregistrement Route 53 en routage de basculement, associe a un controle de sante sur l'ALB primaire et assorti d'un TTL faible, pour rediriger le trafic vers la region secondaire.",
-    "Creer un enregistrement Route 53 en routage pondere qui repartit en permanence le trafic a parts egales entre les ALB des deux regions, quel que soit l'etat de sante de chacun.",
+    "Creer un enregistrement Route 53 en routage pondere qui repartit en permanence le trafic a parts egales entre les ALB des deux regions, quel que soit l'etat de sante de chacune d'entre elles.",
     "Faire modifier l'enregistrement DNS vers l'ALB de la region secondaire par l'ingenieur d'astreinte des que le tableau de bord de supervision signale une panne de la region primaire."
   ]
 }

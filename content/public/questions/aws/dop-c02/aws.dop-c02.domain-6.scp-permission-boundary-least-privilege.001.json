@@ -10,9 +10,9 @@
   },
   "prompt": "Une equipe de securite centrale doit garantir que meme les administrateurs IAM des comptes membres, necessaires a l'administration quotidienne de ces comptes, ne puissent jamais desactiver AWS CloudTrail, quitter l'organisation, ni s'octroyer des privileges administrateur en dehors du pipeline sanctionne, tout en leur laissant la pleine capacite d'administrer IAM pour leurs taches operationnelles normales.",
   "choices": [
-    "Retirer les permissions IAM administratives dans chaque compte membre et centraliser la creation des roles et des politiques dans le seul compte de gestion de l'organisation.",
+    "Retirer les permissions IAM administratives dans chaque compte membre et centraliser la creation des roles et des politiques dans le seul compte de gestion de l'organisation entiere.",
     "Attacher une limite de permissions (permissions boundary) a chaque nouveau role IAM, l'attachement etant realise par l'equipe proprietaire du compte au moment ou elle cree le role.",
-    "Faire auditer chaque semaine les journaux CloudTrail de tous les comptes par l'equipe de securite, qui retablit la configuration attendue lorsqu'un ecart est constate.",
+    "Faire auditer chaque semaine ouvree les journaux CloudTrail de tous les comptes par l'equipe de securite, qui retablit la configuration attendue lorsqu'un ecart y est constate.",
     "Appliquer sur l'unite d'organisation une politique de controle de service refusant cloudtrail:StopLogging, organizations:LeaveOrganization et la creation de politiques IAM administrateur hors pipeline."
   ]
 }

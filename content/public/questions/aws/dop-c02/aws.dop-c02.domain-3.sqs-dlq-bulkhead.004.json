@@ -11,8 +11,8 @@
   "prompt": "Dans une architecture de traitement de commandes, une fonction Lambda de commande appelle de maniere synchrone un service d'inventaire qui subit parfois du throttling ou des echecs temporaires. Lorsque l'inventaire est degrade, l'ensemble du flux de commande subit des timeouts en cascade, bloquant meme les commandes qui n'ont pas besoin d'une reponse immediate de l'inventaire. L'equipe veut isoler les defaillances de l'inventaire du flux principal, permettre des nouvelles tentatives sures sans amplifier la charge sur un service deja degrade, et conserver les evenements en echec pour analyse ulterieure des causes racines.",
   "choices": [
     "Rendre l'appel a l'inventaire asynchrone via une file Amazon SQS standard, dotee d'une politique de nouvelles tentatives et d'une file de messages non distribues (dead-letter queue).",
-    "Conserver l'appel synchrone entre la fonction Lambda de commande et le service d'inventaire, en portant le delai d'expiration de la fonction Lambda a quinze minutes.",
-    "Ajouter dans le code de la fonction Lambda de commande une boucle de nouvelles tentatives synchrones repetees jusqu'a obtention d'une reponse du service d'inventaire.",
+    "Conserver l'appel synchrone entre la fonction Lambda de commande et le service d'inventaire, en portant le delai d'expiration de la fonction Lambda a la valeur maximale de quinze minutes.",
+    "Ajouter dans le code de la fonction Lambda de commande une boucle de nouvelles tentatives synchrones repetees jusqu'a obtention d'une reponse du service d'inventaire ou de l'expiration du delai.",
     "Retirer la verification d'inventaire du flux de commande et accepter chaque commande d'emblee, la disponibilite reelle etant reconciliee plus tard dans la journee par un traitement par lots."
   ]
 }

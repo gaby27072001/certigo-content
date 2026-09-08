@@ -10,9 +10,9 @@
   },
   "prompt": "Une entreprise doit chiffrer des donnees sensibles repliquees entre deux regions AWS pour la reprise apres sinistre. L'exigence de conformite impose que le meme materiel de cle logique puisse dechiffrer les donnees dans la region secondaire lors d'un basculement sans avoir a rechiffrer l'integralite des donnees, tout en conservant la gestion des cles entierement au sein d'AWS, sans equipe dediee a l'exploitation de materiel cryptographique, et avec une auditabilite stricte des acces via CloudTrail.",
   "choices": [
-    "Creer dans chaque region une cle KMS geree par le client independante, et rechiffrer les donnees repliquees avec la cle de la region secondaire au moment du basculement.",
+    "Creer dans chaque region une cle KMS geree par le client independante, et rechiffrer l'integralite des donnees repliquees avec la cle de la region secondaire au moment de chaque basculement.",
     "Creer une cle KMS multi-region dans la region primaire et sa cle repliquee dans la region secondaire, les deux partageant le meme materiel de cle pour dechiffrer les donnees repliquees.",
-    "Deployer un cluster AWS CloudHSM dans chaque region et assurer en interne la generation, la sauvegarde et la synchronisation du materiel de cle entre les deux clusters.",
+    "Deployer un cluster AWS CloudHSM dans chaque region et assurer en interne la generation, la sauvegarde et la synchronisation du materiel de cle entre les deux clusters de l'entreprise concernes.",
     "Repliquer les donnees sans chiffrement au repos entre les deux regions, la protection reposant sur le chiffrement en transit assure par TLS entre les services concernes."
   ]
 }
