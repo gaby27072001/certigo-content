@@ -9,5 +9,9 @@
     "objective": "section-3"
   },
   "correct": "Mettre en place un suivi de la dérive (drift) du modèle, des indicateurs clés de performance (KPI), un suivi de version, et un feature store pour tracer les données utilisées.",
-  "rationale": "Le suivi de la dérive du modèle, des KPI métier, du versionnage, complété par un feature store garantissant la cohérence des données utilisées, constitue l'ensemble des pratiques de surveillance continue permettant de détecter et de diagnostiquer une baisse progressive de pertinence sans changement de code. Suivre le taux d'erreurs applicatives côté serveur ne détecte pas une dérive comportementale du modèle, qui n'entraîne pas nécessairement d'erreur technique visible. Revalider le modèle uniquement au lancement ignore que les performances d'un modèle peuvent se dégrader dans le temps même sans mise à jour de code, du fait de l'évolution des données réelles. Remplacer le modèle à la moindre variation, sans diagnostic préalable via le suivi de dérive ou les KPI, ne permet pas d'identifier la cause réelle du problème."
+  "rationale": "Le suivi de la dérive du modèle, des KPI métier, du versionnage, complété par un feature store garantissant la cohérence des données utilisées, constitue l'ensemble des pratiques de surveillance continue permettant de détecter et de diagnostiquer une baisse progressive de pertinence sans changement de code. Suivre le taux d'erreurs applicatives côté serveur ne détecte pas une dérive comportementale du modèle, qui n'entraîne pas nécessairement d'erreur technique visible. Revalider le modèle uniquement au lancement ignore que les performances d'un modèle peuvent se dégrader dans le temps même sans mise à jour de code, du fait de l'évolution des données réelles. Remplacer le modèle à la moindre variation, sans diagnostic préalable via le suivi de dérive ou les KPI, ne permet pas d'identifier la cause réelle du problème.",
+  "provenance": [
+    "https://cloud.google.com/vertex-ai/docs/model-monitoring/overview",
+    "https://cloud.google.com/vertex-ai/docs/featurestore/latest/overview"
+  ]
 }
