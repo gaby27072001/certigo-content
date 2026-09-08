@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Créer un gateway VPC endpoint S3 et l'associer aux tables de routage des sous-réseaux, avec une endpoint policy adaptée",
-  "rationale": "Le gateway endpoint fournit un chemin privé vers S3 depuis les tables de routage sélectionnées sans frais de traitement NAT Gateway. La politique d'endpoint peut limiter les compartiments et actions. Exposer les instances ou détourner le trafic par le datacenter augmente le risque, la latence et le coût."
+  "correct": "Créer un point de terminaison de passerelle pour Amazon S3 et l'associer aux tables de routage privées",
+  "rationale": "Un point de terminaison de passerelle pour Amazon S3 s'associe aux tables de routage des sous-réseaux privés et achemine le trafic vers le service sans passer par la passerelle NAT ; il n'est pas facturé au volume et le trafic reste interne à la Région. Placer les instances en sous-réseau public leur donnerait une exposition directe à Internet, ce que l'énoncé interdit. Un point de terminaison d'interface pour S3 existe et fonctionne, mais il repose sur PrivateLink et facture l'heure d'endpoint ainsi que les données traitées, alors que le point de terminaison de passerelle ne l'est pas : il réduit moins la dépense pour ce profil de trafic. L'accélération de transfert optimise les transferts longue distance par le réseau de périphérie et ne s'applique pas à un trafic intra-Région, dont elle ne modifie pas le chemin de sortie. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain3.html ; https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html"
 }

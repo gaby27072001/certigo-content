@@ -11,8 +11,8 @@
   "prompt": "Un fournisseur externe dépose chaque jour un fichier de transactions traité par une tâche AWS Glue puis chargé dans un entrepôt. Certains jours, le fichier contient des identifiants client vides, des montants négatifs et des doublons de référence, qui faussent les indicateurs publiés aux directions métier. L'équipe veut évaluer des règles de qualité au sein même du pipeline, écarter les enregistrements non conformes avant le chargement et conserver une mesure de la qualité dans le temps, avec un service géré. Que mettre en place ?",
   "choices": [
     "Ajouter une étape AWS Glue Data Quality à la tâche, exprimer les contrôles en DQDL (complétude, unicité, plages de valeurs) et router les enregistrements en échec vers un préfixe de quarantaine avant l'étape de chargement.",
-    "Construire un tableau de bord Amazon QuickSight affichant le nombre de valeurs nulles constatées après le chargement des données.",
-    "Ajouter une contrainte NOT NULL sur la table cible de l'entrepôt et relancer manuellement la tâche lorsque le chargement échoue.",
-    "Profiler un fichier sur dix avec AWS Glue DataBrew et faire inspecter visuellement le résultat une fois par semaine."
+    "Construire un tableau de bord Amazon QuickSight affichant le nombre de valeurs nulles et de doublons constatés après le chargement des données dans l'entrepôt, puis le passer en revue chaque semaine.",
+    "Ajouter une contrainte NOT NULL sur chaque colonne obligatoire de la table cible de l'entrepôt et relancer manuellement la tâche de chargement complète chaque fois que l'insertion échoue, sans isoler la ligne fautive qui l'a provoquée.",
+    "Profiler un fichier sur dix avec AWS Glue DataBrew et faire inspecter visuellement le rapport de profilage par un analyste une fois par semaine, afin de repérer les écarts de complétude et les valeurs hors des plages attendues."
   ]
 }

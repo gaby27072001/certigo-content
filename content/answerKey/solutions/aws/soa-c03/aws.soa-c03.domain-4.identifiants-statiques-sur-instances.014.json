@@ -9,5 +9,8 @@
     "objective": "domain-4"
   },
   "correct": "Attacher à l'instance un profil d'instance portant un rôle IAM limité au compartiment, laisser le kit SDK récupérer des informations d'identification temporaires, puis supprimer la clé du fichier de configuration.",
-  "rationale": "Le rôle IAM attaché via un profil d'instance fournit au kit SDK des informations d'identification temporaires, renouvelées automatiquement par le service de métadonnées de l'instance : plus aucun secret de longue durée ne réside sur l'hôte, et les autorisations restent limitées au compartiment visé. Stocker la clé dans Parameter Store, même chiffrée, conserve une information d'identification de longue durée à distribuer et à faire tourner. Chiffrer le fichier de configuration ne change rien au fait que la clé statique existe toujours et doit être déchiffrée en clair sur l'instance. Créer un utilisateur IAM par instance multiplie les secrets à gérer, et une condition d'adresse IP source restreint l'usage sans supprimer la clé."
+  "rationale": "Le rôle IAM attaché via un profil d'instance fournit au kit SDK des informations d'identification temporaires, renouvelées automatiquement par le service de métadonnées de l'instance : plus aucun secret de longue durée ne réside sur l'hôte, et les autorisations restent limitées au compartiment visé. Stocker la clé dans Parameter Store, même chiffrée, conserve une information d'identification de longue durée à distribuer et à faire tourner. Chiffrer le fichier de configuration ne change rien au fait que la clé statique existe toujours et doit être déchiffrée en clair sur l'instance. Créer un utilisateur IAM par instance multiplie les secrets à gérer, et une condition d'adresse IP source restreint l'usage sans supprimer la clé.",
+  "provenance": [
+    "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html"
+  ]
 }

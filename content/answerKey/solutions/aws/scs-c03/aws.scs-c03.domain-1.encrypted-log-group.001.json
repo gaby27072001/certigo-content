@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "correct": "Autoriser le principal de service régional CloudWatch Logs dans la politique KMS, avec un contexte de chiffrement limité au groupe de journaux",
-  "rationale": "CloudWatch Logs, et non le code Lambda, utilise la clé pour chiffrer les données du groupe. La politique de clé doit donc autoriser le principal `logs.<region>.amazonaws.com`, idéalement contraint par le contexte de chiffrement du groupe. Une NAT n'est pas requise pour ce mécanisme de service et une clé asymétrique ne chiffre pas les journaux."
+  "correct": "Les journaux sont déjà chiffrés par défaut, il faut donc associer une clé AWS KMS au groupe et restreindre son usage par le contexte de chiffrement",
+  "rationale": "Les données d'un groupe de journaux sont toujours chiffrées au repos, par défaut avec un chiffrement côté serveur géré par le service ; associer une clé AWS KMS donne le contrôle de la politique, et la condition sur le contexte de chiffrement kms:EncryptionContext:aws:logs:arn restreint la clé à un groupe précis. Affirmer que les journaux restent en clair est faux et conduirait à un export inutile. Migrer vers un service de recherche répond à un besoin d'analyse, pas de chiffrement. La validation des fichiers CloudTrail atteste l'intégrité d'une piste d'audit, pas la confidentialité d'un groupe de journaux. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain1.html ; https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html"
 }

@@ -10,9 +10,9 @@
   },
   "prompt": "Un lac de données Amazon S3 est enregistré dans AWS Lake Formation et catalogué dans AWS Glue. Une table clients contient des colonnes de contact directement identifiantes. Les analystes marketing doivent interroger cette table avec Amazon Athena mais ne doivent jamais voir les colonnes de courriel et de téléphone, alors que l'équipe conformité conserve un accès complet. La direction refuse toute duplication du jeu de données et exige un effort d'exploitation minimal. Quelle solution retenir ?",
   "choices": [
-    "Créer une copie de la table sans les colonnes sensibles dans un autre compartiment et donner aux analystes marketing l'accès à cette copie.",
-    "Attacher aux analystes marketing une politique IAM refusant l'action s3:GetObject sur les objets qui contiennent les colonnes sensibles.",
-    "Chiffrer les colonnes de courriel et de téléphone avec une clé AWS KMS distincte et ne communiquer cette clé qu'à l'équipe conformité.",
+    "Créer une copie de la table sans les colonnes sensibles dans un autre compartiment et donner aux analystes marketing l'accès à cette copie, puis maintenir les deux jeux synchronisés.",
+    "Attacher aux analystes marketing une politique IAM refusant l'action s3:GetObject sur les objets qui contiennent les colonnes sensibles, indépendamment du moteur de requête employé.",
+    "Chiffrer les colonnes de courriel et de téléphone avec une clé AWS KMS distincte et ne communiquer cette clé qu'à l'équipe conformité, les autres analystes ne lisant que des valeurs illisibles.",
     "Accorder aux analystes marketing la permission SELECT via AWS Lake Formation en n'incluant que les colonnes autorisées, et laisser Athena appliquer le filtrage à l'exécution."
   ]
 }

@@ -9,5 +9,9 @@
     "objective": "section-2"
   },
   "correct": "Exécuter CREATE MODEL dans BigQuery ML, évaluer le modèle, puis appeler ML.PREDICT sur les clients actifs",
-  "rationale": "BigQuery ML permet d'entraîner, d'évaluer et d'utiliser un classificateur avec SQL sans déplacer les données; ML.PREDICT réalise l'inférence par lot. Dataproc ajoute une infrastructure inutile, une règle fixe n'apprend pas à partir des étiquettes et un tableau de bord ne remplace pas un modèle."
+  "rationale": "BigQuery ML permet d'entraîner, d'évaluer et d'utiliser un classificateur avec SQL sans déplacer les données; ML.PREDICT réalise l'inférence par lot. Dataproc ajoute une infrastructure inutile, une règle fixe n'apprend pas à partir des étiquettes et un tableau de bord ne remplace pas un modèle.",
+  "provenance": [
+    "https://cloud.google.com/bigquery/docs/create-machine-learning-model",
+    "https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"
+  ]
 }

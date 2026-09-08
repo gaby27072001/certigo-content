@@ -10,9 +10,9 @@
   },
   "prompt": "La mise à jour d'une pile AWS CloudFormation a échoué, et le retour arrière a échoué à son tour parce qu'une ressource avait été modifiée manuellement en dehors de CloudFormation. La pile est bloquée à l'état UPDATE_ROLLBACK_FAILED et le service refuse toute nouvelle opération de mise à jour. Quelle action permet de rétablir la pile ?",
   "choices": [
-    "Supprimer la pile puis la recréer, seule issue possible depuis cet état.",
-    "Attendre vingt-quatre heures : CloudFormation relance automatiquement le retour arrière.",
+    "Supprimer la pile puis la recréer entièrement depuis le modèle d'origine, cet état bloqué ne laissant aucune autre issue praticable que la reconstruction complète.",
+    "Attendre vingt-quatre heures : passé ce délai, CloudFormation relance de lui-même le retour arrière interrompu et la pile se débloque sans aucune intervention de l'équipe d'exploitation ni correction préalable de la ressource.",
     "Corriger la cause côté ressource, par exemple rétablir la configuration modifiée hors CloudFormation, puis lancer ContinueUpdateRollback en indiquant si nécessaire les ressources à ignorer pour terminer le retour arrière.",
-    "Activer la protection contre la suppression de la pile pour forcer la reprise du retour arrière."
+    "Activer la protection contre la suppression de la pile, ce qui force le service à reprendre le retour arrière en ignorant d'office la ressource qui avait été modifiée en dehors de CloudFormation par un opérateur de l'équipe."
   ]
 }

@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Utiliser EC2 Image Builder avec composants de durcissement et tests, intégrer les résultats Amazon Inspector et ne distribuer que les images conformes",
-  "rationale": "Image Builder fournit une chaîne reproductible de construction, test et distribution d'AMI. Inspector apporte la visibilité sur les vulnérabilités des images et ressources prises en charge, ce qui permet de bloquer la promotion selon la politique. Une construction manuelle ne garantit ni cadence ni traçabilité, et Macie cible les données sensibles dans S3."
+  "correct": "Un pipeline EC2 Image Builder planifié, qui reconstruit l'image, exécute une analyse de vulnérabilités et bloque la distribution en cas d'échec",
+  "rationale": "Image Builder automatise la création, la gestion et la distribution d'images durcies, intègre le paramétrage des analyses de vulnérabilités dans la définition du pipeline et laisse l'image produite dans le compte qui la possède. Un document Automation peut enchaîner ces étapes, mais la logique de blocage sur vulnérabilité doit être entièrement écrite et maintenue à la main. Une règle AWS Config évalue la conformité d'une ressource existante et ne produit aucune image. Un projet de compilation sait orchestrer un enchaînement mais n'apporte ni analyse d'image intégrée ni gestion native de la distribution. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain3.html ; https://docs.aws.amazon.com/imagebuilder/latest/userguide/what-is-image-builder.html"
 }

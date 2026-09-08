@@ -10,9 +10,9 @@
   },
   "prompt": "Un audit relève que les identifiants d'une base Amazon RDS for PostgreSQL sont écrits en clair dans un fichier de configuration livré avec l'application sur des instances Amazon EC2. L'entreprise exige désormais une rotation du mot de passe tous les trente jours, sans interruption de service et sans nouveau déploiement applicatif, ainsi qu'une trace des accès à ce secret. Quelle solution l'architecte doit-il concevoir ?",
   "choices": [
-    "Chiffrer le fichier de configuration avec AWS KMS et le redéployer chaque mois par le pipeline de livraison, la clé AWS KMS étant tournée automatiquement chaque année.",
+    "Chiffrer le fichier de configuration avec AWS KMS et le redéployer chaque mois par le pipeline de livraison continue, la clé AWS KMS étant tournée automatiquement chaque année et son usage restreint au seul rôle de déploiement du pipeline.",
     "Stocker les identifiants dans AWS Secrets Manager avec la rotation automatique gérée pour Amazon RDS toutes les trente jours, autoriser le rôle IAM du profil d'instance à lire ce secret, et faire récupérer le secret par l'application au démarrage puis lors d'un échec d'authentification.",
-    "Injecter les identifiants dans des variables d'environnement des instances au moyen des données utilisateur, et remplacer les instances du groupe Auto Scaling chaque mois pour renouveler la valeur.",
-    "Conserver les identifiants dans un paramètre AWS Systems Manager Parameter Store de type String et planifier une fonction AWS Lambda qui remplace la valeur du paramètre tous les trente jours."
+    "Injecter les identifiants dans des variables d'environnement des instances au moyen des données utilisateur du modèle de lancement, et remplacer l'ensemble des instances du groupe Auto Scaling chaque mois afin de renouveler la valeur diffusée aux serveurs applicatifs.",
+    "Conserver les identifiants dans un paramètre AWS Systems Manager Parameter Store de type String, puis planifier une fonction AWS Lambda qui en remplace la valeur tous les trente jours et redémarre ensuite les instances applicatives concernées par ce changement."
   ]
 }

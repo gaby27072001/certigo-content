@@ -10,9 +10,9 @@
   },
   "prompt": "Sur une flotte d'instances Amazon EC2, un agent applicatif s'arrête de façon aléatoire. Une alarme CloudWatch détecte déjà la panne grâce à une métrique publiée par l'agent CloudWatch. L'équipe CloudOps veut que le service soit relancé automatiquement, avec une trace auditable de chaque remédiation. Quelle solution répond au besoin ?",
   "choices": [
-    "Programmer une tâche planifiée sur chaque instance qui redémarre le service toutes les dix minutes, qu'il soit défaillant ou non.",
-    "Configurer l'action d'alarme EC2 « terminer l'instance » pour que l'instance soit supprimée dès que le seuil est franchi.",
-    "Publier l'alarme dans une file Amazon SQS et demander à l'équipe d'astreinte de traiter chaque message manuellement.",
+    "Programmer sur chaque instance une tâche planifiée qui redémarre le service applicatif toutes les dix minutes, qu'il soit défaillant ou non, de manière à couvrir les arrêts sans dépendre de l'alarme.",
+    "Configurer sur l'alarme CloudWatch l'action EC2 « terminer l'instance », de sorte que l'instance concernée soit supprimée dès le franchissement du seuil et remplacée par le groupe Auto Scaling.",
+    "Publier chaque changement d'état de l'alarme dans une file Amazon SQS et demander à l'équipe d'astreinte de traiter manuellement chaque message reçu, en se connectant à l'instance concernée pour y relancer le service défaillant.",
     "Faire relayer le changement d'état de l'alarme par une règle Amazon EventBridge qui déclenche un runbook AWS Systems Manager Automation chargé de relancer le service sur l'instance concernée et de journaliser l'exécution."
   ]
 }

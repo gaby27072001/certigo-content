@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Préprovisionner par StackSets un rôle de réponse intercompte à confiance restreinte, des runbooks Systems Manager et une journalisation centralisée immuable",
-  "rationale": "La préparation intercompte réduit la dépendance envers les identités du compte potentiellement compromis et permet une réponse reproductible. Les StackSets maintiennent le rôle et les runbooks à l'échelle, tandis que les journaux externes restent disponibles si le compte affecté est altéré. Les identifiants root partagés et la création tardive d'utilisateurs augmentent fortement le risque."
+  "correct": "Un coffre AWS Backup en mode conformité, dont le verrou demeure modifiable pendant la période de grâce initiale puis devient définitif",
+  "rationale": "Le mode conformité rend le verrou immuable une fois la période de grâce écoulée : ni un administrateur, ni l'utilisateur racine, ni AWS ne peuvent alors le retirer, et la période de grâce répond à la tolérance exprimée pour un réglage erroné. Le mode gouvernance autorise le retrait du verrou par un principal disposant de la permission adéquate, ce qui contredit l'exigence portant sur l'administrateur le plus large. Le versionnage avec suppression protégée par authentification multifacteur reste révocable par le propriétaire du compartiment. Une politique de cycle de vie planifie des opérations et n'oppose aucune immuabilité à une suppression manuelle. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain2.html ; https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html"
 }

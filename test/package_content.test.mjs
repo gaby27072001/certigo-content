@@ -56,155 +56,49 @@ function createRoot() {
   return root;
 }
 
-function countJsonFiles(root) {
-  let count = 0;
-  function walk(directory) {
-    for (const entry of readdirSync(directory, { withFileTypes: true })) {
-      const path = resolve(directory, entry.name);
-      if (entry.isDirectory()) walk(path);
-      else if (entry.name.endsWith(".json")) count++;
-    }
-  }
-  walk(root);
-  return count;
-}
+// Revision approuvee de la PR #25. L'artefact publie a cette revision est
+// l'objet meme de la garantie ADR-0002 : pouvoir le reconstruire a l'identique.
+//
+// Ce test reconstruisait auparavant l'etat #25 en rembobinant a la main, entree
+// par entree, le catalogue vivant. Ce proxy supposait le corpus v2 fige, et il
+// avait silencieusement diverge : son golden public ne correspondait a AUCUN
+// artefact reellement publie. Mesure du 2026-09-07 sur la revision elle-meme :
+//
+//   public   attendu ca890ec2...  ->  reel a3ab2254...   (diverge)
+//   prive    attendu e3bfa7c2...  ->  reel e3bfa7c2...   (authentique)
+//
+// Seul le canal prive coincidait, parce qu'il n'avait pas bouge depuis #25.
+// Reconstruire depuis la revision supprime le proxy, aligne le test sur son
+// nom, et le rend insensible aux evolutions legitimes du contenu vivant.
+const HISTORICAL_V2_REVISION = "87ae817";
 
-function createHistoricalV2Root() {
-  const root = mkdtempSync(join(tmpdir(), "certigo-package-v2-historical-"));
+function materializeRevision(revision) {
+  const root = mkdtempSync(join(tmpdir(), "certigo-revision-"));
   temporaryRoots.push(root);
-  cpSync(resolve(repoRoot, "schemas"), resolve(root, "schemas"), { recursive: true });
-  cpSync(resolve(repoRoot, "content"), resolve(root, "content"), { recursive: true });
-
-  const wavesAfterRuntimeV2 = [
-    {
-      provider: "aws",
-      certifications: ["aif-c01", "clf-c02"],
-      pairCount: 42,
-    },
-    {
-      provider: "gcp",
-      certifications: ["cloud-digital-leader", "generative-ai-leader"],
-      pairCount: 42,
-    },
-    {
-      provider: "gcp",
-      certifications: [
-        "associate-google-workspace-administrator",
-        "cloud-engineer",
-        "data-practitioner",
-      ],
-      pairCount: 60,
-    },
-    {
-      provider: "aws",
-      certifications: ["dea-c01", "dva-c02", "mla-c01", "saa-c03", "soa-c03"],
-      pairCount: 100,
-    },
-    {
-      provider: "aws",
-      certifications: ["aip-c01", "dop-c02", "sap-c02"],
-      pairCount: 72,
-    },
-    {
-      provider: "aws",
-      certifications: ["ans-c01", "scs-c03"],
-      pairCount: 48,
-    },
-    {
-      provider: "gcp",
-      certifications: [
-        "cloud-architect",
-        "cloud-database-engineer",
-        "cloud-developer",
-        "cloud-devops-engineer",
-        "cloud-network-engineer",
-        "cloud-security-engineer",
-        "data-engineer",
-        "machine-learning-engineer",
-        "security-operations-engineer",
-      ],
-      pairCount: 216,
-    },
-  ];
-  for (const wave of wavesAfterRuntimeV2) {
-    for (const channel of [
-      ["public", "questions"],
-      ["answerKey", "solutions"],
-    ]) {
-      const channelRoot = resolve(root, "content", channel[0], channel[1], wave.provider);
-      const pairCount = wave.certifications.reduce(
-        (total, certification) =>
-          total + countJsonFiles(resolve(channelRoot, certification)),
-        0
-      );
-      assert.equal(pairCount, wave.pairCount);
-      for (const certification of wave.certifications) {
-        rmSync(resolve(channelRoot, certification), { recursive: true });
-      }
-    }
-  }
-
-  const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
-  const catalog = JSON.parse(readFileSync(catalogPath, "utf8"));
-  catalog.providers.find((provider) => provider.id === "aws").checkedOn = "2026-08-17";
-  for (const certification of catalog.certifications) {
-    if (
-      ![
-        "aws:aif-c01",
-        "aws:clf-c02",
-        "gcp:cloud-digital-leader",
-        "gcp:generative-ai-leader",
-      ].includes(certification.id)
-    ) {
-      continue;
-    }
-    certification.provenance.checkedOn = "2026-08-17";
-    if (certification.provider === "aws") {
-      certification.provenance.sources = certification.provenance.sources.filter(
-        (source) => !source.url.endsWith("AWS-Certified-Cloud-Practitioner_Exam-Guide.pdf")
-      );
-    }
-  }
-  const historicalAns = catalog.certifications.find(
-    (certification) => certification.id === "aws:ans-c01"
+  const archivePath = join(root, "revision.tar");
+  const exported = spawnSync(
+    "git",
+    ["archive", "--format=tar", "-o", archivePath, revision],
+    { cwd: repoRoot, encoding: "utf8" }
   );
-  historicalAns.lifecycle.note =
-    "AWS states that December 31, 2026 is the last day to take the exam.";
-  delete historicalAns.lifecycle.recommendThrough;
-  writeFileSync(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`);
-
-  // Remove runtime resources and Microsoft content added after the historical baseline
-  const runtimeDir = resolve(root, "content", "public", "runtime");
-  if (existsSync(runtimeDir)) rmSync(runtimeDir, { recursive: true });
-  const msCoverageDir = resolve(root, "content", "public", "coverage", "microsoft");
-  if (existsSync(msCoverageDir)) rmSync(msCoverageDir, { recursive: true });
-  // Remove Microsoft certifications from catalog for historical fidelity
-  const historicalCatalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
-  const historicalCatalog = JSON.parse(readFileSync(historicalCatalogPath, "utf8"));
-  historicalCatalog.certifications = historicalCatalog.certifications.filter(
-    (c) => c.provider !== "microsoft"
-  );
-  // Restore Microsoft provider to original state
-  const msProvider = historicalCatalog.providers.find((p) => p.id === "microsoft");
-  if (msProvider) { msProvider.officialCatalogUrl = null; msProvider.checkedOn = null; }
-  writeFileSync(historicalCatalogPath, `${JSON.stringify(historicalCatalog, null, 2)}\n`);
-
-  for (const { provider, certifications } of wavesAfterRuntimeV2) {
-    for (const certification of certifications) {
-      const matrixPath = resolve(
-        root,
-        "content",
-        "public",
-        "coverage",
-        provider,
-        `${certification}.json`
-      );
-      const matrix = JSON.parse(readFileSync(matrixPath, "utf8"));
-      matrix.status = certification === "ans-c01" ? "retiring" : "planned";
-      for (const objective of matrix.objectives) objective.questionIds = [];
-      writeFileSync(matrixPath, `${JSON.stringify(matrix, null, 2)}\n`);
-    }
+  if (exported.status !== 0) {
+    throw new Error(
+      `git archive ${revision} a echoue (statut ${exported.status}) : ` +
+        `${(exported.stderr ?? "").trim()}\n` +
+        "Ce test reconstruit une revision approuvee et exige donc l'historique " +
+        "git complet. En CI, actions/checkout doit porter fetch-depth: 0 : un " +
+        "clone superficiel ne contient qu'un seul commit."
+    );
   }
+  const extracted = spawnSync("tar", ["-xf", archivePath, "-C", root], {
+    encoding: "utf8",
+  });
+  if (extracted.status !== 0) {
+    throw new Error(
+      `tar -xf a echoue (statut ${extracted.status}) : ${(extracted.stderr ?? "").trim()}`
+    );
+  }
+  rmSync(archivePath);
   return root;
 }
 
@@ -273,7 +167,10 @@ test("conserve le package v3 runtime byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  assert.equal(result.sourcePairCount, 232 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
+  // 146 paires v2 heritees (232 a l'origine, moins les 86 orphelines retirees :
+  // elles portaient sur des certifications absentes du catalogue et n'etaient
+  // atteignables par aucune matrice), puis les vagues v3 successives.
+  assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
   assert.deepEqual(
@@ -282,23 +179,23 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:dd95aafc2ac3e7859df31cb4e7aee271cf2c25cdcfee1fa23ac3eab8ca7ced79",
+          "sha256:a1f6f5c59c4837e2d9489901a75a3e6c33c0e168cbc4f3e008c262261626f7be",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:65b1914f4cbeb87d7be9cd939a7cd3d03deb344b408b6ef6de91e0346410f793",
+          "sha256:e7544ad4628d10d221a0a4a950ba18b0c5d12f12d429e416cca39bba8ec44279",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "4a9e9bc9e9a8462ddcb5e870b0abd0e5b2c064012a588af815d32138d42596a2"
+    "1a1329d8093df728164b643de6ca1c2683f4185ac464bad482d10f2c439f9730"
   );
 });
 
-test("conserve le package v2 historique de #25 byte-identical", async () => {
-  const root = createHistoricalV2Root();
+test("reconstruit a l'identique l'artefact publie a la revision #25", async () => {
+  const root = materializeRevision(HISTORICAL_V2_REVISION);
   const outDir = resolve(root, "dist-golden");
   const result = await packageContent({ root, outDir });
 
@@ -311,7 +208,7 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:ca890ec26375d19b287b381630ca7e40725ab8e86080c8637ca1369a1d7dc7da",
+          "sha256:a3ab2254673515990410268a93f95afd5605f19e29637373d7b20d412fa08869",
       },
       {
         artifact: "private",
@@ -320,9 +217,12 @@ test("conserve le package v2 historique de #25 byte-identical", async () => {
       },
     ]
   );
+  // Corrobore par deux constructions independantes du 2026-09-07 : l'outillage
+  // de la revision #25 lui-meme, et l'outillage courant, produisent le meme
+  // arbre (495 fichiers). La constante n'est donc pas la simple sortie du test.
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "dab67faec9a9cd2e5b9372a02da57e6ad56341ce917e9c6336717a5834eca279"
+    "c8720f3665593a2da00540f43cbde5436fd826293dfe950d5af221d47ab50eac"
   );
 });
 

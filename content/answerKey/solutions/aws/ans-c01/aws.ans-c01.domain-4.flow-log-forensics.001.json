@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "VPC Flow Logs et Transit Gateway Flow Logs livrés dans S3 en format Parquet avec partitionnement compatible Athena",
-  "rationale": "Les journaux de flux contiennent les métadonnées de communication et l'action accept/reject requises, sans capturer le payload. S3 en Parquet réduit le volume analysé et Athena permet les investigations ad hoc. Traffic Mirroring est utile pour les paquets complets mais serait plus coûteux et inutile ici."
+  "correct": "Des journaux de flux VPC livrés dans Amazon S3 au format Parquet, interrogés avec Athena",
+  "rationale": "Les journaux de flux VPC consignent les couples d'adresses, les ports et le champ d'action qui indique si le paquet a été accepté ou rejeté ; livrés dans Amazon S3 au format Parquet et partitionnés par date, ils s'interrogent avec Athena sans lecture séquentielle, à un coût de stockage sans commune mesure avec celui des paquets complets. La duplication de trafic conserve précisément les paquets complets, ce que le budget exclut, et se configure avant l'incident, non après. CloudTrail enregistre les appels d'API : il dirait qui a modifié l'instance, jamais quelles adresses ont dialogué avec elle. Les métriques CloudWatch agrègent des volumes d'octets et de paquets sans conserver l'identité des interlocuteurs ni la décision d'acceptation. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain4.html ; https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html"
 }

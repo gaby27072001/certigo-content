@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-6"
   },
-  "prompt": "Un auditeur exige une vue multi-compte continue des ressources non conformes et un dossier de preuves mappé à un framework réglementaire. L'équipe veut réduire la collecte manuelle. Quelle combinaison choisir ?",
+  "prompt": "Une équipe conformité prépare un audit et cherche à automatiser la collecte de preuves rattachées à des contrôles, plutôt que de rassembler des captures d'écran. Elle consulte le guide d'examen puis la documentation du service qu'il cite, et constate que les deux pages ne racontent pas la même histoire. Que faut-il retenir ?",
   "choices": [
-    "AWS Config avec agrégateur et conformance packs, associé à AWS Audit Manager dans un compte administrateur délégué",
-    "Amazon Route 53 health checks et AWS Budgets",
-    "VPC Traffic Mirroring sans stockage des résultats",
-    "Un inventaire annuel dans une feuille de calcul locale"
+    "Le guide d'examen ne cite aucun service de collecte de preuves, la question relève donc entièrement d'AWS Artifact et de ses rapports téléchargeables",
+    "Le guide d'examen cite AWS Config comme service de collecte de preuves, la documentation confirme ce rôle et aucune divergence n'existe entre les deux",
+    "Le guide d'examen cite AWS Security Hub comme service de collecte de preuves, la documentation le confirme et l'audit peut s'appuyer sur ses normes",
+    "Le guide d'examen cite AWS Audit Manager, mais sa documentation indique que le service n'accepte plus de nouveaux clients : la divergence est réelle"
   ]
 }

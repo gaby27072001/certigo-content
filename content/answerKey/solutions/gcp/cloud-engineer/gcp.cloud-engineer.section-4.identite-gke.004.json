@@ -9,5 +9,8 @@
     "objective": "section-4"
   },
   "correct": "Utiliser Workload Identity Federation for GKE avec un ServiceAccount Kubernetes dédié autorisé sur le topic",
-  "rationale": "Workload Identity Federation for GKE fournit au Pod des jetons de courte durée liés à son identité Kubernetes et permet une attribution IAM précise sur le topic. Le compte des nœuds étendrait l'accès aux autres Pods, un Secret contenant une clé reste un identifiant persistant et l'accès anonyme est non sécurisé."
+  "rationale": "Workload Identity Federation for GKE fournit au Pod des jetons de courte durée liés à son identité Kubernetes et permet une attribution IAM précise sur le topic. Le compte des nœuds étendrait l'accès aux autres Pods, un Secret contenant une clé reste un identifiant persistant et l'accès anonyme est non sécurisé.",
+  "provenance": [
+    "https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity"
+  ]
 }

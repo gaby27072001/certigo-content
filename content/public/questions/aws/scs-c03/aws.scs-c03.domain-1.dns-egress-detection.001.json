@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-1"
   },
-  "prompt": "Des instances privées utilisent le résolveur VPC et accèdent à Internet par une architecture Transit Gateway centralisée. Le SOC doit détecter une exfiltration par DNS et corréler les requêtes avec les flux refusés ou acceptés, sans capturer tous les paquets. Que faut-il activer ?",
+  "prompt": "Un analyste soupçonne qu'une instance compromise exfiltre des données en encodant des fragments dans des requêtes de résolution vers un domaine contrôlé par l'attaquant. Le trafic sortant direct est déjà bloqué par les groupes de sécurité, mais la résolution de noms reste possible depuis le réseau virtuel. Quel contrôle traite ce vecteur ?",
   "choices": [
-    "Uniquement les journaux d'accès de l'Application Load Balancer",
-    "Route 53 Resolver query logging ainsi que les VPC Flow Logs et Transit Gateway Flow Logs, livrés au compte de sécurité",
-    "VPC Traffic Mirroring sur toutes les interfaces réseau de l'organisation sans filtre",
-    "Uniquement CloudTrail data events pour les compartiments S3"
+    "Associer un groupe de règles AWS Network Firewall au sous-réseau afin de refuser les paquets sortants vers les plages réservées à la résolution",
+    "Associer un groupe de règles Route 53 Resolver DNS Firewall au réseau virtuel afin de filtrer les domaines interrogeables et de journaliser les tentatives",
+    "Associer une liste de contrôle d'accès réseau restrictive au sous-réseau afin d'interdire le port 53 vers toute destination extérieure",
+    "Associer un point de terminaison Amazon VPC de type interface afin que la résolution transite par le réseau privé plutôt que par Internet"
   ]
 }

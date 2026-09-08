@@ -9,5 +9,9 @@
     "objective": "domain-1"
   },
   "correct": "Installer et configurer l'agent CloudWatch sur les instances, en distribuant sa configuration par un document AWS Systems Manager, afin de publier les métriques de mémoire et de système de fichiers dans CloudWatch.",
-  "rationale": "L'hyperviseur ne voit pas l'intérieur du système d'exploitation : la mémoire et l'espace disque sont des métriques invitées qui nécessitent l'agent CloudWatch, déployé et configuré à grande échelle via Systems Manager (Run Command, State Manager ou Distributor), puis publiées comme métriques personnalisées exploitables par des alarmes. La surveillance détaillée ne change que la fréquence de publication (une minute au lieu de cinq) des métriques EC2 existantes : elle n'ajoute aucune métrique mémoire. L'espace de noms AWS/EC2 ne contient jamais de métriques de mémoire ni de système de fichiers, quelle que soit la granularité. CloudTrail journalise des appels d'API de plan de contrôle et non l'utilisation des ressources système à l'intérieur de l'instance."
+  "rationale": "L'hyperviseur ne voit pas l'intérieur du système d'exploitation : la mémoire et l'espace disque sont des métriques invitées qui nécessitent l'agent CloudWatch, déployé et configuré à grande échelle via Systems Manager (Run Command, State Manager ou Distributor), puis publiées comme métriques personnalisées exploitables par des alarmes. La surveillance détaillée ne change que la fréquence de publication (une minute au lieu de cinq) des métriques EC2 existantes : elle n'ajoute aucune métrique mémoire. L'espace de noms AWS/EC2 ne contient jamais de métriques de mémoire ni de système de fichiers, quelle que soit la granularité. CloudTrail journalise des appels d'API de plan de contrôle et non l'utilisation des ressources système à l'intérieur de l'instance.",
+  "provenance": [
+    "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/metrics-collected-by-CloudWatch-agent.html",
+    "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html"
+  ]
 }

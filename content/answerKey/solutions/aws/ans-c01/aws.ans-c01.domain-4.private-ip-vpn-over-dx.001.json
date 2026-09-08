@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Configurer une AWS Site-to-Site VPN à adresses IP privées au-dessus du transit VIF Direct Connect et du Transit Gateway",
-  "rationale": "Une private IP VPN over Direct Connect ajoute IPsec au chemin privé fourni par le transit VIF, Direct Connect gateway et Transit Gateway. Direct Connect seul fournit une liaison dédiée mais pas un chiffrement IPsec automatique. Un public VIF n'est pas destiné à publier les préfixes privés."
+  "correct": "Un Site-to-Site VPN à adresses IP privées, établi sur une interface virtuelle de transit adossée",
+  "rationale": "Le Site-to-Site VPN à adresses IP privées se monte sur une interface virtuelle de transit rattachée à une passerelle Direct Connect elle-même associée à la passerelle de transit : les extrémités portent des adresses privées, le tunnel reste sur le réseau AWS sans toucher l'Internet public, et les VPC rattachés à la passerelle sont desservis. Un VPN classique sur interface virtuelle publique fonctionne, mais ses extrémités sont des adresses publiques, ce que l'énoncé refuse. MACsec chiffre la liaison entre le routeur du client et le port AWS ; le chiffrement s'arrête au port, il ne couvre donc pas le trajet complet, et un appairage ne dessert pas les VPC via la passerelle de transit. Un tunnel entre appliances EC2 impose d'exploiter, de mettre à l'échelle et de rendre redondantes ces appliances, là où un service géré existe. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain4.html ; https://docs.aws.amazon.com/vpn/latest/s2svpn/private-ip-dx.html"
 }

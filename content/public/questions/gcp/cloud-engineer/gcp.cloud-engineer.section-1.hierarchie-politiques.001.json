@@ -10,9 +10,9 @@
   },
   "prompt": "Une entreprise possède une organisation Google Cloud avec des dossiers « Production » et « Développement ». Elle veut empêcher la création d'adresses IP externes sur toutes les VM de production, y compris dans les futurs projets, sans affecter le développement. Quelle action faut-il effectuer ?",
   "choices": [
-    "Créer une règle de pare-feu refusant Internet dans chaque projet de production",
+    "Créer dans chaque projet de production une règle de pare-feu refusant tout trafic Internet sortant",
     "Appliquer au dossier « Production » la contrainte d'organisation qui interdit les adresses IP externes",
-    "Retirer le rôle Compute Admin aux propriétaires des projets de production",
-    "Créer un budget commun pour les projets du dossier « Production »"
+    "Retirer le rôle Compute Admin à tous les propriétaires des projets du dossier « Production »",
+    "Créer un budget de facturation commun à l'ensemble des projets du dossier « Production »"
   ]
 }

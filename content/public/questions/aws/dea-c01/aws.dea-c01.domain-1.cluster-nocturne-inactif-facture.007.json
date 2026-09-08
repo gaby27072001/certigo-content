@@ -10,9 +10,9 @@
   },
   "prompt": "Une tâche Apache Spark de préparation de données s'exécute chaque nuit pendant environ trois heures sur un cluster Amazon EMR laissé actif vingt-quatre heures sur vingt-quatre. Le reste du temps le cluster est inactif mais facturé. La tâche est idempotente et peut être relancée sans conséquence si des nœuds disparaissent. L'équipe doit réduire fortement le coût sans allonger notablement la durée du traitement. Que recommander ?",
   "choices": [
-    "Diviser par deux la taille des instances du cluster permanent et accepter que le traitement dure environ deux fois plus longtemps.",
+    "Diviser par deux la taille des instances du cluster permanent et accepter que le traitement nocturne dure environ deux fois plus longtemps, le cluster restant facturé le reste de la journée alors qu'aucune tâche ne s'y exécute.",
     "Remplacer le cluster permanent par un cluster EMR transitoire lancé par le planificateur, avec le nœud primaire et le groupe principal à la demande, les nœuds de tâche sur des instances Spot, et l'arrêt automatique à la fin de l'étape.",
-    "Placer tous les nœuds du cluster, y compris le nœud primaire, sur des instances Spot et maintenir le cluster actif en permanence.",
-    "Acheter des instances réservées sur trois ans pour l'ensemble des nœuds du cluster permanent."
+    "Placer tous les nœuds du cluster, y compris le nœud primaire qui dirige l'ensemble, sur des instances Spot, et maintenir ce cluster actif en permanence pour absorber les interruptions de capacité éventuelles sur ces instances.",
+    "Acheter des instances réservées sur trois ans pour l'ensemble des nœuds du cluster permanent, afin d'obtenir le tarif horaire le plus bas possible sur la totalité de la capacité réservée pendant toute la durée de l'engagement de trois ans souscrit."
   ]
 }

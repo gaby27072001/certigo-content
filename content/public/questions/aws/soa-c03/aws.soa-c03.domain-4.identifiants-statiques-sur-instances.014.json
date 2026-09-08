@@ -10,9 +10,9 @@
   },
   "prompt": "Une application hébergée sur des instances Amazon EC2 accède à un compartiment Amazon S3 avec une clé d'accès IAM de longue durée écrite dans un fichier de configuration. L'audit de sécurité exige la suppression de toute information d'identification statique sur les instances. Quelle solution appliquer ?",
   "choices": [
-    "Déplacer la clé d'accès dans un paramètre SecureString de Parameter Store et la lire au démarrage de l'application.",
+    "Déplacer la clé d'accès dans un paramètre SecureString de Parameter Store et la lire au démarrage de l'application, la clé n'étant plus écrite en clair.",
     "Attacher à l'instance un profil d'instance portant un rôle IAM limité au compartiment, laisser le kit SDK récupérer des informations d'identification temporaires, puis supprimer la clé du fichier de configuration.",
-    "Chiffrer le fichier de configuration avec AWS KMS et faire tourner la clé d'accès tous les quatre-vingt-dix jours.",
-    "Créer un utilisateur IAM dédié par instance et restreindre son usage par une condition d'adresse IP source."
+    "Chiffrer le fichier de configuration avec AWS KMS et faire tourner la clé d'accès tous les quatre-vingt-dix jours, de sorte qu'aucune valeur ne reste valable durablement sur les instances visées par l'audit de sécurité.",
+    "Créer un utilisateur IAM dédié à chacune des instances et restreindre son usage par une condition d'adresse IP source, afin que la clé ne puisse servir depuis aucune autre machine que celle qui la détient légitimement."
   ]
 }

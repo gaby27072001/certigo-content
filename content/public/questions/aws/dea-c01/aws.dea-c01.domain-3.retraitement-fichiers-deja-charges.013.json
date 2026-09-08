@@ -10,9 +10,9 @@
   },
   "prompt": "Une tâche AWS Glue Spark s'exécute toutes les heures sur un préfixe Amazon S3 alimenté en continu, puis charge le résultat dans Amazon Redshift. L'équipe constate que la durée d'exécution et le coût en unités de traitement augmentent chaque semaine, et que la table Redshift contient des lignes en double correspondant à des fichiers déjà traités lors des exécutions précédentes. Quelle correction traite la cause du problème ?",
   "choices": [
-    "Déplacer les fichiers déjà traités vers un compartiment d'archive à la fin de chaque exécution, au moyen d'un script externe planifié.",
-    "Réduire le nombre d'unités de traitement de données allouées à la tâche afin de limiter le coût de la relecture complète.",
-    "Ajouter une clause DISTINCT à la requête de chargement Amazon Redshift pour éliminer les doublons après coup.",
+    "Déplacer les fichiers déjà traités vers un compartiment d'archive à la fin de chaque exécution, au moyen d'un script externe planifié et maintenu séparément.",
+    "Réduire le nombre d'unités de traitement de données allouées à la tâche afin de limiter le coût de la relecture complète du jeu de fichiers à chaque exécution.",
+    "Ajouter une clause DISTINCT à la requête de chargement Amazon Redshift pour éliminer après coup les doublons produits par la relecture intégrale des fichiers d'entrée à chaque exécution de la tâche nocturne.",
     "Activer les signets de tâche AWS Glue et transmettre le contexte de transformation aux sources et aux destinations du script, afin que seules les nouvelles données soient traitées à chaque exécution."
   ]
 }

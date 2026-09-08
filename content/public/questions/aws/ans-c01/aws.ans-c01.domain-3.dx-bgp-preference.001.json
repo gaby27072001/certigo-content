@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Deux connexions Direct Connect annoncent les mêmes préfixes sur site à AWS. Le trafic AWS vers le datacenter doit préférer la connexion primaire, tout en gardant la seconde en secours sans annoncer de préfixe plus spécifique. Quel mécanisme utiliser ?",
+  "prompt": "Deux connexions AWS Direct Connect aboutissent à la même passerelle Direct Connect. Le trafic sortant d'AWS vers le réseau du client doit emprunter en priorité la première connexion, la seconde ne servant qu'en cas de panne. Les deux annoncent exactement le même préfixe, avec la même longueur de masque. Quel mécanisme impose ce choix ?",
   "choices": [
-    "Appliquer aux annonces BGP les communautés de préférence locale AWS avec une valeur plus élevée sur la liaison primaire",
-    "Changer uniquement le TTL des enregistrements Route 53 privés",
-    "Ajouter une route statique dans une Internet Gateway",
-    "Utiliser des security groups différents sur les virtual interfaces"
+    "Découper le préfixe annoncé sur la connexion principale en deux préfixes plus spécifiques",
+    "Appliquer les communautés BGP de préférence locale 7224:7300 et 7224:7100",
+    "Allonger le chemin d'AS sur la connexion principale afin de la rendre plus attractive",
+    "Réduire l'intervalle des messages de maintien BGP sur la connexion privilégiée"
   ]
 }

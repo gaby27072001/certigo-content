@@ -10,9 +10,9 @@
   },
   "prompt": "Une application régionale utilise PostgreSQL, exige des transactions relationnelles et doit continuer à fonctionner après la panne d'une zone avec un minimum d'administration. Quelle architecture faut-il déployer ?",
   "choices": [
-    "BigQuery avec des tables partitionnées",
-    "Firestore en mode natif",
-    "PostgreSQL installé sur une VM unique avec un disque local SSD",
+    "BigQuery avec des tables partitionnées par date de chargement",
+    "Firestore en mode natif avec des index composites et des requêtes",
+    "PostgreSQL installé sur une VM unique avec un seul disque local SSD",
     "Cloud SQL for PostgreSQL en haute disponibilité régionale"
   ]
 }

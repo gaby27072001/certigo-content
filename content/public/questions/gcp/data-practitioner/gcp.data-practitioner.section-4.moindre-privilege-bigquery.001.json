@@ -10,9 +10,9 @@
   },
   "prompt": "Un groupe d'analystes doit exécuter des requêtes sur un seul dataset BigQuery de production. Il ne doit ni modifier les tables ni lire les autres datasets du projet. Quelle attribution respecte le principe du moindre privilège ?",
   "choices": [
-    "Accorder BigQuery Admin au niveau du projet",
-    "Accorder Editor au niveau du projet et demander aux analystes de ne pas modifier les tables",
-    "Accorder Storage Object Viewer au niveau du projet",
+    "Accorder le rôle BigQuery Admin au niveau du projet de production",
+    "Accorder le rôle Editor au niveau du projet en demandant de ne pas modifier les tables existantes",
+    "Accorder le rôle Storage Object Viewer au niveau du projet de production",
     "Accorder BigQuery Data Viewer sur le dataset et BigQuery Job User sur le projet"
   ]
 }

@@ -13,7 +13,7 @@ permissions: {}
 jobs:
   plan:
     if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
     outputs:
@@ -31,6 +31,10 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+          # PORTEUR pour `npm test` execute plus bas dans les gates de
+          # publication : le golden de la revision #25 materialise cette
+          # revision via `git archive` et exige l'historique git complet.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -117,7 +121,7 @@ jobs:
   publish-public:
     needs: plan
     environment: azure-content-public
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
       id-token: write
@@ -125,6 +129,14 @@ jobs:
       AZURE_CORE_OUTPUT: none
       AZURE_LOGIN_PRE_CLEANUP: true
       AZURE_LOGIN_POST_CLEANUP: true
+      # Cache d'identifiants propre au job. Les deux depots enregistrent leurs
+      # runners sur les MEMES machines physiques, sous le meme utilisateur, donc
+      # ils partagent `~/.azure` par defaut. Un `azure/login` declenche par
+      # l'autre depot ecrase alors le cache de ce job en pleine execution, et
+      # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
+      # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
+      # job Certigo sur la meme VM, deux fois, sur les deux VM.
+      AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -173,23 +185,21 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           audience: api://AzureADTokenExchange
       - name: Publish and verify public blobs
-        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        shell: bash
         env:
           MANIFEST_ID: ${{ needs.plan.outputs.public_manifest_id }}
           AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
           AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
-        with:
-          azcliversion: 2.89.1
-          inlineScript: |
-            bash tools/publish_blob_artifact.sh dist/public \
-              "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
-              "manifests/${MANIFEST_ID}" "public,max-age=31536000,immutable" manifestId
+        run: |
+          bash tools/publish_blob_artifact.sh dist/public \
+            "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
+            "manifests/${MANIFEST_ID}" "public,max-age=31536000,immutable" manifestId
 
   publish-answer-key:
     needs: plan
     environment: azure-content-answer-key
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
       id-token: write
@@ -197,6 +207,14 @@ jobs:
       AZURE_CORE_OUTPUT: none
       AZURE_LOGIN_PRE_CLEANUP: true
       AZURE_LOGIN_POST_CLEANUP: true
+      # Cache d'identifiants propre au job. Les deux depots enregistrent leurs
+      # runners sur les MEMES machines physiques, sous le meme utilisateur, donc
+      # ils partagent `~/.azure` par defaut. Un `azure/login` declenche par
+      # l'autre depot ecrase alors le cache de ce job en pleine execution, et
+      # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
+      # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
+      # job Certigo sur la meme VM, deux fois, sur les deux VM.
+      AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -245,23 +263,21 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           audience: api://AzureADTokenExchange
       - name: Publish and verify answer key blobs
-        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        shell: bash
         env:
           MANIFEST_ID: ${{ needs.plan.outputs.private_manifest_id }}
           AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
           AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
-        with:
-          azcliversion: 2.89.1
-          inlineScript: |
-            bash tools/publish_blob_artifact.sh dist/private \
-              "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
-              "manifests/${MANIFEST_ID}" "private,no-store" manifestId
+        run: |
+          bash tools/publish_blob_artifact.sh dist/private \
+            "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
+            "manifests/${MANIFEST_ID}" "private,no-store" manifestId
 
   publish-release:
     needs: [plan, publish-public, publish-answer-key]
     environment: azure-content-release
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: [self-hosted, Linux, X64, certigo-ci]
     permissions:
       contents: read
       id-token: write
@@ -269,6 +285,14 @@ jobs:
       AZURE_CORE_OUTPUT: none
       AZURE_LOGIN_PRE_CLEANUP: true
       AZURE_LOGIN_POST_CLEANUP: true
+      # Cache d'identifiants propre au job. Les deux depots enregistrent leurs
+      # runners sur les MEMES machines physiques, sous le meme utilisateur, donc
+      # ils partagent `~/.azure` par defaut. Un `azure/login` declenche par
+      # l'autre depot ecrase alors le cache de ce job en pleine execution, et
+      # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
+      # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
+      # job Certigo sur la meme VM, deux fois, sur les deux VM.
+      AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -328,15 +352,13 @@ jobs:
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           audience: api://AzureADTokenExchange
       - name: Publish release descriptor last
-        uses: azure/cli@9f7ce6f37c31b777ec6c6b6d1dfe7db79f497956 # v2
+        shell: bash
         env:
           RELEASE_ID: ${{ needs.plan.outputs.release_id }}
           AZURE_RESOURCE_GROUP: ${{ vars.AZURE_RESOURCE_GROUP }}
           AZURE_STORAGE_ACCOUNT: ${{ vars.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ vars.AZURE_STORAGE_CONTAINER }}
-        with:
-          azcliversion: 2.89.1
-          inlineScript: |
-            bash tools/publish_blob_artifact.sh dist/release.json \
-              "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
-              "releases/${RELEASE_ID}" "private,no-store" releaseId
+        run: |
+          bash tools/publish_blob_artifact.sh dist/release.json \
+            "${AZURE_RESOURCE_GROUP}" "${AZURE_STORAGE_ACCOUNT}" "${AZURE_STORAGE_CONTAINER}" \
+            "releases/${RELEASE_ID}" "private,no-store" releaseId

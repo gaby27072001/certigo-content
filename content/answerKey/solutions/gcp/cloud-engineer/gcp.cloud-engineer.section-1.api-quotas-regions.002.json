@@ -9,5 +9,9 @@
     "objective": "section-1"
   },
   "correct": "Activer Compute Engine, estimer les vCPU et demander le quota régional nécessaire avant le déploiement",
-  "rationale": "Compute Engine doit être activé et les quotas régionaux doivent couvrir la capacité prévue avant la création des VM. Répartir les VM entre zones ne contourne pas un quota régional, Cloud Resource Manager ne fournit pas le service de calcul et changer une valeur par défaut de CLI n'augmente aucun quota."
+  "rationale": "Compute Engine doit être activé et les quotas régionaux doivent couvrir la capacité prévue avant la création des VM. Répartir les VM entre zones ne contourne pas un quota régional, Cloud Resource Manager ne fournit pas le service de calcul et changer une valeur par défaut de CLI n'augmente aucun quota.",
+  "provenance": [
+    "https://cloud.google.com/compute/resource-usage",
+    "https://cloud.google.com/docs/quotas/view-manage"
+  ]
 }

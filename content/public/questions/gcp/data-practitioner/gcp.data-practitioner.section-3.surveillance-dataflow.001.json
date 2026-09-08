@@ -10,9 +10,9 @@
   },
   "prompt": "Un pipeline Dataflow en streaming lit Pub/Sub et écrit dans BigQuery. Les lignes arrivent désormais avec vingt minutes de retard, mais le job est toujours en cours d'exécution. Quelle vérification doit être effectuée en premier pour localiser le goulot d'étranglement ?",
   "choices": [
-    "Ouvrir l'historique des requêtes BigQuery et comparer la latence des insertions",
+    "Ouvrir l'historique des requêtes BigQuery et comparer la latence des insertions du jour",
     "Examiner le retard système, la fraîcheur et le backlog, puis corréler les étapes dans Cloud Logging",
-    "Redémarrer le job avec le même nombre de workers avant d'examiner les métriques",
+    "Redémarrer le job avec le même nombre de workers avant d'examiner la moindre métrique de retard",
     "Convertir le topic Pub/Sub en bucket Cloud Storage afin d'obtenir un journal d'erreurs"
   ]
 }

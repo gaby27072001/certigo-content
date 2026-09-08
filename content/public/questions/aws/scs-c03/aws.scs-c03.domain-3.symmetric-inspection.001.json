@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Toutes les communications est-ouest entre VPC doivent traverser AWS Network Firewall dans un VPC d'inspection relié à Transit Gateway. Des flux stateful sont abandonnés lorsque l'aller et le retour utilisent des appliances dans des AZ différentes. Quelle correction appliquer ?",
+  "prompt": "Une équipe déploie un parc d'appliances tierces d'inspection en profondeur qui exigent de voir les deux sens d'une même connexion sur la même appliance. Le trafic provient de plusieurs réseaux virtuels consommateurs et le parc doit pouvoir grandir sans rompre les connexions établies. Quel composant garantit cette propriété ?",
   "choices": [
-    "Activer le mode appliance sur l'attachement Transit Gateway d'inspection et aligner les tables de routage par AZ pour conserver la symétrie",
-    "Activer la propagation de toutes les routes dans toutes les tables Transit Gateway",
-    "Remplacer Network Firewall par un compartiment S3",
-    "Désactiver le suivi d'état des règles sans modifier le routage"
+    "Un équilibreur de charge réseau associé à un groupe cible, qui répartit les connexions entrantes sur les appliances en fonction de leur état de santé",
+    "Une passerelle de transit avec table de routage dédiée, qui oriente les flux des réseaux consommateurs vers le réseau d'inspection mutualisé",
+    "Un équilibreur de charge de type passerelle, qui maintient l'adhérence de flux vers une même appliance et échange tout le trafic en protocole GENEVE",
+    "Un point de terminaison Amazon VPC de type interface, qui expose le service d'inspection aux réseaux virtuels consommateurs par connectivité privée"
   ]
 }

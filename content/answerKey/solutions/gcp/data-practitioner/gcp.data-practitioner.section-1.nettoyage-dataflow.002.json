@@ -9,5 +9,9 @@
     "objective": "section-1"
   },
   "correct": "Créer un pipeline Dataflow par lot qui valide le schéma, normalise les dates, déduplique et place les rejets en quarantaine",
-  "rationale": "Un pipeline Dataflow rend les contrôles reproductibles, nettoie les enregistrements valides et sépare explicitement les rejets avant leur arrivée dans BigQuery. La détection de schéma ne corrige pas la qualité, une intervention manuelle ne passe pas à l'échelle et une table externe ne traite ni les doublons ni les formats incohérents."
+  "rationale": "Un pipeline Dataflow rend les contrôles reproductibles, nettoie les enregistrements valides et sépare explicitement les rejets avant leur arrivée dans BigQuery. La détection de schéma ne corrige pas la qualité, une intervention manuelle ne passe pas à l'échelle et une table externe ne traite ni les doublons ni les formats incohérents.",
+  "provenance": [
+    "https://cloud.google.com/dataflow/docs/overview",
+    "https://cloud.google.com/dataflow/docs/guides/write-to-bigquery"
+  ]
 }

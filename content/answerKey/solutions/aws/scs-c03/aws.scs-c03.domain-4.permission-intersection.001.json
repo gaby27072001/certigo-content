@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Examiner les refus explicites et l'intersection entre politique d'identité, permission boundary, session policy, SCP et politique de ressource à l'aide des événements et outils d'analyse IAM",
-  "rationale": "Les autorisations effectives résultent de l'intersection des limites applicables, et un refus explicite l'emporte sur un Allow. Ajouter une autre politique d'identité ne contourne ni boundary, ni session policy, ni SCP. Les journaux CloudTrail et les outils IAM aident à identifier la couche qui bloque l'appel."
+  "correct": "Une limite de permissions imposée aux rôles créés, qui borne les permissions effectives à l'intersection avec la politique basée sur l'identité",
+  "rationale": "Une limite de permissions fixe le maximum qu'une politique basée sur l'identité peut accorder à une entité : le rôle créé n'obtient que l'intersection des deux, ce qui neutralise une politique trop large sans revue humaine. Une politique de session produit bien une intersection, mais elle s'applique au moment de l'assomption et ne contraint pas ce qu'un développeur attache au rôle. Une politique de contrôle de service peut interdire la création elle-même, ce qui supprime la délégation au lieu de la borner. Une politique basée sur les ressources ne protège que les ressources énumérées et laisse le rôle libre partout ailleurs. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain4.html ; https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html"
 }

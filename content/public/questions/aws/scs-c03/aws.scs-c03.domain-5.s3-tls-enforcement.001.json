@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-5"
   },
-  "prompt": "Un compartiment S3 réglementé doit refuser les requêtes non chiffrées et les clients utilisant une version TLS inférieure à 1.2, tout en évitant de bloquer involontairement les appels directs de services AWS lorsque les clés de contexte réseau sont masquées. Quel contrôle appliquer ?",
+  "prompt": "Une équipe crée un compartiment Amazon S3 pour des données réglementées. Elle doit garantir qu'aucune requête en clair ne sera acceptée et choisir un chiffrement au repos qui reste exploitable par les services AWS chargés d'analyser ces objets. Un ancien document interne recommande de fournir la clé à chaque requête. Que faut-il faire ?",
   "choices": [
-    "Une bucket policy avec des Deny sur `aws:SecureTransport` faux et `s3:TlsVersion` inférieur à 1.2, structurés avec l'exception appropriée pour les principaux de service AWS",
-    "Une règle de cycle de vie S3 qui supprime les objets après un jour",
-    "Un groupe de sécurité attaché directement au compartiment S3",
-    "Une clé KMS asymétrique sans bucket policy"
+    "Refuser les requêtes non chiffrées par une condition de politique de compartiment, et suivre le document interne en fournissant la clé à chaque requête",
+    "Refuser les requêtes non chiffrées par une liste de contrôle d'accès sur le compartiment, et chiffrer chaque objet avec une clé gérée par le service",
+    "Refuser les requêtes non chiffrées par une condition de politique de compartiment, et chiffrer les objets avec une clé AWS KMS gérée par le compte",
+    "Refuser les requêtes non chiffrées par une règle AWS Config remédiée, et chiffrer les objets avec une clé fournie par l'appelant à chaque requête"
   ]
 }

@@ -172,6 +172,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "transition": {
+          "enum": ["announced", "none-announced"]
+        },
         "reviewOn": {
           "type": "string",
           "format": "date"

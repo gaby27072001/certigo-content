@@ -9,5 +9,8 @@
     "objective": "domain-3"
   },
   "correct": "Corriger la cause côté ressource, par exemple rétablir la configuration modifiée hors CloudFormation, puis lancer ContinueUpdateRollback en indiquant si nécessaire les ressources à ignorer pour terminer le retour arrière.",
-  "rationale": "Depuis l'état UPDATE_ROLLBACK_FAILED, la procédure prise en charge consiste à lever l'obstacle sur la ressource fautive puis à appeler ContinueUpdateRollback, éventuellement avec la liste des ressources à ignorer, afin de ramener la pile à UPDATE_ROLLBACK_COMPLETE et de rendre les mises à jour de nouveau possibles. Supprimer puis recréer la pile détruit inutilement des ressources de production alors qu'une reprise du retour arrière est disponible. CloudFormation ne relance jamais seul un retour arrière échoué : la pile reste bloquée tant qu'aucune action explicite n'est entreprise. La protection contre la suppression empêche uniquement de supprimer la pile et n'a aucun effet sur l'état du retour arrière."
+  "rationale": "Depuis l'état UPDATE_ROLLBACK_FAILED, la procédure prise en charge consiste à lever l'obstacle sur la ressource fautive puis à appeler ContinueUpdateRollback, éventuellement avec la liste des ressources à ignorer, afin de ramener la pile à UPDATE_ROLLBACK_COMPLETE et de rendre les mises à jour de nouveau possibles. Supprimer puis recréer la pile détruit inutilement des ressources de production alors qu'une reprise du retour arrière est disponible. CloudFormation ne relance jamais seul un retour arrière échoué : la pile reste bloquée tant qu'aucune action explicite n'est entreprise. La protection contre la suppression empêche uniquement de supprimer la pile et n'a aucun effet sur l'état du retour arrière.",
+  "provenance": [
+    "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html"
+  ]
 }

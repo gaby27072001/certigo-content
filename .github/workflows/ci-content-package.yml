@@ -29,6 +29,13 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+          # PORTEUR pour `npm test`. Le test « reconstruit a l'identique
+          # l'artefact publie a la revision #25 » materialise cette revision via
+          # `git archive`, ce qui exige l'historique git complet. Le defaut de
+          # actions/checkout est fetch-depth: 1, qui ne fournit qu'un seul
+          # commit : le test echouerait sur « Not a valid object name 87ae817 ».
+          # Cout mesure le 2026-09-07 : historique complet = 2,47 MiB, 106 commits.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6

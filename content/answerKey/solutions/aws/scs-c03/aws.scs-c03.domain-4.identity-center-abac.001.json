@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Configurer les attributs de contrôle d'accès dans IAM Identity Center et des permission sets utilisant des conditions sur principal tags et resource tags",
-  "rationale": "L'ABAC propage des attributs de l'identité fédérée en principal tags et les compare aux étiquettes des ressources dans les politiques. Les permission sets restent gérables à l'échelle tout en adaptant les droits au contexte. Des utilisateurs dupliqués et des droits administrateur permanents augmentent la charge et violent le moindre privilège."
+  "correct": "Sélectionner l'attribut dans les attributs pour le contrôle d'accès, puis écrire une politique comparant l'étiquette de session à celle de la ressource",
+  "rationale": "Les attributs sélectionnés dans la page dédiée sont transmis au compte cible sous forme d'étiquettes de session, référençables par la clé de condition aws:PrincipalTag, ce qui permet une politique unique comparant l'attribut de l'utilisateur à l'étiquette de la ressource : un nouveau service ne demande alors aucune modification. Créer un jeu de permissions par service reproduit exactement la prolifération que l'énoncé veut éviter. Les chemins IAM organisent les entités mais n'apportent aucune comparaison dynamique avec les étiquettes des ressources. Restreindre l'assomption dans la politique de confiance filtre qui peut prendre le rôle, sans moduler l'accès aux ressources. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain4.html ; https://docs.aws.amazon.com/singlesignon/latest/userguide/attributesforaccesscontrol.html"
 }

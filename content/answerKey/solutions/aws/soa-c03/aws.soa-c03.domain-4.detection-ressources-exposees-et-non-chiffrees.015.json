@@ -9,5 +9,8 @@
     "objective": "domain-4"
   },
   "correct": "Déployer un pack de conformité AWS Config à l'échelle de l'organisation, composé de règles gérées qui évaluent en continu les ressources et publient leur état de conformité.",
-  "rationale": "AWS Config enregistre les configurations des ressources et évalue des règles en continu ; un pack de conformité regroupe ces règles dans un modèle déployable sur toute l'organisation et fournit un tableau de bord ainsi qu'un historique de conformité par ressource, ce qui correspond exactement à la demande. Un audit manuel trimestriel n'est ni continu ni fiable, et les données de facturation ne décrivent pas les propriétés de sécurité des ressources. CloudTrail Insights détecte des variations inhabituelles d'activité d'API : il n'évalue pas la conformité et ne bloque aucune création de ressource. IAM ne publie pas de métrique de conformité des ressources dans CloudWatch : l'alarme proposée n'existe pas."
+  "rationale": "AWS Config enregistre les configurations des ressources et évalue des règles en continu ; un pack de conformité regroupe ces règles dans un modèle déployable sur toute l'organisation et fournit un tableau de bord ainsi qu'un historique de conformité par ressource, ce qui correspond exactement à la demande. Un audit manuel trimestriel n'est ni continu ni fiable, et les données de facturation ne décrivent pas les propriétés de sécurité des ressources. CloudTrail Insights détecte des variations inhabituelles d'activité d'API : il n'évalue pas la conformité et ne bloque aucune création de ressource. IAM ne publie pas de métrique de conformité des ressources dans CloudWatch : l'alarme proposée n'existe pas.",
+  "provenance": [
+    "https://docs.aws.amazon.com/config/latest/developerguide/conformance-packs.html"
+  ]
 }

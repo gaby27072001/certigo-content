@@ -10,9 +10,9 @@
   },
   "prompt": "Un éditeur de jeu multijoueur exploite des serveurs de session dans trois Régions AWS. Le client communique par un protocole propriétaire sur UDP et TCP, sans HTTP. Les joueurs éloignés subissent une latence et une gigue élevées, et lors d'une panne régionale la bascule reste lente parce que de nombreux clients conservent en cache la résolution DNS précédente. L'équipe demande des adresses IP d'entrée fixes, une entrée sur le réseau AWS au plus près du joueur et une bascule qui ne dépende pas du cache DNS. Quelle solution l'architecte doit-il retenir ?",
   "choices": [
-    "Déployer une distribution Amazon CloudFront devant les serveurs de session et activer la mise en cache des réponses.",
-    "Configurer un routage Amazon Route 53 fondé sur la latence entre les trois Régions, avec des contrôles de santé et une durée de vie DNS de soixante secondes.",
-    "Déployer un Application Load Balancer par Région et publier un enregistrement DNS de type CNAME par continent.",
+    "Déployer une distribution Amazon CloudFront devant les serveurs de session et activer la mise en cache des réponses aux points de présence, afin que les joueurs éloignés soient servis depuis l'emplacement périphérique le plus proche.",
+    "Configurer un routage Amazon Route 53 fondé sur la latence entre les trois Régions, assorti de contrôles de santé sur chaque point de terminaison et d'une durée de vie DNS ramenée à soixante secondes pour accélérer la bascule lors d'une panne.",
+    "Déployer un Application Load Balancer par Région et publier un enregistrement DNS de type CNAME par continent, chaque client étant dirigé vers le répartiteur régional correspondant à sa zone géographique et basculé manuellement par l'exploitation en cas de panne.",
     "Utiliser AWS Global Accelerator avec ses deux adresses IP statiques anycast, des points de terminaison Network Load Balancer dans chaque Région et des contrôles de santé assurant la bascule sans dépendre de la mise en cache DNS côté client."
   ]
 }

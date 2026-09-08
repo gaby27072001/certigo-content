@@ -11,8 +11,8 @@
   "prompt": "Un lac de données stocke des fichiers Apache Parquet dans Amazon S3 et les expose via le catalogue de données AWS Glue à Amazon Athena et Amazon EMR. Trois besoins nouveaux apparaissent : supprimer ou corriger des enregistrements au niveau de la ligne à la demande des personnes concernées, ajouter et renommer des colonnes sans réécrire l'historique, et pouvoir relire l'état du jeu de données tel qu'il était la semaine précédente. Quelle évolution du stockage répond à ces trois besoins ?",
   "choices": [
     "Migrer les jeux de données vers des tables Apache Iceberg enregistrées dans le catalogue de données AWS Glue, qui prennent en charge les opérations MERGE et DELETE au niveau de la ligne, l'évolution de schéma et les instantanés historiques.",
-    "Réécrire intégralement chaque partition Parquet concernée à l'aide d'une tâche AWS Glue à chaque demande de suppression ou de correction.",
-    "Charger l'intégralité du lac de données dans une table Amazon DynamoDB afin de bénéficier des mises à jour au niveau de l'élément.",
-    "Activer la gestion des versions Amazon S3 sur le compartiment et supprimer les versions correspondant aux enregistrements à effacer."
+    "Réécrire intégralement chaque partition Parquet concernée à l'aide d'une tâche AWS Glue à chaque nouvelle demande de suppression ou de correction, en reconstruisant tous les fichiers touchés.",
+    "Charger l'intégralité du lac de données dans une table Amazon DynamoDB afin de bénéficier des mises à jour au niveau de l'élément, puis exposer cette table aux moteurs d'analyse existants.",
+    "Activer la gestion des versions Amazon S3 sur le compartiment et supprimer les versions correspondant aux enregistrements à effacer, en conservant les versions antérieures pour pouvoir relire l'état du jeu de données tel qu'il était la semaine précédente."
   ]
 }

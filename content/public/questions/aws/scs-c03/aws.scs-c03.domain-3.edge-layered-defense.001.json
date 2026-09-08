@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "prompt": "Une API mondiale derrière un ALB subit des attaques volumétriques et des rafales HTTP ciblant des chemins coûteux. L'entreprise veut des règles gérées OWASP, une limitation par client et une protection DDoS avec accès à l'équipe de réponse AWS. Quelle combinaison choisir ?",
+  "prompt": "Une application diffusée par Amazon CloudFront subit des vagues de trafic applicatif qui saturent l'origine sans jamais atteindre le volume d'une attaque volumétrique classique. L'entreprise veut une réponse gérée, une facturation protégée contre les pics induits par l'attaque et l'accès à une équipe spécialisée pendant l'événement. Que souscrire ?",
   "choices": [
-    "CloudFront devant l'ALB, une web ACL AWS WAF avec règles gérées et rate-based rules, et AWS Shield Advanced",
-    "Un Network ACL qui autorise tous les ports et Amazon Inspector sur l'ALB",
-    "Une passerelle NAT par Région sans CloudFront",
-    "Uniquement des groupes de sécurité avec une règle par URL HTTP"
+    "AWS Shield Advanced, qui étend la protection aux ressources déclarées et ouvre l'escalade vers une équipe spécialisée pendant l'attaque",
+    "AWS Firewall Manager, qui déploie une politique commune de règles applicatives sur l'ensemble des distributions de l'organisation",
+    "Amazon GuardDuty, qui détecte les comportements réseau anormaux visés par la vague de trafic et notifie l'équipe de sécurité",
+    "AWS Network Firewall, qui inspecte les flux entrants du réseau virtuel et rejette les paquets correspondant aux signatures connues"
   ]
 }

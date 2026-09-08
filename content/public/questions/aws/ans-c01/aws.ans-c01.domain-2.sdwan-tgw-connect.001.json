@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Un fournisseur SD-WAN déploie des appliances virtuelles dans un VPC et doit échanger dynamiquement des milliers de routes avec Transit Gateway au moyen de BGP, sans créer un tunnel IPsec par site. Quel type d'attachement utiliser ?",
+  "prompt": "Une entreprise exploite une infrastructure SD-WAN dont les appliances virtuelles tournent sur des instances EC2 dans un VPC. Elle veut que ces appliances échangent leurs préfixes avec une passerelle de transit en BGP, à un débit supérieur à celui d'un tunnel IPsec unique, sans chiffrer une seconde fois un trafic déjà chiffré par le SD-WAN. Quelle mise en œuvre convient ?",
   "choices": [
-    "Un Transit Gateway Connect attachment utilisant GRE et BGP au-dessus de l'attachement de transport",
-    "Un VPC peering par agence sans BGP",
-    "Un Internet Gateway attaché directement aux appliances comme table de routage",
-    "Un interface endpoint PrivateLink pour propager les routes"
+    "Un attachement Connect de la passerelle de transit, porté par l'attachement du VPC, en GRE avec sessions BGP",
+    "Un Site-to-Site VPN vers la passerelle de transit, avec l'option de routage dynamique BGP activée",
+    "Un appairage entre le VPC des appliances et chaque VPC applicatif, les routes étant saisies à la main",
+    "Une interface virtuelle de transit Direct Connect déclarée depuis le VPC des appliances SD-WAN"
   ]
 }

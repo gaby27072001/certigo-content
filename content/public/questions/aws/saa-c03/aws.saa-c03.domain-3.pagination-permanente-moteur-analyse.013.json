@@ -10,9 +10,9 @@
   },
   "prompt": "Un moteur d'analyse en mémoire tourne sur douze instances m6i.2xlarge dotées de 32 Gio de mémoire chacune. L'ensemble de travail atteint 220 Gio et doit être intégralement présent sur un même nœud, car le moteur n'est pas distribué. Les serveurs pagineent en permanence, la latence des requêtes explose, alors que l'utilisation processeur moyenne plafonne à 18 %. Quelle correction de dimensionnement l'architecte doit-il proposer ?",
   "choices": [
-    "Doubler le nombre d'instances m6i.2xlarge derrière un répartiteur de charge et déclencher la mise à l'échelle automatique sur l'utilisation processeur.",
+    "Doubler le nombre d'instances m6i.2xlarge derrière un répartiteur de charge et déclencher la mise à l'échelle automatique sur l'utilisation processeur, afin que la charge se répartisse sur davantage de nœuds et que la pagination cesse.",
     "Migrer vers une famille d'instances optimisées pour la mémoire, par exemple r6i, dimensionnée pour contenir l'intégralité de l'ensemble de travail en mémoire, et conserver une mise à l'échelle modérée puisque le processeur n'est pas le facteur limitant.",
-    "Ajouter des volumes Amazon EBS io2 à haut débit et agrandir le fichier d'échange pour compenser le manque de mémoire.",
-    "Passer à une famille d'instances optimisées pour le calcul, par exemple c7i, afin de bénéficier d'une fréquence processeur plus élevée."
+    "Ajouter à chaque nœud des volumes Amazon EBS io2 à haut débit et agrandir sensiblement le fichier d'échange, de sorte que la pagination s'appuie sur un stockage plus rapide et que l'ensemble de travail reste joignable malgré le manque de mémoire vive.",
+    "Passer à une famille d'instances optimisées pour le calcul, par exemple c7i, afin de bénéficier d'une fréquence processeur plus élevée et d'un meilleur débit par cœur, ce qui réduira le temps de traitement de chaque requête."
   ]
 }

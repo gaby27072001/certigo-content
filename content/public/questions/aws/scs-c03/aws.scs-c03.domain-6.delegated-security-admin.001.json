@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-6"
   },
-  "prompt": "Le compte de management AWS Organizations ne doit pas servir aux opérations quotidiennes. L'entreprise veut activer GuardDuty, Security Hub et Macie dans les comptes existants et futurs, avec une équipe sécurité centrale. Quel modèle de gouvernance appliquer ?",
+  "prompt": "Une organisation veut qu'une équipe sécurité opère les services de sécurité pour tous les comptes depuis un compte dédié, sans se connecter au compte de gestion pour les tâches courantes. Elle veut aussi que la portée d'analyse couvre l'organisation entière plutôt qu'un compte isolé. Quelle approche répond à ces deux besoins ?",
   "choices": [
-    "Désigner un compte sécurité comme administrateur délégué pour chaque service et configurer l'auto-activation ou les politiques centrales sur les OU",
-    "Créer toutes les ressources de sécurité uniquement dans le compte de management",
-    "Inviter manuellement chaque compte sans utiliser Organizations",
-    "Donner les identifiants root du compte de management au SOC"
+    "Désigner le compte de sécurité comme administrateur délégué des services concernés, ce qui lui permet d'opérer et d'analyser à l'échelle de l'organisation",
+    "Accorder à l'équipe sécurité un rôle intercompte dans le compte de gestion, assumable uniquement après une authentification multifacteur validée",
+    "Déplacer les services de sécurité dans une unité d'organisation dédiée, ce qui transfère leur administration au compte racine de cette unité",
+    "Partager les ressources de sécurité vers le compte dédié avec AWS Resource Access Manager, ce qui délègue leur administration à l'équipe sécurité"
   ]
 }

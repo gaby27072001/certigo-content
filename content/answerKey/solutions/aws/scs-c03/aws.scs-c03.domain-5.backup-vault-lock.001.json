@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-5"
   },
-  "correct": "AWS Backup Vault Lock en mode conformité dans un coffre de sauvegarde séparé, avec politiques de copie intercompte",
-  "rationale": "En mode conformité, Vault Lock impose une conservation WORM après la période de grâce et ne peut plus être modifié ou supprimé, même par un administrateur. La copie intercompte réduit le blast radius du compte de production. Un tag ou une alerte ne constitue pas un contrôle d'immuabilité."
+  "correct": "Le verrou est définitif, mais un coffre devenu vide reste supprimable, ce qui n'aide pas tant qu'il contient des points de récupération",
+  "rationale": "Après la période de grâce, le verrou en mode conformité ne peut être retiré ni par un administrateur, ni par l'utilisateur racine, ni par AWS ; en revanche un coffre vide reste supprimable, ce qui ne résout pas le cas décrit puisque le coffre contient encore des points de récupération soumis à la rétention. Affirmer que l'utilisateur racine conserve un droit d'assouplissement contredit la nature du mode conformité. Une demande à l'assistance ne peut pas davantage lever un verrou dont l'immuabilité est le but. La quatrième formulation est exacte sur l'immuabilité mais fausse en affirmant que le coffre lui-même resterait indestructible en toute circonstance. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain5.html ; https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html"
 }

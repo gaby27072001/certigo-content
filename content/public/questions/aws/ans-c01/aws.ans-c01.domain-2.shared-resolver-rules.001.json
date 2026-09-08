@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "prompt": "Une équipe réseau centrale doit implémenter la résolution de domaines sur site pour 60 VPC de comptes membres, sans déployer un outbound Resolver endpoint par VPC. Quelle mise en œuvre est correcte ?",
+  "prompt": "Une équipe réseau centrale doit permettre à soixante VPC, répartis sur des comptes membres, de résoudre les domaines internes hébergés par les serveurs DNS du centre de données. Elle ne veut pas déployer un endpoint sortant Route 53 Resolver dans chacun de ces VPC. Quelle mise en œuvre atteint ce résultat ?",
   "choices": [
-    "Déployer des Route 53 Resolver outbound endpoints dans un VPC réseau, créer des forwarding rules et partager les règles avec les comptes via AWS RAM",
-    "Partager directement les adresses link-local du résolveur VPC entre Régions",
-    "Créer une private hosted zone du même nom dans chaque VPC sans enregistrement",
-    "Utiliser un NAT Gateway comme serveur DNS faisant autorité"
+    "Déclarer les adresses des serveurs DNS du centre de données dans le jeu d'options DHCP de chaque VPC",
+    "Créer des endpoints sortants centraux et partager les règles de transfert par AWS Resource Access Manager",
+    "Créer dans chaque VPC une zone hébergée privée portant le nom du domaine interne du site",
+    "Associer les soixante VPC à une zone hébergée privée unique détenue par le compte central"
   ]
 }

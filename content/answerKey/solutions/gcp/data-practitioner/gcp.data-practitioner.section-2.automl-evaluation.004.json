@@ -9,5 +9,9 @@
     "objective": "section-2"
   },
   "correct": "Conserver un jeu d'évaluation, examiner les métriques avec ML.EVALUATE, puis utiliser ML.PREDICT si elles sont acceptables",
-  "rationale": "Un jeu distinct et ML.EVALUATE permettent de mesurer la généralisation avant l'inférence avec ML.PREDICT. Évaluer sur les données d'entraînement donne une estimation biaisée, la présentation dans Looker ne mesure pas la qualité prédictive et un réentraînement par ligne empêche une validation contrôlée."
+  "rationale": "Un jeu distinct et ML.EVALUATE permettent de mesurer la généralisation avant l'inférence avec ML.PREDICT. Évaluer sur les données d'entraînement donne une estimation biaisée, la présentation dans Looker ne mesure pas la qualité prédictive et un réentraînement par ligne empêche une validation contrôlée.",
+  "provenance": [
+    "https://cloud.google.com/bigquery/docs/evaluate-overview",
+    "https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict"
+  ]
 }

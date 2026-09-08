@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "correct": "Faire confiance au compte AWS précis du fournisseur et exiger dans la politique de confiance un ExternalId unique fourni pour ce client",
-  "rationale": "La confiance limite qui peut appeler AssumeRole, et l'ExternalId unique prouve que le fournisseur agit pour le bon client dans un modèle mutualisé. Un nom de rôle ou une adresse IP ne protège pas l'appel STS contre le confused deputy. Des identifiants root ne doivent jamais être distribués."
+  "correct": "Un identifiant externe unique par client, imposé comme condition dans la politique de confiance du rôle assumé par l'éditeur",
+  "rationale": "L'identifiant externe traite précisément le problème du député confus : chaque client impose une valeur qui lui est propre dans la condition de la politique de confiance, de sorte qu'un tiers ne peut pas amener l'éditeur à utiliser son accès sur le périmètre d'un autre client. Exiger une authentification multifacteur suppose un opérateur humain, alors que l'éditeur agit par automatisme. Réduire la durée de session limite la fenêtre d'exposition d'un identifiant volé sans empêcher la confusion de périmètre. Restreindre les adresses sources filtre l'origine réseau, mais toutes les demandes de l'éditeur en proviennent, quel que soit le client concerné. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain4.html ; https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html"
 }

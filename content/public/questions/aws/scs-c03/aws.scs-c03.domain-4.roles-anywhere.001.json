@@ -8,11 +8,11 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-4"
   },
-  "prompt": "Des serveurs industriels hors AWS doivent appeler une API AWS avec des informations d'identification temporaires. Ils disposent déjà de certificats X.509 émis par une PKI privée et l'entreprise refuse les clés d'accès longues durées. Quelle solution utiliser ?",
+  "prompt": "Un parc de serveurs hébergés dans un centre de données appelle des services AWS avec des clés d'accès à longue durée de vie stockées dans un fichier de configuration. L'entreprise dispose déjà d'une infrastructure à clés publiques interne et veut supprimer ces clés sans déplacer les serveurs ni installer un agent propriétaire. Que retenir ?",
   "choices": [
-    "IAM Roles Anywhere avec un trust anchor, un profil et des rôles à privilèges minimaux",
-    "Un utilisateur IAM par serveur avec une clé sans expiration",
-    "Une URL S3 présignée valable dix ans pour toutes les API",
-    "Amazon Cognito user pools avec un mot de passe root partagé"
+    "Déclarer chaque serveur comme nœud hybride AWS Systems Manager, ce qui lui attribue un rôle de service et supprime le besoin de clés locales",
+    "Fédérer les serveurs via un fournisseur d'identité web, ce qui permet d'échanger un jeton signé contre des identifiants temporaires AWS",
+    "Provisionner un utilisateur IAM par serveur avec rotation programmée des clés, ce qui limite la fenêtre d'exposition d'un identifiant divulgué",
+    "Enregistrer l'autorité de certification interne comme ancrage de confiance IAM Roles Anywhere et présenter un certificat X.509 par serveur"
   ]
 }

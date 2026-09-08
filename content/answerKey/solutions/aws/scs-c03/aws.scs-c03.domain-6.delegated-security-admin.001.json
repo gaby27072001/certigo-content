@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-6"
   },
-  "correct": "Désigner un compte sécurité comme administrateur délégué pour chaque service et configurer l'auto-activation ou les politiques centrales sur les OU",
-  "rationale": "L'administration déléguée sépare la gouvernance de sécurité du compte de management et permet une couverture organisationnelle. Les mécanismes d'auto-activation ou de configuration centrale intègrent les nouveaux comptes de manière déterministe. Les invitations manuelles dérivent, et l'usage quotidien du root ou du compte de management augmente le risque."
+  "correct": "Désigner le compte de sécurité comme administrateur délégué des services concernés, ce qui lui permet d'opérer et d'analyser à l'échelle de l'organisation",
+  "rationale": "La désignation d'un administrateur délégué transfère l'exploitation courante d'un service de sécurité vers un compte dédié et permet d'établir une portée d'analyse couvrant l'organisation, comme le fait un analyseur d'accès externe créé au niveau de l'organisation. Accorder un rôle dans le compte de gestion maintient précisément l'usage quotidien de ce compte que l'énoncé veut éviter. Une unité d'organisation regroupe des comptes mais ne possède pas de compte racine auquel une administration pourrait être transférée. Le partage de ressources rend une ressource utilisable par un autre compte, sans lui confier l'administration du service. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/security-specialty-03/security-specialty-03-domain6.html ; https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html"
 }

@@ -8,6 +8,6 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-2"
   },
-  "correct": "Publier l'enregistrement DS généré auprès du registrar de la zone parente",
-  "rationale": "La signature de zone produit une clé de signature, mais la chaîne DNSSEC devient vérifiable seulement lorsque le digest DS est publié dans la zone parente via le registrar. Un PTR sert à la résolution inverse et les groupes de sécurité ne s'appliquent pas aux hosted zones. Supprimer les NS casserait la délégation DNS."
+  "correct": "Publier l'enregistrement de signataire de délégation dans la zone parente",
+  "rationale": "La chaîne de confiance DNSSEC se construit depuis la zone parente : tant que l'enregistrement de signataire de délégation, dérivé de la clé de signature de clé, n'est pas publié auprès du registrar, aucun résolveur validant ne peut relier la zone signée à son parent, et la signature reste sans effet pour lui. Allonger la durée de vie des enregistrements ne crée aucun lien de délégation et ne fait que ralentir la propagation des corrections. Activer la validation sur les endpoints entrants concerne la manière dont les requêtes issues du VPC sont vérifiées, ce qui est un rôle de résolveur et non de publication de la zone. Passer à des serveurs de noms personnalisés ne remplace pas la délégation signée ; AWS signale au contraire que certains fournisseurs ne répondent pas correctement aux requêtes de signataire de délégation, ce qui aggrave le problème au lieu de le corriger. Sources officielles AWS : https://docs.aws.amazon.com/aws-certification/latest/advanced-networking-specialty-01/advanced-networking-specialty-01-domain2.html ; https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html"
 }

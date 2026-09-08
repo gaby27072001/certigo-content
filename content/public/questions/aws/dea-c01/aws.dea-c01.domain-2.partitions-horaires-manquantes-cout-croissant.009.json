@@ -10,9 +10,9 @@
   },
   "prompt": "Un lac de données Amazon S3 organise ses fichiers selon un chemin de type année, mois, jour puis heure, ce qui crée vingt-quatre nouvelles partitions par jour et par jeu de données. Un crawler AWS Glue planifié toutes les heures sur le préfixe racine met de plus en plus de temps à s'exécuter, son coût augmente et les analystes constatent régulièrement que les dernières heures sont absentes de leurs requêtes Amazon Athena. La structure des chemins est parfaitement prévisible. Quelle solution supprime ce retard et cette dérive de coût ?",
   "choices": [
-    "Supprimer le partitionnement et regrouper tous les fichiers dans un préfixe Amazon S3 unique.",
-    "Réduire l'intervalle du crawler AWS Glue à cinq minutes tout en le laissant parcourir le préfixe racine complet.",
-    "Recréer la table dans le catalogue avec une instruction CREATE TABLE à chaque nouvelle heure de données.",
+    "Supprimer entièrement le partitionnement et regrouper tous les fichiers du jeu de données dans un préfixe Amazon S3 unique, sans aucune hiérarchie de dates ni d'heures.",
+    "Réduire l'intervalle d'exécution du crawler AWS Glue à cinq minutes tout en le laissant parcourir la totalité du préfixe racine du jeu de données à chacun de ses passages.",
+    "Recréer la table dans le catalogue de données avec une instruction CREATE TABLE exécutée à chaque nouvelle heure de données déposée dans le lac, puis relancer les requêtes concernées.",
     "Activer la projection de partitions sur la table du catalogue de données AWS Glue en déclarant les plages de valeurs et le modèle de chemin Amazon S3, puis supprimer l'exécution récurrente du crawler."
   ]
 }

@@ -8,6 +8,9 @@
     "blueprintVersion": "2026-08-17",
     "objective": "domain-3"
   },
-  "correct": "Utiliser Patch Manager d'AWS Systems Manager avec une base de référence de correctifs, des groupes de correctifs définis par étiquettes et des fenêtres de maintenance, puis suivre l'état via les rapports de conformité des correctifs.",
-  "rationale": "Patch Manager applique une base de référence (règles d'approbation, listes d'exclusion) aux instances regroupées par étiquettes, exécute l'analyse ou l'installation dans des fenêtres de maintenance et publie un état de conformité agrégé, y compris à l'échelle de plusieurs comptes : c'est la réponse directe aux exigences de planification et de reporting. Une intervention interactive sur des centaines d'instances n'est ni tenable ni auditable. Remplacer toute la flotte à chaque bulletin est coûteux et, sans suivi, ne démontre pas la conformité. Un redémarrage planifié par EventBridge n'installe aucun correctif par lui-même et provoque des interruptions inutiles."
+  "correct": "Utiliser Patch Manager d'AWS Systems Manager avec une base de référence des correctifs et des fenêtres de maintenance qui les installent sans intervention manuelle, puis en suivre l'état via les rapports de conformité du parc entier.",
+  "rationale": "Patch Manager applique une base de référence (règles d'approbation, listes d'exclusion) aux instances regroupées par étiquettes, exécute l'analyse ou l'installation dans des fenêtres de maintenance et publie un état de conformité agrégé, y compris à l'échelle de plusieurs comptes : c'est la réponse directe aux exigences de planification et de reporting. Une intervention interactive sur des centaines d'instances n'est ni tenable ni auditable. Remplacer toute la flotte à chaque bulletin est coûteux et, sans suivi, ne démontre pas la conformité. Un redémarrage planifié par EventBridge n'installe aucun correctif par lui-même et provoque des interruptions inutiles.",
+  "provenance": [
+    "https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html"
+  ]
 }
