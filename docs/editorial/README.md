@@ -115,6 +115,89 @@ Portee de la mesure : 4 cohortes relues au premier commit sur les 26 qui
 possedent des paires v3 a quatre choix. Les 6 certifications restantes sont en
 v2 heritee et ne sont pas mesurables ainsi.
 
+### La position se corrige par permutation pure, sans toucher un caractere
+
+Mesure du 2026-09-09 sur `microsoft:az-900`, 36 questions : **32 bonnes reponses
+en position A**, soit 88,9 % en repondant toujours A, contre un nul de 12,10
+(permutation, 3000 tirages, controle d'identite OK) — `p = 0,0003`. C'etait le
+plus gros volume exploitable du depot, sur un examen vivant.
+
+**La position est independante des trois autres axes**, et cette independance est
+structurelle, pas heureuse : `correctMatchesChoice` compare la chaine `correct`
+a l'ENSEMBLE des `choices` (`.some(choice === correct)`), sans jamais consulter
+d'index. Les 36 `answerKey` de la cohorte stockent bien `correct` comme une
+**chaine**, jamais comme un index — verifie, pas suppose.
+
+> **Reordonner le tableau `choices` du fichier public suffit.** L'`answerKey`
+> n'est pas touche, aucun texte n'est modifie, donc ni le rang, ni le ratio, ni
+> le Jaccard, ni le lexique ne peuvent bouger.
+
+Verifie apres ecriture, en comparant chaque grandeur avant/apres : rang, ratio,
+distinction, multiensemble des longueurs, textes tries, `intrus`, `inverse` et
+les seize familles lexicales — **toutes identiques**, `sim_leak` inchange a
+`intrus=0.250 / inverse=0.273`. Corroboration independante : le `manifestId`
+**prive** est reste identique, ce qui ne serait pas le cas si un `answerKey`
+avait bouge.
+
+Deux precautions, chacune ayant deja servi :
+
+- **Chercher les ordres contraints avant de permuter** (« toutes les reponses
+  ci-dessus », progression chronologique, echelle croissante). Zero sur cette
+  cohorte, mais mesure avec un detecteur a temoin positif, pas suppose. Motifs
+  accent-safe obligatoires : `\b` se definit sur `[A-Za-z0-9_]` et ne peut pas
+  encadrer `premiere`.
+- **Preserver la fin de ligne du fichier.** `core.autocrlf=true` laisse des CRLF
+  dans le repertoire de travail ; reserialiser en LF change 18 octets par
+  fichier sans changer un caractere de contenu, et noie la correction reelle.
+
+Resultat : `32/2/2/0 -> 9/9/9/9`, soit **25,0 % exactement**, la valeur du nul.
+Conformement a la regle des deux directions, la cible n'etait pas « zero en A ».
+
+**Le peage n'a pas ete paye, et c'est delibere.** Les deux autres axes de cette
+cohorte sont au taux de base — rangs `13/9/4/10`, `p = 0,459` ; ratio hors bande
+29/36, `p = 0,257`. Aucun n'est exploitable, et les fermer imposerait de
+reecrire 32 questions dont une quinzaine ont pour bonne reponse un **nom propre
+de service de longueur fixe** (`Azure Arc` 9, `Microsoft Entra Conditional
+Access` 34). Un premier solveur, qui ne modelisait que l'arithmetique, a propose
+de ramener ce dernier a 13-16 caracteres : **aucun controle numerique n'attrape
+cette erreur-la**. Le registre de dette garde donc ses 32 entrees.
+
+Trois raisons de ne pas le payer, dans cet ordre : deux axes au taux de base ne
+sont pas des defauts mais des mesures qui ne disent rien ; les fermer detruirait
+des noms de services, et un corpus « nommez le service » ou le nom est faux vaut
+moins qu'un corpus desequilibre sur un axe non exploitable ; enfin le risque est
+**asymetrique**, puisque `sim_leak` est deja a `0.250` exactement — au nul, donc
+sans marge de progression et avec toute la marge de degradation.
+
+### Etat de cette cohorte, a lire avant d'y toucher
+
+> **La position est CORRIGEE (`9/9/9/9`, 25,0 %) et elle n'est PAS GARDEE.**
+>
+> Les deux gardes de cohorte sont conditionnees a `exemptCount === 0`, et les
+> **32 entrees `microsoft:az-900` restent au registre jusqu'au 2026-11-30**.
+> Tant qu'elles y sont, une regression de position sur cette cohorte **ne serait
+> pas detectee** : `npm run validate` rendra vert sans avoir rien lu de cet axe.
+
+**Ce n'est pas une deduction, c'est un controle positif.** Les 36 questions ont
+ete temporairement remises en position A — `36/0/0/0`, soit le pire cas
+possible, 100 % exploitable sans lire l'enonce — puis restaurees :
+
+    npm run validate   ->  exit 0
+    « OK - ... equilibre editorial et anti-fuite valides. »
+
+Le validateur declare l'equilibre **valide** sur un corpus integralement
+exploitable. Un vert n'est donc pas une mesure sur cet axe tant que le registre
+porte une entree.
+
+C'est un arbitrage assume, pas un oubli — l'alternative etait une reecriture
+massive d'un corpus de noms propres pour fermer deux axes qui ne fuient pas.
+Deux consequences pratiques pour la session qui reprendra ce dossier :
+
+- **Ne pas relire un `validate` vert comme une preuve** que `9/9/9/9` tient
+  encore. Le verifier en mesurant, avec un instrument a plancher de lecture.
+- **A l'echeance du registre**, l'ordre impose reste « vider puis valider » — et
+  vider exige d'avoir tranche le peage, pas seulement de retirer des lignes.
+
 ## Le residu mesure, et pourquoi il n'est pas corrige
 
     node tools/audit_answer_leak.mjs <provider> <slug>
