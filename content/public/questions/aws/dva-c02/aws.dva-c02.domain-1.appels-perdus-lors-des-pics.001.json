@@ -12,7 +12,7 @@
   "choices": [
     "Intercepter l'exception de limitation de débit dans le microservice écrit en Python et renvoyer immédiatement une erreur 500 au client, en précisant dans le contrat de l'API que l'appelant doit relancer lui-même l'opération métier perdue lors des pics observés.",
     "Remplacer les appels du SDK AWS par des requêtes HTTP signées directement avec Signature Version 4 et les répartir sur plusieurs points de terminaison, afin que les limites de débit imposées par Amazon DynamoDB soient évaluées séparément pour chaque signature émise par le microservice écrit en Python.",
-    "Configurer la stratégie de nouvelles tentatives du SDK (mode standard ou adaptatif, nombre maximal de tentatives) pour réessayer les erreurs limitées avec un retrait exponentiel et de la gigue, rendre l'écriture idempotente, puis émettre une métrique lorsque les tentatives sont épuisées.",
+    "Configurer la stratégie de nouvelles tentatives du SDK (mode standard ou adaptatif) pour que le microservice écrit en Python réessaie l'exception de limitation de débit avec un retrait exponentiel et de la gigue, et rendre l'écriture idempotente afin que l'opération métier ne soit pas perdue.",
     "Entourer l'appel d'une boucle qui relance l'opération toutes les 50 millisecondes, sans limite de tentatives ni gigue, jusqu'à ce que le service cesse de renvoyer l'exception de limitation de débit et que l'opération métier finisse par aboutir sans perte."
   ]
 }

@@ -231,6 +231,15 @@ export function chargerCorpus(racine, corpus) {
     if (i < 0) throw new Error(`${e.nom}: reponse correcte introuvable parmi les choix`);
     out.push({
       fichier: e.nom,
+      id: q.id ?? e.nom,
+      // `choix` et `index` conservent la FORME de la question (ordre des
+      // options, position de la bonne reponse). La fuite lexicale ne s'en sert
+      // pas, mais les axes position / rang de longueur ne peuvent pas etre
+      // mesures sans eux — et tools/audit_answer_leak.mjs portait son propre
+      // chargeur, cable sur la seule disposition imbriquee, donc aveugle aux
+      // 146 questions Azure a plat. Un seul chargeur, deux dispositions.
+      choix,
+      index: i,
       bonne: choix[i],
       distracteurs: choix.filter((_, j) => j !== i),
     });

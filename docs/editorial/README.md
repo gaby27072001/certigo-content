@@ -22,6 +22,41 @@ La question qui compte n'est donc pas « le corpus est-il separable » — un
 classifieur a onze traits n'est pas un apprenant — mais « quelqu'un qui ignore
 la matiere peut-il faire mieux que le hasard ».
 
+## La cible est le nul, jamais le minimum
+
+Cette regle-ci porte sur **tous** les axes, presents et futurs. Elle a ete
+formulee apres avoir failli etre enfreinte avec l'avertissement sous les yeux.
+
+> **Un axe de fuite a deux directions. Le porter a zero maximise l'autre. La
+> cible est la valeur du nul — calculee, pas devinee — et un axe « parfait » a 0
+> doit etre traite comme un axe casse.**
+
+Le cas mesure. Sur `aws:dva-c02`, douze des vingt bonnes reponses etaient
+l'option la moins semblable aux trois autres ; « prends celle qui detonne »
+rendait 0.600 contre un nul de 0.250. Corriger **les douze** fait tomber ce taux
+a **0.000** — et 0.000 n'est pas la disparition de la fuite, c'est l'affirmation
+« la bonne reponse n'est JAMAIS l'intrus ». La regle inverse — ecarter l'option
+qui detonne, choisir parmi les trois autres — rend alors **1/3 = 0.333**, au
+dessus du nul. On aurait remplace une fuite par sa symetrique.
+
+Sept ont donc ete corrigees et cinq laissees, ce qui place les deux strategies a
+0.250. Les cinq laissees sont celles dont la marge est la plus faible : a un
+ecart de 0.014, la difference n'est pas percevable, donc pas exploitable.
+
+**Ce principe explique retroactivement le bareme de longueur.** La cible des
+rangs est `5/5/5/5`, et non `0/0/0/20` renverse en `20/0/0/0` : « la bonne
+reponse n'est jamais la plus longue » se joue de tete aussi bien que l'inverse.
+L'equilibrage y etait applique **sans que le principe soit nomme** — et faute de
+l'avoir nomme, il a failli etre enfreint sur le quatrieme axe.
+
+Consequences operationnelles, a tenir sur tout axe neuf :
+
+    mesurer les DEUX directions      un instrument qui n'en mesure qu'une
+                                     laisse livrer son extreme oppose
+    calculer le nul, ne pas le fixer  0.250 ici se demontre ; ailleurs il
+                                     s'obtient par permutation
+    lire un 0.000 comme une alarme    au meme titre qu'un 1.000
+
 ## Les deux axes corriges, et ou ils sont controles
 
 | Axe | Exploitable de tete | Controle dans le depot |
@@ -43,6 +78,12 @@ operationnelle :
 > Un `npm run validate` vert **avant** le retrait des entrees ne prouve rien sur
 > l'axe des rangs. C'est le retrait qui allume le controle. L'ordre est donc
 > impose : retrait d'abord, validation ensuite.
+
+**Ce barème peut en fabriquer un autre.** Satisfaire le rang en allongeant les
+distracteurs les rapproche les uns des autres et isole la bonne reponse, ce qui
+ouvre un quatrieme axe exploitable. La borne qui l'empeche est dans
+[Quatrieme axe : la similarite entre options](#quatrieme-axe--la-similarite-entre-options-que-le-bareme-de-longueur-peut-fabriquer),
+et elle doit etre lue **avant** d'entamer une remediation de rangs.
 
 ### D'ou vient le desequilibre : mesure, et non reconstitution
 
@@ -417,6 +458,119 @@ D'ou les trois exigences appliquees ici, toutes trois presentes dans
 
 Le troisieme est le moins cher : les deux premiers rattrapent un resultat faux
 **apres** l'avoir produit, l'autotest empeche qu'il existe.
+
+## Quatrieme axe : la similarite entre options, que le bareme de longueur peut fabriquer
+
+Les trois premiers axes decrivent chacun **une** option isolement : ou elle est,
+combien elle mesure, quels mots elle porte. Celui-ci decrit une option
+**relativement aux trois autres**.
+
+Quand trois distracteurs reformulent l'enonce avec son propre vocabulaire, ils
+deviennent semblables **entre eux**, et la bonne reponse — qui nomme un
+mecanisme different avec des mots neufs — devient l'intrus. La regle « prends
+celle qui detonne » s'execute alors sans lire l'enonce. C'est bien la regle
+d'arret de cette note : exploitable de tete, donc a corriger.
+
+### L'incident : reparer un axe en cassant un autre
+
+`aws:dva-c02` partait de rangs `0/0/0/20` — dans les vingt questions, la bonne
+reponse etait la plus longue. Atteindre `5/5/5/5` imposait d'allonger les
+distracteurs **au-dela** des bonnes reponses, donc massivement, donc tous avec
+le seul materiau disponible : l'enonce.
+
+| etat | rangs de longueur | taux « choisis l'intrus » |
+| --- | --- | --- |
+| avant `febae1f` (#78) | `0/0/0/20` | 0.175 — **sous le nul** |
+| apres `febae1f` (#78) | `5/5/5/5` | **0.600**, p = 0.0005 |
+
+L'axe des rangs a ete reellement repare. Un autre a ete ouvert dans le meme
+mouvement, et **aucun controle du depot ne pouvait le voir** : il est ne de la
+correction elle-meme.
+
+### Le contre-exemple, qui interdit d'en tirer la mauvaise lecon
+
+Il serait faux de conclure « allonger avec le vocabulaire de l'enonce cause une
+fuite » et de retirer la methode. `aws:aip-c01` a subi la meme campagne, rangs
+`0/2/13/9 -> 6/6/6/6`, donc un allongement massif au vocabulaire de l'enonce —
+et son taux **baisse** de 0.188 a 0.146.
+
+Sur les seize corpus modifies apres leur creation, mesures un par un contre le
+parent de chaque commit : **un seul a regresse**, treize sont sains, trois se
+sont ameliores.
+
+> Ce n'est pas la methode qui casse, c'est le **cas extreme du bareme**. Un
+> corpus a `0/0/0/20` n'a aucune marge : il faut deplacer les quatre options.
+> Un corpus deja proche de l'equilibre se retouche par petites corrections.
+
+### La borne
+
+> **Ne pas allonger un distracteur au-dela de ce que le bareme exige.**
+>
+> **Quand la bonne reponse doit descendre en rang, faire descendre la BONNE
+> REPONSE plutot que monter les trois distracteurs** — une option a retoucher au
+> lieu de trois.
+>
+> **La bonne reponse doit parler du probleme avec les mots du probleme**, pas
+> seulement nommer sa solution. Reintroduire dans la bonne reponse le
+> vocabulaire de l'enonce que les distracteurs portent deja est ce qui la ramene
+> dans le peloton au lieu de l'en isoler.
+
+L'arithmetique suffit a justifier la borne, sans rien supposer du vocabulaire :
+**monter trois options les rapproche toutes du meme materiau ; descendre une
+option n'en rapproche aucune.** Le risque est dans le NOMBRE d'options touchees.
+
+### Le mecanisme : substituer, ne pas ajouter
+
+La borne dit quoi ne pas faire ; voici comment faire. Quand les rangs sont deja
+equilibres et **gardes**, la marge de longueur est nulle : ajouter des mots a la
+bonne reponse la ferait changer de rang et rouvrirait l'axe qu'on vient de
+fermer. La reecriture doit donc se faire **a longueur quasi constante**.
+
+> **Echanger un mot propre a la bonne reponse contre un mot que les distracteurs
+> portent deja fait -1 sur l'union et +1 sur l'intersection.** C'est l'edition la
+> plus efficace a longueur egale — deux fois plus qu'un simple ajout, qui ne
+> bouge que l'intersection.
+
+`tools/sim_cible.mjs` calcule, pour chaque question, l'intervalle de longueurs
+qui preserve **a la fois** le rang et le ratio, et nomme le vocabulaire porte par
+au moins deux distracteurs et absent de la bonne reponse. Sur `dva-c02`, neuf des
+douze premieres redactions sont sorties de cet intervalle et ont ete **refusees
+avant ecriture**.
+
+C'est la seule parade de ce programme qui agisse **avant** la redaction plutot
+qu'apres la mesure — meme famille que l'autotest de motif, applique a l'edition.
+
+### Le controle d'arret
+
+    node tools/sim_delta.mjs
+
+> Pour le corpus touche : **delta < 0.15**, **ou** niveau d'arrivee **<= 0.250**.
+
+Le `ou` n'est pas une facilite. `gcp:cloud-engineer` bouge de +0.200 et arrive a
+0.225 : il est repasse **sous** le nul, il n'offre aucune prise. Un delta seul ne
+fait pas une fuite — il faut un mouvement franc **et** un niveau d'arrivee
+exploitable. L'objectif est de revenir sous le nul, pas de descendre
+indefiniment.
+
+### Le nul vaut exactement 0.250, et c'est demontrable
+
+Le vecteur de similarite ne depend que des textes : permuter l'etiquette
+« celle-ci est la bonne » ne le change pas. Pour une question dont l'argmin
+compte `k` ex aequo, la strategie repartit `1/k` sur `k` options, donc
+`P(succes) = k x 1/4 x 1/k = 1/4`, **quel que soit `k`**.
+
+C'est la seule des quatre mesures dont le nul soit exact plutot qu'estime : une
+ligne est donc interpretable seule, sans reference figee. La garde reste
+neanmoins **differentielle** — un seuil absolu rougirait sur des dettes
+anterieures qui n'ont rien regresse, et une garde rouge en permanence dresse a
+passer outre.
+
+### La marge, sans laquelle le taux ment
+
+Un ecart de similarite de 0.001 n'est pas une regle qu'un humain execute.
+`tools/sim_leak.mjs` rend donc la marge — deuxieme plus petite similarite moins
+la plus petite — a cote du taux. Sur `dva-c02` la marge mediane vaut 0.034 et
+aucune des vingt questions n'a de marge nulle : ce n'est pas un effet d'arrondi.
 
 ## Pourquoi le processus ne converge pas de lui-meme
 
