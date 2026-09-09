@@ -225,7 +225,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 
   assert.deepEqual(aws, expectedAws);
   assert.deepEqual(gcp, expectedGcp);
-  assert.equal(catalog.asOf, "2026-08-31");
+  assert.equal(catalog.asOf, "2026-09-08");
   assert.ok(aws.includes("aws:aip-c01"));
   assert.ok(!aws.includes("aws:mls-c01"));
 
@@ -383,7 +383,11 @@ test("applique automatiquement la date de retrait ANS-C01 a l'inventaire actif",
     false
   );
 
-  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-31" });
+  // Date de controle derivee du snapshot, non figee : une date anterieure a
+  // catalog.asOf declenche "date de controle anterieure au snapshot" et fait
+  // echouer ce test pour une raison etrangere a ce qu'il mesure. La derivation
+  // survit aux avances de snapshot.
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: catalog.asOf });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:ans-c01"));
   assert.ok(current.recommendedCertificationIds.includes("aws:ans-c01"));
@@ -418,7 +422,11 @@ test("applique les bornes linguistiques de transition MLA-C01", () => {
   assert.equal(isCertificationActiveOn(mla, "2027-01-13"), true);
   assert.equal(isCertificationActiveOn(mla, "2027-01-14"), false);
 
-  const current = checkCatalogFreshness({ root: repoRoot, asOf: "2026-09-04" });
+  // Meme raison qu'au-dessus : derive du snapshot, jamais figee. Couplage a
+  // connaitre : cette assertion tient tant que catalog.asOf reste au plus tard
+  // le 2026-09-28, borne recommendThrough de MLA-C01. Une avance de snapshot
+  // au-dela la fera echouer, et ce sera un vrai signal, pas un artefact.
+  const current = checkCatalogFreshness({ root: repoRoot, asOf: catalog.asOf });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:mla-c01"));
   assert.ok(current.recommendedCertificationIds.includes("aws:mla-c01"));
@@ -514,9 +522,19 @@ test("distingue peremption des sources et silence de cycle de vie", () => {
     "l'entree temoin doit etre soumise a la gate de transition"
   );
 
+  // Snapshot fixe sur la copie : sans cela le test herite de catalog.asOf du
+  // depot, et une avance de snapshot rend ses dates de controle anterieures au
+  // snapshot, ce qui le fait echouer pour une raison etrangere a son objet.
+  catalog.asOf = "2026-08-17";
+  catalog.freshness = { ...catalog.freshness, reviewDueOn: "2026-09-16" };
+
   // Muette par construction, et perimee au 2026-09-17 (31 jours).
   delete target.lifecycle;
   target.provenance.checkedOn = "2026-08-17";
+  for (const certification of catalog.certifications) {
+    if (certification.id === target.id) continue;
+    certification.provenance.checkedOn = "2026-09-16";
+  }
   writeJson(catalogAt(root), catalog);
 
   mkdirSync(resolve(root, "config"), { recursive: true });
@@ -526,7 +544,7 @@ test("distingue peremption des sources et silence de cycle de vie", () => {
   });
 
   // Avant toute expiration : gate verte.
-  const today = checkCatalogFreshness({ root, asOf: "2026-09-05" });
+  const today = checkCatalogFreshness({ root, asOf: "2026-08-31" });
   assert.deepEqual(today.errors, []);
 
   // Apres expiration ET peremption : les DEUX motifs remontent, distincts.
@@ -637,9 +655,25 @@ test("un fichier d'exemptions absent ne vaut pas exemption", () => {
 });
 
 test("detecte catalogue stale, date invalide et catalogue absent", () => {
-  const stale = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-01" });
+  // Dates derivees du snapshot, jamais figees : "stale" est le lendemain de la
+  // revue exigee, "anterieure" la veille du snapshot. Des constantes se
+  // perimeraient a chaque avance de catalog.asOf et feraient echouer ce test
+  // pour une raison etrangere a ce qu'il mesure.
+  const catalog = readJson(catalogAt(repoRoot));
+  const dayAfter = (date) =>
+    new Date(Date.parse(date) + 86_400_000).toISOString().slice(0, 10);
+  const dayBefore = (date) =>
+    new Date(Date.parse(date) - 86_400_000).toISOString().slice(0, 10);
+
+  const stale = checkCatalogFreshness({
+    root: repoRoot,
+    asOf: dayAfter(catalog.freshness.reviewDueOn),
+  });
   assert.ok(stale.errors.some((error) => error.includes("snapshot age")));
-  const before = checkCatalogFreshness({ root: repoRoot, asOf: "2026-08-30" });
+  const before = checkCatalogFreshness({
+    root: repoRoot,
+    asOf: dayBefore(catalog.asOf),
+  });
   assert.ok(before.errors.some((error) => error.includes("anterieure")));
   assert.throws(() => parseDate("2026-02-30", "test"), /date invalide/);
   assert.throws(() => parseDate("17-08-2026", "test"), /YYYY-MM-DD/);

@@ -602,3 +602,35 @@ semantique. Mesure du 2026-09-08 avec `asOf` porte au 2026-10-08 : `validate`
 et `runtime:check` restent verts, 903 ressources, 0 divergence, aucun fichier
 perdu — mais le `manifestId` public change, puisque le catalogue est lui-meme
 empaquete.
+
+### Un invariant reel, et non garde
+
+`freshness.reviewDueOn` vaut `asOf + freshness.maxAgeDays`. Verifie sur les
+seize revisions du catalogue et sur **deux paires de valeurs distinctes** —
+`2026-08-17 + 30 = 2026-09-16`, puis `2026-08-31 + 30 = 2026-09-30`. Une seule
+paire serait une coincidence ; deux paires independantes en font une relation.
+
+Consequence : avancer `asOf` **impose** d'avancer `reviewDueOn` d'autant. Ce
+n'est pas un arbitrage de politique, c'est la preservation d'un invariant
+existant.
+
+> **Rien ne verifie cette relation.** Elle tient parce que des redacteurs
+> successifs l'ont respectee. Le prochain qui avance `asOf` sans avancer
+> `reviewDueOn` obtiendra un verrou qui mord a une date arbitraire, plus tot
+> que prevu, et **aucun controle ne l'en avertira** : une valeur perimee vers
+> le bas n'emet rien, elle se contente de declencher trop tot.
+
+Le controle actuel declenche sur un **OU** des deux conditions, donc il ne peut
+pas detecter la rupture : la condition la plus stricte des deux masque l'autre.
+Un garde utile porterait sur l'egalite elle-meme, pas sur ses effets.
+
+### Les dates de controle des tests se derivent, elles ne se figent pas
+
+Corollaire operationnel, mesure le 2026-09-08 : avancer `asOf` de sept jours a
+fait echouer **six tests** qui figeaient une date de controle « verte »
+anterieure au nouveau snapshot, et qui remontaient alors `date de controle
+anterieure au snapshot` — un motif etranger a ce que chacun mesurait.
+
+Ces tests derivent desormais leur date de `catalog.asOf` ou de
+`freshness.reviewDueOn`. Un test qui a besoin d'un snapshot precis fixe le sien
+sur sa copie synthetique plutot que d'heriter de celui du depot.

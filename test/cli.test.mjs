@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { afterEach, test } from "node:test";
@@ -55,10 +55,16 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
 });
 
 test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
-  const current = execute("check_catalog_freshness.mjs", [
-    "--as-of",
-    "2026-08-31",
-  ]);
+  // Date derivee du snapshot du catalogue : une constante anterieure a
+  // catalog.asOf declencherait "date de controle anterieure au snapshot" et
+  // ferait echouer ce test a chaque avance de snapshot.
+  const catalogAsOf = JSON.parse(
+    readFileSync(
+      resolve(repoRoot, "content", "public", "catalog", "certifications.json"),
+      "utf8"
+    )
+  ).asOf;
+  const current = execute("check_catalog_freshness.mjs", ["--as-of", catalogAsOf]);
   assert.equal(current.status, 0, current.stderr);
   assert.match(current.stdout, /actifs=31/);
 
