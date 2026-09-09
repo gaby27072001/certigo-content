@@ -9,5 +9,5 @@
     "objective": "section-1"
   },
   "correct": "Redondance GRS, niveau Archive",
-  "rationale": "Survivre à la perte d'une **région** impose une redondance **géo-redondante** (GRS ou GZRS) — LRS et ZRS restent dans une seule région. Pour des données rares conservées longtemps au coût minimal, le niveau **Archive** est le bon choix. D'où GRS + Archive."
+  "rationale": "Survivre à la perte d'une **région** impose une redondance **géo-redondante** (GRS ou GZRS) — LRS reste dans une seule région. Pour des données rares conservées longtemps au coût minimal, le niveau **Archive** est le bon choix : GZRS en niveau Chaud survivrait bien à la panne, mais coûterait beaucoup plus cher. D'où GRS + Archive."
 }
