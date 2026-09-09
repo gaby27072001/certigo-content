@@ -47,9 +47,15 @@ function certProvider(certificationId) {
 
 function runtimeLifecycle(certification) {
   if (certification.status === "retired") {
+    // Un examen retire doit pouvoir nommer son successeur : sans `replacedBy`,
+    // la ressource dit au candidat que l'examen est mort sans lui donner d'ou
+    // aller. Le catalogue connait le successeur ; on le propage.
     return {
       status: "retired",
       retiredOn: certification.lifecycle.lastExamOn,
+      ...(certification.lifecycle.successor
+        ? { replacedBy: certification.lifecycle.successor }
+        : {}),
     };
   }
   if (certification.status === "replaced") {

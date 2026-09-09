@@ -22,6 +22,7 @@ import {
   sha256Hex,
 } from "./gen_manifest.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
+import { isCertificationRecommendedOn } from "./lib/catalog.mjs";
 import {
   CONTENT_MODE,
   detectContentMode,
@@ -64,6 +65,54 @@ const FORBIDDEN_PUBLIC_KEYS = new Set([
   "explanation",
   "rationale",
 ]);
+
+const CATALOG_SOURCE_PATH = "content/public/catalog/certifications.json";
+
+/**
+ * Certification portee par une ressource, quel que soit son type. Renvoie null
+ * quand la ressource n'appartient a aucune certification (le catalogue) ou
+ * quand elle ne la declare pas (paires v2 heritees, sans bloc `metadata`) :
+ * une ressource non identifiable n'est jamais exclue, pour que les corpus
+ * historiques restent reconstructibles a l'identique (ADR-0002).
+ */
+function certificationOfResource(resourceType, data) {
+  if (resourceType === "certificationCatalog") return null;
+  if (resourceType === "coverageMatrix") return data.certification ?? null;
+  if (resourceType === "question" || resourceType === "solution") {
+    const metadata = data.metadata;
+    if (metadata === null || Array.isArray(metadata) || typeof metadata !== "object") {
+      return null;
+    }
+    return metadata.certification ?? null;
+  }
+  return data.certificationId ?? null;
+}
+
+/**
+ * Porte de livraison. Une certification qui n'est plus recommandee a la date
+ * d'evaluation du catalogue ne part plus dans les artefacts : servir un corpus
+ * au-dela de son `recommendThrough`, c'est faire preparer un examen qu'on
+ * deconseille de passer. La regle est datee et pilotee par le catalogue, donc
+ * reversible en changeant une date, et elle s'applique aux DEUX canaux pour que
+ * la correspondance un-a-un entre questions publiques et corriges soit
+ * preservee dans les artefacts.
+ */
+function buildDeliveryGate(root) {
+  const catalogPath = resolve(root, CATALOG_SOURCE_PATH);
+  if (!existsSync(catalogPath)) return { asOf: null, excluded: new Map() };
+  const catalog = loadJson(catalogPath);
+  const excluded = new Map();
+  for (const certification of catalog.certifications ?? []) {
+    if (isCertificationRecommendedOn(certification, catalog.asOf)) continue;
+    excluded.set(certification.id, {
+      certification: certification.id,
+      status: certification.status ?? null,
+      recommendThrough: certification.lifecycle?.recommendThrough ?? null,
+      successor: certification.lifecycle?.successor ?? null,
+    });
+  }
+  return { asOf: catalog.asOf, excluded };
+}
 
 function toPosix(path) {
   return path.replaceAll("\\", "/");
@@ -484,6 +533,8 @@ export function verifyArtifact({
 
 async function writeArtifact(root, distRoot, config, mode) {
   const artifactRoot = resolve(distRoot, config.name);
+  const gate = buildDeliveryGate(root);
+  const excludedByCertification = new Map();
   const sourceFiles = [];
   for (const pattern of sourceGlobsForChannel(mode, config.manifestChannel)) {
     sourceFiles.push(...await glob(pattern, { cwd: root, posix: true }));
@@ -497,6 +548,16 @@ async function writeArtifact(root, distRoot, config, mode) {
     const resourceType = resourceTypeFromArtifactPath(relativeSourcePath);
     if (resourceType === null) {
       throw new Error(`[package] type de ressource inconnu: ${sourcePath}`);
+    }
+    const certification = certificationOfResource(resourceType, data);
+    if (certification !== null && gate.excluded.has(certification)) {
+      const tally = excludedByCertification.get(certification) ?? {
+        ...gate.excluded.get(certification),
+        fileCount: 0,
+      };
+      tally.fileCount++;
+      excludedByCertification.set(certification, tally);
+      continue;
     }
     const outputPath = expectedArtifactPath({
       artifact: config.name,
@@ -529,7 +590,33 @@ async function writeArtifact(root, distRoot, config, mode) {
   manifestFiles.sort((a, b) => compareOrdinal(a.path, b.path));
   const manifest = buildManifest(config, manifestFiles, mode);
   writeFileSync(resolve(artifactRoot, "manifest.json"), serializePretty(manifest), "utf8");
-  return artifactRoot;
+
+  // La porte doit rester BRUYANTE. Une exclusion silencieuse ferait fondre des
+  // dizaines de fichiers sans trace, et le mode d'echec dangereux de ce depot
+  // est precisement celui qui ne dit rien.
+  const exclusions = [...excludedByCertification.values()].sort((left, right) =>
+    compareOrdinal(left.certification, right.certification)
+  );
+  const excludedFileCount = exclusions.reduce(
+    (total, entry) => total + entry.fileCount,
+    0
+  );
+  if (exclusions.length > 0) {
+    console.warn(
+      `[package] ${config.name}: ${excludedFileCount} fichier(s) EXCLU(S) de la livraison — ` +
+        `${exclusions.length} certification(s) non recommandee(s) au ${gate.asOf}`
+    );
+    for (const entry of exclusions) {
+      console.warn(
+        `[package]   - ${entry.certification}: ${entry.fileCount} fichier(s)` +
+          ` [statut ${entry.status ?? "inconnu"}` +
+          `, recommendThrough ${entry.recommendThrough ?? "aucun"}` +
+          `, successeur ${entry.successor ?? "aucun"}]`
+      );
+    }
+  }
+
+  return { artifactRoot, deliveryGate: { asOf: gate.asOf, excludedFileCount, exclusions } };
 }
 
 export async function verifyPackagedContent(options = {}) {
@@ -599,8 +686,10 @@ export async function packageContent(options = {}) {
 
   const packages = [];
   const manifests = {};
+  const deliveryGates = {};
   for (const config of configs) {
-    const artifactRoot = await writeArtifact(root, distRoot, config, mode);
+    const { artifactRoot, deliveryGate } = await writeArtifact(root, distRoot, config, mode);
+    deliveryGates[config.name] = deliveryGate;
     const verified = verifyArtifact({
       artifactRoot,
       expectedChannel: config.name,
@@ -641,6 +730,14 @@ export async function packageContent(options = {}) {
     });
   }
 
+  const deliveryGateExclusions = [
+    ...new Set(
+      Object.values(deliveryGates).flatMap((gate) =>
+        gate.exclusions.map((entry) => entry.certification)
+      )
+    ),
+  ].sort(compareOrdinal);
+
   const summary = {
     schema: "certigo.content.package-report/v1",
     sourcePairCount: validation.pairCount,
@@ -649,6 +746,26 @@ export async function packageContent(options = {}) {
     ...(mode === CONTENT_MODE.runtime
       ? { runtimeResourceCount: validation.runtimeResourceCount }
       : {}),
+    // Emis UNIQUEMENT quand la porte exclut quelque chose. Un corpus sans
+    // exclusion produit donc le meme rapport qu'avant l'existence de la porte,
+    // ce qui preserve la reconstruction byte-identical des artefacts
+    // historiques exigee par l'ADR-0002.
+    ...(deliveryGateExclusions.length === 0
+      ? {}
+      : {
+          deliveryGate: {
+            asOf: deliveryGates[configs[0].name].asOf,
+            excludedCertifications: deliveryGateExclusions,
+            excludedFileCount: Object.values(deliveryGates).reduce(
+              (total, gate) => total + gate.excludedFileCount,
+              0
+            ),
+            byArtifact: configs.map((config) => ({
+              artifact: config.name,
+              excludedFileCount: deliveryGates[config.name].excludedFileCount,
+            })),
+          },
+        }),
     packages,
     ...(release === null
       ? {}

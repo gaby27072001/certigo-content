@@ -23,6 +23,10 @@ import {
   verifyPackagedContent,
 } from "../tools/package_content.mjs";
 import { canonicalize, sha256Hex } from "../tools/gen_manifest.mjs";
+import {
+  isCertificationRecommendedOn,
+  loadCatalog,
+} from "../tools/lib/catalog.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const temporaryRoots = [];
@@ -182,19 +186,79 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:61250e79ede34eff27c771f313bae2c8fb67bba99dea1ff3d6dbb7af1d47010d",
+          "sha256:92c1d646881fe62d63d1d62db1484b6dbd6644d0ba57b22c2b202e19cd1cc458",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:0638926a1bbe1feba92cf9a086dc26a734e529e2f883f630fdca93c52bf03941",
+          "sha256:43c284bf3e800836251b46462fd92522700ad8009b1162f39dcc67ff52d748d6",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "4812ee584ef4aa57ad5c3b709b81452134faddda44b60e71b99f483c8a09bb74"
+    "e135a3ff56138bf62bfbb92e1f92cd6cecaa6bc5340c56aa250eb5d2fd430bb5"
   );
+});
+
+test("n'expedie aucune certification non recommandee a la date du catalogue", async () => {
+  const outDir = mkdtempSync(join(tmpdir(), "certigo-package-gate-"));
+  temporaryRoots.push(outDir);
+
+  const catalog = loadCatalog(repoRoot);
+  const result = await packageContent({ root: repoRoot, outDir });
+
+  const attendues = { servies: [], exclues: [] };
+  for (const certification of catalog.certifications) {
+    const cible = isCertificationRecommendedOn(certification, catalog.asOf)
+      ? attendues.servies
+      : attendues.exclues;
+    cible.push(certification.id);
+  }
+
+  // AUTOTEST. Les deux cotes doivent etre peuples, sinon l'assertion suivante
+  // est vide de sens : un artefact qui ne contiendrait RIEN la satisferait tout
+  // autant qu'un artefact correct. Un zero n'est une preuve d'absence que si
+  // l'instrument sait rendre non-zero sur la meme cible.
+  assert.ok(
+    attendues.exclues.length > 0,
+    "aucune certification exclue : la porte n'est pas discriminante sur ce catalogue"
+  );
+  assert.ok(
+    attendues.servies.length > 0,
+    "aucune certification servie : le temoin positif manque"
+  );
+
+  for (const canal of ["public", "private"]) {
+    const manifest = JSON.parse(
+      readFileSync(resolve(outDir, canal, "manifest.json"), "utf8")
+    );
+    const certifications = new Set(
+      manifest.files.map((entry) => entry.certification).filter(Boolean)
+    );
+    for (const id of attendues.exclues) {
+      assert.equal(
+        certifications.has(id),
+        false,
+        `${canal}: "${id}" n'est plus recommandee au ${catalog.asOf} et ne doit pas etre livree`
+      );
+    }
+    for (const id of attendues.servies) {
+      assert.equal(
+        certifications.has(id),
+        true,
+        `${canal}: "${id}" est recommandee au ${catalog.asOf} et doit rester livree`
+      );
+    }
+  }
+
+  // La porte doit se DECLARER. Une exclusion silencieuse ferait fondre des
+  // dizaines de fichiers sans laisser de trace dans le journal CI.
+  assert.deepEqual(
+    result.deliveryGate.excludedCertifications,
+    [...attendues.exclues].sort()
+  );
+  assert.ok(result.deliveryGate.excludedFileCount > 0);
 });
 
 test("reconstruit a l'identique l'artefact publie a la revision #25", async () => {
