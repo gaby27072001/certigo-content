@@ -1,0 +1,94 @@
+name: codeql
+
+# Analyse statique CodeQL de la surface NON editoriale du depot.
+#
+# Perimetre volontairement etroit, chaque borne etant appuyee sur une mesure
+# du 2026-09-09 (revision ee9a485) et verrouillee par `test/ci_workflows.test.mjs` :
+#
+#   `actions`               les quatre workflows totalisent 737 lignes et trois
+#                           d'entre elles obtiennent `id-token: write` pour
+#                           pousser des artefacts immuables vers Azure en OIDC.
+#                           C'est la surface reellement exposee du depot, et
+#                           son durcissement (`permissions: {}`, actions
+#                           epinglees par SHA, aucun `pull_request_target`,
+#                           aucune interpolation dans un `run:`) est tenu A LA
+#                           MAIN : c'est exactement ce qui regresse en silence.
+#
+#   `javascript-typescript` 25 outils et 15 tests, 11 808 lignes au total, en
+#                           croissance rapide (+2 000 lignes apportees par la
+#                           seule PR #88).
+#
+#   PAS de `python`         mesure : 0 fichier `.py` suivi et 0 sur disque, et
+#                           la detection GitHub ne liste que `actions`,
+#                           `javascript`, `javascript-typescript`, `typescript`.
+#                           Un poste `python` dans la matrice serait un job vide.
+#
+# Le contenu editorial (`content/**`, ~2 500 JSON) n'est pas un langage
+# analysable : il reste couvert par `npm run validate`, les gardes anti-fuite
+# et `npm run manifest:check`.
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+# PAS de `schedule`. Les runners `certigo-ci` sont un pool dedie de deux
+# machines ; une analyse periodique les consommerait alors qu'aucun code n'a
+# change. Les evenements ci-dessus couvrent deja toute entree dans `main`.
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    # Meme garde que `ci-tooling` et `ci-content-package` : une pull request
+    # issue d'un fork ne recoit qu'un jeton en lecture seule, donc pas de
+    # `security-events: write`, et l'envoi du SARIF echouerait. Ce workflow
+    # utilise `pull_request` et non `pull_request_target` : le code non fiable
+    # n'est jamais execute avec un jeton privilegie, ce qui rend inutile
+    # l'isolation source/controle du workflow homologue de `Certigo`.
+    if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    permissions:
+      # `actions: read` est requis, pas decoratif : sur une pull request
+      # CodeQL bascule en mode « overlay with caching » et interroge
+      # l'API workflow-runs pour retrouver la base overlay. Sans cette
+      # permission l'etape echoue sur « Resource not accessible by
+      # integration » (mesure du 2026-09-09, PR #89, les deux langages).
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: actions
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@5595ccaf912efad79be6eef63a5619ff05969be3 # v4.37.6
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          # `queries` est volontairement absent. L'entree sert a ajouter des
+          # requetes ; l'omettre selectionne la suite `default`. Ne pas y
+          # mettre `security-and-quality` : sur le depot voisin cette suite
+          # rend surtout des `note` de style (`py/import-and-import-from`,
+          # `cs/catch-of-all-exceptions`), et une regle qui rougit sur tout
+          # dresse a passer outre.
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@5595ccaf912efad79be6eef63a5619ff05969be3 # v4.37.6
+        with:
+          category: "/language:${{ matrix.language }}"

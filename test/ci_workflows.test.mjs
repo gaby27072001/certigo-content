@@ -97,6 +97,62 @@ test("les uploads GitHub sont manuels, explicites et stricts", () => {
   assert.equal(uploads[2].with["retention-days"], 30);
 });
 
+test("l'analyse CodeQL reste bornee a son perimetre mesure", () => {
+  const codeql = loadWorkflow("codeql.yml");
+
+  // Aucun `schedule` : le pool `certigo-ci` ne compte que deux machines et une
+  // analyse periodique le consommerait sans qu'aucun code n'ait change.
+  assert.deepEqual(Object.keys(codeql.on).sort(), ["pull_request", "push"]);
+  assert.deepEqual(codeql.on.push, { branches: ["main"] });
+  assert.deepEqual(codeql.on.pull_request, {});
+
+  // `pull_request_target` executerait le code d'une PR avec un jeton
+  // privilegie. Ce workflow s'en passe, ce qui rend inutile toute isolation
+  // source/controle.
+  assert.equal(codeql.on.pull_request_target, undefined);
+
+  const analyze = codeql.jobs.analyze;
+
+  // Perimetre de langages : mesure du 2026-09-09, 0 fichier `.py` dans le
+  // depot. Ajouter `python` reintroduirait un job vide.
+  assert.deepEqual(
+    analyze.strategy.matrix.include.map((entry) => entry.language).sort(),
+    ["actions", "javascript-typescript"]
+  );
+  for (const entry of analyze.strategy.matrix.include) {
+    assert.equal(entry["build-mode"], "none");
+  }
+
+  const init = analyze.steps.find((step) =>
+    step.uses?.startsWith("github/codeql-action/init@")
+  );
+  // `queries` absent => suite `default`. `security-and-quality` rend surtout
+  // des `note` de style, et une regle qui rougit sur tout dresse a passer outre.
+  assert.equal(init.with.queries, undefined);
+
+  // Runner dedie du depot : `certigo-ci`. Les runners de `Certigo`
+  // (`certigo-pr` / `certigo-trusted`) sont un pool distinct.
+  assert.match(analyze["runs-on"], /certigo-ci/);
+
+  // Moindre privilege : rien au niveau du workflow, et le strict necessaire
+  // au niveau du job. `actions: read` est requis par le mode overlay de
+  // CodeQL sur les pull requests ; son absence a fait echouer les deux
+  // langages sur « Resource not accessible by integration ».
+  assert.deepEqual(codeql.permissions, {});
+  assert.deepEqual(analyze.permissions, {
+    actions: "read",
+    contents: "read",
+    "security-events": "write",
+  });
+
+  // Toute action tierce reste epinglee par SHA complet.
+  for (const step of analyze.steps) {
+    if (step.uses !== undefined) {
+      assert.match(step.uses, /@[0-9a-f]{40}$/);
+    }
+  }
+});
+
 test("la publication Azure reste separee et exclusivement manuelle", () => {
   const azure = loadWorkflow("publish-content-azure.yml");
   assert.deepEqual(Object.keys(azure.on), ["workflow_dispatch"]);
