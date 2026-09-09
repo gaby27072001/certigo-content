@@ -7,6 +7,7 @@ if (process.allowedNodeEnvironmentFlags.has("--test-coverage-lines")) {
   args.push(
     "--test-coverage-include=tools/**/*.mjs",
     "--test-coverage-exclude=tools/migrate_p1_05.mjs",
+    "--test-coverage-exclude=tools/migrate_microsoft_v3.mjs",
     "--test-coverage-lines=80",
     "--test-coverage-functions=75",
     "--test-coverage-branches=70"

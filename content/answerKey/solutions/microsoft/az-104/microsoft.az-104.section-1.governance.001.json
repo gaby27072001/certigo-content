@@ -1,0 +1,13 @@
+{
+  "id": "microsoft.az-104.section-1.governance.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Un verrou de ressource CanNotDelete",
+  "rationale": "Un **verrou CanNotDelete** empêche la suppression tout en autorisant lecture et modification, et s'applique même au Propriétaire. Une policy `audit` ne bloque rien ; retirer les rôles casserait l'exploitation ; un tag est une simple métadonnée sans effet protecteur."
+}

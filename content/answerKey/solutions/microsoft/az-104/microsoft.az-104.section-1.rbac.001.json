@@ -1,0 +1,13 @@
+{
+  "id": "microsoft.az-104.section-1.rbac.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Contributeur, au niveau du groupe de ressources",
+  "rationale": "**Contributeur** permet de tout gérer (créer, modifier, supprimer) mais **pas de déléguer l'accès** — exactement la contrainte demandée. La **portée** doit être le groupe de ressources pour limiter l'effet. Propriétaire pourrait attribuer des rôles ; Lecteur est en lecture seule ; Administrateur de l'accès utilisateur ne gère QUE les accès."
+}

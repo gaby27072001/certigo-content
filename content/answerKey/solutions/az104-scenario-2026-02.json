@@ -1,7 +1,0 @@
-{
-  "id": "az104-scenario-2026-02",
-  "schemaVersion": "v2",
-  "kind": "answerKey",
-  "correct": "Affecter la stratégie intégrée Allowed locations au groupe de gestion avec un effet de refus",
-  "rationale": "Une affectation Azure Policy au **groupe de gestion** est héritée par les abonnements enfants. La stratégie **Allowed locations** avec refus bloque les créations hors des régions autorisées au point de contrôle Resource Manager. Un verrou protège des modifications ou suppressions, un tag ne contraint pas la région et un budget ne bloque pas les déploiements."
-}

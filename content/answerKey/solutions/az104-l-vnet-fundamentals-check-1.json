@@ -1,7 +1,0 @@
-{
-  "id": "az104-l-vnet-fundamentals-check-1",
-  "schemaVersion": "v2",
-  "kind": "answerKey",
-  "correct": "A ↔ B et B ↔ C, mais pas A ↔ C",
-  "rationale": "L'appairage de VNets n'est **pas transitif** : A parle à B et B parle à C, mais A ne joint pas C tant qu'un appairage direct A–C (ou un routage via une appliance/Virtual WAN) n'est pas ajouté. Le peering transporte bien le trafic privé, donc « aucune communication » est faux."
-}

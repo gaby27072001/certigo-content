@@ -1,0 +1,13 @@
+{
+  "id": "microsoft.az-104.section-1.vm-availability-scale.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Un groupe identique (VMSS) avec autoscale, réparti sur des zones de disponibilité",
+  "rationale": "Le **VMSS** apporte l'**autoscale** piloté par des métriques (CPU), et le répartir sur des **zones de disponibilité** protège contre la perte d'un datacenter. Une VM unique n'a pas d'élasticité ; un availability set ne couvre qu'un datacenter ; un domaine de défaillance unique ne protège pas."
+}

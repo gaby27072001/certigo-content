@@ -1,7 +1,0 @@
-{
-  "id": "az104-l-network-traffic-check-1",
-  "schemaVersion": "v2",
-  "kind": "answerKey",
-  "correct": "Application Gateway (couche 7) avec WAF",
-  "rationale": "Le routage par **URL** et le **WAF** sont des fonctions de **couche 7**, propres à l'**Application Gateway**. Le Load Balancer ne voit que TCP/UDP (couche 4) ; un NSG filtre mais ne répartit pas la charge ; une UDR contrôle le chemin, pas la distribution applicative."
-}

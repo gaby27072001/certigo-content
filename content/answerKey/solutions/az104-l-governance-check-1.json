@@ -1,7 +1,0 @@
-{
-  "id": "az104-l-governance-check-1",
-  "schemaVersion": "v2",
-  "kind": "answerKey",
-  "correct": "Un verrou de ressource CanNotDelete",
-  "rationale": "Un **verrou CanNotDelete** empêche la suppression tout en autorisant lecture et modification, et s'applique même au Propriétaire. Une policy `audit` ne bloque rien ; retirer les rôles casserait l'exploitation ; un tag est une simple métadonnée sans effet protecteur."
-}

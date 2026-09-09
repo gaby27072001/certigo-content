@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.az-104.section-1.vm-availability-scale.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "prompt": "Vous devez ajouter ou retirer automatiquement des instances de VM identiques selon l'utilisation CPU, tout en survivant à la panne d'un datacenter au sein d'une région. Quelle approche ?",
+  "choices": [
+    "Une VM unique redimensionnée manuellement",
+    "Un groupe à haute disponibilité dans un seul datacenter",
+    "Un groupe identique (VMSS) avec autoscale, réparti sur des zones de disponibilité",
+    "Plusieurs VM dans le même domaine de défaillance"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "microsoft.az-104.section-1.az104-scenario-2026-03.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Une stratégie de gestion du cycle de vie avec conditions d'âge, actions de changement de niveau et suppression",
+  "rationale": "La **gestion du cycle de vie Blob** évalue périodiquement des règles basées notamment sur la dernière modification. Elle peut changer automatiquement le niveau des blobs concernés puis les supprimer à l'âge prévu, avec un filtre sur le conteneur `logs`. Une stratégie d'accès contrôle une SAS, la réplication copie les objets et un instantané Azure Files ne gère pas le cycle de vie des blobs."
+}

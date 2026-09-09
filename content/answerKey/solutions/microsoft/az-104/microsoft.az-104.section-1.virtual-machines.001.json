@@ -1,0 +1,13 @@
+{
+  "id": "microsoft.az-104.section-1.virtual-machines.001",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1"
+  },
+  "correct": "Son contenu peut être perdu lors d'une désallocation de la VM",
+  "rationale": "Le **disque temporaire** offre un stockage rapide mais **non persistant** : son contenu peut disparaître lors d'une désallocation ou d'une maintenance. Il ne convient donc pas aux données durables (base de production) ; il n'est ni géo-répliqué ni lié au chiffrement d'Ultra Disk."
+}

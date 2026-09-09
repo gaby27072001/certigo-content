@@ -167,9 +167,12 @@ test("conserve le package v3 runtime byte-identical", async () => {
 
   const result = await packageContent({ root: repoRoot, outDir });
 
-  // 146 paires v2 heritees (232 a l'origine, moins les 86 orphelines retirees :
-  // elles portaient sur des certifications absentes du catalogue et n'etaient
-  // atteignables par aucune matrice), puis les vagues v3 successives.
+  // 146 paires Microsoft heritees (232 a l'origine, moins les 86 orphelines
+  // retirees : elles portaient sur des certifications absentes du catalogue et
+  // n'etaient atteignables par aucune matrice), puis les vagues v3 successives.
+  // Ces 146 etaient en v2 a plat jusqu'a leur migration vers v3 ; le compte de
+  // paires est inchange par la migration, seuls leurs identifiants, leur
+  // emplacement et leur schemaVersion l'ont ete.
   assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
@@ -179,18 +182,18 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:c33c8839257785823a88e841362194053345097452eb5f3cedaa7de95269b669",
+          "sha256:48a41fb59248aa55c4584a5bb8bcbedab061532579551bc15facb8053b297386",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:ee6ae56bcfefea808006ff76c584f0e9272b83d8efbc3d762da405329a8e3db1",
+          "sha256:0638926a1bbe1feba92cf9a086dc26a734e529e2f883f630fdca93c52bf03941",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "b207137c1e1d7c277ec49ea14bfbe5c8d3972ab2bd41c866ea60a1ebc547241d"
+    "ca315862d5ebaaf13727ffdf73840c5ff72b4084d8cee0fba723b2aec38552bc"
   );
 });
 
