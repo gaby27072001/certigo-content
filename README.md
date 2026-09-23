@@ -43,7 +43,7 @@ un commit donne.
 | --- | --- |
 | `npm test` | Execute les tests avec la couverture native Node et, si le runtime les supporte, les seuils lignes 80 %, fonctions 75 %, branches 70 %. |
 | `npm run validate` | Valide le corpus reel : schemas, bijection et anti-fuite. |
-| `npm run catalog:freshness` | Controle sans reseau l'age du snapshot et les transitions de cycle de vie ; accepte `-- --as-of YYYY-MM-DD`. |
+| `npm run catalog:freshness` | Controle sans reseau l'age du snapshot et les transitions de cycle de vie ; accepte `-- --as-of YYYY-MM-DD`. Projection jour par jour de la prochaine echeance : voir `AGENTS.md`, section « Projecting catalog freshness day by day ». |
 | `npm run manifest:check` | Verifie le determinisme, le vecteur golden et le schema du manifeste. |
 | `npm run manifest:generate` | Genere le manifeste mixte historique, reserve au rollback. |
 | `npm run package` | Nettoie `dist/`, valide le corpus et produit les deux artefacts. |

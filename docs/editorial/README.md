@@ -746,6 +746,38 @@ tort. Le francais n'est retire sur aucune : il est offert et epargne sur
 > **avant** d'interpreter une phrase de retrait : la phrase suit ce champ et
 > s'y rapporte souvent.
 
+### Une recherche par code qui ne trouve rien n'annonce aucun retrait
+
+Mesure du 2026-09-23, navigateur reel : sur `learn.microsoft.com/credentials/browse/`,
+une recherche par code d'examen rend « *No results* » pour AZ-104, AZ-900,
+DP-900 et SC-900, alors que ces quatre certifications sont actives. La meme
+recherche par **intitule** (« Azure Administrator », « Azure Fundamentals »…)
+les trouve toutes. Cause observee : leurs URL d'examen
+(`/credentials/certifications/exams/<code>/`) resolvent vers la page de
+certification, et la recherche par code ne rend que des fiches `EXAM`. Seule
+AI-901 garde une page d'examen distincte ; AI-900, retiree, n'apparait plus
+comme examen par aucune des deux voies.
+
+> Un code absent d'un index n'est pas une affirmation de retrait. Chercher par
+> intitule, puis lire la page de certification elle-meme.
+
+### Une mise a jour du meme examen n'est pas une transition, mais elle se date
+
+Mesure du 2026-09-23 sur `microsoft:sc-900` : la page de certification annonce
+« *The English language version of this certification will be updated on
+October 21, 2026* », et le guide d'etude presente deja les competences « *as
+of October 21, 2026* », avec deux groupes d'objectifs notes « *Minor* ». Meme
+code, meme certification : ni retrait ni successeur, donc `lifecycle.transition`
+reste `none-announced`.
+
+L'evenement est pourtant date et change ce que la source dira. Le catalogue le
+porte dans `lifecycle.reviewOn`, que `tools/check_catalog_freshness.mjs`
+applique a toute entree, quel que soit son statut : la gate passe jusqu'au
+2026-10-20 et rend **exactement une** erreur a partir du 2026-10-21. Convention
+retenue : un `reviewOn` sur une entree `none-announced` est la date de relecture
+d'une mise a jour annoncee du **meme** examen. Il se retire en relisant la
+source une fois la mise a jour en ligne, jamais en le repoussant.
+
 ## Encadrer une contradiction plutot que l'arbitrer
 
 Quand deux pages officielles se contredisent, le catalogue **pose les deux
@@ -785,6 +817,13 @@ l'affirmation pour laquelle elle est citee **sans jamais devenir invalide** —
 elle repond 200, elle est complete, elle parle du bon produit. D'ou la source
 `lifecycle` ajoutee sur l'entree.
 
+Second cas, mesure du 2026-09-23 sur la page AWS de MLA : son tableau d'apercu
+nomme l'examen beta « *ME1-C02* », alors que les titres et la banniere de la
+meme page, le guide d'examen, l'index des guides AWS et l'annonce de septembre
+2026 disent tous « *MLA-C02* ». Une cellule contre cinq enonces concordants se
+lit comme une coquille, pas comme un changement de code : le catalogue garde
+`MLA-C02` et consigne l'ecart dans `lifecycle.note` de `aws:mla-c02`.
+
 ## Falaise d'expiration des registres
 
 `config/editorial-debt.json` et `config/legacy-coverage-inventory.json`
@@ -821,6 +860,12 @@ depuis `checkedOn + 30`. La gate echouait en realite le **2026-09-13**, sur les
 exemptions. `--as-of 2026-09-12` rendait 0, `--as-of 2026-09-13` rendait 1.
 Trois jours d'ecart, et **rafraichir les dates seules n'aurait rien repare** :
 le registre d'exemptions ne se quitte qu'en declarant `lifecycle.transition`.
+
+Meme erreur de lecture, mesuree le 2026-09-23 : l'echeance annoncee etait le
+2026-10-08, celle de `reviewDueOn`. La gate echouait en realite des le
+**2026-10-05**, sur deux entrees verifiees le 2026-09-04 (`aws:mla-c01`,
+`aws:mla-c02`) ; puis 9 erreurs le 2026-10-06, 19 le 2026-10-08 et 37 le
+2026-10-09. La date la plus visible n'etait pas la plus proche.
 
 > Ne pas deduire une echeance d'une formule. Faire varier `--as-of` jusqu'a la
 > bascule, puis **lire les messages** : un code de sortie dit qu'il y a un

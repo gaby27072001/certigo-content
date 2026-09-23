@@ -47,6 +47,40 @@ Useful targeted commands:
 - `npm run package:private`
 - `npm run policy:artifact-access`
 
+## Projecting catalog freshness day by day
+
+`npm run catalog:freshness` fails CI on the first day any source, provider catalog, snapshot or
+`lifecycle.reviewOn` expires. The nearest deadline is often not the most visible one, so project it
+instead of computing it. The check is offline and deterministic. Run it from the repository root. It
+prints one line per day with the exit code and the error count, followed by the first messages:
+
+```powershell
+$start = (Get-Date).ToUniversalTime().Date   # or [datetime]'2026-10-15'
+foreach ($offset in 0..10) {
+  $day = $start.AddDays($offset).ToString('yyyy-MM-dd')
+  $out = node tools/check_catalog_freshness.mjs --as-of $day 2>&1
+  $errors = @($out | Where-Object { "$_" -match '^\s+- ' })
+  "$day exit=$LASTEXITCODE errors=$($errors.Count)"
+  $errors | Select-Object -First 3 | ForEach-Object { "  $_" }
+}
+```
+
+```bash
+start=$(date -u +%F)   # or start=2026-10-15
+for offset in $(seq 0 10); do
+  day=$(date -u -d "${start} +${offset} day" +%F)
+  out=$(node tools/check_catalog_freshness.mjs --as-of "$day" 2>&1); status=$?
+  printf '%s exit=%s errors=%s\n' "$day" "$status" "$(printf '%s\n' "$out" | grep -c '^  - ')"
+  printf '%s\n' "$out" | grep '^  - ' | head -n 3
+done
+```
+
+The first day with `exit=1` is the real deadline, and its messages name the entries to re-verify
+against their official sources. Re-verifying an entry means updating `provenance.checkedOn` and,
+per campaign, `asOf` with `freshness.reviewDueOn = asOf + maxAgeDays`. A `reviewOn` is cleared
+only by reading the source again, never by moving its date. See `docs/editorial/README.md`, section
+"Une echeance se dichotomise, elle ne se deduit pas".
+
 ## Expected change process
 
 1. Update matching JSON pairs in the appropriate public/private locations.

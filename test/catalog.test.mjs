@@ -225,7 +225,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 
   assert.deepEqual(aws, expectedAws);
   assert.deepEqual(gcp, expectedGcp);
-  assert.equal(catalog.asOf, "2026-09-08");
+  assert.equal(catalog.asOf, "2026-09-23");
   assert.ok(aws.includes("aws:aip-c01"));
   assert.ok(!aws.includes("aws:mls-c01"));
 
@@ -236,7 +236,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(ans.lifecycle.recommendThrough, "2026-12-31");
   assert.equal(ans.lifecycle.lastExamOn, "2026-12-31");
   assert.equal(ans.lifecycle.reviewOn, "2027-01-01");
-  assert.equal(ans.provenance.checkedOn, "2026-09-05");
+  assert.equal(ans.provenance.checkedOn, "2026-09-23");
   assert.equal(ans.lifecycle.transition, "announced");
   assert.equal(ans.lifecycle.successor, undefined);
   assert.ok(
@@ -261,7 +261,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(mla.lifecycle.lastExamOn, "2027-01-13");
   assert.equal(mla.lifecycle.reviewOn, "2027-01-14");
   assert.equal(mla.lifecycle.successor, "aws:mla-c02");
-  assert.equal(mla.provenance.checkedOn, "2026-09-04");
+  assert.equal(mla.provenance.checkedOn, "2026-09-23");
   assert.ok(
     mla.provenance.sources.some(
       (source) =>
@@ -290,7 +290,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
     assert.equal(entry.lifecycle.transition, "announced", `${id}: transition`);
     assert.equal(entry.lifecycle.recommendThrough, bracket.recommendThrough, `${id}: borne basse`);
     assert.equal(entry.lifecycle.lastExamOn, bracket.lastExamOn, `${id}: borne haute`);
-    assert.equal(entry.provenance.checkedOn, "2026-09-05", `${id}: date de verification`);
+    assert.equal(entry.provenance.checkedOn, "2026-09-23", `${id}: date de verification`);
     assert.ok(
       entry.lifecycle.recommendThrough < entry.lifecycle.lastExamOn,
       `${id}: l'encadrement doit rester un intervalle`
@@ -437,6 +437,35 @@ test("applique les bornes linguistiques de transition MLA-C01", () => {
   assert.ok(
     transition.errors.some((error) =>
       error.includes("aws:mla-c01: transition a reverifier")
+    )
+  );
+});
+
+test("date la mise a jour annoncee de SC-900 sans en faire une transition", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const sc900 = catalog.certifications.find(
+    (certification) => certification.id === "microsoft:sc-900"
+  );
+
+  // Meme code, meme certification : la mise a jour des competences annoncee
+  // pour le 2026-10-21 n'est ni un retrait ni une succession. L'entree reste
+  // active et recommandee, et ne declare aucune date de fin.
+  assert.equal(sc900.status, "active");
+  assert.equal(sc900.lifecycle.transition, "none-announced");
+  assert.equal(sc900.lifecycle.lastExamOn, undefined);
+  assert.equal(sc900.lifecycle.successor, undefined);
+  assert.equal(sc900.lifecycle.reviewOn, "2026-10-21");
+  assert.equal(isCertificationRecommendedOn(sc900, sc900.lifecycle.reviewOn), true);
+
+  // reviewOn vaut aussi pour une entree none-announced : la veille, aucune
+  // erreur ne vise SC-900 ; le jour de la mise a jour, la gate exige de relire
+  // la source une fois le nouveau referentiel en ligne.
+  const before = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-20" });
+  assert.ok(!before.errors.some((error) => error.includes("microsoft:sc-900")));
+  const onUpdate = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-21" });
+  assert.ok(
+    onUpdate.errors.includes(
+      "microsoft:sc-900: transition a reverifier depuis le 2026-10-21"
     )
   );
 });
