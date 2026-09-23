@@ -47,6 +47,12 @@ test("les gates CI couvrent chaque push main et pull request", () => {
     findStep(content, "package-private", "Verify final private artifact").run,
     /package:verify:private/
   );
+  // Garde « expand avant usage » : un paquet refuse par les schemas du backend
+  // ne doit franchir ni une PR, ni un push main.
+  assert.match(
+    findStep(content, "package-gates", "Enforce backend content contract (expand before use)").run,
+    /npm run contract:backend/
+  );
 
   const toolingCommands = tooling.jobs["test-and-supply-chain"].steps
     .map((step) => step.run ?? "")
@@ -161,4 +167,12 @@ test("la publication Azure reste separee et exclusivement manuelle", () => {
     undefined
   );
   assert.equal(azure.concurrency["cancel-in-progress"], false);
+  // Une publication est irreversible : le plan refuse une release que l'import
+  // backend rejetterait, et le controle porte sur le dist qui sera publie.
+  const gates = findStep(azure, "plan", "Run publication gates").run;
+  assert.match(gates, /npm run contract:backend -- --dist dist/);
+  assert.ok(
+    gates.indexOf("npm run package\n") < gates.indexOf("npm run contract:backend"),
+    "la garde backend doit porter sur le paquet construit"
+  );
 });

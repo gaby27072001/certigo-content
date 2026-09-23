@@ -53,6 +53,12 @@ jobs:
       - name: Enforce certification catalog freshness
         run: npm run catalog:freshness
 
+      # Regle « expand avant usage » : le paquet doit etre accepte par la copie
+      # des schemas embarques du backend Certigo (config/backend-accepted-schemas),
+      # sinon l'import refuserait une release deja publiee, donc irreversible.
+      - name: Enforce backend content contract (expand before use)
+        run: npm run contract:backend
+
       - name: Enforce global artifact download policy
         run: npm run policy:artifact-access
 

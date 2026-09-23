@@ -93,6 +93,7 @@ jobs:
           npm run policy:artifact-access
           npm run package
           npm run package:verify
+          npm run contract:backend -- --dist dist
 
       - name: Resolve immutable identities
         id: identity

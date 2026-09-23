@@ -31,6 +31,7 @@ test("les CLI documentent l'aide avec un code de succes", () => {
     "compile_runtime.mjs",
     "check_catalog_freshness.mjs",
     "check_artifact_access.mjs",
+    "check_backend_contract.mjs",
   ]) {
     const result = execute(tool, ["--help"]);
     assert.equal(result.status, 0, `${tool}: ${result.stderr}`);
@@ -47,6 +48,8 @@ test("les CLI refusent arguments inconnus et valeurs manquantes", () => {
     ["compile_runtime.mjs", ["--out"]],
     ["check_catalog_freshness.mjs", ["--as-of"]],
     ["check_artifact_access.mjs", ["--policy"]],
+    ["check_backend_contract.mjs", ["--dist"]],
+    ["check_backend_contract.mjs", ["--unknown"]],
   ]) {
     const result = execute(tool, args);
     assert.equal(result.status, 1, `${tool}: ${result.stdout}`);

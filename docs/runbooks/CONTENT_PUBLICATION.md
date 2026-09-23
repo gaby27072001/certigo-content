@@ -86,7 +86,11 @@ toute connexion lorsque :
 - un des trois targets ou Client IDs repository est absent ou invalide ;
 - deux targets ou deux UAMI publisher sont identiques ;
 - le package ne produit pas les trois IDs SHA-256 runtime ;
-- une gate de validation, manifeste, anti-fuite ou politique echoue.
+- une gate de validation, manifeste, anti-fuite ou politique echoue ;
+- le paquet construit n'est pas entierement accepte par la copie des schemas
+  embarques du backend Certigo (`npm run contract:backend -- --dist dist`,
+  regle « expand avant usage ») : une release que l'import refuserait ne doit
+  pas devenir irreversible.
 
 Les environnements contractuels sont :
 

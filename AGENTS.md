@@ -81,6 +81,38 @@ per campaign, `asOf` with `freshness.reviewDueOn = asOf + maxAgeDays`. A `review
 only by reading the source again, never by moving its date. See `docs/editorial/README.md`, section
 "Une echeance se dichotomise, elle ne se deduit pas".
 
+## Backend content contract: expand before use
+
+The Certigo backend re-validates every release at import against its **own embedded copies** of the
+schemas (`backend/src/Certigo.Infrastructure/ContentContracts/Schemas/` in `gchambaud_microsoft/Certigo`).
+Its C# catalog parser also rejects unknown properties. If content uses a field the backend does not
+know yet, the import rejects the release, and by then the release is already published, which cannot
+be undone. This happened with `lifecycle.transition`: PR #84 added it here, and the backend only
+accepted it with Certigo#511.
+
+`config/backend-accepted-schemas/` holds a copy of those backend schemas, pinned to a named Certigo
+revision in `SOURCE.json`. `npm run contract:backend` (run by `package-gates` and by the
+publication plan) fails when:
+
+- any document of the built package (descriptor, manifests, payloads) is rejected by that copy, or
+- the copy was edited by hand (its hashes no longer match `SOURCE.json`), or it is missing.
+
+A content schema that is ahead of the copy is only reported as a note. What fails is **using** a
+shape the backend rejects.
+
+To use a new field or a new shape:
+
+1. Open a Certigo PR that makes the backend accept it (schema and C# parser: the *expand* step), and
+   get it merged.
+2. Resynchronize the copy from a Certigo checkout of that merged revision. The bytes come from the
+   `HEAD` git objects, not from the working tree:
+   `npm run contract:backend -- --sync-from <path-to-Certigo-checkout>`
+3. Only then change the content that uses the field, possibly in the same PR as step 2.
+
+Before an import, the backend must also have been **deployed** with that revision. For the exact
+importer, replay `CandidateContentPackageTests` from Certigo on the local `dist/` (see
+`docs/runbooks/CONTENT_RELEASES.md` in Certigo).
+
 ## Expected change process
 
 1. Update matching JSON pairs in the appropriate public/private locations.

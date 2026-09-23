@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/question.schema.json",
+  "title": "Certigo public question",
+  "description": "Validates legacy v2, metadata-aware v3, and canonical runtime v4 public questions. Every variant forbids answer-bearing keys.",
+  "oneOf": [
+    { "$ref": "#/$defs/v2" },
+    { "$ref": "#/$defs/v3" },
+    { "$ref": "#/$defs/v4" }
+  ],
+  "$defs": {
+    "choices": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "certification",
+        "blueprintVersion",
+        "objective"
+      ],
+      "properties": {
+        "provider": {
+          "enum": ["aws", "gcp", "microsoft"]
+        },
+        "certification": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "blueprintVersion": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "objective": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "runtimeMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "certification",
+        "blueprintVersion",
+        "objective",
+        "domainId",
+        "conceptId"
+      ],
+      "properties": {
+        "provider": {
+          "enum": ["aws", "gcp", "microsoft"]
+        },
+        "certification": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft):[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "blueprintVersion": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+        },
+        "objective": {
+          "type": "string",
+          "pattern": "^(domain|section)-[1-9][0-9]*$"
+        },
+        "domainId": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.domain\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "conceptId": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.concept\\.[a-z0-9]+(?:-[a-z0-9]+)*$"
+        }
+      }
+    },
+    "option": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "v2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "schemaVersion", "kind", "prompt", "choices"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schemaVersion": {
+          "const": "v2"
+        },
+        "kind": {
+          "const": "public"
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "choices": {
+          "$ref": "#/$defs/choices"
+        }
+      }
+    },
+    "v3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "schemaVersion",
+        "kind",
+        "metadata",
+        "prompt",
+        "choices"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+        },
+        "schemaVersion": {
+          "const": "v3"
+        },
+        "kind": {
+          "const": "public"
+        },
+        "metadata": {
+          "$ref": "#/$defs/metadata"
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "choices": {
+          "$ref": "#/$defs/choices"
+        }
+      }
+    },
+    "v4": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "schemaVersion",
+        "kind",
+        "metadata",
+        "itemType",
+        "difficulty",
+        "prompt",
+        "options"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+        },
+        "legacyId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "schemaVersion": {
+          "const": "v4"
+        },
+        "kind": {
+          "const": "public"
+        },
+        "metadata": {
+          "$ref": "#/$defs/runtimeMetadata"
+        },
+        "itemType": {
+          "enum": [
+            "mcq",
+            "multi",
+            "scenario",
+            "spotTheIssue"
+          ]
+        },
+        "difficulty": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/option"
+          }
+        }
+      }
+    }
+  }
+}
