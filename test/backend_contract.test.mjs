@@ -135,11 +135,19 @@ test("echoue ferme quand la copie backend est absente", async () => {
 
 test("signale sans echouer un schema de contrat en avance sur le backend", async () => {
   const root = contractRoot();
+  // Les schemas du depot peuvent deja etre en avance sur la copie (par exemple la
+  // variante v5, acceptee ici avant de l'etre par le backend). Le temoin mesure donc
+  // l'ecart AJOUTE par un schema de plus, pas un ecart absolu.
+  const baseline = await checkBackendContract({ root, distDir });
+  assert.deepEqual(baseline.errors, []);
   writeFileSync(resolve(root, "schemas", "future.schema.json"), "{}\n", "utf8");
 
   const result = await checkBackendContract({ root, distDir });
   assert.deepEqual(result.errors, []);
-  assert.deepEqual(result.schemaDrift, ["future.schema.json"]);
+  assert.deepEqual(
+    result.schemaDrift,
+    [...baseline.schemaDrift, "future.schema.json"].sort()
+  );
 });
 
 test("--sync-from copie les octets de HEAD et enregistre la revision Certigo", () => {

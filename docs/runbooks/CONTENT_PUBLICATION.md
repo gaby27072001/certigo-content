@@ -17,7 +17,7 @@ public et prive sont physiquement separes. Le descripteur est publie en dernier
 et atteste que les deux arbres ont ete publies et relus avec succes.
 
 Le publisher copie les octets produits par le packager sans les reformater. Les
-contrats question/solution v2-v4, content manifest v1-v3, package manifest
+contrats question/solution v2-v5, content manifest v1-v3, package manifest
 v1-v3, leurs hashes et le descripteur `release/v1` restent donc inchanges. Une
 release publiable exige `dist/release.json`; un corpus historique v1/v2 sans
 descripteur est refuse fail-closed.

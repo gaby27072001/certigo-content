@@ -2,11 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://certigo.microsoft.com/schemas/solution.schema.json",
   "title": "Certigo answerKey solution",
-  "description": "Validates legacy v2, metadata-aware v3 with optional official-source provenance, and stable-option v4 private solutions. Answer material remains confined to the answerKey channel.",
+  "description": "Validates legacy v2, metadata-aware v3 with optional official-source provenance, stable-option v4, and per-type exercise v5 private solutions. v5 carries itemType so that per-type cardinalities and the matchPairs token pattern are enforced by the schema alone; cross-file rules X1-X9 are enforced by tools/lib/exercise_v5.mjs. Answer material remains confined to the answerKey channel.",
   "oneOf": [
     { "$ref": "#/$defs/v2" },
     { "$ref": "#/$defs/v3" },
-    { "$ref": "#/$defs/v4" }
+    { "$ref": "#/$defs/v4" },
+    { "$ref": "#/$defs/v5" }
   ],
   "$defs": {
     "metadata": {
@@ -144,6 +145,106 @@
           "minLength": 1
         }
       }
+    },
+    "optionId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "pairToken": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*:[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "v5": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "schemaVersion",
+        "kind",
+        "itemType",
+        "correctOptionIds",
+        "rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(aws|gcp|microsoft)\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.[0-9]{3}$"
+        },
+        "schemaVersion": {
+          "const": "v5"
+        },
+        "kind": {
+          "const": "answerKey"
+        },
+        "itemType": {
+          "enum": [
+            "mcq",
+            "multi",
+            "scenario",
+            "spotTheIssue",
+            "ordering",
+            "applied",
+            "cloze",
+            "matchPairs"
+          ]
+        },
+        "correctOptionIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "itemType": { "enum": ["mcq", "scenario", "spotTheIssue"] } },
+            "required": ["itemType"]
+          },
+          "then": {
+            "properties": { "correctOptionIds": { "type": "array", "maxItems": 1 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "itemType": { "enum": ["multi", "ordering", "applied", "matchPairs"] } },
+            "required": ["itemType"]
+          },
+          "then": {
+            "properties": { "correctOptionIds": { "type": "array", "minItems": 2 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "itemType": { "const": "cloze" } },
+            "required": ["itemType"]
+          },
+          "then": {
+            "properties": { "correctOptionIds": { "type": "array", "maxItems": 6 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "itemType": { "const": "matchPairs" } },
+            "required": ["itemType"]
+          },
+          "then": {
+            "properties": {
+              "correctOptionIds": { "type": "array", "items": { "$ref": "#/$defs/pairToken" } }
+            }
+          },
+          "else": {
+            "properties": {
+              "correctOptionIds": { "type": "array", "items": { "$ref": "#/$defs/optionId" } }
+            }
+          }
+        }
+      ]
     }
   }
 }

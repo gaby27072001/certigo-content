@@ -1,0 +1,44 @@
+{
+  "id": "microsoft.az-104.section-1.examples.008",
+  "schemaVersion": "v5",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1",
+    "domainId": "microsoft.az-104.domain.governance",
+    "conceptId": "microsoft.az-104.concept.rbac-built-in-roles"
+  },
+  "itemType": "matchPairs",
+  "difficulty": 2,
+  "prompt": "Associe chaque rôle intégré à ce qu'il permet.",
+  "options": [
+    {
+      "id": "l-owner",
+      "label": "Propriétaire"
+    },
+    {
+      "id": "l-contributor",
+      "label": "Contributeur"
+    },
+    {
+      "id": "l-reader",
+      "label": "Lecteur"
+    }
+  ],
+  "matches": [
+    {
+      "id": "r-read",
+      "label": "Consulter seulement"
+    },
+    {
+      "id": "r-all",
+      "label": "Tout gérer, y compris les accès"
+    },
+    {
+      "id": "r-resources",
+      "label": "Gérer les ressources, sans les accès"
+    }
+  ]
+}

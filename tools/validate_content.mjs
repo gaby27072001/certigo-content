@@ -16,6 +16,11 @@ import {
 } from "./lib/catalog.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import {
+  isV5,
+  v5PairViolations,
+  v5QuestionViolations,
+} from "./lib/exercise_v5.mjs";
+import {
   CONTENT_MODE,
   detectContentMode,
   expectedSourcePath,
@@ -34,8 +39,16 @@ const FORBIDDEN_PUBLIC_KEYS = [
   "correct",
   "correctOptionIds",
   "explanation",
+  "pairs",
   "rationale",
 ];
+// Versions portant la metadata runtime (domainId, conceptId) et rattachees au graphe
+// canonique. Les corriges de ces versions ne dupliquent pas la metadata.
+const RUNTIME_ITEM_VERSIONS = ["v4", "v5"];
+
+function isRuntimeItem(payload) {
+  return RUNTIME_ITEM_VERSIONS.includes(payload?.schemaVersion);
+}
 const OFFICIAL_SOURCE_HOSTS = {
   aws: ["aws.amazon.com", "d1.awsstatic.com", "docs.aws.amazon.com"],
   gcp: ["cloud.google.com", "services.google.com", "support.google.com"],
@@ -340,7 +353,7 @@ function validateCatalogSemantics(catalog, err) {
 }
 
 function validateMetadata({ data, file, channel, catalogIndex, err }) {
-  if (!["v3", "v4"].includes(data?.schemaVersion)) {
+  if (!["v3", ...RUNTIME_ITEM_VERSIONS].includes(data?.schemaVersion)) {
     const legacyRoot =
       channel === "public"
         ? "content/public/questions/"
@@ -352,7 +365,7 @@ function validateMetadata({ data, file, channel, catalogIndex, err }) {
     return;
   }
 
-  if (data.schemaVersion === "v4" && channel === "answerKey") {
+  if (isRuntimeItem(data) && channel === "answerKey") {
     const expectedPath = expectedSourcePath({
       artifact: "private",
       mode: CONTENT_MODE.runtime,
@@ -417,6 +430,14 @@ function validateMetadata({ data, file, channel, catalogIndex, err }) {
 }
 
 export function correctMatchesChoice(question, solution) {
+  if (isV5(question) || isV5(solution)) {
+    return (
+      isV5(question) &&
+      isV5(solution) &&
+      v5QuestionViolations(question).length === 0 &&
+      v5PairViolations(question, solution).length === 0
+    );
+  }
   if (question?.schemaVersion === "v4") {
     const optionIds = new Set(
       Array.isArray(question.options)
@@ -608,7 +629,7 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
         }
         referencedQuestions.add(block.questionId);
         if (
-          question.schemaVersion !== "v4" ||
+          !isRuntimeItem(question) ||
           question.metadata?.certification !== lesson.certificationId ||
           question.metadata?.domainId !== domain?.id ||
           question.metadata?.conceptId !== block.conceptId
@@ -634,7 +655,7 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
         if (questionBankCertIds.has(concept.certificationId)) continue;
         const usedByQuestion = [...publicIds.values()].some(
           ({ data }) =>
-            data.schemaVersion === "v4" && data.metadata?.conceptId === concept.id
+            isRuntimeItem(data) && data.metadata?.conceptId === concept.id
         );
         if (!usedByQuestion) {
           err(`[runtime:orphan] ${file}: concept sans bloc ni question`);
@@ -643,7 +664,7 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
     }
 
     for (const [questionId, { data: question, file }] of publicIds) {
-      if (question.schemaVersion !== "v4") continue;
+      if (!isRuntimeItem(question)) continue;
       const domain = domains.get(question.metadata?.domainId)?.data;
       const concept = concepts.get(question.metadata?.conceptId)?.data;
       if (!domain || !concept) {
@@ -760,6 +781,11 @@ export async function validateContent(options = {}) {
         err(`[integrity:option-id] ${file}: ids d'option dupliques`);
       }
     }
+    if (isV5(data)) {
+      for (const { rule, message } of v5QuestionViolations(data)) {
+        err(`[v5:${rule}] ${file}: ${message}`);
+      }
+    }
     if (typeof data?.id === "string") {
       if (basename(file, ".json") !== data.id) {
         err(`[integrity:path-id] ${file}: nom de fichier different de id "${data.id}"`);
@@ -771,7 +797,7 @@ export async function validateContent(options = {}) {
       } else {
         publicIds.set(data.id, { file, data });
       }
-      if (data.schemaVersion === "v4" && typeof data.legacyId === "string") {
+      if (isRuntimeItem(data) && typeof data.legacyId === "string") {
         if (publicLegacyIds.has(data.legacyId)) {
           err(
             `[integrity:legacy-id] ${file}: alias question duplique "${data.legacyId}"`
@@ -904,9 +930,9 @@ export async function validateContent(options = {}) {
 
   if (
     contentMode !== CONTENT_MODE.runtime &&
-    [...publicIds.values()].some(({ data }) => data.schemaVersion === "v4")
+    [...publicIds.values()].some(({ data }) => isRuntimeItem(data))
   ) {
-    err("[runtime:missing] une question v4 exige un graphe runtime canonique");
+    err("[runtime:missing] une question v4 ou v5 exige un graphe runtime canonique");
   }
 
   for (const [id, question] of publicIds) {
@@ -915,7 +941,17 @@ export async function validateContent(options = {}) {
       continue;
     }
     const solution = answerIds.get(id);
-    if (!correctMatchesChoice(question.data, solution.data)) {
+    if (isV5(question.data) || isV5(solution.data)) {
+      // Une paire v5 se juge sur les regles croisees X1 a X9, chacune nommee. Les regles
+      // qui ne dependent que de la question (X2 et une partie de X6/X7) ont deja ete
+      // signalees fichier par fichier. Une paire dont un seul fichier est en v5 est
+      // signalee par [integrity:schema-version] ci-dessous.
+      if (isV5(question.data) && isV5(solution.data)) {
+        for (const { rule, message } of v5PairViolations(question.data, solution.data)) {
+          err(`[v5:${rule}] paire "${id}" (${solution.file}): ${message}`);
+        }
+      }
+    } else if (!correctMatchesChoice(question.data, solution.data)) {
       err(
         `[integrity:correct-choice] solution "${id}" (${solution.file}): la reponse doit correspondre exactement aux options publiques dans ${question.file} (egalite stricte, sans conversion de casse, trim ni normalisation Unicode)`
       );
@@ -1043,7 +1079,7 @@ export async function validateContent(options = {}) {
             `[coverage:question] ${file}: "${questionId}" absent ou rattache au mauvais objectif`
           );
         } else if (question.metadata) {
-          // v3/v4 questions carry metadata — verify certification+objective match
+          // v3/v4/v5 questions carry metadata — verify certification+objective match
           if (
             question.metadata.certification !== certification.id ||
             question.metadata.objective !== objective.id
@@ -1162,7 +1198,7 @@ export async function validateContent(options = {}) {
       }
     }
     for (const [id, question] of publicIds) {
-      if (!["v3", "v4"].includes(question.data.schemaVersion)) continue;
+      if (!["v3", ...RUNTIME_ITEM_VERSIONS].includes(question.data.schemaVersion)) continue;
       if (
         question.data.metadata === null ||
         Array.isArray(question.data.metadata) ||

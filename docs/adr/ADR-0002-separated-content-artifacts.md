@@ -39,7 +39,8 @@ sources. Elle refuse :
 
 - tout lien symbolique ou type de fichier non regulier ;
 - tout segment de chemin contenant `answerKey` ;
-- toute cle JSON `correct` ou `rationale`, a n'importe quelle profondeur ;
+- toute cle JSON `correct`, `correctOptionIds`, `explanation`, `pairs` ou
+  `rationale`, a n'importe quelle profondeur ;
 - les memes motifs dans les octets bruts ;
 - tout fichier non declare ou dont le hash/taille diverge.
 

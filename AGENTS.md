@@ -12,7 +12,7 @@ Tooling and CI produce separate `public` and `private` artifacts with distinct m
 ## Working rules for agents
 
 1. Preserve the public/private separation. Never move answer material into `content/public/questions/`.
-2. A public question must not include `correct` or `rationale` fields.
+2. A public question must not include answer fields: `correct`, `correctOptionIds`, `explanation`, `pairs` or `rationale`.
 3. Maintain one-to-one mapping between public question IDs and private solutions.
 4. Keep outputs deterministic: avoid machine-specific paths, timestamps, or non-canonical JSON formatting changes that could affect manifest determinism.
 5. Make focused, minimal edits; do not refactor unrelated files.

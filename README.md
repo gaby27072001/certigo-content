@@ -73,19 +73,22 @@ retention, l'immutabilite, la publication et le rollback.
 5. Executer `npm run package` puis `npm run package:verify`.
 
 Une question publique, le catalogue et les matrices ne doivent contenir aucune
-cle `correct` ou `rationale`.
+cle `correct`, `correctOptionIds`, `explanation`, `pairs` ou `rationale`.
 Chaque identifiant public doit posseder exactement une solution et
 reciproquement. Pour v2/v3, `solution.correct` doit etre une valeur de
 `question.choices`. Pour v4, chaque `solution.correctOptionIds` doit referencer
-un `question.options[].id`. Les comparaisons sont strictes : aucune conversion de casse, aucun trim et
+un `question.options[].id`. Pour v5, la paire doit respecter les regles croisees
+X1 a X9 du contrat d'exercices (voir
+[`ADR-0005`](docs/adr/ADR-0005-canonical-runtime-content-contract.md)). Les comparaisons sont strictes : aucune conversion de casse, aucun trim et
 aucune normalisation Unicode ne sont appliques. Le manifeste est deterministe :
 toute modification semantique
 du corpus change son hash, tandis que l'ordre des cles et la mise en forme JSON
 ne le changent pas.
 
 Les payloads historiques `v2` restent valides et a plat. Les paires
-multi-cloud metadata-only utilisent `v3`; le contrat runtime utilise `v4`. Les
-deux variantes namespacees utilisent un ID
+multi-cloud metadata-only utilisent `v3`; le contrat runtime utilise `v4`, et
+`v5` pour les exercices par type. Les
+variantes namespacees utilisent un ID
 `provider.certification.objective.slug.sequence` et des chemins symetriques
 `questions/<provider>/<certification>/` /
 `solutions/<provider>/<certification>/`.

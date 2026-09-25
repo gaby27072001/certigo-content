@@ -24,6 +24,11 @@ import {
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import { isCertificationRecommendedOn } from "./lib/catalog.mjs";
 import {
+  isV5,
+  v5PairViolations,
+  v5QuestionViolations,
+} from "./lib/exercise_v5.mjs";
+import {
   CONTENT_MODE,
   detectContentMode,
   expectedArtifactPath,
@@ -63,8 +68,11 @@ const FORBIDDEN_PUBLIC_KEYS = new Set([
   "correct",
   "correctoptionids",
   "explanation",
+  "pairs",
   "rationale",
 ]);
+const FORBIDDEN_PUBLIC_RAW_PATTERN =
+  /"(?:correct|correctOptionIds|explanation|pairs|rationale)"\s*:/i;
 
 const CATALOG_SOURCE_PATH = "content/public/catalog/certifications.json";
 
@@ -74,6 +82,11 @@ const CATALOG_SOURCE_PATH = "content/public/catalog/certifications.json";
  * quand elle ne la declare pas (paires v2 heritees, sans bloc `metadata`) :
  * une ressource non identifiable n'est jamais exclue, pour que les corpus
  * historiques restent reconstructibles a l'identique (ADR-0002).
+ *
+ * Les corriges v4 et v5 ne portent pas de metadata, mais leur id est
+ * namespace (`<provider>.<slug>.<objectif>.<concept>.<NNN>`), comme le chemin
+ * que leur donne `expectedArtifactPath`. La certification s'en deduit : sans
+ * cela, la porte exclurait la question et livrerait son corrige seul.
  */
 function certificationOfResource(resourceType, data) {
   if (resourceType === "certificationCatalog") return null;
@@ -81,6 +94,14 @@ function certificationOfResource(resourceType, data) {
   if (resourceType === "question" || resourceType === "solution") {
     const metadata = data.metadata;
     if (metadata === null || Array.isArray(metadata) || typeof metadata !== "object") {
+      if (
+        resourceType === "solution" &&
+        ["v4", "v5"].includes(data.schemaVersion) &&
+        typeof data.id === "string"
+      ) {
+        const [provider, slug] = data.id.split(".");
+        return provider && slug ? `${provider}:${slug}` : null;
+      }
       return null;
     }
     return metadata.certification ?? null;
@@ -285,7 +306,7 @@ export function inspectPublicArtifact(artifactRoot) {
 
     const absolutePath = resolve(root, path);
     const raw = readFileSync(absolutePath, "utf8");
-    if (/"(?:correct|correctOptionIds|explanation|rationale)"\s*:/i.test(raw)) {
+    if (FORBIDDEN_PUBLIC_RAW_PATTERN.test(raw)) {
       violations.push(`motif de corrige interdit dans ${path}`);
     }
 
@@ -437,6 +458,11 @@ export function verifyArtifact({
           errors.push(`ids d'option dupliques ou invalides: ${entry.path}`);
         }
       }
+      if (resourceType === "question" && isV5(payload)) {
+        for (const { rule, message } of v5QuestionViolations(payload)) {
+          errors.push(`[v5:${rule}] ${entry.path}: ${message}`);
+        }
+      }
       if (extended && entry.resourceType !== resourceType) {
         errors.push(
           `resourceType incorrect: ${entry.path} attendu ${resourceType}, obtenu ${entry.resourceType}`
@@ -529,6 +555,60 @@ export function verifyArtifact({
     throw new Error(`[package-verify] ${errors.join("; ")}`);
   }
   return { manifest, antiLeakReport };
+}
+
+function loadArtifactPayloads(artifactRoot, resourceType) {
+  const manifest = loadJson(resolve(artifactRoot, "manifest.json"));
+  const payloads = new Map();
+  for (const entry of Array.isArray(manifest.files) ? manifest.files : []) {
+    if (typeof entry?.path !== "string") continue;
+    if (resourceTypeFromArtifactPath(entry.path) !== resourceType) continue;
+    payloads.set(entry.id, {
+      path: entry.path,
+      payload: loadJson(resolve(artifactRoot, entry.path)),
+    });
+  }
+  return payloads;
+}
+
+/**
+ * Regles croisees v5 sur ce qui est reellement livre : chaque question v5 du
+ * canal public a son corrige v5 dans le canal prive, et la paire respecte X1 a
+ * X9 (les regles propres a la question sont verifiees artefact par artefact).
+ * Le validateur les applique deja aux sources ; les rejouer ici couvre la porte
+ * de livraison et toute modification des artefacts apres construction.
+ */
+export function verifyExercisePairs(distRoot) {
+  const root = resolve(distRoot);
+  const questions = loadArtifactPayloads(resolve(root, "public"), "question");
+  const solutions = loadArtifactPayloads(resolve(root, "private"), "solution");
+  const errors = [];
+  for (const [id, { path, payload }] of questions) {
+    if (!isV5(payload)) continue;
+    const solution = solutions.get(id);
+    if (!solution) {
+      errors.push(`question v5 "${id}" (${path}) livree sans son corrige`);
+      continue;
+    }
+    if (!isV5(solution.payload)) {
+      errors.push(
+        `paire "${id}": question v5, corrige ${solution.payload?.schemaVersion ?? "inconnu"}`
+      );
+      continue;
+    }
+    for (const { rule, message } of v5PairViolations(payload, solution.payload)) {
+      errors.push(`[v5:${rule}] paire "${id}": ${message}`);
+    }
+  }
+  for (const [id, { path, payload }] of solutions) {
+    if (!isV5(payload)) continue;
+    if (!isV5(questions.get(id)?.payload)) {
+      errors.push(`corrige v5 "${id}" (${path}) livre sans sa question v5`);
+    }
+  }
+  if (errors.length > 0) {
+    throw new Error(`[package-verify] ${errors.join("; ")}`);
+  }
 }
 
 async function writeArtifact(root, distRoot, config, mode) {
@@ -643,6 +723,7 @@ export async function verifyPackagedContent(options = {}) {
     manifests[config.name] = result.manifest;
   }
   const allChannels = options.channel === undefined || options.channel === "all";
+  if (allChannels) verifyExercisePairs(distRoot);
   const releasePath = resolve(distRoot, "release.json");
   const releaseRequired = Object.values(manifests).some(
     (manifest) => manifest.schema === RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID
@@ -710,6 +791,10 @@ export async function packageContent(options = {}) {
       fileCount: verified.manifest.fileCount,
     });
     manifests[config.name] = verified.manifest;
+  }
+
+  if (configs.length === Object.keys(CHANNELS).length) {
+    verifyExercisePairs(distRoot);
   }
 
   let release = null;

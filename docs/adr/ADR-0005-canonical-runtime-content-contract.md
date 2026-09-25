@@ -143,6 +143,37 @@ explicite plutot qu'un encodage ambigu dans `options`.
 `solution/v4` contient uniquement le meme `id`, `correctOptionIds` et
 `rationale`. La metadata n'est pas dupliquee dans le canal prive.
 
+### Question et solution v5 (expand du 2026-09-25)
+
+`question/v5` et `solution/v5` sont la variante « un contrat par type » specifiee
+par Certigo : `docs/contracts/exercise-items/v5/README.md` de
+`gchambaud_microsoft/Certigo`, revision
+`6562c293852592f727d7b61e2d792070752a67cf`, et son ADR-022. Les schemas
+de ce depot en integrent les propositions a l'identique dans leurs `oneOf` ; v2,
+v3 et v4 ne changent pas.
+
+- `itemType` couvre les huit types : `mcq`, `multi`, `scenario`,
+  `spotTheIssue`, `ordering`, `applied`, `cloze` et `matchPairs`.
+- `matches[]` porte la colonne droite, **uniquement** pour `matchPairs`.
+- Le corrige porte aussi `itemType`, ce qui permet au schema seul d'imposer les
+  cardinalites par type. Pour `matchPairs`, `correctOptionIds` contient des
+  jetons `"<idGauche>:<idDroite>"`.
+- `applied` est un sous-ensemble ordonne d'au moins deux etapes : les options
+  absentes du corrige sont des distracteurs.
+- La cle `pairs` rejoint les cles interdites cote public.
+
+Les regles croisees X1 a X9 (section 5 du contrat) sont codees une seule fois dans
+`tools/lib/exercise_v5.mjs`. Le validateur les applique aux sources, et le
+packager les rejoue sur les artefacts construits (`verifyExercisePairs`). Rien ne
+reordonne les options a la publication : X8 (`ordering`, `applied`) et X9
+(`matchPairs`) exigent que l'ordre publie ne donne pas la reponse. Elles
+remplacent la publication « triee par id » de la premiere version d'ADR-022, qui
+revelait la reponse des que les id encodaient le rang.
+
+Aucun contenu v5 n'est publie tant que le backend ne l'accepte pas. La garde
+`npm run contract:backend` refuse tout paquet v5 jusqu'a la resynchronisation de
+`config/backend-accepted-schemas/`, apres que Certigo a embarque et deploye v5.
+
 L'appariement bijectif est exige **uniquement** entre question et solution. Les
 autres ressources publiques utilisent des references validees mais n'ont aucun
 miroir prive.
@@ -185,7 +216,7 @@ existantes : elle exige une migration explicite et une nouvelle release.
 | --- | --- | --- | --- |
 | Historique sans catalogue | `v2` | `v1` | `v1` |
 | Fondation catalogue/couverture | `v2` ou `v3` | `v2` | `v2` |
-| Contrat runtime canonique | `v2`, `v3` et `v4` | `v3` | `v3` |
+| Contrat runtime canonique | `v2`, `v3`, `v4` et `v5` | `v3` | `v3` |
 
 La presence d'au moins une ressource sous `content/public/runtime/**` active le
 mode v3. Le simple ajout du catalogue ne change donc pas les manifestes v2 de

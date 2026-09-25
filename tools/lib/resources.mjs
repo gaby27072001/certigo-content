@@ -161,7 +161,7 @@ export function expectedArtifactPath({
     if (metadata?.provider && metadata?.certification) {
       return `${directory}/${metadata.provider}/${certificationSlug(metadata.certification)}/${data.id}.json`;
     }
-    if (artifact === "private" && data.schemaVersion === "v4") {
+    if (artifact === "private" && ["v4", "v5"].includes(data.schemaVersion)) {
       return `${directory}/${providerFromQuestionId(data.id)}/${certificationFromQuestionId(data.id)}/${data.id}.json`;
     }
   }

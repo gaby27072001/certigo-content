@@ -1,0 +1,30 @@
+{
+  "id": "microsoft.az-104.section-1.examples.004",
+  "schemaVersion": "v5",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:az-104",
+    "blueprintVersion": "2026-08-17",
+    "objective": "section-1",
+    "domainId": "microsoft.az-104.domain.governance",
+    "conceptId": "microsoft.az-104.concept.resource-locks"
+  },
+  "itemType": "spotTheIssue",
+  "difficulty": 2,
+  "prompt": "Voici le plan de l'équipe pour protéger la production. Quelle décision n'atteint pas son objectif ?",
+  "options": [
+    {
+      "id": "a",
+      "label": "Poser un verrou sur le groupe d'administration de production"
+    },
+    {
+      "id": "b",
+      "label": "Poser un verrou CanNotDelete sur le groupe de ressources de production"
+    },
+    {
+      "id": "c",
+      "label": "Réserver le rôle Propriétaire au compte d'urgence"
+    }
+  ]
+}

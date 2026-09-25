@@ -43,7 +43,7 @@ export function isCertificationRecommendedOn(certification, dateValue) {
 
 export function metadataFields(payload) {
   if (
-    !["v3", "v4"].includes(payload?.schemaVersion) ||
+    !["v3", "v4", "v5"].includes(payload?.schemaVersion) ||
     payload.metadata === null ||
     Array.isArray(payload.metadata) ||
     typeof payload.metadata !== "object"
