@@ -180,9 +180,15 @@ une selection partielle : un item `applied` avec distracteurs, conforme au contr
 (`[v5:garde-applied]`) tant que `allowAppliedDistractors` vaut `false` dans
 `config/exercise-publication-guards.json`. C'est la valeur du depot, et un fichier
 ou un reglage absent laisse aussi la garde active. Le validateur ne l'applique pas,
-parce que ce n'est pas une regle du contrat. On la leve en passant le reglage a
-`true`, une fois que Certigo a livre et deploye cette interface ; Certigo applique
-la meme garde cote legacy.
+parce que ce n'est pas une regle du contrat. C'est la meme garde que
+`APPLIED_DISTRACTORS_NOT_YET_SUPPORTED`, qui s'applique au corpus legacy de
+Certigo (decision Q-G, Certigo#530). On ne la leve qu'une fois reunies les trois
+conditions de `docs/EXERCICES.md` de Certigo :
+1. l'app permet de valider un `applied` des 2 etapes placees ;
+2. cette version est la seule en circulation chez les apprenants ;
+3. les vecteurs de parite couvrent les sous-ensembles.
+
+Le deploiement du backend seul ne suffit pas.
 
 L'appariement bijectif est exige **uniquement** entre question et solution. Les
 autres ressources publiques utilisent des references validees mais n'ont aucun

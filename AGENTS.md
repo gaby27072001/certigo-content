@@ -121,9 +121,17 @@ are not contract rules, and `npm run validate` does not apply them.
 
 - `allowAppliedDistractors` is `false`: an `applied` item whose options are not all cited by
   `correctOptionIds` is refused with `[v5:garde-applied]`. X5 allows such distractors, but the app
-  cannot validate a partial selection yet, so the item would be impossible to pass.
-- Set the value to `true` only once Certigo has shipped and deployed that interface. A missing file
-  or key keeps the guard active, and an unreadable value fails the build.
+  only lets the learner submit once every option is placed, so the item would be impossible to pass.
+  Certigo applies the same rule to its legacy corpus (`APPLIED_DISTRACTORS_NOT_YET_SUPPORTED`,
+  decision Q-G, Certigo#530).
+- Set the value to `true` only when **all three** lifting conditions of Certigo's `docs/EXERCICES.md`
+  (section "Garde provisoire sur les distracteurs d'`applied`") hold:
+  1. the app lets the learner submit an `applied` answer once 2 steps are placed, with accessible
+     reordering;
+  2. that app version is the only one learners have, checked on the latest distributed build;
+  3. the parity vectors cover subsets.
+  Deploying the backend alone is not enough. A missing file or key keeps the guard active, and an
+  unreadable value fails the build.
 
 ## Expected change process
 

@@ -486,6 +486,12 @@ test("la garde provisoire est active dans ce depot : un applied avec distracteur
   // Temoin volontaire : lever la garde (allowAppliedDistractors: true) est une decision
   // qui attend l'interface de selection partielle de Certigo, et doit se voir en revue.
   assert.deepEqual(loadExerciseGuards(repoRoot), { allowAppliedDistractors: false });
+  // Le reglage est documente la ou il se change : la garde jumelle de Certigo et ses
+  // trois conditions de levee.
+  const note = readJson(resolve(repoRoot, EXERCISE_GUARDS_PATH)).note;
+  for (const expected of ["APPLIED_DISTRACTORS_NOT_YET_SUPPORTED", "(1)", "(2)", "(3)"]) {
+    assert.ok(note.includes(expected), `note du reglage: ${expected} attendu`);
+  }
   const { question, solution } = example("applied");
   assert.deepEqual(appliedDistractorIds(question, solution), ["p-readonly"]);
   assert.deepEqual(appliedDistractorIds(...Object.values(example("ordering"))), []);

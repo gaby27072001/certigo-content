@@ -259,8 +259,9 @@ export function appliedDistractorIds(question, solution) {
 }
 
 // Tant que allowAppliedDistractors vaut false, un applied avec distracteurs est refuse :
-// l'app ne sait pas encore valider une selection partielle, l'item serait impossible a
-// reussir. La garde se leve quand Certigo a livre cette interface.
+// l'app ne permet de valider qu'une fois toutes les options placees, l'item serait
+// impossible a reussir. Meme regle que APPLIED_DISTRACTORS_NOT_YET_SUPPORTED cote Certigo ;
+// ses trois conditions de levee sont recopiees dans EXERCISE_GUARDS_PATH.
 export function v5PublicationGuardViolations(question, solution, guards = DEFAULT_EXERCISE_GUARDS) {
   if (guards.allowAppliedDistractors === true) return [];
   const distractors = appliedDistractorIds(question, solution);
@@ -269,8 +270,9 @@ export function v5PublicationGuardViolations(question, solution, guards = DEFAUL
     violation(
       APPLIED_DISTRACTOR_GUARD,
       `item applied avec distracteur(s) ${distractors.join(", ")} refuse a la publication : ` +
-        "l'app ne sait pas encore valider une selection partielle. Garde levee par " +
-        `allowAppliedDistractors dans ${EXERCISE_GUARDS_PATH}`
+        "l'app ne permet de valider qu'une fois toutes les options placees (meme garde que " +
+        "APPLIED_DISTRACTORS_NOT_YET_SUPPORTED cote Certigo). Garde levee par " +
+        `allowAppliedDistractors dans ${EXERCISE_GUARDS_PATH}, aux conditions qu'il documente`
     ),
   ];
 }
