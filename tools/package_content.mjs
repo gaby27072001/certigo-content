@@ -25,7 +25,9 @@ import { compareOrdinal } from "./lib/deterministic.mjs";
 import { isCertificationRecommendedOn } from "./lib/catalog.mjs";
 import {
   isV5,
+  loadExerciseGuards,
   v5PairViolations,
+  v5PublicationGuardViolations,
   v5QuestionViolations,
 } from "./lib/exercise_v5.mjs";
 import {
@@ -577,8 +579,13 @@ function loadArtifactPayloads(artifactRoot, resourceType) {
  * X9 (les regles propres a la question sont verifiees artefact par artefact).
  * Le validateur les applique deja aux sources ; les rejouer ici couvre la porte
  * de livraison et toute modification des artefacts apres construction.
+ *
+ * Les gardes provisoires de publication (`guards`, lues dans
+ * config/exercise-publication-guards.json par les appelants) ne s'appliquent
+ * qu'ici : elles refusent la PUBLICATION d'items conformes au contrat que l'app
+ * ne sait pas encore faire reussir. Sans reglage, elles sont actives.
  */
-export function verifyExercisePairs(distRoot) {
+export function verifyExercisePairs(distRoot, guards) {
   const root = resolve(distRoot);
   const questions = loadArtifactPayloads(resolve(root, "public"), "question");
   const solutions = loadArtifactPayloads(resolve(root, "private"), "solution");
@@ -596,7 +603,10 @@ export function verifyExercisePairs(distRoot) {
       );
       continue;
     }
-    for (const { rule, message } of v5PairViolations(payload, solution.payload)) {
+    for (const { rule, message } of [
+      ...v5PairViolations(payload, solution.payload),
+      ...v5PublicationGuardViolations(payload, solution.payload, guards),
+    ]) {
       errors.push(`[v5:${rule}] paire "${id}": ${message}`);
     }
   }
@@ -723,7 +733,7 @@ export async function verifyPackagedContent(options = {}) {
     manifests[config.name] = result.manifest;
   }
   const allChannels = options.channel === undefined || options.channel === "all";
-  if (allChannels) verifyExercisePairs(distRoot);
+  if (allChannels) verifyExercisePairs(distRoot, loadExerciseGuards(root));
   const releasePath = resolve(distRoot, "release.json");
   const releaseRequired = Object.values(manifests).some(
     (manifest) => manifest.schema === RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID
@@ -794,7 +804,7 @@ export async function packageContent(options = {}) {
   }
 
   if (configs.length === Object.keys(CHANNELS).length) {
-    verifyExercisePairs(distRoot);
+    verifyExercisePairs(distRoot, loadExerciseGuards(root));
   }
 
   let release = null;

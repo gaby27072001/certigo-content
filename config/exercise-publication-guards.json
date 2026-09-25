@@ -1,0 +1,5 @@
+{
+  "schema": "certigo.exercise-publication-guards/v1",
+  "note": "Gardes provisoires de publication des exercices v5, appliquees par le packager (npm run package, package:verify, contract:backend et le plan de publication), pas par le contrat. allowAppliedDistractors vaut false : un item applied dont certaines options ne figurent pas dans correctOptionIds (des distracteurs, que la regle X5 permet) est refuse a la publication, parce que l'app ne sait pas encore valider une selection partielle et qu'un tel item serait impossible a reussir. Passer la valeur a true seulement quand Certigo a livre et deploye cette interface (lot wp-p2-06). Un fichier ou un reglage absent laisse la garde active.",
+  "allowAppliedDistractors": false
+}

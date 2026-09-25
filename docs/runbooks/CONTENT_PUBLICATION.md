@@ -90,7 +90,10 @@ toute connexion lorsque :
 - le paquet construit n'est pas entierement accepte par la copie des schemas
   embarques du backend Certigo (`npm run contract:backend -- --dist dist`,
   regle « expand avant usage ») : une release que l'import refuserait ne doit
-  pas devenir irreversible.
+  pas devenir irreversible ;
+- une paire v5 livree viole les regles croisees X1 a X9, ou une garde provisoire
+  de `config/exercise-publication-guards.json` : aujourd'hui, un item `applied`
+  avec distracteurs tant que `allowAppliedDistractors` vaut `false`.
 
 Les environnements contractuels sont :
 

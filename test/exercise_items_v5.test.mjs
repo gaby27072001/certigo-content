@@ -14,9 +14,14 @@ import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import {
+  appliedDistractorIds,
   clozeBlankCount,
+  EXERCISE_GUARDS_PATH,
+  EXERCISE_GUARDS_SCHEMA,
+  loadExerciseGuards,
   V5_ITEM_TYPES,
   v5PairViolations,
+  v5PublicationGuardViolations,
   v5QuestionViolations,
   v5Violations,
 } from "../tools/lib/exercise_v5.mjs";
@@ -300,11 +305,18 @@ function v5Id(itemType) {
 // Racine de contenu runtime complete (fixture runtime-v3) enrichie des huit exemples,
 // rattaches a la banque de questions AWS de la fixture. Seuls l'id et la metadata sont
 // adaptes ; la charge d'exercice (prompt, options, matches, corrige) est celle du contrat.
-function createV5Root() {
+//
+// Par defaut, l'applied est livre SANS son distracteur, pour rester publiable sous la garde
+// provisoire (config/exercise-publication-guards.json) ; `appliedDistractors: true` garde
+// l'exemple du contrat tel quel. `guards` ecrit un reglage de garde dans la racine.
+function createV5Root({ appliedDistractors = false, guards } = {}) {
   const root = mkdtempSync(join(tmpdir(), "certigo-exercise-v5-"));
   temporaryRoots.push(root);
   cpSync(resolve(runtimeFixtureRoot, "content"), resolve(root, "content"), { recursive: true });
   cpSync(resolve(repoRoot, "schemas"), resolve(root, "schemas"), { recursive: true });
+  if (guards !== undefined) {
+    writeJson(resolve(root, EXERCISE_GUARDS_PATH), guards);
+  }
   const coveragePath = resolve(root, "content", "public", "coverage", "aws", "clf-c02.json");
   const coverage = readJson(coveragePath);
   for (const itemType of V5_ITEM_TYPES) {
@@ -320,6 +332,11 @@ function createV5Root() {
       conceptId: "aws.clf-c02.concept.variable-spend",
     };
     solution.id = id;
+    if (itemType === "applied" && !appliedDistractors) {
+      question.options = question.options.filter((option) =>
+        solution.correctOptionIds.includes(option.id)
+      );
+    }
     writeJson(resolve(root, "content", "public", "questions", "aws", "clf-c02", `${id}.json`), question);
     writeJson(resolve(root, "content", "answerKey", "solutions", "aws", "clf-c02", `${id}.json`), solution);
     coverage.objectives[0].questionIds.push(id);
@@ -336,7 +353,7 @@ function sourcePath(root, channel, itemType) {
 }
 
 test("le validateur accepte les huit types v5 et nomme chaque regle croisee violee", async () => {
-  const root = createV5Root();
+  const root = createV5Root({ appliedDistractors: true });
   const accepted = await validateContent({ root });
   assert.deepEqual(accepted.errors, []);
   assert.equal(accepted.pairCount, 5 + 8);
@@ -463,4 +480,71 @@ test("tant que la copie backend n'a pas v5, la garde expand avant usage refusera
   // Seize fichiers v5 (huit questions, huit corriges) sont refuses, et rien d'autre.
   assert.equal(refused.length, 16, result.errors.join(" | "));
   assert.equal(result.errors.length, 16);
+});
+
+test("la garde provisoire est active dans ce depot : un applied avec distracteurs n'est pas publiable", () => {
+  // Temoin volontaire : lever la garde (allowAppliedDistractors: true) est une decision
+  // qui attend l'interface de selection partielle de Certigo, et doit se voir en revue.
+  assert.deepEqual(loadExerciseGuards(repoRoot), { allowAppliedDistractors: false });
+  const { question, solution } = example("applied");
+  assert.deepEqual(appliedDistractorIds(question, solution), ["p-readonly"]);
+  assert.deepEqual(appliedDistractorIds(...Object.values(example("ordering"))), []);
+  assert.deepEqual(
+    v5PublicationGuardViolations(question, solution).map((entry) => entry.rule),
+    ["garde-applied"]
+  );
+  assert.deepEqual(
+    v5PublicationGuardViolations(question, solution, { allowAppliedDistractors: true }),
+    []
+  );
+  // La garde ne fait pas partie du contrat : l'exemple reste conforme a X1-X9.
+  assert.deepEqual(v5Violations(question, solution), []);
+});
+
+test("la garde refuse a la publication un applied avec distracteurs, et se leve par son reglage", async () => {
+  const guarded = createV5Root({ appliedDistractors: true });
+  const validation = await validateContent({ root: guarded });
+  assert.deepEqual(validation.errors, [], "la garde n'est pas une regle de validation");
+  await assert.rejects(
+    () => packageContent({ root: guarded }),
+    (error) =>
+      /\[v5:garde-applied\]/.test(error.message) &&
+      error.message.includes(v5Id("applied")) &&
+      error.message.includes("p-readonly")
+  );
+
+  const explicit = createV5Root({
+    appliedDistractors: true,
+    guards: { schema: EXERCISE_GUARDS_SCHEMA, allowAppliedDistractors: false },
+  });
+  await assert.rejects(() => packageContent({ root: explicit }), /\[v5:garde-applied\]/);
+
+  const lifted = createV5Root({
+    appliedDistractors: true,
+    guards: { schema: EXERCISE_GUARDS_SCHEMA, allowAppliedDistractors: true },
+  });
+  await packageContent({ root: lifted });
+  const published = readJson(
+    resolve(lifted, "dist", "public", "questions", "aws", "clf-c02", `${v5Id("applied")}.json`)
+  );
+  assert.ok(published.options.some((option) => option.id === "p-readonly"));
+  await verifyPackagedContent({ root: lifted });
+
+  // La verification finale relit le reglage : reactiver la garde refuse le meme dist.
+  writeJson(resolve(lifted, EXERCISE_GUARDS_PATH), {
+    schema: EXERCISE_GUARDS_SCHEMA,
+    allowAppliedDistractors: false,
+  });
+  await assert.rejects(() => verifyPackagedContent({ root: lifted }), /\[v5:garde-applied\]/);
+});
+
+test("un reglage de garde illisible echoue ferme au lieu de lever la garde", async () => {
+  const wrongSchema = createV5Root({ guards: { schema: "autre", allowAppliedDistractors: true } });
+  assert.throws(() => loadExerciseGuards(wrongSchema), /schema attendu/);
+  await assert.rejects(() => packageContent({ root: wrongSchema }), /schema attendu/);
+
+  const notBoolean = createV5Root({
+    guards: { schema: EXERCISE_GUARDS_SCHEMA, allowAppliedDistractors: "oui" },
+  });
+  assert.throws(() => loadExerciseGuards(notBoolean), /doit etre un booleen/);
 });

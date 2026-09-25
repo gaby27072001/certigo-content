@@ -10,6 +10,9 @@
 // rien ne reordonne les options a la publication, et c'est a l'auteur de publier un ordre
 // qui ne donne pas la reponse.
 
+import { existsSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
 export const V5 = "v5";
 
 export const V5_ITEM_TYPES = Object.freeze([
@@ -218,4 +221,56 @@ export function v5PairViolations(question, solution) {
 
 export function v5Violations(question, solution) {
   return [...v5QuestionViolations(question), ...v5PairViolations(question, solution)];
+}
+
+// ---------------------------------------------------------------------------------------
+// Gardes provisoires de publication. Elles ne font pas partie du contrat v5 : elles
+// refusent a la publication des items conformes au contrat que l'app ne sait pas encore
+// faire reussir. Chacune se leve par un reglage de EXERCISE_GUARDS_PATH, documente dans le
+// fichier lui-meme, et un fichier ou un reglage absent laisse la garde ACTIVE.
+// ---------------------------------------------------------------------------------------
+
+export const EXERCISE_GUARDS_PATH = "config/exercise-publication-guards.json";
+export const EXERCISE_GUARDS_SCHEMA = "certigo.exercise-publication-guards/v1";
+export const APPLIED_DISTRACTOR_GUARD = "garde-applied";
+
+export const DEFAULT_EXERCISE_GUARDS = Object.freeze({ allowAppliedDistractors: false });
+
+export function loadExerciseGuards(root) {
+  const path = resolve(root, EXERCISE_GUARDS_PATH);
+  if (!existsSync(path)) return DEFAULT_EXERCISE_GUARDS;
+  const raw = readFileSync(path, "utf8");
+  const document = JSON.parse(raw.charCodeAt(0) === 0xfeff ? raw.slice(1) : raw);
+  if (document?.schema !== EXERCISE_GUARDS_SCHEMA) {
+    throw new Error(`${EXERCISE_GUARDS_PATH}: schema attendu ${EXERCISE_GUARDS_SCHEMA}`);
+  }
+  const allow = document.allowAppliedDistractors;
+  if (allow !== undefined && typeof allow !== "boolean") {
+    throw new Error(`${EXERCISE_GUARDS_PATH}: allowAppliedDistractors doit etre un booleen`);
+  }
+  return Object.freeze({ allowAppliedDistractors: allow === true });
+}
+
+// Les options d'un applied absentes du corrige sont ses distracteurs (X5 les permet).
+export function appliedDistractorIds(question, solution) {
+  if (question?.itemType !== "applied") return [];
+  const cited = new Set(Array.isArray(solution?.correctOptionIds) ? solution.correctOptionIds : []);
+  return idsOf(question.options).filter((id) => !cited.has(id));
+}
+
+// Tant que allowAppliedDistractors vaut false, un applied avec distracteurs est refuse :
+// l'app ne sait pas encore valider une selection partielle, l'item serait impossible a
+// reussir. La garde se leve quand Certigo a livre cette interface.
+export function v5PublicationGuardViolations(question, solution, guards = DEFAULT_EXERCISE_GUARDS) {
+  if (guards.allowAppliedDistractors === true) return [];
+  const distractors = appliedDistractorIds(question, solution);
+  if (distractors.length === 0) return [];
+  return [
+    violation(
+      APPLIED_DISTRACTOR_GUARD,
+      `item applied avec distracteur(s) ${distractors.join(", ")} refuse a la publication : ` +
+        "l'app ne sait pas encore valider une selection partielle. Garde levee par " +
+        `allowAppliedDistractors dans ${EXERCISE_GUARDS_PATH}`
+    ),
+  ];
 }

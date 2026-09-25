@@ -113,6 +113,18 @@ Before an import, the backend must also have been **deployed** with that revisio
 importer, replay `CandidateContentPackageTests` from Certigo on the local `dist/` (see
 `docs/runbooks/CONTENT_RELEASES.md` in Certigo).
 
+## Provisional publication guards for v5 exercises
+
+`config/exercise-publication-guards.json` holds temporary guards that the packager applies at
+publication (`npm run package`, `package:verify`, `contract:backend` and the publication plan). They
+are not contract rules, and `npm run validate` does not apply them.
+
+- `allowAppliedDistractors` is `false`: an `applied` item whose options are not all cited by
+  `correctOptionIds` is refused with `[v5:garde-applied]`. X5 allows such distractors, but the app
+  cannot validate a partial selection yet, so the item would be impossible to pass.
+- Set the value to `true` only once Certigo has shipped and deployed that interface. A missing file
+  or key keeps the guard active, and an unreadable value fails the build.
+
 ## Expected change process
 
 1. Update matching JSON pairs in the appropriate public/private locations.

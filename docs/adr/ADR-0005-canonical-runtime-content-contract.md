@@ -174,6 +174,16 @@ Aucun contenu v5 n'est publie tant que le backend ne l'accepte pas. La garde
 `npm run contract:backend` refuse tout paquet v5 jusqu'a la resynchronisation de
 `config/backend-accepted-schemas/`, apres que Certigo a embarque et deploye v5.
 
+**Garde provisoire de publication (2026-09-25).** L'app ne sait pas encore valider
+une selection partielle : un item `applied` avec distracteurs, conforme au contrat
+(X5), serait impossible a reussir. Le packager le refuse donc a la publication
+(`[v5:garde-applied]`) tant que `allowAppliedDistractors` vaut `false` dans
+`config/exercise-publication-guards.json`. C'est la valeur du depot, et un fichier
+ou un reglage absent laisse aussi la garde active. Le validateur ne l'applique pas,
+parce que ce n'est pas une regle du contrat. On la leve en passant le reglage a
+`true`, une fois que Certigo a livre et deploye cette interface ; Certigo applique
+la meme garde cote legacy.
+
 L'appariement bijectif est exige **uniquement** entre question et solution. Les
 autres ressources publiques utilisent des references validees mais n'ont aucun
 miroir prive.
