@@ -33,10 +33,19 @@ fixture is stored here.
 
 ## Extraction
 
-The suite is repository content at `test/fixtures/apple-compat/v1/`. A consumer
-repository can pin this repository revision and copy this directory into its
-test resources, preserving the directory structure. Do not copy private
-`content/answerKey/` files or infer answer keys from public fixture values.
+The suite was introduced by Certigo Content commit
+`6922952936678c1bc37d8bb0db9e50afbef38a90` on branch
+`gaby27072001-apple-content-compatibility`; its repository path is
+`test/fixtures/apple-compat/v1/`. In a consumer repository, copy only this
+fixture directory into that repository's test resources, preserving the
+relative paths and this README as provenance. Do not cherry-pick the producer
+commit across repositories: it also contains producer-side tests and may not
+apply to the consumer's history. Do not copy private `content/answerKey/` files
+or infer answer keys from public fixture values.
+
+These JSON payloads are public question DTO fixtures, not API-projection DTOs.
+Keep API-projection tests separate from tests that read canonical corpus
+documents; both can reference these fixtures without changing their shapes.
 
 Run the producer-side checks with:
 
