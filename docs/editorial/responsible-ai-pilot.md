@@ -8,12 +8,19 @@ de competence certifiee.
 
 ## Lecture et relecture
 
-Lire les trois lessons dans l'ordre : verifier une affirmation, comprendre
+Lire les trois lessons dans l'ordre : preparer un plan de verification, comprendre
 recherche/contexte/entrainement, puis suspendre et escalader une action a risque.
 Dans chaque lesson, lire le cas resolu, produire sa propre reponse au
 `practice.prompt`, puis utiliser `successCriteria` et `feedback` pour la relire.
 Les criteres ne sont pas un score ni une cle de correction du corpus existant.
 Les durees sont des estimations editoriales, pas des mesures d'usage.
+
+La premiere pratique demande un plan de verification, pas une recherche
+effective de source : le reglage et le lien du cas fictif ne sont pas fournis.
+Les deux autres pratiques travaillent la comprehension guidee du RAG et d'une
+decision d'arret/escalade. Aucune n'est une evaluation autonome d'acquisition
+ou de preparation professionnelle. Les criteres et retours sont des documents
+auteur, pas une interface livree qui masquerait puis revelerait le feedback.
 
 Tous les scenarios sont fictifs et rediges pour ce pilote. Ils ne reprennent
 ni questions d'examen, ni passages fournisseurs, ni corriges Certigo.
@@ -53,7 +60,9 @@ verifient les octets apres regeneration et l'exclusion des manifestes/paquets.
 Ces controles ne sont pas une evaluation avec des apprenants. Avant de
 qualifier le pilote de pret pour le produit, faire relire les faits et la
 langue, puis observer si des debutants savent justifier leurs decisions sans
-voir le retour pedagogique. Pas de promesse d'apprentissage mesure dans cette PR.
+voir le retour pedagogique. Observer aussi une recherche effective de source,
+l'appui sur un passage precis et le transfert a un cas nouveau. Ces validations
+restent futures ; pas de promesse d'apprentissage mesure dans cette PR.
 
 Le repertoire editorial n'est pas distribue. Ne pas copier le pilote dans
 `content/public/runtime/` : le generateur remplace cet arbre. La contrainte

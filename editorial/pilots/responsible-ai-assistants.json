@@ -48,7 +48,7 @@
     {
       "id": "verify-claims",
       "title": "Une réponse convaincante n'est pas une preuve",
-      "objective": "Isoler une affirmation technique, trouver une source adaptée et décider si l'on peut l'utiliser ou s'il faut suspendre la décision.",
+      "objective": "Proposer un plan de vérification d'une affirmation technique : isoler ce qui est à vérifier, préciser les sources et conditions à rechercher et formuler une décision bornée si les preuves manquent.",
       "estimatedMinutes": 6,
       "hook": "Un assistant rédige une note claire en quelques secondes. Le risque commence quand sa clarté remplace votre vérification.",
       "keyIdeas": [
@@ -68,13 +68,13 @@
         "decision": "Camille retire la garantie d'exactitude et fait relire les points non établis avant toute action. Une citation utile et un contrôle favorable réduisent certains risques ; ils ne suppriment pas le besoin de vérifier."
       },
       "practice": {
-        "prompt": "Un collègue propose : « Ce réglage fonctionne dans toutes les régions ; l'assistant cite une page AWS. » Sans utiliser de compte cloud, écrivez deux vérifications à faire et la décision à prendre si la page ne couvre que votre région de test.",
+        "prompt": "Un collègue propose : « Ce réglage fonctionne dans toutes les régions ; l'assistant cite une page AWS. » Ce cas fictif ne précise ni le réglage ni la page : il sert à préparer une vérification, pas à la réaliser. Sans compte cloud, isolez l'affirmation à vérifier, proposez deux vérifications avec les sources à rechercher et formulez la décision à prendre si la page ne couvre que votre région de test.",
         "successCriteria": [
-          "Vérifier que le passage cité décrit bien le réglage et ses conditions, pas seulement le service.",
-          "Chercher la documentation officielle des régions prises en charge à la version ou date utile.",
-          "Ne pas généraliser au-delà des régions établies ; suspendre le déploiement envisagé et demander une revue si les informations manquent."
+          "Isoler la généralisation « dans toutes les régions » et prévoir de confronter le réglage et ses conditions au passage cité.",
+          "Prévoir de rechercher la documentation officielle des régions prises en charge à la version ou date utile ; demander le nom du réglage et le lien manquants.",
+          "Formuler une décision conditionnelle : ne pas généraliser au-delà des régions établies, suspendre le déploiement envisagé et demander une revue si les informations manquent."
         ],
-        "feedback": "Si vous avez seulement demandé une deuxième réponse à l'assistant, vous n'avez pas obtenu de preuve indépendante. Réduisez l'affirmation aux conditions documentées et nommez la vérification manquante. Il est raisonnable de conclure « non établi »."
+        "feedback": "Votre production est un plan : elle ne prouve pas que vous avez trouvé ou vérifié une source. Une deuxième réponse de l'assistant ne constituerait pas une preuve indépendante. Le plan doit nommer les informations manquantes, les sources à rechercher et la limite de la décision. La recherche effective d'un passage et le transfert à un cas nouveau restent à pratiquer et à observer ultérieurement."
       },
       "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence de preuve, dire ce qui manque est plus utile que parler avec assurance.",
       "sourceIds": ["aws-kb-overview", "aws-grounding"]
