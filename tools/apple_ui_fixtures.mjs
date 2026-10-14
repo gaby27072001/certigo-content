@@ -106,7 +106,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const [path, bytes] of files) {
     const target = resolve(root, suiteDirectory, path);
     if (args.includes("--check")) {
-      if (readFileSync(target, "utf8").replaceAll("\r\n", "\n") !== bytes) {
+      if (readFileSync(target, "utf8") !== bytes) {
         throw new Error(`Fixture drift: ${path}`);
       }
     } else {

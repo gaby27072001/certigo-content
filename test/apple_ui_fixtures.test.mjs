@@ -18,7 +18,7 @@ test("real Apple UI samples preserve compiler mapping and public canonical resou
   const questionSchema = ajv.compile(read(resolve(root, "schemas/question.schema.json")));
   const runtimeSchema = ajv.compile(read(resolve(root, "schemas/runtime-resource.schema.json")));
   for (const [path, bytes] of generated) {
-    assert.equal(readFileSync(resolve(fixtureRoot, path), "utf8").replaceAll("\r\n", "\n"), bytes, path);
+    assert.equal(readFileSync(resolve(fixtureRoot, path), "utf8"), bytes, path);
     const data = JSON.parse(bytes);
     if (path.endsWith("/question.json")) assert.ok(questionSchema(data), path);
     if (/\/(track|domain|concept)\.json$/.test(path)) assert.ok(runtimeSchema(data), path);
