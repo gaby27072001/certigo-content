@@ -69,6 +69,31 @@ test("les gates CI couvrent chaque push main et pull request", () => {
   }
 });
 
+test("le tooling utilise GitHub hosted sans elargir ses privileges", () => {
+  const tooling = loadWorkflow("ci-tooling.yml");
+  const job = tooling.jobs["test-and-supply-chain"];
+
+  assert.equal(job["runs-on"], "ubuntu-24.04");
+  assert.deepEqual(tooling.permissions, { contents: "read" });
+  assert.equal(job.permissions, undefined);
+  assert.equal(
+    job.if,
+    "${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}"
+  );
+  assert.equal(
+    job.environment,
+    "${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}"
+  );
+  const checkout = findStep(tooling, "test-and-supply-chain", "Checkout");
+  assert.equal(checkout.with["persist-credentials"], false);
+  assert.equal(checkout.with["fetch-depth"], 0);
+  for (const step of job.steps) {
+    if (step.uses !== undefined) {
+      assert.match(step.uses, /@[0-9a-f]{40}$/);
+    }
+  }
+});
+
 test("les uploads GitHub sont manuels, explicites et stricts", () => {
   const content = loadWorkflow("ci-content-package.yml");
   const tooling = loadWorkflow("ci-tooling.yml");
