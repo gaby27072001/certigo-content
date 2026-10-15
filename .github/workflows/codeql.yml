@@ -32,9 +32,9 @@ on:
     branches: [main]
   pull_request: {}
 
-# PAS de `schedule`. Les runners `certigo-ci` sont un pool dedie de deux
-# machines ; une analyse periodique les consommerait alors qu'aucun code n'a
-# change. Les evenements ci-dessus couvrent deja toute entree dans `main`.
+# PAS de `schedule` : une analyse periodique consommerait des runners alors
+# qu'aucun code n'a change. Les evenements ci-dessus couvrent deja toute
+# entree dans `main`.
 
 concurrency:
   group: codeql-${{ github.ref }}
@@ -52,7 +52,7 @@ jobs:
     # n'est jamais execute avec un jeton privilegie, ce qui rend inutile
     # l'isolation source/controle du workflow homologue de `Certigo`.
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
-    runs-on: ${{ vars.PR_RUNNER_LABELS && fromJSON(vars.PR_RUNNER_LABELS) || fromJSON('["self-hosted","Linux","X64","certigo-ci"]') }}
+    runs-on: ubuntu-24.04
     permissions:
       # `actions: read` est requis, pas decoratif : sur une pull request
       # CodeQL bascule en mode « overlay with caching » et interroge
