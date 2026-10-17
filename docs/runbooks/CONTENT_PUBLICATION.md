@@ -68,7 +68,19 @@ npm run publish:dry-run -- --destination .local-publication
 ```
 
 Le materializer est idempotent et deterministe. `runtime:check` echoue si les
-fichiers generes ne correspondent pas au contenu committe (CI gate).
+fichiers generes ne correspondent pas au contenu committe (CI gate). Son
+perimetre de generation est `tracks`, `domains` et `concepts`: les pistes
+`questionBank` sont regenerees, les pistes `guided` existantes sont preservees,
+et les dossiers `units` et `lessons` restent sous propriete editoriale. Les
+ressources `domains` et `concepts` restent derivees et gerees par le
+materializer.
+
+Une piste guidee doit utiliser les schemas runtime existants et former un graphe
+complet track → units → lessons → concepts. `npm run validate` controle ce
+graphe et les references; `runtime:check` ne remplace pas cette validation. Un
+document editorial de pilote n'est pas converti automatiquement en cours
+runtime, et aucune reponse privee ne doit etre copiee dans les lessons
+publiques.
 
 Les adaptateurs v2 vers v4 et v3 vers v4 (`tools/lib/schema_adapter.mjs`)
 consignent `sourceSchema` dans `dist/runtime-adapter/adapter-report.json`. Ce
