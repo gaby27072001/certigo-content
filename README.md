@@ -12,6 +12,12 @@ Cette separation est aussi une frontiere de distribution : l'outillage produit
 des artefacts `public` et `private` independants, avec des manifestes et hashes
 distincts. La gate machine inspecte la sortie publique finale avant publication.
 
+`editorial/pilots/` est une racine d'auteur distincte, non distribuee et non
+generee. Le [pilote sur les assistants IA](docs/editorial/responsible-ai-pilot.md)
+est un brouillon d'apprentissage original, sans preparation a une certification.
+Voir [ADR-0006](docs/adr/ADR-0006-standalone-editorial-pilot.md) pour la frontiere
+avec le runtime genere et les conditions d'une integration future.
+
 ## Prerequis
 
 - Node.js `20.20.2` (voir `.nvmrc`) ;
@@ -43,6 +49,7 @@ un commit donne.
 | --- | --- |
 | `npm test` | Execute les tests avec la couverture native Node et, si le runtime les supporte, les seuils lignes 80 %, fonctions 75 %, branches 70 %. |
 | `npm run validate` | Valide le corpus reel : schemas, bijection et anti-fuite. |
+| `npm run editorial:validate` | Valide hors reseau les pilotes autonomes non distribues ; inclus aussi dans les tests. |
 | `npm run catalog:freshness` | Controle sans reseau l'age du snapshot et les transitions de cycle de vie ; accepte `-- --as-of YYYY-MM-DD`. Projection jour par jour de la prochaine echeance : voir `AGENTS.md`, section « Projecting catalog freshness day by day ». |
 | `npm run contract:backend` | Garde « expand avant usage » : construit le paquet et exige que tout soit accepte par la copie des schemas du backend Certigo (`config/backend-accepted-schemas/`) ; accepte `-- --dist <dir>` et `-- --sync-from <checkout Certigo>`. Voir `AGENTS.md`, section « Backend content contract ». |
 | `npm run manifest:check` | Verifie le determinisme, le vecteur golden et le schema du manifeste. |
