@@ -69,6 +69,78 @@ test("les gates CI couvrent chaque push main et pull request", () => {
   }
 });
 
+test("le tooling utilise GitHub hosted sans elargir ses privileges", () => {
+  const tooling = loadWorkflow("ci-tooling.yml");
+  const job = tooling.jobs["test-and-supply-chain"];
+
+  assert.equal(job["runs-on"], "ubuntu-24.04");
+  assert.deepEqual(tooling.permissions, { contents: "read" });
+  assert.equal(job.permissions, undefined);
+  assert.equal(
+    job.if,
+    "${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}"
+  );
+  assert.equal(
+    job.environment,
+    "${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}"
+  );
+  const checkout = findStep(tooling, "test-and-supply-chain", "Checkout");
+  assert.equal(checkout.with["persist-credentials"], false);
+  assert.equal(checkout.with["fetch-depth"], 0);
+  for (const step of job.steps) {
+    if (step.uses !== undefined) {
+      assert.match(step.uses, /@[0-9a-f]{40}$/);
+    }
+  }
+});
+
+test("les trois jobs package utilisent GitHub hosted sans elargir leurs privileges", () => {
+  const content = loadWorkflow("ci-content-package.yml");
+
+  assert.deepEqual(content.permissions, { contents: "read" });
+  assert.deepEqual(Object.keys(content.jobs).sort(), [
+    "package-gates",
+    "package-private",
+    "package-public",
+  ]);
+  for (const [name, job] of Object.entries(content.jobs)) {
+    assert.equal(job["runs-on"], "ubuntu-24.04");
+    assert.equal(job.permissions, undefined);
+    assert.equal(
+      job.if,
+      "${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}"
+    );
+    assert.equal(
+      job.environment,
+      "${{ github.event_name == 'pull_request' && 'pr-ci' || '' }}"
+    );
+    const checkout = findStep(content, name, "Checkout");
+    assert.equal(checkout.with["persist-credentials"], false);
+    if (name === "package-gates") {
+      assert.equal(checkout.with["fetch-depth"], 0);
+    } else {
+      assert.equal(job.needs, "package-gates");
+    }
+    assert.equal(
+      findStep(content, name, "Setup Node.js").with["node-version-file"],
+      ".nvmrc"
+    );
+    assert.equal(findStep(content, name, "Install locked tooling").run, "npm ci");
+    for (const step of job.steps) {
+      if (step.uses !== undefined) {
+        assert.match(step.uses, /@[0-9a-f]{40}$/);
+      }
+    }
+  }
+  for (const [step, command] of [
+    ["Test packaging and leak gates", "npm test"],
+    ["Enforce certification catalog freshness", "npm run catalog:freshness"],
+    ["Enforce global artifact download policy", "npm run policy:artifact-access"],
+  ]) {
+    assert.equal(findStep(content, "package-gates", step).run, command);
+  }
+});
+
 test("les uploads GitHub sont manuels, explicites et stricts", () => {
   const content = loadWorkflow("ci-content-package.yml");
   const tooling = loadWorkflow("ci-tooling.yml");
@@ -106,8 +178,7 @@ test("les uploads GitHub sont manuels, explicites et stricts", () => {
 test("l'analyse CodeQL reste bornee a son perimetre mesure", () => {
   const codeql = loadWorkflow("codeql.yml");
 
-  // Aucun `schedule` : le pool `certigo-ci` ne compte que deux machines et une
-  // analyse periodique le consommerait sans qu'aucun code n'ait change.
+  // Aucun `schedule` : pas d'analyse periodique sans changement de code.
   assert.deepEqual(Object.keys(codeql.on).sort(), ["pull_request", "push"]);
   assert.deepEqual(codeql.on.push, { branches: ["main"] });
   assert.deepEqual(codeql.on.pull_request, {});
@@ -136,9 +207,12 @@ test("l'analyse CodeQL reste bornee a son perimetre mesure", () => {
   // des `note` de style, et une regle qui rougit sur tout dresse a passer outre.
   assert.equal(init.with.queries, undefined);
 
-  // Runner dedie du depot : `certigo-ci`. Les runners de `Certigo`
-  // (`certigo-pr` / `certigo-trusted`) sont un pool distinct.
-  assert.match(analyze["runs-on"], /certigo-ci/);
+  assert.equal(analyze["runs-on"], "ubuntu-24.04");
+  assert.equal(analyze.strategy["fail-fast"], false);
+  assert.equal(
+    analyze.if,
+    "${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}"
+  );
 
   // Moindre privilege : rien au niveau du workflow, et le strict necessaire
   // au niveau du job. `actions: read` est requis par le mode overlay de

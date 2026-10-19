@@ -33,8 +33,15 @@ function normalizeLineEndings(value) {
 }
 
 function writeResource(path, data) {
+  const serialized = `${canonicalize(data)}\n`;
+  if (
+    existsSync(path) &&
+    normalizeLineEndings(readFileSync(path, "utf8")) === serialized
+  ) {
+    return;
+  }
   mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, `${canonicalize(data)}\n`, "utf8");
+  writeFileSync(path, serialized, "utf8");
 }
 
 function certSlug(certificationId) {
@@ -43,6 +50,107 @@ function certSlug(certificationId) {
 
 function certProvider(certificationId) {
   return certificationId.split(":")[0];
+}
+
+function runtimeResourcePath(resource) {
+  const provider = certProvider(resource.data.certificationId);
+  const slug = certSlug(resource.data.certificationId);
+  const folder = {
+    track: "tracks",
+    domain: "domains",
+    concept: "concepts",
+  }[resource.type];
+  if (!folder) {
+    throw new Error(`[runtime:ownership] type genere inconnu: ${resource.type}`);
+  }
+  return `content/public/runtime/${folder}/${provider}/${slug}/${resource.data.id}.json`;
+}
+
+function authoredGuidedTrackFiles(root) {
+  const files = glob.sync("content/public/runtime/tracks/**/*.json", {
+    cwd: root,
+    posix: true,
+  }).sort(compareOrdinal);
+  const guidedFiles = new Set();
+
+  for (const file of files) {
+    const track = loadJson(resolve(root, file));
+    if (track.mode === "guided") {
+      if (
+        typeof track.certificationId !== "string" ||
+        typeof track.id !== "string"
+      ) {
+        throw new Error(
+          `[runtime:ownership] piste guidee sans identite valide: ${file}`
+        );
+      }
+      const expectedPath =
+        `content/public/runtime/tracks/${certProvider(track.certificationId)}/` +
+        `${certSlug(track.certificationId)}/${track.id}.json`;
+      if (
+        track.schema !== "certigo.runtime.track/v1" ||
+        track.resourceType !== "track" ||
+        file !== expectedPath
+      ) {
+        throw new Error(
+          `[runtime:ownership] piste guidee invalide ou chemin divergent: ${file}`
+        );
+      }
+      guidedFiles.add(file);
+    } else if (track.mode !== "questionBank") {
+      throw new Error(
+        `[runtime:ownership] mode de piste non gere dans ${file}`
+      );
+    }
+  }
+
+  return guidedFiles;
+}
+
+function generatedResources(resources, guidedTrackFiles) {
+  return resources.filter((resource) =>
+    resource.type !== "track" ||
+    !guidedTrackFiles.has(runtimeResourcePath(resource))
+  );
+}
+
+function generatedRuntimeFiles(root) {
+  return ["tracks", "domains", "concepts"].flatMap((folder) =>
+    glob.sync(`content/public/runtime/${folder}/**/*.json`, {
+      cwd: root,
+      posix: true,
+    })
+  ).sort(compareOrdinal);
+}
+
+function removeStaleGeneratedResources(root, resources, guidedTrackFiles) {
+  const expectedFiles = new Set(resources.map(runtimeResourcePath));
+  for (const file of generatedRuntimeFiles(root)) {
+    if (expectedFiles.has(file) || guidedTrackFiles.has(file)) continue;
+
+    if (file.startsWith("content/public/runtime/tracks/")) {
+      const track = loadJson(resolve(root, file));
+      if (track.mode !== "questionBank") {
+        throw new Error(
+          `[runtime:ownership] refus de supprimer une piste non generee: ${file}`
+        );
+      }
+    } else {
+      const folder = file.split("/")[3];
+      const resourceType = folder === "domains" ? "domain" : "concept";
+      const resource = loadJson(resolve(root, file));
+      if (
+        resource.resourceType !== resourceType ||
+        resource.schema !== `certigo.runtime.${resourceType}/v1`
+      ) {
+        throw new Error(
+          `[runtime:ownership] refus de supprimer une ressource non generee: ${file}`
+        );
+      }
+    }
+
+    rmSync(resolve(root, file), { force: true });
+  }
 }
 
 function runtimeLifecycle(certification) {
@@ -256,8 +364,12 @@ export async function materializeRuntime(options = {}) {
     });
   }
 
+  const guidedTrackFiles = authoredGuidedTrackFiles(root);
+  const resourcesToMaterialize = generatedResources(allResources, guidedTrackFiles);
+
   if (checkMode) {
-    // Verify generated coverage and the exact runtime tree, including stale files.
+    // Generated resources are exact; authored units, lessons and guided tracks
+    // are validated by validate_content.mjs and are never regenerated here.
     let mismatches = 0;
     for (const { path, data } of expectedCoverageFiles) {
       const expected = `${canonicalize(data)}\n`;
@@ -268,21 +380,13 @@ export async function materializeRuntime(options = {}) {
         mismatches++;
       }
     }
-    const expectedRuntimeFiles = new Set();
-    for (const resource of allResources) {
-      const provider = certProvider(resource.data.certificationId);
-      const slug = certSlug(resource.data.certificationId);
-      const folder = resource.type === "track" ? "tracks" :
-                     resource.type === "domain" ? "domains" :
-                     resource.type === "concept" ? "concepts" :
-                     resource.type === "unit" ? "units" : "lessons";
-      const filePath = resolve(
-        root,
-        `content/public/runtime/${folder}/${provider}/${slug}/${resource.data.id}.json`
-      );
-      expectedRuntimeFiles.add(
-        `content/public/runtime/${folder}/${provider}/${slug}/${resource.data.id}.json`
-      );
+    const expectedRuntimeFiles = new Set(
+      resourcesToMaterialize.map(runtimeResourcePath)
+    );
+    for (const file of guidedTrackFiles) expectedRuntimeFiles.add(file);
+    for (const resource of resourcesToMaterialize) {
+      const path = runtimeResourcePath(resource);
+      const filePath = resolve(root, path);
       const expected = `${canonicalize(resource.data)}\n`;
       if (!existsSync(filePath)) {
         mismatches++;
@@ -291,12 +395,7 @@ export async function materializeRuntime(options = {}) {
         if (actual !== expected) mismatches++;
       }
     }
-    const actualRuntimeFiles = new Set(
-      glob.sync("content/public/runtime/**/*.json", {
-        cwd: root,
-        posix: true,
-      })
-    );
+    const actualRuntimeFiles = new Set(generatedRuntimeFiles(root));
     for (const path of actualRuntimeFiles) {
       if (!expectedRuntimeFiles.has(path)) mismatches++;
     }
@@ -310,25 +409,17 @@ export async function materializeRuntime(options = {}) {
   }
 
   // Write coverage matrices and replace the generated runtime tree atomically enough
-  // for a local build: stale resources must never survive a materialization.
+  // for a local build. Only generated resource types are reconciled; authored
+  // guided tracks, units and lessons are outside the generator's ownership.
   for (const { path, data } of expectedCoverageFiles) {
     writeResource(resolve(root, path), data);
   }
-  rmSync(resolve(root, "content/public/runtime"), { recursive: true, force: true });
+  removeStaleGeneratedResources(root, resourcesToMaterialize, guidedTrackFiles);
 
   // Write runtime resources
   let written = 0;
-  for (const resource of allResources) {
-    const provider = certProvider(resource.data.certificationId);
-    const slug = certSlug(resource.data.certificationId);
-    const folder = resource.type === "track" ? "tracks" :
-                   resource.type === "domain" ? "domains" :
-                   resource.type === "concept" ? "concepts" :
-                   resource.type === "unit" ? "units" : "lessons";
-    const filePath = resolve(
-      root,
-      `content/public/runtime/${folder}/${provider}/${slug}/${resource.data.id}.json`
-    );
+  for (const resource of resourcesToMaterialize) {
+    const filePath = resolve(root, runtimeResourcePath(resource));
     writeResource(filePath, resource.data);
     written++;
   }

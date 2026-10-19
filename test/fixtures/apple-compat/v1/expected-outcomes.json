@@ -1,0 +1,81 @@
+{
+  "suite": "certigo.apple-compat/v1",
+  "canonicalization": "json-sorted-keys-compact-utf8",
+  "packageSerialization": "json-sorted-keys-compact-utf8-lf",
+  "capabilityProfile": {
+    "id": "apple-basic-v1",
+    "supportedItemTypes": ["mcq"]
+  },
+  "vectors": [
+    {
+      "file": "supported/question-v3.json",
+      "schemaVersion": "v3",
+      "contract": "valid",
+      "client": "supported",
+      "payloadDigests": {
+        "canonicalBody": {
+          "size": 622,
+          "sha256": "0fa9322e82030daf124c37ba7ec7a64bfe53a2565371c9b999583944ab32d8ca"
+        },
+        "packageFile": {
+          "size": 623,
+          "sha256": "f316636c33dcc80994cfc33d6504a0db05785d5f4221a0930daf3e8184eaa0ba"
+        }
+      }
+    },
+    {
+      "file": "supported/question-v4-mcq.json",
+      "schemaVersion": "v4",
+      "contract": "valid",
+      "client": "supported",
+      "payloadDigests": {
+        "canonicalBody": {
+          "size": 699,
+          "sha256": "51dbf56cefcf4c3dd9c974eb560f5d9113eca9857027f0c9e87a40d1b9b59c5d"
+        },
+        "packageFile": {
+          "size": 700,
+          "sha256": "878f3ddfc11f7a60896da88fcd4aa4000f29f7fbaac854aa32b8695b3c4679f0"
+        }
+      }
+    },
+    {
+      "file": "capability-probes/question-v4-spot-the-issue.json",
+      "schemaVersion": "v4",
+      "contract": "valid",
+      "client": "unsupported-capability",
+      "requiredCapability": "itemType:spotTheIssue",
+      "profile": "apple-basic-v1",
+      "notMalformed": true,
+      "payloadDigests": {
+        "canonicalBody": {
+          "size": 614,
+          "sha256": "6890bd938184c70e77c6f99ec284cb2d1b072e95dfae5d709004bd180dca1ebb"
+        },
+        "packageFile": {
+          "size": 615,
+          "sha256": "ccc176840be5e034e937c3a7828582b8097914f12aee8113f7aa2779c7761386"
+        }
+      }
+    }
+  ],
+  "negativeCases": [
+    {
+      "id": "unknown-property",
+      "mutation": {
+        "addProperty": "unexpectedProperty"
+      },
+      "expected": "malformed",
+      "schemaValid": false
+    },
+    {
+      "id": "answer-bearing-property",
+      "mutation": {
+        "addForbiddenProperty": "correctOptionIds"
+      },
+      "expected": "malformed",
+      "schemaValid": false,
+      "answerLeak": true
+    }
+  ]
+}

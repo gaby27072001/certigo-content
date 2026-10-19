@@ -73,6 +73,12 @@ retention, l'immutabilite, la publication et le rollback.
 
 ## Contribution
 
+Le fichier [CODEOWNERS](.github/CODEOWNERS) designe les responsables des chemins
+du depot pour les demandes de revue. GitHub utilise celui de la branche cible
+d'une PR : une modification ne s'applique qu'apres sa fusion dans cette branche.
+Cette designation n'impose pas une approbation obligatoire et ne garantit pas
+une revue independante.
+
 1. Modifier les paires JSON correspondantes dans les deux espaces.
 2. Executer `npm test`.
 3. Executer `npm run validate`.
