@@ -236,7 +236,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(ans.lifecycle.recommendThrough, "2026-12-31");
   assert.equal(ans.lifecycle.lastExamOn, "2026-12-31");
   assert.equal(ans.lifecycle.reviewOn, "2027-01-01");
-  assert.equal(ans.provenance.checkedOn, "2026-09-23");
+  assert.equal(ans.provenance.checkedOn, "2026-10-20");
   assert.equal(ans.lifecycle.transition, "announced");
   assert.equal(ans.lifecycle.successor, undefined);
   assert.ok(
@@ -328,6 +328,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
     if ([
       "aws:dva-c02",
       "aws:sap-c02",
+      "aws:ans-c01",
       "gcp:cloud-digital-leader",
       "gcp:cloud-architect",
       "gcp:cloud-database-engineer",
@@ -345,7 +346,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    24
+    23
   );
 });
 
