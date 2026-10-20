@@ -325,12 +325,24 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
     assert.equal(provider.checkedOn, "2026-09-23", provider.id);
   }
   for (const entry of catalog.certifications) {
-    if (["aws:dva-c02", "aws:sap-c02", "microsoft:ai-900", "microsoft:ai-901", "microsoft:az-104", "microsoft:az-900", "microsoft:dp-900"].includes(entry.id)) continue;
+    if ([
+      "aws:dva-c02",
+      "aws:sap-c02",
+      "gcp:cloud-digital-leader",
+      "gcp:data-practitioner",
+      "gcp:generative-ai-leader",
+      "gcp:machine-learning-engineer",
+      "microsoft:ai-900",
+      "microsoft:ai-901",
+      "microsoft:az-104",
+      "microsoft:az-900",
+      "microsoft:dp-900",
+    ].includes(entry.id)) continue;
     assert.equal(entry.provenance.checkedOn, "2026-09-23", entry.id);
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    31
+    27
   );
 });
 
