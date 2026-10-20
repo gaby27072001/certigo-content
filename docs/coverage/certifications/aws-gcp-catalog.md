@@ -69,6 +69,15 @@ Cette revue est partielle : elle ne rafraichit ni `catalog.asOf`, ni
 autres certifications. Elle ne constitue pas une nouvelle validation factuelle
 de chaque question.
 
+Le catalogue, y compris `checkedOn`, appartient au package public. Toute revue
+qui le modifie change donc son manifeste, le descripteur de release et le
+rapport de packaging, meme si questions et runtime sont identiques. Avant de
+mettre a jour les deux empreintes du golden v3 de
+`test/package_content.test.mjs`, comparer les packages construits par
+`packageContent` sur la base et la candidate : seule l'entree
+`catalog/certifications.json` du manifeste public doit changer pour une revue
+de ce type, et le canal prive doit rester byte-identical.
+
 ### Google Cloud - 14 certifications actives
 
 Google Cloud ne publie aucun code examen comparable aux codes AWS. Le champ

@@ -180,13 +180,15 @@ test("conserve le package v3 runtime byte-identical", async () => {
   assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
+  // Le golden inclut le catalogue public et ses dates de revue. La revue AWS
+  // du 2026-10-20 ne change que ce fichier et les identites qui en derivent.
   assert.deepEqual(
     result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
     [
       {
         artifact: "public",
         manifestId:
-          "sha256:11b297c76d95fedf1e83284acbcb3398333761fe23cad14520b4f8eada9393bb",
+          "sha256:67f56e929aa16b9730149398c29b3641037a524f8a82b45b0a56efb5d459279f",
       },
       {
         artifact: "private",
@@ -197,7 +199,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "41193a1c64463e6f97bdba7c517bd554e48cfc49710a9f05627b4b51bd8bed49"
+    "91b66579eba302bee377cf92196d5a534168d2c65995ad6ff59f0bccf9c54928"
   );
 });
 
