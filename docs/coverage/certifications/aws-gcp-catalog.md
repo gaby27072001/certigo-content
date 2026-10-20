@@ -15,12 +15,12 @@ d'examen officiels AWS et Google Cloud.
 | CLF-C02 | AWS Certified Cloud Practitioner | Foundational | active | version/date non publiees |
 | SOA-C03 | AWS Certified CloudOps Engineer - Associate | Associate | active | v1.1, 2026-06-01 |
 | DEA-C01 | AWS Certified Data Engineer - Associate | Associate | active | v1.1, 2025-12-12 |
-| DVA-C02 | AWS Certified Developer - Associate | Associate | active-retiring, derniere session 2026-11-30 ou 2026-12-01 selon la source AWS | v2.1, 2024-12-12 |
+| DVA-C02 | AWS Certified Developer - Associate | Associate | active-retiring, derniere session 2026-11-30 (revue ciblee 2026-10-20) | v2.1, 2024-12-12 |
 | MLA-C01 | AWS Certified Machine Learning Engineer - Associate | Associate | active-retiring, anglais jusqu'au 2026-09-28, autres langues jusqu'au 2027-01-13 | version/date non publiees |
 | SAA-C03 | AWS Certified Solutions Architect - Associate | Associate | active | version/date non publiees |
 | DOP-C02 | AWS Certified DevOps Engineer - Professional | Professional | active | version/date non publiees |
 | AIP-C01 | AWS Certified Generative AI Developer - Professional | Professional | active | version/date non publiees |
-| SAP-C02 | AWS Certified Solutions Architect - Professional | Professional | active-retiring, derniere session 2026-11-16 ou 2026-11-17 selon la source AWS | version/date non publiees |
+| SAP-C02 | AWS Certified Solutions Architect - Professional | Professional | active-retiring, derniere session 2026-11-16 (revue ciblee 2026-10-20) | version/date non publiees |
 | ANS-C01 | AWS Certified Advanced Networking - Specialty | Specialty | active-retiring, derniere session 2026-12-31 | version/date non publiees |
 | SCS-C03 | AWS Certified Security - Specialty | Specialty | active | v1.0, 2026-03-26 |
 
@@ -46,6 +46,37 @@ DVA-C03 avec une note indiquant une ouverture au 2026-12-01 : DVA-C03 est donc
 annonce mais non actif au snapshot. MLA-C02/ME1-C02 sont egalement annonces
 mais non actifs. MLS-C01 est exclu : AWS indique une derniere session au
 2026-03-31. SOA-C02 et SCS-C02 sont remplaces.
+
+### Revue ciblee des transitions DVA-C02 et SAP-C02 au 2026-10-20
+
+Les pages de certification
+[DVA-C02](https://aws.amazon.com/certification/certified-developer-associate/) et
+[SAP-C02](https://aws.amazon.com/certification/certified-solutions-architect-professional/)
+concordent maintenant avec
+[l'annonce officielle de septembre](https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/) :
+les derniers jours inclus sont respectivement le 30 novembre et le 16 novembre.
+Le desaccord d'un jour consigne precedemment est resolu. La revue de transition
+est fixee au lendemain de chaque dernier jour, sans pretendre que le successeur
+est deja disponible.
+
+Les guides actuels
+[DVA-C02](https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html) et
+[SAP-C02](https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html)
+ont aussi ete relus : codes et ponderations ci-dessus restent ceux de ces
+versions. Aucun blueprint, question ou historique n'est converti vers C03.
+Cette revue est partielle : elle ne rafraichit ni `catalog.asOf`, ni
+`freshness.reviewDueOn`, ni les dates de controle des fournisseurs ou des 31
+autres certifications. Elle ne constitue pas une nouvelle validation factuelle
+de chaque question.
+
+Le catalogue, y compris `checkedOn`, appartient au package public. Toute revue
+qui le modifie change donc son manifeste, le descripteur de release et le
+rapport de packaging, meme si questions et runtime sont identiques. Avant de
+mettre a jour les deux empreintes du golden v3 de
+`test/package_content.test.mjs`, comparer les packages construits par
+`packageContent` sur la base et la candidate : seule l'entree
+`catalog/certifications.json` du manifeste public doit changer pour une revue
+de ce type, et le canal prive doit rester byte-identical.
 
 ### Google Cloud - 14 certifications actives
 
