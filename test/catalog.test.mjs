@@ -298,6 +298,24 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   }
 });
 
+test("borne la revue Microsoft partielle sans effacer les echeances globales et SC-900", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  const reviewed = ["ai-900", "ai-901", "az-104", "az-900", "dp-900"];
+  for (const slug of reviewed) {
+    const entry = catalog.certifications.find(
+      (certification) => certification.id === `microsoft:${slug}`
+    );
+    assert.equal(entry.provenance.checkedOn, "2026-10-20", slug);
+  }
+  assert.equal(catalog.asOf, "2026-09-23");
+  assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
+  const sc = catalog.certifications.find((entry) => entry.id === "microsoft:sc-900");
+  assert.equal(sc.provenance.checkedOn, "2026-09-23");
+  assert.equal(sc.lifecycle.reviewOn, "2026-10-21");
+  const provider = catalog.providers.find((entry) => entry.id === "microsoft");
+  assert.equal(provider.checkedOn, "2026-09-23");
+});
+
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
