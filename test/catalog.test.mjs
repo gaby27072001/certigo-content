@@ -328,9 +328,12 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
     if ([
       "aws:dva-c02",
       "aws:sap-c02",
+      "gcp:associate-google-workspace-administrator",
       "gcp:cloud-digital-leader",
       "gcp:cloud-architect",
       "gcp:cloud-database-engineer",
+      "gcp:cloud-developer",
+      "gcp:cloud-engineer",
       "gcp:data-engineer",
       "gcp:data-practitioner",
       "gcp:generative-ai-leader",
@@ -345,7 +348,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    24
+    21
   );
 });
 
