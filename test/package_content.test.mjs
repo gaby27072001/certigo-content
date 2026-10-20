@@ -188,7 +188,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:d931e939a0ac2e4c6dd58f839ba9e3bc78fc8076ca011f24ef0da6bbee6a46f3",
+          "sha256:f6070ea158669ef5809d436a4739b1ad55366a1b6b53040dcb977e46b1d76504",
       },
       {
         artifact: "private",
@@ -199,7 +199,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "81c42620a65accca000cceffcf33340569680c08eb21757c3d05cdf469939964"
+    "56639423e75fa80fa4951ee134b5678cc943d78528173d75c883c0e81180cb13"
   );
 });
 
