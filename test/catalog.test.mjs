@@ -329,6 +329,9 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
       "aws:dva-c02",
       "aws:sap-c02",
       "gcp:cloud-digital-leader",
+      "gcp:cloud-architect",
+      "gcp:cloud-database-engineer",
+      "gcp:data-engineer",
       "gcp:data-practitioner",
       "gcp:generative-ai-leader",
       "gcp:machine-learning-engineer",
@@ -342,7 +345,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    27
+    24
   );
 });
 
