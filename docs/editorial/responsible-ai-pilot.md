@@ -65,6 +65,11 @@ l'appui sur un passage precis et le transfert a un cas nouveau. Ces validations
 restent futures ; pas de promesse d'apprentissage mesure dans cette PR.
 
 Le repertoire editorial n'est pas distribue. Ne pas copier le pilote dans
-`content/public/runtime/` : le generateur remplace cet arbre. La contrainte
-et la recommandation d'integration sont dans
+`content/public/runtime/` : son contrat exige une certification et un blueprint,
+ce qui ne correspond pas a ce pilote non certifiant. Depuis la synchronisation
+avec main, le generateur preserve les tracks `guided`, leurs units et lessons ;
+cette protection ne convertit pas le pilote en ressource runtime compatible.
+Une copie integree dans un autre depot doit etre tracee separement ; elle ne
+prouve ni la distribution par ces paquets ni l'execution dans l'application.
+Le contexte initial, son evolution et la recommandation d'integration sont dans
 [`ADR-0006`](../adr/ADR-0006-standalone-editorial-pilot.md).

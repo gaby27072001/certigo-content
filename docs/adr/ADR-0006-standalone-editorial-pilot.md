@@ -4,14 +4,23 @@
 
 Propose le 2026-10-14. Le pilote reste un brouillon a relire, pas une release.
 
-## Contexte constate sur main
+## Contexte initial constate le 2026-10-14
 
-`tools/materialize_runtime.mjs` produit exclusivement des tracks
+`tools/materialize_runtime.mjs` produisait exclusivement des tracks
 `questionBank`, des domains et des concepts a partir du catalogue et de la
-couverture. En mode ecriture, il supprime puis recree tout
-`content/public/runtime/`. Son mode `--check` refuse les fichiers supplementaires.
-Une lesson redigee a la main dans cet arbre serait donc effacee a la prochaine
+couverture. En mode ecriture, il supprimait puis recreait tout
+`content/public/runtime/`. Son mode `--check` refusait les fichiers supplementaires.
+Une lesson redigee a la main dans cet arbre aurait donc ete effacee a la prochaine
 generation, meme si le schema runtime sait representer des parcours guides.
+
+### Evolution constatee le 2026-10-20
+
+La synchronisation avec main `838adf2` a apporte la protection des ressources
+auteur : le generateur preserve les tracks `guided`, leurs units et lessons.
+`test/runtime_v3.test.mjs` couvre cette preservation et les conflits de graphe.
+Le risque d'effacement decrit ci-dessus est donc historique, pas une limitation
+du generateur actuel. Cette evolution ne change pas la decision de garder ce
+pilote hors des ressources de release.
 
 `schemas/runtime-resource.schema.json` et le validateur de graphe exigent
 une certification et son blueprint. Notre parcours de bonnes pratiques IA ne
@@ -51,8 +60,10 @@ Aucune nouvelle dependance ni generation de lesson runtime n'est ajoutee.
 ## Consequences et limites
 
 - Le travail auteur ne peut pas etre efface par la regeneration actuelle.
-- Le pilote est reviewable en JSON ; il n'est ni visible dans l'application,
-  ni importe par le backend, ni inclus dans les artefacts public/prive.
+- Le pilote est reviewable en JSON et reste exclu des artefacts public/prive.
+  Cette PR ne l'importe pas dans le backend et ne livre pas de lecteur natif.
+  Une integration dans un autre depot est une livraison distincte : les
+  controles de ce depot ne prouvent ni son execution ni son deploiement.
 - La validation structurelle ne prouve ni la qualite pedagogique ni la
   fidelite aux sources. La date est un snapshot, pas une attestation de
   fraicheur permanente ; le controle ne consulte pas AWS a chaque execution.
@@ -65,11 +76,10 @@ Decider d'abord comment representer un parcours d'apprentissage sans
 certification dans le backend et l'application, puis appliquer expand avant
 usage. Ne pas recycler une certification comme conteneur.
 
-Ensuite, definir deux racines d'auteur explicites : banques derivees et
-compositions guidees. Un assembleur deterministe devra ecrire seulement une
-sortie generee, refuser les collisions d'identifiants et de chemins, valider
-les references et conserver la separation public/prive pour les futurs
-exercices notes. Il ne devra jamais supprimer une racine auteur.
+La protection des compositions guidees existe maintenant dans le generateur ;
+il n'est plus necessaire de la recreer. Toute adaptation future du pilote devra
+cependant valider son contrat non certifiant, ses references et la separation
+public/prive pour les futurs exercices notes, sans supprimer une racine auteur.
 
 Avant publication, prouver la preservation du contenu auteur apres
 regeneration, la parite du contrat deploye, les controles anti-fuite et
