@@ -277,24 +277,25 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   );
   assert.equal(mla.lifecycle.transition, "announced");
 
-  // Vague 1 de la campagne de verification : les deux transitions AWS dont les
-  // sources officielles se contredisent sont encadrees et non tranchees.
-  for (const [id, bracket] of [
-    ["aws:sap-c02", { recommendThrough: "2026-11-16", lastExamOn: "2026-11-17" }],
-    ["aws:dva-c02", { recommendThrough: "2026-11-30", lastExamOn: "2026-12-01" }],
+  for (const [id, finalDay, followingDay] of [
+    ["aws:sap-c02", "2026-11-16", "2026-11-17"],
+    ["aws:dva-c02", "2026-11-30", "2026-12-01"],
   ]) {
     const entry = catalog.certifications.find(
       (certification) => certification.id === id
     );
     assert.equal(entry.status, "active-retiring", `${id}: statut`);
     assert.equal(entry.lifecycle.transition, "announced", `${id}: transition`);
-    assert.equal(entry.lifecycle.recommendThrough, bracket.recommendThrough, `${id}: borne basse`);
-    assert.equal(entry.lifecycle.lastExamOn, bracket.lastExamOn, `${id}: borne haute`);
-    assert.equal(entry.provenance.checkedOn, "2026-09-23", `${id}: date de verification`);
-    assert.ok(
-      entry.lifecycle.recommendThrough < entry.lifecycle.lastExamOn,
-      `${id}: l'encadrement doit rester un intervalle`
-    );
+    assert.equal(entry.lifecycle.recommendThrough, finalDay, `${id}: recommandation`);
+    assert.equal(entry.lifecycle.lastExamOn, finalDay, `${id}: dernier jour inclus`);
+    assert.equal(entry.lifecycle.reviewOn, followingDay, `${id}: revue apres retrait`);
+    assert.equal(entry.provenance.checkedOn, "2026-10-20", `${id}: date de verification`);
+    assert.equal(isCertificationActiveOn(entry, finalDay), true);
+    assert.equal(isCertificationRecommendedOn(entry, finalDay), true);
+    assert.equal(isCertificationActiveOn(entry, followingDay), false);
+    assert.equal(isCertificationRecommendedOn(entry, followingDay), false);
+    const after = checkCatalogFreshness({ root: repoRoot, asOf: followingDay });
+    assert.ok(after.errors.includes(`${id}: transition a reverifier depuis le ${followingDay}`));
   }
 });
 
@@ -314,6 +315,23 @@ test("borne la revue Microsoft partielle sans effacer les echeances globales et 
   assert.equal(sc.lifecycle.reviewOn, "2026-10-21");
   const provider = catalog.providers.find((entry) => entry.id === "microsoft");
   assert.equal(provider.checkedOn, "2026-09-23");
+});
+
+test("une revue partielle ne rafraichit pas les sources non relues", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  assert.equal(catalog.asOf, "2026-09-23");
+  assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
+  for (const provider of catalog.providers) {
+    assert.equal(provider.checkedOn, "2026-09-23", provider.id);
+  }
+  for (const entry of catalog.certifications) {
+    if (["aws:dva-c02", "aws:sap-c02", "microsoft:ai-900", "microsoft:ai-901", "microsoft:az-104", "microsoft:az-900", "microsoft:dp-900"].includes(entry.id)) continue;
+    assert.equal(entry.provenance.checkedOn, "2026-09-23", entry.id);
+  }
+  assert.equal(
+    checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
+    31
+  );
 });
 
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {

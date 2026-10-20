@@ -180,15 +180,15 @@ test("conserve le package v3 runtime byte-identical", async () => {
   assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
-  // Le golden inclut le catalogue : les cinq checkedOn Microsoft du 2026-10-20
-  // changent ce fichier et les identites derivees, pas les questions ni le prive.
+  // Le golden inclut le catalogue public et ses dates de revue. Les revues AWS et Microsoft
+  // du 2026-10-20 ne changent que ce fichier et les identites qui en derivent.
   assert.deepEqual(
     result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
     [
       {
         artifact: "public",
         manifestId:
-          "sha256:eda4614e2ae74920d828b23c886ea75f02a4ee57aef431f66b7c4f69e800e544",
+          "sha256:13bed08badde7c17bda02eb44f3b91597a4512088fb848835f1860d44f9b926e",
       },
       {
         artifact: "private",
@@ -199,7 +199,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "0d1fb3608732277d7972cdb69993102e6f0e6656cdb4b7e0a0aa20fc775ff6aa"
+    "ae6be0574d51145ce1b31a5a8d4e110f2b28e84002f1793fdf6fa4153d3d4731"
   );
 });
 
