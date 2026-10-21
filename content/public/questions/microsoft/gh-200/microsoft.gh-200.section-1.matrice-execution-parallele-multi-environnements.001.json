@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-200.section-1.matrice-execution-parallele-multi-environnements.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-200",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe maintient une bibliothèque multiplateforme et souhaite valider chaque demande de fusion sur trois versions d'exécution Node.js et deux systèmes d'exploitation sans dupliquer la définition des étapes dans le fichier de workflow GitHub Actions. Quelle construction déclarative du job permet d'exécuter ces combinaisons en parallèle ?",
+  "choices": [
+    "Déclarer une stratégie de matrice sur le job combinant les systèmes d'exploitation et les versions cibles B.",
+    "Enchaîner six fichiers de workflow distincts déclenchés par des événements de publication de version interne reel.",
+    "Copier les étapes de compilation dans six blocs séquentiels au sein d'un conteneur unique sans paramètre dans ce projet.",
+    "Stocker les binaires compilés dans le dépôt Git principal avant l'exécution des contrôles de syntaxe dans ce projet priorises."
+  ]
+}

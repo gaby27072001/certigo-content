@@ -1,0 +1,17 @@
+{
+  "id": "microsoft.gh-200.section-5.federation-oidc-moindre-privilege-jeton-github.004",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-200",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-5"
+  },
+  "correct": "Configurer la fédération OpenID Connect avec le fournisseur cloud et déclarer permissions en lecture minimale dans ce projets.",
+  "rationale": "La fédération OIDC avec `permissions: id-token: write` et une restriction explicite de `GITHUB_TOKEN` élimine les secrets cloud longue durée au profit de jetons à courte durée de vie. Sources officielles Microsoft Learn : https://learn.microsoft.com/credentials/certifications/github-actions/ et https://learn.microsoft.com/credentials/certifications/resources/study-guides/gh-200",
+  "provenance": [
+    "https://learn.microsoft.com/credentials/certifications/github-actions/",
+    "https://learn.microsoft.com/credentials/certifications/resources/study-guides/gh-200"
+  ]
+}

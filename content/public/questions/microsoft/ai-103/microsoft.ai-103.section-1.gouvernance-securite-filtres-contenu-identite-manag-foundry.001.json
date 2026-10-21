@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.ai-103.section-1.gouvernance-securite-filtres-contenu-identite-manag-foundry.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:ai-103",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe conçoit une application d'assistance client sur Azure AI Foundry et Azure OpenAI. L'architecte sécurité exige que l'application backend s'authentifie auprès des points de terminaison de modèles sans clé API statique et qu'une politique centrale bloque les tentatives de contournement d'instructions (prompt shields) ainsi que les contenus haineux ou violents. Quelle combinaison répond à ces exigences ?",
+  "choices": [
+    "Utiliser une identité managée Entra ID avec RBAC et associer une politique Azure AI Content Safety controle.",
+    "Intégrer la clé principale de la ressource dans le code client distribué aux navigateurs des agents interne final.",
+    "Désactiver le filtrage d'entrée afin de réduire la latence réseau lors des pics de trafic saisonniers dans ce projet v2.",
+    "Stocker les jetons d'authentification dans une table publique accessible sans contrôle de rôle Azure dans ce projet priorises."
+  ]
+}

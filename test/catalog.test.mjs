@@ -346,6 +346,13 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
     "gcp:cloud-network-engineer",
     "gcp:cloud-security-engineer",
     "gcp:security-operations-engineer",
+    "microsoft:ai-103",
+    "microsoft:dp-600",
+    "microsoft:gh-100",
+    "microsoft:gh-200",
+    "microsoft:gh-300",
+    "microsoft:gh-500",
+    "microsoft:gh-900",
   ];
   assert.equal(catalog.asOf, "2026-09-23");
   assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
@@ -421,7 +428,7 @@ test("clot la campagne sans inventer une date de revue commune a toutes les sour
   ).length, 18);
   assert.equal(catalog.certifications.filter((entry) =>
     entry.provenance.checkedOn === "2026-10-21"
-  ).length, 15);
+  ).length, 22);
   for (const day of ["2026-10-21", "2026-10-23", "2026-10-24"]) {
     assert.deepEqual(checkCatalogFreshness({ root: repoRoot, asOf: day }).errors, []);
   }
@@ -433,8 +440,8 @@ test("clot la campagne sans inventer une date de revue commune a toutes les sour
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
   const result = await validateContent({ root: repoRoot });
   assert.deepEqual(result.errors, []);
-  assert.equal(result.certificationCount, 33);
-  assert.equal(result.coverageCount, 33);
+  assert.equal(result.certificationCount, 40);
+  assert.equal(result.coverageCount, 40);
 
   const catalog = readJson(catalogAt(repoRoot));
   const completedGcpProfessional = [];
@@ -874,7 +881,7 @@ test("accepte une paire v3 namespacee et la rattache a sa matrice", async () => 
     treeSnapshot(resolve(root, "dist-first")),
     treeSnapshot(resolve(root, "dist-second"))
   );
-  assert.equal(summary.certificationCount, 33);
+  assert.equal(summary.certificationCount, 40);
   const publicManifest = readJson(
     resolve(root, "dist-first", "public", "manifest.json")
   );

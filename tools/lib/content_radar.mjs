@@ -11,6 +11,9 @@ addFormats(ajv);
 const registryValidator = ajv.compile(JSON.parse(readFileSync(
   new URL("../../schemas/content-radar-sources.schema.json", import.meta.url), "utf8"
 )));
+const tracksValidator = ajv.compile(JSON.parse(readFileSync(
+  new URL("../../editorial/schemas/content-radar-tracks.schema.json", import.meta.url), "utf8"
+)));
 const text = { type: "string", minLength: 1 };
 const snapshotValidator = ajv.compile({
   type: "object", additionalProperties: false, required: ["schemaVersion", "captures"],
@@ -97,6 +100,73 @@ export function validateRegistry(registry) {
   }
   if (categories.size !== 7) throw new Error("radar: les sept categories sont requises");
   return registry;
+}
+
+export function validateRadarTracks(registry, tracksCatalog, { runtimeCatalog = null, asOf = null } = {}) {
+  validateRegistry(registry);
+  assertSchema(tracksValidator, tracksCatalog, "radar pistes internationales");
+  const providers = new Map(registry.providers.map((provider) => [provider.id, provider]));
+  const runtimeIds = runtimeCatalog
+    ? new Set((runtimeCatalog.certifications ?? []).map((entry) => entry.id))
+    : null;
+  const checkDateStr = asOf ?? tracksCatalog.asOf;
+  const asOfTime = Date.parse(`${tracksCatalog.asOf}T00:00:00.000Z`);
+  const dueTime = Date.parse(`${tracksCatalog.freshness.reviewDueOn}T00:00:00.000Z`);
+  const checkTime = Date.parse(`${checkDateStr}T00:00:00.000Z`);
+  if (Number.isNaN(asOfTime) || Number.isNaN(dueTime) || Number.isNaN(checkTime)) {
+    throw new Error("radar pistes: date ISO invalide");
+  }
+  const maxAgeDays = tracksCatalog.freshness.maxAgeDays;
+  const expectedDue = new Date(asOfTime + maxAgeDays * 86_400_000).toISOString().slice(0, 10);
+  if (tracksCatalog.freshness.reviewDueOn !== expectedDue) {
+    throw new Error(`radar pistes: reviewDueOn attendu ${expectedDue}, recu ${tracksCatalog.freshness.reviewDueOn}`);
+  }
+  if (checkTime < asOfTime || checkTime > dueTime) {
+    throw new Error(`radar pistes: date de controle ${checkDateStr} hors fenetre [${tracksCatalog.asOf}, ${tracksCatalog.freshness.reviewDueOn}]`);
+  }
+  const orderedIds = tracksCatalog.tracks.map((track) => track.id);
+  if (orderedIds.join("\n") !== [...orderedIds].sort(compareOrdinal).join("\n")) {
+    throw new Error("radar pistes: tracks doit etre trie par id");
+  }
+  const ids = new Set();
+  for (const track of tracksCatalog.tracks) {
+    if (ids.has(track.id)) throw new Error(`radar piste dupliquee: ${track.id}`);
+    ids.add(track.id);
+    const provider = providers.get(track.providerId);
+    if (!provider) throw new Error(`radar fournisseur inconnu pour ${track.id}: ${track.providerId}`);
+    if (track.id !== `${track.providerId}:${track.slug}`) {
+      throw new Error(`radar identifiant incoherent: ${track.id}`);
+    }
+    if (track.category !== provider.category) {
+      throw new Error(`radar categorie divergente pour ${track.id}: ${track.category} != ${provider.category}`);
+    }
+    if (runtimeIds && track.runtimeCatalogId !== null && !runtimeIds.has(track.runtimeCatalogId)) {
+      throw new Error(`radar runtimeCatalogId inconnu pour ${track.id}: ${track.runtimeCatalogId}`);
+    }
+    assertOfficialUrl(track.officialUrl, provider);
+    for (const source of track.provenance.sources) {
+      assertOfficialUrl(source.url, provider);
+    }
+    const checkedTime = Date.parse(`${track.provenance.checkedOn}T00:00:00.000Z`);
+    const ageDays = Math.floor((checkTime - checkedTime) / 86_400_000);
+    if (ageDays < 0 || ageDays > maxAgeDays) {
+      throw new Error(`radar fraicheur invalide pour ${track.id}: age=${ageDays}j`);
+    }
+    if (track.lifecycle.transition === "announced" && !track.lifecycle.lastExamOn) {
+      throw new Error(`radar transition announced sans lastExamOn: ${track.id}`);
+    }
+    if (track.lifecycle.transition === "none-announced" && track.lifecycle.lastExamOn) {
+      throw new Error(`radar transition none-announced incompatible avec lastExamOn: ${track.id}`);
+    }
+    if (track.lifecycle.reviewOn && checkDateStr >= track.lifecycle.reviewOn) {
+      throw new Error(`radar reviewOn atteint pour ${track.id}: ${track.lifecycle.reviewOn}`);
+    }
+    const sum = track.blueprint.objectives.reduce((acc, obj) => acc + obj.weightPercent, 0);
+    if (sum < 99 || sum > 101) {
+      throw new Error(`radar somme des objectifs invalide pour ${track.id}: ${sum}`);
+    }
+  }
+  return tracksCatalog;
 }
 
 const captureKey = (capture) => `${capture.providerId}/${capture.endpointId}`;

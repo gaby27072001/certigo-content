@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.ai-103.section-2.orchestration-agents-outils-ancrage-hybride-ai-search.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:ai-103",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-2"
+  },
+  "prompt": "Un éditeur développe un agent métier sur Azure AI Foundry Agent Service chargé de répondre aux questions réglementaires en citant la base documentaire interne et d'interroger une API REST de suivi de dossiers. Les requêtes combinent des références exactes d'articles de loi et des formulations sémantiques variées. Quelle architecture d'ancrage et d'outillage offre la meilleure pertinence ?",
+  "choices": [
+    "Concaténer l'intégralité du fonds documentaire dans l'invite système à chaque message de l'utilisateur reel.",
+    "Configurer Azure AI Search en recherche hybride avec reclassement sémantique et déclarer l'outil OpenAPI controle.",
+    "Limiter l'indexation à une recherche plein texte sans vecteurs ni définition de schéma pour l'API métier dans ce projet.",
+    "Réentraîner le modèle de fondation chaque heure pour mémoriser l'état transitoire des dossiers actifs dans ce projet controle."
+  ]
+}

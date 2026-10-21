@@ -2,7 +2,7 @@
 import { mkdirSync, readFileSync, writeFileSync, existsSync, realpathSync } from "node:fs";
 import { resolve, relative, isAbsolute, dirname, basename } from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
-import { validateRegistry, validateSnapshot, compareRadar, captureLive } from "./lib/content_radar.mjs";
+import { validateRegistry, validateRadarTracks, validateSnapshot, compareRadar, captureLive } from "./lib/content_radar.mjs";
 
 const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
 const json = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -35,6 +35,9 @@ export async function runRadar(args) {
     if (existsSync(resolve(options.out))) throw new Error(`radar sortie deja existante: ${options.out}`);
   }
   const registry = validateRegistry(readJson(resolve(options.registry ?? "config/content-radar-sources.json")));
+  if (!options.registry && existsSync(resolve("config/content-radar-tracks.json"))) {
+    validateRadarTracks(registry, readJson(resolve("config/content-radar-tracks.json")));
+  }
   if (!options.live && !options.snapshot) {
     return { ok: true, mode: "registry-validation-only", providers: registry.providers.length,
       categories: new Set(registry.providers.map((provider) => provider.category)).size, networkAccessed: false };
