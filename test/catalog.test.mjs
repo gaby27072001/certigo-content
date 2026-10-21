@@ -314,7 +314,7 @@ test("borne les revues Microsoft sans effacer les echeances globales", () => {
   assert.equal(sc.provenance.checkedOn, "2026-10-21");
   assert.equal(sc.lifecycle.reviewOn, undefined);
   const provider = catalog.providers.find((entry) => entry.id === "microsoft");
-  assert.equal(provider.checkedOn, "2026-09-23");
+  assert.equal(provider.checkedOn, "2026-10-21");
 });
 
 test("une revue partielle ne rafraichit pas les sources non relues", () => {
@@ -336,7 +336,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   assert.equal(catalog.asOf, "2026-09-23");
   assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
   for (const provider of catalog.providers) {
-    assert.equal(provider.checkedOn, "2026-09-23", provider.id);
+    assert.equal(provider.checkedOn, "2026-10-21", provider.id);
   }
   for (const entry of catalog.certifications) {
     if (reviewedOnOctober21.includes(entry.id)) {
@@ -350,6 +350,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
       "aws:dva-c02",
       "aws:sap-c02",
       "aws:ans-c01",
+      "aws:mla-c02",
       "gcp:associate-google-workspace-administrator",
       "gcp:cloud-digital-leader",
       "gcp:cloud-architect",
@@ -371,7 +372,7 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    6
+    2
   );
   for (const day of ["2026-10-21", "2026-10-23", "2026-10-24"]) {
     const { errors } = checkCatalogFreshness({ root: repoRoot, asOf: day });
@@ -380,9 +381,20 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
     }
   }
   const pending = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors;
-  for (const id of ["aws:mla-c01", "aws:mla-c02"]) {
-    assert.ok(pending.some((error) => error.startsWith(`${id}: sources agees`)), id);
-  }
+  assert.ok(pending.some((error) => error.startsWith("aws:mla-c01: sources agees")));
+  assert.ok(pending.some((error) => error.startsWith("snapshot age")));
+  assert.ok(!pending.some((error) => error.includes("aws:mla-c02")));
+  const mla1 = catalog.certifications.find((entry) => entry.id === "aws:mla-c01");
+  assert.ok(mla1.lifecycle.note.includes("No accessible current MLA-C01 guide"));
+  const mla2 = catalog.certifications.find((entry) => entry.id === "aws:mla-c02");
+  assert.equal(mla2.provenance.checkedOn, "2026-10-21");
+  assert.equal(mla2.status, "announced");
+  assert.ok(mla2.lifecycle.note.includes("GA registration and delivery as TBD"));
+  assert.ok(mla2.lifecycle.note.includes("unresolved"));
+  assert.ok(mla2.provenance.sources.some((source) =>
+    source.kind === "lifecycle" &&
+    source.url === "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/"
+  ));
   const aif = catalog.certifications.find((entry) => entry.id === "aws:aif-c01");
   assert.ok(aif.lifecycle.note.includes("French (France) remains listed"));
   assert.ok(aif.lifecycle.note.includes("actual Italian/German withdrawal is therefore unconfirmed"));

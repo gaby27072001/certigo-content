@@ -181,14 +181,14 @@ test("conserve le package v3 runtime byte-identical", async () => {
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
   // Le golden inclut le catalogue public, ses dates et les limites des revues.
-  // Le lot AWS/GCP du 2026-10-21 ne change que ce fichier et les identites derivees.
+  // La revue des index et de MLA du 2026-10-21 ne change que ce fichier et les identites derivees.
   assert.deepEqual(
     result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
     [
       {
         artifact: "public",
         manifestId:
-          "sha256:d9e9f6835720b3152bff15b9458d9e0adefdd5fd73ead20d692bf71589858de7",
+          "sha256:bf1c1e013d0a26ed66dad9c131edabea96ad31a1036ef831224a08030a74b083",
       },
       {
         artifact: "private",
@@ -199,7 +199,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "32fedc239e6fd9507d769635b685c73c12ad4d9531a38b39ebf88b3a2dc440e6"
+    "71147ad14f55804e21a7794216e2fc4271f46f2beec2f81b82071b7aa6095203"
   );
 });
 

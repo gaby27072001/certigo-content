@@ -16,7 +16,7 @@
         "d1.awsstatic.com",
         "docs.aws.amazon.com"
       ],
-      "checkedOn": "2026-09-23"
+      "checkedOn": "2026-10-21"
     },
     {
       "id": "gcp",
@@ -28,7 +28,7 @@
         "services.google.com",
         "support.google.com"
       ],
-      "checkedOn": "2026-09-23"
+      "checkedOn": "2026-10-21"
     },
     {
       "id": "microsoft",
@@ -38,7 +38,7 @@
       "sourceHosts": [
         "learn.microsoft.com"
       ],
-      "checkedOn": "2026-09-23"
+      "checkedOn": "2026-10-21"
     }
   ],
   "certifications": [
@@ -354,7 +354,7 @@
         "lastExamOn": "2027-01-13",
         "recommendThrough": "2026-09-28",
         "successor": "aws:mla-c02",
-        "note": "AWS opened MLA-C02 beta registration on September 1, 2026. The last day to take MLA-C01 in English is September 28, 2026, and MLA-C02 beta delivery begins September 29, 2026. MLA-C01 remains available in Japanese, Korean, and Simplified Chinese until MLA-C02 GA delivery on January 14, 2027, when MLA-C01 retires in all languages. lastExamOn is an inclusive active-through boundary, so the final active date is January 13, 2027."
+        "note": "AWS opened MLA-C02 beta registration on September 1, 2026. The last day to take MLA-C01 in English is September 28, 2026, and MLA-C02 beta delivery begins September 29, 2026. MLA-C01 remains available in Japanese, Korean, and Simplified Chinese until MLA-C02 GA delivery on January 14, 2027, when MLA-C01 retires in all languages. lastExamOn is an inclusive active-through boundary, so the final active date is January 13, 2027. Review attempt on 2026-10-21 remains incomplete: the catalog-linked English HTML guide returns HTTP 404; the alternative training-and-certification PDF and approved-path PDF return HTTP 403 from this environment, and the docs PDF returns HTTP 404. These responses do not prove intentional withdrawal or its cause. No accessible current MLA-C01 guide has been validated, so provenance.checkedOn remains 2026-09-23. The September AWS announcement supplies the January 14, 2027 GA/retirement date retained above, but the current certification page still says GA registration and delivery are TBD. These conflicting date statements are not resolved by this review; the retained structured dates are the earlier announcement-based boundaries, not newly confirmed delivery dates."
       },
       "provenance": {
         "checkedOn": "2026-09-23",
@@ -392,13 +392,14 @@
         ]
       },
       "lifecycle": {
-        "note": "AWS states that MLA-C02 beta registration opened September 1, 2026 (English only); beta delivery begins September 29, 2026; general availability in all languages begins January 14, 2027, when MLA-C01 retires in all languages. MLA-C01 in English remains available through September 28, 2026. Caution for future checks: the exam-overview table of the certification page labels the updated beta exam \"ME1-C02\", while the same page's headings and banner, the MLA-C02 exam guide, the AWS exam guides index and the September 2026 offerings announcement all name it \"MLA-C02\". The catalog keeps MLA-C02: one table cell against five concordant statements reads as a typo, not as an announced code change."
+        "note": "Reviewed on 2026-10-21. The official certification page states MLA-C02 beta registration opened September 1, 2026 (English only), beta delivery began September 29, 2026, and MLA-C01 English availability ended September 28, 2026. It says MLA-C01 in Japanese, Korean and Simplified Chinese remains available until MLA-C02 general availability. The current page explicitly lists GA registration and delivery as TBD. In contrast, the September 2026 AWS offerings announcement states GA delivery on January 14, 2027 and MLA-C01 retirement in all languages then. This review records that unresolved difference; neither GA delivery nor retirement on that date is newly confirmed. The entry remains announced and is not promoted to active. The MLA-C02 guide is accessible, its domain titles and weights match this blueprint, and its bytes match the earlier retained guide. The exam-overview table still labels the beta ME1-C02, whereas the same page headings, official guide, guide index and announcement name MLA-C02; the catalog retains MLA-C02 without claiming an announced code change."
       },
       "provenance": {
-        "checkedOn": "2026-09-23",
+        "checkedOn": "2026-10-21",
         "sources": [
           { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" },
-          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02.html" }
+          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-02/machine-learning-engineer-associate-02.html" },
+          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
         ]
       }
     },
