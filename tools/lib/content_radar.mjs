@@ -137,8 +137,75 @@ function decodeEntities(value) {
   return value.replace(/&(?:amp|quot|apos|lt|gt|#(\d+)|#x([a-f0-9]+));/gi, (entity, dec, hex) => {
     const code = dec ? Number(dec) : hex ? parseInt(hex, 16) : undefined;
     if (code !== undefined) return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : entity;
-    return { "&amp;": "&", "&quot;": '"', "&apos;": "'", "&lt;": "<", "&gt;": ">" }[entity.toLowerCase()];
+    return { "&amp;": "&", "&quot;": '"', "&apos;": "'", "&lt;": " ", "&gt;": " " }[entity.toLowerCase()];
   });
+}
+
+function stripAnglesAndCollapseSpaces(value) {
+  let out = "";
+  let prevSpace = true;
+  for (const ch of value) {
+    const isSpace = ch === "<" || ch === ">" || /\s/.test(ch);
+    if (isSpace) {
+      if (!prevSpace) {
+        out += " ";
+        prevSpace = true;
+      }
+    } else {
+      out += ch;
+      prevSpace = false;
+    }
+  }
+  return out.trim();
+}
+
+function extractHtmlAnchors(body) {
+  const lower = body.toLowerCase();
+  const anchors = [];
+  for (let i = 0; i < body.length; ) {
+    if (lower.startsWith("<!--", i)) {
+      const end = lower.indexOf("-->", i + 4);
+      i = end === -1 ? body.length : end + 3;
+      continue;
+    }
+    if (lower.startsWith("<script", i) || lower.startsWith("<style", i)) {
+      const closeTag = lower.startsWith("<script", i) ? "</script" : "</style";
+      const end = lower.indexOf(closeTag, i + closeTag.length - 1);
+      const closeEnd = end === -1 ? -1 : body.indexOf(">", end + closeTag.length);
+      i = closeEnd === -1 ? body.length : closeEnd + 1;
+      continue;
+    }
+    if (lower.startsWith("<a", i) && /\s/.test(lower[i + 2] ?? "")) {
+      const tagEnd = body.indexOf(">", i + 2);
+      if (tagEnd === -1) break;
+      const closeStart = lower.indexOf("</a", tagEnd + 1);
+      if (closeStart === -1) break;
+      const closeEnd = body.indexOf(">", closeStart + 3);
+      if (closeEnd === -1) break;
+      const attrs = body.slice(i + 2, tagEnd);
+      const hrefMatch = /\bhref\s*=\s*(["'])(.*?)\1/i.exec(attrs);
+      if (hrefMatch) {
+        let text = "";
+        let inTag = false;
+        for (const ch of body.slice(tagEnd + 1, closeStart)) {
+          if (ch === "<") {
+            inTag = true;
+            text += " ";
+          } else if (ch === ">") {
+            inTag = false;
+            text += " ";
+          } else if (!inTag) {
+            text += ch;
+          }
+        }
+        anchors.push({ href: hrefMatch[2], text });
+      }
+      i = closeEnd + 1;
+      continue;
+    }
+    i++;
+  }
+  return anchors;
 }
 
 function itemsFor(capture, provider, endpoint) {
@@ -154,12 +221,11 @@ function itemsFor(capture, provider, endpoint) {
     return feed.items;
   }
   const items = new Map();
-  const html = body.replace(/<!--[\s\S]*?-->|<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, "");
-  for (const match of html.matchAll(/<a\b[^>]*\bhref\s*=\s*(["'])(.*?)\1[^>]*>([\s\S]*?)<\/a\s*>/gi)) {
-    const title = decodeEntities(match[3].replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
+  for (const anchor of extractHtmlAnchors(body)) {
+    const title = stripAnglesAndCollapseSpaces(decodeEntities(anchor.text));
     if (!/\b(certifi(?:cation|cations|ed)|training|courses?|formations?|cours|parcours)\b/i.test(title) ||
         title.length > 200) continue;
-    const href = decodeEntities(match[2]);
+    const href = decodeEntities(anchor.href);
     let url;
     try {
       url = new URL(href, capture.url);
