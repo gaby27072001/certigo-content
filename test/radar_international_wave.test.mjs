@@ -48,12 +48,19 @@ test("valide la premiere vague de 7 pistes Microsoft/GitHub/AI/Fabric dans le ca
 
     const publicFiles = readdirSync(publicDir).filter((f) => f.endsWith(".json")).sort();
     const privateFiles = readdirSync(privateDir).filter((f) => f.endsWith(".json")).sort();
-    assert.equal(publicFiles.length, 4, `${id}: 4 questions attendues`);
+    const expectedCount = Math.max(4, entry.blueprint.objectives.length);
+    assert.equal(publicFiles.length, expectedCount, `${id}: ${expectedCount} questions attendues`);
     assert.deepEqual(privateFiles, publicFiles, `${id}: parite public/prive`);
 
     const coverage = readJson(coveragePath);
     assert.equal(coverage.status, "in-progress");
     assert.equal(coverage.certification, id);
+    for (const objective of coverage.objectives) {
+      assert.ok(
+        objective.questionIds.length >= 1,
+        `${id}/${objective.objective}: chaque domaine distribuable doit avoir au moins une question`
+      );
+    }
 
     const positions = [0, 0, 0, 0];
     const ranks = [0, 0, 0, 0];
@@ -72,8 +79,16 @@ test("valide la premiere vague de 7 pistes Microsoft/GitHub/AI/Fabric dans le ca
         assert.equal(new URL(url).hostname, "learn.microsoft.com");
       }
     }
-    assert.deepEqual(positions, [1, 1, 1, 1], `${id}: equilibre des positions 1/1/1/1`);
-    assert.deepEqual(ranks, [1, 1, 1, 1], `${id}: equilibre des rangs 1/1/1/1`);
+    const minPerBucket = Math.floor(publicFiles.length / 4);
+    const maxPerBucket = Math.ceil(publicFiles.length / 4);
+    assert.ok(
+      positions.every((c) => c >= minPerBucket && c <= maxPerBucket),
+      `${id}: equilibre des positions ${positions.join("/")}`
+    );
+    assert.ok(
+      ranks.every((c) => c >= minPerBucket && c <= maxPerBucket),
+      `${id}: equilibre des rangs ${ranks.join("/")}`
+    );
   }
 });
 

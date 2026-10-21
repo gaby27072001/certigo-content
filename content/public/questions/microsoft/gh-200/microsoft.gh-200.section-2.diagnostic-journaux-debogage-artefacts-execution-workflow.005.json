@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-200.section-2.diagnostic-journaux-debogage-artefacts-execution-workflow.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-200",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-2"
+  },
+  "prompt": "Un workflow GitHub Actions échoue de manière intermittente lors d'une étape d'empaquetage sans produire suffisamment de détails dans la sortie standard. L'équipe souhaite inspecter le comportement interne des étapes et du runner lors d'une nouvelle exécution sans modifier le fichier YAML du dépôt. Quelle action permet d'obtenir ces traces détaillées ?",
+  "choices": [
+    "Relancer le job avec la journalisation de débogage activée ou définir ACTIONS_STEP_DEBUG et ACTIONS_RUNNER_DEBUG.",
+    "Supprimer l'historique des exécutions précédentes afin de forcer le runner à régénérer le cache complet des dépendances.",
+    "Désactiver la collecte des journaux d'étape dans les paramètres du dépôt pour accélérer l'affichage de la console web.",
+    "Remplacer le déclencheur workflow_dispatch par un événement push sur la branche principale sans variable de diagnostic."
+  ]
+}

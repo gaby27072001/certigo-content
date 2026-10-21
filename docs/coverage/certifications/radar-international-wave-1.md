@@ -4,7 +4,7 @@ Ce document décrit le premier lot de pistes internationales issues du Radar mon
 
 ## 1. Pistes livrées dans le catalogue runtime (`content/public/catalog/certifications.json`)
 
-Conformément à la règle « expand before use » (`config/backend-accepted-schemas/`), les sept certifications officielles hébergées sur `learn.microsoft.com` sont activées de bout en bout (catalogue, matrice de couverture `in-progress`, 4 paires v3 équilibrées `1/1/1/1` en position et en rang de longueur, ressources runtime `track`/`domain`/`concept`) :
+Conformément à la règle « expand before use » (`config/backend-accepted-schemas/`), les sept certifications officielles hébergées sur `learn.microsoft.com` sont activées de bout en bout (catalogue, matrice de couverture `in-progress` couvrant 100 % des domaines, 37 paires v3 équilibrées en position et en rang de longueur, ressources runtime `track`/`domain`/`concept`) :
 
 - `microsoft:ai-103` — **Microsoft Certified: Azure AI Apps and Agents Developer Associate** (`AI-103`, successeur actif d'`AI-102` retiré le 30 juin 2026)
 - `microsoft:dp-600` — **Microsoft Certified: Fabric Analytics Engineer Associate** (`DP-600`)

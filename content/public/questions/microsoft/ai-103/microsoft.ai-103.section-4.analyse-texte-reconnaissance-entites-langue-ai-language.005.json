@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.ai-103.section-4.analyse-texte-reconnaissance-entites-langue-ai-language.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:ai-103",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-4"
+  },
+  "prompt": "Une équipe développe un pipeline d'analyse de réclamations multilingues avec Azure AI Language. Le service doit détecter automatiquement la langue du message, masquer les données personnelles sensibles (PII) avant archivage et extraire les opinions associées à chaque aspect produit dans les retours clients. Quelle architecture répond à ce besoin ?",
+  "choices": [
+    "Appeler Azure AI Language avec détection de langue, masquage PII et analyse de sentiment par exploration d'opinions.",
+    "Exécuter une expression régulière locale fixe sans modèle linguistique afin d'isoler chaque entité nommée dans les textes.",
+    "Convertir chaque message texte en image matricielle afin d'appliquer un détecteur optique de caractères standard sur le flux.",
+    "Stocker les réclamations brutes non filtrées dans un conteneur public avant de lancer un tri alphabétique simple sur les colonnes."
+  ]
+}

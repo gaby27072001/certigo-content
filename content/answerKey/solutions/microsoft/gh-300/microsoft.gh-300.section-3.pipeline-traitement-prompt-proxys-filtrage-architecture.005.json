@@ -1,0 +1,17 @@
+{
+  "id": "microsoft.gh-300.section-3.pipeline-traitement-prompt-proxys-filtrage-architecture.005",
+  "schemaVersion": "v3",
+  "kind": "answerKey",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-300",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-3"
+  },
+  "correct": "L'extension assemble le contexte pertinent, interroge le proxy TLS et écarte le prompt après génération sans réentraînement.",
+  "rationale": "Pour GitHub Copilot Business et Enterprise, l'extension collecte le contexte pertinent, transmet le prompt chiffré via TLS au proxy qui applique les filtres de sécurité, et ne conserve ni les prompts ni les suggestions pour entraîner les modèles de fondation. Sources officielles Microsoft Learn : https://learn.microsoft.com/credentials/certifications/github-copilot/ et https://learn.microsoft.com/credentials/certifications/resources/study-guides/gh-300",
+  "provenance": [
+    "https://learn.microsoft.com/credentials/certifications/github-copilot/",
+    "https://learn.microsoft.com/credentials/certifications/resources/study-guides/gh-300"
+  ]
+}
