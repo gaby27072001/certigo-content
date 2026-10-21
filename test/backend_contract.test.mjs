@@ -62,9 +62,9 @@ test("la copie des schemas du backend est integre et nomme sa revision Certigo",
   assert.deepEqual(contract.errors, []);
   assert.match(contract.source.revision, /^[0-9a-f]{40}$/);
   assert.equal(contract.source.path, BACKEND_SCHEMA_PATH);
-  // Chaque schema de contrat de ce depot a sa contrepartie cote backend.
+  // Le registre Radar est un outil hors publication, pas un contrat importe.
   const contentSchemas = readdirSync(resolve(repoRoot, "schemas")).filter((name) =>
-    name.endsWith(".schema.json")
+    name.endsWith(".schema.json") && name !== "content-radar-sources.schema.json"
   );
   for (const name of contentSchemas) {
     assert.ok(contract.schemas.has(name), `${name}: absent de la copie backend`);
