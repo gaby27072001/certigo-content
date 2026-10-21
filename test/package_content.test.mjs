@@ -180,27 +180,35 @@ test("conserve le package v3 runtime byte-identical", async () => {
   assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
-  // Le golden inclut le catalogue public, ses dates et les limites des revues.
-  // La revue des index et de MLA du 2026-10-21 ne change que ce fichier et les identites derivees.
+  // Le snapshot du 21 octobre franchit recommendThrough de MLA-C01 :
+  // ses 46 ressources publiques et 20 solutions sortent du package, pas des sources.
   assert.deepEqual(
     result.packages.map(({ artifact, manifestId }) => ({ artifact, manifestId })),
     [
       {
         artifact: "public",
         manifestId:
-          "sha256:bf1c1e013d0a26ed66dad9c131edabea96ad31a1036ef831224a08030a74b083",
+          "sha256:74e906cbaeacea2a64f72b5dd4f5d5930dc9ff20b3cca87b1b51b415f2622548",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:7781a6d36add31223ea234c60808ded367d283c0d1f4a9a042cb1cdad71f9055",
+          "sha256:36ffd9866d1cfc4382024b8d6ae767c48b8cbd47712388bc1332973cd2c8eb0f",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "71147ad14f55804e21a7794216e2fc4271f46f2beec2f81b82071b7aa6095203"
+    "bc23f200ef2e99526c05b3b2ea28e3e8d7cf13d563e4e14211a5dcb482793e56"
   );
+  for (const channel of ["public", "private"]) {
+    const manifest = JSON.parse(
+      readFileSync(resolve(outDir, channel, "manifest.json"), "utf8")
+    );
+    assert.ok(!manifest.files.some(({ path }) =>
+      path.includes("/mla-c01/") || path === "coverage/aws/mla-c01.json"
+    ));
+  }
 });
 
 test("n'expedie aucune certification non recommandee a la date du catalogue", async () => {

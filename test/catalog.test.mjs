@@ -225,7 +225,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
 
   assert.deepEqual(aws, expectedAws);
   assert.deepEqual(gcp, expectedGcp);
-  assert.equal(catalog.asOf, "2026-09-23");
+  assert.equal(catalog.asOf, "2026-10-21");
   assert.ok(aws.includes("aws:aip-c01"));
   assert.ok(!aws.includes("aws:mls-c01"));
 
@@ -261,7 +261,15 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   assert.equal(mla.lifecycle.lastExamOn, "2027-01-13");
   assert.equal(mla.lifecycle.reviewOn, "2027-01-14");
   assert.equal(mla.lifecycle.successor, "aws:mla-c02");
-  assert.equal(mla.provenance.checkedOn, "2026-09-23");
+  assert.equal(mla.provenance.checkedOn, "2026-10-21");
+  assert.match(mla.guide.url, /\/ja_jp\/aws-certification\//);
+  for (const locale of ["ja_jp", "ko_kr", "zh_cn"]) {
+    assert.ok(mla.provenance.sources.some((source) =>
+      source.kind === "exam-guide" && source.url.includes(`/${locale}/`)
+    ));
+  }
+  assert.ok(mla.lifecycle.note.includes("does not prove when or why"));
+  assert.ok(mla.lifecycle.note.includes("HTTP 200"));
   assert.ok(
     mla.provenance.sources.some(
       (source) =>
@@ -308,8 +316,8 @@ test("borne les revues Microsoft sans effacer les echeances globales", () => {
     );
     assert.equal(entry.provenance.checkedOn, "2026-10-20", slug);
   }
-  assert.equal(catalog.asOf, "2026-09-23");
-  assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
+  assert.equal(catalog.asOf, "2026-10-21");
+  assert.equal(catalog.freshness.reviewDueOn, "2026-11-20");
   const sc = catalog.certifications.find((entry) => entry.id === "microsoft:sc-900");
   assert.equal(sc.provenance.checkedOn, "2026-10-21");
   assert.equal(sc.lifecycle.reviewOn, undefined);
@@ -318,7 +326,13 @@ test("borne les revues Microsoft sans effacer les echeances globales", () => {
 });
 
 test("une revue partielle ne rafraichit pas les sources non relues", () => {
-  const catalog = readJson(catalogAt(repoRoot));
+  const root = createMetadataRoot();
+  const catalog = readJson(catalogAt(root));
+  catalog.asOf = "2026-09-23";
+  catalog.freshness.reviewDueOn = "2026-10-23";
+  catalog.certifications.find((entry) => entry.id === "aws:mla-c01")
+    .provenance.checkedOn = "2026-09-23";
+  writeJson(catalogAt(root), catalog);
   const reviewedOnOctober21 = [
     "aws:aif-c01",
     "aws:aip-c01",
@@ -371,21 +385,19 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
     assert.equal(entry.provenance.checkedOn, "2026-09-23", entry.id);
   }
   assert.equal(
-    checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
+    checkCatalogFreshness({ root, asOf: "2026-10-24" }).errors.length,
     2
   );
   for (const day of ["2026-10-21", "2026-10-23", "2026-10-24"]) {
-    const { errors } = checkCatalogFreshness({ root: repoRoot, asOf: day });
+    const { errors } = checkCatalogFreshness({ root, asOf: day });
     for (const id of reviewedOnOctober21) {
       assert.ok(!errors.some((error) => error.startsWith(`${id}:`)), `${day}: ${id}`);
     }
   }
-  const pending = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors;
+  const pending = checkCatalogFreshness({ root, asOf: "2026-10-24" }).errors;
   assert.ok(pending.some((error) => error.startsWith("aws:mla-c01: sources agees")));
   assert.ok(pending.some((error) => error.startsWith("snapshot age")));
   assert.ok(!pending.some((error) => error.includes("aws:mla-c02")));
-  const mla1 = catalog.certifications.find((entry) => entry.id === "aws:mla-c01");
-  assert.ok(mla1.lifecycle.note.includes("No accessible current MLA-C01 guide"));
   const mla2 = catalog.certifications.find((entry) => entry.id === "aws:mla-c02");
   assert.equal(mla2.provenance.checkedOn, "2026-10-21");
   assert.equal(mla2.status, "announced");
@@ -398,6 +410,24 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   const aif = catalog.certifications.find((entry) => entry.id === "aws:aif-c01");
   assert.ok(aif.lifecycle.note.includes("French (France) remains listed"));
   assert.ok(aif.lifecycle.note.includes("actual Italian/German withdrawal is therefore unconfirmed"));
+});
+
+test("clot la campagne sans inventer une date de revue commune a toutes les sources", () => {
+  const catalog = readJson(catalogAt(repoRoot));
+  assert.equal(catalog.asOf, "2026-10-21");
+  assert.equal(catalog.freshness.reviewDueOn, "2026-11-20");
+  assert.equal(catalog.certifications.filter((entry) =>
+    entry.provenance.checkedOn === "2026-10-20"
+  ).length, 18);
+  assert.equal(catalog.certifications.filter((entry) =>
+    entry.provenance.checkedOn === "2026-10-21"
+  ).length, 15);
+  for (const day of ["2026-10-21", "2026-10-23", "2026-10-24"]) {
+    assert.deepEqual(checkCatalogFreshness({ root: repoRoot, asOf: day }).errors, []);
+  }
+  const result = checkCatalogFreshness({ root: repoRoot, asOf: catalog.asOf });
+  assert.ok(result.activeCertificationIds.includes("aws:mla-c01"));
+  assert.ok(result.nonRecommendedCertificationIds.includes("aws:mla-c01"));
 });
 
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
@@ -524,14 +554,12 @@ test("applique les bornes linguistiques de transition MLA-C01", () => {
   assert.equal(isCertificationActiveOn(mla, "2027-01-13"), true);
   assert.equal(isCertificationActiveOn(mla, "2027-01-14"), false);
 
-  // Meme raison qu'au-dessus : derive du snapshot, jamais figee. Couplage a
-  // connaitre : cette assertion tient tant que catalog.asOf reste au plus tard
-  // le 2026-09-28, borne recommendThrough de MLA-C01. Une avance de snapshot
-  // au-dela la fera echouer, et ce sera un vrai signal, pas un artefact.
+  // Le snapshot du 21 octobre franchit la borne de recommandation :
+  // l'examen reste actif dans trois langues, mais sort des packages livres.
   const current = checkCatalogFreshness({ root: repoRoot, asOf: catalog.asOf });
   assert.deepEqual(current.errors, []);
   assert.ok(current.activeCertificationIds.includes("aws:mla-c01"));
-  assert.ok(current.recommendedCertificationIds.includes("aws:mla-c01"));
+  assert.ok(current.nonRecommendedCertificationIds.includes("aws:mla-c01"));
 
   const transition = checkCatalogFreshness({ root: repoRoot, asOf: "2027-01-14" });
   assert.ok(!transition.activeCertificationIds.includes("aws:mla-c01"));
