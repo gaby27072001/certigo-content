@@ -7,6 +7,36 @@ d'examen officiels AWS et Google Cloud.
 
 ## Inventaire exact
 
+### Controle partiel des index et MLA au 2026-10-21
+
+Les index officiels ont ete relus integralement : AWS liste 13 guides, dont
+AIB-C01 absent du corpus ; Google Cloud liste 15 certifications, dont
+Agentic Architect absent du corpus. Aucune de ces offres n'est ajoutee ici.
+L'inventaire Microsoft Learn a ete lu via son
+[API publique](https://learn.microsoft.com/api/contentbrowser/search/credentials?locale=en-us&$filter=credential_types/any(t:%20t%20eq%20'certification')) :
+77 identifiants uniques sur trois pages, pagination terminee. C'est un
+inventaire de certifications, pas une liste de statuts d'examens : AI-900
+retire et AI-901 actif se rattachent a Azure AI Fundamentals. L'absence d'une
+URL d'examen dans cette API ne prouve donc pas son retrait. Ces controles
+datent les trois index, sans pretendre que le corpus couvre toute leur offre.
+
+Le guide MLA-C02 est accessible et ses domaines/poids sont inchanges. Sa page
+de certification indique toujours des dates GA `TBD`, alors que l'annonce
+AWS de septembre donne le 14 janvier 2027. La note attribue chaque constat
+a sa source, sans arbitrer ni promouvoir le statut `announced`.
+
+Le guide HTML MLA-C01 renvoie 404 ; les deux chemins PDF AWS essayes
+(`training-and-certification` et `approved`) renvoient 403 dans cet
+environnement, le PDF `docs` renvoie 404. Cela ne prouve ni un retrait
+intentionnel du guide ni un lien causal avec la fin des passages en anglais.
+Faute de guide courant valide, sa date `checkedOn` reste le 23 septembre.
+Les bornes structurees de janvier restent celles de l'annonce anterieure,
+pas une confirmation nouvelle du calendrier effectif.
+
+Le snapshot global reste donc au 23 septembre : deux erreurs restent
+attendues au 24 octobre (snapshot et source MLA-C01). La garde de revue
+partielle les preserve ; les index relus ne suffisent pas a tout rafraichir.
+
 ### AWS - 12 certifications actives
 
 | Code | Titre | Niveau | Statut | Guide |
