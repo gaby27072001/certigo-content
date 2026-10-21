@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "certigo.content-radar-sources/v1",
+  "providers": [
+    {
+      "id": "microsoft", "name": "Microsoft", "category": "cloud-hyperscalers",
+      "officialDomains": ["https://learn.microsoft.com"],
+      "discoveryEndpoints": [{"id": "credentials", "url": "https://learn.microsoft.com/en-us/credentials/browse/?credential_types=certification", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "aws", "name": "Amazon Web Services", "category": "cloud-hyperscalers",
+      "officialDomains": ["https://aws.amazon.com", "https://docs.aws.amazon.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://aws.amazon.com/certification/", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "gcp", "name": "Google Cloud", "category": "cloud-hyperscalers",
+      "officialDomains": ["https://cloud.google.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://cloud.google.com/learn/certification", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "oracle", "name": "Oracle", "category": "cloud-hyperscalers",
+      "officialDomains": ["https://education.oracle.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://education.oracle.com/oracle-certification", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "openai", "name": "OpenAI", "category": "ai-foundation-models",
+      "officialDomains": ["https://academy.openai.com", "https://openai.com"],
+      "discoveryEndpoints": [{"id": "academy", "url": "https://academy.openai.com/public/content", "format": "html-links"}],
+      "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "anthropic", "name": "Anthropic", "category": "ai-foundation-models",
+      "officialDomains": ["https://academy.claude.com"],
+      "discoveryEndpoints": [{"id": "learn", "url": "https://academy.claude.com/", "format": "html-links"}],
+      "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "mistral-ai", "name": "Mistral AI", "category": "ai-foundation-models",
+      "officialDomains": ["https://docs.mistral.ai"],
+      "discoveryEndpoints": [{"id": "guides", "url": "https://docs.mistral.ai/", "format": "html-links"}],
+      "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "nvidia", "name": "NVIDIA", "category": "ai-foundation-models",
+      "officialDomains": ["https://www.nvidia.com"],
+      "discoveryEndpoints": [{"id": "training", "url": "https://www.nvidia.com/en-us/training/", "format": "html-links"}],
+      "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "huggingface", "name": "Hugging Face", "category": "ai-foundation-models",
+      "officialDomains": ["https://huggingface.co"],
+      "discoveryEndpoints": [{"id": "learn", "url": "https://huggingface.co/learn", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "cohere", "name": "Cohere", "category": "ai-foundation-models",
+      "officialDomains": ["https://docs.cohere.com"],
+      "discoveryEndpoints": [{"id": "llmu", "url": "https://docs.cohere.com/docs/llmu", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "meta-ai", "name": "Meta AI", "category": "ai-foundation-models",
+      "officialDomains": ["https://ai.meta.com"],
+      "discoveryEndpoints": [{"id": "resources", "url": "https://ai.meta.com/resources/", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "apple", "name": "Apple", "category": "apple-mobile",
+      "officialDomains": ["https://training.apple.com"],
+      "discoveryEndpoints": [{"id": "training", "url": "https://training.apple.com/", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "databricks", "name": "Databricks", "category": "data-analytics",
+      "officialDomains": ["https://www.databricks.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.databricks.com/learn/certification", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "snowflake", "name": "Snowflake", "category": "data-analytics",
+      "officialDomains": ["https://learn.snowflake.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://learn.snowflake.com/en/certifications", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "mongodb", "name": "MongoDB", "category": "data-analytics",
+      "officialDomains": ["https://learn.mongodb.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://learn.mongodb.com/pages/certification", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "confluent", "name": "Confluent", "category": "data-analytics",
+      "officialDomains": ["https://training.confluent.io"],
+      "discoveryEndpoints": [{"id": "training", "url": "https://training.confluent.io/", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "dbt-labs", "name": "dbt Labs", "category": "data-analytics",
+      "officialDomains": ["https://learn.getdbt.com"],
+      "discoveryEndpoints": [{"id": "learn", "url": "https://learn.getdbt.com/", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "linux-foundation-cncf", "name": "Linux Foundation / CNCF", "category": "devops-cloud-native-dev",
+      "officialDomains": ["https://training.linuxfoundation.org", "https://www.cncf.io"],
+      "discoveryEndpoints": [
+        {"id": "lf-certifications", "url": "https://training.linuxfoundation.org/certification/", "format": "html-links"},
+        {"id": "cncf-certifications", "url": "https://www.cncf.io/training/certification/", "format": "html-links"}
+      ],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "hashicorp", "name": "HashiCorp", "category": "devops-cloud-native-dev",
+      "officialDomains": ["https://developer.hashicorp.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://developer.hashicorp.com/certifications", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "github", "name": "GitHub", "category": "devops-cloud-native-dev",
+      "officialDomains": ["https://learn.github.com"],
+      "discoveryEndpoints": [
+        {"id": "certifications", "url": "https://learn.github.com/certifications", "format": "html-links"},
+        {"id": "skills", "url": "https://learn.github.com/skills", "format": "html-links"}
+      ],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "red-hat", "name": "Red Hat", "category": "devops-cloud-native-dev",
+      "officialDomains": ["https://www.redhat.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.redhat.com/en/services/certifications", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "docker", "name": "Docker", "category": "devops-cloud-native-dev",
+      "officialDomains": ["https://docs.docker.com"],
+      "discoveryEndpoints": [{"id": "get-started", "url": "https://docs.docker.com/get-started/", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "gitlab", "name": "GitLab", "category": "devops-cloud-native-dev",
+      "officialDomains": ["https://university.gitlab.com"],
+      "discoveryEndpoints": [{"id": "university", "url": "https://university.gitlab.com/", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "cisco", "name": "Cisco", "category": "cybersecurity-networking",
+      "officialDomains": ["https://www.cisco.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.cisco.com/site/us/en/learn/training-certifications/certifications/index.html", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "comptia", "name": "CompTIA", "category": "cybersecurity-networking",
+      "officialDomains": ["https://www.comptia.org"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.comptia.org/certifications", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "isc2", "name": "ISC2", "category": "cybersecurity-networking",
+      "officialDomains": ["https://www.isc2.org"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.isc2.org/certifications", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "isaca", "name": "ISACA", "category": "cybersecurity-networking",
+      "officialDomains": ["https://www.isaca.org"],
+      "discoveryEndpoints": [{"id": "credentialing", "url": "https://www.isaca.org/credentialing", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "offsec", "name": "OffSec", "category": "cybersecurity-networking",
+      "officialDomains": ["https://www.offsec.com"],
+      "discoveryEndpoints": [{"id": "courses", "url": "https://www.offsec.com/courses/", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "palo-alto-networks", "name": "Palo Alto Networks", "category": "cybersecurity-networking",
+      "officialDomains": ["https://www.paloaltonetworks.com"],
+      "discoveryEndpoints": [{"id": "certification", "url": "https://www.paloaltonetworks.com/services/education/certification", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "cloudflare", "name": "Cloudflare", "category": "cybersecurity-networking",
+      "officialDomains": ["https://developers.cloudflare.com"],
+      "discoveryEndpoints": [{"id": "learning-paths", "url": "https://developers.cloudflare.com/learning-paths/", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "salesforce", "name": "Salesforce", "category": "enterprise-delivery",
+      "officialDomains": ["https://trailhead.salesforce.com"],
+      "discoveryEndpoints": [{"id": "credentials", "url": "https://trailhead.salesforce.com/credentials/administratoroverview", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "servicenow", "name": "ServiceNow", "category": "enterprise-delivery",
+      "officialDomains": ["https://www.servicenow.com"],
+      "discoveryEndpoints": [{"id": "training", "url": "https://www.servicenow.com/services/training-and-certification.html", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "sap", "name": "SAP", "category": "enterprise-delivery",
+      "officialDomains": ["https://learning.sap.com"],
+      "discoveryEndpoints": [{"id": "certifications", "url": "https://learning.sap.com/certifications", "format": "html-links"}],
+      "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "atlassian", "name": "Atlassian", "category": "enterprise-delivery",
+      "officialDomains": ["https://community.atlassian.com"],
+      "discoveryEndpoints": [{"id": "university", "url": "https://community.atlassian.com/learning", "format": "html-links"}],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "pmi-scrum", "name": "PMI / Scrum.org", "category": "enterprise-delivery",
+      "officialDomains": ["https://www.pmi.org", "https://www.scrum.org"],
+      "discoveryEndpoints": [
+        {"id": "pmi-certifications", "url": "https://www.pmi.org/certifications", "format": "html-links"},
+        {"id": "scrum-certifications", "url": "https://www.scrum.org/professional-scrum-certifications", "format": "html-links"}
+      ],
+      "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    }
+  ]
+}
