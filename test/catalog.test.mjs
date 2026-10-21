@@ -299,7 +299,7 @@ test("inventorie exactement les certifications AWS et Google Cloud actives", asy
   }
 });
 
-test("borne la revue Microsoft partielle sans effacer les echeances globales et SC-900", () => {
+test("borne les revues Microsoft sans effacer les echeances globales", () => {
   const catalog = readJson(catalogAt(repoRoot));
   const reviewed = ["ai-900", "ai-901", "az-104", "az-900", "dp-900"];
   for (const slug of reviewed) {
@@ -311,8 +311,8 @@ test("borne la revue Microsoft partielle sans effacer les echeances globales et 
   assert.equal(catalog.asOf, "2026-09-23");
   assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
   const sc = catalog.certifications.find((entry) => entry.id === "microsoft:sc-900");
-  assert.equal(sc.provenance.checkedOn, "2026-09-23");
-  assert.equal(sc.lifecycle.reviewOn, "2026-10-21");
+  assert.equal(sc.provenance.checkedOn, "2026-10-21");
+  assert.equal(sc.lifecycle.reviewOn, undefined);
   const provider = catalog.providers.find((entry) => entry.id === "microsoft");
   assert.equal(provider.checkedOn, "2026-09-23");
 });
@@ -344,12 +344,13 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
       "microsoft:az-104",
       "microsoft:az-900",
       "microsoft:dp-900",
+      "microsoft:sc-900",
     ].includes(entry.id)) continue;
     assert.equal(entry.provenance.checkedOn, "2026-09-23", entry.id);
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    20
+    18
   );
 });
 
@@ -496,28 +497,40 @@ test("applique les bornes linguistiques de transition MLA-C01", () => {
   );
 });
 
-test("date la mise a jour annoncee de SC-900 sans en faire une transition", () => {
+test("acquitte la revue SC-900 du 21 octobre sans promettre le deploiement FR", () => {
   const catalog = readJson(catalogAt(repoRoot));
   const sc900 = catalog.certifications.find(
     (certification) => certification.id === "microsoft:sc-900"
   );
 
-  // Meme code, meme certification : la mise a jour des competences annoncee
-  // pour le 2026-10-21 n'est ni un retrait ni une succession. L'entree reste
-  // active et recommandee, et ne declare aucune date de fin.
   assert.equal(sc900.status, "active");
   assert.equal(sc900.lifecycle.transition, "none-announced");
   assert.equal(sc900.lifecycle.lastExamOn, undefined);
   assert.equal(sc900.lifecycle.successor, undefined);
-  assert.equal(sc900.lifecycle.reviewOn, "2026-10-21");
-  assert.equal(isCertificationRecommendedOn(sc900, sc900.lifecycle.reviewOn), true);
+  assert.equal(sc900.provenance.checkedOn, "2026-10-21");
+  assert.equal(sc900.lifecycle.reviewOn, undefined);
+  assert.ok(sc900.lifecycle.note.includes("French exam rollout remains unconfirmed"));
+  assert.ok(sc900.lifecycle.note.includes("not an observed deployment"));
+  for (const weight of ["10-15%", "25-30%", "35-40%", "20-25%"]) {
+    assert.ok(sc900.lifecycle.note.includes(weight));
+  }
+  assert.ok(sc900.provenance.sources.some((source) =>
+    source.url === "https://learn.microsoft.com/fr-fr/credentials/certifications/resources/study-guides/sc-900"
+  ));
+  for (const day of ["2026-10-21", "2026-10-23"]) {
+    const result = checkCatalogFreshness({ root: repoRoot, asOf: day });
+    assert.deepEqual(result.errors.filter((error) => error.includes("microsoft:sc-900")), []);
+    assert.equal(isCertificationRecommendedOn(sc900, day), true);
+  }
 
-  // reviewOn vaut aussi pour une entree none-announced : la veille, aucune
-  // erreur ne vise SC-900 ; le jour de la mise a jour, la gate exige de relire
-  // la source une fois le nouveau referentiel en ligne.
-  const before = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-20" });
+  // Conserver la regression de la garde sur l'etat precedant la relecture.
+  const root = createMetadataRoot();
+  sc900.provenance.checkedOn = "2026-09-23";
+  sc900.lifecycle.reviewOn = "2026-10-21";
+  writeJson(catalogAt(root), catalog);
+  const before = checkCatalogFreshness({ root, asOf: "2026-10-20" });
   assert.ok(!before.errors.some((error) => error.includes("microsoft:sc-900")));
-  const onUpdate = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-21" });
+  const onUpdate = checkCatalogFreshness({ root, asOf: "2026-10-21" });
   assert.ok(
     onUpdate.errors.includes(
       "microsoft:sc-900: transition a reverifier depuis le 2026-10-21"

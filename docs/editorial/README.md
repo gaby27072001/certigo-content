@@ -778,6 +778,17 @@ retenue : un `reviewOn` sur une entree `none-announced` est la date de relecture
 d'une mise a jour annoncee du **meme** examen. Il se retire en relisant la
 source une fois la mise a jour en ligne, jamais en le repoussant.
 
+Relecture du 2026-10-21 : les guides EN et FR publient le referentiel date
+du 21 octobre (10-15 / 25-30 / 35-40 / 20-25 %) et les deux changements
+mineurs Entra ID / Defender XDR. Cette relecture acquitte `reviewOn` ;
+elle ne prouve pas un deploiement effectif de l'examen. La page de
+certification emploie encore le futur. Le guide FR traduit le referentiel,
+mais indique environ huit semaines de decalage des examens localises,
+avec retards possibles : l'adoption par l'examen FR reste non confirmee.
+Le blueprint agrege et les questions existantes ne sont pas revalides
+pedagogiquement par ce controle de sources. Les echeances globales restent
+inchangees.
+
 ## Encadrer une contradiction plutot que l'arbitrer
 
 Quand deux pages officielles se contredisent, le catalogue **pose les deux
