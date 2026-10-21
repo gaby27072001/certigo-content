@@ -316,6 +316,109 @@ test("la verification standalone refuse les option IDs dupliques", async () => {
   );
 });
 
+test("refuse un domaine sans question dans une piste questionBank distribuable (validate et package:verify)", async () => {
+  const root = createRoot();
+  const catalogPath = resolve(root, "content", "public", "catalog", "certifications.json");
+  const catalog = readJson(catalogPath);
+  const clf = catalog.certifications.find((c) => c.id === "aws:clf-c02");
+  clf.blueprint.objectives[0].weightPercent = 50;
+  clf.blueprint.objectives.push({
+    id: "domain-2",
+    title: "Security and Compliance",
+    weightPercent: 50,
+    weightType: "exact",
+  });
+  writeJson(catalogPath, catalog);
+
+  const coveragePath = resolve(root, "content", "public", "coverage", "aws", "clf-c02.json");
+  const coverage = readJson(coveragePath);
+  coverage.objectives[0].weightPercent = 50;
+  coverage.objectives.push({
+    objective: "domain-2",
+    title: "Security and Compliance",
+    weightPercent: 50,
+    weightType: "exact",
+    questionIds: [],
+  });
+  writeJson(coveragePath, coverage);
+
+  const emptyDomainId = "aws.clf-c02.domain.security-compliance";
+  const emptyDomainPath = resolve(
+    root,
+    "content",
+    "public",
+    "runtime",
+    "domains",
+    "aws",
+    "clf-c02",
+    `${emptyDomainId}.json`
+  );
+  writeJson(emptyDomainPath, {
+    schema: "certigo.runtime.domain/v1",
+    resourceType: "domain",
+    id: emptyDomainId,
+    certificationId: "aws:clf-c02",
+    blueprintVersion: "2026-08-17",
+    objectiveId: "domain-2",
+    lifecycle: { status: "active" },
+  });
+
+  const trackPath = resolve(
+    root,
+    "content",
+    "public",
+    "runtime",
+    "tracks",
+    "aws",
+    "clf-c02",
+    "aws.clf-c02.track.main.json"
+  );
+  const track = readJson(trackPath);
+  track.domainIds.push(emptyDomainId);
+  writeJson(trackPath, track);
+
+  const validation = await validateContent({ root });
+  assert.ok(
+    validation.errors.some(
+      (error) =>
+        error.includes("[runtime:domain-coverage]") &&
+        error.includes("aws.clf-c02.track.main") &&
+        error.includes(emptyDomainId)
+    ),
+    `attendu [runtime:domain-coverage], obtenu: ${validation.errors.join("; ")}`
+  );
+
+  const packagedRoot = createRoot();
+  await packageContent({ root: packagedRoot });
+  const packagedQuestionRel =
+    "questions/aws/clf-c02/aws.clf-c02.domain-1.cloud-value.001.json";
+  rmSync(resolve(packagedRoot, "dist", "public", packagedQuestionRel));
+  const publicManifestPath = resolve(packagedRoot, "dist", "public", "manifest.json");
+  const publicManifest = readJson(publicManifestPath);
+  publicManifest.files = publicManifest.files.filter(
+    (entry) => entry.path !== packagedQuestionRel
+  );
+  publicManifest.fileCount = publicManifest.files.length;
+  const { canonicalize: canon, sha256Hex: sha } = await import("../tools/gen_manifest.mjs");
+  const manifestBody = {
+    schema: publicManifest.schema,
+    channel: publicManifest.channel,
+    artifact: publicManifest.artifact,
+    algorithm: publicManifest.algorithm,
+    serialization: publicManifest.serialization,
+    fileCount: publicManifest.fileCount,
+    files: publicManifest.files,
+  };
+  publicManifest.rootHash = sha(canon(manifestBody));
+  publicManifest.manifestId = `sha256:${publicManifest.rootHash}`;
+  writeJson(publicManifestPath, publicManifest);
+
+  await assert.rejects(
+    () => verifyPackagedContent({ root: packagedRoot }),
+    /\[runtime:domain-coverage\].*aws\.clf-c02\.track\.main.*aws\.clf-c02\.domain\.cloud-concepts/
+  );
+});
+
 test("refuse une sortie runtime traversant une junction", async (context) => {
   const root = createRoot();
   const outside = mkdtempSync(join(tmpdir(), "certigo-runtime-outside-"));

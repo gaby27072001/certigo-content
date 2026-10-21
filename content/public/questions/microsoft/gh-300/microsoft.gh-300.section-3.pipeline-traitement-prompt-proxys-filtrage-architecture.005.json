@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-300.section-3.pipeline-traitement-prompt-proxys-filtrage-architecture.005",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-300",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-3"
+  },
+  "prompt": "Un architecte sécurité évalue le cycle de vie d'une requête dans GitHub Copilot Business. Il souhaite comprendre comment l'extension IDE assemble le contexte, transmet le prompt au service proxy GitHub, applique les filtres de sécurité et traite les suggestions retournées vis-à-vis de la conservation des données. Quel comportement décrit fidèlement cette architecture ?",
+  "choices": [
+    "L'extension assemble le contexte pertinent, interroge le proxy TLS et écarte le prompt après génération sans réentraînement.",
+    "Le poste client télécharge l'intégralité du modèle fondation en mémoire vive pour exécuter l'inférence locale hors connexion.",
+    "Le service archive les extraits de code privés dans une base publique afin de réentraîner le modèle partagé en continu sur le cloud.",
+    "Le proxy désactive le chiffrement de transport afin d'autoriser l'inspection en clair des requêtes par des serveurs tiers externes."
+  ]
+}

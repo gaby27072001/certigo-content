@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-500.section-6.configurations-securite-entreprise-deploiement-echelle.006",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-500",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-6"
+  },
+  "prompt": "Un administrateur sécurité doit activer Secret Protection et la configuration par défaut de CodeQL sur des centaines de dépôts répartis dans une organisation GitHub Enterprise, tout en garantissant que chaque nouveau dépôt créé hérite automatiquement de ce profil de sécurité. Quel mécanisme d'administration répond à ce besoin à grande échelle ?",
+  "choices": [
+    "Modifier l'historique Git de chaque dépôt pour insérer un fichier de configuration local sur la branche.",
+    "Créer et appliquer une configuration de sécurité GitHub au niveau de l'organisation avec activation automatique.",
+    "Révoquer les droits d'écriture des équipes de développement jusqu'à la vérification individuelle de chaque dépôt.",
+    "Archiver les dépôts existants afin de recréer des dépôts vides dépourvus d'historique de commits et de branches actives."
+  ]
+}

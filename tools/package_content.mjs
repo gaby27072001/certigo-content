@@ -585,6 +585,64 @@ function loadArtifactPayloads(artifactRoot, resourceType) {
  * qu'ici : elles refusent la PUBLICATION d'items conformes au contrat que l'app
  * ne sait pas encore faire reussir. Sans reglage, elles sont actives.
  */
+export function verifyDistributableDomainCoverage(distRoot, { requirePrivate = true } = {}) {
+  const root = resolve(distRoot);
+  const publicRoot = resolve(root, "public");
+  const catalogPath = resolve(publicRoot, "catalog", "certifications.json");
+  const catalog = existsSync(catalogPath) ? loadJson(catalogPath) : null;
+  const certifications = new Map(
+    (catalog?.certifications ?? []).map((item) => [item.id, item])
+  );
+  const tracks = loadArtifactPayloads(publicRoot, "track");
+  const domains = loadArtifactPayloads(publicRoot, "domain");
+  const questions = loadArtifactPayloads(publicRoot, "question");
+  const privateManifestPath = resolve(root, "private", "manifest.json");
+  const solutions =
+    requirePrivate && existsSync(privateManifestPath)
+      ? loadArtifactPayloads(resolve(root, "private"), "solution")
+      : null;
+  const errors = [];
+
+  for (const { payload: track } of tracks.values()) {
+    if (track?.mode !== "questionBank") continue;
+    const certification = certifications.get(track.certificationId);
+    const isDistributable = certification
+      ? isCertificationRecommendedOn(certification, catalog?.asOf)
+      : ["active", "retiring"].includes(track.lifecycle?.status);
+    if (!isDistributable) continue;
+    for (const domainId of track.domainIds ?? []) {
+      const domain = domains.get(domainId)?.payload;
+      if (!domain) {
+        errors.push(
+          `[runtime:domain-coverage] piste distribuable "${track.id}" reference un domaine absent "${domainId}"`
+        );
+        continue;
+      }
+      const matchingQuestionIds = [...questions.entries()]
+        .filter(([, { payload: question }]) =>
+          question?.metadata?.certification === track.certificationId &&
+          (["v4", "v5"].includes(question?.schemaVersion)
+            ? question.metadata?.domainId === domain.id
+            : question.metadata?.objective === domain.objectiveId)
+        )
+        .map(([id]) => id);
+      if (matchingQuestionIds.length === 0) {
+        errors.push(
+          `[runtime:domain-coverage] piste distribuable "${track.id}" sans question pour le domaine "${domainId}"`
+        );
+      } else if (solutions && !matchingQuestionIds.some((id) => solutions.has(id))) {
+        errors.push(
+          `[runtime:domain-coverage] piste distribuable "${track.id}" sans corrige prive pour le domaine "${domainId}"`
+        );
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    throw new Error(`[package-verify] ${errors.join("; ")}`);
+  }
+}
+
 export function verifyExercisePairs(distRoot, guards) {
   const root = resolve(distRoot);
   const questions = loadArtifactPayloads(resolve(root, "public"), "question");
@@ -738,6 +796,9 @@ export async function verifyPackagedContent(options = {}) {
   const releaseRequired = Object.values(manifests).some(
     (manifest) => manifest.schema === RUNTIME_PACKAGE_MANIFEST_SCHEMA_ID
   );
+  if (releaseRequired && manifests.public) {
+    verifyDistributableDomainCoverage(distRoot, { requirePrivate: allChannels });
+  }
   const release =
     allChannels && (releaseRequired || existsSync(releasePath))
       ? verifyReleaseDescriptor({
@@ -805,6 +866,11 @@ export async function packageContent(options = {}) {
 
   if (configs.length === Object.keys(CHANNELS).length) {
     verifyExercisePairs(distRoot, loadExerciseGuards(root));
+  }
+  if (mode === CONTENT_MODE.runtime && manifests.public) {
+    verifyDistributableDomainCoverage(distRoot, {
+      requirePrivate: configs.length === Object.keys(CHANNELS).length,
+    });
   }
 
   let release = null;

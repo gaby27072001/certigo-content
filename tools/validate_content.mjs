@@ -13,6 +13,7 @@ import {
   CATALOG_SCHEMA_PATH,
   COVERAGE_SCHEMA_PATH,
   isCertificationActiveOn,
+  isCertificationRecommendedOn,
 } from "./lib/catalog.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import {
@@ -493,7 +494,14 @@ export function answerLengthMetrics(choices, correct) {
   };
 }
 
-function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
+function validateRuntimeGraph({
+  runtimeByType,
+  catalog,
+  catalogIndex,
+  publicIds,
+  answerIds,
+  err,
+}) {
     const tracks = runtimeByType.get("track");
     const domains = runtimeByType.get("domain");
     const units = runtimeByType.get("unit");
@@ -518,6 +526,10 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
       if (track.mode === "questionBank") {
         questionBankCertIds.add(track.certificationId);
       }
+      const certification = catalogIndex?.certifications.get(track.certificationId);
+      const isDistributable = certification
+        ? isCertificationRecommendedOn(certification, catalog?.asOf)
+        : ["active", "retiring"].includes(track.lifecycle?.status);
       const mappedObjectives = new Set();
       for (const domainId of track.domainIds ?? []) {
         const domain = domains.get(domainId)?.data;
@@ -538,6 +550,21 @@ function validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err }) {
           );
         }
         mappedObjectives.add(domain.objectiveId);
+        if (isDistributable && track.mode === "questionBank") {
+          const hasPairForDomain = [...publicIds.entries()].some(
+            ([questionId, { data: question }]) =>
+              answerIds?.has(questionId) &&
+              question?.metadata?.certification === track.certificationId &&
+              (isRuntimeItem(question)
+                ? question.metadata?.domainId === domain.id
+                : question.metadata?.objective === domain.objectiveId)
+          );
+          if (!hasPairForDomain) {
+            err(
+              `[runtime:domain-coverage] ${file}: piste distribuable "${track.id}" sans question pour le domaine "${domainId}"`
+            );
+          }
+        }
       }
       for (const unitId of track.unitIds ?? []) {
         const unit = units.get(unitId)?.data;
@@ -1001,7 +1028,14 @@ export async function validateContent(options = {}) {
   }
 
   if (runtimeFiles.length > 0) {
-    validateRuntimeGraph({ runtimeByType, catalogIndex, publicIds, err });
+    validateRuntimeGraph({
+      runtimeByType,
+      catalog,
+      catalogIndex,
+      publicIds,
+      answerIds,
+      err,
+    });
   }
 
   const coverageByCertification = new Map();
