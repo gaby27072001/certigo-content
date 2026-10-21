@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-200.section-5.federation-oidc-moindre-privilege-jeton-github.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-200",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-5"
+  },
+  "prompt": "Un pipeline GitHub Actions déploie des ressources cloud et s'authentifie actuellement à l'aide d'un secret statique à longue durée de vie stocké dans le dépôt. L'architecte sécurité souhaite éliminer tout secret persistant, émettre des jetons éphémères par exécution et restreindre les permissions par défaut du jeton du workflow. Quelle architecture doit-il retenir ?",
+  "choices": [
+    "Encoder la clé d'accès statique en base64 dans une variable de dépôt accessible aux branches de test global.",
+    "Transmettre le mot de passe du compte de service dans les arguments en clair de l'étape d'installation documentes.",
+    "Étendre les droits d'écriture du jeton automatique aux différents événements issus de dépôts tiers dans ce projet final.",
+    "Configurer la fédération OpenID Connect avec le fournisseur cloud et déclarer permissions en lecture minimale dans ce projets."
+  ]
+}

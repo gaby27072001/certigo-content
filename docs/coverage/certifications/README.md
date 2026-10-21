@@ -11,7 +11,11 @@ chaque certification couverte :
 - [catalogue AWS et Google Cloud](aws-gcp-catalog.md), avec les 26 matrices du
   snapshot 2026-08-17 ;
 - [vague pilote AWS MLA-C02](aws-mla-c02-pilot-wave.md), matrice partielle
-  pour une certification bêta tout juste annoncée.
+  pour une certification bêta tout juste annoncée ;
+- [vague internationale Radar (Lot 1)](radar-international-wave-1.md), pistes
+  GitHub Copilot (`GH-300`), GitHub (`GH-900`, `GH-200`, `GH-500`, `GH-100`),
+  Azure AI (`AI-103`), Fabric (`DP-600`) et catalogue Radar international 9
+  écosystèmes.
 
 Les sources de premiere partie restent detaillees dans chaque document. Les
 regles communes d'identite, de provenance, de versioning et de cycle de vie

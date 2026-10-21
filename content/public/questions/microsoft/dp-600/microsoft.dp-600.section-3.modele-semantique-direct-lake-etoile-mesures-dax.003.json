@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.dp-600.section-3.modele-semantique-direct-lake-etoile-mesures-dax.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:dp-600",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-3"
+  },
+  "prompt": "Un modèle sémantique Microsoft Fabric exploite le mode Direct Lake sur un Lakehouse contenant une table de faits de cinq cents millions de lignes. Les utilisateurs signalent que certaines requêtes basculent en mode DirectQuery (fallback) et que les calculs de comparaison annuelle sont lents. Quelles actions l'ingénieur analytique doit-il entreprendre pour stabiliser et accélérer le modèle ?",
+  "choices": [
+    "Fusionner les dimensions et les faits dans une table unique dénormalisée comportant deux cents colonnes tex.",
+    "Multiplier les relations bidirectionnelles entre tables de faits pour forcer le filtrage croisé permanent partage.",
+    "Structurer un schéma en étoile propre, éviter les colonnes calculées complexes et suivre les garde-fous de framing reel.",
+    "Désactiver la mise en mémoire des colonnes fréquemment interrogées lors du rafraîchissement du modèle dans ce projet controle."
+  ]
+}

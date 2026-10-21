@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-500.section-3.revue-dependances-blocage-vulnerabilites-pull-request.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-500",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-3"
+  },
+  "prompt": "Un éditeur logiciel souhaite empêcher l'introduction de paquets open source présentant des vulnérabilités critiques connues ou des licences incompatibles avant même qu'une demande de fusion ne soit acceptée sur la branche principale. Quel contrôle de sécurité de la chaîne logistique GitHub doit être intégré comme vérification requise sur les pull requests ?",
+  "choices": [
+    "Supprimer le fichier de verrouillage des paquets afin de résoudre la dernière version lors du build partage.",
+    "Intégrer l'action de revue des dépendances pour bloquer les versions vulnérables lors de la revue dans ce projets.",
+    "Autoriser la fusion immédiate puis traiter les alertes de sécurité lors de la clôture trimestrielle dans ce projet reel.",
+    "Archiver le graphe de dépendances du dépôt pour éviter l'indexation des bibliothèques transitives dans ce projet interne reel."
+  ]
+}

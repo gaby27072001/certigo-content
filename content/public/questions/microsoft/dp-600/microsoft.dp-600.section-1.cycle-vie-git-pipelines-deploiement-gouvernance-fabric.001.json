@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.dp-600.section-1.cycle-vie-git-pipelines-deploiement-gouvernance-fabric.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:dp-600",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-1"
+  },
+  "prompt": "Une équipe d'ingénierie analytique gère des espaces de travail Microsoft Fabric distincts pour le développement, la qualification et la production. L'architecte veut versionner les définitions de modèles sémantiques et de notebooks dans Git, automatiser la promotion entre environnements et adapter automatiquement les chaînes de connexion aux sources de chaque palier. Quelle architecture Fabric doit-il mettre en place ?",
+  "choices": [
+    "Connecter l'espace de développement à Git et configurer un pipeline de déploiement avec règles de paramètre.",
+    "Exporter les rapports localement puis les réimporter dans l'espace de production sans contrôle de version partage.",
+    "Accorder le rôle Administrateur sur l'espace de production aux différents analystes externes du projet dans ce projet B.",
+    "Dupliquer les tables sources dans un compte de stockage externe à chaque modification d'une mesure DAX dans ce projet partage."
+  ]
+}

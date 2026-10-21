@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.ai-103.section-5.extraction-documentaire-sch-personnalise-content-understanding.004",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:ai-103",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-5"
+  },
+  "prompt": "Une compagnie d'assurance traite des milliers de constats hétérogènes comprenant des formulaires numérisés, des tableaux multi-pages et des pièces justificatives. L'équipe souhaite extraire des champs métier typés avec des scores de confiance par champ pour orienter vers une revue humaine les dossiers dont la certitude est inférieure au seuil réglementaire. Quel service Azure AI doit-elle privilégier ?",
+  "choices": [
+    "Découper les fichiers PDF en chaînes brutes sans préserver la structure des tableaux ni des cellules global.",
+    "Utiliser un traducteur automatique de texte sans modèle de mise en page ni indicateur de fiabilité dans ce projet.",
+    "Stocker les documents numérisés sous forme d'images matricielles sans indexation des champs extraits dans ce projet cle.",
+    "Utiliser Azure AI Document Intelligence et Content Understanding avec schéma typé et seuils de confiance dans ce projet final."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.dp-600.section-2.architecture-medaillon-onelake-shortcuts-optimisation-delta.002",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:dp-600",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-2"
+  },
+  "prompt": "Une entreprise consolide dans un Lakehouse Microsoft Fabric des données transactionnelles déjà stockées au format Parquet dans Azure Data Lake Storage Gen2 ainsi que des flux d'événements quotidiens. L'équipe souhaite éviter la copie physique des données historiques externes tout en garantissant des lectures rapides par les moteurs Spark et Direct Lake sur les tables Delta agrégées. Quelle approche doit-elle retenir ?",
+  "choices": [
+    "Copier chaque nuit les téraoctets historiques dans des fichiers CSV non partitionnés au sein du Lakehouse B.",
+    "Créer des raccourcis OneLake vers le stockage externe et appliquer l'optimisation Delta V-Order aux tables global.",
+    "Désactiver la compaction des petits fichiers Parquet afin de conserver un fichier distinct par transaction interne reel.",
+    "Remplacer les tables Delta par des vues texte non indexées recalculées lors de chaque ouverture de rapport dans ce projet cle."
+  ]
+}

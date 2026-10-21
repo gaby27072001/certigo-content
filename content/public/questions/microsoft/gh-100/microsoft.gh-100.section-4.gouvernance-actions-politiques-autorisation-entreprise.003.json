@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-100.section-4.gouvernance-actions-politiques-autorisation-entreprise.003",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-100",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-4"
+  },
+  "prompt": "Pour réduire le risque lié à la chaîne d'approvisionnement dans GitHub Enterprise, l'administrateur souhaite autoriser dans les workflows uniquement les actions officielles créées par GitHub, les actions internes de l'entreprise et une liste restreinte d'actions tierces épinglées sur un SHA de commit précis. Où et comment doit-il appliquer cette restriction ?",
+  "choices": [
+    "Désactiver complètement l'exécution des contrôles d'intégration continue sur les dépôts de production final.",
+    "Laisser chaque développeur choisir les actions tierces via un fichier de préférences non supervisé dans ce projet.",
+    "Appliquer une politique d'autorisation sélective des actions au niveau de l'entreprise avec motifs validés interne reel.",
+    "Supprimer les journaux d'exécution des workflows dès qu'une étape externe télécharge un paquet public dans ce projet controle."
+  ]
+}

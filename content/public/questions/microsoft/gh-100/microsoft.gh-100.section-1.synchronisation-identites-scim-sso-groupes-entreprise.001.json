@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.gh-100.section-1.synchronisation-identites-scim-sso-groupes-entreprise.001",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:gh-100",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-1"
+  },
+  "prompt": "Une grande entreprise déploie GitHub Enterprise Cloud avec Comptes Gérés d'Entreprise (Enterprise Managed Users). L'équipe identité exige que la création, la suspension des comptes et l'appartenance aux équipes GitHub reflètent automatiquement les groupes de l'annuaire d'entreprise Entra ID sans gestion locale des membres. Quelle architecture d'authentification et de provisionnement doit être configurée ?",
+  "choices": [
+    "Configurer l'authentification unique SAML ou OIDC couplée au provisionnement SCIM relié aux équipes partage.",
+    "Inviter chaque collaborateur via une adresse personnelle externe avec validation par courriel standard documentes.",
+    "Partager un jeton d'accès personnel commun entre les administrateurs d'organisation de chaque filiale dans ce projet v2.",
+    "Autoriser la création libre de comptes locaux dépourvus de liaison avec le fournisseur d'identité dans ce projet interne reel."
+  ]
+}

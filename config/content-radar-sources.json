@@ -4,7 +4,12 @@
     {
       "id": "microsoft", "name": "Microsoft", "category": "cloud-hyperscalers",
       "officialDomains": ["https://learn.microsoft.com"],
-      "discoveryEndpoints": [{"id": "credentials", "url": "https://learn.microsoft.com/en-us/credentials/browse/?credential_types=certification", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "credentials", "url": "https://learn.microsoft.com/en-us/credentials/browse/?credential_types=certification", "format": "html-links"},
+        {"id": "github-copilot-gh-300", "url": "https://learn.microsoft.com/credentials/certifications/github-copilot/", "format": "html-links"},
+        {"id": "azure-ai-apps-agents-ai-103", "url": "https://learn.microsoft.com/credentials/certifications/azure-ai-apps-and-agents-developer-associate/", "format": "html-links"},
+        {"id": "fabric-analytics-dp-600", "url": "https://learn.microsoft.com/credentials/certifications/fabric-analytics-engineer-associate/", "format": "html-links"}
+      ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
@@ -34,7 +39,10 @@
     {
       "id": "anthropic", "name": "Anthropic", "category": "ai-foundation-models",
       "officialDomains": ["https://academy.claude.com"],
-      "discoveryEndpoints": [{"id": "learn", "url": "https://academy.claude.com/", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "learn", "url": "https://academy.claude.com/", "format": "html-links"},
+        {"id": "human-agent-teams", "url": "https://academy.claude.com/courses/building-effective-human-agent-teams", "format": "html-links"}
+      ],
       "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
@@ -70,19 +78,28 @@
     {
       "id": "apple", "name": "Apple", "category": "apple-mobile",
       "officialDomains": ["https://training.apple.com"],
-      "discoveryEndpoints": [{"id": "training", "url": "https://training.apple.com/", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "training", "url": "https://training.apple.com/", "format": "html-links"},
+        {"id": "it-training", "url": "https://training.apple.com/it", "format": "html-links"}
+      ],
       "cadenceMinutes": 60, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
       "id": "databricks", "name": "Databricks", "category": "data-analytics",
       "officialDomains": ["https://www.databricks.com"],
-      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.databricks.com/learn/certification", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "certifications", "url": "https://www.databricks.com/learn/certification", "format": "html-links"},
+        {"id": "genai-engineer-associate", "url": "https://www.databricks.com/learn/certification/genai-engineer-associate", "format": "html-links"}
+      ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
       "id": "snowflake", "name": "Snowflake", "category": "data-analytics",
       "officialDomains": ["https://learn.snowflake.com"],
-      "discoveryEndpoints": [{"id": "certifications", "url": "https://learn.snowflake.com/en/certifications", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "certifications", "url": "https://learn.snowflake.com/en/certifications", "format": "html-links"},
+        {"id": "snowpro-core", "url": "https://learn.snowflake.com/en/certifications/snowpro-core-c03/", "format": "html-links"}
+      ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
@@ -108,14 +125,18 @@
       "officialDomains": ["https://training.linuxfoundation.org", "https://www.cncf.io"],
       "discoveryEndpoints": [
         {"id": "lf-certifications", "url": "https://training.linuxfoundation.org/certification/", "format": "html-links"},
-        {"id": "cncf-certifications", "url": "https://www.cncf.io/training/certification/", "format": "html-links"}
+        {"id": "cncf-certifications", "url": "https://www.cncf.io/training/certification/", "format": "html-links"},
+        {"id": "cka", "url": "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/", "format": "html-links"}
       ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
       "id": "hashicorp", "name": "HashiCorp", "category": "devops-cloud-native-dev",
       "officialDomains": ["https://developer.hashicorp.com"],
-      "discoveryEndpoints": [{"id": "certifications", "url": "https://developer.hashicorp.com/certifications", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "certifications", "url": "https://developer.hashicorp.com/certifications", "format": "html-links"},
+        {"id": "terraform-associate", "url": "https://developer.hashicorp.com/certifications/terraform-associate", "format": "html-links"}
+      ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
@@ -154,7 +175,10 @@
     {
       "id": "comptia", "name": "CompTIA", "category": "cybersecurity-networking",
       "officialDomains": ["https://www.comptia.org"],
-      "discoveryEndpoints": [{"id": "certifications", "url": "https://www.comptia.org/certifications", "format": "html-links"}],
+      "discoveryEndpoints": [
+        {"id": "certifications", "url": "https://www.comptia.org/certifications", "format": "html-links"},
+        {"id": "security-plus", "url": "https://www.comptia.org/en-us/certifications/security/", "format": "html-links"}
+      ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {

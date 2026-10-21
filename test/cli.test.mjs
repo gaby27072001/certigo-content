@@ -26,6 +26,7 @@ test("les CLI documentent l'aide avec un code de succes", () => {
   for (const tool of [
     "gen_manifest.mjs",
     "validate_content.mjs",
+    "validate_catalog.mjs",
     "package_content.mjs",
     "publish_release.mjs",
     "compile_runtime.mjs",
@@ -69,7 +70,7 @@ test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
   ).asOf;
   const current = execute("check_catalog_freshness.mjs", ["--as-of", catalogAsOf]);
   assert.equal(current.status, 0, current.stderr);
-  assert.match(current.stdout, /actifs=31/);
+  assert.match(current.stdout, /actifs=38/);
 
   const transitioned = execute("check_catalog_freshness.mjs", [
     "--as-of",
