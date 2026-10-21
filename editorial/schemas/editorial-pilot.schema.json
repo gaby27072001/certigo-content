@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/editorial-pilot.schema.json",
+  "title": "Certigo standalone editorial pilot (not a release resource)",
+  "description": "Editorial-only authoring contract, excluded from backend release schemas.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "locale", "status", "purpose", "title", "audience", "prerequisites", "estimatedMinutes", "asOf", "scope", "sources", "lessons"],
+  "properties": {
+    "schema": { "const": "certigo.editorial.pilot/v1" },
+    "id": { "$ref": "#/$defs/slug" },
+    "locale": { "const": "fr-FR" },
+    "status": { "const": "draft" },
+    "purpose": { "const": "learning-not-certification" },
+    "title": { "$ref": "#/$defs/text" },
+    "audience": { "$ref": "#/$defs/text" },
+    "prerequisites": { "$ref": "#/$defs/text" },
+    "estimatedMinutes": { "type": "integer", "minimum": 1, "maximum": 60 },
+    "asOf": { "type": "string", "format": "date" },
+    "scope": { "$ref": "#/$defs/text" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "lessons": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/lesson" }
+    }
+  },
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+    "text": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "texts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "url", "checkedOn", "supports", "limits"],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "title": { "$ref": "#/$defs/text" },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://docs\\.aws\\.amazon\\.com/bedrock/latest/userguide/[a-z0-9-]+\\.html$"
+        },
+        "checkedOn": { "type": "string", "format": "date" },
+        "supports": { "$ref": "#/$defs/text" },
+        "limits": { "$ref": "#/$defs/text" }
+      }
+    },
+    "lesson": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "objective", "estimatedMinutes", "hook", "keyIdeas", "workedExample", "practice", "recap", "sourceIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "title": { "$ref": "#/$defs/text" },
+        "objective": { "$ref": "#/$defs/text" },
+        "estimatedMinutes": { "type": "integer", "minimum": 1, "maximum": 60 },
+        "hook": { "$ref": "#/$defs/text" },
+        "keyIdeas": { "$ref": "#/$defs/texts" },
+        "workedExample": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["situation", "steps", "decision"],
+          "properties": {
+            "situation": { "$ref": "#/$defs/text" },
+            "steps": { "$ref": "#/$defs/texts" },
+            "decision": { "$ref": "#/$defs/text" }
+          }
+        },
+        "practice": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt", "successCriteria", "feedback"],
+          "properties": {
+            "prompt": { "$ref": "#/$defs/text" },
+            "successCriteria": { "$ref": "#/$defs/texts" },
+            "feedback": { "$ref": "#/$defs/text" }
+          }
+        },
+        "recap": { "$ref": "#/$defs/text" },
+        "sourceIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/slug" }
+        }
+      }
+    }
+  }
+}
