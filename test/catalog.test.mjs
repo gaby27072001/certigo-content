@@ -319,12 +319,33 @@ test("borne les revues Microsoft sans effacer les echeances globales", () => {
 
 test("une revue partielle ne rafraichit pas les sources non relues", () => {
   const catalog = readJson(catalogAt(repoRoot));
+  const reviewedOnOctober21 = [
+    "aws:aif-c01",
+    "aws:aip-c01",
+    "aws:clf-c02",
+    "aws:dea-c01",
+    "aws:dop-c02",
+    "aws:saa-c03",
+    "aws:scs-c03",
+    "aws:soa-c03",
+    "gcp:cloud-devops-engineer",
+    "gcp:cloud-network-engineer",
+    "gcp:cloud-security-engineer",
+    "gcp:security-operations-engineer",
+  ];
   assert.equal(catalog.asOf, "2026-09-23");
   assert.equal(catalog.freshness.reviewDueOn, "2026-10-23");
   for (const provider of catalog.providers) {
     assert.equal(provider.checkedOn, "2026-09-23", provider.id);
   }
   for (const entry of catalog.certifications) {
+    if (reviewedOnOctober21.includes(entry.id)) {
+      assert.equal(entry.provenance.checkedOn, "2026-10-21", entry.id);
+      assert.equal(entry.lifecycle.transition, "none-announced", entry.id);
+      assert.ok(entry.lifecycle.note.includes("Review on 2026-10-21"), entry.id);
+      assert.ok(entry.lifecycle.note.includes("not a guarantee"), entry.id);
+      continue;
+    }
     if ([
       "aws:dva-c02",
       "aws:sap-c02",
@@ -350,8 +371,21 @@ test("une revue partielle ne rafraichit pas les sources non relues", () => {
   }
   assert.equal(
     checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors.length,
-    18
+    6
   );
+  for (const day of ["2026-10-21", "2026-10-23", "2026-10-24"]) {
+    const { errors } = checkCatalogFreshness({ root: repoRoot, asOf: day });
+    for (const id of reviewedOnOctober21) {
+      assert.ok(!errors.some((error) => error.startsWith(`${id}:`)), `${day}: ${id}`);
+    }
+  }
+  const pending = checkCatalogFreshness({ root: repoRoot, asOf: "2026-10-24" }).errors;
+  for (const id of ["aws:mla-c01", "aws:mla-c02"]) {
+    assert.ok(pending.some((error) => error.startsWith(`${id}: sources agees`)), id);
+  }
+  const aif = catalog.certifications.find((entry) => entry.id === "aws:aif-c01");
+  assert.ok(aif.lifecycle.note.includes("French (France) remains listed"));
+  assert.ok(aif.lifecycle.note.includes("actual Italian/German withdrawal is therefore unconfirmed"));
 });
 
 test("valide exhaustivement le catalogue reel et les vagues completes", async () => {
