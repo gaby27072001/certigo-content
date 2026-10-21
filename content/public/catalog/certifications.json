@@ -1,9 +1,9 @@
 {
   "schema": "certigo.certification-catalog/v1",
-  "asOf": "2026-09-23",
+  "asOf": "2026-10-21",
   "freshness": {
     "maxAgeDays": 30,
-    "reviewDueOn": "2026-10-23"
+    "reviewDueOn": "2026-11-20"
   },
   "providers": [
     {
@@ -333,7 +333,7 @@
       "status": "active-retiring",
       "officialUrl": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/",
       "guide": {
-        "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html",
+        "url": "https://docs.aws.amazon.com/ja_jp/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html",
         "version": null,
         "publishedOn": null,
         "versionSource": null,
@@ -354,14 +354,16 @@
         "lastExamOn": "2027-01-13",
         "recommendThrough": "2026-09-28",
         "successor": "aws:mla-c02",
-        "note": "AWS opened MLA-C02 beta registration on September 1, 2026. The last day to take MLA-C01 in English is September 28, 2026, and MLA-C02 beta delivery begins September 29, 2026. MLA-C01 remains available in Japanese, Korean, and Simplified Chinese until MLA-C02 GA delivery on January 14, 2027, when MLA-C01 retires in all languages. lastExamOn is an inclusive active-through boundary, so the final active date is January 13, 2027. Review attempt on 2026-10-21 remains incomplete: the catalog-linked English HTML guide returns HTTP 404; the alternative training-and-certification PDF and approved-path PDF return HTTP 403 from this environment, and the docs PDF returns HTTP 404. These responses do not prove intentional withdrawal or its cause. No accessible current MLA-C01 guide has been validated, so provenance.checkedOn remains 2026-09-23. The September AWS announcement supplies the January 14, 2027 GA/retirement date retained above, but the current certification page still says GA registration and delivery are TBD. These conflicting date statements are not resolved by this review; the retained structured dates are the earlier announcement-based boundaries, not newly confirmed delivery dates."
+        "note": "Reviewed on 2026-10-21. The official certification page states that MLA-C01 English availability ended September 28, 2026 and that Japanese, Korean and Simplified Chinese remain available until MLA-C02 general availability. The English guide URL returns HTTP 404 in the October 21 capture after that English exam boundary; the response does not prove when or why the guide became unavailable. The ja_jp, ko_kr and zh_cn official MLA-C01 guides each return HTTP 200 with localized text and the four domains weighted 28%, 26%, 22% and 24%. The Japanese guide is now the primary source, with all three retained in provenance. This is not a restored English or French guide, nor a new validation of the existing question corpus. The September AWS announcement states January 14, 2027 for MLA-C02 GA delivery and MLA-C01 retirement in all languages, but the current certification page still says GA registration and delivery are TBD. The existing January 13 inclusive lastExamOn and January 14 reviewOn retain the announcement-based boundary, not a newly confirmed deployment date. MLA-C01 remains active-retiring but is not recommended after September 28, 2026."
       },
       "provenance": {
-        "checkedOn": "2026-09-23",
+        "checkedOn": "2026-10-21",
         "sources": [
-          { "kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/" },
-          { "kind": "exam-guide", "url": "https://docs.aws.amazon.com/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html" },
-          { "kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/" }
+          {"kind": "certification-page", "url": "https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/"},
+          {"kind": "lifecycle", "url": "https://aws.amazon.com/blogs/training-and-certification/september-2026-new-offerings/"},
+          {"kind": "exam-guide", "url": "https://docs.aws.amazon.com/ja_jp/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html"},
+          {"kind": "exam-guide", "url": "https://docs.aws.amazon.com/ko_kr/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html"},
+          {"kind": "exam-guide", "url": "https://docs.aws.amazon.com/zh_cn/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html"}
         ]
       }
     },

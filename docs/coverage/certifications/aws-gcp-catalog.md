@@ -33,9 +33,39 @@ Faute de guide courant valide, sa date `checkedOn` reste le 23 septembre.
 Les bornes structurees de janvier restent celles de l'annonce anterieure,
 pas une confirmation nouvelle du calendrier effectif.
 
-Le snapshot global reste donc au 23 septembre : deux erreurs restent
+Lors de ce premier controle, le snapshot global restait au 23 septembre : deux erreurs restaient
 attendues au 24 octobre (snapshot et source MLA-C01). La garde de revue
-partielle les preserve ; les index relus ne suffisent pas a tout rafraichir.
+partielle sur fixture preserve cette regression.
+
+### Resolution par les guides localises MLA-C01 au 2026-10-21
+
+Les trois guides officiels
+[japonais](https://docs.aws.amazon.com/ja_jp/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html),
+[coreen](https://docs.aws.amazon.com/ko_kr/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html)
+et [chinois simplifie](https://docs.aws.amazon.com/zh_cn/aws-certification/latest/machine-learning-engineer-associate-01/machine-learning-engineer-associate-01.html)
+repondent 200 avec un texte effectivement localise et les quatre domaines
+28 / 26 / 22 / 24 %. Le guide japonais devient la reference principale ;
+les trois sont conserves en provenance. L'URL anglaise repondait 404 lors
+du controle du 21 octobre, apres la borne anglaise du 28 septembre. Cette
+chronologie ne prouve ni la date ni la cause de son indisponibilite.
+La contradiction GA `TBD` / annonce du 14 janvier reste explicite, pas resolue.
+
+La campagne des 33 entrees est maintenant close sur des lectures des 20 et
+21 octobre : les dates individuelles reelles restent intactes (18 au 20,
+15 au 21), et les trois index sont dates du 21. Le snapshot est fixe au
+21 octobre, avec revue globale au plus tard le 20 novembre. Les projections
+des 21, 23 et 24 octobre n'ont plus d'erreur ; cela n'atteste pas une
+nouvelle validation pedagogique des questions ni la resolution des limites
+factuelles deja documentees.
+
+**Effet de livraison :** le snapshot franchit `recommendThrough` MLA-C01
+(28 septembre). Le packager existant exclut donc desormais ses ressources
+publiques et solutions privees, sans supprimer ni modifier les sources.
+MLA-C01 reste `active-retiring` dans les trois langues, mais non recommande.
+Les deux manifestes et le golden global changent par cette selection
+intentionnelle ; le canal prive ne peut plus etre annonce byte-identical.
+Tous les fichiers conserves, hors catalogue et identites derivees, doivent
+rester identiques.
 
 ### AWS - 12 certifications actives
 
