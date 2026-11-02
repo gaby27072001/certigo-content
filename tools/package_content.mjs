@@ -15,7 +15,7 @@ import { argv, cwd } from "node:process";
 import { pathToFileURL } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
-import { glob } from "glob";
+import { glob } from "./lib/glob.mjs";
 import {
   CANONICALIZATION,
   canonicalize,

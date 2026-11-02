@@ -39,7 +39,7 @@ import { readFileSync, writeFileSync, rmSync, mkdirSync } from "node:fs";
 import { resolve, relative, basename } from "node:path";
 import { cwd, argv, env, exit } from "node:process";
 import { parse as parseYaml } from "yaml";
-import { glob } from "glob";
+import { glob } from "./lib/glob.mjs";
 
 const ROOT = cwd();
 const PUBLIC_DIR = "content/public/questions";

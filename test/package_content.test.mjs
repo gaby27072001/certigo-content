@@ -177,7 +177,7 @@ test("conserve le package v3 runtime byte-identical", async () => {
   // Ces 146 etaient en v2 a plat jusqu'a leur migration vers v3 ; le compte de
   // paires est inchange par la migration, seuls leurs identifiants, leur
   // emplacement et leur schemaVersion l'ont ete.
-  assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8 + 37);
+  assert.equal(result.sourcePairCount, 146 + 42 + 42 + 60 + 100 + 72 + 48 + 216 + 8 + 37 + 8);
   assert.ok(result.release !== null);
   assert.equal(existsSync(resolve(outDir, "release.json")), true);
   // Le snapshot du 21 octobre franchit recommendThrough de MLA-C01 :
@@ -188,18 +188,18 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:e00ee9c8b8e7936fe85e28998942c276fd9abcb0908a79a3231a044c774cc71f",
+          "sha256:8b843dad347da5846926aeb96791e3fc200ef994210ac4f8dc448c639d4c0dbd",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:6072d6bc44cefe9cad9a20995f72edf59f96436f147fd0abb4ad522f3ad1cd93",
+          "sha256:df7d83db2a1833cda1f8ad29d47d66526d97631f2d27390404870bde4852ff87",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "db75e3426f50ce0f78e5c29694254d14e6e7fa692712cc5bf96036c695decc69"
+    "353073685a19d82ecd6487b41d2753e64f4ef3df53c348f5b282fb09098bc763"
   );
   for (const channel of ["public", "private"]) {
     const manifest = JSON.parse(

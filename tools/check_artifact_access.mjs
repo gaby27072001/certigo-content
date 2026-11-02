@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { relative, resolve } from "node:path";
 import { argv, cwd } from "node:process";
 import { pathToFileURL } from "node:url";
-import { glob } from "glob";
+import { glob } from "./lib/glob.mjs";
 import { parse } from "yaml";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 

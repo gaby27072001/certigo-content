@@ -35,7 +35,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
-import { glob } from "glob";
+import { glob } from "./lib/glob.mjs";
 import { compareOrdinal } from "./lib/deterministic.mjs";
 import {
   CONTENT_MODE,

@@ -5,6 +5,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { validateRadarTracks, validateRegistry } from "../tools/lib/content_radar.mjs";
 import { validateCatalog } from "../tools/validate_catalog.mjs";
+import { validateEditorialTracks } from "../tools/validate_editorial.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
@@ -17,17 +18,22 @@ const expectedMicrosoftRadarWave = [
   "gh-300",
   "gh-500",
   "gh-900",
+  "m365-copilot",
 ];
 
 const expectedInternationalRadarTracks = [
+  "anthropic:claude-code-mcp",
   "anthropic:claude-human-agent-teams",
   "apple:apple-device-support",
   "comptia:security-plus-sy0-701",
   "databricks:genai-engineer-associate",
   "github:gh-300",
+  "harvey:legal-ai-platform",
   "hashicorp:terraform-associate-004",
   "linux-foundation-cncf:cka",
+  "microsoft:m365-copilot",
   "openai:academy-ai-foundations",
+  "openai:chatgpt-codex-agents",
   "snowflake:snowpro-core-cof-c03",
 ];
 
@@ -48,7 +54,10 @@ test("valide la premiere vague de 7 pistes Microsoft/GitHub/AI/Fabric dans le ca
 
     const publicFiles = readdirSync(publicDir).filter((f) => f.endsWith(".json")).sort();
     const privateFiles = readdirSync(privateDir).filter((f) => f.endsWith(".json")).sort();
-    const expectedCount = Math.max(4, entry.blueprint.objectives.length);
+    const expectedCount =
+      slug === "m365-copilot"
+        ? 8
+        : Math.max(4, entry.blueprint.objectives.length);
     assert.equal(publicFiles.length, expectedCount, `${id}: ${expectedCount} questions attendues`);
     assert.deepEqual(privateFiles, publicFiles, `${id}: parite public/prive`);
 
@@ -110,9 +119,37 @@ test("valide les 9 pistes phares internationales du Radar 35 fournisseurs et val
 
   const report = await validateCatalog({ root: repoRoot, asOf: "2026-10-21" });
   assert.equal(report.ok, true, report.errors.join("\n"));
-  assert.equal(report.certificationCount, 40);
-  assert.equal(report.activeCertificationCount, 38);
-  assert.equal(report.recommendedCertificationCount, 37);
-  assert.equal(report.radarProviderCount, 35);
-  assert.equal(report.radarTrackCount, 9);
+  assert.equal(report.certificationCount, 41);
+  assert.equal(report.activeCertificationCount, 39);
+  assert.equal(report.recommendedCertificationCount, 38);
+  assert.equal(report.radarProviderCount, 36);
+  assert.equal(report.radarTrackCount, 13);
+});
+
+test("valide les 4 parcours phares IA generative & metier (M365 Copilot & Agents, OpenAI & Codex, Anthropic Claude & MCP, Harvey Legal IA)", () => {
+  const result = validateEditorialTracks({ root: repoRoot });
+  assert.equal(result.ok, true, result.errors.join("\n"));
+  assert.equal(result.trackCount, 4);
+  assert.equal(result.moduleCount, 12);
+  assert.equal(result.lessonCount, 32);
+  assert.equal(result.questionCount, 64);
+  assert.deepEqual(result.trackFiles, [
+    "editorial/tracks/anthropic-claude-mcp.json",
+    "editorial/tracks/harvey-legal-ai.json",
+    "editorial/tracks/m365-copilot-agents.json",
+    "editorial/tracks/openai-chatgpt-codex.json",
+  ]);
+  for (const file of result.trackFiles) {
+    const track = readJson(resolve(repoRoot, file));
+    assert.equal(track.brand, "CertiGo");
+    assert.equal(track.modules.length, 3);
+    for (const mod of track.modules) {
+      assert.ok(mod.architectureSchema.diagram.includes("➔"));
+      for (const lesson of mod.lessons) {
+        assert.ok(lesson.declicCard.title.length > 0);
+        assert.equal(lesson.microSlides.length, 3);
+        assert.ok(lesson.questions.length >= 2);
+      }
+    }
+  }
 });
