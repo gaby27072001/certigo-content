@@ -7,7 +7,7 @@ dans les sept categories demandees. Le nom de travail « Top 30 » n'est pas un
 classement mondial mesure. `linux-foundation-cncf` et `pmi-scrum` regroupent des
 organismes distincts ; PMI et Scrum.org ne sont pas un organisme unique.
 Une presence dans le registre ne prouve ni l'existence d'une certification,
-ni une offre exhaustive, ni un partenariat avec Certigo.
+ni une offre exhaustive, ni un partenariat avec CertiGo.
 
 Le CLI livre la validation du registre, la capture publique bornee, le rejeu
 deterministe de snapshots, des deltas et des **brouillons de revue**. Il ne cree

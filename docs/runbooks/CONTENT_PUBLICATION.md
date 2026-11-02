@@ -2,7 +2,7 @@
 
 Ce runbook couvre uniquement la construction et la publication. Il ne
 provisionne aucune ressource Azure, ne configure aucun secret ou variable et
-n'active aucune release dans Certigo.
+n'active aucune release dans CertiGo.
 
 ## Contrat #290/#304
 
@@ -100,7 +100,7 @@ toute connexion lorsque :
 - le package ne produit pas les trois IDs SHA-256 runtime ;
 - une gate de validation, manifeste, anti-fuite ou politique echoue ;
 - le paquet construit n'est pas entierement accepte par la copie des schemas
-  embarques du backend Certigo (`npm run contract:backend -- --dist dist`,
+  embarques du backend CertiGo (`npm run contract:backend -- --dist dist`,
   regle « expand avant usage ») : une release que l'import refuserait ne doit
   pas devenir irreversible ;
 - une paire v5 livree viole les regles croisees X1 a X9, ou une garde provisoire

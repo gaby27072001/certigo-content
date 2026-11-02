@@ -2,7 +2,7 @@
 
 ## Repository purpose
 
-This repository contains Certigo editorial content split across two trust zones:
+This repository contains CertiGo editorial content split across two trust zones:
 
 - `content/public/questions/` for distributable question content (no answers)
 - `content/answerKey/solutions/` for sensitive answer keys
@@ -83,14 +83,14 @@ only by reading the source again, never by moving its date. See `docs/editorial/
 
 ## Backend content contract: expand before use
 
-The Certigo backend re-validates every release at import against its **own embedded copies** of the
+The CertiGo backend re-validates every release at import against its **own embedded copies** of the
 schemas (`backend/src/Certigo.Infrastructure/ContentContracts/Schemas/` in `gchambaud_microsoft/Certigo`).
 Its C# catalog parser also rejects unknown properties. If content uses a field the backend does not
 know yet, the import rejects the release, and by then the release is already published, which cannot
 be undone. This happened with `lifecycle.transition`: PR #84 added it here, and the backend only
 accepted it with Certigo#511.
 
-`config/backend-accepted-schemas/` holds a copy of those backend schemas, pinned to a named Certigo
+`config/backend-accepted-schemas/` holds a copy of those backend schemas, pinned to a named CertiGo
 revision in `SOURCE.json`. `npm run contract:backend` (run by `package-gates` and by the
 publication plan) fails when:
 
@@ -102,16 +102,16 @@ shape the backend rejects.
 
 To use a new field or a new shape:
 
-1. Open a Certigo PR that makes the backend accept it (schema and C# parser: the *expand* step), and
+1. Open a CertiGo PR that makes the backend accept it (schema and C# parser: the *expand* step), and
    get it merged.
-2. Resynchronize the copy from a Certigo checkout of that merged revision. The bytes come from the
+2. Resynchronize the copy from a CertiGo checkout of that merged revision. The bytes come from the
    `HEAD` git objects, not from the working tree:
-   `npm run contract:backend -- --sync-from <path-to-Certigo-checkout>`
+   `npm run contract:backend -- --sync-from <path-to-CertiGo-checkout>`
 3. Only then change the content that uses the field, possibly in the same PR as step 2.
 
 Before an import, the backend must also have been **deployed** with that revision. For the exact
-importer, replay `CandidateContentPackageTests` from Certigo on the local `dist/` (see
-`docs/runbooks/CONTENT_RELEASES.md` in Certigo).
+importer, replay `CandidateContentPackageTests` from CertiGo on the local `dist/` (see
+`docs/runbooks/CONTENT_RELEASES.md` in CertiGo).
 
 ## Provisional publication guards for v5 exercises
 
@@ -122,9 +122,9 @@ are not contract rules, and `npm run validate` does not apply them.
 - `allowAppliedDistractors` is `false`: an `applied` item whose options are not all cited by
   `correctOptionIds` is refused with `[v5:garde-applied]`. X5 allows such distractors, but the app
   only lets the learner submit once every option is placed, so the item would be impossible to pass.
-  Certigo applies the same rule to its legacy corpus (`APPLIED_DISTRACTORS_NOT_YET_SUPPORTED`,
+  CertiGo applies the same rule to its legacy corpus (`APPLIED_DISTRACTORS_NOT_YET_SUPPORTED`,
   decision Q-G, Certigo#530).
-- Set the value to `true` only when **all three** lifting conditions of Certigo's `docs/EXERCICES.md`
+- Set the value to `true` only when **all three** lifting conditions of CertiGo's `docs/EXERCICES.md`
   (section "Garde provisoire sur les distracteurs d'`applied`") hold:
   1. the app lets the learner submit an `applied` answer once 2 steps are placed, with accessible
      reordering;

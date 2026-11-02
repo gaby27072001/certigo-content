@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Garde « expand avant usage » : le contenu ne doit utiliser que ce que le
-// backend Certigo accepte deja a l'import.
+// backend CertiGo accepte deja a l'import.
 //
 // Le backend revalide chaque release contre SES copies embarquees des schemas
 // (ContentContractVerifier + JsonSchemaContentContractValidator). Une forme que
@@ -10,15 +10,15 @@
 // 2026-09-23 : `lifecycle.transition`, ajoute par la PR #84, faisait refuser
 // tout le catalogue, alors que `validate` et les tests restaient verts ici.
 //
-// Les deux depots sont prives : la CI de ce depot ne peut pas lire Certigo. La
+// Les deux depots sont prives : la CI de ce depot ne peut pas lire CertiGo. La
 // garde s'appuie donc sur une copie des schemas du backend, figee a une revision
-// Certigo nommee, et verifie deux choses :
+// CertiGo nommee, et verifie deux choses :
 //   1. la copie est integre : ses empreintes sont celles de SOURCE.json ;
 //   2. tout ce que le paquet livre (descripteur, manifestes, charges utiles) est
 //      accepte par cette copie.
 // Un schema de ce depot en avance sur la copie n'est qu'une note : seul l'usage
 // d'une forme refusee fait echouer.
-// La copie ne se met a jour qu'avec --sync-from, depuis un checkout Certigo dont
+// La copie ne se met a jour qu'avec --sync-from, depuis un checkout CertiGo dont
 // la revision est enregistree : c'est l'etape « expand » cote backend, faite
 // avant l'usage cote contenu.
 
@@ -49,7 +49,7 @@ export const BACKEND_SCHEMA_PATH =
   "backend/src/Certigo.Infrastructure/ContentContracts/Schemas";
 const CONTENT_SCHEMAS_DIRECTORY = "schemas";
 
-// Miroir de ContentContractVerifier.ValidatePayloadSchema cote Certigo.
+// Miroir de ContentContractVerifier.ValidatePayloadSchema cote CertiGo.
 const SCHEMA_BY_RESOURCE_TYPE = {
   certificationCatalog: "certification-catalog.schema.json",
   coverageMatrix: "coverage-matrix.schema.json",
@@ -66,10 +66,10 @@ const PACKAGE_MANIFEST_SCHEMA = "package-manifest.schema.json";
 
 const EXPAND_FIRST =
   "Regle « expand avant usage » : faire d'abord accepter cette forme par le backend " +
-  "(PR Certigo sur " +
+  "(PR CertiGo sur " +
   BACKEND_SCHEMA_PATH +
   "), la fusionner, puis resynchroniser la copie avec " +
-  "`npm run contract:backend -- --sync-from <checkout Certigo>` avant de l'utiliser ici.";
+  "`npm run contract:backend -- --sync-from <checkout CertiGo>` avant de l'utiliser ici.";
 
 // Empreinte independante du poste : un checkout Windows en core.autocrlf=true
 // voit des CRLF que l'objet git ne contient pas. On hache les octets en LF, ce
@@ -268,14 +268,14 @@ function git(repository, args, encoding = "utf8") {
   });
 }
 
-// Copie depuis un checkout Certigo : les octets viennent de l'objet git de HEAD,
+// Copie depuis un checkout CertiGo : les octets viennent de l'objet git de HEAD,
 // pas de l'arbre de travail, pour qu'une fin de ligne locale ou une modification
 // non commitee ne puissent pas entrer dans la copie.
 export function syncBackendSchemas({ root, from }) {
   const repository = resolve(from);
   const revision = git(repository, ["rev-parse", "HEAD"]).trim();
   if (!/^[0-9a-f]{40}$/.test(revision)) {
-    throw new Error(`revision Certigo illisible: ${revision}`);
+    throw new Error(`revision CertiGo illisible: ${revision}`);
   }
   const committedAt = new Date(git(repository, ["show", "-s", "--format=%cI", "HEAD"]).trim())
     .toISOString()
@@ -304,9 +304,9 @@ export function syncBackendSchemas({ root, from }) {
   const source = {
     schema: BACKEND_SOURCE_SCHEMA,
     note:
-      "Copie des schemas embarques par le backend Certigo, qui revalide chaque release a l'import. " +
-      "Ne pas editer a la main : regenerer avec `npm run contract:backend -- --sync-from <checkout Certigo>` " +
-      "une fois la PR expand fusionnee cote Certigo.",
+      "Copie des schemas embarques par le backend CertiGo, qui revalide chaque release a l'import. " +
+      "Ne pas editer a la main : regenerer avec `npm run contract:backend -- --sync-from <checkout CertiGo>` " +
+      "une fois la PR expand fusionnee cote CertiGo.",
     repository: BACKEND_REPOSITORY,
     path: BACKEND_SCHEMA_PATH,
     revision,
@@ -361,7 +361,7 @@ if (isMain) {
       const result = await checkBackendContract(options);
       const total = Object.values(result.counts).reduce((sum, count) => sum + count, 0);
       console.log(
-        `[contract:backend] revision Certigo ${result.revision ?? "inconnue"}, ${total} document(s) controle(s)`
+        `[contract:backend] revision CertiGo ${result.revision ?? "inconnue"}, ${total} document(s) controle(s)`
       );
       if (result.schemaDrift.length > 0) {
         console.log(

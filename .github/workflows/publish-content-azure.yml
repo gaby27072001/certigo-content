@@ -136,7 +136,7 @@ jobs:
       # l'autre depot ecrase alors le cache de ce job en pleine execution, et
       # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
       # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
-      # job Certigo sur la meme VM, deux fois, sur les deux VM.
+      # job CertiGo sur la meme VM, deux fois, sur les deux VM.
       AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
@@ -214,7 +214,7 @@ jobs:
       # l'autre depot ecrase alors le cache de ce job en pleine execution, et
       # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
       # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
-      # job Certigo sur la meme VM, deux fois, sur les deux VM.
+      # job CertiGo sur la meme VM, deux fois, sur les deux VM.
       AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit
@@ -292,7 +292,7 @@ jobs:
       # l'autre depot ecrase alors le cache de ce job en pleine execution, et
       # l'appel `az` suivant echoue avec un principal etranger. Mesure : le run
       # 33960774991 a perdu ses deux jobs 18 secondes apres le demarrage d'un
-      # job Certigo sur la meme VM, deux fois, sur les deux VM.
+      # job CertiGo sur la meme VM, deux fois, sur les deux VM.
       AZURE_CONFIG_DIR: /tmp/azure-${{ github.run_id }}-${{ github.job }}
     steps:
       - name: Checkout approved commit

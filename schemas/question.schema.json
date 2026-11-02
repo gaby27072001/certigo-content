@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://certigo.microsoft.com/schemas/question.schema.json",
-  "title": "Certigo public question",
+  "title": "CertiGo public question",
   "description": "Validates legacy v2, metadata-aware v3, canonical runtime v4, and per-type exercise v5 public questions. Every variant forbids answer-bearing keys. Cross-file rules X1-X9 of v5 are enforced by tools/lib/exercise_v5.mjs.",
   "oneOf": [
     { "$ref": "#/$defs/v2" },

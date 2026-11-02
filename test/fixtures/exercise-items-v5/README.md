@@ -12,4 +12,4 @@ règles croisées X1 à X9 de `tools/lib/exercise_v5.mjs`. Les 17 contrôles né
 test sont construits en modifiant une seule propriété de ces fichiers.
 
 Ne pas les modifier : s'ils divergent de la spécification, la recopier depuis une révision
-nommée de Certigo et mettre à jour cette révision ici.
+nommée de CertiGo et mettre à jour cette révision ici.

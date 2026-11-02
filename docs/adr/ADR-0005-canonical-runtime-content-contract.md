@@ -9,7 +9,7 @@ Accepte le 2026-08-19.
 La fondation multi-cloud de l'ADR-0004 publie des paires
 question/solution, un catalogue de certifications et des matrices de
 couverture. Son `package-manifest/v2` ne decrit toutefois pas le graphe
-consomme par Certigo :
+consomme par CertiGo :
 
 - `Track`, `ExamDomain` et `TrackUnit` ;
 - `Lesson`, ses blocs ordonnes et leurs `conceptId` ;
@@ -17,7 +17,7 @@ consomme par Certigo :
 - `LessonAnswerKey`, garde cote serveur.
 
 Le runtime historique compile des fichiers YAML riches puis les charge dans
-Cosmos. Le script `tools/seed_content.py` du depot Certigo duplique aujourd'hui
+Cosmos. Le script `tools/seed_content.py` du depot CertiGo duplique aujourd'hui
 les questions dans les lessons et extrait un document answer key. En parallele,
 les nouvelles certifications AWS et Google Cloud sont naturellement des
 banques rattachees a un blueprint et ne justifient pas toutes un parcours
@@ -146,7 +146,7 @@ explicite plutot qu'un encodage ambigu dans `options`.
 ### Question et solution v5 (expand du 2026-09-25)
 
 `question/v5` et `solution/v5` sont la variante « un contrat par type » specifiee
-par Certigo : `docs/contracts/exercise-items/v5/README.md` de
+par CertiGo : `docs/contracts/exercise-items/v5/README.md` de
 `gchambaud_microsoft/Certigo`, revision
 `6562c293852592f727d7b61e2d792070752a67cf`, et son ADR-022. Les schemas
 de ce depot en integrent les propositions a l'identique dans leurs `oneOf` ; v2,
@@ -172,7 +172,7 @@ revelait la reponse des que les id encodaient le rang.
 
 Aucun contenu v5 n'est publie tant que le backend ne l'accepte pas. La garde
 `npm run contract:backend` refuse tout paquet v5 jusqu'a la resynchronisation de
-`config/backend-accepted-schemas/`, apres que Certigo a embarque et deploye v5.
+`config/backend-accepted-schemas/`, apres que CertiGo a embarque et deploye v5.
 
 **Garde provisoire de publication (2026-09-25).** L'app ne sait pas encore valider
 une selection partielle : un item `applied` avec distracteurs, conforme au contrat
@@ -182,8 +182,8 @@ une selection partielle : un item `applied` avec distracteurs, conforme au contr
 ou un reglage absent laisse aussi la garde active. Le validateur ne l'applique pas,
 parce que ce n'est pas une regle du contrat. C'est la meme garde que
 `APPLIED_DISTRACTORS_NOT_YET_SUPPORTED`, qui s'applique au corpus legacy de
-Certigo (decision Q-G, Certigo#530). On ne la leve qu'une fois reunies les trois
-conditions de `docs/EXERCICES.md` de Certigo :
+CertiGo (decision Q-G, Certigo#530). On ne la leve qu'une fois reunies les trois
+conditions de `docs/EXERCICES.md` de CertiGo :
 1. l'app permet de valider un `applied` des 2 etapes placees ;
 2. cette version est la seule en circulation chez les apprenants ;
 3. les vecteurs de parite couvrent les sous-ensembles.
@@ -272,7 +272,7 @@ cycle. Son corps contient :
 cache par `publicManifestId`; l'import atomique public/prive est idempotent par
 `releaseId`.
 
-## Projection vers Certigo
+## Projection vers CertiGo
 
 `tools/compile_runtime.mjs` produit :
 
@@ -285,7 +285,7 @@ cache par `publicManifestId`; l'import atomique public/prive est idempotent par
 La projection refuse un corpus invalide et passe la gate anti-fuite sur sa
 sortie publique. Elle ne publie ni ne charge Cosmos.
 
-## Impact sur Certigo #244
+## Impact sur CertiGo #244
 
 L'import backend doit :
 
@@ -297,7 +297,7 @@ L'import backend doit :
 6. garder les containers/acces public et answer key distincts ;
 7. promouvoir ou restaurer un pointeur de release, jamais reecrire un artefact.
 
-## Impact sur Certigo #243
+## Impact sur CertiGo #243
 
 Le mobile ne telecharge que le package public. Il doit :
 
