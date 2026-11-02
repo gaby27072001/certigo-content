@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { glob } from "glob";
+import { glob } from "./lib/glob.mjs";
 import { compileRuntime } from "./compile_runtime.mjs";
 import { canonicalize, sha256Hex } from "./gen_manifest.mjs";
 import { conceptIdFromQuestionId, domainIdFromObjective } from "./lib/schema_adapter.mjs";

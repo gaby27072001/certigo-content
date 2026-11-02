@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { globSync } from "glob";
+import { globSync } from "./glob.mjs";
 import { CATALOG_PATH, metadataFields } from "./catalog.mjs";
 
 export const CONTENT_MODE = Object.freeze({
