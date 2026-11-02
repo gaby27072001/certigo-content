@@ -1,6 +1,6 @@
 // Regles croisees question <-> corrige des exercices v5 (X1 a X9).
 //
-// Source : contrat v5 de Certigo, docs/contracts/exercise-items/v5/README.md, section 5,
+// Source : contrat v5 de CertiGo, docs/contracts/exercise-items/v5/README.md, section 5,
 // a la revision 6562c293852592f727d7b61e2d792070752a67cf. Le schema ne voit qu'un fichier a
 // la fois ; ces regles lient la question publique et son corrige. Elles s'appliquent ici
 // dans le validateur (sources) et dans le packager (artefacts construits), puis une seconde
@@ -260,7 +260,7 @@ export function appliedDistractorIds(question, solution) {
 
 // Tant que allowAppliedDistractors vaut false, un applied avec distracteurs est refuse :
 // l'app ne permet de valider qu'une fois toutes les options placees, l'item serait
-// impossible a reussir. Meme regle que APPLIED_DISTRACTORS_NOT_YET_SUPPORTED cote Certigo ;
+// impossible a reussir. Meme regle que APPLIED_DISTRACTORS_NOT_YET_SUPPORTED cote CertiGo ;
 // ses trois conditions de levee sont recopiees dans EXERCISE_GUARDS_PATH.
 export function v5PublicationGuardViolations(question, solution, guards = DEFAULT_EXERCISE_GUARDS) {
   if (guards.allowAppliedDistractors === true) return [];
@@ -271,7 +271,7 @@ export function v5PublicationGuardViolations(question, solution, guards = DEFAUL
       APPLIED_DISTRACTOR_GUARD,
       `item applied avec distracteur(s) ${distractors.join(", ")} refuse a la publication : ` +
         "l'app ne permet de valider qu'une fois toutes les options placees (meme garde que " +
-        "APPLIED_DISTRACTORS_NOT_YET_SUPPORTED cote Certigo). Garde levee par " +
+        "APPLIED_DISTRACTORS_NOT_YET_SUPPORTED cote CertiGo). Garde levee par " +
         `allowAppliedDistractors dans ${EXERCISE_GUARDS_PATH}, aux conditions qu'il documente`
     ),
   ];

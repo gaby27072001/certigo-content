@@ -50,7 +50,7 @@ jobs:
     # `security-events: write`, et l'envoi du SARIF echouerait. Ce workflow
     # utilise `pull_request` et non `pull_request_target` : le code non fiable
     # n'est jamais execute avec un jeton privilegie, ce qui rend inutile
-    # l'isolation source/controle du workflow homologue de `Certigo`.
+    # l'isolation source/controle du workflow homologue de `CertiGo`.
     if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-24.04
     permissions:

@@ -57,7 +57,7 @@ after(() => {
   }
 });
 
-test("la copie des schemas du backend est integre et nomme sa revision Certigo", () => {
+test("la copie des schemas du backend est integre et nomme sa revision CertiGo", () => {
   const contract = loadBackendContract({ root: repoRoot });
   assert.deepEqual(contract.errors, []);
   assert.match(contract.source.revision, /^[0-9a-f]{40}$/);
@@ -150,7 +150,7 @@ test("signale sans echouer un schema de contrat en avance sur le backend", async
   );
 });
 
-test("--sync-from copie les octets de HEAD et enregistre la revision Certigo", () => {
+test("--sync-from copie les octets de HEAD et enregistre la revision CertiGo", () => {
   const certigo = temporary("certigo-fake-backend-");
   const schemaDirectory = resolve(certigo, BACKEND_SCHEMA_PATH);
   mkdirSync(schemaDirectory, { recursive: true });

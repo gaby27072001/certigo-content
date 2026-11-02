@@ -11,7 +11,7 @@
 
 ADR-0002 produit deux paquets independants, deterministes et verifies. Leur
 retention dans GitHub Actions est limitee et ne constitue pas une livraison
-durable. La publication Azure doit rester decouplee des deploiements Certigo
+durable. La publication Azure doit rester decouplee des deploiements CertiGo
 existants : ce depot ne provisionne aucune ressource et ne modifie aucune
 configuration de backend, de CDN ou d'application.
 

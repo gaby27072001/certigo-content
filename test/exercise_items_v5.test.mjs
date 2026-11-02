@@ -484,9 +484,9 @@ test("tant que la copie backend n'a pas v5, la garde expand avant usage refusera
 
 test("la garde provisoire est active dans ce depot : un applied avec distracteurs n'est pas publiable", () => {
   // Temoin volontaire : lever la garde (allowAppliedDistractors: true) est une decision
-  // qui attend l'interface de selection partielle de Certigo, et doit se voir en revue.
+  // qui attend l'interface de selection partielle de CertiGo, et doit se voir en revue.
   assert.deepEqual(loadExerciseGuards(repoRoot), { allowAppliedDistractors: false });
-  // Le reglage est documente la ou il se change : la garde jumelle de Certigo et ses
+  // Le reglage est documente la ou il se change : la garde jumelle de CertiGo et ses
   // trois conditions de levee.
   const note = readJson(resolve(repoRoot, EXERCISE_GUARDS_PATH)).note;
   for (const expected of ["APPLIED_DISTRACTORS_NOT_YET_SUPPORTED", "(1)", "(2)", "(3)"]) {

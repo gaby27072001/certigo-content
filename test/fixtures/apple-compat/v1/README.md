@@ -1,7 +1,7 @@
 # Apple content compatibility fixtures v1
 
 This directory is a language-neutral fixture suite for clients consuming the
-existing Certigo public content contract. It adds no content schema, API, or
+existing CertiGo public content contract. It adds no content schema, API, or
 publication format.
 
 `expected-outcomes.json` is the test contract. It distinguishes:
@@ -33,7 +33,7 @@ fixture is stored here.
 
 ## Extraction
 
-The suite was introduced by Certigo Content commit
+The suite was introduced by CertiGo Content commit
 `6922952936678c1bc37d8bb0db9e50afbef38a90` on branch
 `gaby27072001-apple-content-compatibility`; its repository path is
 `test/fixtures/apple-compat/v1/`. In a consumer repository, copy only this

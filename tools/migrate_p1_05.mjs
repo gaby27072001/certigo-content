@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Deterministic content migrator for work-package p1-05.
 //
-// Reads the Certigo monorepo lesson corpus (content/<track>/lessons/*.lesson.yaml)
+// Reads the CertiGo monorepo lesson corpus (content/<track>/lessons/*.lesson.yaml)
 // and emits the certigo-content v2 question/answerKey pairs for every eligible
 // MCQ `check` block:
 //   - content/public/questions/<check.id>.json   (public payload, no answer)

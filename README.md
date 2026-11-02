@@ -1,6 +1,6 @@
 # certigo-content
 
-Source editoriale privee du contenu Certigo. Le depot conserve deux espaces :
+Source editoriale privee du contenu CertiGo. Le depot conserve deux espaces :
 
 - `content/public/questions/` contient les questions distribuables sans reponse ;
 - `content/public/catalog/` et `content/public/coverage/` contiennent le
@@ -51,7 +51,7 @@ un commit donne.
 | `npm run validate` | Valide le corpus reel : schemas, bijection et anti-fuite. |
 | `npm run editorial:validate` | Valide hors reseau les pilotes autonomes non distribues ; inclus aussi dans les tests. |
 | `npm run catalog:freshness` | Controle sans reseau l'age du snapshot et les transitions de cycle de vie ; accepte `-- --as-of YYYY-MM-DD`. Projection jour par jour de la prochaine echeance : voir `AGENTS.md`, section « Projecting catalog freshness day by day ». |
-| `npm run contract:backend` | Garde « expand avant usage » : construit le paquet et exige que tout soit accepte par la copie des schemas du backend Certigo (`config/backend-accepted-schemas/`) ; accepte `-- --dist <dir>` et `-- --sync-from <checkout Certigo>`. Voir `AGENTS.md`, section « Backend content contract ». |
+| `npm run contract:backend` | Garde « expand avant usage » : construit le paquet et exige que tout soit accepte par la copie des schemas du backend CertiGo (`config/backend-accepted-schemas/`) ; accepte `-- --dist <dir>` et `-- --sync-from <checkout CertiGo>`. Voir `AGENTS.md`, section « Backend content contract ». |
 | `npm run manifest:check` | Verifie le determinisme, le vecteur golden et le schema du manifeste. |
 | `npm run manifest:generate` | Genere le manifeste mixte historique, reserve au rollback. |
 | `npm run package` | Nettoie `dist/`, valide le corpus et produit les deux artefacts. |

@@ -23,7 +23,7 @@ ou de preparation professionnelle. Les criteres et retours sont des documents
 auteur, pas une interface livree qui masquerait puis revelerait le feedback.
 
 Tous les scenarios sont fictifs et rediges pour ce pilote. Ils ne reprennent
-ni questions d'examen, ni passages fournisseurs, ni corriges Certigo.
+ni questions d'examen, ni passages fournisseurs, ni corriges CertiGo.
 Ne pas utiliser de vrais journaux, secrets ou documents internes pour essayer
 les activites. Aucune commande ni action cloud n'est necessaire.
 

@@ -7,7 +7,7 @@
 
 ## Contexte
 
-`certigo-content` héberge le contenu de Certigo :
+`certigo-content` héberge le contenu de CertiGo :
 
 - `content/public/questions/*.json` — énoncés publics ;
 - `content/answerKey/solutions/*.json` — corrigés (answer key).
