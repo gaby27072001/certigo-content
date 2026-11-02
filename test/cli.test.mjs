@@ -70,7 +70,7 @@ test("la CLI de fraicheur expose les transitions sans acces reseau", () => {
   ).asOf;
   const current = execute("check_catalog_freshness.mjs", ["--as-of", catalogAsOf]);
   assert.equal(current.status, 0, current.stderr);
-  assert.match(current.stdout, /actifs=38/);
+  assert.match(current.stdout, /actifs=39/);
 
   const transitioned = execute("check_catalog_freshness.mjs", [
     "--as-of",

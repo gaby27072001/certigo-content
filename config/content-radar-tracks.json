@@ -7,6 +7,61 @@
   },
   "tracks": [
     {
+      "id": "anthropic:claude-code-mcp",
+      "providerId": "anthropic",
+      "slug": "claude-code-mcp",
+      "officialCode": "CLAUDE-MCP",
+      "title": "CertiGo Pro: Anthropic Claude, Artifacts, Projects, Claude Code & MCP",
+      "category": "ai-foundation-models",
+      "kind": "training",
+      "level": "professional",
+      "status": "active",
+      "runtimeCatalogId": null,
+      "officialUrl": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+      "blueprint": {
+        "version": "2026-10-21",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "Structured XML prompting, Extended Thinking, Projects knowledge bases, and interactive Artifacts",
+            "weightPercent": 35,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-2",
+            "title": "Claude Code CLI agent workflows, CLAUDE.md conventions, and multi-file refactoring",
+            "weightPercent": 35,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-3",
+            "title": "Model Context Protocol (MCP) servers, tools, resources, prompts, Computer Use, and Constitutional AI safety",
+            "weightPercent": 30,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified HTTP 200 on 2026-10-21 against docs.anthropic.com and academy.claude.com: active Anthropic engineering track covering structured XML prompting, Extended Thinking, Projects, Artifacts, Claude Code CLI, Model Context Protocol (MCP), Computer Use, and Constitutional AI; no retirement date announced."
+      },
+      "provenance": {
+        "checkedOn": "2026-10-21",
+        "sources": [
+          {
+            "kind": "learning-path",
+            "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview",
+            "httpStatus": 200
+          },
+          {
+            "kind": "certification-page",
+            "url": "https://academy.claude.com/",
+            "httpStatus": 200
+          }
+        ]
+      }
+    },
+    {
       "id": "anthropic:claude-human-agent-teams",
       "providerId": "anthropic",
       "slug": "claude-human-agent-teams",
@@ -338,6 +393,61 @@
       }
     },
     {
+      "id": "harvey:legal-ai-platform",
+      "providerId": "harvey",
+      "slug": "legal-ai-platform",
+      "officialCode": "HARVEY-LEGAL",
+      "title": "CertiGo Pro: Harvey Legal AI — Assistant, Vault, Knowledge & Workflows",
+      "category": "ai-foundation-models",
+      "kind": "training",
+      "level": "professional",
+      "status": "active",
+      "runtimeCatalogId": null,
+      "officialUrl": "https://www.harvey.ai/",
+      "blueprint": {
+        "version": "2026-10-21",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "Harvey Assistant: contract drafting, AI-assisted redlining, grounded legal research, and client memos",
+            "weightPercent": 35,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-2",
+            "title": "Harvey Vault: M&A data room due diligence at scale and multi-contract extraction grids",
+            "weightPercent": 35,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-3",
+            "title": "Harvey Knowledge & Workflows: regulatory/case-law research, multi-step legal workflows, and zero-training privilege protection",
+            "weightPercent": 30,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified HTTP 200 on 2026-10-21 against harvey.ai: flagship legal AI curriculum for law firms and corporate legal departments covering Harvey Assistant, Harvey Vault, Harvey Knowledge, and multi-step legal workflows under strict attorney-client confidentiality; no retirement date announced."
+      },
+      "provenance": {
+        "checkedOn": "2026-10-21",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://www.harvey.ai/",
+            "httpStatus": 200
+          },
+          {
+            "kind": "learning-path",
+            "url": "https://www.harvey.ai/blog",
+            "httpStatus": 200
+          }
+        ]
+      }
+    },
+    {
       "id": "hashicorp:terraform-associate-004",
       "providerId": "hashicorp",
       "slug": "terraform-associate-004",
@@ -490,6 +600,67 @@
       }
     },
     {
+      "id": "microsoft:m365-copilot",
+      "providerId": "microsoft",
+      "slug": "m365-copilot",
+      "officialCode": "MS-4004",
+      "title": "CertiGo Pro: Microsoft 365 Copilot, Cowork, Bureautique & Agents",
+      "category": "cloud-hyperscalers",
+      "kind": "training",
+      "level": "associate",
+      "status": "active",
+      "runtimeCatalogId": "microsoft:m365-copilot",
+      "officialUrl": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview",
+      "blueprint": {
+        "version": "2026-10-21",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "Microsoft Graph Grounding, Work IQ, Copilot Cowork, Loop, and Pages",
+            "weightPercent": 25,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-2",
+            "title": "Microsoft 365 Copilot in Word and PowerPoint",
+            "weightPercent": 25,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-3",
+            "title": "Microsoft 365 Copilot in Excel, Python in Excel, Outlook, and Teams",
+            "weightPercent": 25,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-4",
+            "title": "Declarative Agents, Copilot Studio Autonomous Agents, Triggers, and Purview Governance",
+            "weightPercent": 25,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified HTTP 200 on 2026-10-21 on learn.microsoft.com: bridged into the live runtime catalog as microsoft:m365-copilot covering Microsoft Graph Grounding / Work IQ, Copilot Cowork, Word, PowerPoint, Excel, Outlook, Teams, Declarative Agents, Copilot Studio Autonomous Agents, and Purview governance; no retirement date announced."
+      },
+      "provenance": {
+        "checkedOn": "2026-10-21",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview",
+            "httpStatus": 200
+          },
+          {
+            "kind": "exam-guide",
+            "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio",
+            "httpStatus": 200
+          }
+        ]
+      }
+    },
+    {
       "id": "openai:academy-ai-foundations",
       "providerId": "openai",
       "slug": "academy-ai-foundations",
@@ -539,6 +710,61 @@
           {
             "kind": "certification-page",
             "url": "https://academy.openai.com/pages/courses",
+            "httpStatus": 200
+          }
+        ]
+      }
+    },
+    {
+      "id": "openai:chatgpt-codex-agents",
+      "providerId": "openai",
+      "slug": "chatgpt-codex-agents",
+      "officialCode": "OPENAI-CODEX",
+      "title": "CertiGo Pro: OpenAI ChatGPT Enterprise, Codex, Deep Research & Agents SDK",
+      "category": "ai-foundation-models",
+      "kind": "training",
+      "level": "professional",
+      "status": "active",
+      "runtimeCatalogId": null,
+      "officialUrl": "https://openai.com/index/introducing-codex/",
+      "blueprint": {
+        "version": "2026-10-21",
+        "objectives": [
+          {
+            "id": "section-1",
+            "title": "ChatGPT Pro & Enterprise: model routing (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, Custom GPTs, and Data Analysis",
+            "weightPercent": 35,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-2",
+            "title": "OpenAI Codex autonomous software engineering agent: cloud sandbox execution, automated PRs, AGENTS.md, and code review",
+            "weightPercent": 35,
+            "weightType": "approximate"
+          },
+          {
+            "id": "section-3",
+            "title": "AI Engineering with Responses API, Structured Outputs, Function Calling, Agents SDK, and Evals",
+            "weightPercent": 30,
+            "weightType": "approximate"
+          }
+        ]
+      },
+      "lifecycle": {
+        "transition": "none-announced",
+        "note": "Verified HTTP 200 on 2026-10-21 against openai.com and academy.openai.com: flagship OpenAI engineering track covering ChatGPT Enterprise, o3/o4-mini reasoning models, Deep Research, Canvas, Codex autonomous agent, Responses API, Structured Outputs, Function Calling, Agents SDK, and Evals; no retirement date announced."
+      },
+      "provenance": {
+        "checkedOn": "2026-10-21",
+        "sources": [
+          {
+            "kind": "certification-page",
+            "url": "https://openai.com/index/introducing-codex/",
+            "httpStatus": 200
+          },
+          {
+            "kind": "learning-path",
+            "url": "https://academy.openai.com/public/content",
             "httpStatus": 200
           }
         ]

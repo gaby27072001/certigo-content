@@ -1,0 +1,171 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "harvey-legal-ai",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "solutions": [
+    {
+      "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+      "lessonId": "redaction-revision-contrats-playbook",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-client-droit-applicable-et-playbook"
+      ],
+      "rationale": "Pour qu'une révision contractuelle dans Harvey Assistant soit pertinente et directement exploitable, il faut fournir le contrat source, la partie représentée (ex. Client licencié), le droit applicable ainsi que le playbook définissant les positions cibles et de repli (fallback).",
+      "examTip": "Dans Harvey Assistant : précisez toujours Rôle représenté + Droit applicable + Playbook (position idéale & fallback).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+      "lessonId": "redaction-revision-contrats-playbook",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "audit-croise-definitions-et-clauses-substantives"
+      ],
+      "rationale": "Une définition excessivement restrictive à l'article 1 peut neutraliser la portée d'une clause substantive. Harvey Assistant permet d'effectuer un audit croisé systématique entre les termes définis et les obligations du contrat.",
+      "examTip": "Ne lisez jamais une clause de garantie ou de confidentialité sans faire auditer par Harvey les termes définis auxquels elle renvoie.",
+      "sourceIds": [
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+      "lessonId": "redlining-assiste-ia-et-memos-clients",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "conserver-structure-adverse-inserer-gardes-fous"
+      ],
+      "rationale": "Le redlining chirurgical (à intrusion minimale) conserve la structure et le style du projet adverse tout en insérant exactement les garde-fous requis par le playbook, ce qui facilite l'acceptation rapide par la partie adverse.",
+      "examTip": "En négociation équilibrée, privilégiez le redlining chirurgical à intrusion minimale plutôt que le remplacement intégral d'articles.",
+      "sourceIds": [
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+      "lessonId": "redlining-assiste-ia-et-memos-clients",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "confusion-commentaire-externe-et-note-strategie-interne"
+      ],
+      "rationale": "Les commentaires de marge envoyés à la partie adverse doivent contenir uniquement des justifications objectives de négociation, tandis que l'évaluation du risque et les seuils de repli (fallback/walk-away) doivent rester dans un mémo interne confidentiel destiné au client.",
+      "examTip": "Séparez toujours le commentaire externe (envoyé à la partie adverse) et la note stratégique interne (couverte par le secret professionnel).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+      "lessonId": "vault-audit-data-rooms-due-diligence",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "creer-projet-vault-isole-equipe-dossier"
+      ],
+      "rationale": "Chaque opération de Due Diligence M&A dans Harvey Vault doit être logée dans un projet dédié dont l'accès est strictement restreint aux membres habilités du dossier (Matter-level access control) afin de respecter les murailles éthiques.",
+      "examTip": "1 Data Room M&A = 1 projet Harvey Vault isolé avec contrôle d'accès par dossier (Ethical Wall).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+      "lessonId": "vault-audit-data-rooms-due-diligence",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "omission-clauses-modifiees-par-avenant"
+      ],
+      "rationale": "En audit contractuel, un avenant (Amendment) modifie ou remplace les stipulations du contrat initial. Exclure les avenants de l'analyse dans Harvey Vault expose au risque de manquer une obligation critique ajoutée ultérieurement.",
+      "examTip": "En Due Diligence dans Vault, regroupez et analysez toujours ensemble le contrat initial et tous ses avenants successifs.",
+      "sourceIds": [
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+      "lessonId": "grilles-extraction-multi-contrats-review-tables",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "review-table-colonne-fermee-plus-detail-citation"
+      ],
+      "rationale": "Dans Harvey Vault, combiner dans une Review Table une colonne de classification fermée (pour filtrer instantanément les contrats à risque) et une colonne de détail avec citation cliquable (pour vérifier la clause exacte dans le PDF) est la méthode d'audit de référence.",
+      "examTip": "Review Table optimale = 1 colonne de catégorie fermée (filtrable) + 1 colonne de détail sourcé avec citation cliquable.",
+      "sourceIds": [
+        "harvey-product-blog",
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+      "lessonId": "grilles-extraction-multi-contrats-review-tables",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "distinguer-absence-clause-et-stipulation-expresse"
+      ],
+      "rationale": "En droit des contrats, le silence d'un acte (absence de clause de changement de contrôle ou de cession) n'a pas le même effet juridique qu'une interdiction ou une autorisation expresse. Prévoir la catégorie « Silence du contrat » évite toute fausse inférence.",
+      "examTip": "Dans toute grille d'extraction juridique, distinguez toujours « Interdit », « Autorisé » et « Silence du contrat ».",
+      "sourceIds": [
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+      "lessonId": "harvey-knowledge-recherche-juridique-sourcee",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-bases-juridiques-verifiees-et-citations"
+      ],
+      "rationale": "Harvey Knowledge s'appuie sur des bases documentaires législatives, réglementaires et jurisprudentielles vérifiées et relie chaque affirmation à sa citation source afin d'éliminer les inventions de références.",
+      "examTip": "Harvey Knowledge = ancrage sur sources officielles + citations cliquables vers les textes et décisions.",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+      "lessonId": "harvey-knowledge-recherche-juridique-sourcee",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "ouvrir-citations-verifier-vigueur-et-espece"
+      ],
+      "rationale": "Même avec un outil juridique ancré, la déontologie et la rigueur imposent d'ouvrir la source citée pour vérifier sa date d'entrée en vigueur, l'absence de revirement et l'adéquation des faits d'espèce au cas du client.",
+      "examTip": "Ouvrez toujours la citation dans Harvey Knowledge pour vérifier la vigueur du texte et la pertinence des faits d'espèce.",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+      "lessonId": "harvey-workflows-et-secret-professionnel",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "orchestration-multi-etapes-reproductible-validee"
+      ],
+      "rationale": "Harvey Workflows permet d'enchaîner de manière structurée et reproductible plusieurs étapes d'un processus juridique (analyse de pièces, extraction, recherche de droit, rédaction d'acte) tout en maintenant le contrôle et la validation de l'avocat.",
+      "examTip": "Harvey Workflows = enchaînement guidé et reproductible d'étapes juridiques complexes avec validation humaine.",
+      "sourceIds": [
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+      "lessonId": "harvey-workflows-et-secret-professionnel",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "zero-entrainement-client-et-isolation-locataire"
+      ],
+      "rationale": "Harvey applique une politique stricte de zéro-entraînement sur les données des clients (prompts, documents, livrables) et un cloisonnement complet par organisation et par dossier afin de préserver le secret professionnel et la confidentialité des affaires.",
+      "examTip": "Protection du secret professionnel dans Harvey = Zéro-entraînement sur les données clients + Cloisonnement par dossier (Ethical Walls).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    }
+  ]
+}

@@ -8,7 +8,8 @@
         {"id": "credentials", "url": "https://learn.microsoft.com/en-us/credentials/browse/?credential_types=certification", "format": "html-links"},
         {"id": "github-copilot-gh-300", "url": "https://learn.microsoft.com/credentials/certifications/github-copilot/", "format": "html-links"},
         {"id": "azure-ai-apps-agents-ai-103", "url": "https://learn.microsoft.com/credentials/certifications/azure-ai-apps-and-agents-developer-associate/", "format": "html-links"},
-        {"id": "fabric-analytics-dp-600", "url": "https://learn.microsoft.com/credentials/certifications/fabric-analytics-engineer-associate/", "format": "html-links"}
+        {"id": "fabric-analytics-dp-600", "url": "https://learn.microsoft.com/credentials/certifications/fabric-analytics-engineer-associate/", "format": "html-links"},
+        {"id": "m365-copilot", "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview", "format": "html-links"}
       ],
       "cadenceMinutes": 30, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
@@ -32,16 +33,29 @@
     },
     {
       "id": "openai", "name": "OpenAI", "category": "ai-foundation-models",
-      "officialDomains": ["https://academy.openai.com", "https://openai.com"],
-      "discoveryEndpoints": [{"id": "academy", "url": "https://academy.openai.com/public/content", "format": "html-links"}],
+      "officialDomains": ["https://academy.openai.com", "https://openai.com", "https://platform.openai.com"],
+      "discoveryEndpoints": [
+        {"id": "academy", "url": "https://academy.openai.com/public/content", "format": "html-links"},
+        {"id": "codex-agents", "url": "https://openai.com/index/introducing-codex/", "format": "html-links"}
+      ],
       "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },
     {
       "id": "anthropic", "name": "Anthropic", "category": "ai-foundation-models",
-      "officialDomains": ["https://academy.claude.com"],
+      "officialDomains": ["https://academy.claude.com", "https://docs.anthropic.com"],
       "discoveryEndpoints": [
         {"id": "learn", "url": "https://academy.claude.com/", "format": "html-links"},
-        {"id": "human-agent-teams", "url": "https://academy.claude.com/courses/building-effective-human-agent-teams", "format": "html-links"}
+        {"id": "human-agent-teams", "url": "https://academy.claude.com/courses/building-effective-human-agent-teams", "format": "html-links"},
+        {"id": "claude-code-mcp", "url": "https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview", "format": "html-links"}
+      ],
+      "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
+    },
+    {
+      "id": "harvey", "name": "Harvey", "category": "ai-foundation-models",
+      "officialDomains": ["https://www.harvey.ai"],
+      "discoveryEndpoints": [
+        {"id": "platform", "url": "https://www.harvey.ai/", "format": "html-links"},
+        {"id": "legal-ai", "url": "https://www.harvey.ai/blog", "format": "html-links"}
       ],
       "cadenceMinutes": 15, "ingestionStages": ["stage1_announced_card", "stage2_blueprint_and_pack"]
     },

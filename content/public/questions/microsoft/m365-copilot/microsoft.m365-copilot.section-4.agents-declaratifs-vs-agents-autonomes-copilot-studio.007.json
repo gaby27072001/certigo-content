@@ -1,0 +1,18 @@
+{
+  "id": "microsoft.m365-copilot.section-4.agents-declaratifs-vs-agents-autonomes-copilot-studio.007",
+  "schemaVersion": "v3",
+  "kind": "public",
+  "metadata": {
+    "provider": "microsoft",
+    "certification": "microsoft:m365-copilot",
+    "blueprintVersion": "2026-10-21",
+    "objective": "section-4"
+  },
+  "prompt": "Une DSI compare deux besoins : (1) un assistant RH ancré sur trois sites SharePoint pour répondre aux questions des salariés dans Microsoft 365 Copilot, et (2) un agent d'approvisionnement qui se déclenche dès réception d'un bon de commande dans Dataverse pour vérifier les stocks SAP et créer une demande d'approbation. Quelle architecture choisir ?",
+  "choices": [
+    "Déployer deux agents déclaratifs sans connecteur car ils s'exécutent en arrière-plan sans prompt interne.",
+    "Coder un orchestrateur de modèle sur mesure pour la FAQ RH et désactiver les actions Power Platform conforme.",
+    "Créer un agent déclaratif M365 pour la FAQ RH et un agent autonome Copilot Studio avec déclencheur interne.",
+    "Publier les clés d'API SAP dans les instructions système d'un agent partagé sans contrôle d'identité priorise."
+  ]
+}

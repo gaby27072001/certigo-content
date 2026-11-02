@@ -28,7 +28,7 @@ const course = (id, title = "Original fixture training") =>
 test("radar validates all 35 selected groups, seven categories and both gated stages", () => {
   assert.equal(validateRegistry(registry), registry);
   assert.deepEqual(registry.providers.map((p) => p.id).sort(), [
-    "microsoft", "aws", "gcp", "oracle", "openai", "anthropic", "mistral-ai", "nvidia", "huggingface",
+    "microsoft", "aws", "gcp", "oracle", "openai", "anthropic", "harvey", "mistral-ai", "nvidia", "huggingface",
     "cohere", "meta-ai", "apple", "databricks", "snowflake", "mongodb", "confluent", "dbt-labs",
     "linux-foundation-cncf", "hashicorp", "github", "red-hat", "docker", "gitlab", "cisco", "comptia",
     "isc2", "isaca", "offsec", "palo-alto-networks", "cloudflare", "salesforce", "servicenow",
@@ -139,13 +139,13 @@ test("an offering already known through another endpoint is not a new offering",
 test("configured blueprint raw-byte hash change is associated with the existing item", () => {
   const r = clone(registry);
   const p = provider("openai", r);
-  p.discoveryEndpoints.push({ id: "fixture-blueprint", url: "https://academy.openai.com/fixture.pdf",
-    format: "blueprint", itemUrl: "https://academy.openai.com/fixture-course" });
-  const known = snapshot(capture("openai", "fixture pdf v1", { source: r, index: 1, type: "application/pdf" }));
-  const observed = snapshot(capture("openai", "fixture pdf v2", { source: r, index: 1, type: "application/pdf" }));
+  const bpIndex = p.discoveryEndpoints.push({ id: "fixture-blueprint", url: "https://academy.openai.com/fixture.pdf",
+    format: "blueprint", itemUrl: "https://academy.openai.com/fixture-course" }) - 1;
+  const known = snapshot(capture("openai", "fixture pdf v1", { source: r, index: bpIndex, type: "application/pdf" }));
+  const observed = snapshot(capture("openai", "fixture pdf v2", { source: r, index: bpIndex, type: "application/pdf" }));
   const report = compareRadar(r, known, observed);
   assert.equal(report.events[0].type, "blueprint_changed");
-  assert.equal(report.events[0].url, p.discoveryEndpoints[1].itemUrl);
+  assert.equal(report.events[0].url, p.discoveryEndpoints[bpIndex].itemUrl);
   assert.equal(report.drafts.length, 0);
 });
 
@@ -254,7 +254,7 @@ test("live oversized, timeout, redirect-loop and wrong-type responses fail expli
 
 test("CLI defaults to offline registry validation and fails on unknown/missing/conflicting arguments", async () => {
   assert.deepEqual(await runRadar([]), {
-    ok: true, mode: "registry-validation-only", providers: 35, categories: 7, networkAccessed: false
+    ok: true, mode: "registry-validation-only", providers: 36, categories: 7, networkAccessed: false
   });
   for (const args of [["--unknown"], ["--snapshot"], ["--live", "--snapshot", "x"],
     ["--known", "x"], ["--out", "x"], ["--live", "--out", "content/radar"]]) {
