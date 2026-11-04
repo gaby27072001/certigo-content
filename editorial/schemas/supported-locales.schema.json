@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/supported-locales.schema.json",
+  "title": "CertiGo supported languages and UI modes registry",
+  "description": "Canonical list of supported locales and UI language modes across CertiGo content and native applications.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "asOf",
+    "defaultLocale",
+    "locales",
+    "uiModes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "certigo.supported-locales/v1"
+    },
+    "asOf": {
+      "type": "string",
+      "format": "date"
+    },
+    "defaultLocale": {
+      "const": "fr-FR"
+    },
+    "locales": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": {
+        "$ref": "#/$defs/localeEntry"
+      }
+    },
+    "uiModes": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "$ref": "#/$defs/uiModeEntry"
+      }
+    }
+  },
+  "$defs": {
+    "localeCode": {
+      "enum": [
+        "fr-FR",
+        "en-US",
+        "es-ES",
+        "de-DE",
+        "it-IT",
+        "pt-BR",
+        "ar-SA",
+        "ja-JP",
+        "hi-IN",
+        "zh-Hans",
+        "ko-KR"
+      ]
+    },
+    "localeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "locale",
+        "languageCode",
+        "appLanguage",
+        "nativeName",
+        "englishName",
+        "frenchName",
+        "direction",
+        "isCanonicalAppLanguage",
+        "settingsIndices"
+      ],
+      "properties": {
+        "locale": {
+          "$ref": "#/$defs/localeCode"
+        },
+        "languageCode": {
+          "enum": ["fr", "en", "es", "de", "it", "pt", "ar", "ja", "hi", "zh-Hans", "ko"]
+        },
+        "appLanguage": {
+          "enum": ["fr", "en", "es", "de", "it", "pt", "ar", "ja", "hi", "zh-Hans", "ko"]
+        },
+        "nativeName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "englishName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frenchName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "direction": {
+          "enum": ["ltr", "rtl"]
+        },
+        "isCanonicalAppLanguage": {
+          "type": "boolean"
+        },
+        "settingsIndices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 11
+          }
+        }
+      }
+    },
+    "uiModeEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "id",
+        "locale",
+        "pickerLabel",
+        "bilingualTechnicalTermsEN"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "locale": {
+          "$ref": "#/$defs/localeCode"
+        },
+        "pickerLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bilingualTechnicalTermsEN": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

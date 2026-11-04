@@ -11,6 +11,42 @@
     "trackId": { "$ref": "#/$defs/slug" },
     "brand": { "const": "CertiGo" },
     "kind": { "const": "answerKey" },
+    "locale": {
+      "enum": [
+        "fr-FR",
+        "en-US",
+        "es-ES",
+        "de-DE",
+        "it-IT",
+        "pt-BR",
+        "ar-SA",
+        "ja-JP",
+        "hi-IN",
+        "zh-Hans",
+        "ko-KR"
+      ]
+    },
+    "supportedLocales": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "fr-FR",
+          "en-US",
+          "es-ES",
+          "de-DE",
+          "it-IT",
+          "pt-BR",
+          "ar-SA",
+          "ja-JP",
+          "hi-IN",
+          "zh-Hans",
+          "ko-KR"
+        ]
+      }
+    },
     "solutions": {
       "type": "array",
       "minItems": 4,

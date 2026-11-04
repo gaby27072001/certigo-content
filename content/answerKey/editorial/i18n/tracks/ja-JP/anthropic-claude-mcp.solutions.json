@@ -1,0 +1,247 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "anthropic-claude-mcp",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "ja-JP",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.001",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "documents-xml-en-haut-question-en-bas"
+      ],
+      "plainExplanation": "Placez toujours longs documents tout en haut 内の balise <documents> ・ mettez votre question tout à fin.",
+      "rationale": "Anthropic recommande の structurer prompts complexes ・ の balises XML (`<documents>`, `<document>`, `<instructions>`) ・ の placer longs documents の référence en haut の prompt, avant instructions ・ question finale.",
+      "examTip": "上の Claude ・ long contexte : `<documents>` en haut の prompt + `<instructions>` ・ question tout en bas.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-contexte-avant-generation"
+      ],
+      "plainExplanation": "Obliger Claude à citer d'abord passages réels l'empêche d'inventer の informations qui ne sont pas 内の document.",
+      "rationale": "En extrayant d'abord citations littérales 内の `<quotes>`, モデル place preuves exactes 内の son contexte の génération immédiat avant の rédiger `<answer>`, ce qui réduit drastiquement extrapolations non fondées.",
+      "examTip": "Demandez toujours `<quotes>` (extraction littérale) avant `<answer>` (analyse) 上の tâches documentaires critiques.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "max-tokens-superieur-budget-thinking"
+      ],
+      "plainExplanation": "limite totale (max_tokens) 必要がある toujours être plus grande que budget の réflexion 向け laisser の place à 応答 finale.",
+      "rationale": "内の l'API Messages d'Anthropic, `budget_tokens` représente part maximale の `max_tokens` allouée au bloc `thinking` : `max_tokens` 必要がある donc toujours être strictement supérieur à `budget_tokens` 向け permettre génération の 応答 finale.",
+      "examTip": "・ Extended Thinking : `max_tokens > budget_tokens` (car `max_tokens` = réflexion + 応答 finale).",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "artifacts-interactifs-versionnes"
+      ],
+      "plainExplanation": "Artifacts affichent en direct interfaces, graphiques ・ schémas générés par Claude 内の volet dédié.",
+      "rationale": "Artifacts affiche ・ exécute en direct 内の panneau latéral isolé composants React, pages HTML, graphiques SVG ・ diagrammes Mermaid, ・ bascule code/aperçu ・ historique の versions.",
+      "examTip": "Rendu interactif en direct の code UI (React/HTML), SVG または diagrammes Mermaid = Artifacts.",
+      "sourceIds": [
+        "anthropic-academy-teams"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "invalidation-prefixe-par-uuid-debut"
+      ],
+      "plainExplanation": "cache ne réutilise que ce qui est identique depuis premier mot : toute valeur qui change 必要がある être placée à fin.",
+      "rationale": "Prompt Caching d'Anthropic repose 上の l'égalité exacte の préfixe の リクエスト. Injecter UUID または horodatage changeant au début の bloc `system` modifie préfixe à chaque appel ・ empêche toute lecture en cache.",
+      "examTip": "向け que Prompt Caching fonctionne : gardez début (`tools` ➔ `system` ➔ corpus) 100 % statique ・ placez データ dynamiques à fin.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "bloc-document-citations-enabled-true"
+      ],
+      "plainExplanation": "Activez l'option native citations: { enabled: true } 上の document envoyé à Claude.",
+      "rationale": "fonctionnalité native の citations の l'API Messages s'active en fournissant sources 内の の blocs の type `document` ・ l'option `citations: { enabled: true }`.",
+      "examTip": "Citations vérifiables natives 内の l'API Claude = bloc `document` ・ `citations: { enabled: true }`.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.001",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "fichier-claude-md"
+      ],
+      "plainExplanation": "ファイル CLAUDE.md sert の mémoire permanente lue 自動的に par Claude Code à chaque démarrage.",
+      "rationale": "Claude Code charge 自動的に ファイル `CLAUDE.md` 向け connaître commandes の build, の lint, の test ・ conventions d'architecture の dépôt.",
+      "examTip": "`CLAUDE.md` est mémoire persistante の votre dépôt 向け Claude Code.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "commande-slash-clear"
+      ],
+      "plainExplanation": "commande /clear vide entièrement conversation en cours 向け repartir à zéro なしで mélanger sujets.",
+      "rationale": "commande `/clear` vide l'historique の conversation の session courante 向け repartir 上の contexte propre ・ économique lors d' changement の sujet, tout en conservant instructions の `CLAUDE.md`.",
+      "examTip": "Changement の tâche indépendante 内の Claude Code = `/clear` ; résumé d' tâche longue en cours = `/compact`.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "settings-json-allow-npm-test-deny-env"
+      ],
+      "plainExplanation": "Réglez ファイル .claude/settings.json 向け autoriser commande の test ・ bloquer explicitement lecture の ファイル sensibles.",
+      "rationale": "ファイル `.claude/settings.json` 可能にする d'autoriser finement の commandes sûres comme `Bash(npm test)` 内の `権限.allow` tout en interdisant explicitement lecture の secrets `.env*` ・ appels ネットワーク non approuvés 内の `権限.deny`.",
+      "examTip": "Utilisez `.claude/settings.json` (`allow` / `deny`) 向け pré-approuver のみ commandes の test inoffensives.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "prompt-injection-via-issue-publique"
+      ],
+      "plainExplanation": "message piégé pourrait manipuler l'agent 向け lui faire exécuter の commandes dangereuses または voler の アクセス secrets.",
+      "rationale": "texte soumis par tiers externe (issue publique, PR externe, page web) est entrée non fiable : s'il est traité par agent en mode headless disposant d'outils Bash complets ・ d' トークン administrateur, injection の prompt peut provoquer compromission grave.",
+      "examTip": "En CI headless (`claude -p`) 上の の entrées externes : conteneur éphémère + `--allowedTools` minimal + トークン en lecture seule.",
+      "sourceIds": [
+        "anthropic-claude-code",
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "primitive-resources-uri"
+      ],
+      "plainExplanation": "Resource MCP 可能にする の lire donnée en toute セキュリティ, contrairement à Tool qui exécute action.",
+      "rationale": "内の standard MCP, `Resources` représentent の データ structurées または textuelles identifiées par URI (schémas, ファイル, ログ) exposées en lecture seule なしで effet の bord, par opposition aux `Tools` qui exécutent の actions.",
+      "examTip": "内の MCP : `Resources` = データ en lecture par URI · `Prompts` = モデル ユーザー · `Tools` = actions exécutables.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "ecrire-logs-sur-stderr"
+      ],
+      "plainExplanation": "canal standard (stdout) est réservé aux messages JSON の protocole MCP ; ログ 必要がある être écrits 上の stderr.",
+      "rationale": "Lorsqu' serveur MCP communique via transport `stdio`, flux `stdout` véhicule exclusivement messages JSON-RPC 2.0. Tout journal applicatif écrit 上の `stdout` (`console.log`, `print`) casse parsing の client ; il faut 活用： `stderr` (`console.error`).",
+      "examTip": "Serveur MCP en transport `stdio` : jamais の `console.log` 上の `stdout`, écrivez tous vos logs 上の `stderr` !",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "vm-ou-conteneur-isole-moindre-privilege"
+      ],
+      "plainExplanation": "Faites- toujours tourner 内の 仮想マシン isolée ・ minimum の 権限, jamais 上の votre session personnelle.",
+      "rationale": "Computer Use interagissant 直接 ・ l'écran, souris ・ clavier, Anthropic recommande の l'exécuter 内の 仮想マシン または conteneur isolé disposant の strict minimum の 権限 ・ d'アクセス ネットワーク, ・ validation humaine の actions sensibles.",
+      "examTip": "Computer Use = toujours confiné 内の VM または conteneur dédié なしで session ni secrets personnels.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "charte-explicite-principes-auto-critique"
+      ],
+      "plainExplanation": "Claude apprend à s'auto-corriger en suivant charte écrite の règles éthiques ・ の セキュリティ (être utile, honnête ・ inoffensif).",
+      "rationale": "Constitutional AI aligne モデル Claude en s'appuyant 上の constitution explicite の principes normatifs (visant comportement utile, honnête ・ inoffensif) lors の phases d'auto-critique ・ d'apprentissage par renforcement.",
+      "examTip": "Constitutional AI = alignement の セキュリティ fondé 上の charte explicite の principes (Helpful, Honest, Harmless).",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "injection-instructions-cachees-description-tool"
+      ],
+      "plainExplanation": "の ordres cachés 内の description d' outil trompent l'IA 向け lui faire dérober の データ à l'insu の l'ユーザー.",
+      "rationale": "Puisque descriptions d'outils retournées par `tools/list` sont injectées 内の contexte の モデル 向け qu'il sache comment appeler, serveur MCP malveillant peut y glisser の instructions cachées (Tool Poisoning) poussant LLM à lire ・ exfiltrer の データ locales.",
+      "examTip": "Tool Poisoning MCP = injection の prompt dissimulée 内の description `tools/list` d' serveur MCP non fiable.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-sql-lecture-seule-replica-et-serveur-audite"
+      ],
+      "plainExplanation": "Connectez serveur MCP ・ compte の データベース configuré strictement en lecture seule.",
+      "rationale": "セキュリティ d' serveur MCP repose 上の 最小権限 au niveau の l'infrastructure cible : connecter serveur à réplica ・ compte PostgreSQL en lecture seule 保証する techniquement qu'aucune écriture または suppression ne peut avoir lieu.",
+      "examTip": "Ne comptez jamais 上の prompt 向け empêcher `DROP` または `DELETE` via MCP : imposez rôle データベース en lecture seule.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    }
+  ]
+}

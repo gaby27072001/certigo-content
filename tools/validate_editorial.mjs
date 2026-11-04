@@ -239,6 +239,9 @@ export function validateEditorialTracks(options = {}) {
     }
   }
 
+  const parityResult = validateMultilingualParity({ root });
+  errors.push(...parityResult.errors);
+
   return {
     ok: errors.length === 0,
     trackFiles,
@@ -247,6 +250,230 @@ export function validateEditorialTracks(options = {}) {
     moduleCount,
     lessonCount,
     questionCount,
+    localeCount: parityResult.localeCount,
+    errors,
+  };
+}
+
+export function validateMultilingualParity(options = {}) {
+  const root = resolve(options.root ?? ".");
+  const localesConfigPath = resolve(root, "config/supported-locales.json");
+  if (!existsSync(localesConfigPath)) {
+    return { ok: true, localeCount: 0, locales: [], errors: [] };
+  }
+
+  const ajv = new Ajv2020({ allErrors: true, strict: true });
+  addFormats(ajv);
+  const validateLocales = ajv.compile(readJson(resolve(root, "editorial/schemas/supported-locales.schema.json")));
+  const validateTrack = ajv.compile(readJson(resolve(root, "editorial/schemas/editorial-track.schema.json")));
+  const validateTrackSolutions = ajv.compile(readJson(resolve(root, "editorial/schemas/editorial-track-solutions.schema.json")));
+  const validatePilot = ajv.compile(readJson(resolve(root, "editorial/schemas/localized-editorial-pilot.schema.json")));
+  const validateCatalogPublic = ajv.compile(readJson(resolve(root, "editorial/schemas/multilingual-catalog-public.schema.json")));
+  const validateCatalogSolutions = ajv.compile(readJson(resolve(root, "editorial/schemas/multilingual-catalog-solutions.schema.json")));
+
+  const errors = [];
+  const localesDoc = readJson(localesConfigPath);
+  if (!validateLocales(localesDoc)) {
+    for (const error of validateLocales.errors ?? []) {
+      errors.push(`[multilingual:schema] config/supported-locales.json${error.instancePath}: ${error.message}`);
+    }
+    return { ok: false, localeCount: 0, locales: [], errors };
+  }
+
+  const supportedLocales = localesDoc.locales.map((entry) => entry.locale);
+  const canonicalTrackFiles = globSync("editorial/tracks/*.json", { cwd: root, posix: true }).sort(compareOrdinal);
+  const canonicalPilotFiles = globSync("editorial/pilots/*.json", { cwd: root, posix: true }).sort(compareOrdinal);
+  const catalogPath = resolve(root, "content/public/catalog/certifications.json");
+  const radarTracksPath = resolve(root, "config/content-radar-tracks.json");
+  const canonicalQuestions = globSync("content/public/questions/**/*.json", { cwd: root, posix: true })
+    .sort(compareOrdinal)
+    .map((file) => readJson(resolve(root, file)))
+    .sort((a, b) => compareOrdinal(a.id, b.id));
+  const canonicalSolutionsById = new Map(
+    globSync("content/answerKey/solutions/**/*.json", { cwd: root, posix: true })
+      .sort(compareOrdinal)
+      .map((file) => readJson(resolve(root, file)))
+      .map((s) => [s.id, s])
+  );
+  const canonicalConceptIds = globSync("content/public/runtime/concepts/**/*.json", { cwd: root, posix: true })
+    .sort(compareOrdinal)
+    .map((file) => readJson(resolve(root, file)).id)
+    .sort(compareOrdinal);
+  const canonicalCertIds = existsSync(catalogPath)
+    ? readJson(catalogPath).certifications.map((c) => c.id)
+    : [];
+  const canonicalRadarIds = existsSync(radarTracksPath)
+    ? readJson(radarTracksPath).tracks.map((t) => t.id)
+    : [];
+
+  for (const file of canonicalTrackFiles) {
+    const canonicalTrack = readJson(resolve(root, file));
+    const canonicalSol = readJson(resolve(root, `content/answerKey/editorial/tracks/${canonicalTrack.id}.solutions.json`));
+    const canonicalQIds = canonicalTrack.modules.flatMap((m) => m.lessons.flatMap((l) => l.questions.map((q) => q.id)));
+    const canonicalLessonIds = canonicalTrack.modules.flatMap((m) => m.lessons.map((l) => l.id));
+
+    for (const locale of supportedLocales) {
+      const locTrackRel = `editorial/i18n/tracks/${locale}/${canonicalTrack.id}.json`;
+      const locSolRel = `content/answerKey/editorial/i18n/tracks/${locale}/${canonicalTrack.id}.solutions.json`;
+      const locTrackAbs = resolve(root, locTrackRel);
+      const locSolAbs = resolve(root, locSolRel);
+
+      if (!existsSync(locTrackAbs)) {
+        errors.push(`[multilingual:missing] ${locTrackRel} manquant pour locale ${locale}`);
+        continue;
+      }
+      if (!existsSync(locSolAbs)) {
+        errors.push(`[multilingual:missing] ${locSolRel} manquant pour locale ${locale}`);
+        continue;
+      }
+
+      const rawTrack = readFileSync(locTrackAbs, "utf8");
+      for (const key of FORBIDDEN_PUBLIC_KEYS) {
+        if (new RegExp(`"${key}"\\s*:`, "i").test(rawTrack)) {
+          errors.push(`[multilingual:anti-leak] ${locTrackRel}: cle interdite "${key}"`);
+        }
+      }
+
+      const locTrack = JSON.parse(rawTrack);
+      const locSol = readJson(locSolAbs);
+
+      if (!validateTrack(locTrack)) {
+        for (const error of validateTrack.errors ?? []) {
+          errors.push(`[multilingual:schema] ${locTrackRel}${error.instancePath}: ${error.message}`);
+        }
+      }
+      if (!validateTrackSolutions(locSol)) {
+        for (const error of validateTrackSolutions.errors ?? []) {
+          errors.push(`[multilingual:schema] ${locSolRel}${error.instancePath}: ${error.message}`);
+        }
+      }
+      if (locTrack.locale !== locale || locSol.locale !== locale) {
+        errors.push(`[multilingual:locale] ${locTrackRel}: locale attendue "${locale}"`);
+      }
+
+      const locLessonIds = locTrack.modules.flatMap((m) => m.lessons.map((l) => l.id));
+      const locQIds = locTrack.modules.flatMap((m) => m.lessons.flatMap((l) => l.questions.map((q) => q.id)));
+      if (locLessonIds.join(",") !== canonicalLessonIds.join(",") || locQIds.join(",") !== canonicalQIds.join(",")) {
+        errors.push(`[multilingual:parity] ${locTrackRel}: divergence des lessons ou questions avec ${file}`);
+      }
+      if (locSol.solutions.map((s) => s.id).join(",") !== canonicalSol.solutions.map((s) => s.id).join(",")) {
+        errors.push(`[multilingual:parity] ${locSolRel}: divergence des solutions avec ${canonicalTrack.id}`);
+      }
+      if (locale !== "fr-FR" && locTrack.title === canonicalTrack.title) {
+        errors.push(`[multilingual:untranslated] ${locTrackRel}: titre non traduit pour ${locale}`);
+      }
+      for (const dashPath of findLongDashPaths(locTrack)) {
+        errors.push(`[multilingual:long-dash] ${locTrackRel}${dashPath}: long tiret interdit`);
+      }
+      for (const dashPath of findLongDashPaths(locSol)) {
+        errors.push(`[multilingual:long-dash] ${locSolRel}${dashPath}: long tiret interdit`);
+      }
+    }
+  }
+
+  for (const file of canonicalPilotFiles) {
+    const canonicalPilot = readJson(resolve(root, file));
+    for (const locale of supportedLocales) {
+      const locPilotRel = `editorial/i18n/pilots/${locale}/${canonicalPilot.id}.json`;
+      const locPilotAbs = resolve(root, locPilotRel);
+      if (!existsSync(locPilotAbs)) {
+        errors.push(`[multilingual:missing] ${locPilotRel} manquant pour locale ${locale}`);
+        continue;
+      }
+      const locPilot = readJson(locPilotAbs);
+      if (!validatePilot(locPilot)) {
+        for (const error of validatePilot.errors ?? []) {
+          errors.push(`[multilingual:schema] ${locPilotRel}${error.instancePath}: ${error.message}`);
+        }
+      }
+      if (locPilot.locale !== locale) {
+        errors.push(`[multilingual:locale] ${locPilotRel}: locale attendue "${locale}"`);
+      }
+      for (const dashPath of findLongDashPaths(locPilot)) {
+        errors.push(`[multilingual:long-dash] ${locPilotRel}${dashPath}: long tiret interdit`);
+      }
+    }
+  }
+
+  if (canonicalCertIds.length > 0 && canonicalQuestions.length > 0) {
+    for (const locale of supportedLocales) {
+      const pubRel = `editorial/i18n/catalog/${locale}.public.json`;
+      const solRel = `content/answerKey/editorial/i18n/catalog/${locale}.solutions.json`;
+      const pubAbs = resolve(root, pubRel);
+      const solAbs = resolve(root, solRel);
+
+      if (!existsSync(pubAbs) || !existsSync(solAbs)) {
+        errors.push(`[multilingual:missing] bundle catalogue manquant pour ${locale}`);
+        continue;
+      }
+
+      const rawPub = readFileSync(pubAbs, "utf8");
+      for (const key of FORBIDDEN_PUBLIC_KEYS) {
+        if (new RegExp(`"${key}"\\s*:`, "i").test(rawPub)) {
+          errors.push(`[multilingual:anti-leak] ${pubRel}: cle interdite "${key}"`);
+        }
+      }
+
+      const pubDoc = JSON.parse(rawPub);
+      const solDoc = readJson(solAbs);
+
+      if (!validateCatalogPublic(pubDoc)) {
+        for (const error of validateCatalogPublic.errors ?? []) {
+          errors.push(`[multilingual:schema] ${pubRel}${error.instancePath}: ${error.message}`);
+        }
+      }
+      if (!validateCatalogSolutions(solDoc)) {
+        for (const error of validateCatalogSolutions.errors ?? []) {
+          errors.push(`[multilingual:schema] ${solRel}${error.instancePath}: ${error.message}`);
+        }
+      }
+
+      if (pubDoc.certifications.map((c) => c.id).join(",") !== canonicalCertIds.join(",")) {
+        errors.push(`[multilingual:parity] ${pubRel}: certifications divergentes du catalogue`);
+      }
+      if (pubDoc.radarTracks.map((t) => t.id).join(",") !== canonicalRadarIds.join(",")) {
+        errors.push(`[multilingual:parity] ${pubRel}: pistes Radar divergentes`);
+      }
+      if (pubDoc.concepts.map((c) => c.id).join(",") !== canonicalConceptIds.join(",")) {
+        errors.push(`[multilingual:parity] ${pubRel}: concepts runtime divergents`);
+      }
+      if (pubDoc.questions.length !== canonicalQuestions.length || solDoc.solutions.length !== canonicalQuestions.length) {
+        errors.push(`[multilingual:parity] ${pubRel}: nombre de questions/solutions divergent (${pubDoc.questions.length}/${solDoc.solutions.length} vs ${canonicalQuestions.length})`);
+      } else {
+        for (let idx = 0; idx < canonicalQuestions.length; idx++) {
+          const canQ = canonicalQuestions[idx];
+          const canS = canonicalSolutionsById.get(canQ.id);
+          const locQ = pubDoc.questions[idx];
+          const locS = solDoc.solutions[idx];
+          const canChoices = canQ.choices ?? canQ.options?.map((o) => o.label) ?? [];
+          const expectedIndex = canChoices.indexOf(canS.correct);
+          if (locQ.id !== canQ.id || locS.id !== canQ.id) {
+            errors.push(`[multilingual:parity] ${pubRel}: question/solution ${idx} hors ordre pour ${canQ.id}`);
+            break;
+          }
+          if (locQ.choices.indexOf(locS.correct) !== expectedIndex) {
+            errors.push(`[multilingual:answer-index] ${solRel}: index de bonne reponse divergent pour ${canQ.id}`);
+            break;
+          }
+          if (locale !== "fr-FR" && locQ.prompt === canQ.prompt) {
+            errors.push(`[multilingual:untranslated] ${pubRel}: question "${canQ.id}" non traduite pour ${locale}`);
+            break;
+          }
+        }
+      }
+      for (const dashPath of findLongDashPaths(pubDoc)) {
+        errors.push(`[multilingual:long-dash] ${pubRel}${dashPath}: long tiret interdit`);
+      }
+      for (const dashPath of findLongDashPaths(solDoc)) {
+        errors.push(`[multilingual:long-dash] ${solRel}${dashPath}: long tiret interdit`);
+      }
+    }
+  }
+
+  return {
+    ok: errors.length === 0,
+    localeCount: supportedLocales.length,
+    locales: supportedLocales,
     errors,
   };
 }

@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné 在 OpenAI Academy 与 documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple 无 jargon 与 expert) 与 examen blanc."
+  },
+  "locale": "zh-Hans",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro：OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "掌握 choix 的 模型 (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent 的 programmation autonome Codex 与 l'ingénierie IA 的 production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads 与 responsables produit déployant offres OpenAI en 企业.",
+  "prerequisites": "Connaître bases 的 développement logiciel (Git, JSON, API REST) 与 l'utilisation courante d'一个 assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI 与Prompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente bonnes pratiques d'ingénierie 的 prompt, routage 之间 模型 multimodaux 与 模型 的 raisonnement, l'usage 的 Canvas, Projects, Custom GPTs 与 l'évaluation systématique.",
+      "limits": "performances d'一个 prompt 或 d'一个 workflow dépendent d'évaluations empiriques (Evals) 在 数据 représentatives 的 cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox (CertiGo 路径)",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement 的 l'agent OpenAI Codex : exécution 的 tâches en parallèle 在 一个 conteneur cloud isolé 配合 访问 coupé à Internet pendant l'exécution, lecture 的 conventions AGENTS.md, exécution 的 tests 与 ouverture 的 Pull Requests vérifiables.",
+      "limits": "Codex exécute tests configurés 在 son environnement sandbox ; toute fusion en production reste soumise à revue 的 code 与 aux contrôles CI 的 l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, 与Evals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente Responses API unifiée, l'application stricte 的 JSON Schema via Structured Outputs (strict: true), Function Calling, l'Agents SDK (handoffs, guardrails, tracing) 与 suites d'évaluation Evals.",
+      "limits": "garantie syntaxique 的 Structured Outputs assure respect 的 schéma JSON, mais pas véracité métier 的 valeurs retournées ni l'autorisation d'exécuter 一个 appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "第 1 单元 · ChatGPT Pro & Enterprise : 模型, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs 模型 的 raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs 与 Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner 模型 optimal selon tâche (GPT-4o vs o3/o4-mini), conduire 一项 étude sourcée 配合 Deep Research 与 structurer 一个 espace 的 travail récurrent 配合 Projects, Canvas 与 Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage 的 模型 : GPT-4o multimodal rapide vs 模型 的 raisonnement à chaîne 的 pensée interne o3 与 o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée 配合 citations) & Data Analysis (exécution Python 用于 nettoyer, modéliser 与 tracer 的 数据)",
+        "Canvas (co-édition ciblée 的 texte 与 的 code), Projects (instructions 与 文件 persistants) 与 Custom GPTs gouvernés en 企业"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o 用于 l'interaction multimodale rapide 与 rédaction fluide, o3/o4-mini 用于 raisonnement algorithmique 或 analytique complexe, 与 Deep Research lorsqu'一项 synthèse exige d'explorer, croiser 与 citer 的 dizaines 的 sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage 的 模型 & Espaces 的 Travail",
+        "diagram": "[请求 用户] ➔ [Choix 模型 : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "[ZH] GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image 与 audio 配合 faible latence ; o3 与 o4-mini allouent 的 calcul 的 raisonnement avant 的 répondre aux problèmes logiques, mathématiques, juridiques 或 d'architecture."
+          },
+          {
+            "name": "[ZH] Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement web 与 connecteurs autorisés 用于 livrer 一个 rapport sourcé ; Data Analysis exécute 的 code Python 用于 analyser 的 文件 CSV/Excel."
+          },
+          {
+            "name": "[ZH] Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre 一个 éditeur côte à côte 用于 réviser 的 texte 或 的 code par section ; Projects regroupe conversations, instructions 与 文件 ; Custom GPTs partage 的 assistants spécialisés 在 workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "在 ChatGPT Enterprise, conversations, 文件 的 Projects 与 exécutions Data Analysis sont isolés par espace 的 travail client 与 ne servent jamais à entraîner 模型 OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "选择 bon 模型 : GPT-4o multimodal vs 模型 的 raisonnement o3 与 o4-mini",
+          "objective": "Arbitrer 之间 GPT-4o, o3 与 o4-mini selon complexité logique, besoin multimodal, latence 与 成本 d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "使用 模型 的 raisonnement plus lourd 用于 reformuler 一个 courriel 的 trois lignes gaspille 的 temps, mais confier 一个 audit d'architecture distribuée à 一个 模型 instantané fait rater 的 cas limites : quelle est règle 的 tri ?",
+          "declicCard": {
+            "title": "核心顿悟 模型 OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse 与 échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne 的 pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "用于 rédiger, résumer, traduire 或 dialoguer rapidement à partir 的 texte 或 d'images courantes, choisissez GPT-4o.",
+            "step2": "用于 résoudre 一个 bug subtil, prouver 一项 cohérence financière/juridique 或 planifier sous fortes contraintes, choisissez o3 (profondeur maximale) 或 o4-mini (raisonnement rapide 与 économique).",
+            "rule": "Prompting o3/o4-mini : donnez 一个 objectif précis, contraintes 与 format attendu, 无 imposer 的 « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · GPT-4O MULTIMODAL",
+              "title": "模型 polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle 在 tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse 的 réunions, traduction nuancée, extraction visuelle rapide 与 conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "[ZH] GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "步骤 2 · 模型 的 RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer 的 temps 的 réflexion avant premier mot",
+              "bodyParagraph": "模型 的 série o (`o3` 与 `o4-mini`) génèrent 一项 chaîne 的 raisonnement interne avant d'émettre leur 响应 finale : ils vérifient leurs hypothèses, reviennent en arrière en cas 的 contradiction 与 excellent en algorithmique, finance, analyse 的 causes racines 与 revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement 的 pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "步骤 3 · ADAPTER SON PROMPTING",
+              "title": "一个 brief d'objectif clair plutôt que 的 micro-guidage",
+              "bodyParagraph": "配合 GPT-4o, détailler étapes intermédiaires améliore souvent sortie. 配合 o3 与 o4-mini, spécifiez clairement l'objectif final, invariants à respecter, 数据 d'entrée 与 schéma 的 sortie : 模型 construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "在 o3/o4-mini : spécifiez QUOI (contraintes + critères 的 succès), laissez 模型 gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie faible latence 与 l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre profondeur 的 raisonnement maximale 用于 problèmes scientifiques, architecturaux, financiers 或 的 débogage complexe, tandis qu'`o4-mini` optimise compromis vitesse/成本 在 tâches techniques.",
+            "一个 prompt destiné à 一个 模型 的 raisonnement 必须 définir rigoureusement contraintes, cas limites 与 livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "某团队d'ingénierie chez 一个 éditeur SaaS 必须 traiter deux demandes : (1) transformer 的 notes d'atelier en FAQ client multilingue, 与 (2) identifier 一项 condition 的 course (race condition) 之间 trois microservices 的 paiement.",
+            "steps": [
+              "Affecter rédaction 与 traduction 的 FAQ client à GPT-4o 在 Canvas 用于 itérer rapidement 在 style.",
+              "Soumettre 日志 d'exécution 与 code 的 trois microservices à o3 en précisant invariants transactionnels à 验证.",
+              "Valider scénario d'entrelacement découvert par o3 au moyen d'一个 test automatisé reproductible."
+            ],
+            "decision": "routage intentionnel divise temps 的 rédaction par trois 与 résout bug 的 concurrence que revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez trois tâches suivantes 之间 GPT-4o, o4-mini 与 o3 en justifiant votre choix : (A) Reformuler 15 fiches produit 用于 catalogue web, (B) Diagnostiquer 一项 incohérence 之间 quatre clauses 的 pénalité 与 一个 模型 actuariel, (C) Générer rapidement 的 tests unitaires 在 vingt fonctions utilitaires.",
+            "successCriteria": [
+              "关联 (A) à GPT-4o 用于 sa rapidité rédactionnelle 与 sa maîtrise 的 ton.",
+              "关联 (B) à o3 用于 sa capacité 的 raisonnement multi-contraintes profond.",
+              "关联 (C) à o4-mini 用于 son raisonnement code rapide 与 économique à haut volume."
+            ],
+            "feedback": "选择 模型 proportionné à difficulté cognitive évite à fois 在-qualité lente 与 l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez 一个 problème financier 或 logique très complexe 配合 douze règles à 验证 en même temps. Quel 模型 OpenAI 选择 ?",
+              "prompt": "架构师financier 必须 验证 cohérence mathématique 与 réglementaire d'一个 模型 的 couverture 的 taux comportant douze contraintes croisées 与 identifier cas limites où formule diverge. Quel 模型 OpenAI 必须-il sélectionner 在 ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "模型 的 raisonnement o3, conçu 用于 décomposer 与 验证 的 problèmes logiques, mathématiques 与 multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "一个 模型 的 transcription vocale purement acoustique dépourvu 的 capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "一个 模型 d'embeddings vectoriels qui retourne 仅 一项 liste 的 nombres flottants 无 texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "classifieur 的 modération 的 contenu qui produit 仅 的 scores 的 安全 booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est différence pratique 之间 模型 的 réflexion o3 与 o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` 的 `o3` au sein 的 famille 的 模型 的 raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre 一个 raisonnement technique 与 code beaucoup plus rapide 与 économique 用于 tâches à haut débit, tandis qu'o3 privilégie profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération 的 code informatique 与 se limite à retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie 自动 prompts d'企业 在 Internet contrairement au 模型 o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée 与 ne peut lire aucun 文件 structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o 用于 vitesse multimodale 与 rédactionnelle ; o4-mini 用于 raisonnement technique agile ; o3 用于 arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée 与 analyse Python",
+          "objective": "Conduire 一项 recherche approfondie multi-sources 配合 Deep Research 与 analyser 的 jeux 的 数据 tabulaires 配合 Data Analysis 在 ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "您必须livrer demain matin 一项 étude concurrentielle citant trente sources vérifiables 与 一项 analyse 的 cohorte 在 一个 文件 的 120 000 lignes 的 ventes : comment combiner Deep Research 与 Data Analysis 无 jamais inventer 一个 chiffre ?",
+          "declicCard": {
+            "title": "核心顿悟 Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré 配合 citations",
+            "diagramBottom": "Data Analysis : 文件 CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research synthèses documentaires 与 études 的 marché nécessitant 的 parcourir, recouper 与 citer 的 dizaines 的 sources.",
+            "step2": "Confiez à Data Analysis tout calcul 在 vos 文件 chiffrés afin que résultat provienne d'一项 exécution Python réelle 与 non d'一个 calcul mental 的 LLM.",
+            "rule": "Ne demandez jamais à 一个 模型 的 calculer 的 tête 在 50 000 lignes : exigez l'exécution Python 的 Data Analysis 与 inspectez code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · DEEP RESEARCH",
+              "title": "一个 analyste 的 recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à 一项 recherche web rapide d'一项 seconde, Deep Research établit 一个 plan d'investigation, explore 的 multiples pages 与 documents autorisés, recoupe contradictions 与 rédige 一个 rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "[ZH] Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "步骤 2 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif 在 vos jeux 的 数据",
+              "bodyParagraph": "Lorsque vous déposez 一个 文件 CSV, Excel 或 JSON 在 ChatGPT Enterprise, Data Analysis écrit 与 exécute 的 code Python (`pandas`, `numpy`, `matplotlib`) 在 一个 environnement isolé. Il nettoie valeurs manquantes, calcule agrégats exacts 与 génère 的 visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable 与 déterministe 在 vos 文件 的 数据"
+            },
+            {
+              "stepBadge": "步骤 3 · VÉRIFICATION 的 BOUT EN BOUT",
+              "title": "Auditer sources 与 script Python",
+              "bodyParagraph": "一个 professionnel CertiGo vérifie toujours deux éléments avant 的 diffuser son livrable : 在 Deep Research, il ouvre citations 的 conclusions critiques ; 在 Data Analysis, il déplie bloc 的 code Python (`</>`) 用于 验证 filtres appliqués (par exemple traitement 的 lignes annulées 或 的 devises).",
+              "keyTakeawayPill": "Toujours ouvrir citations Deep Research + inspecter filtres 的 script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit 的 recherches multi-étapes 在 plusieurs minutes 用于 produire 的 rapports exhaustifs accompagnés 的 citations précises.",
+            "Data Analysis exécute 的 code Python 在 一个 bac à sable 用于 garantir l'exactitude mathématique 的 statistiques, jointures 与 graphiques 在 的 文件 volumineux.",
+            "L'inspection 的 code Python généré (`</>`) 支持 的 valider hypothèses 的 nettoyage (valeurs nulles, doublons, devises) avant 的 présenter chiffres."
+          ],
+          "workedExample": {
+            "situation": "某团队stratégie prépare l'entrée 在 一个 nouveau marché européen : elle 必须 comparer cadres réglementaires 的 quatre pays 与 analyser l'historique interne 的 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant quatre juridictions, autorités officielles à privilégier 与 grille comparative attendue 配合 liens sources.",
+              "Charger l'extrait anonymisé 的 80 000 commandes 在 Data Analysis 与 demander calcul 的 panier moyen, 的 rétention à 6 mois 与 的 saisonnalité via Python.",
+              "Déplier code Python 用于 验证 que commandes remboursées ont bien été exclues 的 chiffre d'affaires net, puis 验证 citations réglementaires 的 Deep Research."
+            ],
+            "decision": "comité d'investissement reçoit 一个 dossier où chaque règle juridique pointe vers son texte officiel 与 chaque indicateur financier est issu d'一个 script Python reproductible."
+          },
+          "practice": {
+            "prompt": "一个 analyste colle 5 000 lignes 的 transactions 在 一个 prompt texte 与 demande au 模型 的 calculer médiane 与 l'écart-type 无 使用 Data Analysis. Expliquez risque 与 bonne méthode à adopter.",
+            "successCriteria": [
+              "解析 que prédiction 的 令牌 texte 无 exécution 的 code risque 的 produire 的 calculs statistiques approximatifs 或 tronqués.",
+              "Joindre 文件 structuré (CSV/XLSX) 与 demander explicitement l'exécution d'一个 script Python via Data Analysis.",
+              "Ouvrir bloc 的 code exécuté 用于 验证 colonne ciblée 与 traitement 的 valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique 或 statistique 在 一个 tableau 的 数据 必须 passer par l'exécution Python 的 Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil 的 ChatGPT 支持 的 chercher 在 的 dizaines 的 documents officiels 与 的 rédiger 一个 rapport complet 配合 toutes sources ?",
+              "prompt": "一项 responsable veille réglementaire 必须 produire 一个 rapport comparant exigences publiées par cinq autorités 的 régulation 配合 的 citations vérifiables ligne par ligne. Quelle fonctionnalité 的 ChatGPT Pro / Enterprise est spécifiquement conçue 用于 ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie 一项 recherche multi-étapes, recoupe documents 与 produit 一个 rapport structuré 配合 citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "一项 complétion hors-ligne à température élevée 无 访问 aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "générateur d'illustrations graphiques dépourvu 的 moteur 的 recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé 无 connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule 一个 total 的 ventes différent 的 votre comptabilité à partir d'一个 文件 Excel. Que devez-vous 验证 en premier ?",
+              "prompt": "Après avoir chargé 一个 文件 CSV 的 60 000 ventes 在 ChatGPT Data Analysis, 一个 contrôleur obtient 一个 chiffre d'affaires supérieur 的 12 % à celui 的 comptabilité. Quel réflexe 的 vérification 必须-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir code Python exécuté (`</>`) 用于 验证 comment lignes annulées, taxes 与 devises ont été filtrées 在 pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "禁用 l'exécution Python 用于 obliger 模型 的 langage à additionner 60 000 lignes 的 tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir 文件 CSV en image JPEG compressée avant 的 relancer somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier 直接 graphique car 一个 script Python généré applique toujours conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore 与 cite sources ; Data Analysis exécute 的 Python déterministe 与 inspectable 在 vos 数据 chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer 与 共享 l'IA en 企业",
+          "objective": "Distinguer 与 combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) 与 Custom GPTs (assistants métier partagés 与 gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il 创建 一个 Project 或 一个 Custom GPT ? 与 comment modifier trois lignes au milieu d'一个 document 或 d'一个 script 的 300 lignes 无 que ChatGPT ne régénère tout depuis début ?",
+          "declicCard": {
+            "title": "核心顿悟 Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'团队)",
+            "diagramTop": "Canvas = Éditeur côte à côte 用于 retoucher 一项 section précise d'一个 texte 或 d'一个 code",
+            "diagramBottom": "Projects = Votre dossier 的 travail continu · Custom GPT = Assistant standardisé partagé 配合 l'团队",
+            "step1": "Ouvrez Canvas 用于 itérer 在 一个 livrable long (article, spécification, script) en surlignant 仅 passage à réécrire 或 déboguer.",
+            "step2": "Utilisez 一个 Project 用于 regrouper vos 文件 与 instructions d'一个 dossier en cours, 与 publiez 一个 Custom GPT lorsque toute l'团队 a besoin 的 même assistant métier.",
+            "rule": "Travail récurrent d'一个 dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé 用于 l'团队 = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · CANVAS",
+              "title": "Fini régénération complète à chaque retouche",
+              "bodyParagraph": "在 Canvas, document 或 code s'affiche 在 一个 volet dédié à droite 的 chat. Vous pouvez surligner 一个 seul paragraphe 或 一项 seule fonction 用于 demander 一项 réécriture, 一个 changement 的 niveau 的 lecture, l'ajout 的 logs 或 portage vers 一个 autre langage, 配合 一个 historique 的 versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner 一项 zone ➔ Édition chirurgicale in-place + Historique 的 versions"
+            },
+            {
+              "stepBadge": "步骤 2 · PROJECTS",
+              "title": "Garder contexte d'一个 dossier au fil 的 semaines",
+              "bodyParagraph": "一个 Project 在 ChatGPT rassemble en 一个 seul endroit vos instructions personnalisées, vos 文件 的 référence (cahier 的 charges, architecture, charte éditoriale) 与 tous fils 的 conversation liés à ce chantier. Chaque nouveau chat ouvert 在 Project hérite immédiatement 的 ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + 文件 sources + Historique 的 chats organisé"
+            },
+            {
+              "stepBadge": "步骤 3 · CUSTOM GPTS EN 企业",
+              "title": "Standardiser 一个 assistant métier 配合 Actions 与 治理",
+              "bodyParagraph": "Lorsqu'一个 workflow est stabilisé (ex. Revue d'appel d'offres, Générateur 的 post-mortem SRE), encapsulez ses instructions système, sa base documentaire 与 ses Actions API OpenAPI 在 一个 Custom GPT publié 仅 au sein 的 votre espace 的 travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en 安全"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas 支持 co-édition granulaire 的 texte 与 的 code 配合 raccourcis dédiés (longueur, ton, revue 的 code, ajout 的 commentaires, portage 的 langage) 与 gestion 的 versions.",
+            "Projects organise travaux au long cours d'一个 用户 或 d'一项 团队 autour d'instructions 与 的 文件 的 référence persistants.",
+            "Custom GPTs 在 ChatGPT Enterprise permettent 的 distribuer 的 assistants spécialisés dotés d'Actions OpenAPI sous contrôle 的 console d'administration."
+          ],
+          "workedExample": {
+            "situation": "某团队SRE souhaite (1) suivre l'opération 的 migration Cloud 的 trimestre 配合 ses schémas d'architecture, (2) co-rédiger runbook 的 bascule section par section, 与 (3) offrir à tous ingénieurs d'astreinte 一个 assistant standardisé 的 rédaction 的 post-mortem.",
+            "steps": [
+              "创建 一个 Project « Migration Cloud T4 » contenant schémas d'architecture 与 contraintes 的 SLA.",
+              "Rédiger 与 affiner runbook 的 bascule 在 Canvas en révisant chaque procédure 的 rollback 无 altérer sections déjà validées.",
+              "Publier 一个 Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré 配合 模型 d'incident 与 grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "trois outils sont utilisés selon leur rôle exact : continuité 的 dossier (Project), édition fine (Canvas) 与 standardisation d'团队 (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer 一个 prompt complexe utilisé par dix personnes en copier-coller vers 一个 Custom GPT d'企业 sécurisé, 与 précisez quand 用户 devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer prompt validé 在 instructions système 的 Custom GPT 与 y joindre documents 的 référence officiels.",
+              "Restreindre partage 的 Custom GPT aux groupes autorisés 的 workspace ChatGPT Enterprise.",
+              "使用 Canvas lorsque l'用户 souhaite peaufiner localement 一个 paragraphe 的 livrable généré avant export."
+            ],
+            "feedback": "Centraliser prompt 在 一个 Custom GPT élimine dérive 的 versions copiées-collées, tandis que Canvas assure finition 在 mesure 的 chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "如何modifier seulement 30 lignes d'一个 long programme 在 ChatGPT 无 risquer qu'il réécrive 或 casse reste 的 文件 ?",
+              "prompt": "Vous travaillez 在 一个 script Python 的 250 lignes 在 ChatGPT 与 souhaitez optimiser 仅 fonction 的 pagination aux lignes 80 à 110 tout en garantissant que reste 的 文件 reste strictement intact 与 versionné. Quel outil devez-vous 使用 ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir code 在 Canvas, surligner lignes 80 à 110 与 demander l'optimisation ciblée 配合 suivi 的 version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir 一项 conversation vierge 无 fournir 文件 与 demander 的 réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir script Python en 文件 audio MP3 avant 的 soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique 的 l'espace 的 travail à chaque modification d'一项 variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "在 ChatGPT Enterprise, quand faut-il 创建 一个 Project plutôt qu'一个 Custom GPT ?",
+              "prompt": "Quelle différence principale guide choix 之间 一个 Project 与 一个 Custom GPT 在 ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "一个 Project organise 一个 espace 的 travail continu (chats, 文件 与 consignes d'一个 chantier), tandis qu'一个 Custom GPT publie 一个 assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "一个 Project indexe 自动 ses 文件 在 moteurs 的 recherche publics alors qu'一个 Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "一个 Custom GPT ne peut contenir ni instructions système ni documents 的 référence, contrairement à 一个 Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "一个 Project accepte 仅 的 文件 d'images matricielles 与 refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas 用于 l'édition chirurgicale côte à côte ; Projects 用于 vos chantiers au long cours ; Custom GPTs 用于 standardiser 与 共享 一个 assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "第 2 单元 · OpenAI Codex : Agent 的 Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée 的 Codex, pilotage par AGENTS.md, exécution parallèle 的 tâches, génération 的 Pull Requests vérifiées 与 revue 的 code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "配置 一个 文件 AGENTS.md déterministe, 委派 en parallèle 一个 correctif 的 bug 与 一项 implémentation 的 fonctionnalité à OpenAI Codex 在 son sandbox, 与 auditer diff ainsi que 日志 的 tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, 访问 网络 coupé pendant l'exécution 用于 prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes 的 build/lint/test, invariants d'architecture 与 conventions 的 dépôt",
+        "Parallélisation 的 tâches, ouverture 的 Pull Requests 配合 preuves d'exécution 的 tests 与 revue 的 code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que commandes 的 vérification documentées 在 votre AGENTS.md : exigez toujours 的 tests verts 在 journal 的 sandbox avant 的 fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "[ZH] Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (网络 OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs 的 Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "[ZH] Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit 与 modifie code 与 exécute tests 配合 l'访问 网络 externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "合同 AGENTS.md",
+            "role": "文件 versionné 在 dépôt (racine 与 sous-dossiers) qui indique à Codex comment compiler, linter, tester 与 respecter frontières architecturales."
+          },
+          {
+            "name": "[ZH] Vérification & Pull Request",
+            "role": "Codex itère 在 son implémentation jusqu'à ce que suite 的 tests passe, puis produit 一个 commit/PR accompagné 的 citations 的 文件 与 的 sorties 的 terminal."
+          }
+        ],
+        "securityInvariant": "Pendant phase d'exécution 的 l'agent Codex, l'访问 Internet sortant est désactivé 在 bac à sable afin d'empêcher toute exfiltration 的 code source 或 téléchargement 的 paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "[ZH] Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "解析 comment OpenAI Codex exécute 的 code 与 的 tests 在 一个 conteneur sandbox cloud isolé 与 pourquoi coupure 网络 pendant l'exécution protège dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est différence fondamentale 之间 一个 assistant d'autocomplétion 在 l'IDE 与 l'agent OpenAI Codex capable 的 vous livrer 一项 Pull Request testée 的 bout en bout ?",
+          "declicCard": {
+            "title": "核心顿悟 Codex : 的 Suggestion 的 Ligne à Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création 的 conteneur + Clone 的 dépôt + Installation 的 dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, 网络 OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement 的 tâche prépare dépôt 与 ses dépendances, puis verrouille l'访问 网络 externe avant 的 donner main à l'agent.",
+            "step2": "Codex explore base 的 code, applique ses modifications 与 lance réellement compilateurs 与 tests jusqu'à obtenir 一个 résultat vert.",
+            "rule": "一个 patch non exécuté est 一项 hypothèse ; 一个 patch validé par tests 在 sandbox Codex est 一个 livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · 一个 CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone 与 isolée 在 cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre 在 son propre conteneur cloud isolé contenant votre dépôt Git à révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction 的 bug, refactorisation, couverture 的 tests) 无 jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié 与 indépendant"
+            },
+            {
+              "stepBadge": "步骤 2 · 安全 网络 OFF",
+              "title": "为什么l'访问 Internet est coupé pendant boucle agent",
+              "bodyParagraph": "一项 fois script d'initialisation d'environnement terminé (installation 的 dépendances via `npm ci` 或 `pip`), conteneur coupe l'访问 Internet sortant pendant que l'agent travaille. Ainsi, même face à 一项 instruction piégée 在 一个 文件 的 test, Codex ne peut ni exfiltrer 的 code ni télécharger 的 binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure 网络 ➔ Exécution sûre 的 l'agent"
+            },
+            {
+              "stepBadge": "步骤 3 · PREUVES D'EXÉCUTION",
+              "title": "Journal 的 terminal, citations 的 lignes 与 diff Git",
+              "bodyParagraph": "À fin 的 sa mission, Codex ne renvoie pas 一项 simple explication théorique : il fournit diff Git exact, citations 的 文件 modifiés 与 journal complet 的 commandes 的 test exécutées 在 terminal 的 sandbox.",
+              "keyTakeawayPill": "Toujours inspecter journal 的 test 的 sandbox avant 的 创建 或 fusionner PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère 在 一个 conteneur cloud isolé dédié à chaque tâche, permettant 的 paralléliser plusieurs chantiers logiciels.",
+            "séparation 之间 phase d'initialisation (installation 的 dépendances) 与 phase d'exécution 的 l'agent (网络 externe désactivé) élimine risques d'exfiltration 与 d'injection supply-chain en cours 的 tâche.",
+            "Chaque résultat inclut 一项 trace vérifiable 的 commandes exécutées 与 的 tests passés."
+          ],
+          "workedExample": {
+            "situation": "某团队plateforme veut confier à Codex mise à jour d'一个 validateur 的 schéma TypeScript, mais lors 的 premier essai, `npm test` échoue 在 sandbox 配合 `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant boucle d'exécution 的 l'agent, l'访问 网络 est coupé, donc l'agent ne peut pas télécharger 的 paquets depuis registre npm.",
+              "Ajouter `npm ci` 在 script 的 configuration initiale 的 l'environnement Codex (qui s'exécute avant coupure 网络).",
+              "Relancer tâche : Codex dispose désormais 的 `node_modules`, exécute 85 tests unitaires 与 livre 一个 diff 100 % vert."
+            ],
+            "decision": "L'团队 documente script 的 préchargement 的 dépendances 在 configuration 的 l'environnement Codex 的 dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi 一个 agent 的 programmation autonome exécutant 的 tests 在 一个 dépôt 必须 tourner 配合 l'访问 网络 externe désactivé 一项 fois dépendances installées, 与 comment gérer appels à 的 API tierces 在 tests.",
+            "successCriteria": [
+              "解析 que coupure 网络 empêche l'exfiltration 的 code propriétaire 与 téléchargement 的 code arbitraire en cas 的 prompt injection.",
+              "Préinstaller toutes dépendances requises lors 的 phase 的 setup 的 l'environnement.",
+              "使用 的 fixtures locales 或 的 mocks déterministes 用于 tester intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "的 tests rapides, déterministes 与 hors-ligne (在 fixtures) sont à fois 一项 bonne pratique d'ingénierie logicielle 与 clé 的 l'efficacité 的 Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "为什么l'agent 的 programmation OpenAI Codex coupe-t-il l'访问 à Internet pendant qu'il modifie votre code ?",
+              "prompt": "为什么l'environnement d'exécution d'OpenAI Codex désactive-t-il l'访问 Internet sortant pendant que l'agent modifie code 与 exécute tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "用于 empêcher toute exfiltration 的 code 或 的 secrets ainsi que téléchargement 的 paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "用于 empêcher compilateur TypeScript 或 Python 的 lire 文件 présents 在 répertoire 的 travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "用于 禁用 l'historique Git local 与 interdire génération d'一个 diff 之间 branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "用于 réduire résolution graphique 的 carte vidéo locale 的 l'ordinateur portable 的 développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque 一个 outil qui s'installe normalement depuis Internet. 如何régler cela ?",
+              "prompt": "一项 tâche confiée à OpenAI Codex échoue lors 的 l'exécution 的 `pytest` car bibliothèques 的 文件 `requirements.txt` ne sont pas installées 与 l'agent ne peut pas contacter PyPI. Quelle est résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "配置 l'installation 的 dépendances (`pip install -r requirements.txt`) 在 script d'initialisation 的 l'environnement sandbox avant coupure 网络."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex 的 删除 dossier `tests/` afin que commande retourne 一个 code 的 sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "禁用 vérification par tests 与 fusionner 直接 code généré 在 branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire clés secrètes 的 production en clair 在 文件 README.md 的 dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne 在 son sandbox isolé 与 exigez preuve par logs 的 tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées 与 revue 的 code 配合 Codex",
+          "objective": "Structurer 一个 文件 AGENTS.md efficace, 委派 的 tâches ciblées 或 的 revues 的 code à Codex 与 valider Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "如何faire en sorte que Codex connaisse instantanément vos commandes 的 test ciblées, vos règles d'architecture 与 vos interdits 的 安全 无 avoir à répéter 在 chaque prompt ?",
+          "declicCard": {
+            "title": "核心顿悟 AGENTS.md : Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à racine (与 par sous-dossier) = Commandes 的 validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible bons 文件, lance bons tests 与 ouvre 一项 PR propre",
+            "step1": "Documentez 在 `AGENTS.md` commandes exactes (`npm test`, `npm run validate`), invariants métier 与 règles 的 style.",
+            "step2": "Utilisez 的 文件 `AGENTS.md` plus spécifiques 在 sous-dossiers d'一个 monorepo (`backend/`, `apps/mobile/`) 用于 affiner consignes locales.",
+            "rule": "Si vous corrigez deux fois même erreur 的 convention 在 一项 PR d'agent, transformez cette remarque en règle 在 `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · STANDARD AGENTS.MD",
+              "title": "Donner à l'agent carte 与 boussole 的 dépôt",
+              "bodyParagraph": "一个 bon 文件 `AGENTS.md` ne répète pas 的 marketing : il donne l'architecture 的 dossiers, règles strictes (ex. séparation public/privé, déterminisme 的 manifestes), commande 的 test rapide 用于 itérer 与 suite complète à exécuter avant 的 conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes 的 test rapides 与 complètes"
+            },
+            {
+              "stepBadge": "步骤 2 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "的 ticket bien borné à Pull Request prête à relire",
+              "bodyParagraph": "用于 委派 efficacement à Codex, formulez 一项 tâche bornée : symptôme 或 comportement attendu, 文件 或 modules concernés 与 critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit 一项 branche 与 一项 Pull Request documentant changements 与 tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère 的 test = Pull Request autonome prête 用于 revue"
+            },
+            {
+              "stepBadge": "步骤 3 · REVUE 的 CODE PAR CODEX",
+              "title": "Détecter bugs logiques 与 régressions avant fusion",
+              "bodyParagraph": "En mode revue 的 code 在 一项 Pull Request, Codex compare l'intention au diff réel, exécute 或 trace chemins d'erreur (nullabilité, conditions 的 course, oubli 的 validation 的 borne, fuite d'information) 与 signale 仅 défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles 的 安全 与 cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit 一个 contexte persistant 与 hiérarchique (racine puis sous-répertoires) que Codex consulte 自动.",
+            "délégation parallèle 支持 的 traiter simultanément 的 corrections 的 bugs, 的 ajouts 的 tests 与 的 refactorisations isolées.",
+            "使用 Codex en revue 的 Pull Request 支持 d'identifier erreurs 的 logique, oublis 的 cas limites 与 écarts vis-à-vis 的 invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "在 dépôt `certigo-content`, chaque question publique 必须 avoir 一项 solution privée correspondante 与 aucun champ `correct` 或 `rationale` ne 必须 figurer 在 `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or 与 séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` 在 `AGENTS.md`.",
+              "Confier à Codex l'ajout d'一个 nouveau parcours 配合 ses questions 与 solutions.",
+              "验证 在 rapport 的 PR que Codex a exécuté 的 lui-même toutes commandes prescrites par `AGENTS.md` avant 的 proposer fusion."
+            ],
+            "decision": "文件 `AGENTS.md` 确保 que chaque tâche exécutée par l'agent respecte gardes 的 安全 与 的 合同 的 dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez quatre rubriques indispensables d'一个 文件 `AGENTS.md` 用于 一项 API backend soumise à 的 exigences strictes 的 rétrocompatibilité 的 schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture 与 répertoires critiques (ex. schémas 的 合同, séparation 的 couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use 在 schémas, interdiction 的 secrets).",
+              "3. Commandes d'installation 与 的 validation ciblée puis complète.",
+              "4. Processus 的 changement attendu avant ouverture 的 Pull Request."
+            ],
+            "feedback": "一个 `AGENTS.md` concis, impératif 与 orienté commandes 的 vérification améliore radicalement taux 的 réussite au premier essai 的 Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert 文件 AGENTS.md placé 在 votre projet informatique 用于 OpenAI Codex ?",
+              "prompt": "Quel est rôle 的 文件 `AGENTS.md` placé à racine 与 在 sous-dossiers d'一个 dépôt Git utilisé 配合 OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir 自动 à l'agent commandes 的 build/test, l'architecture 与 invariants 的 dépôt 或 的 sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair mots 的 passe 的 数据库 的 production 用于 éviter variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "替换 binaire 的 compilateur par 一项 interprétation purement approximative 无 exécution 的 tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes branches 无 exécuter workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger 在 quatre parties différentes 的 votre logiciel. 如何gagner 的 temps 配合 Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits 在 quatre modules distincts 的 votre application. 如何exploiter OpenAI Codex 的 façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "委派 quatre corrections en parallèle 在 quatre tâches Codex distinctes en exigeant 一个 test 的 non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander 一项 réécriture totale 的 l'application 在 一个 seul commit géant en désactivant suite 的 tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre 仅 titre « Ça ne marche pas » 无 indiquer ni module ni trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser 的 modifications non testées 直接 在 branche 的 production en contournant revue 的 code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue 的 PR = workflow d'ingénierie augmentée 配合 OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic 的 régressions CI, remédiation 与 安全 配合 Codex",
+          "objective": "使用 Codex 用于 diagnostiquer 一个 échec CI complexe, écrire 一个 test reproducteur avant correctif (TDD) 与 appliquer garde-fous 的 安全.",
+          "estimatedMinutes": 8,
+          "hook": "一个 pipeline CI échoue 的 façon intermittente 在 一项 erreur 的 sérialisation : comment guider Codex 用于 qu'il prouve cause racine par 一个 test rouge avant d'écrire 一项 seule ligne 的 correctif ?",
+          "declicCard": {
+            "title": "核心顿悟 Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ 验证 Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire 一个 test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer correctif chirurgical (Vert) ➔ 3. Exécuter suite complète & gardes 的 合同",
+            "step1": "Fournissez trace d'erreur exacte à Codex 与 demandez d'abord 一个 test minimal qui échoue 在 bug actuel.",
+            "step2": "一项 fois symptôme reproduit, laissez Codex appliquer correctif minimal 与 验证 qu'aucune garde existante ne régresse.",
+            "rule": "一个 correctif 无 test reproducteur qui échouait avant 与 passe après n'est pas 一项 remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · REPRODUIRE AVANT 的 CORRIGER",
+              "title": "discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez 一个 bug à Codex, exigez 在 prompt (或 在 `AGENTS.md`) qu'il commence par reproduire l'erreur 配合 一个 test ciblé. Voir test échouer 用于 raison attendue prouve que l'agent a compris vrai mécanisme 的 bug 与 non 一个 symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger cause racine (Green) ➔ 3. 验证 l'ensemble"
+            },
+            {
+              "stepBadge": "步骤 2 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter bruit 与 refactorisations non demandées",
+              "bodyParagraph": "一个 bon correctif d'agent modifie 仅 lignes nécessaires 与 ajoute test correspondant, 无 reformater 的 dizaines 的 文件 non liés ni affaiblir 一项 assertion 的 安全 用于 faire passer test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement 的 test 或 suppression 的 garde 用于 obtenir 一个 vert artificiel"
+            },
+            {
+              "stepBadge": "步骤 3 · CONTRÔLE HUMAIN 的 FRONTIÈRES",
+              "title": "Ce qu'一个 relecteur humain vérifie toujours 在 一项 PR d'agent",
+              "bodyParagraph": "Lors 的 relecture 的 PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test 或 contrôle 的 schéma n'a été contourné · 2. Que nouvelles dépendances éventuelles sont légitimes · 3. Que frontières 的 安全 (权限, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue 的 PR : inspecter en priorité tests modifiés, schémas 与 frontières 的 confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger reproduction préalable 的 bug par 一个 test qui échoue 确保 pertinence 的 correctif produit par Codex.",
+            "一个 agent ne 必须 jamais faire passer 一个 build au vert en supprimant 或 en relâchant 一项 assertion 的 安全 或 的 合同.",
+            "revue humaine 的 Pull Request se concentre 在 validité 的 tests ajoutés, minimalité 的 diff 与 respect 的 frontières 的 安全."
+          ],
+          "workedExample": {
+            "situation": "在 一个 pipeline 的 packaging, 一个 文件 Windows en CRLF produit 一个 hash SHA-256 différent 的 celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire 一个 test unitaire injectant 的 fins 的 ligne `\\r\\n` 与 vérifiant que hash normalisé reste identique à celui en `\\n` ( test échoue initialement).",
+              "Corriger fonction 的 hachage 用于 normaliser fins 的 ligne avant calcul 的 digest SHA-256.",
+              "Exécuter toute suite 的 tests 与 验证 que vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "PR contient 6 lignes 的 code productif 与 20 lignes 的 test d'isolation prouvant résolution 在 Windows 与 Linux."
+          },
+          "practice": {
+            "prompt": "一个 agent propose 一项 PR qui corrige 一项 erreur 的 validation en supprimant règle `additionalProperties: false` 的 schéma JSON. Expliquez pourquoi vous devez rejeter cette PR 与 quelle consigne donner.",
+            "successCriteria": [
+              "解析 que retirer `additionalProperties: false` ouvre 合同 à 的 propriétés inconnues 或 à 的 fuites 的 数据.",
+              "Identifier quelle propriété provoquant rejet était illégitime 在 数据 (或 si 一项 procédure formelle d'expand backend est requise).",
+              "Exiger que schéma reste strictement fermé 与 qu'一个 test négatif vérifie rejet 的 propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais 一个 correctif éteindre l'alarme au lieu d'éteindre l'incendie : schémas fermés 与 gardes 必须 rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "在 quel ordre Codex 必须-il travailler 用于 prouver qu'il a vraiment corrigé 一个 bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex correction d'一个 bug 的 calcul d'arrondi signalé en production. Quelle séquence 的 travail 确保 que correctif règle réellement problème 无 régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord 一个 test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer correctif minimal (vert), puis lancer toute suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "删除 assertions numériques 的 tests existants afin que suite s'exécute 无 erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier fonction mathématique 无 exécuter tests 与 fusionner immédiatement branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer workflow GitHub Actions 的 branche 用于 masquer l'échec 的 build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "一个 agent propose 的 faire passer 一个 test 的 安全 au vert en désactivant contrôle 在 文件 posant problème. Que faites-vous ?",
+              "prompt": "Lors 的 relecture d'一项 Pull Request générée 用于 corriger 一个 test d'anti-fuite en échec, vous constatez que diff ajoute 文件 fautif à 一项 liste d'exclusion globale au lieu 的 retirer champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter PR car elle neutralise garde 的 安全, 与 demander 的 删除 champ sensible 的 文件 public tout en conservant contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver 与 fusionner immédiatement puisque l'indicateur 的 pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "删除 complètement 文件 的 test d'anti-fuite 用于 accélérer prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "配置 l'outil 的 revue 的 code 用于 masquer systématiquement modifications apportées aux 文件 的 tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver 一项 PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "第 3 单元 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire 的 systèmes d'IA 的 production fiables 配合 Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK 与 évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir 一个 appel Responses API combinant Function Calling 与 Structured Outputs (`strict: true`), orchestrer 一个 transfert (handoff) 配合 Guardrails 在 l'Agents SDK 与 valider qualité via 一项 suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % conformité au JSON Schema",
+        "[ZH] Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux 的 数据 的 référence, graders déterministes/模型 与 portes 的 non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` 在 vos schémas JSON (Structured Outputs & Function Calling), validez 权限 côté serveur avant d'exécuter 一个 outil, 与 bloquez tout changement 的 prompt 或 的 模型 qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent 的 Production 配合 OpenAI Responses API & Agents SDK",
+        "diagram": "[ZH] [Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "[ZH] Responses API & Structured Outputs",
+            "role": "Unifie génération 配合 état, outils natifs (recherche, 文件, code) 与 contraint décodage 的 模型 用于 respecter 一个 JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "[ZH] Function Calling & Agents SDK",
+            "role": "支持 au 模型 d'émettre 的 appels 的 fonctions typés exécutés par votre code backend 与 d'orchestrer 的 transferts (handoffs) 之间 agents spécialisés protégés par 的 Guardrails."
+          },
+          {
+            "name": "[ZH] OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, respect 的 consignes 与 l'absence 的 régression 在 一个 jeu 的 cas 的 test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "一个 appel 的 fonction retourné par 模型 (`tool_call`) est 一项 intention non fiable : backend applicatif 必须 toujours valider l'身份, 权限 与 bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir 合同 JSON à 100 %",
+          "objective": "Exploiter Responses API 与 配置 Structured Outputs (`strict: true`) 用于 éliminer toute erreur 的 parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h 的 matin parce que LLM a oublié 一项 virgule JSON 或 renommé champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "核心顿悟 Structured Outputs : 的 JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés 或 types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types 与 enums",
+            "step1": "Définissez votre schéma 的 sortie (Pydantic / Zod / JSON Schema) 配合 `strict: true` 与 `additionalProperties: false` 在 chaque objet.",
+            "step2": "Gérez explicitement champ `refusal` 在 votre code au cas où 请求 est rejetée 用于 motif 的 安全.",
+            "rule": "En production, n'espérez jamais qu'一项 consigne 在 prompt suffise à garantir 一个 schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · RESPONSES API",
+              "title": "一项 primitive unique 用于 texte, outils 与 l'état",
+              "bodyParagraph": "Responses API d'OpenAI unifie génération 的 réponses, chaînage multi-tours (`previous_response_id`), l'appel 的 fonctions personnalisées 与 l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) 在 一项 seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État 的 conversation + Outils natifs 与 personnalisés"
+            },
+            {
+              "stepBadge": "步骤 2 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui 确保 seulement 的 accolades valides, Structured Outputs 配合 `strict: true` compile votre JSON Schema en 一项 grammaire qui filtre 令牌 lors 的 l'inférence : 模型 ne peut littéralement pas émettre 一项 clé inconnue, omettre 一个 champ requis 或 violer 一个 `enum`.",
+              "keyTakeawayPill": "[ZH] Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "步骤 3 · GESTION 的 REFUS & VALIDATION MÉTIER",
+              "title": "[ZH] Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si 一项 demande viole règles 的 安全, 模型 remplit propriété dédiée `refusal` plutôt que schéma : votre code 必须 验证 `refusal` avant 的 lire l'objet parsé. 的 plus, `strict: true` 确保 type (ex. 一个 nombre), mais votre backend 必须 toujours valider règles métier (ex. taux 的 TVA autorisé).",
+              "keyTakeawayPill": "验证 `refusal` + Valider règles métier côté serveur après désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "Responses API combine génération multimodale, chaînage d'état 与 invocation d'outils en 一项 seule boucle.",
+            "Structured Outputs 配合 `strict: true` impose respect exact 的 JSON Schema (clés requises, types, enums 与 `additionalProperties: false`) par décodage contraint.",
+            "code applicatif 必须 toujours inspecter cas 的 refus (`refusal`) 与 appliquer ses propres validations métier 在 valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "一项 assurtech extrait 自动 garanties 与 franchises 的 合同 PDF vers son moteur 的 tarification C# 与 subissait 2 % d'erreurs 的 désérialisation 配合 的 simples instructions 在 prompt.",
+            "steps": [
+              "Définir schéma JSON 的 l'extraction 配合 `strict: true`, `additionalProperties: false` 与 的 énumérations fermées 用于 types 的 franchise.",
+              "Appeler Responses API 配合 ce schéma 在 `text.format` (`json_schema`).",
+              "Ajouter 一个 contrôle en sortie vérifiant l'absence 的 `refusal` 与 cohérence arithmétique (franchise <= plafond 的 garantie)."
+            ],
+            "decision": "taux d'erreur 的 formatage JSON tombe à 0,00 % en production dès déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez différence 之间 mode `json_object` historique 与 `json_schema` 配合 `strict: true` (Structured Outputs), 与 listez deux exigences structurelles 的 JSON Schema en mode strict.",
+            "successCriteria": [
+              "解析 que `json_object` 确保 仅 一项 syntaxe JSON valide 无 imposer 的 schéma, tandis que `json_schema` (`strict: true`) 确保 respect exact 的 structure.",
+              "Mentionner que chaque objet 的 schéma 必须 déclarer `additionalProperties: false`.",
+              "Mentionner que tous champs définis 在 `properties` 必须 figurer 在 `required` (en utilisant 一个 type nullable `[\"string\", \"null\"]` 用于 champs optionnels)."
+            ],
+            "feedback": "En mode strict, 一个 champ optionnel se modélise par 一个 type union incluant `null` tout en restant listé 在 `required`, 配合 `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "如何obliger l'API OpenAI à renvoyer 一项 响应 JSON qui respecte toujours exactement champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI 用于 extraire lignes d'一项 facture 与 exige que 响应 respecte à 100 % 一个 schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) 与 `lignes` (array), 无 aucune propriété supplémentaire. 哪种配置devez-vous 使用 ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "使用 Structured Outputs (`json_schema`) 配合 `strict: true` 与 `additionalProperties: false` 在 chaque objet 的 schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules 在 prompt 无 启用 的 schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer 响应 brute au centième caractère avant d'ajouter 一项 accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler température 在 2.0 en mode texte libre 用于 diversifier nom 的 clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "配合 mode strict d'OpenAI, comment déclarer 一个 champ facultatif (comme 一个 commentaire) 在 votre format JSON ?",
+              "prompt": "如何modéliser 一个 champ optionnel (par exemple `commentaire`) 在 一个 JSON Schema utilisé 配合 OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure champ 在 `required` 与 définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) 配合 `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` 与 删除 totalement tableau `required` 的 l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer nom 的 champ 配合 一项 chaîne vide en guise 的 définition 的 type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer 的 balises XML à l'intérieur 的 schéma JSON 用于 禁用 validateur 的 令牌."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur 的 parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs 与 guardrails",
+          "objective": "Implémenter Function Calling 配合 schémas stricts 与 orchestrer 的 agents spécialisés 配合 Handoffs, Guardrails 与 Tracing 在 l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "如何faire collaborer 一个 agent 的 triage, 一个 agent 的 facturation 与 一个 agent technique 无 创建 一项 usine à gaz impossible à déboguer ni laisser 一个 prompt malveillant déclencher 一个 remboursement non autorisé ?",
+          "declicCard": {
+            "title": "核心顿悟 Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : 模型 propose `call_tool(args)` ➔ VOTRE code vérifie 权限 与 exécute",
+            "diagramBottom": "[ZH] Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` 在 définitions 的 fonctions (`tools`) 与 validez toujours autorisations côté serveur avant d'exécuter fonction.",
+            "step2": "Découpez responsabilités 配合 的 Handoffs explicites 之间 agents spécialisés 与 protégez entrées/sorties par 的 Guardrails parallèles.",
+            "rule": "模型 ne touche jamais 直接 votre 数据库 : il émet 一项 proposition d'appel d'outil que votre backend contrôle 与 exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · FUNCTION CALLING STRICT",
+              "title": "Séparer décision d'appel 与 l'exécution réelle",
+              "bodyParagraph": "Lors d'一个 Function Calling, 模型 ne lance aucun code 在 serveurs d'OpenAI : il retourne 一个 objet structuré indiquant nom 的 fonction 与 ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie 权限 的 l'用户, exécute fonction 与 renvoie résultat au 模型.",
+              "keyTakeawayPill": "模型 = propose l'appel 与 arguments · Votre serveur = vérifie 权限 与 exécute"
+            },
+            {
+              "stepBadge": "步骤 2 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer 的 spécialistes plutôt qu'一个 méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose 在 的 primitives légères : 一个 `Agent` (instructions + 模型 + outils), 的 `Handoffs` (délégation explicite 的 conversation vers 一个 agent spécialiste comme 一个 transfert d'appel qualifié) 与 `Tracing` natif qui enregistre chaque étape, appel d'outil 与 transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré 的 bout en bout"
+            },
+            {
+              "stepBadge": "步骤 3 · GUARDRAILS D'ENTRÉE 与 的 SORTIE",
+              "title": "[ZH] Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "`Guardrails` s'exécutent en parallèle 的 l'agent : 一个 guardrail d'entrée léger détecte immédiatement 一项 tentative d'injection 的 prompt 或 一项 demande hors périmètre 与 déclenche 一个 `tripwire` qui interrompt l'exécution avant même que 模型 principal 或 ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil 或 génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, 模型 génère 仅 arguments structurés 的 l'appel (`strict: true`) ; l'exécution 与 contrôle d'访问 restent sous responsabilité 的 serveur applicatif.",
+            "L'OpenAI Agents SDK structure workflows multi-agents autour d'Agents, 的 Tools, 的 Handoffs (transferts 的 contrôle) 与 的 Tracing intégré.",
+            "Guardrails d'entrée 与 的 sortie utilisent 一个 mécanisme 的 disjoncteur (`tripwire`) 用于 bloquer requêtes malveillantes 或 sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "一个 service client bancaire déploie 一项 architecture multi-agents 配合 l'OpenAI Agents SDK : 一个 agent d'accueil, 一个 agent Cartes Bancaires (pouvant faire opposition) 与 一个 agent Crédits.",
+            "steps": [
+              "Placer 一个 Input Guardrail qui vérifie qu'aucune tentative 的 contournement d'身份 或 的 demande hors banque n'est présente.",
+              "配置 l'agent d'accueil 配合 deux Handoffs explicites vers l'agent Cartes 与 l'agent Crédits.",
+              "在 l'outil `bloquer_carte(carte_id)` 的 l'agent Cartes, 启用 `strict: true` 在 schéma 与 验证 côté serveur que `carte_id` appartient bien au `user_id` authentifié 在 contexte 的 session."
+            ],
+            "decision": "parcours est traçable 在 dashboard 的 Tracing 与 protégé contre appels d'outils 在 cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "开发人员passe `user_id` comme argument libre 在 schéma 的 Function Calling `rembourser_commande(user_id, commande_id)` 与 fait confiance à valeur choisie par LLM. Expliquez vulnérabilité 与 comment corriger.",
+            "successCriteria": [
+              "Identifier faille d'autorisation (一个 prompt injection peut convaincre LLM 的 passer `user_id` d'一个 autre client).",
+              "Retirer `user_id` 的 arguments générés par LLM 与 l'injecter côté serveur depuis 令牌 d'authentification vérifié 的 session.",
+              "Valider en 数据库 que `commande_id` appartient bien à cet 用户 authentifié 与 appliquer 一个 plafond 的 remboursement."
+            ],
+            "feedback": "identifiants 的 安全 (qui est connecté, quel est son tenant) 必须 toujours provenir 的 contexte serveur authentifié, jamais 的 arguments devinés par 模型."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "为什么est-il dangereux 的 laisser l'IA 选择 elle-même numéro 的 dossier client à lire 无 验证 qui est connecté ?",
+              "prompt": "在 一项 application utilisant Function Calling d'OpenAI, fonction `lire_dossier_medical(patient_id)` laisse 模型 选择 librement `patient_id` à partir 的 texte 的 conversation 无 验证 session authentifiée côté serveur. Quel est risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "一项 divulgation non autorisée (IDOR) : 一个 用户 peut manipuler prompt 用于 amener 模型 à demander dossier d'一个 autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "一项 incompatibilité d'affichage 的 caractères accentués 在 police système 的 navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "一项 saturation 的 périphérique audio local lors 的 sérialisation 的 l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "suppression automatique 的 文件 JSON Schema 在 disque dur 的 serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "在 kit OpenAI Agents SDK, comment arrêter immédiatement 一个 agent si 一个 contrôle détecte 一项 demande dangereuse ?",
+              "prompt": "在 l'OpenAI Agents SDK, quel mécanisme 支持 à 一个 contrôle 的 安全 exécuté en parallèle d'interrompre immédiatement l'agent avant qu'一个 outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "一个 Guardrail déclenchant 一个 disjoncteur (`tripwire`) dès que sa condition 的 安全 或 的 périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation 的 paramètre `max_output_tokens` au-delà 的 fenêtre 的 contexte 的 模型."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "désactivation complète 的 module 的 Tracing 在 configuration globale 的 SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "retrait 的 toutes instructions système 的 agents spécialisés recevant 一个 handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + 身份 injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = 的 agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant 的 部署",
+          "objective": "Construire 一项 suite d'évaluation (OpenAI Evals) combinant jeu 的 数据 的 référence, graders déterministes 与 LLM-as-a-judge 用于 piloter mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt 在 trois exemples 与 ça a l'air super ! » : pourquoi cette phrase est-elle cause numéro 一个 的 régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "核心顿悟 Evals : Traiter Prompts 与 模型 comme 的 Code 配合 的 Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution 在 variante",
+            "diagramBottom": "Graders (Exactitude 的 schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez 一个 dataset doré (golden dataset) couvrant cas nominaux, cas ambigus 与 tentatives 的 contournement.",
+            "step2": "Combinez 的 graders déterministes (schéma JSON, nom 的 l'outil appelé, mots-clés interdits) 与 的 graders sémantiques calibrés.",
+            "rule": "Aucun changement 的 prompt, 的 模型 或 的 RAG ne part en production 无 passer suite d'Evals au-dessus 的 seuil 的 référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · DATASET 的 RÉFÉRENCE",
+              "title": "Partir 的 vraies erreurs observées 在 terrain",
+              "bodyParagraph": "一项 bonne suite d'évaluation (Evals) ne contient pas 仅 的 questions faciles : elle réunit 50 à 200 cas représentatifs 的 production, incluant formulations ambiguës 的 用户, documents contradictoires, valeurs nulles 与 scénarios où l'agent 必须 refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas 的 refus attendus"
+            },
+            {
+              "stepBadge": "步骤 2 · GRADERS (NOTATEURS)",
+              "title": "Privilégier déterminisme, compléter par 一个 juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité 的 graders déterministes rapides 与 reproductibles : correspondance exacte d'一个 identifiant, validité 的 JSON Schema, vérification que bon `tool_call` a été émis 配合 bons paramètres. 用于 évaluer fidélité au contexte (groundedness) 或 ton, ajoutez 一个 grader par 模型 (LLM-as-a-judge) doté d'一项 grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par 模型 在 grille explicite"
+            },
+            {
+              "stepBadge": "步骤 3 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser 成本, latence 与 qualité en confiance",
+              "bodyParagraph": "配合 一项 suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si passage d'一个 模型 coûteux vers `o4-mini` 或 `gpt-4o-mini` maintient 99 % 的 précision tout en divisant latence 与 facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation 的 模型 或 的 prompt à l'aveugle : Evals tranchent par preuve"
+            }
+          ],
+          "keyIdeas": [
+            "évaluations systématiques (Evals) transforment l'amélioration d'一个 système IA d'一项 intuition subjective en 一项 ingénierie mesurable.",
+            "一项 suite d'Evals robuste combine 的 contrôles déterministes (schéma, sélection d'outils, règles métier) 与 的 évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production 必须 être converti en 一个 nouveau cas 的 test 在 dataset d'Evals 用于 empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "某团队souhaite réduire 的 60 % temps 的 响应 的 son agent 的 qualification 的 tickets en remplaçant son prompt système 的 4 000 mots 与 en changeant 的 模型.",
+            "steps": [
+              "Construire 在 OpenAI Evals 一个 jeu 的 120 tickets historiques annotés 配合 catégorie attendue, priorité 与 l'outil à appeler.",
+              "Définir deux graders : 一个 grader déterministe 在 couple `(categorie, priorite, tool_name)` 与 一个 grader 的 conformité vérifiant l'absence 的 promesse commerciale non autorisée.",
+              "Comparer score 的 nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, 用于 一项 latence divisée par 2,4."
+            ],
+            "decision": "mise en production est approuvée 在 base 的 rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez trois types 的 cas 的 test 与 deux types 的 graders que vous devez inclure 在 一项 suite OpenAI Evals 用于 valider 一个 agent qui résume 的 合同 与 appelle 一项 API d'archivage.",
+            "successCriteria": [
+              "Trois familles 的 cas : 合同 standards complets, 合同 incomplets/contradictoires (cas limites) 与 prompts tentant 的 forcer 一个 archivage non autorisé.",
+              "Grader déterministe : 验证 structure JSON 的 résumé 与 arguments exacts passés à fonction d'archivage.",
+              "Grader d'ancrage : 验证 que chaque clause citée 在 résumé figure réellement 在 合同 source."
+            ],
+            "feedback": "Tester ensemble fidélité 的 texte 与 justesse 的 l'appel d'outil couvre à fois génération 与 l'action 的 l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez consignes 的 votre assistant IA. 如何vérifier que vous n'avez rien cassé avant mise en ligne ?",
+              "prompt": "Votre 团队 modifie instructions système d'一个 agent en production 用于 raccourcir ses réponses, 与 veut s'assurer que ce changement ne dégrade pas choix 的 outils Function Calling 在 150 scénarios critiques 的 l'企业. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter 一项 suite automatisée OpenAI Evals vérifiant appels d'outils 在 150 scénarios 与 bloquer déploiement en cas 的 régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles 在 l'interface 的 chat puis 部署 immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer schémas 的 paramètres 的 fonctions afin qu'aucune erreur 的 typage ne remonte 在 日志."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "部署 无 test préalable 与 compter 在 tickets 的 réclamation 的 clients 用于 mesurer qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "如何vérifier 的 façon simple, rapide 与 gratuite qu'一个 agent a bien choisi devise EUR 在 一个 test automatique ?",
+              "prompt": "Quel type 的 grader (notateur) est plus fiable 与 plus économique 用于 验证 在 OpenAI Evals qu'一个 agent a appelé fonction `creer_avoir` 配合 bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "一个 grader déterministe inspectant 直接 nom 的 fonction appelée 与 l'égalité stricte 的 l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "一项 évaluation purement stylistique demandant à 一个 模型 tiers si 响应 semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "一项 règle vérifiant 仅 que 响应 textuelle dépasse mille caractères, 无 lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "一个 générateur 的 nombres aléatoires attribuant 一个 score 无 comparer sortie à valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes 与 sémantiques + Porte 的 non-régression CI = l'ingénierie IA pilotée par Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "全真模拟考试 CertiGo Pro：OpenAI (ChatGPT Enterprise, 模型 o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète 的 maîtrise 的 produits OpenAI en 企业 : sélection 的 模型 (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex 配合 AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK 与 OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

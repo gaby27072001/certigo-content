@@ -1,0 +1,280 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "m365-copilot-agents",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "ko-KR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "jeton-entra-acl"
+      ],
+      "plainExplanation": "Copilot utilise 전용 파일 및 courriels auxquels votre propre compte Microsoft a déjà droit d'accéder.",
+      "rationale": "Microsoft 365 Copilot exécute Grounding Microsoft Graph 및 recherche 내 l'index sémantique (Work IQ) en présentant 토큰 Entra ID 의 l'사용자 connecté : seuls documents 및 courriels auxquels l'analyste a déjà 액세스 peuvent être récupérés.",
+      "examTip": "Grounding Graph = 권한 Entra ID 의 l'사용자 courant, zéro élévation 의 privilège 및 zéro réentraînement public.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "surpartage-acl-sharepoint"
+      ],
+      "plainExplanation": "파일 était déjà partagé par erreur 및 trop 의 monde 기반 SharePoint : il faut restreindre 권한 d'액세스 의 dossier.",
+      "rationale": "Lorsque Copilot cite document interne inattendu, c'est que l'사용자 dispose déjà d' droit 의 lecture 기반 ce 파일 (기반-partage SharePoint/OneDrive). remédiation consiste à corriger ACL SharePoint 및 à appliquer étiquette 의 sensibilité Microsoft Purview.",
+      "examTip": "document sensible visible 내 Copilot révèle 기반-partage SharePoint (oversharing), jamais fuite 의 poids 의 LLM.",
+      "sourceIds": [
+        "ms-copilot-privacy",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "delegation-cowork-plan"
+      ],
+      "plainExplanation": "Déléguez mission à Copilot Cowork : il prépare dossier étape par étape en arrière-plan 및 vous soumet résultat.",
+      "rationale": "Copilot Cowork est conçu 위한 planifier 및 exécuter en arrière-plan 의 travaux multi-étapes croisant plusieurs sources Work IQ (Teams, Outlook, Excel, Word) tout en soumettant livrable à point 의 contrôle humain.",
+      "examTip": "Mission transversale multi-applications 및 suivi d'étapes = délégation asynchrone Copilot Cowork.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "heritage-identite-et-validation"
+      ],
+      "plainExplanation": "Non, il respecte exactement vos 권한 d'액세스 및 vous demande confirmation avant toute action importante.",
+      "rationale": "Même en exécution asynchrone, Copilot Cowork opère strictement sous l'ID 및 권한 의 l'사용자 qui délègue tâche, 및 maintient point d'approbation humaine avant toute diffusion 또는 action externe.",
+      "examTip": "Asynchrone ne veut jamais dire 없이 거버넌스 : Cowork conserve vos 권한 Entra ID 및 vos jalons d'approbation.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "copilot-pages-composant-loop"
+      ],
+      "plainExplanation": "Copilot Pages (basé 기반 Microsoft Loop) 지원합니다 의 modifier même contenu en direct depuis Teams comme depuis Outlook.",
+      "rationale": "En ouvrant 응답 내 Copilot Pages puis en partageant comme composant Microsoft Loop, table reste synchronisée en temps réel 간의 Teams, Outlook, Word 및 web.",
+      "examTip": "Co-édition bidirectionnelle en direct 간의 Teams 및 Outlook = Copilot Pages + composant Microsoft Loop.",
+      "sourceIds": [
+        "ms-copilot-pages"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "sharepoint-embedded-purview"
+      ],
+      "plainExplanation": "Elles sont stockées 내 SharePoint Embedded 및 bénéficient 자동으로 의 mêmes règles 의 보안 que vos sites SharePoint.",
+      "rationale": "Copilot Pages sont stockées 내 의 conteneurs SharePoint Embedded rattachés au locataire Microsoft 365, ce qui 보장합니다 l'application complète 의 règles 의 rétention, d'eDiscovery 및 의 거버넌스 Microsoft Purview.",
+      "examTip": "Copilot Pages repose 기반 SharePoint Embedded : même 보안 및 même conformité Purview que SharePoint Online.",
+      "sourceIds": [
+        "ms-copilot-pages",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "selecteur-slash-fichiers-reference"
+      ],
+      "plainExplanation": "Utilisez bouton « / » 내 Copilot 위한 attacher 직접 파일 의 référence avant 의 lancer rédaction.",
+      "rationale": "내 Copilot 위한 Word, l'opérateur `/` 지원합니다 의 pointer explicitement vers 의 파일 OneDrive 또는 SharePoint afin d'ancrer génération 의 texte, 의 clauses 또는 d' synthèse exécutive 기반 ces documents 의 référence.",
+      "examTip": "내 Word, `/` = attacher 파일 sources qui font foi 위한 éviter toute invention.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-ouvert-et-styles-word"
+      ],
+      "plainExplanation": "Structurez d'abord votre document Word 및 의 titres clairs, puis créez présentation depuis votre 모델 PowerPoint d'기업.",
+      "rationale": "Copilot 내 PowerPoint s'appuie 기반 hiérarchie Titre 1 / Titre 2 의 파일 Word 위한 découper diapositives 및 générer notes d'orateur, tout en appliquant masques 의 모델 PowerPoint ouvert.",
+      "examTip": "Styles Titre 1/2 내 Word + 모델 d'기업 ouvert 내 PowerPoint = présentation chartée 및 speaker notes.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "let-et-lambda"
+      ],
+      "plainExplanation": "LET 지원합니다 의 donner nom aux étapes 의 calcul, 및 LAMBDA transforme formule en fonction réutilisable partout 내 classeur.",
+      "rationale": "fonction `LET` nomme 및 stocke calculs intermédiaires au sein d' formule 위한 améliorer lisibilité 및 performances, tandis que `LAMBDA` transforme cette logique en fonction personnalisée réutilisable 없이 macro VBA.",
+      "examTip": "Variables locales 내 formule Excel = LET · Fonction métier réutilisable 없이 VBA = LAMBDA.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "conteneur-isole-azure-xl"
+      ],
+      "plainExplanation": "Il tourne 내 espace isolé Microsoft Cloud 없이 aucun 액세스 à Internet, ce qui protège vos tableaux financiers.",
+      "rationale": "Python in Excel exécute code 내 conteneur isolé par hyperviseur 기반 Azure Container Instances 없이 액세스 au 네트워크, au disque local ni au 토큰 사용자, 및 n'accède qu'aux 데이터 passées via `xl()`.",
+      "examTip": "Python in Excel = conteneur Azure isolé, zéro 액세스 네트워크 및 lecture exclusive via `xl()`.",
+      "sourceIds": [
+        "ms-python-excel"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "transcription-ou-enregistrement-actif"
+      ],
+      "plainExplanation": "transcription (또는 l'enregistrement) 의 réunion 해야 합니다 avoir été activée 위한 que Copilot puisse lire échanges passés.",
+      "rationale": "위한 synthétiser échanges passés 및 attribuer actions à leurs propriétaires, Copilot 내 Teams 및 Intelligent Meeting Recap s'appuient 기반 transcription (또는 l'enregistrement transcrit) 및 identification 의 orateurs.",
+      "examTip": "없이 transcription active 내 Teams, Copilot ne peut ni citer décisions passées ni attribuer actions aux intervenants.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "analyse-ton-ressenti-clarte"
+      ],
+      "plainExplanation": "Elle relit votre brouillon 및 vous conseille 위한 rendre ton plus diplomatique 및 message plus clair avant l'envoi.",
+      "rationale": "Coaching by Copilot 내 Outlook examine brouillon d'e-mail 기반 trois axes (ton, ressenti 의 lecteur 및 clarté) 및 fournit 의 recommandations concrètes avant l'envoi.",
+      "examTip": "Générer brouillon = Draft with Copilot · Améliorer ton, l'impact 및 clarté d' texte = Coaching by Copilot.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "agent-autonome-copilot-studio"
+      ],
+      "plainExplanation": "Il faut agent autonome 내 Copilot Studio, car lui seul peut réagir 자동으로 à événement système.",
+      "rationale": "agent qui réagit 자동으로 à événement 의 데이터 (création d'entrée Dataverse) 없이 intervention initiale d' 사용자 내 chat est agent autonome conçu 내 Microsoft Copilot Studio.",
+      "examTip": "Déclencheur d'événement système (Dataverse, boîte partagée, planification) 없이 prompt humain = Agent autonome Copilot Studio.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "cadrage-sources-sur-orchestrateur-m365"
+      ],
+      "plainExplanation": "Lorsqu'on veut spécialiser chat Copilot 기반 base documentaire précise 의 l'기업 및 quelques outils ciblés.",
+      "rationale": "agent déclaratif spécialise Microsoft 365 Copilot en définissant 의 instructions 기반 mesure, 의 sources SharePoint/Graph bornées 및 의 actions tout en s'appuyant 기반 l'orchestrateur 및 보안 의 M365 Copilot.",
+      "examTip": "[KO] Agent déclaratif = instructions + sources bornées + actions exécutées par l'orchestrateur M365 Copilot.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "elevation-privileges-via-auteur"
+      ],
+      "plainExplanation": "N'importe quel employé pourrait alors 사용: l'agent 위한 faire 의 opérations réservées à l'administrateur.",
+      "rationale": "Exécuter action d'écriture ERP 및 identifiants 의 l'auteur 지원합니다 à tout 사용자 의 l'agent d'agir 및 권한 의 cet auteur. Il faut imposer l'authentification 의 l'사용자 final (`User authentication`).",
+      "examTip": "기반 toute action qui lit 의 데이터 privées 또는 modifie système métier, imposez l'authentification 의 l'사용자 final.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "descriptions-detaillees-actions-parametres"
+      ],
+      "plainExplanation": "Rédigez description très précise 기반 chaque outil en indiquant quand l'사용: 및 quand ne pas l'사용:.",
+      "rationale": "L'orchestrateur génératif sélectionne ses outils 및 renseigne leurs arguments à partir 의 descriptions en langage naturel 의 chaque action 및 의 chaque paramètre.",
+      "examTip": "description d' action Copilot Studio fait partie 의 prompt 의 routage 의 l'orchestrateur : soyez explicite 및 discriminant.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "heritage-etiquette-plus-restrictive"
+      ],
+      "plainExplanation": "résumé reçoit 자동으로 l'étiquette plus stricte (« Confidentiel Direction ») 위한 éviter toute fuite.",
+      "rationale": "Microsoft 365 Copilot applique règle d'héritage 의 Microsoft Purview : lorsqu' 응답 또는 document combine plusieurs sources, l'étiquette 의 sensibilité ayant priorité plus élevée ( plus restrictive) est 자동으로 appliquée.",
+      "examTip": "Fusion multi-documents 내 Copilot = héritage automatique 의 l'étiquette Purview plus restrictive.",
+      "sourceIds": [
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "politique-dlp-power-platform"
+      ],
+      "plainExplanation": "règle 의 protection contre perte 의 데이터 (DLP Power Platform) bloque tout transfert 간의 SharePoint 및 의 connecteurs externes.",
+      "rationale": "politiques DLP (Data Loss Prevention) 의 Power Platform permettent d'격리: connecteurs métier (Business) 의 connecteurs externes 및 의 bloquer connecteurs HTTP non autorisés 내 Copilot Studio.",
+      "examTip": "Empêcher agent Copilot Studio d'exfiltrer 의 데이터 SharePoint vers API tierce = Politique DLP Power Platform.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-privacy"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné على OpenAI Academy و documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple بدون jargon و expert) و examen blanc."
+  },
+  "locale": "ar-SA",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "إتقان choix من النماذج (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent من programmation autonome Codex و l'ingénierie IA من production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads و responsables produit déployant offres OpenAI en المؤسسة.",
+  "prerequisites": "Connaître bases من développement logiciel (Git, JSON, API REST) و l'utilisation courante d' assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI وPrompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente bonnes pratiques d'ingénierie من prompt, routage بين النماذج multimodaux و النماذج من raisonnement, l'usage من Canvas, Projects, Custom GPTs و l'évaluation systématique.",
+      "limits": "performances d' prompt أو d' workflow dépendent d'évaluations empiriques (Evals) على البيانات représentatives من cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox (مسار CertiGo)",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement من l'agent OpenAI Codex : exécution من tâches en parallèle في conteneur cloud isolé مع الوصول coupé à Internet pendant l'exécution, lecture من conventions AGENTS.md, exécution من tests و ouverture من Pull Requests vérifiables.",
+      "limits": "Codex exécute tests configurés في son environnement sandbox ; toute fusion en production reste soumise à revue من code و aux contrôles CI من l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, وEvals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente Responses API unifiée, l'application stricte من JSON Schema via Structured Outputs (strict: true), Function Calling, l'Agents SDK (handoffs, guardrails, tracing) و suites d'évaluation Evals.",
+      "limits": "garantie syntaxique من Structured Outputs assure respect من schéma JSON, mais pas véracité métier من valeurs retournées ni l'autorisation d'exécuter appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "الوحدة 1 · ChatGPT Pro & Enterprise : النماذج, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs النماذج من raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs و Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner النموذج optimal selon tâche (GPT-4o vs o3/o4-mini), conduire étude sourcée مع Deep Research و structurer espace من travail récurrent مع Projects, Canvas و Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage من النموذج : GPT-4o multimodal rapide vs النماذج من raisonnement à chaîne من pensée interne o3 و o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée مع citations) & Data Analysis (exécution Python من أجل nettoyer, modéliser و tracer من البيانات)",
+        "Canvas (co-édition ciblée من texte و من code), Projects (instructions و الملفات persistants) و Custom GPTs gouvernés en المؤسسة"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o من أجل l'interaction multimodale rapide و rédaction fluide, o3/o4-mini من أجل raisonnement algorithmique أو analytique complexe, و Deep Research lorsqu' synthèse exige d'explorer, croiser و citer من dizaines من sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage من النماذج & Espaces من Travail",
+        "diagram": "[الطلب المستخدم] ➔ [Choix النموذج : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "[AR] GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image و audio مع faible latence ; o3 و o4-mini allouent من calcul من raisonnement avant من répondre aux problèmes logiques, mathématiques, juridiques أو d'architecture."
+          },
+          {
+            "name": "[AR] Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement web و connecteurs autorisés من أجل livrer rapport sourcé ; Data Analysis exécute من code Python من أجل analyser من الملفات CSV/Excel."
+          },
+          {
+            "name": "[AR] Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre éditeur côte à côte من أجل réviser من texte أو من code par section ; Projects regroupe conversations, instructions و الملفات ; Custom GPTs partage من assistants spécialisés في workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "في ChatGPT Enterprise, conversations, الملفات من Projects و exécutions Data Analysis sont isolés par espace من travail client و ne servent jamais à entraîner النماذج OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "اختيار bon النموذج : GPT-4o multimodal vs النماذج من raisonnement o3 و o4-mini",
+          "objective": "Arbitrer بين GPT-4o, o3 و o4-mini selon complexité logique, besoin multimodal, latence و التكلفة d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "استخدام النموذج من raisonnement plus lourd من أجل reformuler courriel من trois lignes gaspille من temps, mais confier audit d'architecture distribuée à النموذج instantané fait rater من cas limites : quelle est règle من tri ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية النماذج OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse و échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne من pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "من أجل rédiger, résumer, traduire أو dialoguer rapidement à partir من texte أو d'images courantes, choisissez GPT-4o.",
+            "step2": "من أجل résoudre bug subtil, prouver cohérence financière/juridique أو planifier sous fortes contraintes, choisissez o3 (profondeur maximale) أو o4-mini (raisonnement rapide و économique).",
+            "rule": "Prompting o3/o4-mini : donnez objectif précis, contraintes و format attendu, بدون imposer من « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · GPT-4O MULTIMODAL",
+              "title": "النموذج polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle في tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse من réunions, traduction nuancée, extraction visuelle rapide و conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "[AR] GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "الخطوة 2 · النماذج من RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer من temps من réflexion avant premier mot",
+              "bodyParagraph": "النماذج من série o (`o3` و `o4-mini`) génèrent chaîne من raisonnement interne avant d'émettre leur الاستجابة finale : ils vérifient leurs hypothèses, reviennent en arrière en cas من contradiction و excellent en algorithmique, finance, analyse من causes racines و revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement من pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "الخطوة 3 · ADAPTER SON PROMPTING",
+              "title": "brief d'objectif clair plutôt que من micro-guidage",
+              "bodyParagraph": "مع GPT-4o, détailler étapes intermédiaires améliore souvent sortie. مع o3 و o4-mini, spécifiez clairement l'objectif final, invariants à respecter, البيانات d'entrée و schéma من sortie : النموذج construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "على o3/o4-mini : spécifiez QUOI (contraintes + critères من succès), laissez النموذج gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie faible latence و l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre profondeur من raisonnement maximale من أجل problèmes scientifiques, architecturaux, financiers أو من débogage complexe, tandis qu'`o4-mini` optimise compromis vitesse/التكلفة على tâches techniques.",
+            "prompt destiné à النموذج من raisonnement يجب définir rigoureusement contraintes, cas limites و livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "يقوم فريق d'ingénierie chez éditeur SaaS يجب traiter deux demandes : (1) transformer من notes d'atelier en FAQ client multilingue, و (2) identifier condition من course (race condition) بين trois microservices من paiement.",
+            "steps": [
+              "Affecter rédaction و traduction من FAQ client à GPT-4o في Canvas من أجل itérer rapidement على style.",
+              "Soumettre السجلات d'exécution و code من trois microservices à o3 en précisant invariants transactionnels à التحقق من.",
+              "Valider scénario d'entrelacement découvert par o3 au moyen d' test automatisé reproductible."
+            ],
+            "decision": "routage intentionnel divise temps من rédaction par trois و résout bug من concurrence que revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez trois tâches suivantes بين GPT-4o, o4-mini و o3 en justifiant votre choix : (A) Reformuler 15 fiches produit من أجل catalogue web, (B) Diagnostiquer incohérence بين quatre clauses من pénalité و النموذج actuariel, (C) Générer rapidement من tests unitaires على vingt fonctions utilitaires.",
+            "successCriteria": [
+              "ربط (A) à GPT-4o من أجل sa rapidité rédactionnelle و sa maîtrise من ton.",
+              "ربط (B) à o3 من أجل sa capacité من raisonnement multi-contraintes profond.",
+              "ربط (C) à o4-mini من أجل son raisonnement code rapide و économique à haut volume."
+            ],
+            "feedback": "اختيار النموذج proportionné à difficulté cognitive évite à fois على-qualité lente و l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez problème financier أو logique très complexe مع douze règles à التحقق من en même temps. Quel النموذج OpenAI اختيار ?",
+              "prompt": "يقوم مهندس معماري financier يجب التحقق من cohérence mathématique و réglementaire d' النموذج من couverture من taux comportant douze contraintes croisées و identifier cas limites où formule diverge. Quel النموذج OpenAI يجب-il sélectionner في ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "النموذج من raisonnement o3, conçu من أجل décomposer و التحقق من من problèmes logiques, mathématiques و multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "النموذج من transcription vocale purement acoustique dépourvu من capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "النموذج d'embeddings vectoriels qui retourne فقط liste من nombres flottants بدون texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "classifieur من modération من contenu qui produit فقط من scores من الأمان booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est différence pratique بين النماذج من réflexion o3 و o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` من `o3` au sein من famille من النماذج من raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre raisonnement technique و code beaucoup plus rapide و économique من أجل tâches à haut débit, tandis qu'o3 privilégie profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération من code informatique و se limite à retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie تلقائياً prompts d'المؤسسة على Internet contrairement au النموذج o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée و ne peut lire aucun الملف structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o من أجل vitesse multimodale و rédactionnelle ; o4-mini من أجل raisonnement technique agile ; o3 من أجل arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée و analyse Python",
+          "objective": "Conduire recherche approfondie multi-sources مع Deep Research و analyser من jeux من البيانات tabulaires مع Data Analysis في ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "يجب عليك livrer demain matin étude concurrentielle citant trente sources vérifiables و analyse من cohorte على الملف من 120 000 lignes من ventes : comment combiner Deep Research و Data Analysis بدون jamais inventer chiffre ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré مع citations",
+            "diagramBottom": "Data Analysis : الملف CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research synthèses documentaires و études من marché nécessitant من parcourir, recouper و citer من dizaines من sources.",
+            "step2": "Confiez à Data Analysis tout calcul على vos الملفات chiffrés afin que résultat provienne d' exécution Python réelle و non d' calcul mental من LLM.",
+            "rule": "Ne demandez jamais à النموذج من calculer من tête على 50 000 lignes : exigez l'exécution Python من Data Analysis و inspectez code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · DEEP RESEARCH",
+              "title": "analyste من recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à recherche web rapide d' seconde, Deep Research établit plan d'investigation, explore من multiples pages و documents autorisés, recoupe contradictions و rédige rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "[AR] Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "الخطوة 2 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif على vos jeux من البيانات",
+              "bodyParagraph": "Lorsque vous déposez الملف CSV, Excel أو JSON في ChatGPT Enterprise, Data Analysis écrit و exécute من code Python (`pandas`, `numpy`, `matplotlib`) في environnement isolé. Il nettoie valeurs manquantes, calcule agrégats exacts و génère من visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable و déterministe على vos الملفات من البيانات"
+            },
+            {
+              "stepBadge": "الخطوة 3 · VÉRIFICATION من BOUT EN BOUT",
+              "title": "Auditer sources و script Python",
+              "bodyParagraph": "professionnel CertiGo vérifie toujours deux éléments avant من diffuser son livrable : في Deep Research, il ouvre citations من conclusions critiques ; في Data Analysis, il déplie bloc من code Python (`</>`) من أجل التحقق من filtres appliqués (par exemple traitement من lignes annulées أو من devises).",
+              "keyTakeawayPill": "Toujours ouvrir citations Deep Research + inspecter filtres من script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit من recherches multi-étapes على plusieurs minutes من أجل produire من rapports exhaustifs accompagnés من citations précises.",
+            "Data Analysis exécute من code Python في bac à sable من أجل garantir l'exactitude mathématique من statistiques, jointures و graphiques على من الملفات volumineux.",
+            "L'inspection من code Python généré (`</>`) يتيح من valider hypothèses من nettoyage (valeurs nulles, doublons, devises) avant من présenter chiffres."
+          ],
+          "workedExample": {
+            "situation": "يقوم فريق stratégie prépare l'entrée على nouveau marché européen : elle يجب comparer cadres réglementaires من quatre pays و analyser l'historique interne من 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant quatre juridictions, autorités officielles à privilégier و grille comparative attendue مع liens sources.",
+              "Charger l'extrait anonymisé من 80 000 commandes في Data Analysis و demander calcul من panier moyen, من rétention à 6 mois و من saisonnalité via Python.",
+              "Déplier code Python من أجل التحقق من que commandes remboursées ont bien été exclues من chiffre d'affaires net, puis التحقق من citations réglementaires من Deep Research."
+            ],
+            "decision": "comité d'investissement reçoit dossier où chaque règle juridique pointe vers son texte officiel و chaque indicateur financier est issu d' script Python reproductible."
+          },
+          "practice": {
+            "prompt": "analyste colle 5 000 lignes من transactions في prompt texte و demande au النموذج من calculer médiane و l'écart-type بدون استخدام Data Analysis. Expliquez risque و bonne méthode à adopter.",
+            "successCriteria": [
+              "شرح que prédiction من الرموز texte بدون exécution من code risque من produire من calculs statistiques approximatifs أو tronqués.",
+              "Joindre الملف structuré (CSV/XLSX) و demander explicitement l'exécution d' script Python via Data Analysis.",
+              "Ouvrir bloc من code exécuté من أجل التحقق من colonne ciblée و traitement من valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique أو statistique على tableau من البيانات يجب passer par l'exécution Python من Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil من ChatGPT يتيح من chercher في من dizaines من documents officiels و من rédiger rapport complet مع toutes sources ?",
+              "prompt": "responsable veille réglementaire يجب produire rapport comparant exigences publiées par cinq autorités من régulation مع من citations vérifiables ligne par ligne. Quelle fonctionnalité من ChatGPT Pro / Enterprise est spécifiquement conçue من أجل ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie recherche multi-étapes, recoupe documents و produit rapport structuré مع citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "complétion hors-ligne à température élevée بدون الوصول aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "générateur d'illustrations graphiques dépourvu من moteur من recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé بدون connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule total من ventes différent من votre comptabilité à partir d' الملف Excel. Que devez-vous التحقق من en premier ?",
+              "prompt": "Après avoir chargé الملف CSV من 60 000 ventes في ChatGPT Data Analysis, contrôleur obtient chiffre d'affaires supérieur من 12 % à celui من comptabilité. Quel réflexe من vérification يجب-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir code Python exécuté (`</>`) من أجل التحقق من comment lignes annulées, taxes و devises ont été filtrées في pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "تعطيل l'exécution Python من أجل obliger النموذج من langage à additionner 60 000 lignes من tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir الملف CSV en image JPEG compressée avant من relancer somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier مباشرة graphique car script Python généré applique toujours conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore و cite sources ; Data Analysis exécute من Python déterministe و inspectable على vos البيانات chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer و مشاركة l'IA en المؤسسة",
+          "objective": "Distinguer و combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) و Custom GPTs (assistants métier partagés و gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il إنشاء Project أو Custom GPT ? و comment modifier trois lignes au milieu d' document أو d' script من 300 lignes بدون que ChatGPT ne régénère tout depuis début ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'الفريق)",
+            "diagramTop": "Canvas = Éditeur côte à côte من أجل retoucher section précise d' texte أو d' code",
+            "diagramBottom": "Projects = Votre dossier من travail continu · Custom GPT = Assistant standardisé partagé مع l'الفريق",
+            "step1": "Ouvrez Canvas من أجل itérer على livrable long (article, spécification, script) en surlignant فقط passage à réécrire أو déboguer.",
+            "step2": "Utilisez Project من أجل regrouper vos الملفات و instructions d' dossier en cours, و publiez Custom GPT lorsque toute l'الفريق a besoin من même assistant métier.",
+            "rule": "Travail récurrent d' dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé من أجل l'الفريق = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · CANVAS",
+              "title": "Fini régénération complète à chaque retouche",
+              "bodyParagraph": "في Canvas, document أو code s'affiche في volet dédié à droite من chat. Vous pouvez surligner seul paragraphe أو seule fonction من أجل demander réécriture, changement من niveau من lecture, l'ajout من logs أو portage vers autre langage, مع historique من versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner zone ➔ Édition chirurgicale in-place + Historique من versions"
+            },
+            {
+              "stepBadge": "الخطوة 2 · PROJECTS",
+              "title": "Garder contexte d' dossier au fil من semaines",
+              "bodyParagraph": "Project في ChatGPT rassemble en seul endroit vos instructions personnalisées, vos الملفات من référence (cahier من charges, architecture, charte éditoriale) و tous fils من conversation liés à ce chantier. Chaque nouveau chat ouvert في Project hérite immédiatement من ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + الملفات sources + Historique من chats organisé"
+            },
+            {
+              "stepBadge": "الخطوة 3 · CUSTOM GPTS EN المؤسسة",
+              "title": "Standardiser assistant métier مع Actions و الحوكمة",
+              "bodyParagraph": "Lorsqu' workflow est stabilisé (ex. Revue d'appel d'offres, Générateur من post-mortem SRE), encapsulez ses instructions système, sa base documentaire و ses Actions API OpenAPI في Custom GPT publié فقط au sein من votre espace من travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en الأمان"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas يتيح co-édition granulaire من texte و من code مع raccourcis dédiés (longueur, ton, revue من code, ajout من commentaires, portage من langage) و gestion من versions.",
+            "Projects organise travaux au long cours d' المستخدم أو d' الفريق autour d'instructions و من الملفات من référence persistants.",
+            "Custom GPTs في ChatGPT Enterprise permettent من distribuer من assistants spécialisés dotés d'Actions OpenAPI sous contrôle من console d'administration."
+          ],
+          "workedExample": {
+            "situation": "يقوم فريق SRE souhaite (1) suivre l'opération من migration Cloud من trimestre مع ses schémas d'architecture, (2) co-rédiger runbook من bascule section par section, و (3) offrir à tous ingénieurs d'astreinte assistant standardisé من rédaction من post-mortem.",
+            "steps": [
+              "إنشاء Project « Migration Cloud T4 » contenant schémas d'architecture و contraintes من SLA.",
+              "Rédiger و affiner runbook من bascule في Canvas en révisant chaque procédure من rollback بدون altérer sections déjà validées.",
+              "Publier Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré مع النموذج d'incident و grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "trois outils sont utilisés selon leur rôle exact : continuité من dossier (Project), édition fine (Canvas) و standardisation d'الفريق (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer prompt complexe utilisé par dix personnes en copier-coller vers Custom GPT d'المؤسسة sécurisé, و précisez quand المستخدمين devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer prompt validé في instructions système من Custom GPT و y joindre documents من référence officiels.",
+              "Restreindre partage من Custom GPT aux groupes autorisés من workspace ChatGPT Enterprise.",
+              "استخدام Canvas lorsque l'المستخدم souhaite peaufiner localement paragraphe من livrable généré avant export."
+            ],
+            "feedback": "Centraliser prompt في Custom GPT élimine dérive من versions copiées-collées, tandis que Canvas assure finition على mesure من chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "كيف modifier seulement 30 lignes d' long programme في ChatGPT بدون risquer qu'il réécrive أو casse reste من الملف ?",
+              "prompt": "Vous travaillez على script Python من 250 lignes في ChatGPT و souhaitez optimiser فقط fonction من pagination aux lignes 80 à 110 tout en garantissant que reste من الملف reste strictement intact و versionné. Quel outil devez-vous استخدام ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir code في Canvas, surligner lignes 80 à 110 و demander l'optimisation ciblée مع suivi من version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir conversation vierge بدون fournir الملف و demander من réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir script Python en الملف audio MP3 avant من soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique من l'espace من travail à chaque modification d' variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "في ChatGPT Enterprise, quand faut-il إنشاء Project plutôt qu' Custom GPT ?",
+              "prompt": "Quelle différence principale guide choix بين Project و Custom GPT في ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "Project organise espace من travail continu (chats, الملفات و consignes d' chantier), tandis qu' Custom GPT publie assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "Project indexe تلقائياً ses الملفات على moteurs من recherche publics alors qu' Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "Custom GPT ne peut contenir ni instructions système ni documents من référence, contrairement à Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "Project accepte فقط من الملفات d'images matricielles و refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas من أجل l'édition chirurgicale côte à côte ; Projects من أجل vos chantiers au long cours ; Custom GPTs من أجل standardiser و مشاركة assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "الوحدة 2 · OpenAI Codex : Agent من Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée من Codex, pilotage par AGENTS.md, exécution parallèle من tâches, génération من Pull Requests vérifiées و revue من code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "تكوين الملف AGENTS.md déterministe, تفويض en parallèle correctif من bug و implémentation من fonctionnalité à OpenAI Codex في son sandbox, و auditer diff ainsi que السجلات من tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, الوصول الشبكة coupé pendant l'exécution من أجل prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes من build/lint/test, invariants d'architecture و conventions من dépôt",
+        "Parallélisation من tâches, ouverture من Pull Requests مع preuves d'exécution من tests و revue من code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que commandes من vérification documentées في votre AGENTS.md : exigez toujours من tests verts في journal من sandbox avant من fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "[AR] Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (الشبكة OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs من Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "[AR] Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit و modifie code و exécute tests مع l'الوصول الشبكة externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "العقد AGENTS.md",
+            "role": "الملف versionné في dépôt (racine و sous-dossiers) qui indique à Codex comment compiler, linter, tester و respecter frontières architecturales."
+          },
+          {
+            "name": "[AR] Vérification & Pull Request",
+            "role": "Codex itère على son implémentation jusqu'à ce que suite من tests passe, puis produit commit/PR accompagné من citations من الملفات و من sorties من terminal."
+          }
+        ],
+        "securityInvariant": "Pendant phase d'exécution من l'agent Codex, l'الوصول Internet sortant est désactivé في bac à sable afin d'empêcher toute exfiltration من code source أو téléchargement من paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "[AR] Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "شرح comment OpenAI Codex exécute من code و من tests في conteneur sandbox cloud isolé و pourquoi coupure الشبكة pendant l'exécution protège dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est différence fondamentale بين assistant d'autocomplétion في l'IDE و l'agent OpenAI Codex capable من vous livrer Pull Request testée من bout en bout ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Codex : من Suggestion من Ligne à Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création من conteneur + Clone من dépôt + Installation من dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, الشبكة OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement من tâche prépare dépôt و ses dépendances, puis verrouille l'الوصول الشبكة externe avant من donner main à l'agent.",
+            "step2": "Codex explore base من code, applique ses modifications و lance réellement compilateurs و tests jusqu'à obtenir résultat vert.",
+            "rule": "patch non exécuté est hypothèse ; patch validé par tests في sandbox Codex est livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone و isolée في cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre في son propre conteneur cloud isolé contenant votre dépôt Git à révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction من bug, refactorisation, couverture من tests) بدون jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié و indépendant"
+            },
+            {
+              "stepBadge": "الخطوة 2 · الأمان الشبكة OFF",
+              "title": "لماذا l'الوصول Internet est coupé pendant boucle agent",
+              "bodyParagraph": "fois script d'initialisation d'environnement terminé (installation من dépendances via `npm ci` أو `pip`), conteneur coupe l'الوصول Internet sortant pendant que l'agent travaille. Ainsi, même face à instruction piégée في الملف من test, Codex ne peut ni exfiltrer من code ni télécharger من binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure الشبكة ➔ Exécution sûre من l'agent"
+            },
+            {
+              "stepBadge": "الخطوة 3 · PREUVES D'EXÉCUTION",
+              "title": "Journal من terminal, citations من lignes و diff Git",
+              "bodyParagraph": "À fin من sa mission, Codex ne renvoie pas simple explication théorique : il fournit diff Git exact, citations من الملفات modifiés و journal complet من commandes من test exécutées في terminal من sandbox.",
+              "keyTakeawayPill": "Toujours inspecter journal من test من sandbox avant من إنشاء أو fusionner PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère في conteneur cloud isolé dédié à chaque tâche, permettant من paralléliser plusieurs chantiers logiciels.",
+            "séparation بين phase d'initialisation (installation من dépendances) و phase d'exécution من l'agent (الشبكة externe désactivé) élimine risques d'exfiltration و d'injection supply-chain en cours من tâche.",
+            "Chaque résultat inclut trace vérifiable من commandes exécutées و من tests passés."
+          ],
+          "workedExample": {
+            "situation": "يقوم فريق plateforme veut confier à Codex mise à jour d' validateur من schéma TypeScript, mais lors من premier essai, `npm test` échoue في sandbox مع `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant boucle d'exécution من l'agent, l'الوصول الشبكة est coupé, donc l'agent ne peut pas télécharger من paquets depuis registre npm.",
+              "Ajouter `npm ci` في script من configuration initiale من l'environnement Codex (qui s'exécute avant coupure الشبكة).",
+              "Relancer tâche : Codex dispose désormais من `node_modules`, exécute 85 tests unitaires و livre diff 100 % vert."
+            ],
+            "decision": "L'الفريق documente script من préchargement من dépendances في configuration من l'environnement Codex من dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi agent من programmation autonome exécutant من tests في dépôt يجب tourner مع l'الوصول الشبكة externe désactivé fois dépendances installées, و comment gérer appels à من API tierces في tests.",
+            "successCriteria": [
+              "شرح que coupure الشبكة empêche l'exfiltration من code propriétaire و téléchargement من code arbitraire en cas من prompt injection.",
+              "Préinstaller toutes dépendances requises lors من phase من setup من l'environnement.",
+              "استخدام من fixtures locales أو من mocks déterministes من أجل tester intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "من tests rapides, déterministes و hors-ligne (على fixtures) sont à fois bonne pratique d'ingénierie logicielle و clé من l'efficacité من Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "لماذا l'agent من programmation OpenAI Codex coupe-t-il l'الوصول à Internet pendant qu'il modifie votre code ?",
+              "prompt": "لماذا l'environnement d'exécution d'OpenAI Codex désactive-t-il l'الوصول Internet sortant pendant que l'agent modifie code و exécute tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "من أجل empêcher toute exfiltration من code أو من secrets ainsi que téléchargement من paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "من أجل empêcher compilateur TypeScript أو Python من lire الملفات présents في répertoire من travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "من أجل تعطيل l'historique Git local و interdire génération d' diff بين branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "من أجل réduire résolution graphique من carte vidéo locale من l'ordinateur portable من développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque outil qui s'installe normalement depuis Internet. كيف régler cela ?",
+              "prompt": "tâche confiée à OpenAI Codex échoue lors من l'exécution من `pytest` car bibliothèques من الملف `requirements.txt` ne sont pas installées و l'agent ne peut pas contacter PyPI. Quelle est résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "تكوين l'installation من dépendances (`pip install -r requirements.txt`) في script d'initialisation من l'environnement sandbox avant coupure الشبكة."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex من حذف dossier `tests/` afin que commande retourne code من sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "تعطيل vérification par tests و fusionner مباشرة code généré على branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire clés secrètes من production en clair في الملف README.md من dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne في son sandbox isolé و exigez preuve par logs من tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées و revue من code مع Codex",
+          "objective": "Structurer الملف AGENTS.md efficace, تفويض من tâches ciblées أو من revues من code à Codex و valider Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "كيف faire en sorte que Codex connaisse instantanément vos commandes من test ciblées, vos règles d'architecture و vos interdits من الأمان بدون avoir à répéter في chaque prompt ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية AGENTS.md : Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à racine (و par sous-dossier) = Commandes من validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible bons الملفات, lance bons tests و ouvre PR propre",
+            "step1": "Documentez في `AGENTS.md` commandes exactes (`npm test`, `npm run validate`), invariants métier و règles من style.",
+            "step2": "Utilisez من الملفات `AGENTS.md` plus spécifiques في sous-dossiers d' monorepo (`backend/`, `apps/mobile/`) من أجل affiner consignes locales.",
+            "rule": "Si vous corrigez deux fois même erreur من convention في PR d'agent, transformez cette remarque en règle في `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · STANDARD AGENTS.MD",
+              "title": "Donner à l'agent carte و boussole من dépôt",
+              "bodyParagraph": "bon الملف `AGENTS.md` ne répète pas من marketing : il donne l'architecture من dossiers, règles strictes (ex. séparation public/privé, déterminisme من manifestes), commande من test rapide من أجل itérer و suite complète à exécuter avant من conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes من test rapides و complètes"
+            },
+            {
+              "stepBadge": "الخطوة 2 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "من ticket bien borné à Pull Request prête à relire",
+              "bodyParagraph": "من أجل تفويض efficacement à Codex, formulez tâche bornée : symptôme أو comportement attendu, الملفات أو modules concernés و critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit branche و Pull Request documentant changements و tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère من test = Pull Request autonome prête من أجل revue"
+            },
+            {
+              "stepBadge": "الخطوة 3 · REVUE من CODE PAR CODEX",
+              "title": "Détecter bugs logiques و régressions avant fusion",
+              "bodyParagraph": "En mode revue من code على Pull Request, Codex compare l'intention au diff réel, exécute أو trace chemins d'erreur (nullabilité, conditions من course, oubli من validation من borne, fuite d'information) و signale فقط défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles من الأمان و cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit contexte persistant و hiérarchique (racine puis sous-répertoires) que Codex consulte تلقائياً.",
+            "délégation parallèle يتيح من traiter simultanément من corrections من bugs, من ajouts من tests و من refactorisations isolées.",
+            "استخدام Codex en revue من Pull Request يتيح d'identifier erreurs من logique, oublis من cas limites و écarts vis-à-vis من invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "في dépôt `certigo-content`, chaque question publique يجب avoir solution privée correspondante و aucun champ `correct` أو `rationale` ne يجب figurer في `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or و séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` في `AGENTS.md`.",
+              "Confier à Codex l'ajout d' nouveau parcours مع ses questions و solutions.",
+              "التحقق من في rapport من PR que Codex a exécuté من lui-même toutes commandes prescrites par `AGENTS.md` avant من proposer fusion."
+            ],
+            "decision": "الملف `AGENTS.md` يضمن que chaque tâche exécutée par l'agent respecte gardes من الأمان و من العقد من dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez quatre rubriques indispensables d' الملف `AGENTS.md` من أجل API backend soumise à من exigences strictes من rétrocompatibilité من schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture و répertoires critiques (ex. schémas من العقد, séparation من couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use على schémas, interdiction من secrets).",
+              "3. Commandes d'installation و من validation ciblée puis complète.",
+              "4. Processus من changement attendu avant ouverture من Pull Request."
+            ],
+            "feedback": "`AGENTS.md` concis, impératif و orienté commandes من vérification améliore radicalement taux من réussite au premier essai من Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert الملف AGENTS.md placé في votre projet informatique من أجل OpenAI Codex ?",
+              "prompt": "Quel est rôle من الملف `AGENTS.md` placé à racine و في sous-dossiers d' dépôt Git utilisé مع OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir تلقائياً à l'agent commandes من build/test, l'architecture و invariants من dépôt أو من sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair mots من passe من قاعدة بيانات من production من أجل éviter variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "استبدال binaire من compilateur par interprétation purement approximative بدون exécution من tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes branches بدون exécuter workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger في quatre parties différentes من votre logiciel. كيف gagner من temps مع Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits في quatre modules distincts من votre application. كيف exploiter OpenAI Codex من façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "تفويض quatre corrections en parallèle في quatre tâches Codex distinctes en exigeant test من non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander réécriture totale من l'application في seul commit géant en désactivant suite من tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre فقط titre « Ça ne marche pas » بدون indiquer ni module ni trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser من modifications non testées مباشرة على branche من production en contournant revue من code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue من PR = workflow d'ingénierie augmentée مع OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic من régressions CI, remédiation و الأمان مع Codex",
+          "objective": "استخدام Codex من أجل diagnostiquer échec CI complexe, écrire test reproducteur avant correctif (TDD) و appliquer garde-fous من الأمان.",
+          "estimatedMinutes": 8,
+          "hook": "pipeline CI échoue من façon intermittente على erreur من sérialisation : comment guider Codex من أجل qu'il prouve cause racine par test rouge avant d'écrire seule ligne من correctif ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ التحقق من Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer correctif chirurgical (Vert) ➔ 3. Exécuter suite complète & gardes من العقد",
+            "step1": "Fournissez trace d'erreur exacte à Codex و demandez d'abord test minimal qui échoue على bug actuel.",
+            "step2": "fois symptôme reproduit, laissez Codex appliquer correctif minimal و التحقق من qu'aucune garde existante ne régresse.",
+            "rule": "correctif بدون test reproducteur qui échouait avant و passe après n'est pas remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · REPRODUIRE AVANT من CORRIGER",
+              "title": "discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez bug à Codex, exigez في prompt (أو في `AGENTS.md`) qu'il commence par reproduire l'erreur مع test ciblé. Voir test échouer من أجل raison attendue prouve que l'agent a compris vrai mécanisme من bug و non symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger cause racine (Green) ➔ 3. التحقق من l'ensemble"
+            },
+            {
+              "stepBadge": "الخطوة 2 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter bruit و refactorisations non demandées",
+              "bodyParagraph": "bon correctif d'agent modifie فقط lignes nécessaires و ajoute test correspondant, بدون reformater من dizaines من الملفات non liés ni affaiblir assertion من الأمان من أجل faire passer test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement من test أو suppression من garde من أجل obtenir vert artificiel"
+            },
+            {
+              "stepBadge": "الخطوة 3 · CONTRÔLE HUMAIN من FRONTIÈRES",
+              "title": "Ce qu' relecteur humain vérifie toujours على PR d'agent",
+              "bodyParagraph": "Lors من relecture من PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test أو contrôle من schéma n'a été contourné · 2. Que nouvelles dépendances éventuelles sont légitimes · 3. Que frontières من الأمان (الصلاحيات, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue من PR : inspecter en priorité tests modifiés, schémas و frontières من confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger reproduction préalable من bug par test qui échoue يضمن pertinence من correctif produit par Codex.",
+            "agent ne يجب jamais faire passer build au vert en supprimant أو en relâchant assertion من الأمان أو من العقد.",
+            "revue humaine من Pull Request se concentre على validité من tests ajoutés, minimalité من diff و respect من frontières من الأمان."
+          ],
+          "workedExample": {
+            "situation": "في pipeline من packaging, الملف Windows en CRLF produit hash SHA-256 différent من celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire test unitaire injectant من fins من ligne `\\r\\n` و vérifiant que hash normalisé reste identique à celui en `\\n` ( test échoue initialement).",
+              "Corriger fonction من hachage من أجل normaliser fins من ligne avant calcul من digest SHA-256.",
+              "Exécuter toute suite من tests و التحقق من que vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "PR contient 6 lignes من code productif و 20 lignes من test d'isolation prouvant résolution على Windows و Linux."
+          },
+          "practice": {
+            "prompt": "agent propose PR qui corrige erreur من validation en supprimant règle `additionalProperties: false` من schéma JSON. Expliquez pourquoi vous devez rejeter cette PR و quelle consigne donner.",
+            "successCriteria": [
+              "شرح que retirer `additionalProperties: false` ouvre العقد à من propriétés inconnues أو à من fuites من البيانات.",
+              "Identifier quelle propriété provoquant rejet était illégitime في البيانات (أو si procédure formelle d'expand backend est requise).",
+              "Exiger que schéma reste strictement fermé و qu' test négatif vérifie rejet من propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais correctif éteindre l'alarme au lieu d'éteindre l'incendie : schémas fermés و gardes يجب rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "في quel ordre Codex يجب-il travailler من أجل prouver qu'il a vraiment corrigé bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex correction d' bug من calcul d'arrondi signalé en production. Quelle séquence من travail يضمن que correctif règle réellement problème بدون régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer correctif minimal (vert), puis lancer toute suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "حذف assertions numériques من tests existants afin que suite s'exécute بدون erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier fonction mathématique بدون exécuter tests و fusionner immédiatement branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer workflow GitHub Actions من branche من أجل masquer l'échec من build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "agent propose من faire passer test من الأمان au vert en désactivant contrôle على الملف posant problème. Que faites-vous ?",
+              "prompt": "Lors من relecture d' Pull Request générée من أجل corriger test d'anti-fuite en échec, vous constatez que diff ajoute الملف fautif à liste d'exclusion globale au lieu من retirer champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter PR car elle neutralise garde من الأمان, و demander من حذف champ sensible من الملف public tout en conservant contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver و fusionner immédiatement puisque l'indicateur من pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "حذف complètement الملف من test d'anti-fuite من أجل accélérer prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "تكوين l'outil من revue من code من أجل masquer systématiquement modifications apportées aux الملفات من tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "الوحدة 3 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire من systèmes d'IA من production fiables مع Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK و évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir appel Responses API combinant Function Calling و Structured Outputs (`strict: true`), orchestrer transfert (handoff) مع Guardrails في l'Agents SDK و valider qualité via suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % conformité au JSON Schema",
+        "[AR] Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux من البيانات من référence, graders déterministes/النماذج و portes من non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` على vos schémas JSON (Structured Outputs & Function Calling), validez الصلاحيات côté serveur avant d'exécuter outil, و bloquez tout changement من prompt أو من النموذج qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent من Production مع OpenAI Responses API & Agents SDK",
+        "diagram": "[AR] [Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "[AR] Responses API & Structured Outputs",
+            "role": "Unifie génération مع état, outils natifs (recherche, الملفات, code) و contraint décodage من النموذج من أجل respecter JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "[AR] Function Calling & Agents SDK",
+            "role": "يتيح au النموذج d'émettre من appels من fonctions typés exécutés par votre code backend و d'orchestrer من transferts (handoffs) بين agents spécialisés protégés par من Guardrails."
+          },
+          {
+            "name": "[AR] OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, respect من consignes و l'absence من régression على jeu من cas من test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "appel من fonction retourné par النموذج (`tool_call`) est intention non fiable : backend applicatif يجب toujours valider l'الهوية, الصلاحيات و bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir العقد JSON à 100 %",
+          "objective": "Exploiter Responses API و تكوين Structured Outputs (`strict: true`) من أجل éliminer toute erreur من parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h من matin parce que LLM a oublié virgule JSON أو renommé champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Structured Outputs : من JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés أو types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types و enums",
+            "step1": "Définissez votre schéma من sortie (Pydantic / Zod / JSON Schema) مع `strict: true` و `additionalProperties: false` على chaque objet.",
+            "step2": "Gérez explicitement champ `refusal` في votre code au cas où الطلب est rejetée من أجل motif من الأمان.",
+            "rule": "En production, n'espérez jamais qu' consigne في prompt suffise à garantir schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · RESPONSES API",
+              "title": "primitive unique من أجل texte, outils و l'état",
+              "bodyParagraph": "Responses API d'OpenAI unifie génération من réponses, chaînage multi-tours (`previous_response_id`), l'appel من fonctions personnalisées و l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) في seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État من conversation + Outils natifs و personnalisés"
+            },
+            {
+              "stepBadge": "الخطوة 2 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui يضمن seulement من accolades valides, Structured Outputs مع `strict: true` compile votre JSON Schema en grammaire qui filtre الرموز lors من l'inférence : النموذج ne peut littéralement pas émettre clé inconnue, omettre champ requis أو violer `enum`.",
+              "keyTakeawayPill": "[AR] Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "الخطوة 3 · GESTION من REFUS & VALIDATION MÉTIER",
+              "title": "[AR] Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si demande viole règles من الأمان, النموذج remplit propriété dédiée `refusal` plutôt que schéma : votre code يجب التحقق من `refusal` avant من lire l'objet parsé. من plus, `strict: true` يضمن type (ex. nombre), mais votre backend يجب toujours valider règles métier (ex. taux من TVA autorisé).",
+              "keyTakeawayPill": "التحقق من `refusal` + Valider règles métier côté serveur après désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "Responses API combine génération multimodale, chaînage d'état و invocation d'outils en seule boucle.",
+            "Structured Outputs مع `strict: true` impose respect exact من JSON Schema (clés requises, types, enums و `additionalProperties: false`) par décodage contraint.",
+            "code applicatif يجب toujours inspecter cas من refus (`refusal`) و appliquer ses propres validations métier على valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "assurtech extrait تلقائياً garanties و franchises من العقود PDF vers son moteur من tarification C# و subissait 2 % d'erreurs من désérialisation مع من simples instructions في prompt.",
+            "steps": [
+              "Définir schéma JSON من l'extraction مع `strict: true`, `additionalProperties: false` و من énumérations fermées من أجل types من franchise.",
+              "Appeler Responses API مع ce schéma في `text.format` (`json_schema`).",
+              "Ajouter contrôle en sortie vérifiant l'absence من `refusal` و cohérence arithmétique (franchise <= plafond من garantie)."
+            ],
+            "decision": "taux d'erreur من formatage JSON tombe à 0,00 % en production dès déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez différence بين mode `json_object` historique و `json_schema` مع `strict: true` (Structured Outputs), و listez deux exigences structurelles من JSON Schema en mode strict.",
+            "successCriteria": [
+              "شرح que `json_object` يضمن فقط syntaxe JSON valide بدون imposer من schéma, tandis que `json_schema` (`strict: true`) يضمن respect exact من structure.",
+              "Mentionner que chaque objet من schéma يجب déclarer `additionalProperties: false`.",
+              "Mentionner que tous champs définis في `properties` يجب figurer في `required` (en utilisant type nullable `[\"string\", \"null\"]` من أجل champs optionnels)."
+            ],
+            "feedback": "En mode strict, champ optionnel se modélise par type union incluant `null` tout en restant listé في `required`, مع `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "كيف obliger l'API OpenAI à renvoyer الاستجابة JSON qui respecte toujours exactement champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI من أجل extraire lignes d' facture و exige que الاستجابة respecte à 100 % schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) و `lignes` (array), بدون aucune propriété supplémentaire. أي إعداد devez-vous استخدام ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "استخدام Structured Outputs (`json_schema`) مع `strict: true` و `additionalProperties: false` على chaque objet من schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules في prompt بدون تفعيل من schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer الاستجابة brute au centième caractère avant d'ajouter accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler température على 2.0 en mode texte libre من أجل diversifier nom من clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "مع mode strict d'OpenAI, comment déclarer champ facultatif (comme commentaire) في votre format JSON ?",
+              "prompt": "كيف modéliser champ optionnel (par exemple `commentaire`) في JSON Schema utilisé مع OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure champ في `required` و définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) مع `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` و حذف totalement tableau `required` من l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer nom من champ مع chaîne vide en guise من définition من type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer من balises XML à l'intérieur من schéma JSON من أجل تعطيل validateur من الرموز."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur من parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs و guardrails",
+          "objective": "Implémenter Function Calling مع schémas stricts و orchestrer من agents spécialisés مع Handoffs, Guardrails و Tracing في l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "كيف faire collaborer agent من triage, agent من facturation و agent technique بدون إنشاء usine à gaz impossible à déboguer ni laisser prompt malveillant déclencher remboursement non autorisé ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : النموذج propose `call_tool(args)` ➔ VOTRE code vérifie الحقوق و exécute",
+            "diagramBottom": "[AR] Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` على définitions من fonctions (`tools`) و validez toujours autorisations côté serveur avant d'exécuter fonction.",
+            "step2": "Découpez responsabilités مع من Handoffs explicites بين agents spécialisés و protégez entrées/sorties par من Guardrails parallèles.",
+            "rule": "النموذج ne touche jamais مباشرة votre قاعدة بيانات : il émet proposition d'appel d'outil que votre backend contrôle و exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · FUNCTION CALLING STRICT",
+              "title": "Séparer décision d'appel و l'exécution réelle",
+              "bodyParagraph": "Lors d' Function Calling, النموذج ne lance aucun code على serveurs d'OpenAI : il retourne objet structuré indiquant nom من fonction و ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie الصلاحيات من l'المستخدم, exécute fonction و renvoie résultat au النموذج.",
+              "keyTakeawayPill": "النموذج = propose l'appel و arguments · Votre serveur = vérifie الحقوق و exécute"
+            },
+            {
+              "stepBadge": "الخطوة 2 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer من spécialistes plutôt qu' méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose على من primitives légères : `Agent` (instructions + النموذج + outils), من `Handoffs` (délégation explicite من conversation vers agent spécialiste comme transfert d'appel qualifié) و `Tracing` natif qui enregistre chaque étape, appel d'outil و transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré من bout en bout"
+            },
+            {
+              "stepBadge": "الخطوة 3 · GUARDRAILS D'ENTRÉE و من SORTIE",
+              "title": "[AR] Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "`Guardrails` s'exécutent en parallèle من l'agent : guardrail d'entrée léger détecte immédiatement tentative d'injection من prompt أو demande hors périmètre و déclenche `tripwire` qui interrompt l'exécution avant même que النموذج principal أو ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil أو génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, النموذج génère فقط arguments structurés من l'appel (`strict: true`) ; l'exécution و contrôle d'الوصول restent sous responsabilité من serveur applicatif.",
+            "L'OpenAI Agents SDK structure workflows multi-agents autour d'Agents, من Tools, من Handoffs (transferts من contrôle) و من Tracing intégré.",
+            "Guardrails d'entrée و من sortie utilisent mécanisme من disjoncteur (`tripwire`) من أجل bloquer requêtes malveillantes أو sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "service client bancaire déploie architecture multi-agents مع l'OpenAI Agents SDK : agent d'accueil, agent Cartes Bancaires (pouvant faire opposition) و agent Crédits.",
+            "steps": [
+              "Placer Input Guardrail qui vérifie qu'aucune tentative من contournement d'الهوية أو من demande hors banque n'est présente.",
+              "تكوين l'agent d'accueil مع deux Handoffs explicites vers l'agent Cartes و l'agent Crédits.",
+              "في l'outil `bloquer_carte(carte_id)` من l'agent Cartes, تفعيل `strict: true` على schéma و التحقق من côté serveur que `carte_id` appartient bien au `user_id` authentifié في contexte من session."
+            ],
+            "decision": "parcours est traçable في dashboard من Tracing و protégé contre appels d'outils على cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "يقوم مطور passe `user_id` comme argument libre في schéma من Function Calling `rembourser_commande(user_id, commande_id)` و fait confiance à valeur choisie par LLM. Expliquez vulnérabilité و comment corriger.",
+            "successCriteria": [
+              "Identifier faille d'autorisation ( prompt injection peut convaincre LLM من passer `user_id` d' autre client).",
+              "Retirer `user_id` من arguments générés par LLM و l'injecter côté serveur depuis الرمز d'authentification vérifié من session.",
+              "Valider en قاعدة بيانات que `commande_id` appartient bien à cet المستخدم authentifié و appliquer plafond من remboursement."
+            ],
+            "feedback": "identifiants من الأمان (qui est connecté, quel est son tenant) يجب toujours provenir من contexte serveur authentifié, jamais من arguments devinés par النموذج."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "لماذا est-il dangereux من laisser l'IA اختيار elle-même numéro من dossier client à lire بدون التحقق من qui est connecté ?",
+              "prompt": "في application utilisant Function Calling d'OpenAI, fonction `lire_dossier_medical(patient_id)` laisse النموذج اختيار librement `patient_id` à partir من texte من conversation بدون التحقق من session authentifiée côté serveur. Quel est risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "divulgation non autorisée (IDOR) : المستخدم peut manipuler prompt من أجل amener النموذج à demander dossier d' autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "incompatibilité d'affichage من caractères accentués في police système من navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "saturation من périphérique audio local lors من sérialisation من l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "suppression automatique من الملف JSON Schema على disque dur من serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "في kit OpenAI Agents SDK, comment arrêter immédiatement agent si contrôle détecte demande dangereuse ?",
+              "prompt": "في l'OpenAI Agents SDK, quel mécanisme يتيح à contrôle من الأمان exécuté en parallèle d'interrompre immédiatement l'agent avant qu' outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "Guardrail déclenchant disjoncteur (`tripwire`) dès que sa condition من الأمان أو من périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation من paramètre `max_output_tokens` au-delà من fenêtre من contexte من النموذج."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "désactivation complète من module من Tracing في configuration globale من SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "retrait من toutes instructions système من agents spécialisés recevant handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + الهوية injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = من agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant من نشر",
+          "objective": "Construire suite d'évaluation (OpenAI Evals) combinant jeu من البيانات من référence, graders déterministes و LLM-as-a-judge من أجل piloter mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt على trois exemples و ça a l'air super ! » : pourquoi cette phrase est-elle cause numéro من régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Evals : Traiter Prompts و النماذج comme من Code مع من Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution على variante",
+            "diagramBottom": "Graders (Exactitude من schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez dataset doré (golden dataset) couvrant cas nominaux, cas ambigus و tentatives من contournement.",
+            "step2": "Combinez من graders déterministes (schéma JSON, nom من l'outil appelé, mots-clés interdits) و من graders sémantiques calibrés.",
+            "rule": "Aucun changement من prompt, من النموذج أو من RAG ne part en production بدون passer suite d'Evals au-dessus من seuil من référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · DATASET من RÉFÉRENCE",
+              "title": "Partir من vraies erreurs observées على terrain",
+              "bodyParagraph": "bonne suite d'évaluation (Evals) ne contient pas فقط من questions faciles : elle réunit 50 à 200 cas représentatifs من production, incluant formulations ambiguës من المستخدمين, documents contradictoires, valeurs nulles و scénarios où l'agent يجب refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas من refus attendus"
+            },
+            {
+              "stepBadge": "الخطوة 2 · GRADERS (NOTATEURS)",
+              "title": "Privilégier déterminisme, compléter par juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité من graders déterministes rapides و reproductibles : correspondance exacte d' identifiant, validité من JSON Schema, vérification que bon `tool_call` a été émis مع bons paramètres. من أجل évaluer fidélité au contexte (groundedness) أو ton, ajoutez grader par النموذج (LLM-as-a-judge) doté d' grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par النموذج على grille explicite"
+            },
+            {
+              "stepBadge": "الخطوة 3 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser التكلفة, latence و qualité en confiance",
+              "bodyParagraph": "مع suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si passage d' النموذج coûteux vers `o4-mini` أو `gpt-4o-mini` maintient 99 % من précision tout en divisant latence و facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation من النموذج أو من prompt à l'aveugle : Evals tranchent par preuve"
+            }
+          ],
+          "keyIdeas": [
+            "évaluations systématiques (Evals) transforment l'amélioration d' système IA d' intuition subjective en ingénierie mesurable.",
+            "suite d'Evals robuste combine من contrôles déterministes (schéma, sélection d'outils, règles métier) و من évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production يجب être converti en nouveau cas من test في dataset d'Evals من أجل empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "يقوم فريق souhaite réduire من 60 % temps من الاستجابة من son agent من qualification من tickets en remplaçant son prompt système من 4 000 mots و en changeant من النموذج.",
+            "steps": [
+              "Construire في OpenAI Evals jeu من 120 tickets historiques annotés مع catégorie attendue, priorité و l'outil à appeler.",
+              "Définir deux graders : grader déterministe على couple `(categorie, priorite, tool_name)` و grader من conformité vérifiant l'absence من promesse commerciale non autorisée.",
+              "Comparer score من nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, من أجل latence divisée par 2,4."
+            ],
+            "decision": "mise en production est approuvée على base من rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez trois types من cas من test و deux types من graders que vous devez inclure في suite OpenAI Evals من أجل valider agent qui résume من العقود و appelle API d'archivage.",
+            "successCriteria": [
+              "Trois familles من cas : العقود standards complets, العقود incomplets/contradictoires (cas limites) و prompts tentant من forcer archivage non autorisé.",
+              "Grader déterministe : التحقق من structure JSON من résumé و arguments exacts passés à fonction d'archivage.",
+              "Grader d'ancrage : التحقق من que chaque clause citée في résumé figure réellement في العقد source."
+            ],
+            "feedback": "Tester ensemble fidélité من texte و justesse من l'appel d'outil couvre à fois génération و l'action من l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez consignes من votre assistant IA. كيف التحقق من que vous n'avez rien cassé avant mise en ligne ?",
+              "prompt": "Votre الفريق modifie instructions système d' agent en production من أجل raccourcir ses réponses, و veut s'assurer que ce changement ne dégrade pas choix من outils Function Calling على 150 scénarios critiques من l'المؤسسة. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter suite automatisée OpenAI Evals vérifiant appels d'outils على 150 scénarios و bloquer déploiement en cas من régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles في l'interface من chat puis نشر immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer schémas من paramètres من fonctions afin qu'aucune erreur من typage ne remonte في السجلات."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "نشر بدون test préalable و compter على tickets من réclamation من clients من أجل mesurer qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "كيف التحقق من من façon simple, rapide و gratuite qu' agent a bien choisi devise EUR في test automatique ?",
+              "prompt": "Quel type من grader (notateur) est plus fiable و plus économique من أجل التحقق من في OpenAI Evals qu' agent a appelé fonction `creer_avoir` مع bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "grader déterministe inspectant مباشرة nom من fonction appelée و l'égalité stricte من l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "évaluation purement stylistique demandant à النموذج tiers si الاستجابة semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "règle vérifiant فقط que الاستجابة textuelle dépasse mille caractères, بدون lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "générateur من nombres aléatoires attribuant score بدون comparer sortie à valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes و sémantiques + Porte من non-régression CI = l'ingénierie IA pilotée par Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "اختبار تجريبي CertiGo Pro: OpenAI (ChatGPT Enterprise, النماذج o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète من maîtrise من produits OpenAI en المؤسسة : sélection من النماذج (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex مع AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK و OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

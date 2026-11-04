@@ -1,0 +1,256 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "harvey-legal-ai",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "es-ES",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+      "lessonId": "redaction-revision-contrats-playbook",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-client-droit-applicable-et-playbook"
+      ],
+      "plainExplanation": "Donnez-lui toujours el contrato reçu, el camp que vous défendez (client o fournisseur), la loi del pays y votre guide interne de los clauses acceptables.",
+      "rationale": "Para qu'una révision contractuelle en Harvey Assistant soit pertinente y directamente exploitable, il faut fournir el contrato source, la partie représentée (ex. Client licencié), el droit applicable ainsi que el playbook définissant los positions cibles y de repli (fallback).",
+      "examTip": "En Harvey Assistant : précisez toujours Rôle représenté + Droit applicable + Playbook (position idéale & fallback).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+      "lessonId": "redaction-revision-contrats-playbook",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "audit-croise-definitions-et-clauses-substantives"
+      ],
+      "plainExplanation": "Demandez systématiquement à Harvey de croiser los mots définis au début del contrato con los articles qui los utilisent.",
+      "rationale": "Una définition excessivement restrictive à l'article 1 peut neutraliser la portée d'una clause substantive. Harvey Assistant permite d'effectuer un audit croisé systématique entre los termes définis y los obligations del contrato.",
+      "examTip": "Ne lisez jamais una clause de garantie o de confidentialité sin faire auditer par Harvey los termes définis auxquels elle renvoie.",
+      "sourceIds": [
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+      "lessonId": "redlining-assiste-ia-et-memos-clients",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "conserver-structure-adverse-inserer-gardes-fous"
+      ],
+      "plainExplanation": "Una retouche ciblée garde el texte familier para l'autre partie tout en protégeant votre client, ce qui accélère la signature.",
+      "rationale": "El redlining chirurgical (à intrusion minimale) conserve la structure y el style del projet adverse tout en insérant exactement los garde-fous requis par el playbook, ce qui facilite l'acceptation rapide par la partie adverse.",
+      "examTip": "En négociation équilibrée, privilégiez el redlining chirurgical à intrusion minimale plutôt que el remplacement intégral d'articles.",
+      "sourceIds": [
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+      "lessonId": "redlining-assiste-ia-et-memos-clients",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "confusion-commentaire-externe-et-note-strategie-interne"
+      ],
+      "plainExplanation": "Il ne faut jamais mélanger los arguments envoyés à l'adversaire y la note confidentielle réservée à votre client.",
+      "rationale": "Los commentaires de marge envoyés à la partie adverse deben contenir únicamente de los justifications objectives de négociation, tandis que l'évaluation del risque y los seuils de repli (fallback/walk-away) deben rester en un mémo interne confidentiel destiné au client.",
+      "examTip": "Séparez toujours el commentaire externe (envoyé à la partie adverse) y la note stratégique interne (couverte par el secreto profesional).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+      "lessonId": "harvey-academy-foundations-ai-legal-basics",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ai-for-legal-basics-et-ai-analysis-for-legal-workflows"
+      ],
+      "plainExplanation": "La certification Level 1 Foundations regroupe AI for Legal Basics y AI Analysis for Legal Workflows para former aux bases y à la vérification de los sorties IA.",
+      "rationale": "La certification officielle Level 1 Foundations de Harvey Academy s'appuie en los cours AI for Legal Basics (littératie IA juridique, usages adaptés y prise de décision consciente de los risques) y AI Analysis for Legal Workflows (structuration de los prompts d'extraction y détection de los erreurs avant diffusion).",
+      "examTip": "[ES] Harvey Academy Level 1 Foundations = AI for Legal Basics + AI Analysis for Legal Workflows.",
+      "sourceIds": [
+        "harvey-academy-blog",
+        "harvey-academy-help"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+      "lessonId": "harvey-academy-foundations-ai-legal-basics",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "utiliser-addin-harvey-for-word-in-situ-avec-playbook"
+      ],
+      "plainExplanation": "L'extension Harvey for Word Add-In permite de rédiger, comparer au playbook y insérer de los révisions ciblées sin quitter Word.",
+      "rationale": "El module Get Started With the Harvey for Word Add-In de Harvey Academy forme los juristes à rédiger, Verificar los définitions y appliquer leur playbook de négociation directamente à l'intérieur de Microsoft Word tout en préservant la structure del archivo .docx.",
+      "examTip": "Para réviser un contrato .docx sin casser sa numérotation : utilisez el Harvey for Word Add-In con votre playbook.",
+      "sourceIds": [
+        "harvey-academy-help",
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+      "lessonId": "vault-audit-data-rooms-due-diligence",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "creer-projet-vault-isole-equipe-dossier"
+      ],
+      "plainExplanation": "Créez un espace Vault dédié à ce dossier y autorisez únicamente los avocats qui travaillent en cette opération.",
+      "rationale": "Chaque opération de Due Diligence M&A en Harvey Vault debe être logée en un projet dédié dont l'acceso est strictement restreint aux membres habilités del dossier (Matter-level access control) afin de respecter los murailles éthiques.",
+      "examTip": "1 Data Room M&A = 1 projet Harvey Vault isolé con contrôle d'acceso par dossier (Ethical Wall).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+      "lessonId": "vault-audit-data-rooms-due-diligence",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "omission-clauses-modifiees-par-avenant"
+      ],
+      "plainExplanation": "Un avenant signé plus tard peut annuler o modifier una clause del contrato d'origine : il faut toujours analyser l'ensemble.",
+      "rationale": "En audit contractuel, un avenant (Amendment) modifie o remplace los stipulations del contrato initial. Exclure los avenants de l'analyse en Harvey Vault expose au risque de manquer una obligation critique ajoutée ultérieurement.",
+      "examTip": "En Due Diligence en Vault, regroupez y analysez toujours ensemble el contrato initial y tous ses avenants successifs.",
+      "sourceIds": [
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+      "lessonId": "grilles-extraction-multi-contrats-review-tables",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "review-table-colonne-fermee-plus-detail-citation"
+      ],
+      "plainExplanation": "Combinez una colonne de tri simple (Oui / Non / Silence) y una colonne qui cite el passage exact con un lien cliquable.",
+      "rationale": "En Harvey Vault, combiner en una Review Table una colonne de classification fermée (para filtrer instantanément los contratos à risque) y una colonne de détail con citation cliquable (para Verificar la clause exacte en el PDF) est la méthode d'audit de référence.",
+      "examTip": "Review Table optimale = 1 colonne de catégorie fermée (filtrable) + 1 colonne de détail sourcé con citation cliquable.",
+      "sourceIds": [
+        "harvey-product-blog",
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+      "lessonId": "grilles-extraction-multi-contrats-review-tables",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "distinguer-absence-clause-et-stipulation-expresse"
+      ],
+      "plainExplanation": "Un contrato qui ne dit rien en un sujet n'a pas el même effet juridique qu'un contrato qui l'interdit explicitement.",
+      "rationale": "En droit de los contratos, el silence d'un acte (absence de clause de changement de contrôle o de cession) n'a pas el même effet juridique qu'una interdiction o una autorisation expresse. Prévoir la catégorie « Silence del contrato » évite toute fausse inférence.",
+      "examTip": "En toute grille d'extraction juridique, distinguez toujours « Interdit », « Autorisé » y « Silence del contrato ».",
+      "sourceIds": [
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+      "lessonId": "harvey-knowledge-recherche-juridique-sourcee",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-bases-juridiques-verifiees-et-citations"
+      ],
+      "plainExplanation": "Il appuie chaque respuesta en de los bases juridiques vérifiées y affiche de los liens cliquables vers los textes officiels.",
+      "rationale": "Harvey Knowledge s'appuie en de los bases documentaires législatives, réglementaires y jurisprudentielles vérifiées y relie chaque affirmation à sa citation source afin d'éliminer los inventions de références.",
+      "examTip": "Harvey Knowledge = ancrage en sources officielles + citations cliquables vers los textes y décisions.",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+      "lessonId": "harvey-knowledge-recherche-juridique-sourcee",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "ouvrir-citations-verifier-vigueur-et-espece"
+      ],
+      "plainExplanation": "Cliquez en los sources citées para Verificar que la loi est toujours en vigueur y s'applique bien à votre cas précis.",
+      "rationale": "Même con un outil juridique ancré, la déontologie y la rigueur imposent d'ouvrir la source citée para Verificar sa date d'entrée en vigueur, l'absence de revirement y l'adéquation de los faits d'espèce au cas del client.",
+      "examTip": "Ouvrez toujours la citation en Harvey Knowledge para Verificar la vigueur del texte y la pertinence de los faits d'espèce.",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+      "lessonId": "harvey-workflows-et-secret-professionnel",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "orchestration-multi-etapes-reproductible-validee"
+      ],
+      "plainExplanation": "Un Workflow enchaîne plusieurs étapes vérifiées en el même ordre para que toute l'equipo produise un travail homogène.",
+      "rationale": "Harvey Workflows permite d'enchaîner de manière structurée y reproductible plusieurs étapes d'un processus juridique (analyse de pièces, extraction, recherche de droit, rédaction d'acte) tout en maintenant el contrôle y la validation de l'avocat.",
+      "examTip": "Harvey Workflows = enchaînement guidé y reproductible d'étapes juridiques complexes con validation humaine.",
+      "sourceIds": [
+        "harvey-platform-overview"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+      "lessonId": "harvey-workflows-et-secret-professionnel",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "zero-entrainement-client-et-isolation-locataire"
+      ],
+      "plainExplanation": "Harvey applique una règle de zéro entraînement en los datos clients y isole hermétiquement chaque dossier.",
+      "rationale": "Harvey applique una politique stricte de zéro-entraînement en los datos de los clients (prompts, documents, livrables) y un cloisonnement complet par organisation y par dossier afin de préserver el secreto profesional y la confidentialité de los affaires.",
+      "examTip": "Protection del secreto profesional en Harvey = Zéro-entraînement en los datos clients + Cloisonnement par dossier (Ethical Walls).",
+      "sourceIds": [
+        "harvey-platform-overview",
+        "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+      "lessonId": "harvey-academy-legal-engineering-credly",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "legal-engineering-certification-et-getting-started-for-admins"
+      ],
+      "plainExplanation": "La Legal Engineering Certification de Harvey Academy valide la conception de workflows juridiques, l'ingénierie de prompts y el contrôle qualité à grande échelle.",
+      "rationale": "En Harvey Academy, la Legal Engineering Certification forme aux compétences de conception y de validation de workflows juridiques reproductibles, tandis que el parcours Getting Started for Admins (4 cours) guide la configuration sécurisée del workspace y l'adoption par los équipes.",
+      "examTip": "Référents & Legal Ops en Harvey Academy = Legal Engineering Certification + Getting Started for Admins.",
+      "sourceIds": [
+        "harvey-academy-blog",
+        "harvey-academy-help"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.002",
+      "lessonId": "harvey-academy-legal-engineering-credly",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "badge-verifie-credly-by-pearson-sans-expiration"
+      ],
+      "plainExplanation": "Après réussite de l'examen en Harvey Academy, un badge numérique vérifiable y sin date d'expiration est émis par Credly by Pearson en l'adresse e-mail del compte Academy.",
+      "rationale": "Harvey Academy délivre ses badges de certification via Credly by Pearson en l'adresse e-mail associée au compte Academy. Ces badges vérifiés ne périment pas y permettent à tout tiers de contrôler l'authenticité de los compétences acquises.",
+      "examTip": "Badges Harvey Academy = émis via Credly by Pearson, vérifiables publiquement y sin date d'expiration.",
+      "sourceIds": [
+        "harvey-academy-help"
+      ]
+    }
+  ]
+}

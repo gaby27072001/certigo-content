@@ -1,0 +1,280 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "m365-copilot-agents",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "ja-JP",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "jeton-entra-acl"
+      ],
+      "plainExplanation": "Copilot utilise のみ ファイル ・ courriels auxquels votre propre compte Microsoft a déjà droit d'accéder.",
+      "rationale": "Microsoft 365 Copilot exécute Grounding Microsoft Graph ・ recherche 内の l'index sémantique (Work IQ) en présentant トークン Entra ID の l'ユーザー connecté : seuls documents ・ courriels auxquels l'analyste a déjà アクセス peuvent être récupérés.",
+      "examTip": "Grounding Graph = 権限 Entra ID の l'ユーザー courant, zéro élévation の privilège ・ zéro réentraînement public.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "surpartage-acl-sharepoint"
+      ],
+      "plainExplanation": "ファイル était déjà partagé par erreur ・ trop の monde 上の SharePoint : il faut restreindre 権限 d'アクセス の dossier.",
+      "rationale": "Lorsque Copilot cite document interne inattendu, c'est que l'ユーザー dispose déjà d' droit の lecture 上の ce ファイル (上の-partage SharePoint/OneDrive). remédiation consiste à corriger ACL SharePoint ・ à appliquer étiquette の sensibilité Microsoft Purview.",
+      "examTip": "document sensible visible 内の Copilot révèle 上の-partage SharePoint (oversharing), jamais fuite の poids の LLM.",
+      "sourceIds": [
+        "ms-copilot-privacy",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "delegation-cowork-plan"
+      ],
+      "plainExplanation": "Déléguez mission à Copilot Cowork : il prépare dossier étape par étape en arrière-plan ・ vous soumet résultat.",
+      "rationale": "Copilot Cowork est conçu 向け planifier ・ exécuter en arrière-plan の travaux multi-étapes croisant plusieurs sources Work IQ (Teams, Outlook, Excel, Word) tout en soumettant livrable à point の contrôle humain.",
+      "examTip": "Mission transversale multi-applications ・ suivi d'étapes = délégation asynchrone Copilot Cowork.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "heritage-identite-et-validation"
+      ],
+      "plainExplanation": "Non, il respecte exactement vos 権限 d'アクセス ・ vous demande confirmation avant toute action importante.",
+      "rationale": "Même en exécution asynchrone, Copilot Cowork opère strictement sous l'ID ・ 権限 の l'ユーザー qui délègue tâche, ・ maintient point d'approbation humaine avant toute diffusion または action externe.",
+      "examTip": "Asynchrone ne veut jamais dire なしで ガバナンス : Cowork conserve vos 権限 Entra ID ・ vos jalons d'approbation.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "copilot-pages-composant-loop"
+      ],
+      "plainExplanation": "Copilot Pages (basé 上の Microsoft Loop) 可能にする の modifier même contenu en direct depuis Teams comme depuis Outlook.",
+      "rationale": "En ouvrant 応答 内の Copilot Pages puis en partageant comme composant Microsoft Loop, table reste synchronisée en temps réel 間の Teams, Outlook, Word ・ web.",
+      "examTip": "Co-édition bidirectionnelle en direct 間の Teams ・ Outlook = Copilot Pages + composant Microsoft Loop.",
+      "sourceIds": [
+        "ms-copilot-pages"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "sharepoint-embedded-purview"
+      ],
+      "plainExplanation": "Elles sont stockées 内の SharePoint Embedded ・ bénéficient 自動的に の mêmes règles の セキュリティ que vos sites SharePoint.",
+      "rationale": "Copilot Pages sont stockées 内の の conteneurs SharePoint Embedded rattachés au locataire Microsoft 365, ce qui 保証する l'application complète の règles の rétention, d'eDiscovery ・ の ガバナンス Microsoft Purview.",
+      "examTip": "Copilot Pages repose 上の SharePoint Embedded : même セキュリティ ・ même conformité Purview que SharePoint Online.",
+      "sourceIds": [
+        "ms-copilot-pages",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "selecteur-slash-fichiers-reference"
+      ],
+      "plainExplanation": "Utilisez bouton « / » 内の Copilot 向け attacher 直接 ファイル の référence avant の lancer rédaction.",
+      "rationale": "内の Copilot 向け Word, l'opérateur `/` 可能にする の pointer explicitement vers の ファイル OneDrive または SharePoint afin d'ancrer génération の texte, の clauses または d' synthèse exécutive 上の ces documents の référence.",
+      "examTip": "内の Word, `/` = attacher ファイル sources qui font foi 向け éviter toute invention.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-ouvert-et-styles-word"
+      ],
+      "plainExplanation": "Structurez d'abord votre document Word ・ の titres clairs, puis créez présentation depuis votre モデル PowerPoint d'企業.",
+      "rationale": "Copilot 内の PowerPoint s'appuie 上の hiérarchie Titre 1 / Titre 2 の ファイル Word 向け découper diapositives ・ générer notes d'orateur, tout en appliquant masques の モデル PowerPoint ouvert.",
+      "examTip": "Styles Titre 1/2 内の Word + モデル d'企業 ouvert 内の PowerPoint = présentation chartée ・ speaker notes.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "let-et-lambda"
+      ],
+      "plainExplanation": "LET 可能にする の donner nom aux étapes の calcul, ・ LAMBDA transforme formule en fonction réutilisable partout 内の classeur.",
+      "rationale": "fonction `LET` nomme ・ stocke calculs intermédiaires au sein d' formule 向け améliorer lisibilité ・ performances, tandis que `LAMBDA` transforme cette logique en fonction personnalisée réutilisable なしで macro VBA.",
+      "examTip": "Variables locales 内の formule Excel = LET · Fonction métier réutilisable なしで VBA = LAMBDA.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "conteneur-isole-azure-xl"
+      ],
+      "plainExplanation": "Il tourne 内の espace isolé Microsoft Cloud なしで aucun アクセス à Internet, ce qui protège vos tableaux financiers.",
+      "rationale": "Python in Excel exécute code 内の conteneur isolé par hyperviseur 上の Azure Container Instances なしで アクセス au ネットワーク, au disque local ni au トークン ユーザー, ・ n'accède qu'aux データ passées via `xl()`.",
+      "examTip": "Python in Excel = conteneur Azure isolé, zéro アクセス ネットワーク ・ lecture exclusive via `xl()`.",
+      "sourceIds": [
+        "ms-python-excel"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "transcription-ou-enregistrement-actif"
+      ],
+      "plainExplanation": "transcription (または l'enregistrement) の réunion 必要がある avoir été activée 向け que Copilot puisse lire échanges passés.",
+      "rationale": "向け synthétiser échanges passés ・ attribuer actions à leurs propriétaires, Copilot 内の Teams ・ Intelligent Meeting Recap s'appuient 上の transcription (または l'enregistrement transcrit) ・ identification の orateurs.",
+      "examTip": "なしで transcription active 内の Teams, Copilot ne peut ni citer décisions passées ni attribuer actions aux intervenants.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "analyse-ton-ressenti-clarte"
+      ],
+      "plainExplanation": "Elle relit votre brouillon ・ vous conseille 向け rendre ton plus diplomatique ・ message plus clair avant l'envoi.",
+      "rationale": "Coaching by Copilot 内の Outlook examine brouillon d'e-mail 上の trois axes (ton, ressenti の lecteur ・ clarté) ・ fournit の recommandations concrètes avant l'envoi.",
+      "examTip": "Générer brouillon = Draft with Copilot · Améliorer ton, l'impact ・ clarté d' texte = Coaching by Copilot.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "agent-autonome-copilot-studio"
+      ],
+      "plainExplanation": "Il faut agent autonome 内の Copilot Studio, car lui seul peut réagir 自動的に à événement système.",
+      "rationale": "agent qui réagit 自動的に à événement の データ (création d'entrée Dataverse) なしで intervention initiale d' ユーザー 内の chat est agent autonome conçu 内の Microsoft Copilot Studio.",
+      "examTip": "Déclencheur d'événement système (Dataverse, boîte partagée, planification) なしで prompt humain = Agent autonome Copilot Studio.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "cadrage-sources-sur-orchestrateur-m365"
+      ],
+      "plainExplanation": "Lorsqu'on veut spécialiser chat Copilot 上の base documentaire précise の l'企業 ・ quelques outils ciblés.",
+      "rationale": "agent déclaratif spécialise Microsoft 365 Copilot en définissant の instructions 上の mesure, の sources SharePoint/Graph bornées ・ の actions tout en s'appuyant 上の l'orchestrateur ・ セキュリティ の M365 Copilot.",
+      "examTip": "[JA] Agent déclaratif = instructions + sources bornées + actions exécutées par l'orchestrateur M365 Copilot.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "elevation-privileges-via-auteur"
+      ],
+      "plainExplanation": "N'importe quel employé pourrait alors 活用： l'agent 向け faire の opérations réservées à l'administrateur.",
+      "rationale": "Exécuter action d'écriture ERP ・ identifiants の l'auteur 可能にする à tout ユーザー の l'agent d'agir ・ 権限 の cet auteur. Il faut imposer l'authentification の l'ユーザー final (`User authentication`).",
+      "examTip": "上の toute action qui lit の データ privées または modifie système métier, imposez l'authentification の l'ユーザー final.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "descriptions-detaillees-actions-parametres"
+      ],
+      "plainExplanation": "Rédigez description très précise 上の chaque outil en indiquant quand l'活用： ・ quand ne pas l'活用：.",
+      "rationale": "L'orchestrateur génératif sélectionne ses outils ・ renseigne leurs arguments à partir の descriptions en langage naturel の chaque action ・ の chaque paramètre.",
+      "examTip": "description d' action Copilot Studio fait partie の prompt の routage の l'orchestrateur : soyez explicite ・ discriminant.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "heritage-etiquette-plus-restrictive"
+      ],
+      "plainExplanation": "résumé reçoit 自動的に l'étiquette plus stricte (« Confidentiel Direction ») 向け éviter toute fuite.",
+      "rationale": "Microsoft 365 Copilot applique règle d'héritage の Microsoft Purview : lorsqu' 応答 または document combine plusieurs sources, l'étiquette の sensibilité ayant priorité plus élevée ( plus restrictive) est 自動的に appliquée.",
+      "examTip": "Fusion multi-documents 内の Copilot = héritage automatique の l'étiquette Purview plus restrictive.",
+      "sourceIds": [
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "politique-dlp-power-platform"
+      ],
+      "plainExplanation": "règle の protection contre perte の データ (DLP Power Platform) bloque tout transfert 間の SharePoint ・ の connecteurs externes.",
+      "rationale": "politiques DLP (Data Loss Prevention) の Power Platform permettent d'分離： connecteurs métier (Business) の connecteurs externes ・ の bloquer connecteurs HTTP non autorisés 内の Copilot Studio.",
+      "examTip": "Empêcher agent Copilot Studio d'exfiltrer の データ SharePoint vers API tierce = Politique DLP Power Platform.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-privacy"
+      ]
+    }
+  ]
+}

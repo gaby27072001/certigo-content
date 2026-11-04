@@ -1,0 +1,163 @@
+{
+  "schema": "certigo.editorial.pilot/v1",
+  "id": "responsible-ai-assistants",
+  "locale": "ar-SA",
+  "status": "draft",
+  "purpose": "learning-not-certification",
+  "title": "Travailler مع assistant IA بدون lui تفويض son jugement",
+  "audience": "Personnes qui débutent مع assistants IA من أجل lire documentation, préparer diagnostic أو proposer modification technique.",
+  "prerequisites": "Savoir ouvrir documentation و distinguer environnement من test d' environnement من production. Aucun compte AWS ni الوصول à assistant n'est nécessaire.",
+  "estimatedMinutes": 18,
+  "asOf": "2026-10-14",
+  "scope": "Pilote d'apprentissage original, en français, بدون notation ni préparation à certification أو à titre officiel. situations sont fictives. conseils من travail sont من choix pédagogiques من CertiGo ; faits propres à Amazon Bedrock sont bornés aux pages AWS consultées à date indiquée. Ne pas exécuter من commande, envoyer من document réel ni modifier من permission من أجل suivre ce pilote.",
+  "sources": [
+    {
+      "id": "aws-kb-overview",
+      "title": "Retrieve data وgenerate AI responses with Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "checkedOn": "2026-10-14",
+      "supports": "base من connaissances recherche من informations في من sources ; informations retrouvées peuvent enrichir الاستجابة générée. citations permettent من remonter aux sources من أجل التحقق من الاستجابة.",
+      "limits": "citation n'atteste ni vérité من toute الاستجابة ni l'actualité من source. capacités و الصلاحيات dépendent من type من base و من sa configuration ; ne pas généraliser à tout assistant."
+    },
+    {
+      "id": "aws-kb-rag",
+      "title": "How Amazon Bedrock knowledge bases work (مسار CertiGo)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-it-works.html",
+      "checkedOn": "2026-10-14",
+      "supports": "في parcours RAG vectoriel décrit, من documents non structurés sont découpés, convertis en représentations numériques و indexés. الطلب est aussi représentée numériquement ; من passages proches sont retrouvés puis ajoutés au contexte transmis au النموذج.",
+      "limits": "C'est parcours vectoriel من documents non structurés, pas description من tous modes من recherche. L'utilisation d' النموذج من أجل calculer من embeddings n'est pas son entraînement ; ingestion n'est pas ajustement من paramètres من النموذج générateur."
+    },
+    {
+      "id": "aws-grounding",
+      "title": "Use contextual grounding check to filter hallucinations in responses (مسار CertiGo)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html",
+      "checkedOn": "2026-10-14",
+      "supports": "contrôles d'ancrage contextuel évaluent l'appui d' الاستجابة على source من référence و sa pertinence من أجل الطلب, مع من scores و من seuils configurables.",
+      "limits": "Ces contrôles ne certifient pas vérité externe من source. page consultée limite usages pris en charge à synthèse, reformulation و questions-réponses, hors chatbot conversationnel. score ne يجب pas être présenté comme probabilité من vérité ni comme garantie من confidentialité."
+    },
+    {
+      "id": "aws-data-protection",
+      "title": "Data protection (مسار CertiGo)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "checkedOn": "2026-10-14",
+      "supports": "client garde responsabilité من son contenu و من configuration من الأمان. AWS recommande من الصلاحيات limitées au travail nécessaire و déconseille informations sensibles في tags, champs من nom libres و URL contenant من identifiants.",
+      "limits": "Cette page ne donne pas autorisation d'envoyer من البيانات من l'organisation. règles من conservation, journalisation, الوصول و traitements يجب être vérifiés من أجل service و configuration utilisés ; ni filtre ni التشفير ne garantissent à eux seuls confidentialité."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "verify-claims",
+      "title": "الاستجابة convaincante n'est pas preuve",
+      "objective": "Proposer plan من vérification d' affirmation technique : عزل ce qui est à التحقق من, préciser sources و conditions à rechercher و formuler décision bornée si preuves manquent.",
+      "estimatedMinutes": 6,
+      "hook": "assistant rédige note claire en quelques secondes. risque commence quand sa clarté remplace votre vérification.",
+      "keyIdeas": [
+        "Traitez الاستجابة comme proposition. Séparez faits vérifiables, hypothèses و recommandations. citation est piste من vérification, pas certificat من vérité.",
+        "Choisissez source adaptée : documentation officielle من أجل comportement d' service, référence من version concernée من أجل API, procédure interne autorisée من أجل règle من votre organisation. témoignage peut aider à chercher بدون établir règle générale.",
+        "Ouvrez source و cherchez passage qui soutient exactement l'affirmation. Vérifiez service, version, région و conditions utiles. Si passage ne suffit pas, notez ce qui reste inconnu au lieu من compléter par intuition.",
+        "contrôle d'ancrage contextuel compare الاستجابة à source و à demande. الاستجابة peut être conforme à document erroné أو périmé. contrôle favorable ne remplace donc pas vérification humaine."
+      ],
+      "workedExample": {
+        "situation": "من أجل préparer revue technique, Camille reçoit cette proposition fictive : « Notre الاستجابة cite document و passe contrôle d'ancrage, donc toutes ses affirmations sont exactes. » Aucune modification n'a encore été appliquée.",
+        "steps": [
+          "عزل conclusion à التحقق من : citations و contrôle favorable garantiraient l'exactitude من toutes affirmations.",
+          "Consulter pages AWS Knowledge Bases و contextual grounding checks : l' يتيح من remonter aux sources ; l'autre décrit comparaison مع source و الطلب, pas audit من vérité universel.",
+          "Relire document cité, التحقق من sa date و rapprocher chaque affirmation importante d' passage précis. Signaler affirmations non étayées و celles dont conditions ne correspondent pas au contexte.",
+          "Conserver في note source, sa date من consultation, conditions vérifiées و incertitudes. Ne pas transformer incertitude en consigne من production."
+        ],
+        "decision": "Camille retire garantie d'exactitude و fait relire points non établis avant toute action. citation utile و contrôle favorable réduisent certains risques ; ils ne suppriment pas besoin من التحقق من."
+      },
+      "practice": {
+        "prompt": "collègue propose : « Ce réglage fonctionne في toutes régions ; l'assistant cite page AWS. » Ce cas fictif ne précise ni réglage ni page : il sert à préparer vérification, pas à réaliser. بدون compte cloud, isolez l'affirmation à التحقق من, proposez deux vérifications مع sources à rechercher و formulez décision à prendre si page ne couvre que votre région من test.",
+        "successCriteria": [
+          "عزل généralisation « في toutes régions » و prévoir من confronter réglage و ses conditions au passage cité.",
+          "Prévoir من rechercher documentation officielle من régions prises en charge à version أو date utile ; demander nom من réglage و lien manquants.",
+          "Formuler décision conditionnelle : ne pas généraliser au-delà من régions établies, suspendre déploiement envisagé و demander revue si informations manquent."
+        ],
+        "feedback": "Votre production est plan : elle ne prouve pas que vous avez trouvé أو vérifié source. deuxième الاستجابة من l'assistant ne constituerait pas preuve indépendante. plan يجب nommer informations manquantes, sources à rechercher و limite من décision. recherche effective d' passage و transfert à cas nouveau restent à pratiquer و à observer ultérieurement."
+      },
+      "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence من preuve, dire ce qui manque est plus utile que parler مع assurance.",
+      "sourceIds": [
+        "aws-kb-overview",
+        "aws-grounding"
+      ]
+    },
+    {
+      "id": "retrieval-not-training",
+      "title": "Donner من contexte n'est pas entraîner النموذج",
+      "objective": "شرح parcours RAG vectoriel d' document و distinguer indexation, recherche, contexte و entraînement.",
+      "estimatedMinutes": 6,
+      "hook": "Vous ajoutez procédure à base documentaire. L'assistant peut ensuite retrouver : a-t-il appris cette procédure في ses paramètres ? Pas par cette seule opération.",
+      "keyIdeas": [
+        "RAG signifie génération enrichie par recherche : l'application retrouve من l'information puis fournit au النموذج comme contexte من أجل produire الاستجابة.",
+        "في parcours vectoriel non structuré décrit par AWS, l'ingestion prépare documents : extraction من texte, découpage en passages, calcul d'embeddings و التخزين في index. embedding est représentation numérique utilisée من أجل comparer من contenus, pas الاستجابة ni garantie من compréhension.",
+        "Lors d' demande, النموذج d'embeddings représente aussi الطلب. recherche sélectionne من passages proches, puis ces passages complètent contexte envoyé au النموذج générateur. passage pertinent peut malgré tout être incomplet, obsolète أو mal interprété.",
+        "L'entraînement أو l'ajustement d' النموذج modifie ses paramètres. Calculer من embeddings مع النموذج existant و ajouter من documents à index ne réentraîne pas, par ces seules opérations, النموذج générateur. Cela n'affirme rien على autres traitements أو conservation من البيانات من service.",
+        "Toutes recherches ne suivent pas ce parcours vectoriel : mot RAG ne suffit pas à décrire l'architecture, الوصول أو البيانات réellement transmises."
+      ],
+      "workedExample": {
+        "situation": "يقوم فريق indexe procédure fictive « test من reprise, version 2 ». الطلب retrouve ancien passage من version 1. L'الفريق conclut que النموذج a mal appris nouvelle procédure.",
+        "steps": [
+          "Distinguer procédure stockée, passages indexés, passages retrouvés و الاستجابة générée. Ne pas attribuer immédiatement défaut à l'entraînement.",
+          "التحقق من, في revue بدون البيانات réelles, quelle version a été ingérée و quels passages recherche a sélectionnés. document ajouté mais non synchronisé peut manquer في l'index.",
+          "Comparer passages transmis au النموذج مع procédure en vigueur. Si contexte est ancien, examiner l'ingestion و recherche ; si contexte est adéquat mais الاستجابة diverge, examiner génération و vérification.",
+          "Faire approuver toute mise à jour من base par son responsable ; ne pas lancer entraînement ni élargir الوصول من أجل masquer problème."
+        ],
+        "decision": "L'الفريق cherche d'abord où version périmée بين في parcours. Mettre à jour index و ajuster paramètres d' النموذج sont من opérations différentes, مع من objectifs و من risques différents."
+      },
+      "practice": {
+        "prompt": "Reconstituez à l'écrit trajet d' procédure fictive jusqu'à الاستجابة RAG vectorielle. Placez découpage, embeddings من documents, l'index, représentation من الطلب, passages retrouvés و contexte. Expliquez ensuite pourquoi « document est indexé » ne signifie pas « النموذج générateur a été réentraîné ».",
+        "successCriteria": [
+          "Séparer préparation من documents من recherche effectuée lors d' demande.",
+          "Placer embeddings من passages في l'index و représentation من الطلب avant comparaison.",
+          "Placer passages retrouvés في contexte avant génération.",
+          "Distinguer l'utilisation d' النموذج existant من أجل calculer من vecteurs d' modification من ses paramètres par entraînement."
+        ],
+        "feedback": "trajet attendu est : document → passages → embeddings → index ; puis الطلب → représentation → recherche من passages → contexte enrichi → الاستجابة. Si vous avez relié مباشرة l'index aux paramètres من générateur, reprenez distinction بين contexte fourni à demande و entraînement. Ce schéma n'est pas universel à toutes bases من connaissances."
+      },
+      "recap": "L'index sert à retrouver ; contexte sert à informer demande ; l'entraînement sert à modifier paramètres. Ne confondez pas ces trois rôles.",
+      "sourceIds": [
+        "aws-kb-rag",
+        "aws-kb-overview"
+      ]
+    },
+    {
+      "id": "stop-and-escalate",
+      "title": "Savoir s'arrêter avant d'envoyer أو d'autoriser",
+      "objective": "Repérer donnée sensible أو الوصول excessif, suspendre l'action و demander décision au responsable adapté.",
+      "estimatedMinutes": 6,
+      "hook": "diagnostic peut être techniquement utile و pourtant inacceptable si البيانات أو الحقوق nécessaires ne sont pas autorisés.",
+      "keyIdeas": [
+        "Avant من transmettre, identifiez البيانات, destinataire, finalité و l'autorisation. Secrets, البيانات personnelles, السجلات clients و documents internes demandent vérification spécifique. Pouvoir lire الملف ne donne pas تلقائياً droit من l'envoyer à assistant.",
+        "choix d' service approuvé ne dispense pas من التحقق من sa configuration : الوصول, journalisation, conservation و règles internes. responsabilité partagée ne signifie pas que fournisseur prend toutes décisions à votre place.",
+        "filtre من البيانات sensibles peut aider, mais il ne يضمن pas من tout détecter. Retirer nom ne suffit pas toujours à anonymiser journal. Préférez exemple synthétique بدون donnée réelle si cela répond au besoin و respecte règles internes.",
+        "Demandez seulement الصلاحيات nécessaires à tâche. Face à demande d'administration globale, ne cliquez pas من أجل gagner من temps : demandez au responsable من الوصول revue من besoin و permission limitée.",
+        "Si donnée أو l'autorisation est incertaine, arrêtez l'envoi أو modification. Contactez propriétaire من البيانات, référent الأمان أو responsable من الوصول selon cas, en décrivant besoin بدون reproduire secret."
+      ],
+      "workedExample": {
+        "situation": "Nora prépare diagnostic fictif. journal proposé contient من adresses من clients و الرمز d'الوصول. L'assistant suggère من l'envoyer à outil externe و من lui attribuer rôle administrateur من أجل lire d'autres السجلات.",
+        "steps": [
+          "Ne pas envoyer journal ni accorder rôle. L'outil destinataire و l'usage من ces البيانات ne sont pas encore autorisés.",
+          "Décrire blocage au propriétaire من السجلات و au référent الأمان بدون joindre الرمز ni البيانات clients. Si secret a déjà été exposé, suivre procédure d'incident و demander sa révocation أو rotation par personne habilitée.",
+          "Proposer reproduction synthétique من message d'erreur من أجل commencer diagnostic, sous réserve من règles internes. Ne pas supposer qu' simple suppression من noms rend journal partageable.",
+          "Faire examiner par responsable من الوصول périmètre réellement nécessaire. Reprendre seulement مع destinataire approuvé, من البيانات autorisées و الصلاحيات validées."
+        ],
+        "decision": "Nora suspend l'action à risque و garde diagnostic au stade d' exemple fictif. filtre من l'assistant أو promesse « nous ne réentraînons pas النموذج » ne vaut ni autorisation من transfert ni garantie من confidentialité."
+      },
+      "practice": {
+        "prompt": "يقوم فريق veut envoyer capture من journal interne à assistant : noms sont masqués, mais identifiant من client و URL من connexion restent visibles. Elle demande aussi الوصول administrateur temporaire. Rédigez الاستجابة من trois phrases : ce que vous suspendez, à qui vous demandez revue و comment poursuivre بدون transmettre من البيانات réelles.",
+        "successCriteria": [
+          "Suspendre l'envoi و l'attribution من rôle, بدون déclarer capture anonyme ni rôle acceptable parce qu'il est temporaire.",
+          "Demander revue au propriétaire من البيانات أو au référent الأمان من أجل transfert, و au responsable من الوصول من أجل الصلاحيات.",
+          "Proposer exemple synthétique و permission limitée au besoin, à faire valider avant من reprendre."
+        ],
+        "feedback": "Masquer noms ne règle pas autres identifiants ni informations éventuellement contenues في l'URL. rôle temporaire peut encore donner trop من الحقوق. bonne الاستجابة nomme blocage, décideur و voie من travail sûre ; elle ne copie pas éléments sensibles في demande من revue."
+      },
+      "recap": "البيانات أو الحقوق incertains → arrêter l'action → décrire besoin بدون secret → obtenir revue adaptée. qualité technique ne remplace jamais l'autorisation.",
+      "sourceIds": [
+        "aws-data-protection",
+        "aws-grounding"
+      ]
+    }
+  ]
+}

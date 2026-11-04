@@ -1,0 +1,279 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "zh-Hans",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "lessonId": "choix-modele-gpt4o-vs-o3-o4mini",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-raisonnement-o3"
+      ],
+      "plainExplanation": "模型 o3 prend temps 的 réfléchir étape par étape avant 的 répondre, ce qui rend idéal 用于 calculs 与 règles complexes.",
+      "rationale": "模型 的 raisonnement `o3` est conçu 用于 consacrer 一项 chaîne 的 pensée interne à résolution 的 problèmes mathématiques, logiques, algorithmiques 与 réglementaires à fortes contraintes croisées.",
+      "examTip": "Problème complexe à multiples contraintes logiques 或 financières = 模型 的 raisonnement `o3`.",
+      "sourceIds": [
+        "openai-academy-courses",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "lessonId": "choix-modele-gpt4o-vs-o3-o4mini",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "raisonnement-rapide-economique-haut-debit"
+      ],
+      "plainExplanation": "o3 offre réflexion plus poussée 用于 cas difficiles, tandis qu'o4-mini réfléchit beaucoup plus vite 与 coûte moins cher.",
+      "rationale": "`o4-mini` est optimisé 用于 offrir 一个 raisonnement technique, mathématique 与 logiciel rapide à moindre 成本 与 faible latence, tandis qu'`o3` vise profondeur 的 raisonnement maximale 在 cas plus ardus.",
+      "examTip": "`o3` = profondeur analytique maximale · `o4-mini` = raisonnement technique rapide 与 économique.",
+      "sourceIds": [
+        "openai-academy-courses",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "lessonId": "deep-research-et-data-analysis",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "deep-research-multi-sources"
+      ],
+      "plainExplanation": "Deep Research explore méthodiquement sources pendant plusieurs minutes 与 livre 一个 rapport vérifiable citation par citation.",
+      "rationale": "Deep Research planifie 与 exécute 一项 recherche approfondie 在 的 multiples sources, recoupe informations 与 génère 一个 rapport structuré accompagné 的 citations vérifiables.",
+      "examTip": "Étude approfondie multi-sources 配合 rapport sourcé = Deep Research.",
+      "sourceIds": [
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "lessonId": "deep-research-et-data-analysis",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "inspecter-code-python-filtres"
+      ],
+      "plainExplanation": "Ouvrez code Python exécuté par ChatGPT 用于 验证 s'il n'a pas oublié 的 filtrer commandes annulées 或 doublons.",
+      "rationale": "在 Data Analysis, calcul est exact par rapport au script Python exécuté, mais 一个 écart fonctionnel provient souvent 的 filtres 的 nettoyage (commandes annulées, devises, doublons). Ouvrir code Python (`</>`) 支持 d'auditer 与 d'ajuster immédiatement règle 的 filtrage.",
+      "examTip": "在 Data Analysis, ouvrez toujours bloc `</>` 用于 验证 filtres `pandas` appliqués à vos colonnes.",
+      "sourceIds": [
+        "openai-academy-courses",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "lessonId": "canvas-projects-custom-gpts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "editeur-canvas-selection"
+      ],
+      "plainExplanation": "Utilisez Canvas 用于 sélectionner 仅 lignes à améliorer tout en gardant reste 的 文件 intact.",
+      "rationale": "Canvas offre 一个 éditeur côte à côte permettant 的 cibler 一项 plage 的 lignes précise 在 一个 code 或 一个 texte 用于 modifier 在 place tout en conservant reste 的 文件 与 l'historique 的 versions.",
+      "examTip": "Retouche chirurgicale d'一个 passage 或 d'一项 fonction 配合 gestion 的 versions = Canvas.",
+      "sourceIds": [
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "lessonId": "canvas-projects-custom-gpts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "project-dossier-vs-custom-gpt-assistant-partage"
+      ],
+      "plainExplanation": "一个 Project sert à organiser vos 文件 与 discussions 在 一个 dossier, alors qu'一个 Custom GPT sert à 共享 一个 assistant prêt à l'emploi 配合 toute l'团队.",
+      "rationale": "一个 Project structure 一个 dossier 的 travail continu (instructions, 文件 与 conversations d'一个 chantier), alors qu'一个 Custom GPT encapsule 一个 assistant spécialisé (instructions, connaissances 与 Actions) destiné à être partagé 与 réutilisé 在 l'企业.",
+      "examTip": "Project = mon espace 的 dossier continu · Custom GPT = assistant métier standardisé partagé 配合 l'团队.",
+      "sourceIds": [
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "lessonId": "codex-architecture-sandbox-isolation",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "prevention-exfiltration-et-supply-chain"
+      ],
+      "plainExplanation": "Couper Internet pendant que l'agent code empêche toute fuite 的 code secret vers l'extérieur.",
+      "rationale": "在 OpenAI Codex, l'访问 Internet sortant est coupé pendant boucle d'exécution 的 l'agent afin d'empêcher l'exfiltration 的 code propriétaire 或 的 secrets 与 d'interdire téléchargement 的 code externe non approuvé.",
+      "examTip": "在 sandbox Codex : 网络 ouvert 仅 au setup initial 的 dépendances, puis 网络 coupé pendant l'exécution 的 l'agent.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "lessonId": "codex-architecture-sandbox-isolation",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "installer-dependances-script-setup"
+      ],
+      "plainExplanation": "Ajoutez l'installation 的 cet outil 在 script 的 préparation 的 conteneur, qui s'exécute avant coupure d'Internet.",
+      "rationale": "Puisque l'访问 网络 est désactivé pendant que l'agent Codex travaille, toutes dépendances (`pip`, `npm`, compilateurs) 必须 être installées 在 script 的 setup 的 l'environnement qui s'exécute avant coupure 网络.",
+      "examTip": "Dépendance manquante 在 sandbox Codex = l'ajouter au script 的 setup initial 的 l'environnement.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "lessonId": "codex-agents-md-pr-revue-code",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "instructions-persistantes-build-test-invariants"
+      ],
+      "plainExplanation": "Il indique 自动 à Codex comment lancer tests 与 quelles règles 的 code respecter 在 ce projet.",
+      "rationale": "`AGENTS.md` est lu 自动 par Codex 用于 connaître l'organisation 的 dépôt, invariants d'architecture 与 commandes exactes 的 build, 的 lint 与 的 test à exécuter avant 的 proposer 一项 Pull Request.",
+      "examTip": "`AGENTS.md` = 合同 opérationnel versionné qui guide Codex 在 votre dépôt.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "lessonId": "codex-agents-md-pr-revue-code",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "lancer-quatre-taches-paralleles-avec-tests"
+      ],
+      "plainExplanation": "Lancez quatre tâches Codex en parallèle : chacune travaille 在 son propre espace isolé 与 prépare sa correction.",
+      "rationale": "Chaque tâche Codex tournant 在 son propre conteneur cloud isolé, 委派 quatre correctifs indépendants en parallèle 配合 exigence 的 tests unitaires produit quatre Pull Requests propres 与 ciblées.",
+      "examTip": "Bugs indépendants 在 的 modules distincts = exécution parallèle en conteneurs Codex dédiés.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "lessonId": "codex-debugging-ci-securite",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "test-reproducteur-rouge-puis-correctif-vert"
+      ],
+      "plainExplanation": "Il 必须 d'abord écrire 一个 test qui met bug en évidence, corriger code jusqu'à ce que test passe, puis relancer tous tests.",
+      "rationale": "Reproduire d'abord bug au moyen d'一个 test qui échoue (Red), appliquer correctif minimal qui fait passer (Green), puis exécuter toute suite 的 validation 确保 que cause racine a bien été traitée.",
+      "examTip": "用于 tout bug confié à Codex : 1. Test reproducteur rouge ➔ 2. Correctif minimal vert ➔ 3. Suite complète.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "lessonId": "codex-debugging-ci-securite",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "rejeter-contournement-garde-corriger-source"
+      ],
+      "plainExplanation": "Refusez immédiatement : il faut corriger problème 在 文件, jamais affaiblir 或 contourner contrôle 的 安全.",
+      "rationale": "一个 agent ne 必须 jamais faire verdir CI en désactivant 或 en contournant 一项 garde 的 安全. Il faut rejeter l'exclusion 与 corriger donnée fautive tout en maintenant garde active.",
+      "examTip": "En revue 的 PR d'agent, refusez tout diff qui affaiblit 一个 schéma 或 ajoute 一项 exclusion à 一项 garde 的 安全.",
+      "sourceIds": [
+        "openai-codex-intro",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "lessonId": "responses-api-structured-outputs",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "structured-outputs-json-schema-strict"
+      ],
+      "plainExplanation": "Activez Structured Outputs 配合 strict: true 用于 garantir que 响应 suit votre 模型 JSON 无 erreur.",
+      "rationale": "Structured Outputs (`json_schema` 配合 `strict: true` 与 `additionalProperties: false`) applique 一个 décodage contraint par grammaire qui 确保 à 100 % présence 的 clés requises, respect 的 types 与 的 énumérations.",
+      "examTip": "Zéro erreur 的 parsing JSON en production = Structured Outputs 配合 `strict: true` 与 `additionalProperties: false`.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "lessonId": "responses-api-structured-outputs",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "champ-requis-avec-type-nullable"
+      ],
+      "plainExplanation": "Mettez tous champs 在 liste obligatoire (required), mais autorisez valeur null 用于 champ facultatif.",
+      "rationale": "En mode `strict: true`, toutes propriétés d'一个 objet 必须 figurer 在 tableau `required` 与 `additionalProperties` 必须 valoir `false` ; 一个 champ optionnel est donc typé en union 配合 `null` (`[\"string\", \"null\"]`).",
+      "examTip": "En mode `strict: true` : `additionalProperties: false` partout + tous champs 在 `required` (使用 `[\"type\", \"null\"]` si optionnel).",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "lessonId": "function-calling-agents-sdk-guardrails",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "idor-injection-prompt-identifiant"
+      ],
+      "plainExplanation": "一个 用户 malveillant pourrait ruser 配合 chat 用于 faire lire à l'IA dossier confidentiel d'一个 autre client.",
+      "rationale": "Ne laissez jamais 模型 fournir seul l'identifiant 的 propriétaire 的 ressource (`patient_id`, `user_id`, `tenant_id`). serveur 必须 lier l'appel au 令牌 d'authentification vérifié 的 l'用户 connecté 用于 bloquer toute attaque IDOR par prompt injection.",
+      "examTip": "En Function Calling, l'身份 的 l'用户 与 ses 权限 viennent toujours 的 令牌 serveur, jamais 的 arguments générés par LLM.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "lessonId": "function-calling-agents-sdk-guardrails",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "guardrail-tripwire"
+      ],
+      "plainExplanation": "Utilisez 一个 garde-fou (Guardrail) 配合 arrêt d'urgence (tripwire) qui bloque l'agent avant toute action.",
+      "rationale": "在 l'OpenAI Agents SDK, Guardrails s'exécutent en parallèle 与 peuvent 启用 一个 `tripwire` (disjoncteur) qui lève immédiatement 一项 exception 与 stoppe l'exécution 的 l'agent avant tout appel d'outil.",
+      "examTip": "Guardrail + `tripwire` = arrêt immédiat 的 l'agent en cas d'entrée malveillante 或 hors périmètre.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "lessonId": "evaluations-systematiques-openai-evals",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "executer-suite-evals-avant-deploiement"
+      ],
+      "plainExplanation": "Lancez 一项 batterie automatique 的 cas 的 test (Evals) 与 vérifiez que score reste au moins aussi bon qu'avant.",
+      "rationale": "Toute modification 的 prompt système, 的 schéma d'outil 或 的 模型 必须 être validée par 一项 suite automatisée OpenAI Evals 在 jeu 的 référence avant d'être promue en production.",
+      "examTip": "一个 prompt 或 一个 choix 的 模型 se teste en CI 配合 OpenAI Evals exactement comme 的 code applicatif.",
+      "sourceIds": [
+        "openai-platform-docs",
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+      "lessonId": "evaluations-systematiques-openai-evals",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "grader-deterministe-arguments-outil"
+      ],
+      "plainExplanation": "Utilisez 一项 vérification directe 的 texte 或 的 champ JSON plutôt que 的 payer 一项 seconde IA 用于 noter 响应.",
+      "rationale": "Lorsqu'一个 résultat attendu est structurel 与 exact (nom 的 fonction appelée 与 valeur d'一个 code devise), 一个 grader déterministe est 100 % reproductible, instantané 与 无 成本 d'inférence.",
+      "examTip": "Utilisez 一个 grader déterministe chaque fois que sortie attendue est 一个 champ structuré, 一个 code 或 一个 `tool_call` exact.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    }
+  ]
+}

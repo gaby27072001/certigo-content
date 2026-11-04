@@ -1,0 +1,163 @@
+{
+  "schema": "certigo.editorial.pilot/v1",
+  "id": "responsible-ai-assistants",
+  "locale": "zh-Hans",
+  "status": "draft",
+  "purpose": "learning-not-certification",
+  "title": "Travailler 配合 一个 assistant IA 无 lui 委派 son jugement",
+  "audience": "Personnes qui débutent 配合 assistants IA 用于 lire 一项 documentation, préparer 一个 diagnostic 或 proposer 一项 modification technique.",
+  "prerequisites": "Savoir ouvrir 一项 documentation 与 distinguer 一个 environnement 的 test d'一个 environnement 的 production. Aucun compte AWS ni 访问 à 一个 assistant n'est nécessaire.",
+  "estimatedMinutes": 18,
+  "asOf": "2026-10-14",
+  "scope": "Pilote d'apprentissage original, en français, 无 notation ni préparation à 一项 certification 或 à 一个 titre officiel. situations sont fictives. conseils 的 travail sont 的 choix pédagogiques 的 CertiGo ; faits propres à Amazon Bedrock sont bornés aux pages AWS consultées à date indiquée. Ne pas exécuter 的 commande, envoyer 的 document réel ni modifier 的 permission 用于 suivre ce pilote.",
+  "sources": [
+    {
+      "id": "aws-kb-overview",
+      "title": "Retrieve data 与generate AI responses with Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "checkedOn": "2026-10-14",
+      "supports": "一项 base 的 connaissances recherche 的 informations 在 的 sources ; informations retrouvées peuvent enrichir 一项 响应 générée. citations permettent 的 remonter aux sources 用于 验证 响应.",
+      "limits": "一项 citation n'atteste ni vérité 的 toute 响应 ni l'actualité 的 source. capacités 与 权限 dépendent 的 type 的 base 与 的 sa configuration ; ne pas généraliser à tout assistant."
+    },
+    {
+      "id": "aws-kb-rag",
+      "title": "How Amazon Bedrock knowledge bases work (CertiGo 路径)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-it-works.html",
+      "checkedOn": "2026-10-14",
+      "supports": "在 parcours RAG vectoriel décrit, 的 documents non structurés sont découpés, convertis en représentations numériques 与 indexés. 请求 est aussi représentée numériquement ; 的 passages proches sont retrouvés puis ajoutés au contexte transmis au 模型.",
+      "limits": "C'est parcours vectoriel 的 documents non structurés, pas 一项 description 的 tous modes 的 recherche. L'utilisation d'一个 模型 用于 calculer 的 embeddings n'est pas son entraînement ; 一项 ingestion n'est pas 一个 ajustement 的 paramètres 的 模型 générateur."
+    },
+    {
+      "id": "aws-grounding",
+      "title": "Use contextual grounding check to filter hallucinations in responses (CertiGo 路径)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html",
+      "checkedOn": "2026-10-14",
+      "supports": "contrôles d'ancrage contextuel évaluent l'appui d'一项 响应 在 一项 source 的 référence 与 sa pertinence 用于 一项 请求, 配合 的 scores 与 的 seuils configurables.",
+      "limits": "Ces contrôles ne certifient pas vérité externe 的 source. page consultée limite usages pris en charge à synthèse, reformulation 与 questions-réponses, hors chatbot conversationnel. 一个 score ne 必须 pas être présenté comme 一项 probabilité 的 vérité ni comme 一项 garantie 的 confidentialité."
+    },
+    {
+      "id": "aws-data-protection",
+      "title": "Data protection (CertiGo 路径)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "checkedOn": "2026-10-14",
+      "supports": "client garde responsabilité 的 son contenu 与 的 configuration 的 安全. AWS recommande 的 权限 limitées au travail nécessaire 与 déconseille informations sensibles 在 tags, champs 的 nom libres 与 URL contenant 的 identifiants.",
+      "limits": "Cette page ne donne pas 一项 autorisation d'envoyer 的 数据 的 l'organisation. règles 的 conservation, journalisation, 访问 与 traitements 必须 être vérifiés 用于 service 与 configuration utilisés ; ni 一个 filtre ni 加密 ne garantissent à eux seuls confidentialité."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "verify-claims",
+      "title": "一项 响应 convaincante n'est pas 一项 preuve",
+      "objective": "Proposer 一个 plan 的 vérification d'一项 affirmation technique : 隔离 ce qui est à 验证, préciser sources 与 conditions à rechercher 与 formuler 一项 décision bornée si preuves manquent.",
+      "estimatedMinutes": 6,
+      "hook": "一个 assistant rédige 一项 note claire en quelques secondes. risque commence quand sa clarté remplace votre vérification.",
+      "keyIdeas": [
+        "Traitez 响应 comme 一项 proposition. Séparez faits vérifiables, hypothèses 与 recommandations. 一项 citation est 一项 piste 的 vérification, pas 一个 certificat 的 vérité.",
+        "Choisissez 一项 source adaptée : documentation officielle 用于 comportement d'一个 service, référence 的 version concernée 用于 一项 API, procédure interne autorisée 用于 一项 règle 的 votre organisation. 一个 témoignage peut aider à chercher 无 établir 一项 règle générale.",
+        "Ouvrez source 与 cherchez passage qui soutient exactement l'affirmation. Vérifiez service, version, région 与 conditions utiles. Si passage ne suffit pas, notez ce qui reste inconnu au lieu 的 compléter par intuition.",
+        "一个 contrôle d'ancrage contextuel compare 一项 响应 à 一项 source 与 à 一项 demande. 一项 响应 peut être conforme à 一个 document erroné 或 périmé. 一个 contrôle favorable ne remplace donc pas vérification humaine."
+      ],
+      "workedExample": {
+        "situation": "用于 préparer 一项 revue technique, Camille reçoit cette proposition fictive : « Notre 响应 cite 一个 document 与 passe contrôle d'ancrage, donc toutes ses affirmations sont exactes. » Aucune modification n'a encore été appliquée.",
+        "steps": [
+          "隔离 conclusion à 验证 : citations 与 contrôle favorable garantiraient l'exactitude 的 toutes affirmations.",
+          "Consulter pages AWS Knowledge Bases 与 contextual grounding checks : l'一项 支持 的 remonter aux sources ; l'autre décrit 一项 comparaison 配合 一项 source 与 一项 请求, pas 一个 audit 的 vérité universel.",
+          "Relire document cité, 验证 sa date 与 rapprocher chaque affirmation importante d'一个 passage précis. Signaler affirmations non étayées 与 celles dont conditions ne correspondent pas au contexte.",
+          "Conserver 在 note source, sa date 的 consultation, conditions vérifiées 与 incertitudes. Ne pas transformer 一项 incertitude en consigne 的 production."
+        ],
+        "decision": "Camille retire garantie d'exactitude 与 fait relire points non établis avant toute action. 一项 citation utile 与 一个 contrôle favorable réduisent certains risques ; ils ne suppriment pas besoin 的 验证."
+      },
+      "practice": {
+        "prompt": "一个 collègue propose : « Ce réglage fonctionne 在 toutes régions ; l'assistant cite 一项 page AWS. » Ce cas fictif ne précise ni réglage ni page : il sert à préparer 一项 vérification, pas à réaliser. 无 compte cloud, isolez l'affirmation à 验证, proposez deux vérifications 配合 sources à rechercher 与 formulez décision à prendre si page ne couvre que votre région 的 test.",
+        "successCriteria": [
+          "隔离 généralisation « 在 toutes régions » 与 prévoir 的 confronter réglage 与 ses conditions au passage cité.",
+          "Prévoir 的 rechercher documentation officielle 的 régions prises en charge à version 或 date utile ; demander nom 的 réglage 与 lien manquants.",
+          "Formuler 一项 décision conditionnelle : ne pas généraliser au-delà 的 régions établies, suspendre déploiement envisagé 与 demander 一项 revue si informations manquent."
+        ],
+        "feedback": "Votre production est 一个 plan : elle ne prouve pas que vous avez trouvé 或 vérifié 一项 source. 一项 deuxième 响应 的 l'assistant ne constituerait pas 一项 preuve indépendante. plan 必须 nommer informations manquantes, sources à rechercher 与 limite 的 décision. recherche effective d'一个 passage 与 transfert à 一个 cas nouveau restent à pratiquer 与 à observer ultérieurement."
+      },
+      "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence 的 preuve, dire ce qui manque est plus utile que parler 配合 assurance.",
+      "sourceIds": [
+        "aws-kb-overview",
+        "aws-grounding"
+      ]
+    },
+    {
+      "id": "retrieval-not-training",
+      "title": "Donner 的 contexte n'est pas entraîner 一个 模型",
+      "objective": "解析 parcours RAG vectoriel d'一个 document 与 distinguer indexation, recherche, contexte 与 entraînement.",
+      "estimatedMinutes": 6,
+      "hook": "Vous ajoutez 一项 procédure à 一项 base documentaire. L'assistant peut ensuite retrouver : a-t-il appris cette procédure 在 ses paramètres ? Pas par cette seule opération.",
+      "keyIdeas": [
+        "RAG signifie génération enrichie par recherche : l'application retrouve 的 l'information puis fournit au 模型 comme contexte 用于 produire 一项 响应.",
+        "在 parcours vectoriel non structuré décrit par AWS, l'ingestion prépare documents : extraction 的 texte, découpage en passages, calcul d'embeddings 与 存储 在 一个 index. 一个 embedding est 一项 représentation numérique utilisée 用于 comparer 的 contenus, pas 一项 响应 ni 一项 garantie 的 compréhension.",
+        "Lors d'一项 demande, 一个 模型 d'embeddings représente aussi 请求. recherche sélectionne 的 passages proches, puis ces passages complètent contexte envoyé au 模型 générateur. 一个 passage pertinent peut malgré tout être incomplet, obsolète 或 mal interprété.",
+        "L'entraînement 或 l'ajustement d'一个 模型 modifie ses paramètres. Calculer 的 embeddings 配合 一个 模型 existant 与 ajouter 的 documents à 一个 index ne réentraîne pas, par ces seules opérations, 模型 générateur. Cela n'affirme rien 在 autres traitements 或 conservation 的 数据 的 service.",
+        "Toutes recherches ne suivent pas ce parcours vectoriel : mot RAG ne suffit pas à décrire l'architecture, 访问 或 数据 réellement transmises."
+      ],
+      "workedExample": {
+        "situation": "某团队indexe 一项 procédure fictive « test 的 reprise, version 2 ». 一项 请求 retrouve 一个 ancien passage 的 version 1. L'团队 conclut que 模型 a mal appris nouvelle procédure.",
+        "steps": [
+          "Distinguer procédure stockée, passages indexés, passages retrouvés 与 响应 générée. Ne pas attribuer immédiatement défaut à l'entraînement.",
+          "验证, 在 一项 revue 无 数据 réelles, quelle version a été ingérée 与 quels passages recherche a sélectionnés. 一个 document ajouté mais non synchronisé peut manquer 在 l'index.",
+          "Comparer passages transmis au 模型 配合 procédure en vigueur. Si contexte est ancien, examiner l'ingestion 与 recherche ; si contexte est adéquat mais 响应 diverge, examiner génération 与 vérification.",
+          "Faire approuver toute mise à jour 的 base par son responsable ; ne pas lancer 一个 entraînement ni élargir 访问 用于 masquer problème."
+        ],
+        "decision": "L'团队 cherche d'abord où version périmée 之间 在 parcours. Mettre à jour 一个 index 与 ajuster paramètres d'一个 模型 sont 的 opérations différentes, 配合 的 objectifs 与 的 risques différents."
+      },
+      "practice": {
+        "prompt": "Reconstituez à l'écrit trajet d'一项 procédure fictive jusqu'à 一项 响应 RAG vectorielle. Placez découpage, embeddings 的 documents, l'index, représentation 的 请求, passages retrouvés 与 contexte. Expliquez ensuite pourquoi « document est indexé » ne signifie pas « 模型 générateur a été réentraîné ».",
+        "successCriteria": [
+          "Séparer préparation 的 documents 的 recherche effectuée lors d'一项 demande.",
+          "Placer embeddings 的 passages 在 l'index 与 représentation 的 请求 avant comparaison.",
+          "Placer passages retrouvés 在 contexte avant génération.",
+          "Distinguer l'utilisation d'一个 模型 existant 用于 calculer 的 vecteurs d'一项 modification 的 ses paramètres par entraînement."
+        ],
+        "feedback": "trajet attendu est : document → passages → embeddings → index ; puis 请求 → représentation → recherche 的 passages → contexte enrichi → 响应. Si vous avez relié 直接 l'index aux paramètres 的 générateur, reprenez distinction 之间 contexte fourni à 一项 demande 与 entraînement. Ce schéma n'est pas universel à toutes bases 的 connaissances."
+      },
+      "recap": "L'index sert à retrouver ; contexte sert à informer 一项 demande ; l'entraînement sert à modifier paramètres. Ne confondez pas ces trois rôles.",
+      "sourceIds": [
+        "aws-kb-rag",
+        "aws-kb-overview"
+      ]
+    },
+    {
+      "id": "stop-and-escalate",
+      "title": "Savoir s'arrêter avant d'envoyer 或 d'autoriser",
+      "objective": "Repérer 一项 donnée sensible 或 一个 访问 excessif, suspendre l'action 与 demander 一项 décision au responsable adapté.",
+      "estimatedMinutes": 6,
+      "hook": "一个 diagnostic peut être techniquement utile 与 pourtant inacceptable si 数据 或 权限 nécessaires ne sont pas autorisés.",
+      "keyIdeas": [
+        "Avant 的 transmettre, identifiez 数据, destinataire, finalité 与 l'autorisation. Secrets, 数据 personnelles, 日志 clients 与 documents internes demandent 一项 vérification spécifique. Pouvoir lire 一个 文件 ne donne pas 自动 droit 的 l'envoyer à 一个 assistant.",
+        "choix d'一个 service approuvé ne dispense pas 的 验证 sa configuration : 访问, journalisation, conservation 与 règles internes. responsabilité partagée ne signifie pas que fournisseur prend toutes décisions à votre place.",
+        "一个 filtre 的 数据 sensibles peut aider, mais il ne 确保 pas 的 tout détecter. Retirer 一个 nom ne suffit pas toujours à anonymiser 一个 journal. Préférez 一个 exemple synthétique 无 donnée réelle si cela répond au besoin 与 respecte règles internes.",
+        "Demandez seulement 权限 nécessaires à tâche. Face à 一项 demande d'administration globale, ne cliquez pas 用于 gagner 的 temps : demandez au responsable 的 访问 一项 revue 的 besoin 与 一项 permission limitée.",
+        "Si donnée 或 l'autorisation est incertaine, arrêtez l'envoi 或 modification. Contactez propriétaire 的 数据, référent 安全 或 responsable 的 访问 selon cas, en décrivant besoin 无 reproduire secret."
+      ],
+      "workedExample": {
+        "situation": "Nora prépare 一个 diagnostic fictif. journal proposé contient 的 adresses 的 clients 与 一个 令牌 d'访问. L'assistant suggère 的 l'envoyer à 一个 outil externe 与 的 lui attribuer 一个 rôle administrateur 用于 lire d'autres 日志.",
+        "steps": [
+          "Ne pas envoyer journal ni accorder rôle. L'outil destinataire 与 l'usage 的 ces 数据 ne sont pas encore autorisés.",
+          "Décrire blocage au propriétaire 的 日志 与 au référent 安全 无 joindre 令牌 ni 数据 clients. Si 一个 secret a déjà été exposé, suivre procédure d'incident 与 demander sa révocation 或 rotation par 一项 personne habilitée.",
+          "Proposer 一项 reproduction synthétique 的 message d'erreur 用于 commencer diagnostic, sous réserve 的 règles internes. Ne pas supposer qu'一项 simple suppression 的 noms rend journal partageable.",
+          "Faire examiner par responsable 的 访问 périmètre réellement nécessaire. Reprendre seulement 配合 一个 destinataire approuvé, 的 数据 autorisées 与 权限 validées."
+        ],
+        "decision": "Nora suspend l'action à risque 与 garde diagnostic au stade d'一个 exemple fictif. filtre 的 l'assistant 或 promesse « nous ne réentraînons pas 模型 » ne vaut ni autorisation 的 transfert ni garantie 的 confidentialité."
+      },
+      "practice": {
+        "prompt": "某团队veut envoyer 一项 capture 的 journal interne à 一个 assistant : noms sont masqués, mais 一个 identifiant 的 client 与 一项 URL 的 connexion restent visibles. Elle demande aussi 一个 访问 administrateur temporaire. Rédigez 一项 响应 的 trois phrases : ce que vous suspendez, à qui vous demandez 一项 revue 与 comment poursuivre 无 transmettre 的 数据 réelles.",
+        "successCriteria": [
+          "Suspendre l'envoi 与 l'attribution 的 rôle, 无 déclarer capture anonyme ni rôle acceptable parce qu'il est temporaire.",
+          "Demander 一项 revue au propriétaire 的 数据 或 au référent 安全 用于 transfert, 与 au responsable 的 访问 用于 权限.",
+          "Proposer 一个 exemple synthétique 与 一项 permission limitée au besoin, à faire valider avant 的 reprendre."
+        ],
+        "feedback": "Masquer noms ne règle pas autres identifiants ni informations éventuellement contenues 在 l'URL. 一个 rôle temporaire peut encore donner trop 的 权限. 一项 bonne 响应 nomme blocage, décideur 与 一项 voie 的 travail sûre ; elle ne copie pas éléments sensibles 在 demande 的 revue."
+      },
+      "recap": "数据 或 权限 incertains → arrêter l'action → décrire besoin 无 secret → obtenir revue adaptée. qualité technique ne remplace jamais l'autorisation.",
+      "sourceIds": [
+        "aws-data-protection",
+        "aws-grounding"
+      ]
+    }
+  ]
+}

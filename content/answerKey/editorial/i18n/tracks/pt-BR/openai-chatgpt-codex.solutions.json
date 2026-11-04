@@ -1,0 +1,279 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "pt-BR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "lessonId": "choix-modele-gpt4o-vs-o3-o4mini",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-raisonnement-o3"
+      ],
+      "plainExplanation": "O modelo o3 prend o temps de réfléchir étape par étape avant de répondre, ce qui o rend idéal para os calculs e règles complexes.",
+      "rationale": "O modelo de raisonnement `o3` est conçu para consacrer uma chaîne de pensée interne à a résolution de problèmes mathématiques, logiques, algorithmiques e réglementaires à fortes contraintes croisées.",
+      "examTip": "Problème complexe à multiples contraintes logiques ou financières = modelo de raisonnement `o3`.",
+      "sourceIds": [
+        "openai-academy-courses",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "lessonId": "choix-modele-gpt4o-vs-o3-o4mini",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "raisonnement-rapide-economique-haut-debit"
+      ],
+      "plainExplanation": "o3 offre a réflexion a plus poussée para os cas difficiles, tandis qu'o4-mini réfléchit beaucoup plus vite e coûte moins cher.",
+      "rationale": "`o4-mini` est optimisé para offrir um raisonnement technique, mathématique e logiciel rapide à moindre custo e faible latence, tandis qu'`o3` vise a profondeur de raisonnement maximale em os cas os plus ardus.",
+      "examTip": "`o3` = profondeur analytique maximale · `o4-mini` = raisonnement technique rapide e économique.",
+      "sourceIds": [
+        "openai-academy-courses",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "lessonId": "deep-research-et-data-analysis",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "deep-research-multi-sources"
+      ],
+      "plainExplanation": "Deep Research explore méthodiquement os sources pendant plusieurs minutes e livre um rapport vérifiable citation par citation.",
+      "rationale": "Deep Research planifie e exécute uma recherche approfondie em de multiples sources, recoupe os informations e génère um rapport structuré accompagné de citations vérifiables.",
+      "examTip": "Étude approfondie multi-sources com rapport sourcé = Deep Research.",
+      "sourceIds": [
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "lessonId": "deep-research-et-data-analysis",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "inspecter-code-python-filtres"
+      ],
+      "plainExplanation": "Ouvrez o code Python exécuté par ChatGPT para Verificar s'il n'a pas oublié de filtrer os commandes annulées ou os doublons.",
+      "rationale": "Em Data Analysis, o calcul est exact par rapport au script Python exécuté, mais um écart fonctionnel provient souvent dos filtres de nettoyage (commandes annulées, devises, doublons). Ouvrir o code Python (`</>`) permite d'auditer e d'ajuster immédiatement a règle de filtrage.",
+      "examTip": "Em Data Analysis, ouvrez toujours o bloc `</>` para Verificar os filtres `pandas` appliqués à vos colonnes.",
+      "sourceIds": [
+        "openai-academy-courses",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "lessonId": "canvas-projects-custom-gpts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "editeur-canvas-selection"
+      ],
+      "plainExplanation": "Utilisez Canvas para sélectionner apenas os lignes à améliorer tout en gardant o reste do arquivo intact.",
+      "rationale": "Canvas offre um éditeur côte à côte permettant de cibler uma plage de lignes précise em um code ou um texte para a modifier em place tout en conservant o reste do arquivo e l'historique dos versions.",
+      "examTip": "Retouche chirurgicale d'um passage ou d'uma fonction com gestion de versions = Canvas.",
+      "sourceIds": [
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "lessonId": "canvas-projects-custom-gpts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "project-dossier-vs-custom-gpt-assistant-partage"
+      ],
+      "plainExplanation": "Um Project sert à organiser vos arquivos e discussions em um dossier, alors qu'um Custom GPT sert à Compartilhar um assistant prêt à l'emploi com toute l'equipe.",
+      "rationale": "Um Project structure um dossier de travail continu (instructions, arquivos e conversations d'um chantier), alors qu'um Custom GPT encapsule um assistant spécialisé (instructions, connaissances e Actions) destiné à être partagé e réutilisé em l'empresa.",
+      "examTip": "Project = mon espace de dossier continu · Custom GPT = assistant métier standardisé partagé com l'equipe.",
+      "sourceIds": [
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "lessonId": "codex-architecture-sandbox-isolation",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "prevention-exfiltration-et-supply-chain"
+      ],
+      "plainExplanation": "[PT] Couper Internet pendant que l'agent code empêche toute fuite de code secret vers l'extérieur.",
+      "rationale": "Em OpenAI Codex, l'acesso Internet sortant est coupé pendant a boucle d'exécution de l'agent afin d'empêcher l'exfiltration de code propriétaire ou de secrets e d'interdire o téléchargement de code externe non approuvé.",
+      "examTip": "Em o sandbox Codex : rede ouvert apenas au setup initial dos dépendances, puis rede coupé pendant l'exécution de l'agent.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "lessonId": "codex-architecture-sandbox-isolation",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "installer-dependances-script-setup"
+      ],
+      "plainExplanation": "Ajoutez l'installation de cet outil em o script de préparation do conteneur, qui s'exécute avant a coupure d'Internet.",
+      "rationale": "Puisque l'acesso rede est désactivé pendant que l'agent Codex travaille, toutes os dépendances (`pip`, `npm`, compilateurs) devem être installées em o script de setup de l'environnement qui s'exécute avant a coupure rede.",
+      "examTip": "Dépendance manquante em o sandbox Codex = l'ajouter au script de setup initial de l'environnement.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "lessonId": "codex-agents-md-pr-revue-code",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "instructions-persistantes-build-test-invariants"
+      ],
+      "plainExplanation": "Il indique automaticamente à Codex comment lancer os tests e quelles règles de code respecter em ce projet.",
+      "rationale": "`AGENTS.md` est lu automaticamente par Codex para connaître l'organisation do dépôt, os invariants d'architecture e os commandes exactes de build, de lint e de test à exécuter avant de proposer uma Pull Request.",
+      "examTip": "`AGENTS.md` = o contrato opérationnel versionné qui guide Codex em votre dépôt.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "lessonId": "codex-agents-md-pr-revue-code",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "lancer-quatre-taches-paralleles-avec-tests"
+      ],
+      "plainExplanation": "Lancez quatre tâches Codex en parallèle : chacune travaille em son propre espace isolé e prépare sa correction.",
+      "rationale": "Chaque tâche Codex tournant em son propre conteneur cloud isolé, Delegar quatre correctifs indépendants en parallèle com exigence de tests unitaires produit quatre Pull Requests propres e ciblées.",
+      "examTip": "Bugs indépendants em dos modules distincts = exécution parallèle en conteneurs Codex dédiés.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "lessonId": "codex-debugging-ci-securite",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "test-reproducteur-rouge-puis-correctif-vert"
+      ],
+      "plainExplanation": "Il deve d'abord écrire um test qui met o bug en évidence, corriger o code jusqu'à ce que o test passe, puis relancer tous os tests.",
+      "rationale": "Reproduire d'abord o bug au moyen d'um test qui échoue (Red), appliquer o correctif minimal qui o fait passer (Green), puis exécuter toute a suite de validation garante que a cause racine a bien été traitée.",
+      "examTip": "Para tout bug confié à Codex : 1. Test reproducteur rouge ➔ 2. Correctif minimal vert ➔ 3. Suite complète.",
+      "sourceIds": [
+        "openai-codex-intro"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "lessonId": "codex-debugging-ci-securite",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "rejeter-contournement-garde-corriger-source"
+      ],
+      "plainExplanation": "Refusez immédiatement : il faut corriger o problème em o arquivo, jamais affaiblir ou contourner o contrôle de segurança.",
+      "rationale": "Um agent ne deve jamais faire verdir a CI en désactivant ou en contournant uma garde de segurança. Il faut rejeter l'exclusion e corriger a donnée fautive tout en maintenant a garde active.",
+      "examTip": "En revue de PR d'agent, refusez tout diff qui affaiblit um schéma ou ajoute uma exclusion à uma garde de segurança.",
+      "sourceIds": [
+        "openai-codex-intro",
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "lessonId": "responses-api-structured-outputs",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "structured-outputs-json-schema-strict"
+      ],
+      "plainExplanation": "Activez Structured Outputs com strict: true para garantir que a resposta suit votre modelo JSON sem erreur.",
+      "rationale": "Structured Outputs (`json_schema` com `strict: true` e `additionalProperties: false`) applique um décodage contraint par grammaire qui garante à 100 % a présence dos clés requises, o respect dos types e dos énumérations.",
+      "examTip": "Zéro erreur de parsing JSON en production = Structured Outputs com `strict: true` e `additionalProperties: false`.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "lessonId": "responses-api-structured-outputs",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "champ-requis-avec-type-nullable"
+      ],
+      "plainExplanation": "Mettez tous os champs em a liste obligatoire (required), mais autorisez a valeur null para o champ facultatif.",
+      "rationale": "En mode `strict: true`, toutes os propriétés d'um objet devem figurer em o tableau `required` e `additionalProperties` deve valoir `false` ; um champ optionnel est donc typé en union com `null` (`[\"string\", \"null\"]`).",
+      "examTip": "En mode `strict: true` : `additionalProperties: false` partout + tous os champs em `required` (Utilizar `[\"type\", \"null\"]` si optionnel).",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "lessonId": "function-calling-agents-sdk-guardrails",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "idor-injection-prompt-identifiant"
+      ],
+      "plainExplanation": "Um usuário malveillant pourrait ruser com o chat para faire lire à l'IA o dossier confidentiel d'um autre client.",
+      "rationale": "Ne laissez jamais o modelo fournir seul l'identifiant do propriétaire de a ressource (`patient_id`, `user_id`, `tenant_id`). O serveur deve lier l'appel au token d'authentification vérifié de l'usuário connecté para bloquer toute attaque IDOR par prompt injection.",
+      "examTip": "En Function Calling, l'identidade de l'usuário e ses permissões viennent toujours do token serveur, jamais dos arguments générés par o LLM.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "lessonId": "function-calling-agents-sdk-guardrails",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "guardrail-tripwire"
+      ],
+      "plainExplanation": "Utilisez um garde-fou (Guardrail) com arrêt d'urgence (tripwire) qui bloque l'agent avant toute action.",
+      "rationale": "Em l'OpenAI Agents SDK, os Guardrails s'exécutent en parallèle e peuvent Ativar um `tripwire` (disjoncteur) qui lève immédiatement uma exception e stoppe l'exécution de l'agent avant tout appel d'outil.",
+      "examTip": "[PT] Guardrail + `tripwire` = arrêt immédiat de l'agent en cas d'entrée malveillante ou hors périmètre.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "lessonId": "evaluations-systematiques-openai-evals",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "executer-suite-evals-avant-deploiement"
+      ],
+      "plainExplanation": "Lancez uma batterie automatique de cas de test (Evals) e vérifiez que o score reste au moins aussi bon qu'avant.",
+      "rationale": "Toute modification de prompt système, de schéma d'outil ou de modelo deve être validée par uma suite automatisée OpenAI Evals em o jeu de référence avant d'être promue en production.",
+      "examTip": "Um prompt ou um choix de modelo se teste en CI com OpenAI Evals exactement comme do code applicatif.",
+      "sourceIds": [
+        "openai-platform-docs",
+        "openai-academy-courses"
+      ]
+    },
+    {
+      "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+      "lessonId": "evaluations-systematiques-openai-evals",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "grader-deterministe-arguments-outil"
+      ],
+      "plainExplanation": "Utilisez uma vérification directe do texte ou do champ JSON plutôt que de payer uma seconde IA para noter a resposta.",
+      "rationale": "Lorsqu'um résultat attendu est structurel e exact (nom de fonction appelée e valeur d'um code devise), um grader déterministe est 100 % reproductible, instantané e sem custo d'inférence.",
+      "examTip": "Utilisez um grader déterministe chaque fois que a sortie attendue est um champ structuré, um code ou um `tool_call` exact.",
+      "sourceIds": [
+        "openai-platform-docs"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "anthropic-claude-mcp",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "zh-Hans",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.001",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "documents-xml-en-haut-question-en-bas"
+      ],
+      "plainExplanation": "Placez toujours longs documents tout en haut 在 一项 balise <documents> 与 mettez votre question tout à fin.",
+      "rationale": "Anthropic recommande 的 structurer prompts complexes 配合 的 balises XML (`<documents>`, `<document>`, `<instructions>`) 与 的 placer longs documents 的 référence en haut 的 prompt, avant instructions 与 question finale.",
+      "examTip": "在 Claude 配合 long contexte : `<documents>` en haut 的 prompt + `<instructions>` 与 question tout en bas.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-contexte-avant-generation"
+      ],
+      "plainExplanation": "Obliger Claude à citer d'abord passages réels l'empêche d'inventer 的 informations qui ne sont pas 在 document.",
+      "rationale": "En extrayant d'abord citations littérales 在 `<quotes>`, 模型 place preuves exactes 在 son contexte 的 génération immédiat avant 的 rédiger `<answer>`, ce qui réduit drastiquement extrapolations non fondées.",
+      "examTip": "Demandez toujours `<quotes>` (extraction littérale) avant `<answer>` (analyse) 在 tâches documentaires critiques.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "max-tokens-superieur-budget-thinking"
+      ],
+      "plainExplanation": "limite totale (max_tokens) 必须 toujours être plus grande que budget 的 réflexion 用于 laisser 的 place à 响应 finale.",
+      "rationale": "在 l'API Messages d'Anthropic, `budget_tokens` représente part maximale 的 `max_tokens` allouée au bloc `thinking` : `max_tokens` 必须 donc toujours être strictement supérieur à `budget_tokens` 用于 permettre génération 的 响应 finale.",
+      "examTip": "配合 Extended Thinking : `max_tokens > budget_tokens` (car `max_tokens` = réflexion + 响应 finale).",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "artifacts-interactifs-versionnes"
+      ],
+      "plainExplanation": "Artifacts affichent en direct interfaces, graphiques 与 schémas générés par Claude 在 一个 volet dédié.",
+      "rationale": "Artifacts affiche 与 exécute en direct 在 一个 panneau latéral isolé composants React, pages HTML, graphiques SVG 与 diagrammes Mermaid, 配合 bascule code/aperçu 与 historique 的 versions.",
+      "examTip": "Rendu interactif en direct 的 code UI (React/HTML), SVG 或 diagrammes Mermaid = Artifacts.",
+      "sourceIds": [
+        "anthropic-academy-teams"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "invalidation-prefixe-par-uuid-debut"
+      ],
+      "plainExplanation": "cache ne réutilise que ce qui est identique depuis premier mot : toute valeur qui change 必须 être placée à fin.",
+      "rationale": "Prompt Caching d'Anthropic repose 在 l'égalité exacte 的 préfixe 的 请求. Injecter 一个 UUID 或 一个 horodatage changeant au début 的 bloc `system` modifie préfixe à chaque appel 与 empêche toute lecture en cache.",
+      "examTip": "用于 que Prompt Caching fonctionne : gardez début (`tools` ➔ `system` ➔ corpus) 100 % statique 与 placez 数据 dynamiques à fin.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "bloc-document-citations-enabled-true"
+      ],
+      "plainExplanation": "Activez l'option native citations: { enabled: true } 在 document envoyé à Claude.",
+      "rationale": "fonctionnalité native 的 citations 的 l'API Messages s'active en fournissant sources 在 的 blocs 的 type `document` 配合 l'option `citations: { enabled: true }`.",
+      "examTip": "Citations vérifiables natives 在 l'API Claude = bloc `document` 配合 `citations: { enabled: true }`.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.001",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "fichier-claude-md"
+      ],
+      "plainExplanation": "文件 CLAUDE.md sert 的 mémoire permanente lue 自动 par Claude Code à chaque démarrage.",
+      "rationale": "Claude Code charge 自动 文件 `CLAUDE.md` 用于 connaître commandes 的 build, 的 lint, 的 test 与 conventions d'architecture 的 dépôt.",
+      "examTip": "`CLAUDE.md` est mémoire persistante 的 votre dépôt 用于 Claude Code.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "commande-slash-clear"
+      ],
+      "plainExplanation": "commande /clear vide entièrement conversation en cours 用于 repartir à zéro 无 mélanger sujets.",
+      "rationale": "commande `/clear` vide l'historique 的 conversation 的 session courante 用于 repartir 在 一个 contexte propre 与 économique lors d'一个 changement 的 sujet, tout en conservant instructions 的 `CLAUDE.md`.",
+      "examTip": "Changement 的 tâche indépendante 在 Claude Code = `/clear` ; résumé d'一项 tâche longue en cours = `/compact`.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "settings-json-allow-npm-test-deny-env"
+      ],
+      "plainExplanation": "Réglez 文件 .claude/settings.json 用于 autoriser commande 的 test 与 bloquer explicitement lecture 的 文件 sensibles.",
+      "rationale": "文件 `.claude/settings.json` 支持 d'autoriser finement 的 commandes sûres comme `Bash(npm test)` 在 `权限.allow` tout en interdisant explicitement lecture 的 secrets `.env*` 与 appels 网络 non approuvés 在 `权限.deny`.",
+      "examTip": "Utilisez `.claude/settings.json` (`allow` / `deny`) 用于 pré-approuver 仅 commandes 的 test inoffensives.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "prompt-injection-via-issue-publique"
+      ],
+      "plainExplanation": "一个 message piégé pourrait manipuler l'agent 用于 lui faire exécuter 的 commandes dangereuses 或 voler 的 访问 secrets.",
+      "rationale": "一个 texte soumis par 一个 tiers externe (issue publique, PR externe, page web) est 一项 entrée non fiable : s'il est traité par 一个 agent en mode headless disposant d'outils Bash complets 与 d'一个 令牌 administrateur, 一项 injection 的 prompt peut provoquer 一项 compromission grave.",
+      "examTip": "En CI headless (`claude -p`) 在 的 entrées externes : conteneur éphémère + `--allowedTools` minimal + 令牌 en lecture seule.",
+      "sourceIds": [
+        "anthropic-claude-code",
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "primitive-resources-uri"
+      ],
+      "plainExplanation": "一项 Resource MCP 支持 的 lire 一项 donnée en toute 安全, contrairement à 一个 Tool qui exécute 一项 action.",
+      "rationale": "在 standard MCP, `Resources` représentent 的 数据 structurées 或 textuelles identifiées par URI (schémas, 文件, 日志) exposées en lecture seule 无 effet 的 bord, par opposition aux `Tools` qui exécutent 的 actions.",
+      "examTip": "在 MCP : `Resources` = 数据 en lecture par URI · `Prompts` = 模型 用户 · `Tools` = actions exécutables.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "ecrire-logs-sur-stderr"
+      ],
+      "plainExplanation": "canal standard (stdout) est réservé aux messages JSON 的 protocole MCP ; 日志 必须 être écrits 在 stderr.",
+      "rationale": "Lorsqu'一个 serveur MCP communique via transport `stdio`, flux `stdout` véhicule exclusivement messages JSON-RPC 2.0. Tout journal applicatif écrit 在 `stdout` (`console.log`, `print`) casse parsing 的 client ; il faut 使用 `stderr` (`console.error`).",
+      "examTip": "Serveur MCP en transport `stdio` : jamais 的 `console.log` 在 `stdout`, écrivez tous vos logs 在 `stderr` !",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "vm-ou-conteneur-isole-moindre-privilege"
+      ],
+      "plainExplanation": "Faites- toujours tourner 在 一项 虚拟机 isolée 配合 minimum 的 权限, jamais 在 votre session personnelle.",
+      "rationale": "Computer Use interagissant 直接 配合 l'écran, souris 与 clavier, Anthropic recommande 的 l'exécuter 在 一项 虚拟机 或 一个 conteneur isolé disposant 的 strict minimum 的 权限 与 d'访问 网络, 配合 validation humaine 的 actions sensibles.",
+      "examTip": "Computer Use = toujours confiné 在 一项 VM 或 一个 conteneur dédié 无 session ni secrets personnels.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "charte-explicite-principes-auto-critique"
+      ],
+      "plainExplanation": "Claude apprend à s'auto-corriger en suivant 一项 charte écrite 的 règles éthiques 与 的 安全 (être utile, honnête 与 inoffensif).",
+      "rationale": "Constitutional AI aligne 模型 Claude en s'appuyant 在 一项 constitution explicite 的 principes normatifs (visant 一个 comportement utile, honnête 与 inoffensif) lors 的 phases d'auto-critique 与 d'apprentissage par renforcement.",
+      "examTip": "Constitutional AI = alignement 的 安全 fondé 在 一项 charte explicite 的 principes (Helpful, Honest, Harmless).",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "injection-instructions-cachees-description-tool"
+      ],
+      "plainExplanation": "的 ordres cachés 在 description d'一个 outil trompent l'IA 用于 lui faire dérober 的 数据 à l'insu 的 l'用户.",
+      "rationale": "Puisque descriptions d'outils retournées par `tools/list` sont injectées 在 contexte 的 模型 用于 qu'il sache comment appeler, 一个 serveur MCP malveillant peut y glisser 的 instructions cachées (Tool Poisoning) poussant LLM à lire 与 exfiltrer 的 数据 locales.",
+      "examTip": "Tool Poisoning MCP = injection 的 prompt dissimulée 在 description `tools/list` d'一个 serveur MCP non fiable.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-sql-lecture-seule-replica-et-serveur-audite"
+      ],
+      "plainExplanation": "Connectez serveur MCP 配合 一个 compte 的 数据库 configuré strictement en lecture seule.",
+      "rationale": "安全 d'一个 serveur MCP repose 在 最小权限原则 au niveau 的 l'infrastructure cible : connecter serveur à 一个 réplica 配合 一个 compte PostgreSQL en lecture seule 确保 techniquement qu'aucune écriture 或 suppression ne peut avoir lieu.",
+      "examTip": "Ne comptez jamais 在 prompt 用于 empêcher 一个 `DROP` 或 一个 `DELETE` via MCP : imposez 一个 rôle 数据库 en lecture seule.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    }
+  ]
+}

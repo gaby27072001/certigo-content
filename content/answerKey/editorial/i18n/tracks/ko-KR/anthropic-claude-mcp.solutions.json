@@ -1,0 +1,247 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "anthropic-claude-mcp",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "ko-KR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.001",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "documents-xml-en-haut-question-en-bas"
+      ],
+      "plainExplanation": "Placez toujours longs documents tout en haut 내 balise <documents> 및 mettez votre question tout à fin.",
+      "rationale": "Anthropic recommande 의 structurer prompts complexes 및 의 balises XML (`<documents>`, `<document>`, `<instructions>`) 및 의 placer longs documents 의 référence en haut 의 prompt, avant instructions 및 question finale.",
+      "examTip": "기반 Claude 및 long contexte : `<documents>` en haut 의 prompt + `<instructions>` 및 question tout en bas.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-contexte-avant-generation"
+      ],
+      "plainExplanation": "Obliger Claude à citer d'abord passages réels l'empêche d'inventer 의 informations qui ne sont pas 내 document.",
+      "rationale": "En extrayant d'abord citations littérales 내 `<quotes>`, 모델 place preuves exactes 내 son contexte 의 génération immédiat avant 의 rédiger `<answer>`, ce qui réduit drastiquement extrapolations non fondées.",
+      "examTip": "Demandez toujours `<quotes>` (extraction littérale) avant `<answer>` (analyse) 기반 tâches documentaires critiques.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "max-tokens-superieur-budget-thinking"
+      ],
+      "plainExplanation": "limite totale (max_tokens) 해야 합니다 toujours être plus grande que budget 의 réflexion 위한 laisser 의 place à 응답 finale.",
+      "rationale": "내 l'API Messages d'Anthropic, `budget_tokens` représente part maximale 의 `max_tokens` allouée au bloc `thinking` : `max_tokens` 해야 합니다 donc toujours être strictement supérieur à `budget_tokens` 위한 permettre génération 의 응답 finale.",
+      "examTip": "및 Extended Thinking : `max_tokens > budget_tokens` (car `max_tokens` = réflexion + 응답 finale).",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "artifacts-interactifs-versionnes"
+      ],
+      "plainExplanation": "Artifacts affichent en direct interfaces, graphiques 및 schémas générés par Claude 내 volet dédié.",
+      "rationale": "Artifacts affiche 및 exécute en direct 내 panneau latéral isolé composants React, pages HTML, graphiques SVG 및 diagrammes Mermaid, 및 bascule code/aperçu 및 historique 의 versions.",
+      "examTip": "Rendu interactif en direct 의 code UI (React/HTML), SVG 또는 diagrammes Mermaid = Artifacts.",
+      "sourceIds": [
+        "anthropic-academy-teams"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "invalidation-prefixe-par-uuid-debut"
+      ],
+      "plainExplanation": "cache ne réutilise que ce qui est identique depuis premier mot : toute valeur qui change 해야 합니다 être placée à fin.",
+      "rationale": "Prompt Caching d'Anthropic repose 기반 l'égalité exacte 의 préfixe 의 요청. Injecter UUID 또는 horodatage changeant au début 의 bloc `system` modifie préfixe à chaque appel 및 empêche toute lecture en cache.",
+      "examTip": "위한 que Prompt Caching fonctionne : gardez début (`tools` ➔ `system` ➔ corpus) 100 % statique 및 placez 데이터 dynamiques à fin.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "bloc-document-citations-enabled-true"
+      ],
+      "plainExplanation": "Activez l'option native citations: { enabled: true } 기반 document envoyé à Claude.",
+      "rationale": "fonctionnalité native 의 citations 의 l'API Messages s'active en fournissant sources 내 의 blocs 의 type `document` 및 l'option `citations: { enabled: true }`.",
+      "examTip": "Citations vérifiables natives 내 l'API Claude = bloc `document` 및 `citations: { enabled: true }`.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.001",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "fichier-claude-md"
+      ],
+      "plainExplanation": "파일 CLAUDE.md sert 의 mémoire permanente lue 자동으로 par Claude Code à chaque démarrage.",
+      "rationale": "Claude Code charge 자동으로 파일 `CLAUDE.md` 위한 connaître commandes 의 build, 의 lint, 의 test 및 conventions d'architecture 의 dépôt.",
+      "examTip": "`CLAUDE.md` est mémoire persistante 의 votre dépôt 위한 Claude Code.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "commande-slash-clear"
+      ],
+      "plainExplanation": "commande /clear vide entièrement conversation en cours 위한 repartir à zéro 없이 mélanger sujets.",
+      "rationale": "commande `/clear` vide l'historique 의 conversation 의 session courante 위한 repartir 기반 contexte propre 및 économique lors d' changement 의 sujet, tout en conservant instructions 의 `CLAUDE.md`.",
+      "examTip": "Changement 의 tâche indépendante 내 Claude Code = `/clear` ; résumé d' tâche longue en cours = `/compact`.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "settings-json-allow-npm-test-deny-env"
+      ],
+      "plainExplanation": "Réglez 파일 .claude/settings.json 위한 autoriser commande 의 test 및 bloquer explicitement lecture 의 파일 sensibles.",
+      "rationale": "파일 `.claude/settings.json` 지원합니다 d'autoriser finement 의 commandes sûres comme `Bash(npm test)` 내 `권한.allow` tout en interdisant explicitement lecture 의 secrets `.env*` 및 appels 네트워크 non approuvés 내 `권한.deny`.",
+      "examTip": "Utilisez `.claude/settings.json` (`allow` / `deny`) 위한 pré-approuver 전용 commandes 의 test inoffensives.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "prompt-injection-via-issue-publique"
+      ],
+      "plainExplanation": "message piégé pourrait manipuler l'agent 위한 lui faire exécuter 의 commandes dangereuses 또는 voler 의 액세스 secrets.",
+      "rationale": "texte soumis par tiers externe (issue publique, PR externe, page web) est entrée non fiable : s'il est traité par agent en mode headless disposant d'outils Bash complets 및 d' 토큰 administrateur, injection 의 prompt peut provoquer compromission grave.",
+      "examTip": "En CI headless (`claude -p`) 기반 의 entrées externes : conteneur éphémère + `--allowedTools` minimal + 토큰 en lecture seule.",
+      "sourceIds": [
+        "anthropic-claude-code",
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "primitive-resources-uri"
+      ],
+      "plainExplanation": "Resource MCP 지원합니다 의 lire donnée en toute 보안, contrairement à Tool qui exécute action.",
+      "rationale": "내 standard MCP, `Resources` représentent 의 데이터 structurées 또는 textuelles identifiées par URI (schémas, 파일, 로그) exposées en lecture seule 없이 effet 의 bord, par opposition aux `Tools` qui exécutent 의 actions.",
+      "examTip": "내 MCP : `Resources` = 데이터 en lecture par URI · `Prompts` = 모델 사용자 · `Tools` = actions exécutables.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "ecrire-logs-sur-stderr"
+      ],
+      "plainExplanation": "canal standard (stdout) est réservé aux messages JSON 의 protocole MCP ; 로그 해야 합니다 être écrits 기반 stderr.",
+      "rationale": "Lorsqu' serveur MCP communique via transport `stdio`, flux `stdout` véhicule exclusivement messages JSON-RPC 2.0. Tout journal applicatif écrit 기반 `stdout` (`console.log`, `print`) casse parsing 의 client ; il faut 사용: `stderr` (`console.error`).",
+      "examTip": "Serveur MCP en transport `stdio` : jamais 의 `console.log` 기반 `stdout`, écrivez tous vos logs 기반 `stderr` !",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "vm-ou-conteneur-isole-moindre-privilege"
+      ],
+      "plainExplanation": "Faites- toujours tourner 내 가상 머신 isolée 및 minimum 의 권한, jamais 기반 votre session personnelle.",
+      "rationale": "Computer Use interagissant 직접 및 l'écran, souris 및 clavier, Anthropic recommande 의 l'exécuter 내 가상 머신 또는 conteneur isolé disposant 의 strict minimum 의 권한 및 d'액세스 네트워크, 및 validation humaine 의 actions sensibles.",
+      "examTip": "Computer Use = toujours confiné 내 VM 또는 conteneur dédié 없이 session ni secrets personnels.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "charte-explicite-principes-auto-critique"
+      ],
+      "plainExplanation": "Claude apprend à s'auto-corriger en suivant charte écrite 의 règles éthiques 및 의 보안 (être utile, honnête 및 inoffensif).",
+      "rationale": "Constitutional AI aligne 모델 Claude en s'appuyant 기반 constitution explicite 의 principes normatifs (visant comportement utile, honnête 및 inoffensif) lors 의 phases d'auto-critique 및 d'apprentissage par renforcement.",
+      "examTip": "Constitutional AI = alignement 의 보안 fondé 기반 charte explicite 의 principes (Helpful, Honest, Harmless).",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "injection-instructions-cachees-description-tool"
+      ],
+      "plainExplanation": "의 ordres cachés 내 description d' outil trompent l'IA 위한 lui faire dérober 의 데이터 à l'insu 의 l'사용자.",
+      "rationale": "Puisque descriptions d'outils retournées par `tools/list` sont injectées 내 contexte 의 모델 위한 qu'il sache comment appeler, serveur MCP malveillant peut y glisser 의 instructions cachées (Tool Poisoning) poussant LLM à lire 및 exfiltrer 의 데이터 locales.",
+      "examTip": "Tool Poisoning MCP = injection 의 prompt dissimulée 내 description `tools/list` d' serveur MCP non fiable.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-sql-lecture-seule-replica-et-serveur-audite"
+      ],
+      "plainExplanation": "Connectez serveur MCP 및 compte 의 데이터베이스 configuré strictement en lecture seule.",
+      "rationale": "보안 d' serveur MCP repose 기반 최소 권한 au niveau 의 l'infrastructure cible : connecter serveur à réplica 및 compte PostgreSQL en lecture seule 보장합니다 techniquement qu'aucune écriture 또는 suppression ne peut avoir lieu.",
+      "examTip": "Ne comptez jamais 기반 prompt 위한 empêcher `DROP` 또는 `DELETE` via MCP : imposez rôle 데이터베이스 en lecture seule.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    }
+  ]
+}

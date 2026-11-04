@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/multilingual-catalog-solutions.schema.json",
+  "title": "CertiGo multilingual private answerKey solutions bundle",
+  "description": "Private answerKey localized bundle covering all 779 certification solutions for a supported locale, stored exclusively under content/answerKey/editorial/i18n/catalog/.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "locale",
+    "kind",
+    "solutions"
+  ],
+  "properties": {
+    "schema": {
+      "const": "certigo.multilingual.catalog-solutions/v1"
+    },
+    "locale": {
+      "enum": [
+        "fr-FR",
+        "en-US",
+        "es-ES",
+        "de-DE",
+        "it-IT",
+        "pt-BR",
+        "ar-SA",
+        "ja-JP",
+        "hi-IN",
+        "zh-Hans",
+        "ko-KR"
+      ]
+    },
+    "kind": {
+      "const": "answerKey"
+    },
+    "solutions": {
+      "type": "array",
+      "minItems": 779,
+      "items": {
+        "$ref": "#/$defs/localizedSolution"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "localizedSolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "correct",
+        "plainExplanation",
+        "rationale"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "correct": { "$ref": "#/$defs/text" },
+        "plainExplanation": { "$ref": "#/$defs/text" },
+        "rationale": { "$ref": "#/$defs/text" }
+      }
+    }
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "m365-copilot-agents",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "fr-FR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "jeton-entra-acl"
+      ],
+      "plainExplanation": "Copilot utilise uniquement les fichiers et courriels auxquels votre propre compte Microsoft a déjà le droit d'accéder.",
+      "rationale": "Microsoft 365 Copilot exécute le Grounding Microsoft Graph et la recherche dans l'index sémantique (Work IQ) en présentant le jeton Entra ID de l'utilisateur connecté : seuls les documents et courriels auxquels l'analyste a déjà accès peuvent être récupérés.",
+      "examTip": "Grounding Graph = permissions Entra ID de l'utilisateur courant, zéro élévation de privilège et zéro réentraînement public.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "surpartage-acl-sharepoint"
+      ],
+      "plainExplanation": "Le fichier était déjà partagé par erreur avec trop de monde sur SharePoint : il faut restreindre les droits d'accès du dossier.",
+      "rationale": "Lorsque Copilot cite un document interne inattendu, c'est que l'utilisateur dispose déjà d'un droit de lecture sur ce fichier (sur-partage SharePoint/OneDrive). La remédiation consiste à corriger les ACL SharePoint et à appliquer une étiquette de sensibilité Microsoft Purview.",
+      "examTip": "Un document sensible visible dans Copilot révèle un sur-partage SharePoint (oversharing), jamais une fuite des poids du LLM.",
+      "sourceIds": [
+        "ms-copilot-privacy",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "delegation-cowork-plan"
+      ],
+      "plainExplanation": "Déléguez la mission à Copilot Cowork : il prépare le dossier étape par étape en arrière-plan et vous soumet le résultat.",
+      "rationale": "Copilot Cowork est conçu pour planifier et exécuter en arrière-plan des travaux multi-étapes croisant plusieurs sources Work IQ (Teams, Outlook, Excel, Word) tout en soumettant le livrable à un point de contrôle humain.",
+      "examTip": "Mission transversale multi-applications avec suivi d'étapes = délégation asynchrone Copilot Cowork.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "heritage-identite-et-validation"
+      ],
+      "plainExplanation": "Non, il respecte exactement vos droits d'accès et vous demande confirmation avant toute action importante.",
+      "rationale": "Même en exécution asynchrone, Copilot Cowork opère strictement sous l'identité et les permissions de l'utilisateur qui délègue la tâche, et maintient un point d'approbation humaine avant toute diffusion ou action externe.",
+      "examTip": "Asynchrone ne veut jamais dire sans gouvernance : Cowork conserve vos droits Entra ID et vos jalons d'approbation.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "copilot-pages-composant-loop"
+      ],
+      "plainExplanation": "Copilot Pages (basé sur Microsoft Loop) permet de modifier le même contenu en direct depuis Teams comme depuis Outlook.",
+      "rationale": "En ouvrant la réponse dans Copilot Pages puis en la partageant comme composant Microsoft Loop, la table reste synchronisée en temps réel entre Teams, Outlook, Word et le web.",
+      "examTip": "Co-édition bidirectionnelle en direct entre Teams et Outlook = Copilot Pages + composant Microsoft Loop.",
+      "sourceIds": [
+        "ms-copilot-pages"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "sharepoint-embedded-purview"
+      ],
+      "plainExplanation": "Elles sont stockées dans SharePoint Embedded et bénéficient automatiquement des mêmes règles de sécurité que vos sites SharePoint.",
+      "rationale": "Les Copilot Pages sont stockées dans des conteneurs SharePoint Embedded rattachés au locataire Microsoft 365, ce qui garantit l'application complète des règles de rétention, d'eDiscovery et de gouvernance Microsoft Purview.",
+      "examTip": "Copilot Pages repose sur SharePoint Embedded : même sécurité et même conformité Purview que SharePoint Online.",
+      "sourceIds": [
+        "ms-copilot-pages",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "selecteur-slash-fichiers-reference"
+      ],
+      "plainExplanation": "Utilisez le bouton « / » dans Copilot pour attacher directement les fichiers de référence avant de lancer la rédaction.",
+      "rationale": "Dans Copilot pour Word, l'opérateur `/` permet de pointer explicitement vers des fichiers OneDrive ou SharePoint afin d'ancrer la génération de texte, de clauses ou d'une synthèse exécutive sur ces documents de référence.",
+      "examTip": "Dans Word, `/` = attacher les fichiers sources qui font foi pour éviter toute invention.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-ouvert-et-styles-word"
+      ],
+      "plainExplanation": "Structurez d'abord votre document Word avec des titres clairs, puis créez la présentation depuis votre modèle PowerPoint d'entreprise.",
+      "rationale": "Copilot dans PowerPoint s'appuie sur la hiérarchie Titre 1 / Titre 2 du fichier Word pour découper les diapositives et générer les notes d'orateur, tout en appliquant les masques du modèle PowerPoint ouvert.",
+      "examTip": "Styles Titre 1/2 dans Word + Modèle d'entreprise ouvert dans PowerPoint = présentation chartée avec speaker notes.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "let-et-lambda"
+      ],
+      "plainExplanation": "LET permet de donner un nom aux étapes du calcul, et LAMBDA transforme la formule en fonction réutilisable partout dans le classeur.",
+      "rationale": "La fonction `LET` nomme et stocke les calculs intermédiaires au sein d'une formule pour améliorer la lisibilité et les performances, tandis que `LAMBDA` transforme cette logique en fonction personnalisée réutilisable sans macro VBA.",
+      "examTip": "Variables locales dans une formule Excel = LET · Fonction métier réutilisable sans VBA = LAMBDA.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "conteneur-isole-azure-xl"
+      ],
+      "plainExplanation": "Il tourne dans un espace isolé Microsoft Cloud sans aucun accès à Internet, ce qui protège vos tableaux financiers.",
+      "rationale": "Python in Excel exécute le code dans un conteneur isolé par hyperviseur sur Azure Container Instances sans accès au réseau, au disque local ni au jeton utilisateur, et n'accède qu'aux données passées via `xl()`.",
+      "examTip": "Python in Excel = conteneur Azure isolé, zéro accès réseau et lecture exclusive via `xl()`.",
+      "sourceIds": [
+        "ms-python-excel"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "transcription-ou-enregistrement-actif"
+      ],
+      "plainExplanation": "La transcription (ou l'enregistrement) de la réunion doit avoir été activée pour que Copilot puisse lire les échanges passés.",
+      "rationale": "Pour synthétiser les échanges passés et attribuer les actions à leurs propriétaires, Copilot dans Teams et Intelligent Meeting Recap s'appuient sur la transcription (ou l'enregistrement transcrit) avec identification des orateurs.",
+      "examTip": "Sans transcription active dans Teams, Copilot ne peut ni citer les décisions passées ni attribuer les actions aux intervenants.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "analyse-ton-ressenti-clarte"
+      ],
+      "plainExplanation": "Elle relit votre brouillon et vous conseille pour rendre le ton plus diplomatique et le message plus clair avant l'envoi.",
+      "rationale": "Coaching by Copilot dans Outlook examine le brouillon d'e-mail sur trois axes (ton, ressenti du lecteur et clarté) et fournit des recommandations concrètes avant l'envoi.",
+      "examTip": "Générer un brouillon = Draft with Copilot · Améliorer le ton, l'impact et la clarté d'un texte = Coaching by Copilot.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "agent-autonome-copilot-studio"
+      ],
+      "plainExplanation": "Il faut un agent autonome dans Copilot Studio, car lui seul peut réagir automatiquement à un événement système.",
+      "rationale": "Un agent qui réagit automatiquement à un événement de données (création d'entrée Dataverse) sans intervention initiale d'un utilisateur dans le chat est un agent autonome conçu dans Microsoft Copilot Studio.",
+      "examTip": "Déclencheur d'événement système (Dataverse, boîte partagée, planification) sans prompt humain = Agent autonome Copilot Studio.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "cadrage-sources-sur-orchestrateur-m365"
+      ],
+      "plainExplanation": "Lorsqu'on veut spécialiser le chat Copilot sur une base documentaire précise de l'entreprise avec quelques outils ciblés.",
+      "rationale": "Un agent déclaratif spécialise Microsoft 365 Copilot en définissant des instructions sur mesure, des sources SharePoint/Graph bornées et des actions tout en s'appuyant sur l'orchestrateur et la sécurité de M365 Copilot.",
+      "examTip": "Agent déclaratif = instructions + sources bornées + actions exécutées par l'orchestrateur M365 Copilot.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "elevation-privileges-via-auteur"
+      ],
+      "plainExplanation": "N'importe quel employé pourrait alors utiliser l'agent pour faire des opérations réservées à l'administrateur.",
+      "rationale": "Exécuter une action d'écriture ERP avec les identifiants de l'auteur permet à tout utilisateur de l'agent d'agir avec les droits de cet auteur. Il faut imposer l'authentification de l'utilisateur final (`User authentication`).",
+      "examTip": "Sur toute action qui lit des données privées ou modifie un système métier, imposez l'authentification de l'utilisateur final.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "descriptions-detaillees-actions-parametres"
+      ],
+      "plainExplanation": "Rédigez une description très précise sur chaque outil en indiquant quand l'utiliser et quand ne pas l'utiliser.",
+      "rationale": "L'orchestrateur génératif sélectionne ses outils et renseigne leurs arguments à partir des descriptions en langage naturel de chaque action et de chaque paramètre.",
+      "examTip": "La description d'une action Copilot Studio fait partie du prompt de routage de l'orchestrateur : soyez explicite et discriminant.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "heritage-etiquette-plus-restrictive"
+      ],
+      "plainExplanation": "Le résumé reçoit automatiquement l'étiquette la plus stricte (« Confidentiel Direction ») pour éviter toute fuite.",
+      "rationale": "Microsoft 365 Copilot applique la règle d'héritage de Microsoft Purview : lorsqu'une réponse ou un document combine plusieurs sources, l'étiquette de sensibilité ayant la priorité la plus élevée (la plus restrictive) est automatiquement appliquée.",
+      "examTip": "Fusion multi-documents dans Copilot = héritage automatique de l'étiquette Purview la plus restrictive.",
+      "sourceIds": [
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "politique-dlp-power-platform"
+      ],
+      "plainExplanation": "Une règle de protection contre la perte de données (DLP Power Platform) bloque tout transfert entre SharePoint et des connecteurs externes.",
+      "rationale": "Les politiques DLP (Data Loss Prevention) de Power Platform permettent d'isoler les connecteurs métier (Business) des connecteurs externes et de bloquer les connecteurs HTTP non autorisés dans Copilot Studio.",
+      "examTip": "Empêcher un agent Copilot Studio d'exfiltrer des données SharePoint vers une API tierce = Politique DLP Power Platform.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-privacy"
+      ]
+    }
+  ]
+}

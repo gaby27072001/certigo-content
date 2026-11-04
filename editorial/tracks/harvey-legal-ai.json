@@ -5,7 +5,32 @@
   "providerId": "harvey",
   "radarTrackId": "harvey:legal-ai-platform",
   "routeCode": "HARVEY-LEGAL",
+  "routeAliases": [
+    "HARVEY-LEGAL",
+    "HARVEY-ACADEMY",
+    "HARVEY-AI"
+  ],
+  "brandIdentity": {
+    "logoSlug": "harvey",
+    "displayName": "Harvey AI & Harvey Academy",
+    "primaryHex": "#141413",
+    "accentHex": "#C8A97E",
+    "masteryModel": "Parcours d'expertise produit complet aligné sur Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work et badges Credly by Pearson) : 3 unités progressives, 8 leçons opérationnelles, Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
+  },
   "locale": "fr-FR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
   "status": "active",
   "title": "CertiGo Pro : Harvey Academy & Legal IA (Foundations, Legal Engineering, Assistant, Vault, Knowledge & Workflows)",
   "subtitle": "Maîtriser le programme officiel Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work & badges Credly), Harvey Assistant (Word Add-In, redlining, mémos), Harvey Vault (Data Rooms M&A, Review Tables) et Harvey Knowledge & Workflows.",
@@ -143,6 +168,7 @@
               "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Que devez-vous donner à Harvey Assistant au départ pour qu'il relise un contrat selon les règles de votre entreprise ?",
               "prompt": "Une direction juridique utilise Harvey Assistant pour réviser un contrat de licence logicielle reçu d'un éditeur. Quels éléments faut-il fournir dans l'invite pour obtenir une analyse des risques et des propositions de clauses directement alignées sur la politique de l'entreprise ?",
               "options": [
                 {
@@ -161,13 +187,13 @@
                   "id": "suppression-article-definitions",
                   "label": "Le contrat amputé de son article Définitions et de ses annexes financières afin de raccourcir la lecture."
                 }
-              ],
-              "plainPrompt": "Que devez-vous donner à Harvey Assistant au départ pour qu'il relise un contrat selon les règles de votre entreprise ?"
+              ]
             },
             {
               "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "Une clause paraît rassurante mais un mot avec majuscule cache un piège dans les définitions au début du contrat. Que demander à Harvey ?",
               "prompt": "Lors de la relecture d'un accord de confidentialité (NDA), l'article 4 semble protéger largement votre client, mais la définition de « Informations Confidentielles » à l'article 1 exige qu'elles soient estampillées par tampon humide dans les 24 heures suivant tout échange oral. Quel contrôle Harvey Assistant permet de déjouer ce piège ?",
               "options": [
                 {
@@ -186,8 +212,7 @@
                   "id": "traduire-sans-analyser-portee",
                   "label": "Traduire littéralement l'article 4 en trois langues sans examiner les conditions de forme de l'article 1."
                 }
-              ],
-              "plainPrompt": "Une clause paraît rassurante mais un mot avec majuscule cache un piège dans les définitions au début du contrat. Que demander à Harvey ?"
+              ]
             }
           ],
           "recap": "Dans Harvey Assistant : cadrez la partie représentée, attachez votre playbook (cible + fallback) et contrôlez toujours les définitions.",
@@ -258,6 +283,7 @@
               "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Dans Word avec Harvey, pourquoi vaut-il mieux corriger uniquement les mots risqués d'une clause plutôt que tout réécrire de zéro ?",
               "prompt": "Lors d'un redlining assisté par Harvey dans Microsoft Word, pourquoi est-il préférable de demander une révision « à intrusion minimale » (surgical redlining) plutôt qu'un remplacement intégral par votre clause type lorsque vous êtes en position de négociation équilibrée ?",
               "options": [
                 {
@@ -276,13 +302,13 @@
                   "id": "bloquer-enregistrement-fichier-docx",
                   "label": "Cela verrouille le fichier en lecture seule définitive sur le serveur de messagerie."
                 }
-              ],
-              "plainPrompt": "Dans Word avec Harvey, pourquoi vaut-il mieux corriger uniquement les mots risqués d'une clause plutôt que tout réécrire de zéro ?"
+              ]
             },
             {
               "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "Un juriste laisse par erreur la phrase « nous pouvons céder jusqu'à 2 M€ » dans le fichier Word envoyé à l'adversaire. Quelle erreur a-t-il commise ?",
               "prompt": "Un juriste génère avec Harvey un tableau contenant à la fois le texte du redline et la note confidentielle « Notre client est prêt à céder jusqu'à 2 M€ de plafond en dernier recours », puis copie l'intégralité dans les commentaires du fichier Word envoyé au fournisseur. Quelle règle fondamentale a été violée ?",
               "options": [
                 {
@@ -301,8 +327,7 @@
                   "id": "format-date-iso-dans-titre",
                   "label": "Il a nommé le fichier avec la date du jour au format année-mois-jour."
                 }
-              ],
-              "plainPrompt": "Un juriste laisse par erreur la phrase « nous pouvons céder jusqu'à 2 M€ » dans le fichier Word envoyé à l'adversaire. Quelle erreur a-t-il commise ?"
+              ]
             }
           ],
           "recap": "Redline chirurgical + séparation stricte entre commentaire externe et stratégie interne + mémo exécutif orienté décision = la méthode Harvey Assistant.",
@@ -524,6 +549,7 @@
               "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Vous devez analyser 2 400 documents confidentiels d'un rachat d'entreprise dans Harvey Vault. Comment protéger le secret du dossier ?",
               "prompt": "Un cabinet d'avocats reçoit l'accès à une Data Room de 2 400 documents pour une opération d'acquisition (M&A) soumise à une muraille éthique (Ethical Wall) stricte. Comment configurer l'audit dans Harvey ?",
               "options": [
                 {
@@ -542,13 +568,13 @@
                   "id": "analyser-sans-citations-sources",
                   "label": "Désactiver l'affichage des références de documents pour alléger le rapport d'audit remis au client."
                 }
-              ],
-              "plainPrompt": "Vous devez analyser 2 400 documents confidentiels d'un rachat d'entreprise dans Harvey Vault. Comment protéger le secret du dossier ?"
+              ]
             },
             {
               "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "Pourquoi est-il dangereux de faire analyser uniquement les contrats initiaux dans Harvey Vault en oubliant le dossier des avenants signés après ?",
               "prompt": "Lors d'une Due Diligence dans Harvey Vault, un auditeur filtre uniquement les fichiers intitulés « Contrat_Cadre » et conclut qu'aucun contrat ne contient d'exclusivité, en omettant d'inclure le sous-dossier « Avenants_2025_2026 » dans sa sélection. Quel est le risque ?",
               "options": [
                 {
@@ -567,8 +593,7 @@
                   "id": "suppression-automatique-fichiers-pdf",
                   "label": "Les fichiers PDF non sélectionnés sont définitivement supprimés du serveur de la Data Room."
                 }
-              ],
-              "plainPrompt": "Pourquoi est-il dangereux de faire analyser uniquement les contrats initiaux dans Harvey Vault en oubliant le dossier des avenants signés après ?"
+              ]
             }
           ],
           "recap": "Dans Harvey Vault : isolez chaque dossier par Matter, regroupez contrats et avenants, et exigez toujours la citation exacte de la pièce.",
@@ -639,6 +664,7 @@
               "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Sur 500 contrats dans Harvey Vault, comment repérer d'un coup d'œil ceux qui posent problème tout en pouvant vérifier la phrase exacte du contrat ?",
               "prompt": "En Due Diligence M&A sur 500 contrats commerciaux dans Harvey Vault, vous devez identifier rapidement tous les contrats qui exigent l'accord préalable du client en cas de changement de contrôle, tout en pouvant lire la clause exacte. Quelle méthode est la plus efficace ?",
               "options": [
                 {
@@ -657,13 +683,13 @@
                   "id": "confondre-silence-et-interdiction",
                   "label": "Forcer le modèle à répondre uniquement Oui ou Non même lorsque le document est totalement silencieux sur le sujet."
                 }
-              ],
-              "plainPrompt": "Sur 500 contrats dans Harvey Vault, comment repérer d'un coup d'œil ceux qui posent problème tout en pouvant vérifier la phrase exacte du contrat ?"
+              ]
             },
             {
               "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Dans un tableau d'analyse Harvey Vault, pourquoi faut-il prévoir la case « Le contrat n'en parle pas » en plus de « Oui » et « Non » ?",
               "prompt": "Pourquoi est-il essentiel qu'une colonne de Review Table dans Harvey Vault prévoie explicitement la valeur « Silence du contrat (Aucune clause) » en plus de « Oui » et « Non » ?",
               "options": [
                 {
@@ -682,8 +708,7 @@
                   "id": "modifier-texte-pdf-source",
                   "label": "Pour réécrire directement les fichiers PDF scannés stockés dans la Data Room."
                 }
-              ],
-              "plainPrompt": "Dans un tableau d'analyse Harvey Vault, pourquoi faut-il prévoir la case « Le contrat n'en parle pas » en plus de « Oui » et « Non » ?"
+              ]
             }
           ],
           "recap": "Review Tables dans Harvey Vault = colonnes de tri fermées + colonnes de détail + distinction du silence contractuel + vérification en un clic sur la source.",
@@ -789,6 +814,7 @@
               "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Comment Harvey Knowledge évite-t-il d'inventer de fausses lois ou de faux jugements ?",
               "prompt": "Comment Harvey Knowledge prévient-il le risque d'hallucination de références jurisprudentielles ou réglementaires lors d'une recherche juridique ?",
               "options": [
                 {
@@ -807,13 +833,13 @@
                   "id": "traduction-automatique-romans-fiction",
                   "label": "En s'appuyant uniquement sur des articles de blogs anonymes non juridiques."
                 }
-              ],
-              "plainPrompt": "Comment Harvey Knowledge évite-t-il d'inventer de fausses lois ou de faux jugements ?"
+              ]
             },
             {
               "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Une fois que Harvey Knowledge vous donne une réponse juridique avec des sources, que devez-vous toujours faire avant de valider votre conseil ?",
               "prompt": "Après avoir obtenu une réponse sourcée dans Harvey Knowledge sur l'application d'une directive européenne et de sa transposition nationale, quelle vérification professionnelle le juriste doit-il toujours effectuer avant de signer sa note ?",
               "options": [
                 {
@@ -832,8 +858,7 @@
                   "id": "remplacer-textes-par-avis-personnel",
                   "label": "Effacer les références légales pour ne conserver qu'une opinion générale non motivée."
                 }
-              ],
-              "plainPrompt": "Une fois que Harvey Knowledge vous donne une réponse juridique avec des sources, que devez-vous toujours faire avant de valider votre conseil ?"
+              ]
             }
           ],
           "recap": "Harvey Knowledge apporte la rapidité de l'ancrage sourcé ; l'ouverture de la citation et le contrôle de vigueur scellent la rigueur de l'avocat.",
@@ -904,6 +929,7 @@
               "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Quel est l'avantage d'un Workflow Harvey par rapport à une simple question posée dans le chat ?",
               "prompt": "Quel est l'apport principal de Harvey Workflows par rapport à un simple prompt isolé lors du traitement d'un dossier juridique complexe ?",
               "options": [
                 {
@@ -922,13 +948,13 @@
                   "id": "suppression-numerotation-pieces-contentieux",
                   "label": "Il efface les numéros de pièces justificatives afin d'empêcher le juge de vérifier les faits allégués."
                 }
-              ],
-              "plainPrompt": "Quel est l'avantage d'un Workflow Harvey par rapport à une simple question posée dans le chat ?"
+              ]
             },
             {
               "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Qu'est-ce qui garantit que les contrats confidentiels confiés à Harvey ne serviront jamais à entraîner l'IA pour d'autres clients ?",
               "prompt": "Une direction juridique exige que ses mémos de litige et ses projets d'acquisition restent couverts par la confidentialité et ne puissent en aucun cas enrichir un modèle d'IA accessible à des tiers. Quelle garantie d'architecture de Harvey répond directement à cette exigence ?",
               "options": [
                 {
@@ -947,8 +973,7 @@
                   "id": "desactivation-chiffrement-tls",
                   "label": "La transmission des pièces de Data Room en texte clair sur un réseau Wi-Fi public non chiffré."
                 }
-              ],
-              "plainPrompt": "Qu'est-ce qui garantit que les contrats confidentiels confiés à Harvey ne serviront jamais à entraîner l'IA pour d'autres clients ?"
+              ]
             }
           ],
           "recap": "Harvey Workflows industrialise vos processus multi-étapes ; le zéro-entraînement client, le cloisonnement par dossier et la validation de l'avocat protègent le secret professionnel.",
@@ -1076,18 +1101,6 @@
       ]
     }
   ],
-  "routeAliases": [
-    "HARVEY-LEGAL",
-    "HARVEY-ACADEMY",
-    "HARVEY-AI"
-  ],
-  "brandIdentity": {
-    "logoSlug": "harvey",
-    "displayName": "Harvey AI & Harvey Academy",
-    "primaryHex": "#141413",
-    "accentHex": "#C8A97E",
-    "masteryModel": "Parcours d'expertise produit complet aligné sur Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work et badges Credly by Pearson) : 3 unités progressives, 8 leçons opérationnelles, Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
-  },
   "mockExam": {
     "id": "harvey-legal-ai-mock-exam",
     "title": "Examen Blanc CertiGo Pro : Harvey Academy & Legal IA (Assistant, Vault, Knowledge, Workflows & Legal Engineering)",

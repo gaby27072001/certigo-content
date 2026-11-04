@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné 기반 OpenAI Academy 및 documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple 없이 jargon 및 expert) 및 examen blanc."
+  },
+  "locale": "ko-KR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "마스터: choix 의 모델 (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent 의 programmation autonome Codex 및 l'ingénierie IA 의 production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads 및 responsables produit déployant offres OpenAI en 기업.",
+  "prerequisites": "Connaître bases 의 développement logiciel (Git, JSON, API REST) 및 l'utilisation courante d' assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI 및 Prompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente bonnes pratiques d'ingénierie 의 prompt, routage 간의 모델 multimodaux 및 모델 의 raisonnement, l'usage 의 Canvas, Projects, Custom GPTs 및 l'évaluation systématique.",
+      "limits": "performances d' prompt 또는 d' workflow dépendent d'évaluations empiriques (Evals) 기반 데이터 représentatives 의 cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox (CertiGo 트랙)",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement 의 l'agent OpenAI Codex : exécution 의 tâches en parallèle 내 conteneur cloud isolé 및 액세스 coupé à Internet pendant l'exécution, lecture 의 conventions AGENTS.md, exécution 의 tests 및 ouverture 의 Pull Requests vérifiables.",
+      "limits": "Codex exécute tests configurés 내 son environnement sandbox ; toute fusion en production reste soumise à revue 의 code 및 aux contrôles CI 의 l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, 및 Evals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente Responses API unifiée, l'application stricte 의 JSON Schema via Structured Outputs (strict: true), Function Calling, l'Agents SDK (handoffs, guardrails, tracing) 및 suites d'évaluation Evals.",
+      "limits": "garantie syntaxique 의 Structured Outputs assure respect 의 schéma JSON, mais pas véracité métier 의 valeurs retournées ni l'autorisation d'exécuter appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "유닛 1 · ChatGPT Pro & Enterprise : 모델, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs 모델 의 raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs 및 Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner 모델 optimal selon tâche (GPT-4o vs o3/o4-mini), conduire étude sourcée 및 Deep Research 및 structurer espace 의 travail récurrent 및 Projects, Canvas 및 Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage 의 모델 : GPT-4o multimodal rapide vs 모델 의 raisonnement à chaîne 의 pensée interne o3 및 o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée 및 citations) & Data Analysis (exécution Python 위한 nettoyer, modéliser 및 tracer 의 데이터)",
+        "Canvas (co-édition ciblée 의 texte 및 의 code), Projects (instructions 및 파일 persistants) 및 Custom GPTs gouvernés en 기업"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o 위한 l'interaction multimodale rapide 및 rédaction fluide, o3/o4-mini 위한 raisonnement algorithmique 또는 analytique complexe, 및 Deep Research lorsqu' synthèse exige d'explorer, croiser 및 citer 의 dizaines 의 sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage 의 모델 & Espaces 의 Travail",
+        "diagram": "[요청 사용자] ➔ [Choix 모델 : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "[KO] GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image 및 audio 및 faible latence ; o3 및 o4-mini allouent 의 calcul 의 raisonnement avant 의 répondre aux problèmes logiques, mathématiques, juridiques 또는 d'architecture."
+          },
+          {
+            "name": "[KO] Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement web 및 connecteurs autorisés 위한 livrer rapport sourcé ; Data Analysis exécute 의 code Python 위한 analyser 의 파일 CSV/Excel."
+          },
+          {
+            "name": "[KO] Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre éditeur côte à côte 위한 réviser 의 texte 또는 의 code par section ; Projects regroupe conversations, instructions 및 파일 ; Custom GPTs partage 의 assistants spécialisés 내 workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "내 ChatGPT Enterprise, conversations, 파일 의 Projects 및 exécutions Data Analysis sont isolés par espace 의 travail client 및 ne servent jamais à entraîner 모델 OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "선택: bon 모델 : GPT-4o multimodal vs 모델 의 raisonnement o3 및 o4-mini",
+          "objective": "Arbitrer 간의 GPT-4o, o3 및 o4-mini selon complexité logique, besoin multimodal, latence 및 비용 d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "사용: 모델 의 raisonnement plus lourd 위한 reformuler courriel 의 trois lignes gaspille 의 temps, mais confier audit d'architecture distribuée à 모델 instantané fait rater 의 cas limites : quelle est règle 의 tri ?",
+          "declicCard": {
+            "title": "핵심 포인트 모델 OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse 및 échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne 의 pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "위한 rédiger, résumer, traduire 또는 dialoguer rapidement à partir 의 texte 또는 d'images courantes, choisissez GPT-4o.",
+            "step2": "위한 résoudre bug subtil, prouver cohérence financière/juridique 또는 planifier sous fortes contraintes, choisissez o3 (profondeur maximale) 또는 o4-mini (raisonnement rapide 및 économique).",
+            "rule": "Prompting o3/o4-mini : donnez objectif précis, contraintes 및 format attendu, 없이 imposer 의 « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · GPT-4O MULTIMODAL",
+              "title": "모델 polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle 내 tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse 의 réunions, traduction nuancée, extraction visuelle rapide 및 conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "[KO] GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "2단계 · 모델 의 RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer 의 temps 의 réflexion avant premier mot",
+              "bodyParagraph": "모델 의 série o (`o3` 및 `o4-mini`) génèrent chaîne 의 raisonnement interne avant d'émettre leur 응답 finale : ils vérifient leurs hypothèses, reviennent en arrière en cas 의 contradiction 및 excellent en algorithmique, finance, analyse 의 causes racines 및 revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement 의 pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "3단계 · ADAPTER SON PROMPTING",
+              "title": "brief d'objectif clair plutôt que 의 micro-guidage",
+              "bodyParagraph": "및 GPT-4o, détailler étapes intermédiaires améliore souvent sortie. 및 o3 및 o4-mini, spécifiez clairement l'objectif final, invariants à respecter, 데이터 d'entrée 및 schéma 의 sortie : 모델 construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "기반 o3/o4-mini : spécifiez QUOI (contraintes + critères 의 succès), laissez 모델 gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie faible latence 및 l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre profondeur 의 raisonnement maximale 위한 problèmes scientifiques, architecturaux, financiers 또는 의 débogage complexe, tandis qu'`o4-mini` optimise compromis vitesse/비용 기반 tâches techniques.",
+            "prompt destiné à 모델 의 raisonnement 해야 합니다 définir rigoureusement contraintes, cas limites 및 livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "한 팀이 d'ingénierie chez éditeur SaaS 해야 합니다 traiter deux demandes : (1) transformer 의 notes d'atelier en FAQ client multilingue, 및 (2) identifier condition 의 course (race condition) 간의 trois microservices 의 paiement.",
+            "steps": [
+              "Affecter rédaction 및 traduction 의 FAQ client à GPT-4o 내 Canvas 위한 itérer rapidement 기반 style.",
+              "Soumettre 로그 d'exécution 및 code 의 trois microservices à o3 en précisant invariants transactionnels à 검증:.",
+              "Valider scénario d'entrelacement découvert par o3 au moyen d' test automatisé reproductible."
+            ],
+            "decision": "routage intentionnel divise temps 의 rédaction par trois 및 résout bug 의 concurrence que revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez trois tâches suivantes 간의 GPT-4o, o4-mini 및 o3 en justifiant votre choix : (A) Reformuler 15 fiches produit 위한 catalogue web, (B) Diagnostiquer incohérence 간의 quatre clauses 의 pénalité 및 모델 actuariel, (C) Générer rapidement 의 tests unitaires 기반 vingt fonctions utilitaires.",
+            "successCriteria": [
+              "연결: (A) à GPT-4o 위한 sa rapidité rédactionnelle 및 sa maîtrise 의 ton.",
+              "연결: (B) à o3 위한 sa capacité 의 raisonnement multi-contraintes profond.",
+              "연결: (C) à o4-mini 위한 son raisonnement code rapide 및 économique à haut volume."
+            ],
+            "feedback": "선택: 모델 proportionné à difficulté cognitive évite à fois 기반-qualité lente 및 l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez problème financier 또는 logique très complexe 및 douze règles à 검증: en même temps. Quel 모델 OpenAI 선택: ?",
+              "prompt": "아키텍트가 financier 해야 합니다 검증: cohérence mathématique 및 réglementaire d' 모델 의 couverture 의 taux comportant douze contraintes croisées 및 identifier cas limites où formule diverge. Quel 모델 OpenAI 해야 합니다-il sélectionner 내 ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "모델 의 raisonnement o3, conçu 위한 décomposer 및 검증: 의 problèmes logiques, mathématiques 및 multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "모델 의 transcription vocale purement acoustique dépourvu 의 capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "모델 d'embeddings vectoriels qui retourne 전용 liste 의 nombres flottants 없이 texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "classifieur 의 modération 의 contenu qui produit 전용 의 scores 의 보안 booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est différence pratique 간의 모델 의 réflexion o3 및 o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` 의 `o3` au sein 의 famille 의 모델 의 raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre raisonnement technique 및 code beaucoup plus rapide 및 économique 위한 tâches à haut débit, tandis qu'o3 privilégie profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération 의 code informatique 및 se limite à retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie 자동으로 prompts d'기업 기반 Internet contrairement au 모델 o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée 및 ne peut lire aucun 파일 structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o 위한 vitesse multimodale 및 rédactionnelle ; o4-mini 위한 raisonnement technique agile ; o3 위한 arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée 및 analyse Python",
+          "objective": "Conduire recherche approfondie multi-sources 및 Deep Research 및 analyser 의 jeux 의 데이터 tabulaires 및 Data Analysis 내 ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "귀하는 livrer demain matin étude concurrentielle citant trente sources vérifiables 및 analyse 의 cohorte 기반 파일 의 120 000 lignes 의 ventes : comment combiner Deep Research 및 Data Analysis 없이 jamais inventer chiffre ?",
+          "declicCard": {
+            "title": "핵심 포인트 Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré 및 citations",
+            "diagramBottom": "Data Analysis : 파일 CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research synthèses documentaires 및 études 의 marché nécessitant 의 parcourir, recouper 및 citer 의 dizaines 의 sources.",
+            "step2": "Confiez à Data Analysis tout calcul 기반 vos 파일 chiffrés afin que résultat provienne d' exécution Python réelle 및 non d' calcul mental 의 LLM.",
+            "rule": "Ne demandez jamais à 모델 의 calculer 의 tête 기반 50 000 lignes : exigez l'exécution Python 의 Data Analysis 및 inspectez code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · DEEP RESEARCH",
+              "title": "analyste 의 recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à recherche web rapide d' seconde, Deep Research établit plan d'investigation, explore 의 multiples pages 및 documents autorisés, recoupe contradictions 및 rédige rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "[KO] Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "2단계 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif 기반 vos jeux 의 데이터",
+              "bodyParagraph": "Lorsque vous déposez 파일 CSV, Excel 또는 JSON 내 ChatGPT Enterprise, Data Analysis écrit 및 exécute 의 code Python (`pandas`, `numpy`, `matplotlib`) 내 environnement isolé. Il nettoie valeurs manquantes, calcule agrégats exacts 및 génère 의 visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable 및 déterministe 기반 vos 파일 의 데이터"
+            },
+            {
+              "stepBadge": "3단계 · VÉRIFICATION 의 BOUT EN BOUT",
+              "title": "Auditer sources 및 script Python",
+              "bodyParagraph": "professionnel CertiGo vérifie toujours deux éléments avant 의 diffuser son livrable : 내 Deep Research, il ouvre citations 의 conclusions critiques ; 내 Data Analysis, il déplie bloc 의 code Python (`</>`) 위한 검증: filtres appliqués (par exemple traitement 의 lignes annulées 또는 의 devises).",
+              "keyTakeawayPill": "Toujours ouvrir citations Deep Research + inspecter filtres 의 script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit 의 recherches multi-étapes 기반 plusieurs minutes 위한 produire 의 rapports exhaustifs accompagnés 의 citations précises.",
+            "Data Analysis exécute 의 code Python 내 bac à sable 위한 garantir l'exactitude mathématique 의 statistiques, jointures 및 graphiques 기반 의 파일 volumineux.",
+            "L'inspection 의 code Python généré (`</>`) 지원합니다 의 valider hypothèses 의 nettoyage (valeurs nulles, doublons, devises) avant 의 présenter chiffres."
+          ],
+          "workedExample": {
+            "situation": "한 팀이 stratégie prépare l'entrée 기반 nouveau marché européen : elle 해야 합니다 comparer cadres réglementaires 의 quatre pays 및 analyser l'historique interne 의 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant quatre juridictions, autorités officielles à privilégier 및 grille comparative attendue 및 liens sources.",
+              "Charger l'extrait anonymisé 의 80 000 commandes 내 Data Analysis 및 demander calcul 의 panier moyen, 의 rétention à 6 mois 및 의 saisonnalité via Python.",
+              "Déplier code Python 위한 검증: que commandes remboursées ont bien été exclues 의 chiffre d'affaires net, puis 검증: citations réglementaires 의 Deep Research."
+            ],
+            "decision": "comité d'investissement reçoit dossier où chaque règle juridique pointe vers son texte officiel 및 chaque indicateur financier est issu d' script Python reproductible."
+          },
+          "practice": {
+            "prompt": "analyste colle 5 000 lignes 의 transactions 내 prompt texte 및 demande au 모델 의 calculer médiane 및 l'écart-type 없이 사용: Data Analysis. Expliquez risque 및 bonne méthode à adopter.",
+            "successCriteria": [
+              "설명: que prédiction 의 토큰 texte 없이 exécution 의 code risque 의 produire 의 calculs statistiques approximatifs 또는 tronqués.",
+              "Joindre 파일 structuré (CSV/XLSX) 및 demander explicitement l'exécution d' script Python via Data Analysis.",
+              "Ouvrir bloc 의 code exécuté 위한 검증: colonne ciblée 및 traitement 의 valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique 또는 statistique 기반 tableau 의 데이터 해야 합니다 passer par l'exécution Python 의 Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil 의 ChatGPT 지원합니다 의 chercher 내 의 dizaines 의 documents officiels 및 의 rédiger rapport complet 및 toutes sources ?",
+              "prompt": "responsable veille réglementaire 해야 합니다 produire rapport comparant exigences publiées par cinq autorités 의 régulation 및 의 citations vérifiables ligne par ligne. Quelle fonctionnalité 의 ChatGPT Pro / Enterprise est spécifiquement conçue 위한 ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie recherche multi-étapes, recoupe documents 및 produit rapport structuré 및 citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "complétion hors-ligne à température élevée 없이 액세스 aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "générateur d'illustrations graphiques dépourvu 의 moteur 의 recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé 없이 connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule total 의 ventes différent 의 votre comptabilité à partir d' 파일 Excel. Que devez-vous 검증: en premier ?",
+              "prompt": "Après avoir chargé 파일 CSV 의 60 000 ventes 내 ChatGPT Data Analysis, contrôleur obtient chiffre d'affaires supérieur 의 12 % à celui 의 comptabilité. Quel réflexe 의 vérification 해야 합니다-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir code Python exécuté (`</>`) 위한 검증: comment lignes annulées, taxes 및 devises ont été filtrées 내 pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "비활성화: l'exécution Python 위한 obliger 모델 의 langage à additionner 60 000 lignes 의 tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir 파일 CSV en image JPEG compressée avant 의 relancer somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier 직접 graphique car script Python généré applique toujours conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore 및 cite sources ; Data Analysis exécute 의 Python déterministe 및 inspectable 기반 vos 데이터 chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer 및 공유: l'IA en 기업",
+          "objective": "Distinguer 및 combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) 및 Custom GPTs (assistants métier partagés 및 gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il 생성: Project 또는 Custom GPT ? 및 comment modifier trois lignes au milieu d' document 또는 d' script 의 300 lignes 없이 que ChatGPT ne régénère tout depuis début ?",
+          "declicCard": {
+            "title": "핵심 포인트 Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'팀)",
+            "diagramTop": "Canvas = Éditeur côte à côte 위한 retoucher section précise d' texte 또는 d' code",
+            "diagramBottom": "Projects = Votre dossier 의 travail continu · Custom GPT = Assistant standardisé partagé 및 l'팀",
+            "step1": "Ouvrez Canvas 위한 itérer 기반 livrable long (article, spécification, script) en surlignant 전용 passage à réécrire 또는 déboguer.",
+            "step2": "Utilisez Project 위한 regrouper vos 파일 및 instructions d' dossier en cours, 및 publiez Custom GPT lorsque toute l'팀 a besoin 의 même assistant métier.",
+            "rule": "Travail récurrent d' dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé 위한 l'팀 = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · CANVAS",
+              "title": "Fini régénération complète à chaque retouche",
+              "bodyParagraph": "내 Canvas, document 또는 code s'affiche 내 volet dédié à droite 의 chat. Vous pouvez surligner seul paragraphe 또는 seule fonction 위한 demander réécriture, changement 의 niveau 의 lecture, l'ajout 의 logs 또는 portage vers autre langage, 및 historique 의 versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner zone ➔ Édition chirurgicale in-place + Historique 의 versions"
+            },
+            {
+              "stepBadge": "2단계 · PROJECTS",
+              "title": "Garder contexte d' dossier au fil 의 semaines",
+              "bodyParagraph": "Project 내 ChatGPT rassemble en seul endroit vos instructions personnalisées, vos 파일 의 référence (cahier 의 charges, architecture, charte éditoriale) 및 tous fils 의 conversation liés à ce chantier. Chaque nouveau chat ouvert 내 Project hérite immédiatement 의 ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + 파일 sources + Historique 의 chats organisé"
+            },
+            {
+              "stepBadge": "3단계 · CUSTOM GPTS EN 기업",
+              "title": "Standardiser assistant métier 및 Actions 및 거버넌스",
+              "bodyParagraph": "Lorsqu' workflow est stabilisé (ex. Revue d'appel d'offres, Générateur 의 post-mortem SRE), encapsulez ses instructions système, sa base documentaire 및 ses Actions API OpenAPI 내 Custom GPT publié 전용 au sein 의 votre espace 의 travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en 보안"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas 지원합니다 co-édition granulaire 의 texte 및 의 code 및 raccourcis dédiés (longueur, ton, revue 의 code, ajout 의 commentaires, portage 의 langage) 및 gestion 의 versions.",
+            "Projects organise travaux au long cours d' 사용자 또는 d' 팀 autour d'instructions 및 의 파일 의 référence persistants.",
+            "Custom GPTs 내 ChatGPT Enterprise permettent 의 distribuer 의 assistants spécialisés dotés d'Actions OpenAPI sous contrôle 의 console d'administration."
+          ],
+          "workedExample": {
+            "situation": "한 팀이 SRE souhaite (1) suivre l'opération 의 migration Cloud 의 trimestre 및 ses schémas d'architecture, (2) co-rédiger runbook 의 bascule section par section, 및 (3) offrir à tous ingénieurs d'astreinte assistant standardisé 의 rédaction 의 post-mortem.",
+            "steps": [
+              "생성: Project « Migration Cloud T4 » contenant schémas d'architecture 및 contraintes 의 SLA.",
+              "Rédiger 및 affiner runbook 의 bascule 내 Canvas en révisant chaque procédure 의 rollback 없이 altérer sections déjà validées.",
+              "Publier Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré 및 모델 d'incident 및 grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "trois outils sont utilisés selon leur rôle exact : continuité 의 dossier (Project), édition fine (Canvas) 및 standardisation d'팀 (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer prompt complexe utilisé par dix personnes en copier-coller vers Custom GPT d'기업 sécurisé, 및 précisez quand 사용자 devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer prompt validé 내 instructions système 의 Custom GPT 및 y joindre documents 의 référence officiels.",
+              "Restreindre partage 의 Custom GPT aux groupes autorisés 의 workspace ChatGPT Enterprise.",
+              "사용: Canvas lorsque l'사용자 souhaite peaufiner localement paragraphe 의 livrable généré avant export."
+            ],
+            "feedback": "Centraliser prompt 내 Custom GPT élimine dérive 의 versions copiées-collées, tandis que Canvas assure finition 기반 mesure 의 chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "어떻게 modifier seulement 30 lignes d' long programme 내 ChatGPT 없이 risquer qu'il réécrive 또는 casse reste 의 파일 ?",
+              "prompt": "Vous travaillez 기반 script Python 의 250 lignes 내 ChatGPT 및 souhaitez optimiser 전용 fonction 의 pagination aux lignes 80 à 110 tout en garantissant que reste 의 파일 reste strictement intact 및 versionné. Quel outil devez-vous 사용: ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir code 내 Canvas, surligner lignes 80 à 110 및 demander l'optimisation ciblée 및 suivi 의 version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir conversation vierge 없이 fournir 파일 및 demander 의 réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir script Python en 파일 audio MP3 avant 의 soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique 의 l'espace 의 travail à chaque modification d' variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "내 ChatGPT Enterprise, quand faut-il 생성: Project plutôt qu' Custom GPT ?",
+              "prompt": "Quelle différence principale guide choix 간의 Project 및 Custom GPT 내 ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "Project organise espace 의 travail continu (chats, 파일 및 consignes d' chantier), tandis qu' Custom GPT publie assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "Project indexe 자동으로 ses 파일 기반 moteurs 의 recherche publics alors qu' Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "Custom GPT ne peut contenir ni instructions système ni documents 의 référence, contrairement à Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "Project accepte 전용 의 파일 d'images matricielles 및 refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas 위한 l'édition chirurgicale côte à côte ; Projects 위한 vos chantiers au long cours ; Custom GPTs 위한 standardiser 및 공유: assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "유닛 2 · OpenAI Codex : Agent 의 Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée 의 Codex, pilotage par AGENTS.md, exécution parallèle 의 tâches, génération 의 Pull Requests vérifiées 및 revue 의 code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "구성: 파일 AGENTS.md déterministe, 위임: en parallèle correctif 의 bug 및 implémentation 의 fonctionnalité à OpenAI Codex 내 son sandbox, 및 auditer diff ainsi que 로그 의 tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, 액세스 네트워크 coupé pendant l'exécution 위한 prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes 의 build/lint/test, invariants d'architecture 및 conventions 의 dépôt",
+        "Parallélisation 의 tâches, ouverture 의 Pull Requests 및 preuves d'exécution 의 tests 및 revue 의 code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que commandes 의 vérification documentées 내 votre AGENTS.md : exigez toujours 의 tests verts 내 journal 의 sandbox avant 의 fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "[KO] Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (네트워크 OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs 의 Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "[KO] Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit 및 modifie code 및 exécute tests 및 l'액세스 네트워크 externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "계약 AGENTS.md",
+            "role": "파일 versionné 내 dépôt (racine 및 sous-dossiers) qui indique à Codex comment compiler, linter, tester 및 respecter frontières architecturales."
+          },
+          {
+            "name": "[KO] Vérification & Pull Request",
+            "role": "Codex itère 기반 son implémentation jusqu'à ce que suite 의 tests passe, puis produit commit/PR accompagné 의 citations 의 파일 및 의 sorties 의 terminal."
+          }
+        ],
+        "securityInvariant": "Pendant phase d'exécution 의 l'agent Codex, l'액세스 Internet sortant est désactivé 내 bac à sable afin d'empêcher toute exfiltration 의 code source 또는 téléchargement 의 paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "[KO] Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "설명: comment OpenAI Codex exécute 의 code 및 의 tests 내 conteneur sandbox cloud isolé 및 pourquoi coupure 네트워크 pendant l'exécution protège dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est différence fondamentale 간의 assistant d'autocomplétion 내 l'IDE 및 l'agent OpenAI Codex capable 의 vous livrer Pull Request testée 의 bout en bout ?",
+          "declicCard": {
+            "title": "핵심 포인트 Codex : 의 Suggestion 의 Ligne à Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création 의 conteneur + Clone 의 dépôt + Installation 의 dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, 네트워크 OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement 의 tâche prépare dépôt 및 ses dépendances, puis verrouille l'액세스 네트워크 externe avant 의 donner main à l'agent.",
+            "step2": "Codex explore base 의 code, applique ses modifications 및 lance réellement compilateurs 및 tests jusqu'à obtenir résultat vert.",
+            "rule": "patch non exécuté est hypothèse ; patch validé par tests 내 sandbox Codex est livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone 및 isolée 내 cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre 내 son propre conteneur cloud isolé contenant votre dépôt Git à révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction 의 bug, refactorisation, couverture 의 tests) 없이 jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié 및 indépendant"
+            },
+            {
+              "stepBadge": "2단계 · 보안 네트워크 OFF",
+              "title": "왜 l'액세스 Internet est coupé pendant boucle agent",
+              "bodyParagraph": "fois script d'initialisation d'environnement terminé (installation 의 dépendances via `npm ci` 또는 `pip`), conteneur coupe l'액세스 Internet sortant pendant que l'agent travaille. Ainsi, même face à instruction piégée 내 파일 의 test, Codex ne peut ni exfiltrer 의 code ni télécharger 의 binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure 네트워크 ➔ Exécution sûre 의 l'agent"
+            },
+            {
+              "stepBadge": "3단계 · PREUVES D'EXÉCUTION",
+              "title": "Journal 의 terminal, citations 의 lignes 및 diff Git",
+              "bodyParagraph": "À fin 의 sa mission, Codex ne renvoie pas simple explication théorique : il fournit diff Git exact, citations 의 파일 modifiés 및 journal complet 의 commandes 의 test exécutées 내 terminal 의 sandbox.",
+              "keyTakeawayPill": "Toujours inspecter journal 의 test 의 sandbox avant 의 생성: 또는 fusionner PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère 내 conteneur cloud isolé dédié à chaque tâche, permettant 의 paralléliser plusieurs chantiers logiciels.",
+            "séparation 간의 phase d'initialisation (installation 의 dépendances) 및 phase d'exécution 의 l'agent (네트워크 externe désactivé) élimine risques d'exfiltration 및 d'injection supply-chain en cours 의 tâche.",
+            "Chaque résultat inclut trace vérifiable 의 commandes exécutées 및 의 tests passés."
+          ],
+          "workedExample": {
+            "situation": "한 팀이 plateforme veut confier à Codex mise à jour d' validateur 의 schéma TypeScript, mais lors 의 premier essai, `npm test` échoue 내 sandbox 및 `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant boucle d'exécution 의 l'agent, l'액세스 네트워크 est coupé, donc l'agent ne peut pas télécharger 의 paquets depuis registre npm.",
+              "Ajouter `npm ci` 내 script 의 configuration initiale 의 l'environnement Codex (qui s'exécute avant coupure 네트워크).",
+              "Relancer tâche : Codex dispose désormais 의 `node_modules`, exécute 85 tests unitaires 및 livre diff 100 % vert."
+            ],
+            "decision": "L'팀 documente script 의 préchargement 의 dépendances 내 configuration 의 l'environnement Codex 의 dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi agent 의 programmation autonome exécutant 의 tests 내 dépôt 해야 합니다 tourner 및 l'액세스 네트워크 externe désactivé fois dépendances installées, 및 comment gérer appels à 의 API tierces 내 tests.",
+            "successCriteria": [
+              "설명: que coupure 네트워크 empêche l'exfiltration 의 code propriétaire 및 téléchargement 의 code arbitraire en cas 의 prompt injection.",
+              "Préinstaller toutes dépendances requises lors 의 phase 의 setup 의 l'environnement.",
+              "사용: 의 fixtures locales 또는 의 mocks déterministes 위한 tester intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "의 tests rapides, déterministes 및 hors-ligne (기반 fixtures) sont à fois bonne pratique d'ingénierie logicielle 및 clé 의 l'efficacité 의 Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "왜 l'agent 의 programmation OpenAI Codex coupe-t-il l'액세스 à Internet pendant qu'il modifie votre code ?",
+              "prompt": "왜 l'environnement d'exécution d'OpenAI Codex désactive-t-il l'액세스 Internet sortant pendant que l'agent modifie code 및 exécute tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "위한 empêcher toute exfiltration 의 code 또는 의 secrets ainsi que téléchargement 의 paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "위한 empêcher compilateur TypeScript 또는 Python 의 lire 파일 présents 내 répertoire 의 travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "위한 비활성화: l'historique Git local 및 interdire génération d' diff 간의 branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "위한 réduire résolution graphique 의 carte vidéo locale 의 l'ordinateur portable 의 développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque outil qui s'installe normalement depuis Internet. 어떻게 régler cela ?",
+              "prompt": "tâche confiée à OpenAI Codex échoue lors 의 l'exécution 의 `pytest` car bibliothèques 의 파일 `requirements.txt` ne sont pas installées 및 l'agent ne peut pas contacter PyPI. Quelle est résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "구성: l'installation 의 dépendances (`pip install -r requirements.txt`) 내 script d'initialisation 의 l'environnement sandbox avant coupure 네트워크."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex 의 삭제: dossier `tests/` afin que commande retourne code 의 sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "비활성화: vérification par tests 및 fusionner 직접 code généré 기반 branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire clés secrètes 의 production en clair 내 파일 README.md 의 dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne 내 son sandbox isolé 및 exigez preuve par logs 의 tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées 및 revue 의 code 및 Codex",
+          "objective": "Structurer 파일 AGENTS.md efficace, 위임: 의 tâches ciblées 또는 의 revues 의 code à Codex 및 valider Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "어떻게 faire en sorte que Codex connaisse instantanément vos commandes 의 test ciblées, vos règles d'architecture 및 vos interdits 의 보안 없이 avoir à répéter 내 chaque prompt ?",
+          "declicCard": {
+            "title": "핵심 포인트 AGENTS.md : Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à racine (및 par sous-dossier) = Commandes 의 validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible bons 파일, lance bons tests 및 ouvre PR propre",
+            "step1": "Documentez 내 `AGENTS.md` commandes exactes (`npm test`, `npm run validate`), invariants métier 및 règles 의 style.",
+            "step2": "Utilisez 의 파일 `AGENTS.md` plus spécifiques 내 sous-dossiers d' monorepo (`backend/`, `apps/mobile/`) 위한 affiner consignes locales.",
+            "rule": "Si vous corrigez deux fois même erreur 의 convention 내 PR d'agent, transformez cette remarque en règle 내 `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · STANDARD AGENTS.MD",
+              "title": "Donner à l'agent carte 및 boussole 의 dépôt",
+              "bodyParagraph": "bon 파일 `AGENTS.md` ne répète pas 의 marketing : il donne l'architecture 의 dossiers, règles strictes (ex. séparation public/privé, déterminisme 의 manifestes), commande 의 test rapide 위한 itérer 및 suite complète à exécuter avant 의 conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes 의 test rapides 및 complètes"
+            },
+            {
+              "stepBadge": "2단계 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "의 ticket bien borné à Pull Request prête à relire",
+              "bodyParagraph": "위한 위임: efficacement à Codex, formulez tâche bornée : symptôme 또는 comportement attendu, 파일 또는 modules concernés 및 critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit branche 및 Pull Request documentant changements 및 tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère 의 test = Pull Request autonome prête 위한 revue"
+            },
+            {
+              "stepBadge": "3단계 · REVUE 의 CODE PAR CODEX",
+              "title": "Détecter bugs logiques 및 régressions avant fusion",
+              "bodyParagraph": "En mode revue 의 code 기반 Pull Request, Codex compare l'intention au diff réel, exécute 또는 trace chemins d'erreur (nullabilité, conditions 의 course, oubli 의 validation 의 borne, fuite d'information) 및 signale 전용 défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles 의 보안 및 cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit contexte persistant 및 hiérarchique (racine puis sous-répertoires) que Codex consulte 자동으로.",
+            "délégation parallèle 지원합니다 의 traiter simultanément 의 corrections 의 bugs, 의 ajouts 의 tests 및 의 refactorisations isolées.",
+            "사용: Codex en revue 의 Pull Request 지원합니다 d'identifier erreurs 의 logique, oublis 의 cas limites 및 écarts vis-à-vis 의 invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "내 dépôt `certigo-content`, chaque question publique 해야 합니다 avoir solution privée correspondante 및 aucun champ `correct` 또는 `rationale` ne 해야 합니다 figurer 내 `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or 및 séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` 내 `AGENTS.md`.",
+              "Confier à Codex l'ajout d' nouveau parcours 및 ses questions 및 solutions.",
+              "검증: 내 rapport 의 PR que Codex a exécuté 의 lui-même toutes commandes prescrites par `AGENTS.md` avant 의 proposer fusion."
+            ],
+            "decision": "파일 `AGENTS.md` 보장합니다 que chaque tâche exécutée par l'agent respecte gardes 의 보안 및 의 계약 의 dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez quatre rubriques indispensables d' 파일 `AGENTS.md` 위한 API backend soumise à 의 exigences strictes 의 rétrocompatibilité 의 schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture 및 répertoires critiques (ex. schémas 의 계약, séparation 의 couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use 기반 schémas, interdiction 의 secrets).",
+              "3. Commandes d'installation 및 의 validation ciblée puis complète.",
+              "4. Processus 의 changement attendu avant ouverture 의 Pull Request."
+            ],
+            "feedback": "`AGENTS.md` concis, impératif 및 orienté commandes 의 vérification améliore radicalement taux 의 réussite au premier essai 의 Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert 파일 AGENTS.md placé 내 votre projet informatique 위한 OpenAI Codex ?",
+              "prompt": "Quel est rôle 의 파일 `AGENTS.md` placé à racine 및 내 sous-dossiers d' dépôt Git utilisé 및 OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir 자동으로 à l'agent commandes 의 build/test, l'architecture 및 invariants 의 dépôt 또는 의 sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair mots 의 passe 의 데이터베이스 의 production 위한 éviter variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "교체: binaire 의 compilateur par interprétation purement approximative 없이 exécution 의 tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes branches 없이 exécuter workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger 내 quatre parties différentes 의 votre logiciel. 어떻게 gagner 의 temps 및 Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits 내 quatre modules distincts 의 votre application. 어떻게 exploiter OpenAI Codex 의 façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "위임: quatre corrections en parallèle 내 quatre tâches Codex distinctes en exigeant test 의 non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander réécriture totale 의 l'application 내 seul commit géant en désactivant suite 의 tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre 전용 titre « Ça ne marche pas » 없이 indiquer ni module ni trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser 의 modifications non testées 직접 기반 branche 의 production en contournant revue 의 code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue 의 PR = workflow d'ingénierie augmentée 및 OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic 의 régressions CI, remédiation 및 보안 및 Codex",
+          "objective": "사용: Codex 위한 diagnostiquer échec CI complexe, écrire test reproducteur avant correctif (TDD) 및 appliquer garde-fous 의 보안.",
+          "estimatedMinutes": 8,
+          "hook": "pipeline CI échoue 의 façon intermittente 기반 erreur 의 sérialisation : comment guider Codex 위한 qu'il prouve cause racine par test rouge avant d'écrire seule ligne 의 correctif ?",
+          "declicCard": {
+            "title": "핵심 포인트 Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ 검증: Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer correctif chirurgical (Vert) ➔ 3. Exécuter suite complète & gardes 의 계약",
+            "step1": "Fournissez trace d'erreur exacte à Codex 및 demandez d'abord test minimal qui échoue 기반 bug actuel.",
+            "step2": "fois symptôme reproduit, laissez Codex appliquer correctif minimal 및 검증: qu'aucune garde existante ne régresse.",
+            "rule": "correctif 없이 test reproducteur qui échouait avant 및 passe après n'est pas remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · REPRODUIRE AVANT 의 CORRIGER",
+              "title": "discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez bug à Codex, exigez 내 prompt (또는 내 `AGENTS.md`) qu'il commence par reproduire l'erreur 및 test ciblé. Voir test échouer 위한 raison attendue prouve que l'agent a compris vrai mécanisme 의 bug 및 non symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger cause racine (Green) ➔ 3. 검증: l'ensemble"
+            },
+            {
+              "stepBadge": "2단계 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter bruit 및 refactorisations non demandées",
+              "bodyParagraph": "bon correctif d'agent modifie 전용 lignes nécessaires 및 ajoute test correspondant, 없이 reformater 의 dizaines 의 파일 non liés ni affaiblir assertion 의 보안 위한 faire passer test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement 의 test 또는 suppression 의 garde 위한 obtenir vert artificiel"
+            },
+            {
+              "stepBadge": "3단계 · CONTRÔLE HUMAIN 의 FRONTIÈRES",
+              "title": "Ce qu' relecteur humain vérifie toujours 기반 PR d'agent",
+              "bodyParagraph": "Lors 의 relecture 의 PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test 또는 contrôle 의 schéma n'a été contourné · 2. Que nouvelles dépendances éventuelles sont légitimes · 3. Que frontières 의 보안 (권한, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue 의 PR : inspecter en priorité tests modifiés, schémas 및 frontières 의 confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger reproduction préalable 의 bug par test qui échoue 보장합니다 pertinence 의 correctif produit par Codex.",
+            "agent ne 해야 합니다 jamais faire passer build au vert en supprimant 또는 en relâchant assertion 의 보안 또는 의 계약.",
+            "revue humaine 의 Pull Request se concentre 기반 validité 의 tests ajoutés, minimalité 의 diff 및 respect 의 frontières 의 보안."
+          ],
+          "workedExample": {
+            "situation": "내 pipeline 의 packaging, 파일 Windows en CRLF produit hash SHA-256 différent 의 celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire test unitaire injectant 의 fins 의 ligne `\\r\\n` 및 vérifiant que hash normalisé reste identique à celui en `\\n` ( test échoue initialement).",
+              "Corriger fonction 의 hachage 위한 normaliser fins 의 ligne avant calcul 의 digest SHA-256.",
+              "Exécuter toute suite 의 tests 및 검증: que vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "PR contient 6 lignes 의 code productif 및 20 lignes 의 test d'isolation prouvant résolution 기반 Windows 및 Linux."
+          },
+          "practice": {
+            "prompt": "agent propose PR qui corrige erreur 의 validation en supprimant règle `additionalProperties: false` 의 schéma JSON. Expliquez pourquoi vous devez rejeter cette PR 및 quelle consigne donner.",
+            "successCriteria": [
+              "설명: que retirer `additionalProperties: false` ouvre 계약 à 의 propriétés inconnues 또는 à 의 fuites 의 데이터.",
+              "Identifier quelle propriété provoquant rejet était illégitime 내 데이터 (또는 si procédure formelle d'expand backend est requise).",
+              "Exiger que schéma reste strictement fermé 및 qu' test négatif vérifie rejet 의 propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais correctif éteindre l'alarme au lieu d'éteindre l'incendie : schémas fermés 및 gardes 해야 합니다 rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "내 quel ordre Codex 해야 합니다-il travailler 위한 prouver qu'il a vraiment corrigé bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex correction d' bug 의 calcul d'arrondi signalé en production. Quelle séquence 의 travail 보장합니다 que correctif règle réellement problème 없이 régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer correctif minimal (vert), puis lancer toute suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "삭제: assertions numériques 의 tests existants afin que suite s'exécute 없이 erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier fonction mathématique 없이 exécuter tests 및 fusionner immédiatement branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer workflow GitHub Actions 의 branche 위한 masquer l'échec 의 build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "agent propose 의 faire passer test 의 보안 au vert en désactivant contrôle 기반 파일 posant problème. Que faites-vous ?",
+              "prompt": "Lors 의 relecture d' Pull Request générée 위한 corriger test d'anti-fuite en échec, vous constatez que diff ajoute 파일 fautif à liste d'exclusion globale au lieu 의 retirer champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter PR car elle neutralise garde 의 보안, 및 demander 의 삭제: champ sensible 의 파일 public tout en conservant contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver 및 fusionner immédiatement puisque l'indicateur 의 pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "삭제: complètement 파일 의 test d'anti-fuite 위한 accélérer prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "구성: l'outil 의 revue 의 code 위한 masquer systématiquement modifications apportées aux 파일 의 tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "유닛 3 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire 의 systèmes d'IA 의 production fiables 및 Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK 및 évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir appel Responses API combinant Function Calling 및 Structured Outputs (`strict: true`), orchestrer transfert (handoff) 및 Guardrails 내 l'Agents SDK 및 valider qualité via suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % conformité au JSON Schema",
+        "[KO] Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux 의 데이터 의 référence, graders déterministes/모델 및 portes 의 non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` 기반 vos schémas JSON (Structured Outputs & Function Calling), validez 권한 côté serveur avant d'exécuter outil, 및 bloquez tout changement 의 prompt 또는 의 모델 qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent 의 Production 및 OpenAI Responses API & Agents SDK",
+        "diagram": "[KO] [Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "[KO] Responses API & Structured Outputs",
+            "role": "Unifie génération 및 état, outils natifs (recherche, 파일, code) 및 contraint décodage 의 모델 위한 respecter JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "[KO] Function Calling & Agents SDK",
+            "role": "지원합니다 au 모델 d'émettre 의 appels 의 fonctions typés exécutés par votre code backend 및 d'orchestrer 의 transferts (handoffs) 간의 agents spécialisés protégés par 의 Guardrails."
+          },
+          {
+            "name": "[KO] OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, respect 의 consignes 및 l'absence 의 régression 기반 jeu 의 cas 의 test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "appel 의 fonction retourné par 모델 (`tool_call`) est intention non fiable : backend applicatif 해야 합니다 toujours valider l'ID, 권한 및 bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir 계약 JSON à 100 %",
+          "objective": "Exploiter Responses API 및 구성: Structured Outputs (`strict: true`) 위한 éliminer toute erreur 의 parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h 의 matin parce que LLM a oublié virgule JSON 또는 renommé champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "핵심 포인트 Structured Outputs : 의 JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés 또는 types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types 및 enums",
+            "step1": "Définissez votre schéma 의 sortie (Pydantic / Zod / JSON Schema) 및 `strict: true` 및 `additionalProperties: false` 기반 chaque objet.",
+            "step2": "Gérez explicitement champ `refusal` 내 votre code au cas où 요청 est rejetée 위한 motif 의 보안.",
+            "rule": "En production, n'espérez jamais qu' consigne 내 prompt suffise à garantir schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · RESPONSES API",
+              "title": "primitive unique 위한 texte, outils 및 l'état",
+              "bodyParagraph": "Responses API d'OpenAI unifie génération 의 réponses, chaînage multi-tours (`previous_response_id`), l'appel 의 fonctions personnalisées 및 l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) 내 seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État 의 conversation + Outils natifs 및 personnalisés"
+            },
+            {
+              "stepBadge": "2단계 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui 보장합니다 seulement 의 accolades valides, Structured Outputs 및 `strict: true` compile votre JSON Schema en grammaire qui filtre 토큰 lors 의 l'inférence : 모델 ne peut littéralement pas émettre clé inconnue, omettre champ requis 또는 violer `enum`.",
+              "keyTakeawayPill": "[KO] Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "3단계 · GESTION 의 REFUS & VALIDATION MÉTIER",
+              "title": "[KO] Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si demande viole règles 의 보안, 모델 remplit propriété dédiée `refusal` plutôt que schéma : votre code 해야 합니다 검증: `refusal` avant 의 lire l'objet parsé. 의 plus, `strict: true` 보장합니다 type (ex. nombre), mais votre backend 해야 합니다 toujours valider règles métier (ex. taux 의 TVA autorisé).",
+              "keyTakeawayPill": "검증: `refusal` + Valider règles métier côté serveur après désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "Responses API combine génération multimodale, chaînage d'état 및 invocation d'outils en seule boucle.",
+            "Structured Outputs 및 `strict: true` impose respect exact 의 JSON Schema (clés requises, types, enums 및 `additionalProperties: false`) par décodage contraint.",
+            "code applicatif 해야 합니다 toujours inspecter cas 의 refus (`refusal`) 및 appliquer ses propres validations métier 기반 valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "assurtech extrait 자동으로 garanties 및 franchises 의 계약서 PDF vers son moteur 의 tarification C# 및 subissait 2 % d'erreurs 의 désérialisation 및 의 simples instructions 내 prompt.",
+            "steps": [
+              "Définir schéma JSON 의 l'extraction 및 `strict: true`, `additionalProperties: false` 및 의 énumérations fermées 위한 types 의 franchise.",
+              "Appeler Responses API 및 ce schéma 내 `text.format` (`json_schema`).",
+              "Ajouter contrôle en sortie vérifiant l'absence 의 `refusal` 및 cohérence arithmétique (franchise <= plafond 의 garantie)."
+            ],
+            "decision": "taux d'erreur 의 formatage JSON tombe à 0,00 % en production dès déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez différence 간의 mode `json_object` historique 및 `json_schema` 및 `strict: true` (Structured Outputs), 및 listez deux exigences structurelles 의 JSON Schema en mode strict.",
+            "successCriteria": [
+              "설명: que `json_object` 보장합니다 전용 syntaxe JSON valide 없이 imposer 의 schéma, tandis que `json_schema` (`strict: true`) 보장합니다 respect exact 의 structure.",
+              "Mentionner que chaque objet 의 schéma 해야 합니다 déclarer `additionalProperties: false`.",
+              "Mentionner que tous champs définis 내 `properties` 해야 합니다 figurer 내 `required` (en utilisant type nullable `[\"string\", \"null\"]` 위한 champs optionnels)."
+            ],
+            "feedback": "En mode strict, champ optionnel se modélise par type union incluant `null` tout en restant listé 내 `required`, 및 `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "어떻게 obliger l'API OpenAI à renvoyer 응답 JSON qui respecte toujours exactement champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI 위한 extraire lignes d' facture 및 exige que 응답 respecte à 100 % schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) 및 `lignes` (array), 없이 aucune propriété supplémentaire. 어떤 구성이 devez-vous 사용: ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "사용: Structured Outputs (`json_schema`) 및 `strict: true` 및 `additionalProperties: false` 기반 chaque objet 의 schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules 내 prompt 없이 활성화: 의 schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer 응답 brute au centième caractère avant d'ajouter accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler température 기반 2.0 en mode texte libre 위한 diversifier nom 의 clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "및 mode strict d'OpenAI, comment déclarer champ facultatif (comme commentaire) 내 votre format JSON ?",
+              "prompt": "어떻게 modéliser champ optionnel (par exemple `commentaire`) 내 JSON Schema utilisé 및 OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure champ 내 `required` 및 définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) 및 `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` 및 삭제: totalement tableau `required` 의 l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer nom 의 champ 및 chaîne vide en guise 의 définition 의 type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer 의 balises XML à l'intérieur 의 schéma JSON 위한 비활성화: validateur 의 토큰."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur 의 parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs 및 guardrails",
+          "objective": "Implémenter Function Calling 및 schémas stricts 및 orchestrer 의 agents spécialisés 및 Handoffs, Guardrails 및 Tracing 내 l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "어떻게 faire collaborer agent 의 triage, agent 의 facturation 및 agent technique 없이 생성: usine à gaz impossible à déboguer ni laisser prompt malveillant déclencher remboursement non autorisé ?",
+          "declicCard": {
+            "title": "핵심 포인트 Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : 모델 propose `call_tool(args)` ➔ VOTRE code vérifie 권한 및 exécute",
+            "diagramBottom": "[KO] Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` 기반 définitions 의 fonctions (`tools`) 및 validez toujours autorisations côté serveur avant d'exécuter fonction.",
+            "step2": "Découpez responsabilités 및 의 Handoffs explicites 간의 agents spécialisés 및 protégez entrées/sorties par 의 Guardrails parallèles.",
+            "rule": "모델 ne touche jamais 직접 votre 데이터베이스 : il émet proposition d'appel d'outil que votre backend contrôle 및 exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · FUNCTION CALLING STRICT",
+              "title": "Séparer décision d'appel 및 l'exécution réelle",
+              "bodyParagraph": "Lors d' Function Calling, 모델 ne lance aucun code 기반 serveurs d'OpenAI : il retourne objet structuré indiquant nom 의 fonction 및 ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie 권한 의 l'사용자, exécute fonction 및 renvoie résultat au 모델.",
+              "keyTakeawayPill": "모델 = propose l'appel 및 arguments · Votre serveur = vérifie 권한 및 exécute"
+            },
+            {
+              "stepBadge": "2단계 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer 의 spécialistes plutôt qu' méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose 기반 의 primitives légères : `Agent` (instructions + 모델 + outils), 의 `Handoffs` (délégation explicite 의 conversation vers agent spécialiste comme transfert d'appel qualifié) 및 `Tracing` natif qui enregistre chaque étape, appel d'outil 및 transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré 의 bout en bout"
+            },
+            {
+              "stepBadge": "3단계 · GUARDRAILS D'ENTRÉE 및 의 SORTIE",
+              "title": "[KO] Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "`Guardrails` s'exécutent en parallèle 의 l'agent : guardrail d'entrée léger détecte immédiatement tentative d'injection 의 prompt 또는 demande hors périmètre 및 déclenche `tripwire` qui interrompt l'exécution avant même que 모델 principal 또는 ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil 또는 génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, 모델 génère 전용 arguments structurés 의 l'appel (`strict: true`) ; l'exécution 및 contrôle d'액세스 restent sous responsabilité 의 serveur applicatif.",
+            "L'OpenAI Agents SDK structure workflows multi-agents autour d'Agents, 의 Tools, 의 Handoffs (transferts 의 contrôle) 및 의 Tracing intégré.",
+            "Guardrails d'entrée 및 의 sortie utilisent mécanisme 의 disjoncteur (`tripwire`) 위한 bloquer requêtes malveillantes 또는 sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "service client bancaire déploie architecture multi-agents 및 l'OpenAI Agents SDK : agent d'accueil, agent Cartes Bancaires (pouvant faire opposition) 및 agent Crédits.",
+            "steps": [
+              "Placer Input Guardrail qui vérifie qu'aucune tentative 의 contournement d'ID 또는 의 demande hors banque n'est présente.",
+              "구성: l'agent d'accueil 및 deux Handoffs explicites vers l'agent Cartes 및 l'agent Crédits.",
+              "내 l'outil `bloquer_carte(carte_id)` 의 l'agent Cartes, 활성화: `strict: true` 기반 schéma 및 검증: côté serveur que `carte_id` appartient bien au `user_id` authentifié 내 contexte 의 session."
+            ],
+            "decision": "parcours est traçable 내 dashboard 의 Tracing 및 protégé contre appels d'outils 기반 cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "개발자가 passe `user_id` comme argument libre 내 schéma 의 Function Calling `rembourser_commande(user_id, commande_id)` 및 fait confiance à valeur choisie par LLM. Expliquez vulnérabilité 및 comment corriger.",
+            "successCriteria": [
+              "Identifier faille d'autorisation ( prompt injection peut convaincre LLM 의 passer `user_id` d' autre client).",
+              "Retirer `user_id` 의 arguments générés par LLM 및 l'injecter côté serveur depuis 토큰 d'authentification vérifié 의 session.",
+              "Valider en 데이터베이스 que `commande_id` appartient bien à cet 사용자 authentifié 및 appliquer plafond 의 remboursement."
+            ],
+            "feedback": "identifiants 의 보안 (qui est connecté, quel est son tenant) 해야 합니다 toujours provenir 의 contexte serveur authentifié, jamais 의 arguments devinés par 모델."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "왜 est-il dangereux 의 laisser l'IA 선택: elle-même numéro 의 dossier client à lire 없이 검증: qui est connecté ?",
+              "prompt": "내 application utilisant Function Calling d'OpenAI, fonction `lire_dossier_medical(patient_id)` laisse 모델 선택: librement `patient_id` à partir 의 texte 의 conversation 없이 검증: session authentifiée côté serveur. Quel est risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "divulgation non autorisée (IDOR) : 사용자 peut manipuler prompt 위한 amener 모델 à demander dossier d' autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "incompatibilité d'affichage 의 caractères accentués 내 police système 의 navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "saturation 의 périphérique audio local lors 의 sérialisation 의 l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "suppression automatique 의 파일 JSON Schema 기반 disque dur 의 serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "내 kit OpenAI Agents SDK, comment arrêter immédiatement agent si contrôle détecte demande dangereuse ?",
+              "prompt": "내 l'OpenAI Agents SDK, quel mécanisme 지원합니다 à contrôle 의 보안 exécuté en parallèle d'interrompre immédiatement l'agent avant qu' outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "Guardrail déclenchant disjoncteur (`tripwire`) dès que sa condition 의 보안 또는 의 périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation 의 paramètre `max_output_tokens` au-delà 의 fenêtre 의 contexte 의 모델."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "désactivation complète 의 module 의 Tracing 내 configuration globale 의 SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "retrait 의 toutes instructions système 의 agents spécialisés recevant handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + ID injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = 의 agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant 의 배포:",
+          "objective": "Construire suite d'évaluation (OpenAI Evals) combinant jeu 의 데이터 의 référence, graders déterministes 및 LLM-as-a-judge 위한 piloter mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt 기반 trois exemples 및 ça a l'air super ! » : pourquoi cette phrase est-elle cause numéro 의 régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "핵심 포인트 Evals : Traiter Prompts 및 모델 comme 의 Code 및 의 Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution 기반 variante",
+            "diagramBottom": "Graders (Exactitude 의 schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez dataset doré (golden dataset) couvrant cas nominaux, cas ambigus 및 tentatives 의 contournement.",
+            "step2": "Combinez 의 graders déterministes (schéma JSON, nom 의 l'outil appelé, mots-clés interdits) 및 의 graders sémantiques calibrés.",
+            "rule": "Aucun changement 의 prompt, 의 모델 또는 의 RAG ne part en production 없이 passer suite d'Evals au-dessus 의 seuil 의 référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · DATASET 의 RÉFÉRENCE",
+              "title": "Partir 의 vraies erreurs observées 기반 terrain",
+              "bodyParagraph": "bonne suite d'évaluation (Evals) ne contient pas 전용 의 questions faciles : elle réunit 50 à 200 cas représentatifs 의 production, incluant formulations ambiguës 의 사용자, documents contradictoires, valeurs nulles 및 scénarios où l'agent 해야 합니다 refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas 의 refus attendus"
+            },
+            {
+              "stepBadge": "2단계 · GRADERS (NOTATEURS)",
+              "title": "Privilégier déterminisme, compléter par juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité 의 graders déterministes rapides 및 reproductibles : correspondance exacte d' identifiant, validité 의 JSON Schema, vérification que bon `tool_call` a été émis 및 bons paramètres. 위한 évaluer fidélité au contexte (groundedness) 또는 ton, ajoutez grader par 모델 (LLM-as-a-judge) doté d' grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par 모델 기반 grille explicite"
+            },
+            {
+              "stepBadge": "3단계 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser 비용, latence 및 qualité en confiance",
+              "bodyParagraph": "및 suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si passage d' 모델 coûteux vers `o4-mini` 또는 `gpt-4o-mini` maintient 99 % 의 précision tout en divisant latence 및 facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation 의 모델 또는 의 prompt à l'aveugle : Evals tranchent par preuve"
+            }
+          ],
+          "keyIdeas": [
+            "évaluations systématiques (Evals) transforment l'amélioration d' système IA d' intuition subjective en ingénierie mesurable.",
+            "suite d'Evals robuste combine 의 contrôles déterministes (schéma, sélection d'outils, règles métier) 및 의 évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production 해야 합니다 être converti en nouveau cas 의 test 내 dataset d'Evals 위한 empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "한 팀이 souhaite réduire 의 60 % temps 의 응답 의 son agent 의 qualification 의 tickets en remplaçant son prompt système 의 4 000 mots 및 en changeant 의 모델.",
+            "steps": [
+              "Construire 내 OpenAI Evals jeu 의 120 tickets historiques annotés 및 catégorie attendue, priorité 및 l'outil à appeler.",
+              "Définir deux graders : grader déterministe 기반 couple `(categorie, priorite, tool_name)` 및 grader 의 conformité vérifiant l'absence 의 promesse commerciale non autorisée.",
+              "Comparer score 의 nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, 위한 latence divisée par 2,4."
+            ],
+            "decision": "mise en production est approuvée 기반 base 의 rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez trois types 의 cas 의 test 및 deux types 의 graders que vous devez inclure 내 suite OpenAI Evals 위한 valider agent qui résume 의 계약서 및 appelle API d'archivage.",
+            "successCriteria": [
+              "Trois familles 의 cas : 계약서 standards complets, 계약서 incomplets/contradictoires (cas limites) 및 prompts tentant 의 forcer archivage non autorisé.",
+              "Grader déterministe : 검증: structure JSON 의 résumé 및 arguments exacts passés à fonction d'archivage.",
+              "Grader d'ancrage : 검증: que chaque clause citée 내 résumé figure réellement 내 계약 source."
+            ],
+            "feedback": "Tester ensemble fidélité 의 texte 및 justesse 의 l'appel d'outil couvre à fois génération 및 l'action 의 l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez consignes 의 votre assistant IA. 어떻게 검증: que vous n'avez rien cassé avant mise en ligne ?",
+              "prompt": "Votre 팀 modifie instructions système d' agent en production 위한 raccourcir ses réponses, 및 veut s'assurer que ce changement ne dégrade pas choix 의 outils Function Calling 기반 150 scénarios critiques 의 l'기업. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter suite automatisée OpenAI Evals vérifiant appels d'outils 기반 150 scénarios 및 bloquer déploiement en cas 의 régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles 내 l'interface 의 chat puis 배포: immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer schémas 의 paramètres 의 fonctions afin qu'aucune erreur 의 typage ne remonte 내 로그."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "배포: 없이 test préalable 및 compter 기반 tickets 의 réclamation 의 clients 위한 mesurer qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "어떻게 검증: 의 façon simple, rapide 및 gratuite qu' agent a bien choisi devise EUR 내 test automatique ?",
+              "prompt": "Quel type 의 grader (notateur) est plus fiable 및 plus économique 위한 검증: 내 OpenAI Evals qu' agent a appelé fonction `creer_avoir` 및 bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "grader déterministe inspectant 직접 nom 의 fonction appelée 및 l'égalité stricte 의 l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "évaluation purement stylistique demandant à 모델 tiers si 응답 semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "règle vérifiant 전용 que 응답 textuelle dépasse mille caractères, 없이 lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "générateur 의 nombres aléatoires attribuant score 없이 comparer sortie à valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes 및 sémantiques + Porte 의 non-régression CI = l'ingénierie IA pilotée par Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "실전 모의고사 CertiGo Pro: OpenAI (ChatGPT Enterprise, 모델 o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète 의 maîtrise 의 produits OpenAI en 기업 : sélection 의 모델 (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex 및 AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK 및 OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

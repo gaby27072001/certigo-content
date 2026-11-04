@@ -1,0 +1,163 @@
+{
+  "schema": "certigo.editorial.pilot/v1",
+  "id": "responsible-ai-assistants",
+  "locale": "de-DE",
+  "status": "draft",
+  "purpose": "learning-not-certification",
+  "title": "Travailler mit ein assistant IA ohne lui Delegieren son jugement",
+  "audience": "Personnes qui débutent mit die assistants IA für lire eine documentation, préparer ein diagnostic oder proposer eine modification technique.",
+  "prerequisites": "Savoir ouvrir eine documentation und distinguer ein environnement von test d'ein environnement von production. Aucun compte AWS ni Zugriff à ein assistant n'est nécessaire.",
+  "estimatedMinutes": 18,
+  "asOf": "2026-10-14",
+  "scope": "Pilote d'apprentissage original, en français, ohne notation ni préparation à eine certification oder à ein titre officiel. Die situations sont fictives. Die conseils von travail sont der choix pédagogiques von CertiGo ; die faits propres à Amazon Bedrock sont bornés aux pages AWS consultées à die date indiquée. Ne pas exécuter von commande, envoyer von document réel ni modifier von permission für suivre ce pilote.",
+  "sources": [
+    {
+      "id": "aws-kb-overview",
+      "title": "Retrieve data und generate AI responses with Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "checkedOn": "2026-10-14",
+      "supports": "Eine base von connaissances recherche der informations in der sources ; die informations retrouvées peuvent enrichir eine Antwort générée. Die citations permettent von remonter aux sources für Überprüfen die Antwort.",
+      "limits": "Eine citation n'atteste ni die vérité von toute die Antwort ni l'actualité von die source. Die capacités und Berechtigungen dépendent des type von base und von sa configuration ; ne pas die généraliser à tout assistant."
+    },
+    {
+      "id": "aws-kb-rag",
+      "title": "How Amazon Bedrock knowledge bases work (CertiGo-Pfad)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-it-works.html",
+      "checkedOn": "2026-10-14",
+      "supports": "In der parcours RAG vectoriel décrit, der documents non structurés sont découpés, convertis en représentations numériques und indexés. Die Anfrage est aussi représentée numériquement ; der passages proches sont retrouvés puis ajoutés au contexte transmis au Modell.",
+      "limits": "C'est der parcours vectoriel von documents non structurés, pas eine description von tous die modes von recherche. L'utilisation d'ein Modell für calculer der embeddings n'est pas son entraînement ; eine ingestion n'est pas ein ajustement der paramètres des Modell générateur."
+    },
+    {
+      "id": "aws-grounding",
+      "title": "Use contextual grounding check to filter hallucinations in responses (CertiGo-Pfad)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html",
+      "checkedOn": "2026-10-14",
+      "supports": "Die contrôles d'ancrage contextuel évaluent l'appui d'eine Antwort auf eine source von référence und sa pertinence für eine Anfrage, mit der scores und der seuils configurables.",
+      "limits": "Ces contrôles ne certifient pas die vérité externe von die source. Die page consultée limite die usages pris en charge à die synthèse, die reformulation und die questions-réponses, hors chatbot conversationnel. Ein score ne muss pas être présenté comme eine probabilité von vérité ni comme eine garantie von confidentialité."
+    },
+    {
+      "id": "aws-data-protection",
+      "title": "Data protection (CertiGo-Pfad)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "checkedOn": "2026-10-14",
+      "supports": "Der client garde die responsabilité von son contenu und von die configuration von Sicherheit. AWS recommande der Berechtigungen limitées au travail nécessaire und déconseille die informations sensibles in die tags, champs von nom libres und URL contenant der identifiants.",
+      "limits": "Cette page ne donne pas eine autorisation d'envoyer der Daten von l'organisation. Die règles von conservation, die journalisation, die Zugriff und die traitements müssen être vérifiés für der service und die configuration utilisés ; ni ein filtre ni der Verschlüsselung ne garantissent à eux seuls die confidentialité."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "verify-claims",
+      "title": "Eine Antwort convaincante n'est pas eine preuve",
+      "objective": "Proposer ein plan von vérification d'eine affirmation technique : Isolieren ce qui est à Überprüfen, préciser die sources und conditions à rechercher und formuler eine décision bornée si die preuves manquent.",
+      "estimatedMinutes": 6,
+      "hook": "Ein assistant rédige eine note claire en quelques secondes. Der risque commence quand sa clarté remplace votre vérification.",
+      "keyIdeas": [
+        "Traitez die Antwort comme eine proposition. Séparez die faits vérifiables, die hypothèses und die recommandations. Eine citation est eine piste von vérification, pas ein certificat von vérité.",
+        "Choisissez eine source adaptée : documentation officielle für der comportement d'ein service, référence von die version concernée für eine API, procédure interne autorisée für eine règle von votre organisation. Ein témoignage peut aider à chercher ohne établir eine règle générale.",
+        "Ouvrez die source und cherchez der passage qui soutient exactement l'affirmation. Vérifiez der service, die version, die région und die conditions utiles. Si der passage ne suffit pas, notez ce qui reste inconnu au lieu von compléter par intuition.",
+        "Ein contrôle d'ancrage contextuel compare eine Antwort à eine source und à eine demande. Eine Antwort peut être conforme à ein document erroné oder périmé. Ein contrôle favorable ne remplace donc pas die vérification humaine."
+      ],
+      "workedExample": {
+        "situation": "Für préparer eine revue technique, Camille reçoit cette proposition fictive : « Notre Antwort cite ein document und passe der contrôle d'ancrage, donc toutes ses affirmations sont exactes. » Aucune modification n'a encore été appliquée.",
+        "steps": [
+          "Isolieren die conclusion à Überprüfen : citations und contrôle favorable garantiraient l'exactitude von toutes die affirmations.",
+          "Consulter die pages AWS Knowledge Bases und contextual grounding checks : l'eine ermöglicht von remonter aux sources ; l'autre décrit eine comparaison mit eine source und eine Anfrage, pas ein audit von vérité universel.",
+          "Relire der document cité, Überprüfen sa date und rapprocher chaque affirmation importante d'ein passage précis. Signaler die affirmations non étayées und celles dont die conditions ne correspondent pas au contexte.",
+          "Conserver in die note die source, sa date von consultation, die conditions vérifiées und die incertitudes. Ne pas transformer eine incertitude en consigne von production."
+        ],
+        "decision": "Camille retire die garantie d'exactitude und fait relire die points non établis avant toute action. Eine citation utile und ein contrôle favorable réduisent certains risques ; ils ne suppriment pas der besoin von Überprüfen."
+      },
+      "practice": {
+        "prompt": "Ein collègue propose : « Ce réglage fonctionne in toutes die régions ; l'assistant cite eine page AWS. » Ce cas fictif ne précise ni der réglage ni die page : il sert à préparer eine vérification, pas à die réaliser. Ohne compte cloud, isolez l'affirmation à Überprüfen, proposez deux vérifications mit die sources à rechercher und formulez die décision à prendre si die page ne couvre que votre région von test.",
+        "successCriteria": [
+          "Isolieren die généralisation « in toutes die régions » und prévoir von confronter der réglage und ses conditions au passage cité.",
+          "Prévoir von rechercher die documentation officielle der régions prises en charge à die version oder date utile ; demander der nom des réglage und der lien manquants.",
+          "Formuler eine décision conditionnelle : ne pas généraliser au-delà der régions établies, suspendre der déploiement envisagé und demander eine revue si die informations manquent."
+        ],
+        "feedback": "Votre production est ein plan : elle ne prouve pas que vous avez trouvé oder vérifié eine source. Eine deuxième Antwort von l'assistant ne constituerait pas eine preuve indépendante. Der plan muss nommer die informations manquantes, die sources à rechercher und die limite von die décision. Die recherche effective d'ein passage und der transfert à ein cas nouveau restent à pratiquer und à observer ultérieurement."
+      },
+      "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence von preuve, dire ce qui manque est plus utile que parler mit assurance.",
+      "sourceIds": [
+        "aws-kb-overview",
+        "aws-grounding"
+      ]
+    },
+    {
+      "id": "retrieval-not-training",
+      "title": "Donner des contexte n'est pas entraîner ein Modell",
+      "objective": "Erklären der parcours RAG vectoriel d'ein document und distinguer indexation, recherche, contexte und entraînement.",
+      "estimatedMinutes": 6,
+      "hook": "Vous ajoutez eine procédure à eine base documentaire. L'assistant peut ensuite die retrouver : a-t-il appris cette procédure in ses paramètres ? Pas par cette seule opération.",
+      "keyIdeas": [
+        "RAG signifie génération enrichie par recherche : l'application retrouve von l'information puis die fournit au Modell comme contexte für produire eine Antwort.",
+        "In der parcours vectoriel non structuré décrit par AWS, l'ingestion prépare die documents : extraction von texte, découpage en passages, calcul d'embeddings und Speicher in ein index. Ein embedding est eine représentation numérique utilisée für comparer der contenus, pas eine Antwort ni eine garantie von compréhension.",
+        "Lors d'eine demande, ein Modell d'embeddings représente aussi die Anfrage. Die recherche sélectionne der passages proches, puis ces passages complètent der contexte envoyé au Modell générateur. Ein passage pertinent peut malgré tout être incomplet, obsolète oder mal interprété.",
+        "L'entraînement oder l'ajustement d'ein Modell modifie ses paramètres. Calculer der embeddings mit ein Modell existant und ajouter der documents à ein index ne réentraîne pas, par ces seules opérations, der Modell générateur. Cela n'affirme rien auf die autres traitements oder die conservation der Daten des service.",
+        "Toutes die recherches ne suivent pas ce parcours vectoriel : der mot RAG ne suffit pas à décrire l'architecture, die Zugriff oder die Daten réellement transmises."
+      ],
+      "workedExample": {
+        "situation": "Ein Team indexe eine procédure fictive « test von reprise, version 2 ». Eine Anfrage retrouve ein ancien passage von die version 1. L'Team conclut que der Modell a mal appris die nouvelle procédure.",
+        "steps": [
+          "Distinguer die procédure stockée, die passages indexés, die passages retrouvés und die Antwort générée. Ne pas attribuer immédiatement der défaut à l'entraînement.",
+          "Überprüfen, in eine revue ohne Daten réelles, quelle version a été ingérée und quels passages die recherche a sélectionnés. Ein document ajouté mais non synchronisé peut manquer in l'index.",
+          "Comparer die passages transmis au Modell mit die procédure en vigueur. Si der contexte est ancien, examiner l'ingestion und die recherche ; si der contexte est adéquat mais die Antwort diverge, examiner die génération und die vérification.",
+          "Faire approuver toute mise à jour von die base par son responsable ; ne pas lancer ein entraînement ni élargir die Zugriff für masquer der problème."
+        ],
+        "decision": "L'Team cherche d'abord où die version périmée zwischen in der parcours. Mettre à jour ein index und ajuster die paramètres d'ein Modell sont der opérations différentes, mit der objectifs und der risques différents."
+      },
+      "practice": {
+        "prompt": "Reconstituez à l'écrit der trajet d'eine procédure fictive jusqu'à eine Antwort RAG vectorielle. Placez der découpage, die embeddings der documents, l'index, die représentation von die Anfrage, die passages retrouvés und der contexte. Expliquez ensuite pourquoi « der document est indexé » ne signifie pas « der Modell générateur a été réentraîné ».",
+        "successCriteria": [
+          "Séparer die préparation der documents von die recherche effectuée lors d'eine demande.",
+          "Placer die embeddings der passages in l'index und die représentation von die Anfrage avant die comparaison.",
+          "Placer die passages retrouvés in der contexte avant die génération.",
+          "Distinguer l'utilisation d'ein Modell existant für calculer der vecteurs d'eine modification von ses paramètres par entraînement."
+        ],
+        "feedback": "Der trajet attendu est : document → passages → embeddings → index ; puis Anfrage → représentation → recherche von passages → contexte enrichi → Antwort. Si vous avez relié direkt l'index aux paramètres des générateur, reprenez die distinction zwischen contexte fourni à eine demande und entraînement. Ce schéma n'est pas universel à toutes die bases von connaissances."
+      },
+      "recap": "L'index sert à retrouver ; der contexte sert à informer eine demande ; l'entraînement sert à modifier die paramètres. Ne confondez pas ces trois rôles.",
+      "sourceIds": [
+        "aws-kb-rag",
+        "aws-kb-overview"
+      ]
+    },
+    {
+      "id": "stop-and-escalate",
+      "title": "Savoir s'arrêter avant d'envoyer oder d'autoriser",
+      "objective": "Repérer eine donnée sensible oder ein Zugriff excessif, suspendre l'action und demander eine décision au responsable adapté.",
+      "estimatedMinutes": 6,
+      "hook": "Ein diagnostic peut être techniquement utile und pourtant inacceptable si die Daten oder die Rechte nécessaires ne sont pas autorisés.",
+      "keyIdeas": [
+        "Avant von transmettre, identifiez die Daten, der destinataire, die finalité und l'autorisation. Secrets, Daten personnelles, Protokolle clients und documents internes demandent eine vérification spécifique. Pouvoir lire ein Datei ne donne pas automatisch der droit von l'envoyer à ein assistant.",
+        "Der choix d'ein service approuvé ne dispense pas von Überprüfen sa configuration : Zugriff, journalisation, conservation und règles internes. Die responsabilité partagée ne signifie pas que der fournisseur prend toutes die décisions à votre place.",
+        "Ein filtre von Daten sensibles peut aider, mais il ne gewährleistet pas von tout détecter. Retirer ein nom ne suffit pas toujours à anonymiser ein journal. Préférez ein exemple synthétique ohne donnée réelle si cela répond au besoin und respecte die règles internes.",
+        "Demandez seulement die Berechtigungen nécessaires à die tâche. Face à eine demande d'administration globale, ne cliquez pas für gagner des temps : demandez au responsable der Zugriff eine revue des besoin und eine permission limitée.",
+        "Si die donnée oder l'autorisation est incertaine, arrêtez l'envoi oder die modification. Contactez der propriétaire der Daten, der référent Sicherheit oder der responsable der Zugriff selon der cas, en décrivant der besoin ohne reproduire der secret."
+      ],
+      "workedExample": {
+        "situation": "Nora prépare ein diagnostic fictif. Der journal proposé contient der adresses von clients und ein Token d'Zugriff. L'assistant suggère von l'envoyer à ein outil externe und von lui attribuer ein rôle administrateur für lire d'autres Protokolle.",
+        "steps": [
+          "Ne pas envoyer der journal ni accorder der rôle. L'outil destinataire und l'usage von ces Daten ne sont pas encore autorisés.",
+          "Décrire der blocage au propriétaire der Protokolle und au référent Sicherheit ohne joindre der Token ni die Daten clients. Si ein secret a déjà été exposé, suivre die procédure d'incident und demander sa révocation oder rotation par eine personne habilitée.",
+          "Proposer eine reproduction synthétique des message d'erreur für commencer der diagnostic, sous réserve der règles internes. Ne pas supposer qu'eine simple suppression der noms rend der journal partageable.",
+          "Faire examiner par der responsable der Zugriff der périmètre réellement nécessaire. Reprendre seulement mit ein destinataire approuvé, der Daten autorisées und die Berechtigungen validées."
+        ],
+        "decision": "Nora suspend l'action à risque und garde der diagnostic au stade d'ein exemple fictif. Der filtre von l'assistant oder die promesse « nous ne réentraînons pas der Modell » ne vaut ni autorisation von transfert ni garantie von confidentialité."
+      },
+      "practice": {
+        "prompt": "Ein Team veut envoyer eine capture von journal interne à ein assistant : die noms sont masqués, mais ein identifiant von client und eine URL von connexion restent visibles. Elle demande aussi ein Zugriff administrateur temporaire. Rédigez eine Antwort von trois phrases : ce que vous suspendez, à qui vous demandez eine revue und comment poursuivre ohne transmettre von Daten réelles.",
+        "successCriteria": [
+          "Suspendre l'envoi und l'attribution des rôle, ohne déclarer die capture anonyme ni der rôle acceptable parce qu'il est temporaire.",
+          "Demander eine revue au propriétaire der Daten oder au référent Sicherheit für der transfert, und au responsable der Zugriff für die Berechtigungen.",
+          "Proposer ein exemple synthétique und eine permission limitée au besoin, à faire valider avant von reprendre."
+        ],
+        "feedback": "Masquer die noms ne règle pas die autres identifiants ni die informations éventuellement contenues in l'URL. Ein rôle temporaire peut encore donner trop von Rechte. Eine bonne Antwort nomme der blocage, der décideur und eine voie von travail sûre ; elle ne copie pas die éléments sensibles in die demande von revue."
+      },
+      "recap": "Daten oder Rechte incertains → arrêter l'action → décrire der besoin ohne secret → obtenir die revue adaptée. Die qualité technique ne remplace jamais l'autorisation.",
+      "sourceIds": [
+        "aws-data-protection",
+        "aws-grounding"
+      ]
+    }
+  ]
+}

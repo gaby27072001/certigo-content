@@ -1,0 +1,1129 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "harvey-legal-ai",
+  "brand": "CertiGo",
+  "providerId": "harvey",
+  "radarTrackId": "harvey:legal-ai-platform",
+  "routeCode": "HARVEY-LEGAL",
+  "routeAliases": [
+    "HARVEY-LEGAL",
+    "HARVEY-ACADEMY",
+    "HARVEY-AI"
+  ],
+  "brandIdentity": {
+    "logoSlug": "harvey",
+    "displayName": "Harvey AI & Harvey Academy",
+    "primaryHex": "#141413",
+    "accentHex": "#C8A97E",
+    "masteryModel": "Parcours d'expertise produit complet aligné 기반 Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work 및 badges Credly by Pearson) : 3 unités progressives, 8 leçons opérationnelles, Cartes Déclic, labs pratiques, questions à double niveau (simple 없이 jargon 및 expert) 및 examen blanc."
+  },
+  "locale": "ko-KR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: Harvey Academy & Legal IA (Foundations, Legal Engineering, Assistant, Vault, Knowledge & Workflows)",
+  "subtitle": "마스터: programme officiel Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work & badges Credly), Harvey Assistant (Word Add-In, redlining, mémos), Harvey Vault (Data Rooms M&A, Review Tables) 및 Harvey Knowledge & Workflows.",
+  "audience": "Avocats d'affaires (M&A, Corporate, Contentieux, Droit social, IP/IT), directeurs juridiques (General Counsel), juristes d'기업 및 Legal Ops.",
+  "prerequisites": "Connaître structure 의 계약서 d'affaires, principes d'audit juridique (Due Diligence) 및 règles déontologiques 의 confidentialité.",
+  "estimatedMinutes": 96,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "harvey-platform-overview",
+      "title": "Harvey Legal AI Platform: Assistant, Vault, Knowledge, 및 Workflows",
+      "url": "https://www.harvey.ai/",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente quatre piliers 의 plateforme Harvey : Assistant (rédaction, révision, redlining), Vault (audit 의 Data Rooms 및 grilles d'extraction 기반 의 milliers 의 documents), Knowledge (recherche juridique 및 réglementaire sourcée) 및 Workflows multi-étapes.",
+      "limits": "Toute sortie générée par Harvey constitue projet 의 travail soumis à revue 및 à validation finale d' avocat 또는 juriste habilité."
+    },
+    {
+      "id": "harvey-product-blog",
+      "title": "Harvey Engineering & Product Insights: Multi-model Legal Workflows, Vault Review Tables, 및 Security",
+      "url": "https://www.harvey.ai/blog",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement 의 Review Tables 내 Harvey Vault, l'ancrage citationnel 없이 hallucination 내 Harvey Knowledge, l'intégration Word 위한 redlining 및 l'engagement 의 confidentialité zéro-entraînement 기반 데이터 clients.",
+      "limits": "cloisonnement 의 dossiers (Ethical Walls / Matter-level access controls) 해야 합니다 être configuré conformément aux politiques 의 gestion 의 conflits d'intérêts 의 cabinet 또는 의 direction juridique."
+    },
+    {
+      "id": "harvey-academy-blog",
+      "title": "Harvey Academy: Shaping the Future of Legal AI Literacy (Intro to Harvey, AI for Legal Basics, Harvey in Practice, Deep Dives) (CertiGo 트랙)",
+      "url": "https://www.harvey.ai/blog/introducing-harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente portail officiel Harvey Academy (academy.harvey.ai) conçu par 의 praticiens 의 droit : parcours Intro to Harvey, cours certifiant AI for Legal Basics, ateliers vidéo Harvey in Practice, Harvey Deep Dives 및 déploiement par rôle à l'échelle 의 cabinets 및 directions juridiques.",
+      "limits": "formations 의 fondation sont ouvertes gratuitement 기반 inscription ; modules avancés liés au workspace exigent compte client Harvey actif."
+    },
+    {
+      "id": "harvey-academy-help",
+      "title": "Getting Started with Harvey Academy: Level 1 Foundations, Legal Engineering Certification, Preparing for Legal Work, 및 Credly Badges",
+      "url": "https://help.harvey.ai/articles/harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente certifications officielles Harvey Academy (Level 1 Foundations combinant AI for Legal Basics 및 AI Analysis for Legal Workflows, Legal Engineering Certification, 및 Preparing for Legal Work), parcours Getting Started for Users/Admins, l'Add-In Word 및 délivrance 의 badges numériques vérifiés via Credly by Pearson.",
+      "limits": "L'émission 의 badge vérifié Credly nécessite d'사용: même adresse e-mail 기반 Harvey Academy 및 기반 Credly by Pearson."
+    }
+  ],
+  "modules": [
+    {
+      "id": "harvey-assistant-contrats-redlining-memos",
+      "unitNumber": 1,
+      "title": "유닛 1 · Harvey Assistant : Rédaction, Redlining Assisté & Mémos Clients",
+      "subtitle": "Rédiger 및 réviser 의 계약서 및 son playbook 의 négociation, automatiser redlining argumenté 및 produire 의 mémos 의 synthèse client sourcés.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Appliquer playbook 의 négociation contractuelle 내 Harvey Assistant 위한 réviser 계약 fournisseur (MSA/DPA), générer redlining motivé clause par clause 및 rédiger mémo exécutif destiné au client.",
+      "memoKeyTopics": [
+        "Rédaction 및 révision 의 계약서 : alignement 기반 playbook interne (position préférentielle, position 의 repli / fallback, point 의 rupture / walk-away)",
+        "Redlining assisté par IA (interface Harvey & Add-in Microsoft Word) : réécriture chirurgicale 및 commentaire justificatif destiné à partie adverse",
+        "Recherche juridique sourcée 없이 hallucination 및 rédaction 의 mémos 의 synthèse client structurés (Executive Summary + analyse IRAC)"
+      ],
+      "memoGoldenRule": "Fournissez toujours à Harvey Assistant votre playbook 의 négociation 및 rôle 의 votre client (Acheteur vs Prestataire, Bailleur vs Preneur) avant 의 lancer redlining.",
+      "architectureSchema": {
+        "title": "Flux 의 Révision Contractuelle & Redlining 및 Harvey Assistant",
+        "diagram": "[계약 Adverse + Playbook Client (Positions Gold / Fallback / Red Flag)] ➔ [Harvey Assistant : Analyse d'Écarts + Vérification 의 Définitions] ➔ [Redline Word (Suivi 의 modifications + Commentaires négociateur) + Mémo Client]",
+        "components": [
+          {
+            "name": "Playbook & Contexte 의 Partie",
+            "role": "Définit position 의 client (ex. Acheteur), plafonds acceptables, clauses 의 repli autorisées 및 exclusions non négociables."
+          },
+          {
+            "name": "Moteur 의 Redlining Harvey (Web & Word Add-in)",
+            "role": "Compare chaque clause 의 projet adverse au playbook, propose réécriture exacte au minimum d'intrusion textuelle 및 génère note d'explication commerciale."
+          },
+          {
+            "name": "Générateur 의 Mémo Client Sourcé",
+            "role": "Synthétise points d'arbitrage majeurs en langage clair 위한 direction générale 또는 client, 및 renvoi exact aux numéros d'articles."
+          }
+        ],
+        "securityInvariant": "Chaque clause réécrite 또는 citée par Harvey Assistant est liée à l'article source 의 계약 téléversé ; aucune donnée 의 dossier n'est partagée hors 의 l'espace sécurisé 의 cabinet 또는 의 l'기업."
+      },
+      "lessons": [
+        {
+          "id": "redaction-revision-contrats-playbook",
+          "title": "Rédaction 및 révision 의 계약서 및 Playbook 내 Harvey Assistant",
+          "objective": "Structurer invite juridique précise 내 Harvey Assistant en associant 계약 à réviser, qualité 의 partie représentée 및 playbook 의 négociation.",
+          "estimatedMinutes": 12,
+          "hook": "Demander « Révises ce 계약 » 없이 préciser si vous défendez client acheteur 또는 fournisseur vendeur produit 의 recommandations inversées : comment cadrer Harvey Assistant comme collaborateur senior ?",
+          "declicCard": {
+            "title": "핵심 포인트 Playbook Harvey : Rôle 의 Client + Grille (Idéal / Fallback / Red Flag) + Vérification 의 Définitions",
+            "diagramTop": "Entrées : 1. Rôle (ex. Client Acheteur) · 2. 계약 source · 3. Playbook 의 négociation",
+            "diagramBottom": "Sortie Harvey : Tableau d'écarts par article + Clause 의 repli (Fallback) + Contrôle 의 termes définis",
+            "step1": "Précisez toujours partie que vous représentez, droit applicable, type 의 계약 및 joignez votre playbook 의 clauses.",
+            "step2": "Demandez à Harvey 의 classer chaque écart selon trois niveaux (Conforme / Acceptable en Fallback / Red Flag bloquant) 및 의 검증: termes 및 majuscule.",
+            "rule": "terme défini à l'Article 1 peut neutraliser garantie à l'Article 14 : exigez toujours contrôle croisé 의 définitions."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · CADRER COMME ASSOCIÉ",
+              "title": "Posture contractuelle, juridiction 및 playbook",
+              "bodyParagraph": "내 Harvey Assistant, encadrez chaque révision par quatre paramètres : 1. Qui vous représentez (ex. l'acquéreur 또는 preneur 의 licence SaaS) · 2. droit applicable (ex. droit français, New York law) · 3. Votre playbook 의 positions (standard, fallback, no-go) · 4. format 의 livrable attendu.",
+              "keyTakeawayPill": "Prompt juridique = Rôle représenté + Droit applicable + Playbook + Format 의 sortie"
+            },
+            {
+              "stepBadge": "2단계 · POSITIONS 의 REPLI (FALLBACK)",
+              "title": "Préparer à fois position cible 및 compromis",
+              "bodyParagraph": "위한 chaque clause sensible (plafond 의 responsabilité, dommages indirects, propriété intellectuelle, indemnisation), demandez à Harvey Assistant 의 générer non seulement rédaction cible idéale, mais aussi rédaction 의 repli (fallback) conforme à votre playbook si partie adverse refuse premier jet.",
+              "keyTakeawayPill": "위한 chaque clause critique : Position Idéale + Clause 의 Repli (Fallback) prête à négocier"
+            },
+            {
+              "stepBadge": "3단계 · AUDIT 의 TERMES DÉFINIS",
+              "title": "Traquer définitions orphelines 또는 piégées",
+              "bodyParagraph": "piège classique 의 계약서 longs réside 내 section Définitions : terme défini trop étroitement (ex. « Informations Confidentielles » exigeant marquage écrit systématique) vide clause 의 confidentialité 의 sa substance. Demandez systématiquement à Harvey d'auditer termes définis 및 renvois d'articles.",
+              "keyTakeawayPill": "Toujours faire 검증: par Harvey : Définitions piégées + Termes non définis + Renvois cassés"
+            }
+          ],
+          "keyIdeas": [
+            "révision contractuelle 내 Harvey Assistant exige 의 spécifier partie représentée, juridiction 및 playbook 의 référence.",
+            "génération conjointe 의 position préférentielle 및 의 clause 의 repli (fallback) accélère cycles 의 négociation.",
+            "L'audit automatisé 의 cohérence 간의 l'article Définitions 및 corps 의 계약 détecte restrictions cachées 및 renvois erronés."
+          ],
+          "workedExample": {
+            "situation": "juriste IT d' groupe bancaire révise 및 Harvey Assistant 계약 d'hébergement Cloud (MSA) 의 45 pages soumis par fournisseur étranger.",
+            "steps": [
+              "Téléverser 내 Harvey Assistant MSA proposé ainsi que Playbook Achats IT 의 banque (qui exige plafond 의 responsabilité 의 24 mois 의 redevances 및 préavis 의 réversibilité 의 6 mois).",
+              "Demander tableau comparatif article par article isolant écarts majeurs, définitions restrictives 및 renvois circulaires.",
+              "Identifier immédiatement grâce à Harvey que définition 의 « Faute Lourde » à l'Annexe 1 excluait pannes 의 sous-traitants ultérieurs."
+            ],
+            "decision": "juriste sécurise négociation en corrigeant à fois l'article 기반 responsabilité 및 définition cachée en annexe."
+          },
+          "practice": {
+            "prompt": "Rédigez invite structurée 위한 Harvey Assistant afin d'analyser clause 의 limitation 의 responsabilité 내 계약 SaaS où vous représentez client 기업, en intégrant position cible 및 fallback.",
+            "successCriteria": [
+              "Préciser rôle (Client 기업 souscripteur 의 SaaS) 및 droit applicable.",
+              "Définir position cible (ex. plafond mutuel à 24 mois 의 redevances + déplafonnement 위한 violation 의 confidentialité, 데이터 personnelles 및 contrefaçon IP) 및 position 의 repli (ex. super-cap à 3x 위한 데이터 personnelles).",
+              "Demander l'identification 의 écarts exacts 및 proposition 의 réécriture assortie d' argumentaire commercial."
+            ],
+            "feedback": "Structurer l'invite autour 의 couple (Position cible / Super-cap 의 repli) 지원합니다 à Harvey 의 produire 의 propositions immédiatement utilisables en séance 의 négociation."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Que devez-vous donner à Harvey Assistant au départ 위한 qu'il relise 계약 selon règles 의 votre 기업 ?",
+              "prompt": "법무 부서가 utilise Harvey Assistant 위한 réviser 계약 의 licence logicielle reçu d' éditeur. Quels éléments faut-il fournir 내 l'invite 위한 obtenir analyse 의 risques 및 의 propositions 의 clauses 직접 alignées 기반 politique 의 l'기업 ?",
+              "options": [
+                {
+                  "id": "role-client-droit-applicable-et-playbook",
+                  "label": "계약 adverse, rôle défendu (Client licencié), droit applicable 및 playbook interne précisant positions cibles 및 의 repli (fallback)."
+                },
+                {
+                  "id": "uniquement-derniere-page-signatures",
+                  "label": "전용 page 의 signature vierge 없이 corps 의 계약 ni indication 의 partie représentée."
+                },
+                {
+                  "id": "demande-generique-sans-contexte",
+                  "label": "consigne d' ligne « Améliore texte » 없이 préciser si l'on représente l'éditeur vendeur 또는 client acheteur."
+                },
+                {
+                  "id": "suppression-article-definitions",
+                  "label": "계약 amputé 의 son article Définitions 및 의 ses annexes financières afin 의 raccourcir lecture."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "clause paraît rassurante mais mot 및 majuscule cache piège 내 définitions au début 의 계약. Que demander à Harvey ?",
+              "prompt": "Lors 의 relecture d' accord 의 confidentialité (NDA), l'article 4 semble protéger largement votre client, mais définition 의 « Informations Confidentielles » à l'article 1 exige qu'elles soient estampillées par tampon humide 내 24 heures suivant tout échange oral. Quel contrôle Harvey Assistant 지원합니다 의 déjouer ce piège ?",
+              "options": [
+                {
+                  "id": "audit-croise-definitions-et-clauses-substantives",
+                  "label": "Demander audit croisé 간의 termes définis à l'article 1 및 obligations substantives 위한 repérer toute définition excessivement restrictive."
+                },
+                {
+                  "id": "verification-orthographique-seule",
+                  "label": "Limiter l'analyse à correction 의 fautes 의 frappe 없이 lire sens 의 définitions contractuelles."
+                },
+                {
+                  "id": "ignorer-mots-avec-majuscule",
+                  "label": "Demander à l'assistant d'ignorer tous termes commençant par lettre majuscule 내 l'accord."
+                },
+                {
+                  "id": "traduire-sans-analyser-portee",
+                  "label": "Traduire littéralement l'article 4 en trois langues 없이 examiner conditions 의 forme 의 l'article 1."
+                }
+              ]
+            }
+          ],
+          "recap": "내 Harvey Assistant : cadrez partie représentée, attachez votre playbook (cible + fallback) 및 contrôlez toujours définitions.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "redlining-assiste-ia-et-memos-clients",
+          "title": "Redlining assisté par IA 내 Word 및 rédaction 의 mémos 의 synthèse client",
+          "objective": "Réaliser redlining chirurgical 및 commentaires justificatifs destinés à partie adverse 및 produire mémo 의 synthèse client clair 및 sourcé.",
+          "estimatedMinutes": 12,
+          "hook": "Réécrire entièrement clause adverse braque négociateur d'en face, tandis qu'envoyer 40 pages 의 marques 의 révision brutes à votre directeur général est illisible : comment 사용: Harvey 위한 réussir deux exercices ?",
+          "declicCard": {
+            "title": "핵심 포인트 Redlining & Mémo : Intrusion Minimale 기반 계약 + Synthèse Décisionnelle 위한 Client",
+            "diagramTop": "Redline (위한 partie adverse) : Modification chirurgicale minimale + Commentaire objectif (« Conformité RGPD / Réciprocité »)",
+            "diagramBottom": "Mémo Client (위한 votre dirigeant) : Executive Summary + Top 3 points d'arbitrage commercial + Recommandation",
+            "step1": "Lors 의 redlining 내 Word 및 Harvey, demandez modification à intrusion minimale (conserver structure adverse tout en insérant garde-fous 의 votre playbook).",
+            "step2": "Générez deux livrables distincts : note d'explication neutre 위한 partie adverse 및 mémo stratégique confidentiel 위한 votre client.",
+            "rule": "Ne confondez jamais commentaire 의 redline (lu par partie adverse !) 및 note 의 risque interne (couverte par 변호사-의뢰인 비밀유지특권)."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · REDLINING CHIRURGICAL",
+              "title": "Modifier minimum 의 mots 위한 maximiser l'acceptation",
+              "bodyParagraph": "bon négociateur ne remplace pas article entier s'il suffit d'insérer « raisonnablement », « réciproquement » 또는 plafond chiffré. 및 l'extension Harvey 위한 Microsoft Word (또는 내 l'interface 의 révision), demandez 의 propositions 의 redline à intrusion minimale qui préservent numérotation 및 style 의 document source.",
+              "keyTakeawayPill": "Redlining chirurgical = modifier 전용 mots nécessaires 위한 보안: clause"
+            },
+            {
+              "stepBadge": "2단계 · DISTINGUER DEUX COMMENTAIRES",
+              "title": "Justification externe vs Note 의 risque interne",
+              "bodyParagraph": "Demandez à Harvey 의 produire deux colonnes bien séparées :\n1. **Justification externe (위한 partie adverse)** : neutre, constructive, fondée 기반 pratique 의 marché 또는 réciprocité.\n2. **Analyse 의 risque interne (위한 votre client 전용)** : évaluation franche 의 l'exposition financière 및 의 levier 의 négociation.",
+              "keyTakeawayPill": "Toujours séparer justification externe (partagée) 및 l'analyse 의 risque interne (confidentielle) !"
+            },
+            {
+              "stepBadge": "3단계 · MÉMO 의 SYNTHÈSE CLIENT",
+              "title": "의 l'analyse technique au mémo exécutif actionnable",
+              "bodyParagraph": "위한 votre client 또는 votre direction générale, demandez à Harvey Assistant 의 transformer revue en mémo structuré : 1. Synthèse exécutive (statut global) · 2. Tableau 의 3 à 5 arbitrages commerciaux restants (Clause, Risque concret en euros/opérations, Option recommandée) · 3. Prochaines étapes.",
+              "keyTakeawayPill": "[KO] Mémo client = Décisions commerciales à trancher + Impact métier + Recommandation claire"
+            }
+          ],
+          "keyIdeas": [
+            "redlining assisté par Harvey privilégie modifications chirurgicales (intrusion minimale) alignées 기반 playbook afin d'accélérer conclusion 의 l'accord.",
+            "Il est impératif 의 séparer commentaires 의 marge destinés à partie adverse 의 notes stratégiques internes destinées au client.",
+            "mémo 의 synthèse client traduit écarts juridiques en arbitrages opérationnels 및 financiers 직접 exploitables par dirigeant."
+          ],
+          "workedExample": {
+            "situation": "Sarah, avocate M&A/계약서, révise pacte d'actionnaires en urgence 및 해야 합니다 envoyer d' côté document en suivi 의 modifications au conseil 의 fonds, 및 의 l'autre note d'arbitrage au PDG fondateur.",
+            "steps": [
+              "사용: Harvey 내 Word 위한 proposer 의 redlines chirurgicaux 기반 clauses 의 Bad Leaver, d'inaliénabilité 및 의 sortie conjointe (Drag-Along).",
+              "Générer 의 bulles 의 commentaires neutres orientées pratique 의 marché 위한 document Word destiné au conseil adverse.",
+              "Générer séparément 내 Harvey Assistant mémo exécutif d' page 위한 PDG résumant trois points économiques à trancher avant l'appel."
+            ],
+            "decision": "conseil adverse accepte 80 % 의 redlines dès premier tour 및 PDG tranche 20 % restants en dix minutes grâce au mémo."
+          },
+          "practice": {
+            "prompt": "collaborateur junior s'apprête à envoyer à partie adverse 계약 Word dont bulles 의 commentaires générées contiennent notre position 의 repli secrète (« Nous accepterons 500 k€ s'ils insistent »). Expliquez l'erreur critique 및 règle 의 workflow à imposer 및 Harvey.",
+            "successCriteria": [
+              "Identifier divulgation accidentelle 의 stratégie 의 négociation 및 의 seuil 의 repli 의 client à partie adverse.",
+              "Imposer 내 prompt Harvey séparation stricte 간의 livrable « Commentaires 의 négociation externes » 및 livrable « Note stratégique interne client ».",
+              "Relire 및 purger systématiquement métadonnées 및 commentaires internes 의 파일 Word avant tout envoi externe."
+            ],
+            "feedback": "Ne laissez jamais stratégie 의 repli interne figurer 내 bulles 의 commentaires 의 document Word envoyé à partie adverse."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "내 Word 및 Harvey, pourquoi vaut-il mieux corriger 전용 mots risqués d' clause plutôt que tout réécrire 의 zéro ?",
+              "prompt": "Lors d' redlining assisté par Harvey 내 Microsoft Word, pourquoi est-il préférable 의 demander révision « à intrusion minimale » (surgical redlining) plutôt qu' remplacement intégral par votre clause type lorsque vous êtes en position 의 négociation équilibrée ?",
+              "options": [
+                {
+                  "id": "conserver-structure-adverse-inserer-gardes-fous",
+                  "label": "Cela préserve rédaction 및 numérotation 의 partie adverse tout en insérant exactement protections requises, réduisant frictions 및 délais 의 négociation."
+                },
+                {
+                  "id": "empecher-lecture-par-avocat-adverse",
+                  "label": "Cela rend modifications invisibles 내 mode Suivi 의 modifications 의 Microsoft Word."
+                },
+                {
+                  "id": "supprimer-valeur-juridique-contrat",
+                  "label": "Cela annule 자동으로 toutes obligations financières 의 l'accord 없이 accord 의 parties."
+                },
+                {
+                  "id": "bloquer-enregistrement-fichier-docx",
+                  "label": "Cela verrouille 파일 en lecture seule définitive 기반 serveur 의 messagerie."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "juriste laisse par erreur phrase « nous pouvons céder jusqu'à 2 M€ » 내 파일 Word envoyé à l'adversaire. Quelle erreur a-t-il commise ?",
+              "prompt": "juriste génère 및 Harvey tableau contenant à fois texte 의 redline 및 note confidentielle « Notre client est prêt à céder jusqu'à 2 M€ 의 plafond en dernier recours », puis copie l'intégralité 내 commentaires 의 파일 Word envoyé au fournisseur. Quelle règle fondamentale a été violée ?",
+              "options": [
+                {
+                  "id": "confusion-commentaire-externe-et-note-strategie-interne",
+                  "label": "Il a mélangé justification externe destinée à partie adverse 및 l'analyse confidentielle 의 seuils 의 repli réservée au client."
+                },
+                {
+                  "id": "utilisation-police-serif-standard",
+                  "label": "Il a utilisé police 의 caractères Times New Roman au lieu d' police 없이 empattement."
+                },
+                {
+                  "id": "pagination-automatique-pied-page",
+                  "label": "Il a laissé numérotation 의 pages active 내 pied 의 page 의 계약 Word."
+                },
+                {
+                  "id": "format-date-iso-dans-titre",
+                  "label": "Il a nommé 파일 및 date 의 jour au format année-mois-jour."
+                }
+              ]
+            }
+          ],
+          "recap": "Redline chirurgical + séparation stricte 간의 commentaire externe 및 stratégie interne + mémo exécutif orienté décision = méthode Harvey Assistant.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-foundations-ai-legal-basics",
+          "title": "[KO] Harvey Academy Level 1 Foundations : AI for Legal Basics, AI Analysis & Add-In Word",
+          "objective": "마스터: parcours officiel Harvey Academy Level 1 Foundations (AI for Legal Basics, AI Analysis for Legal Workflows, Getting Started for Users) 및 l'intégration directe 내 Microsoft Word.",
+          "estimatedMinutes": 12,
+          "hook": "어떻게 passer 의 curiosité envers l'IA générative à pratique juridique rigoureuse, vérifiable 및 직접 intégrée 내 Microsoft Word selon référentiel officiel Harvey Academy ?",
+          "declicCard": {
+            "title": "핵심 포인트 Harvey Academy Level 1 : Littératie IA Juridique + Analyse Structurée + Exécution 내 Word",
+            "diagramTop": "[KO] Parcours Level 1 Foundations : 1. AI for Legal Basics (67 min) · 2. AI Analysis for Legal Workflows (60 min) · 3. Harvey in Practice",
+            "diagramBottom": "[KO] Application quotidienne : Getting Started for Users + Harvey for Word Add-In (rédaction, playbook, redlining in situ)",
+            "step1": "Validez fondamentaux (AI for Legal Basics) 위한 distinguer ce que l'IA juridique fait 및 fiabilité (structuration, extraction, comparaison) 의 ce qui exige jugement 의 l'avocat.",
+            "step2": "Appliquez méthode AI Analysis for Legal Workflows 및 l'Add-In Harvey for Word 위한 auditer 및 réviser vos actes 직접 내 votre document 의 travail.",
+            "rule": "Ne faites jamais confiance à sortie IA avant d'avoir cadré tâche, vérifié sources 및 contrôlé erreurs potentielles avant tout envoi client."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · AI FOR LEGAL BASICS",
+              "title": "Acquérir littératie IA juridique consciente 의 risques",
+              "bodyParagraph": "Premier pilier 의 certification Level 1 Foundations 의 Harvey Academy, cours AI for Legal Basics (67 min) pose bases indispensables : fonctionnement 의 grands 모델 의 langage en droit, cas d'usage à forte valeur ajoutée, limites structurelles (hallucinations hors contexte ancré, biais 의 formulation) 및 contrôle humain obligatoire avant tout acte 또는 dépôt.",
+              "keyTakeawayPill": "AI for Legal Basics = 이해: capacités, limites 및 devoir 의 vérification"
+            },
+            {
+              "stepBadge": "2단계 · AI ANALYSIS FOR LEGAL WORKFLOWS",
+              "title": "Concevoir, exécuter 및 검증: analyse documentaire à grande échelle",
+              "bodyParagraph": "Deuxième pilier 의 Level 1 Foundations, cours AI Analysis for Legal Workflows (60 min) enseigne comment structurer 의 prompts d'extraction précis, découper revue documentaire complexe 및 détecter méthodiquement omissions 또는 erreurs d'interprétation avant qu' livrable n'atteigne associé, client 또는 juridiction.",
+              "keyTakeawayPill": "AI Analysis for Legal Workflows = structurer l'extraction + détecter erreurs en amont"
+            },
+            {
+              "stepBadge": "3단계 · HARVEY IN PRACTICE & WORD ADD-IN",
+              "title": "Travailler 직접 내 Microsoft Word 및 workspace Harvey",
+              "bodyParagraph": "parcours Getting Started for Users 및 Get Started With the Harvey for Word Add-In 의 Harvey Academy montrent comment transformer réponses 의 Harvey en livrables réutilisables : ouverture 의 volet Harvey 직접 내 Microsoft Word, application 의 playbooks 의 clauses, révision chirurgicale 및 conservation 의 formatage juridique.",
+              "keyTakeawayPill": "Harvey for Word Add-In = rédiger, comparer au playbook 및 réviser 없이 quitter Word"
+            }
+          ],
+          "keyIdeas": [
+            "certification officielle Level 1 Foundations 의 Harvey Academy combine AI for Legal Basics 및 AI Analysis for Legal Workflows.",
+            "méthode Harvey Academy impose 의 bâtir littératie IA 및 protocole 의 vérification avant 의 se fier aux sorties génératives.",
+            "module Get Started With the Harvey for Word Add-In 지원합니다 d'intégrer rédaction, comparaison au playbook 및 redlining 직접 내 Microsoft Word."
+          ],
+          "workedExample": {
+            "situation": "한 로펌이 d'affaires intègre trente nouveaux collaborateurs 및 souhaite qu'ils maîtrisent Harvey Assistant 및 l'Add-In Word dès leur première semaine 없이 erreur méthodologique.",
+            "steps": [
+              "Inscrire chaque collaborateur 기반 Harvey Academy (academy.harvey.ai) 및 son adresse professionnelle 위한 suivre parcours certifiant Level 1 Foundations (AI for Legal Basics + AI Analysis for Legal Workflows).",
+              "Compléter parcours pratique Getting Started for Users 및 module dédié Get Started With the Harvey for Word Add-In.",
+              "Valider quiz final 위한 obtenir certificat numérique 및 badge vérifié Credly by Pearson attestant maîtrise 의 fondamentaux."
+            ],
+            "decision": "collaborateurs adoptent dès premier jour réflexe systématique 의 cadrage par playbook 및 의 vérification 의 sources 내 Word."
+          },
+          "practice": {
+            "prompt": "Construisez plan d'embarquement Harvey Academy d' 팀 juridique 의 15 juristes : sélectionnez cours 의 parcours Level 1 Foundations, définissez règle 의 contrôle qualité issue d'AI Analysis for Legal Workflows 및 précisez l'usage 의 l'Add-In Word.",
+            "successCriteria": [
+              "Inclure cours AI for Legal Basics (fondamentaux 및 gestion 의 risques) 및 AI Analysis for Legal Workflows (structuration 의 extractions 및 détection d'erreurs).",
+              "Intégrer modules pratiques Getting Started for Users 및 Get Started With the Harvey for Word Add-In.",
+              "Exiger vérification systématique 의 citations 및 의 définitions contractuelles avant toute diffusion 의 livrable."
+            ],
+            "feedback": "L'alliance 의 parcours certifiant Level 1 Foundations 및 의 pratique 기반 l'Add-In Word 보장합니다 adoption rapide 및 sécurisée."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "내 Harvey Academy, quel parcours gratuit 지원합니다 d'acquérir bases 의 l'IA juridique responsable 및 l'analyse documentaire avant 의 passer l'examen certifiant ?",
+              "prompt": "Au sein 의 programme officiel Harvey Academy, quels cours composent socle 의 certification Level 1 Foundations destinée à bâtir pratique juridique responsable 의 l'IA ?",
+              "options": [
+                {
+                  "id": "ai-for-legal-basics-et-ai-analysis-for-legal-workflows",
+                  "label": "cours AI for Legal Basics (littératie IA 및 décision consciente 의 risques) 및 AI Analysis for Legal Workflows (conception, exécution 및 vérification d'analyses documentaires à grande échelle)."
+                },
+                {
+                  "id": "entrainement-poids-llm-en-assembleur",
+                  "label": "cours d'écriture 의 noyaux CUDA en assembleur 위한 réentraîner soi-même poids 의 모델 기반 의 serveurs personnels."
+                },
+                {
+                  "id": "validation-automatique-sans-relecture-avocat",
+                  "label": "module autorisant l'envoi direct 의 projets générés par l'IA aux tribunaux 없이 aucune relecture par juriste."
+                },
+                {
+                  "id": "remplacement-integral-bases-legales-par-reseaux-sociaux",
+                  "label": "formation remplaçant consultation 의 textes officiels par 의 résumés non sourcés issus 의 forums publics."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "어떻게 travailler 직접 기반 계약 내 Microsoft Word tout en appliquant guides 의 clauses enseignés 내 Harvey Academy ?",
+              "prompt": "juriste formé via module Get Started With the Harvey for Word Add-In 의 Harvey Academy 해야 합니다 réviser 계약 fournisseur urgent tout en préservant numérotation 및 mise en page complexes 의 파일 `.docx`. Quelle pratique 해야 합니다-il appliquer ?",
+              "options": [
+                {
+                  "id": "utiliser-addin-harvey-for-word-in-situ-avec-playbook",
+                  "label": "사용: Harvey for Word Add-In 직접 내 Microsoft Word 위한 analyser clauses, appliquer playbook 및 insérer révisions ciblées 없이 quitter ni déstructurer document."
+                },
+                {
+                  "id": "convertir-docx-en-image-jpeg-basse-resolution",
+                  "label": "Convertir cinquante pages 의 계약 en images JPEG basse résolution 및 perdre toute structure 의 styles Word."
+                },
+                {
+                  "id": "copier-coller-sans-styles-dans-bloc-notes",
+                  "label": "Tout copier 내 Bloc-notes Windows en supprimant renvois automatiques 및 numérotation 의 articles."
+                },
+                {
+                  "id": "partager-contrat-sur-outil-public-grand-public",
+                  "label": "Téléverser 계약 confidentiel 기반 outil gratuit grand public dépourvu d'engagement 의 confidentialité."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy Level 1 Foundations = AI for Legal Basics + AI Analysis for Legal Workflows + pratique directe via Harvey for Word Add-In.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-platform-overview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-vault-data-rooms-due-diligence",
+      "unitNumber": 2,
+      "title": "유닛 2 · Harvey Vault : Audit Massif 의 Data Rooms (M&A) & Grilles d'Extraction",
+      "subtitle": "Auditer 의 milliers 의 documents en Data Room M&A, construire 의 grilles d'extraction multi-계약서 (Review Tables) 및 검증: chaque clause à source.",
+      "estimatedMinutes": 24,
+      "memoActivity": "구성: projet Harvey Vault 기반 Data Room d'acquisition 의 2 500 documents, exécuter grille d'extraction multi-계약서 (changement 의 contrôle, responsabilité, résiliation) 및 auditer Red Flags via citations directes.",
+      "memoKeyTopics": [
+        "Harvey Vault : espace documentaire sécurisé à grande échelle 위한 l'audit 의 Data Rooms (M&A, Due Diligence, immobilier, contentieux)",
+        "Grilles d'extraction multi-계약서 (Review Tables) : extraction structurée 의 clauses 의 changement 의 contrôle (Change of Control), responsabilité, exclusivité 및 résiliation",
+        "Contrôle qualité juridique : vérification en clic 의 citation exacte 내 document source, détection 의 avenants modifiant 계약 initial 및 rapport Red Flags"
+      ],
+      "memoGoldenRule": "내 Harvey Vault, définissez chaque colonne 의 votre grille d'extraction 및 question juridique fermée 및 précise, 및 vérifiez toujours avenants rattachés au 계약 principal.",
+      "architectureSchema": {
+        "title": "Pipeline d'Audit M&A 및 Due Diligence 내 Harvey Vault",
+        "diagram": "[Data Room (Milliers 의 PDF/DOCX scannés 또는 natifs)] ➔ [Harvey Vault : OCR Juridique, Classification & Indexation par Dossier] ➔ [Review Table : Colonnes d'Extraction Multi-계약서] ➔ [Cellules Sourcées (Citation cliquable page/clause) ➔ Rapport Red Flags M&A]",
+        "components": [
+          {
+            "name": "[KO] Conteneur Sécurisé Harvey Vault",
+            "role": "Ingère, classe 및 indexe 의 milliers 의 pièces 의 Data Room 내 coffre isolé par dossier (Matter) 및 contrôle d'액세스 granulaire."
+          },
+          {
+            "name": "[KO] Grilles d'Extraction (Review Tables)",
+            "role": "Exécute en parallèle 의 colonnes d'extraction personnalisées 또는 issues 의 모델 기반 의 centaines 의 계약서 (Change of Control, Liability Cap, Governing Law, Termination)."
+          },
+          {
+            "name": "[KO] Ancrage Citationnel & Vérification d'Avenants",
+            "role": "Relie chaque cellule extraite au passage exact 의 document source 위한 permettre à l'avocat 의 valider Red Flag en quelques secondes."
+          }
+        ],
+        "securityInvariant": "Chaque projet Vault est strictement cloisonné au niveau 의 dossier client (Matter-level isolation) afin 의 garantir l'étanchéité 간의 opérations M&A 및 respect 의 murailles éthiques (Ethical Walls)."
+      },
+      "lessons": [
+        {
+          "id": "vault-audit-data-rooms-due-diligence",
+          "title": "Harvey Vault : organiser 및 auditer massivement Data Room M&A",
+          "objective": "Structurer l'ingestion d' Data Room 내 Harvey Vault, classer corpus contractuel 및 쿼리: 의 milliers 의 documents 및 preuves sourcées.",
+          "estimatedMinutes": 12,
+          "hook": "Vendredi 19 h : 3 200 계약서 및 avenants viennent d'être déposés 내 Data Room d' cible d'acquisition 및 rapport 의 Due Diligence Red Flags est attendu lundi matin. 어떻게 structurer votre audit 내 Harvey Vault ?",
+          "declicCard": {
+            "title": "핵심 포인트 Harvey Vault : 의 Tri Manuel à l'Audit Massif Sourcé par Dossier",
+            "diagramTop": "Data Room brute (3 200 파일) ➔ Ingestion 내 projet Harvey Vault isolé par dossier (Matter)",
+            "diagramBottom": "Classification automatique + Regroupement 계약/Avenants ➔ Requêtes transversales 및 citations exactes",
+            "step1": "Créez projet Vault dédié à l'opération 및 권한 restreintes à l'팀 의 dossier (Ethical Wall) 및 importez l'arborescence 의 Data Room.",
+            "step2": "Identifiez d'abord typologie 의 pièces (계약서 clients Top 20, baux, financements, IP, pactes) 및 reliez chaque 계약 의 base à ses avenants ultérieurs.",
+            "rule": "계약 initial lu 없이 son Avenant n° 3 qui double préavis 또는 modifie prix conduit à conclusion d'audit fausse !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · INGESTION & CLOISONNEMENT",
+              "title": "coffre-fort dédié par opération (Matter)",
+              "bodyParagraph": "Harvey Vault 지원합니다 의 charger 의 milliers 의 documents (PDF natifs, scans OCRisés, 파일 Word) au sein d' projet isolé. Seuls avocats 및 juristes habilités 기반 ce dossier (Matter) y ont 액세스, garantissant respect strict 의 murailles éthiques (Ethical Walls) 의 cabinet.",
+              "keyTakeawayPill": "[KO] 1 opération M&A / Contentieux = 1 projet Vault cloisonné aux seuls membres habilités"
+            },
+            {
+              "stepBadge": "2단계 · CARTOGRAPHIER CORPUS",
+              "title": "Relier 계약서 principaux, annexes 및 avenants",
+              "bodyParagraph": "En Data Room, 파일 sont souvent mal nommés (`Scan_042.pdf`). Utilisez Harvey Vault 위한 identifier 자동으로 nature 의 chaque acte, parties signataires, date d'effet 및 surtout 위한 regrouper chaque 계약-cadre 및 ses avenants (Amendments) 및 bons 의 commande.",
+              "keyTakeawayPill": "Toujours regrouper 계약-cadre + Annexes + Avenants par ordre chronologique"
+            },
+            {
+              "stepBadge": "3단계 · INTERROGATION TRANSVERSALE SOURCÉE",
+              "title": "Trouver l'aiguille 내 3 000 documents 및 preuve",
+              "bodyParagraph": "Vous pouvez 쿼리: l'ensemble 의 Vault 또는 sous-dossier ciblé (ex. « Quels 계약서 fournisseurs comportent obligation d'achat minimum annuel 또는 exclusivité géographique ? »). Chaque 응답 cite documents précis 및 ouvre passage surligné en regard.",
+              "keyTakeawayPill": "요청 기반 Vault = 응답 synthétique + Liens directs vers page 및 paragraphe 의 chaque pièce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Vault ingère 및 indexe 의 grands volumes documentaires 내 espace isolé par dossier (Matter) respectant murailles éthiques.",
+            "En Due Diligence, il est essentiel 의 relier chaque 계약 initial à ses avenants successifs afin d'évaluer l'état 의 droit en vigueur à date 의 l'audit.",
+            "Toute affirmation issue d' recherche 기반 Vault est accompagnée 의 citations cliquables permettant à l'avocat 의 검증: texte original."
+          ],
+          "workedExample": {
+            "situation": "한 팀이 M&A audite l'acquisition d' groupe logistique dont Data Room comporte 1 800 파일 commerciaux 및 immobiliers.",
+            "steps": [
+              "생성: Vault dédié à l'opération « Projet Horizon » limité aux six avocats 의 l'팀 M&A/Immobilier.",
+              "Lancer classification initiale 내 Vault 위한 격리: 45 계약서 clients représentant 80 % 의 chiffre d'affaires ainsi que leurs avenants.",
+              "Détecter grâce au recoupement chronologique qu' avenant signé deux mois plus tôt avait ajouté clause d'exclusivité européenne 기반 principal client."
+            ],
+            "decision": "Red Flag d'exclusivité, invisible 내 계약 initial 의 2022 mais présent 내 l'avenant 의 2026, est remonté immédiatement à l'acquéreur."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi analyser 전용 계약서 initiaux 없이 regrouper leurs avenants (Amendments) 내 Data Room M&A constitue faute méthodologique, 및 comment organiser cette vérification 내 Harvey Vault.",
+            "successCriteria": [
+              "설명: qu' avenant postérieur prévaut 기반 clauses qu'il modifie (durée, prix, plafond, changement 의 contrôle).",
+              "Extraire 내 Harvey Vault l'identifiant 의 계약 parent, parties 및 date 의 signature 의 chaque pièce.",
+              "Consolider l'analyse par relation contractuelle en appliquant version plus récente 의 chaque clause modifiée."
+            ],
+            "feedback": "En audit contractuel, vérité juridique résulte 의 lecture combinée 의 계약 의 base 및 의 son dernier avenant en vigueur."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "귀하는 analyser 2 400 documents confidentiels d' rachat d'기업 내 Harvey Vault. 어떻게 protéger secret 의 dossier ?",
+              "prompt": "한 로펌이 reçoit l'액세스 à Data Room 의 2 400 documents 위한 opération d'acquisition (M&A) soumise à muraille éthique (Ethical Wall) stricte. 어떻게 구성: l'audit 내 Harvey ?",
+              "options": [
+                {
+                  "id": "creer-projet-vault-isole-equipe-dossier",
+                  "label": "생성: projet Harvey Vault dédié à l'opération 및 restreindre ses 권한 d'액세스 aux seuls avocats habilités 기반 ce dossier."
+                },
+                {
+                  "id": "deposer-fichiers-espace-public-cabinet",
+                  "label": "Charger 2 400 pièces 내 dossier public accessible à l'ensemble 의 associés 및 stagiaires 의 cabinet."
+                },
+                {
+                  "id": "fusionner-deux-data-rooms-concurrentes",
+                  "label": "Mélanger documents 의 deux cibles concurrentes 내 même grille d'analyse 위한 gagner 의 temps."
+                },
+                {
+                  "id": "analyser-sans-citations-sources",
+                  "label": "비활성화: l'affichage 의 références 의 documents 위한 alléger rapport d'audit remis au client."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "왜 est-il dangereux 의 faire analyser 전용 계약서 initiaux 내 Harvey Vault en oubliant dossier 의 avenants signés après ?",
+              "prompt": "Lors d' Due Diligence 내 Harvey Vault, auditeur filtre 전용 파일 intitulés « Contrat_Cadre » 및 conclut qu'aucun 계약 ne contient d'exclusivité, en omettant d'inclure sous-dossier « Avenants_2025_2026 » 내 sa sélection. Quel est risque ?",
+              "options": [
+                {
+                  "id": "omission-clauses-modifiees-par-avenant",
+                  "label": "avenant postérieur a pu introduire clause d'exclusivité 또는 modifier préavis 의 계약-cadre initial 없이 que l'audit ne détecte."
+                },
+                {
+                  "id": "erreur-formatage-marges-impression",
+                  "label": "marges d'impression 의 navigateur risquent d'être décalées 의 deux millimètres à l'export."
+                },
+                {
+                  "id": "changement-langue-interface-harvey",
+                  "label": "L'interface 사용자 의 Harvey risque 의 basculer 자동으로 en espagnol."
+                },
+                {
+                  "id": "suppression-automatique-fichiers-pdf",
+                  "label": "파일 PDF non sélectionnés sont définitivement supprimés 의 serveur 의 Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "내 Harvey Vault : isolez chaque dossier par Matter, regroupez 계약서 및 avenants, 및 exigez toujours citation exacte 의 pièce.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "grilles-extraction-multi-contrats-review-tables",
+          "title": "Grilles d'extraction multi-계약서 (Review Tables) : changement 의 contrôle, responsabilité 및 résiliation",
+          "objective": "Concevoir 및 exécuter 의 grilles d'extraction multi-계약서 (Review Tables) 내 Harvey Vault 위한 auditer clauses 의 changement 의 contrôle, 의 responsabilité 및 의 résiliation.",
+          "estimatedMinutes": 12,
+          "hook": "어떻게 extraire en quinze minutes, 기반 400 계약서 commerciaux, liste exacte 의 ceux qui permettent au cocontractant 의 résilier 또는 d'exiger consentement écrit en cas 의 rachat 의 société cible (Change of Control) ?",
+          "declicCard": {
+            "title": "핵심 포인트 Review Tables : 1 Ligne = 1 계약 · 1 Colonne = 1 Question Juridique Structurée + Citation",
+            "diagramTop": "Lignes : 400 계약서 의 Data Room · Colonnes : Parties | Date | Change of Control (Oui/Non + Préavis) | Plafond Responsabilité | Résiliation",
+            "diagramBottom": "Clic 기반 n'importe quelle cellule ➔ Ouvre 계약 source au paragraphe exact surligné 위한 vérification",
+            "step1": "Décomposez chaque clause complexe en deux colonnes complémentaires : colonne 의 qualification rapide (`Oui / Non / Silence 의 계약`) 및 colonne 의 détail (`Condition, délai 의 préavis 및 citation`).",
+            "step2": "Filtrez lignes où `Changement 의 contrôle = Consentement requis 또는 Résiliation` 및 vérifiez passages surlignés 위한 dresser matrice Red Flags.",
+            "rule": "Exigez toujours que grille distingue explicitement « Non autorisé par clause » 및 « Silence 의 계약 (aucune clause trouvée) »."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · ARCHITECTURE D' REVIEW TABLE",
+              "title": "Transformer 400 계약서 en matrice structurée",
+              "bodyParagraph": "내 Harvey Vault, Review Table applique en parallèle même série 의 colonnes d'extraction à 의 centaines 의 계약서. Chaque ligne représente document 및 chaque colonne répond à consigne précise (ex. Parties, Date d'échéance, Tacite reconduction, Changement 의 contrôle, Plafond 의 responsabilité, Droit applicable).",
+              "keyTakeawayPill": "[KO] Review Table = Extraction parallèle structurée + Cellules liées au texte source"
+            },
+            {
+              "stepBadge": "2단계 · CONCEVOIR 의 COLONNES PRÉCISES",
+              "title": "Séparer verdict binaire 및 détail opérationnel",
+              "bodyParagraph": "위한 auditer clauses 의 changement 의 contrôle (Change of Control), créez : 1. colonne fermée (`Consentement préalable requis`, `Simple notification`, `Droit 의 résiliation`, `Aucune clause`) · 2. colonne 의 détail extrayant seuil 의 détention déclencheur, délai 의 préavis 및 référence 의 l'article.",
+              "keyTakeawayPill": "Colonne 1 = Catégorie filtrable · Colonne 2 = Conditions exactes, délais 및 article cité"
+            },
+            {
+              "stepBadge": "3단계 · VÉRIFICATION CITATIONNELLE & EXPORT",
+              "title": "Cliquer, 검증: passage surligné 및 exporter",
+              "bodyParagraph": "Aucune cellule 의 Review Table n'est boîte noire : clic 기반 cellule ouvre côte à côte PDF 또는 DOCX original à page exacte 및 paragraphe surligné. L'associé 또는 collaborateur valide ainsi Red Flags critiques avant d'exporter matrice vers Excel 또는 Word.",
+              "keyTakeawayPill": "1 clic 기반 cellule = lecture immédiate 의 clause originale surlignée 내 계약"
+            }
+          ],
+          "keyIdeas": [
+            "Review Tables 의 Harvey Vault permettent d'extraire 및 의 comparer mêmes clauses clés (changement 의 contrôle, plafond 의 responsabilité, indemnisation, résiliation) 기반 의 centaines 의 계약서 simultanément.",
+            "Coupler colonne 의 classification fermée (facile à filtrer/trier) 및 colonne d'analyse détaillée maximise fiabilité 의 revue.",
+            "Distinguer explicitement l'interdiction expresse 및 silence 의 계약 évite toute mauvaise interprétation juridique."
+          ],
+          "workedExample": {
+            "situation": "Lors 의 l'acquisition d' éditeur 의 logiciels B2B, l'팀 Corporate 해야 합니다 검증: 기반 350 계약서 clients si cession 의 100 % 의 titres déclenche droit 의 résiliation anticipée.",
+            "steps": [
+              "생성: Review Table 내 Harvey Vault 기반 350 계약서 및 colonnes : `Client`, `Revenu Annuel`, `Statut Change of Control (Consentement / Notification / Résiliation / Silence)`, `Achat 의 titres inclus 내 définition ?`, 및 `Délai & Sanction`.",
+              "Filtrer 28 계약서 où `Statut Change of Control` indique `Consentement` 또는 `Résiliation`.",
+              "Cliquer 기반 citations 의 28 cellules 위한 confirmer que 11 계약서 incluent expressément changement d'actionnariat indirect 및 préparer lettres 의 demande d'accord (waivers)."
+            ],
+            "decision": "liste 의 11 waivers prioritaires est établie 및 vérifiée en matinée au lieu 의 deux semaines 의 dépouillement linéaire."
+          },
+          "practice": {
+            "prompt": "Concevez intitulés 및 consignes 의 trois colonnes d' Review Table Harvey Vault destinée à auditer risque 의 plafond 의 responsabilité (Liability Cap) 기반 200 계약서 fournisseurs.",
+            "successCriteria": [
+              "Colonne 1 (Classification) : `Existence 및 Type 의 Plafond` (Plafond fixe, Multiple 의 redevances, Responsabilité illimitée, Silence 의 계약).",
+              "Colonne 2 (Montant / Formule) : `Montant 또는 Formule 의 Plafond` (extraire chiffre exact 또는 nombre 의 mois 의 redevances 및 l'article cité).",
+              "Colonne 3 (Exceptions / Carve-outs) : `Exceptions au Plafond` (lister cas déplafonnés : fraude, faute lourde, confidentialité, IP, 데이터 personnelles)."
+            ],
+            "feedback": "Séparer principe 의 plafond, sa formule 의 calcul 및 ses exceptions (carve-outs) 지원합니다 tri instantané 의 계약서 sous-protégés."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "기반 500 계약서 내 Harvey Vault, comment repérer d' coup d'œil ceux qui posent problème tout en pouvant 검증: phrase exacte 의 계약 ?",
+              "prompt": "En Due Diligence M&A 기반 500 계약서 commerciaux 내 Harvey Vault, vous devez identifier rapidement tous 계약서 qui exigent l'accord préalable 의 client en cas 의 changement 의 contrôle, tout en pouvant lire clause exacte. Quelle méthode est plus efficace ?",
+              "options": [
+                {
+                  "id": "review-table-colonne-fermee-plus-detail-citation",
+                  "label": "Construire Review Table combinant colonne 의 classification fermée (`Consentement requis / Notification / Aucune clause`) 및 colonne détaillant conditions 및 citation cliquable."
+                },
+                {
+                  "id": "demander-resume-unique-sans-tableau",
+                  "label": "Demander résumé narratif global 의 dix lignes 기반 500 계약서 없이 nommer aucun 파일."
+                },
+                {
+                  "id": "imprimer-cinq-cents-contrats-papier",
+                  "label": "Exporter 500 계약서 en images non indexées 없이 exécuter 의 grille d'extraction."
+                },
+                {
+                  "id": "confondre-silence-et-interdiction",
+                  "label": "Forcer 모델 à répondre 전용 Oui 또는 Non même lorsque document est totalement silencieux 기반 sujet."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "내 tableau d'analyse Harvey Vault, pourquoi faut-il prévoir case « 계약 n'en parle pas » en plus 의 « Oui » 및 « Non » ?",
+              "prompt": "왜 est-il essentiel qu' colonne 의 Review Table 내 Harvey Vault prévoie explicitement valeur « Silence 의 계약 (Aucune clause) » en plus 의 « Oui » 및 « Non » ?",
+              "options": [
+                {
+                  "id": "distinguer-absence-clause-et-stipulation-expresse",
+                  "label": "위한 distinguer juridiquement 계약 qui interdit expressément opération d' 계약 qui n'aborde pas sujet (auquel s'applique alors droit commun)."
+                },
+                {
+                  "id": "reduire-nombre-colonnes-ecran",
+                  "label": "위한 masquer 자동으로 lignes paires 의 tableau lors 의 l'exportation vers Excel."
+                },
+                {
+                  "id": "desactiver-liens-vers-pdf",
+                  "label": "위한 삭제: liens 의 citation vers pages 의 계약서 originaux."
+                },
+                {
+                  "id": "modifier-texte-pdf-source",
+                  "label": "위한 réécrire 직접 파일 PDF scannés stockés 내 Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "Review Tables 내 Harvey Vault = colonnes 의 tri fermées + colonnes 의 détail + distinction 의 silence contractuel + vérification en clic 기반 source.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-knowledge-workflows-secret-professionnel",
+      "unitNumber": 3,
+      "title": "유닛 3 · Harvey Knowledge, Workflows Multi-Étapes & Secret Professionnel",
+      "subtitle": "Recherche réglementaire 및 jurisprudentielle sourcée, exécution 의 workflows juridiques multi-étapes, confidentialité zéro-entraînement client 및 respect 의 변호사-의뢰인 비밀유지특권.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Exécuter recherche réglementaire 및 jurisprudentielle vérifiée 내 Harvey Knowledge, orchestrer workflow juridique multi-étapes 및 auditer garanties 의 confidentialité zéro-entraînement 및 의 변호사-의뢰인 비밀유지특권.",
+      "memoKeyTopics": [
+        "Harvey Knowledge : recherche juridique, réglementaire, fiscale 및 jurisprudentielle ancrée 기반 의 bases officielles 및 citations vérifiables",
+        "Harvey Workflows : automatisation guidée 의 processus juridiques multi-étapes (qualification ➔ extraction ➔ analyse 의 droit ➔ rédaction 의 livrable)",
+        "Déontologie & 보안 : confidentialité zéro-entraînement 기반 데이터 clients, isolation par locataire/dossier 및 protection 의 변호사-의뢰인 비밀유지특권 의 l'avocat"
+      ],
+      "memoGoldenRule": "avocat ne cite jamais jurisprudence 또는 article 의 loi 없이 avoir vérifié son texte source 및 son état 의 vigueur via citations 의 Harvey Knowledge, 및 conserve toujours responsabilité déontologique 의 conseil livré.",
+      "architectureSchema": {
+        "title": "Architecture Harvey Knowledge, Workflows Multi-Étapes & Frontière 의 Confidentialité",
+        "diagram": "[Dossier Client (Zéro-Entraînement & Ethical Wall)] + [Harvey Knowledge (Bases Légales, Réglementaires & Jurisprudence)] ➔ [Harvey Workflow : Étape 1 Extraction ➔ Étape 2 Confrontation au Droit ➔ Étape 3 Projet d'Acte / Note] ➔ [Revue & Validation 의 l'Avocat]",
+        "components": [
+          {
+            "name": "[KO] Harvey Knowledge",
+            "role": "Interroge 의 corpus juridiques, réglementaires 및 jurisprudentiels 의 référence 위한 fournir 의 réponses ancrées 및 liens directs vers textes 및 décisions."
+          },
+          {
+            "name": "[KO] Harvey Workflows",
+            "role": "Enchaîne 의 manière reproductible plusieurs étapes spécialisées (collecte 의 pièces, extraction 의 faits, recherche 의 droit, génération d'acte 또는 의 conclusions) 및 validation humaine."
+          },
+          {
+            "name": "[KO] Garantie Zéro-Entraînement & Secret Professionnel",
+            "role": "보장합니다 contractuellement 및 techniquement qu'aucun prompt, 계약 또는 mémo client n'est utilisé 위한 entraîner 의 모델 partagés ni exposé à d'autres clients."
+          }
+        ],
+        "securityInvariant": "데이터 soumises 내 Harvey restent strictement confinées au locataire 및 au dossier autorisé, 및 politique zéro-entraînement 의 모델 의 fondation 및 maintien intégral 의 변호사-의뢰인 비밀유지특권."
+      },
+      "lessons": [
+        {
+          "id": "harvey-knowledge-recherche-juridique-sourcee",
+          "title": "Harvey Knowledge : recherche réglementaire 및 jurisprudentielle sourcée 없이 hallucination",
+          "objective": "Conduire recherche réglementaire 및 jurisprudentielle 내 Harvey Knowledge en vérifiant hiérarchie 의 normes, juridiction, date 의 vigueur 및 citations.",
+          "estimatedMinutes": 12,
+          "hook": "Plusieurs avocats 내 monde ont été sanctionnés par 의 tribunaux 위한 avoir cité 의 arrêts inventés par chatbot grand public : comment l'architecture d'ancrage 의 Harvey Knowledge 및 votre protocole 의 revue éliminent-ils ce risque ?",
+          "declicCard": {
+            "title": "핵심 포인트 Harvey Knowledge : Ancrage 기반 Bases Officielles + Vérification 의 Source Citée",
+            "diagramTop": "Question 의 droit (Juridiction + Matière + Période) ➔ Recherche 내 Harvey Knowledge (Textes & Jurisprudence réels)",
+            "diagramBottom": "응답 ancrée 및 citations numérotées ➔ Ouverture 및 lecture 의 l'arrêt/article par l'avocat avant citation",
+            "step1": "Formulez votre question en précisant juridiction, branche 의 droit, faits pertinents 및 date 의 faits litigieux.",
+            "step2": "Ouvrez systématiquement décisions 및 textes cités par Harvey Knowledge 위한 검증: attendu/considérant exact 및 l'absence 의 revirement postérieur.",
+            "rule": "Zéro référence jurisprudentielle 또는 légale 내 acte 또는 consultation 없이 avoir ouvert 및 lu source citée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · POURQUOI CHATBOT GÉNÉRALISTE HALLUCINE",
+              "title": "Prédire numéro d'arrêt plausible ≠ Retrouver vrai arrêt",
+              "bodyParagraph": "모델 의 langage non ancré 기반 base juridique officielle prédit 의 suites 의 mots statistiquement plausibles : il peut inventer 의 toutes pièces numéro 의 pourvoi 또는 attendu qui sonne vrai. Harvey Knowledge résout ce problème à racine en ancrant génération 기반 의 bases documentaires juridiques, fiscales 및 réglementaires vérifiées.",
+              "keyTakeawayPill": "Harvey Knowledge = génération ancrée 기반 의 corpus législatifs, réglementaires 및 jurisprudentiels réels"
+            },
+            {
+              "stepBadge": "2단계 · FORMULER QUESTION 의 DROIT PRÉCISE",
+              "title": "Juridiction, faits qualifiés 및 question 의 droit",
+              "bodyParagraph": "위한 tirer meilleur parti 의 Harvey Knowledge, structurez votre 요청 comme saisine : 1. Juridiction 및 droit applicable (ex. Cour 의 cassation, chambre commerciale ; droit 의 l'Union européenne) · 2. Qualification 의 faits (ex. rupture brutale d' relation commerciale établie 의 8 ans) · 3. Question précise à trancher.",
+              "keyTakeawayPill": "Juridiction exacte + Faits qualifiés + Question 의 droit = recherche ciblée 및 pertinente"
+            },
+            {
+              "stepBadge": "3단계 · CONTRÔLE 의 VIGUEUR & PORTÉE",
+              "title": "Lire l'arrêt 내 son contexte avant 의 l'invoquer",
+              "bodyParagraph": "citation exacte peut malgré tout porter 기반 texte abrogé 또는 기반 의 faits d'espèce différents 의 vôtres (distinguishing). Cliquez toujours 기반 source 내 Harvey Knowledge 위한 검증: date 의 décision, chambre, solution retenue 및 son applicabilité exacte au dossier client.",
+              "keyTakeawayPill": "Toujours 검증: : 1. Existence 의 texte/arrêt · 2. État 의 vigueur · 3. Pertinence aux faits d'espèce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Knowledge ancre recherche juridique 및 réglementaire 기반 의 sources autorisées 및 attache 의 citations vérifiables à chaque affirmation.",
+            "Préciser juridiction, l'ordre 의 juridiction, matière 및 l'époque 의 faits évite transpositions erronées 간의 systèmes juridiques.",
+            "L'avocat 또는 juriste 해야 합니다 systématiquement ouvrir citation source 위한 contrôler portée exacte 의 décision 및 l'absence d'abrogation 또는 의 revirement."
+          ],
+          "workedExample": {
+            "situation": "avocat en droit 의 concurrence prépare note urgente 기반 validité d' clause 의 non-concurrence post-contractuelle 내 계약 의 franchise en droit français 및 européen.",
+            "steps": [
+              "쿼리: Harvey Knowledge en spécifiant droit français (Code 의 commerce) 및 règlement d'exemption européen 기반 restrictions verticales.",
+              "Examiner conditions cumulatives extraites par Harvey Knowledge (limitation 내 temps à an, limitation aux locaux, caractère indispensable à protection 의 savoir-faire) 및 ouvrir références citées.",
+              "Intégrer références vérifiées 내 consultation juridique remise au franchiseur."
+            ],
+            "decision": "consultation est solidement étayée par textes 및 arrêts exacts, vérifiés en quelques minutes."
+          },
+          "practice": {
+            "prompt": "stagiaire vous remet projet 의 conclusions contenant trois arrêts trouvés via outil d'IA grand public non connecté à base juridique, 없이 avoir ouvert décisions. Quelle procédure 의 contrôle lui imposez-vous 및 Harvey Knowledge ?",
+            "successCriteria": [
+              "Interdire formellement l'insertion 내 acte judiciaire 의 toute référence jurisprudentielle non vérifiée à source.",
+              "Relancer recherche 의 droit 내 Harvey Knowledge en précisant juridiction 및 question 의 droit.",
+              "Ouvrir chacune 의 décisions citées par Harvey Knowledge 위한 검증: texte intégral, date 및 l'adéquation aux faits 의 dossier."
+            ],
+            "feedback": "responsabilité professionnelle 의 l'avocat impose que chaque autorité juridique citée ait été lue 및 vérifiée 내 sa source officielle."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "어떻게 Harvey Knowledge évite-t-il d'inventer 의 fausses lois 또는 의 faux jugements ?",
+              "prompt": "어떻게 Harvey Knowledge prévient-il risque d'hallucination 의 références jurisprudentielles 또는 réglementaires lors d' recherche juridique ?",
+              "options": [
+                {
+                  "id": "ancrage-bases-juridiques-verifiees-et-citations",
+                  "label": "En ancrant 응답 기반 의 데이터베이스 juridiques 및 réglementaires faisant foi 및 en attachant 의 citations cliquables vers textes sources."
+                },
+                {
+                  "id": "generation-numeros-pourvoi-aleatoires",
+                  "label": "En générant 의 numéros 의 pourvoi aléatoires à partir d' dictionnaire statistique 없이 consulter 의 base documentaire."
+                },
+                {
+                  "id": "interdiction-afficher-sources",
+                  "label": "En masquant références d'articles 의 loi afin que lecteur ne puisse pas 검증: l'origine 의 raisonnement."
+                },
+                {
+                  "id": "traduction-automatique-romans-fiction",
+                  "label": "En s'appuyant 전용 기반 의 articles 의 blogs anonymes non juridiques."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "fois que Harvey Knowledge vous donne 응답 juridique 및 의 sources, que devez-vous toujours faire avant 의 valider votre conseil ?",
+              "prompt": "Après avoir obtenu 응답 sourcée 내 Harvey Knowledge 기반 l'application d' directive européenne 및 의 sa transposition nationale, quelle vérification professionnelle juriste 해야 합니다-il toujours effectuer avant 의 signer sa note ?",
+              "options": [
+                {
+                  "id": "ouvrir-citations-verifier-vigueur-et-espece",
+                  "label": "Ouvrir textes 및 arrêts cités 위한 confirmer leur état 의 vigueur à date 의 faits 및 검증: que faits d'espèce correspondent au dossier."
+                },
+                {
+                  "id": "copier-sans-lire-sources-citees",
+                  "label": "Envoyer note au tribunal 없이 jamais cliquer 기반 citations ni 검증: date 의 textes."
+                },
+                {
+                  "id": "supprimer-mentions-juridiction",
+                  "label": "Retirer toute mention 의 pays 및 의 juridiction compétente 내 conclusions finales."
+                },
+                {
+                  "id": "remplacer-textes-par-avis-personnel",
+                  "label": "Effacer références légales 위한 ne conserver qu' opinion générale non motivée."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Knowledge apporte rapidité 의 l'ancrage sourcé ; l'ouverture 의 citation 및 contrôle 의 vigueur scellent rigueur 의 l'avocat.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-workflows-et-secret-professionnel",
+          "title": "Harvey Workflows multi-étapes, zéro-entraînement client 및 변호사-의뢰인 비밀유지특권",
+          "objective": "Exécuter 의 workflows juridiques multi-étapes 내 Harvey 및 마스터: l'architecture 의 confidentialité (zéro-entraînement client, cloisonnement 및 변호사-의뢰인 비밀유지특권).",
+          "estimatedMinutes": 12,
+          "hook": "어떻게 standardiser l'excellence d' associé senior 내 workflow reproductible par tout cabinet, tout en garantissant aux clients que leurs secrets d'affaires 및 leur 변호사-의뢰인 비밀유지특권 sont protégés à 100 % ?",
+          "declicCard": {
+            "title": "핵심 포인트 Workflows & Déontologie : Orchestration Multi-Étapes + Zéro-Entraînement Client",
+            "diagramTop": "[KO] Harvey Workflow : 1. Ingestion Pièces ➔ 2. Extraction Faits/Clauses ➔ 3. Confrontation au Droit ➔ 4. Brouillon d'Acte",
+            "diagramBottom": "Garantie Déontologique : Zéro entraînement 기반 데이터 clients + Cloisonnement par dossier + Supervision humaine",
+            "step1": "Utilisez Harvey Workflows 위한 enchaîner 의 façon déterministe 및 guidée 의 tâches complexes (ex. préparation d' assignation, 응답 à contrôle réglementaire, revue DORA/NIS2).",
+            "step2": "Vérifiez toujours trois piliers déontologiques : engagement zéro-entraînement client, muraille éthique par dossier 및 validation finale par l'avocat.",
+            "rule": "confidentialité d' dossier juridique ne souffre aucune exception : zéro usage d'outils publics gratuits réentraînés 기반 prompts !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · HARVEY WORKFLOWS MULTI-ÉTAPES",
+              "title": "Industrialiser savoir-faire juridique 없이 perdre nuance",
+              "bodyParagraph": "workflow 내 Harvey enchaîne plusieurs étapes spécialisées conçues par experts juridiques : par exemple, 1. Extraire chronologie 의 faits depuis 50 pièces 의 contentieux · 2. Identifier manquements contractuels · 3. Rechercher fondements légaux applicables · 4. Générer projet 의 mise en demeure 또는 의 conclusions 및 renvoi aux pièces (`Pièce n° X`).",
+              "keyTakeawayPill": "Harvey Workflows = Chaînage structuré d'étapes juridiques 및 jalons 의 validation"
+            },
+            {
+              "stepBadge": "2단계 · ZÉRO-ENTRAÎNEMENT CLIENT",
+              "title": "Vos dossiers n'entraînent jamais 모델 d' autre client",
+              "bodyParagraph": "Contrairement aux services grand public où conversations peuvent alimenter l'entraînement futur 의 모델, l'architecture d'기업 의 Harvey 보장합니다 contractuellement 및 techniquement **zéro-entraînement** (Zero Training) 기반 prompts, documents 및 livrables 의 clients, 및 암호화 en transit 및 au repos.",
+              "keyTakeawayPill": "Zéro-Entraînement Client = aucune donnée d' dossier n'간의 내 poids 의 모델"
+            },
+            {
+              "stepBadge": "3단계 · SECRET PROFESSIONNEL & RESPONSABILITÉ",
+              "title": "Supervision humaine, Ethical Walls 및 traçabilité",
+              "bodyParagraph": "respect 의 변호사-의뢰인 비밀유지특권 의 l'avocat (및 의 legal privilege) repose 기반 trois contrôles : 1. Isolation stricte par client 및 par dossier (Ethical Walls) · 2. Journalisation d'audit 및 politiques 의 rétention maîtrisées par cabinet · 3. Revue, validation 및 signature par professionnel 의 droit qui demeure seul responsable 의 conseil.",
+              "keyTakeawayPill": "Secret professionnel = Isolation par dossier + Zéro entraînement + Validation humaine 의 l'avocat"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Workflows 지원합니다 d'orchestrer 의 processus juridiques multi-étapes reproductibles (chronologie 의 pièces, grille 의 conformité, projet d'acte) en intégrant savoir-faire 의 cabinet.",
+            "garantie zéro-entraînement client assure qu'aucune donnée confidentielle soumise à Harvey ne sert à entraîner 모델 sous-jacents.",
+            "respect 의 변호사-의뢰인 비밀유지특권 exige l'isolation 의 dossiers (Ethical Walls), l'interdiction 의 outils grand public non contractuels 및 revue finale par l'avocat."
+          ],
+          "workedExample": {
+            "situation": "direction juridique d' groupe pharmaceutique 및 son cabinet conseil 해야 합니다 auditer 120 계약서 critiques au regard 의 règlement européen DORA / NIS2 및 générer avenants 의 mise en conformité.",
+            "steps": [
+              "Lancer 내 Harvey Workflow multi-étapes : (1) Extraction 의 clauses 의 보안 및 의 notification d'incident 내 Vault, (2) Confrontation aux exigences réglementaires via Knowledge, (3) Génération individualisée 의 projet d'avenant 위한 chaque fournisseur incomplet.",
+              "Maintenir l'ensemble 의 pièces 내 l'environnement Harvey d'기업 couvert par l'engagement zéro-entraînement 및 변호사-의뢰인 비밀유지특권.",
+              "Faire relire 및 valider chaque avenant par juriste responsable 의 계약 avant envoi au fournisseur."
+            ],
+            "decision": "campagne 의 conformité réglementaire 기반 120 계약서 est bouclée en dix jours 및 traçabilité complète 및 zéro compromis 기반 confidentialité."
+          },
+          "practice": {
+            "prompt": "client demande à votre cabinet d'avocats quelles garanties concrètes protègent ses documents confidentiels lorsque vos équipes utilisent Harvey. Formulez 응답 structurée en trois points.",
+            "successCriteria": [
+              "1. Garantie contractuelle 및 technique 의 zéro-entraînement : documents 및 prompts 의 client ne sont jamais utilisés 위한 entraîner 의 모델 partagés.",
+              "2. Cloisonnement strict 의 액세스 par dossier (Ethical Walls), 암호화 의 bout en bout 및 hébergement conforme aux standards 의 보안 d'기업.",
+              "3. Maintien intégral 의 supervision 및 의 responsabilité professionnelle 의 avocats 의 cabinet 기반 chaque analyse 및 chaque acte produit."
+            ],
+            "feedback": "Cette 응답 rassure direction juridique 및 RSSI 의 client en couvrant à fois l'architecture IA (zéro-entraînement), 보안 d'액세스 (cloisonnement) 및 déontologie (supervision 의 l'avocat)."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quel est l'avantage d' Workflow Harvey par rapport à simple question posée 내 chat ?",
+              "prompt": "Quel est l'apport principal 의 Harvey Workflows par rapport à simple prompt isolé lors 의 traitement d' dossier juridique complexe ?",
+              "options": [
+                {
+                  "id": "orchestration-multi-etapes-reproductible-validee",
+                  "label": "Il orchestre 의 façon reproductible séquence d'étapes juridiques spécialisées (extraction 의 pièces, analyse 의 droit, génération 의 projet d'acte) 및 jalons 의 validation humaine."
+                },
+                {
+                  "id": "depot-automatique-greffe-sans-avocat",
+                  "label": "Il dépose 및 signe 자동으로 의 actes 의 procédure au greffe 의 tribunal 없이 aucune relecture d' avocat."
+                },
+                {
+                  "id": "publication-dossiers-clients-reseaux-sociaux",
+                  "label": "Il publie pièces confidentielles 의 dossier 기반 forum communautaire 위한 recueillir 의 avis externes."
+                },
+                {
+                  "id": "suppression-numerotation-pieces-contentieux",
+                  "label": "Il efface numéros 의 pièces justificatives afin d'empêcher juge 의 검증: faits allégués."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Qu'est-ce qui 보장합니다 que 계약서 confidentiels confiés à Harvey ne serviront jamais à entraîner l'IA 위한 d'autres clients ?",
+              "prompt": "법무 부서가 exige que ses mémos 의 litige 및 ses projets d'acquisition restent couverts par confidentialité 및 ne puissent en aucun cas enrichir 모델 d'IA accessible à 의 tiers. Quelle garantie d'architecture 의 Harvey répond 직접 à cette exigence ?",
+              "options": [
+                {
+                  "id": "zero-entrainement-client-et-isolation-locataire",
+                  "label": "politique 의 confidentialité zéro-entraînement 기반 데이터 clients combinée au cloisonnement strict par organisation 및 par dossier."
+                },
+                {
+                  "id": "partage-poids-modele-inter-cabinets",
+                  "label": "réentraînement quotidien d' 모델 public commun 기반 l'ensemble 의 계약서 téléversés par tous cabinets."
+                },
+                {
+                  "id": "conservation-publique-prompts",
+                  "label": "L'indexation 의 prompts juridiques 내 annuaire 의 recherche ouvert aux moteurs web."
+                },
+                {
+                  "id": "desactivation-chiffrement-tls",
+                  "label": "transmission 의 pièces 의 Data Room en texte clair 기반 네트워크 Wi-Fi public non chiffré."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Workflows industrialise vos processus multi-étapes ; zéro-entraînement client, cloisonnement par dossier 및 validation 의 l'avocat protègent 변호사-의뢰인 비밀유지특권.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-legal-engineering-credly",
+          "title": "[KO] Harvey Academy Legal Engineering, Preparing for Legal Work, Admins & Badges Credly",
+          "objective": "마스터: Legal Engineering Certification, parcours badgé Preparing for Legal Work, guide Getting Started for Admins, nouveautés Harvey II 및 gestion 의 badges vérifiés Credly by Pearson.",
+          "estimatedMinutes": 12,
+          "hook": "어떻게 industrialiser l'excellence IA 내 cabinet 또는 direction juridique grâce au rôle 의 Legal Engineer, au parcours Admin 의 Harvey Academy 및 aux certifications vérifiables Credly ?",
+          "declicCard": {
+            "title": "핵심 포인트 Legal Engineering & Credly : Industrialisation 의 Workflows + 거버넌스 Admin + Preuve Vérifiée",
+            "diagramTop": "[KO] Certifications & Parcours : Legal Engineering Certification · Preparing for Legal Work (45 min) · Getting Started for Admins · Harvey II",
+            "diagramBottom": "Reconnaissance officielle : Certificat Harvey Academy + Badge numérique vérifié Credly by Pearson (없이 expiration)",
+            "step1": "Formez vos référents via Legal Engineering Certification 및 Getting Started for Admins 위한 concevoir 의 workflows fiables 및 구성: 보안 의 workspace.",
+            "step2": "Validez pratique opérationnelle 및 Preparing for Legal Work 및 associez l'adresse e-mail 의 compte Academy à Credly by Pearson 위한 publier badge vérifié.",
+            "rule": "Utilisez toujours même adresse e-mail professionnelle 기반 Harvey, Harvey Academy 및 Credly (및 autorisez admin@credly.com) 위한 rattacher vos certifications 없이 délai."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "1단계 · LEGAL ENGINEERING CERTIFICATION",
+              "title": "compétences clés 의 Legal Engineer 내 Harvey Academy",
+              "bodyParagraph": "Legal Engineering Certification 의 Harvey Academy (parcours spécialisé en 2 cours, ouvert gratuitement 기반 création 의 compte Academy) forme aux compétences d'ingénierie juridique : décomposition d' processus complexe en étapes vérifiables, conception 의 prompts 및 의 grilles Review Tables standardisés, tests 기반 cas limites 및 assurance qualité avant déploiement à l'팀.",
+              "keyTakeawayPill": "Legal Engineering Certification = concevoir, tester 및 standardiser workflows juridiques"
+            },
+            {
+              "stepBadge": "2단계 · PREPARING FOR LEGAL WORK, ADMINS & HARVEY II",
+              "title": "Embarquer équipes 및 administrer workspace dès jour 1",
+              "bodyParagraph": "위한 사용자 disposant d' 액세스 Harvey (via SSO 또는 code OTP), cours badgé Preparing for Legal Work (45 min) valide mise en pratique par 의 exercices réels 및 badge capstone. En parallèle, parcours Getting Started for Admins (4 cours) guide administrateurs 및 Legal Ops 내 configuration sécurisée 의 workspace, l'organisation 의 flux 및 suivi 의 nouveautés comme playlist Harvey II.",
+              "keyTakeawayPill": "[KO] Preparing for Legal Work (pratique SSO) + Getting Started for Admins (déploiement sécurisé)"
+            },
+            {
+              "stepBadge": "3단계 · BADGES VÉRIFIÉS CREDLY BY PEARSON",
+              "title": "Revendiquer, 검증: 및 공유: ses certifications Harvey Academy",
+              "bodyParagraph": "Chaque certification réussie 기반 Harvey Academy délivre certificat numérique 및 badge vérifié émis via Credly by Pearson (없이 date d'expiration). badge atteste l'émetteur, date d'obtention, compétences validées 및 lien public 의 vérification 위한 LinkedIn 또는 signature professionnelle. Si vous possédez déjà compte Credly sous autre adresse, ajoutez simplement votre e-mail Academy 내 Settings > Account.",
+              "keyTakeawayPill": "Badge Harvey via Credly by Pearson = preuve vérifiable 및 permanente 의 compétence Legal IA"
+            }
+          ],
+          "keyIdeas": [
+            "Legal Engineering Certification 및 Level 1 Foundations sont accessibles gratuitement 및 compte Harvey Academy ; Preparing for Legal Work est dédié aux 사용자 Harvey connectés (SSO/OTP).",
+            "parcours Getting Started for Admins (4 cours) outille Legal Ops 및 administrateurs 위한 구성: l'espace 의 travail 및 배포: 의 workflows sécurisés dès premier jour.",
+            "badges 의 certification Harvey Academy sont émis par Credly by Pearson, ne périment pas 및 se rattachent via l'adresse e-mail 의 compte Academy."
+          ],
+          "workedExample": {
+            "situation": "directrice Legal Ops déploie Harvey auprès 의 120 avocats 및 souhaite structurer 네트워크 의 référents certifiés tout en permettant à chacun 의 valoriser sa certification 기반 LinkedIn.",
+            "steps": [
+              "Suivre parcours Getting Started for Admins (4 cours) 및 playlist Harvey II 위한 구성: workspace, murailles éthiques 및 모델 d'팀.",
+              "Faire passer Legal Engineering Certification aux référents métiers 및 cours badgé Preparing for Legal Work (45 min) aux avocats connectés en SSO.",
+              "Autoriser courriels 의 admin@credly.com 기반 passerelle 의 messagerie 의 cabinet afin que chaque lauréat reçoive 및 accepte son badge vérifié Credly by Pearson."
+            ],
+            "decision": "cabinet dispose d'administrateurs formés, 의 Legal Engineers certifiés 및 d' reconnaissance officielle vérifiable 위한 chaque avocat."
+          },
+          "practice": {
+            "prompt": "Rédigez procédure interne permettant aux juristes 의 votre organisation 의 passer certifications Harvey Academy (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) 및 의 récupérer leur badge Credly by Pearson 없이 blocage technique.",
+            "successCriteria": [
+              "Préciser 의 생성: compte Harvey Academy 및 même adresse e-mail professionnelle que celle utilisée 위한 se connecter à Harvey.",
+              "Distinguer certifications ouvertes (Level 1 Foundations, Legal Engineering) 의 parcours pratique réservé aux 사용자 Harvey connectés en SSO/OTP (Preparing for Legal Work).",
+              "Indiquer procédure d'acceptation 의 badge envoyé par Harvey via Credly (autorisation 의 admin@credly.com 및 ajout d'adresse secondaire 내 Credly Settings > Account si nécessaire)."
+            ],
+            "feedback": "Ce protocole couvre à fois progression pédagogique officielle 의 Harvey Academy 및 délivrance fluide 의 justificatifs Credly."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "내 Harvey Academy, quelle certification spécialisée forme à concevoir 의 workflows juridiques reproductibles, structurer 의 grilles d'extraction 및 industrialiser contrôles qualité ?",
+              "prompt": "Au sein d' direction juridique, responsable innovation souhaite former 의 référents capables 의 concevoir 의 workflows reproductibles, 의 calibrer 의 grilles Review Tables 및 d'administrer l'espace 의 travail Harvey dès premier jour. Quels parcours 의 Harvey Academy répondent spécifiquement à ce besoin ?",
+              "options": [
+                {
+                  "id": "legal-engineering-certification-et-getting-started-for-admins",
+                  "label": "Legal Engineering Certification (compétences clés d'ingénierie juridique en 2 cours) associée au parcours Getting Started for Admins (configuration 의 workspace 및 déploiement 의 workflows sécurisés en 4 cours)."
+                },
+                {
+                  "id": "desactivation-complete-des-controles-acces",
+                  "label": "suppression 의 contrôles d'액세스 par dossier 및 l'improvisation 의 prompts 없이 aucun test préalable."
+                },
+                {
+                  "id": "utilisation-comptes-partages-anonymes",
+                  "label": "partage d' seul identifiant anonyme 간의 cent juristes 없이 suivi 의 progression ni 거버넌스."
+                },
+                {
+                  "id": "redaction-manuelle-sans-aucun-modele",
+                  "label": "L'interdiction d'사용: 의 모델 의 prompts 또는 의 Review Tables afin que chaque juriste réinvente sa méthode."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "어떻게 professionnel certifié 기반 Harvey Academy reçoit-il 및 prouve-t-il officiellement son badge 의 certification 기반 LinkedIn ?",
+              "prompt": "어떻게 fonctionne délivrance 및 vérification 의 badges officiels obtenus après réussite d' certification 기반 Harvey Academy ?",
+              "options": [
+                {
+                  "id": "badge-verifie-credly-by-pearson-sans-expiration",
+                  "label": "badge est émis via Credly by Pearson 기반 l'adresse e-mail 의 compte Harvey Academy, ne comporte pas 의 date d'expiration 및 fournit lien public vérifiant l'émetteur, date 및 compétences acquises."
+                },
+                {
+                  "id": "image-locale-non-verifiable-valable-24h",
+                  "label": "badge est simple image 없이 lien 의 vérification qui expire 자동으로 au bout 의 vingt-quatre heures."
+                },
+                {
+                  "id": "envoi-postal-papier-uniquement",
+                  "label": "diplôme est envoyé 전용 par courrier postal papier 없이 aucun justificatif numérique partageable 기반 LinkedIn."
+                },
+                {
+                  "id": "obligation-creer-nouveau-profil-linkedin",
+                  "label": "L'obtention 의 badge oblige juriste à 삭제: son profil LinkedIn existant 위한 en recréer nouveau."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy certifie vos équipes (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) 및 의 badges vérifiés Credly by Pearson.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "harvey-legal-ai-mock-exam",
+    "title": "실전 모의고사 CertiGo Pro: Harvey Academy & Legal IA (Assistant, Vault, Knowledge, Workflows & Legal Engineering)",
+    "durationMinutes": 30,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète 의 maîtrise produit inspirée 의 certifications Harvey Academy (Level 1 Foundations, Legal Engineering 및 Preparing for Legal Work) : révision 의 계약서 및 playbook, redlining Word, audit 의 Data Rooms M&A 내 Vault, Review Tables, recherche sourcée Knowledge 및 protection 의 변호사-의뢰인 비밀유지특권.",
+    "questionIds": [
+      "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+      "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.002"
+    ]
+  }
+}
