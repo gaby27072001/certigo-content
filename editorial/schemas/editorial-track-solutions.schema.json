@@ -35,6 +35,7 @@
         "lessonId",
         "itemType",
         "correctOptionIds",
+        "plainExplanation",
         "rationale",
         "examTip",
         "sourceIds"
@@ -55,6 +56,7 @@
           "uniqueItems": true,
           "items": { "$ref": "#/$defs/slug" }
         },
+        "plainExplanation": { "$ref": "#/$defs/text" },
         "rationale": { "$ref": "#/$defs/text" },
         "examTip": { "$ref": "#/$defs/text" },
         "sourceIds": {

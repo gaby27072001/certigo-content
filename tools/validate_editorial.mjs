@@ -17,6 +17,21 @@ const FORBIDDEN_PUBLIC_KEYS = [
   "rationale",
 ];
 
+const LONG_DASH_RE = /[\u2013\u2014]/u;
+
+function findLongDashPaths(value, currentPath = "") {
+  if (typeof value === "string") {
+    return LONG_DASH_RE.test(value) ? [currentPath || "/"] : [];
+  }
+  if (Array.isArray(value)) {
+    return value.flatMap((item, idx) => findLongDashPaths(item, `${currentPath}/${idx}`));
+  }
+  if (value !== null && typeof value === "object") {
+    return Object.entries(value).flatMap(([k, v]) => findLongDashPaths(v, `${currentPath}/${k}`));
+  }
+  return [];
+}
+
 export function validateEditorialTracks(options = {}) {
   const root = resolve(options.root ?? ".");
   const trackSchemaPath = resolve(root, "editorial/schemas/editorial-track.schema.json");
@@ -143,6 +158,20 @@ export function validateEditorialTracks(options = {}) {
     for (const sourceId of sourceIds) {
       if (!usedSources.has(sourceId)) err(`source non utilisee "${sourceId}"`);
     }
+    if (!track.routeAliases.includes(track.routeCode)) {
+      err(`routeAliases doit contenir routeCode "${track.routeCode}"`);
+    }
+    if (track.brandIdentity.logoSlug !== track.providerId) {
+      err(`brandIdentity.logoSlug "${track.brandIdentity.logoSlug}" != providerId "${track.providerId}"`);
+    }
+    for (const examQId of track.mockExam.questionIds) {
+      if (!questionById.has(examQId)) {
+        err(`mockExam reference une question inconnue "${examQId}"`);
+      }
+    }
+    for (const dashPath of findLongDashPaths(track)) {
+      errors.push(`[editorial-track:long-dash] ${file}${dashPath}: long tiret interdit (U+2013/U+2014)`);
+    }
 
     const expectedSolutionFile = `content/answerKey/editorial/tracks/${track.id}.solutions.json`;
     const absSolutionPath = resolve(root, expectedSolutionFile);
@@ -204,6 +233,9 @@ export function validateEditorialTracks(options = {}) {
       if (!seenSolutions.has(qId)) {
         errors.push(`[editorial-track:integrity] ${file}: question "${qId}" sans solution dans ${expectedSolutionFile}`);
       }
+    }
+    for (const dashPath of findLongDashPaths(solutionsDoc)) {
+      errors.push(`[editorial-track:long-dash] ${expectedSolutionFile}${dashPath}: long tiret interdit (U+2013/U+2014)`);
     }
   }
 
@@ -269,6 +301,9 @@ export function validateEditorial(options = {}) {
     }
     const minutes = pilot.lessons.reduce((sum, lesson) => sum + lesson.estimatedMinutes, 0);
     if (minutes !== pilot.estimatedMinutes) err("duree totale divergente des lessons");
+    for (const dashPath of findLongDashPaths(pilot)) {
+      errors.push(`[editorial:long-dash] ${file}${dashPath}: long tiret interdit (U+2013/U+2014)`);
+    }
   }
   const tracksResult = validateEditorialTracks({ root });
   errors.push(...tracksResult.errors);

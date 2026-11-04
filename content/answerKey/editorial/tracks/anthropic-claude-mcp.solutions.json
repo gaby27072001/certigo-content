@@ -11,6 +11,7 @@
       "correctOptionIds": [
         "documents-xml-en-haut-question-en-bas"
       ],
+      "plainExplanation": "Placez toujours les longs documents tout en haut dans une balise <documents> et mettez votre question tout à la fin.",
       "rationale": "Anthropic recommande de structurer les prompts complexes avec des balises XML (`<documents>`, `<document>`, `<instructions>`) et de placer les longs documents de référence en haut du prompt, avant les instructions et la question finale.",
       "examTip": "Sur Claude avec long contexte : `<documents>` en haut du prompt + `<instructions>` et question tout en bas.",
       "sourceIds": [
@@ -24,6 +25,7 @@
       "correctOptionIds": [
         "ancrage-contexte-avant-generation"
       ],
+      "plainExplanation": "Obliger Claude à citer d'abord les passages réels l'empêche d'inventer des informations qui ne sont pas dans le document.",
       "rationale": "En extrayant d'abord les citations littérales dans `<quotes>`, le modèle place les preuves exactes dans son contexte de génération immédiat avant de rédiger `<answer>`, ce qui réduit drastiquement les extrapolations non fondées.",
       "examTip": "Demandez toujours `<quotes>` (extraction littérale) avant `<answer>` (analyse) sur les tâches documentaires critiques.",
       "sourceIds": [
@@ -37,6 +39,7 @@
       "correctOptionIds": [
         "max-tokens-superieur-budget-thinking"
       ],
+      "plainExplanation": "La limite totale (max_tokens) doit toujours être plus grande que le budget de réflexion pour laisser de la place à la réponse finale.",
       "rationale": "Dans l'API Messages d'Anthropic, `budget_tokens` représente la part maximale de `max_tokens` allouée au bloc `thinking` : `max_tokens` doit donc toujours être strictement supérieur à `budget_tokens` pour permettre la génération de la réponse finale.",
       "examTip": "Avec Extended Thinking : `max_tokens > budget_tokens` (car `max_tokens` = réflexion + réponse finale).",
       "sourceIds": [
@@ -50,6 +53,7 @@
       "correctOptionIds": [
         "artifacts-interactifs-versionnes"
       ],
+      "plainExplanation": "Les Artifacts affichent en direct les interfaces, graphiques et schémas générés par Claude dans un volet dédié.",
       "rationale": "Artifacts affiche et exécute en direct dans un panneau latéral isolé les composants React, pages HTML, graphiques SVG et diagrammes Mermaid, avec bascule code/aperçu et historique de versions.",
       "examTip": "Rendu interactif en direct de code UI (React/HTML), SVG ou diagrammes Mermaid = Artifacts.",
       "sourceIds": [
@@ -63,6 +67,7 @@
       "correctOptionIds": [
         "invalidation-prefixe-par-uuid-debut"
       ],
+      "plainExplanation": "Le cache ne réutilise que ce qui est identique depuis le premier mot : toute valeur qui change doit être placée à la fin.",
       "rationale": "Le Prompt Caching d'Anthropic repose sur l'égalité exacte du préfixe de la requête. Injecter un UUID ou un horodatage changeant au début du bloc `system` modifie le préfixe à chaque appel et empêche toute lecture en cache.",
       "examTip": "Pour que le Prompt Caching fonctionne : gardez le début (`tools` ➔ `system` ➔ corpus) 100 % statique et placez les données dynamiques à la fin.",
       "sourceIds": [
@@ -76,6 +81,7 @@
       "correctOptionIds": [
         "bloc-document-citations-enabled-true"
       ],
+      "plainExplanation": "Activez l'option native citations: { enabled: true } sur le document envoyé à Claude.",
       "rationale": "La fonctionnalité native de citations de l'API Messages s'active en fournissant les sources dans des blocs de type `document` avec l'option `citations: { enabled: true }`.",
       "examTip": "Citations vérifiables natives dans l'API Claude = bloc `document` avec `citations: { enabled: true }`.",
       "sourceIds": [
@@ -89,6 +95,7 @@
       "correctOptionIds": [
         "fichier-claude-md"
       ],
+      "plainExplanation": "Le fichier CLAUDE.md sert de mémoire permanente lue automatiquement par Claude Code à chaque démarrage.",
       "rationale": "Claude Code charge automatiquement les fichiers `CLAUDE.md` pour connaître les commandes de build, de lint, de test et les conventions d'architecture du dépôt.",
       "examTip": "`CLAUDE.md` est la mémoire persistante de votre dépôt pour Claude Code.",
       "sourceIds": [
@@ -102,6 +109,7 @@
       "correctOptionIds": [
         "commande-slash-clear"
       ],
+      "plainExplanation": "La commande /clear vide entièrement la conversation en cours pour repartir à zéro sans mélanger les sujets.",
       "rationale": "La commande `/clear` vide l'historique de conversation de la session courante pour repartir sur un contexte propre et économique lors d'un changement de sujet, tout en conservant les instructions de `CLAUDE.md`.",
       "examTip": "Changement de tâche indépendante dans Claude Code = `/clear` ; résumé d'une tâche longue en cours = `/compact`.",
       "sourceIds": [
@@ -115,6 +123,7 @@
       "correctOptionIds": [
         "settings-json-allow-npm-test-deny-env"
       ],
+      "plainExplanation": "Réglez le fichier .claude/settings.json pour autoriser la commande de test et bloquer explicitement la lecture des fichiers sensibles.",
       "rationale": "Le fichier `.claude/settings.json` permet d'autoriser finement des commandes sûres comme `Bash(npm test)` dans `permissions.allow` tout en interdisant explicitement la lecture des secrets `.env*` et les appels réseau non approuvés dans `permissions.deny`.",
       "examTip": "Utilisez `.claude/settings.json` (`allow` / `deny`) pour pré-approuver uniquement les commandes de test inoffensives.",
       "sourceIds": [
@@ -128,6 +137,7 @@
       "correctOptionIds": [
         "prompt-injection-via-issue-publique"
       ],
+      "plainExplanation": "Un message piégé pourrait manipuler l'agent pour lui faire exécuter des commandes dangereuses ou voler des accès secrets.",
       "rationale": "Un texte soumis par un tiers externe (issue publique, PR externe, page web) est une entrée non fiable : s'il est traité par un agent en mode headless disposant d'outils Bash complets et d'un jeton administrateur, une injection de prompt peut provoquer une compromission grave.",
       "examTip": "En CI headless (`claude -p`) sur des entrées externes : conteneur éphémère + `--allowedTools` minimal + jeton en lecture seule.",
       "sourceIds": [
@@ -142,6 +152,7 @@
       "correctOptionIds": [
         "primitive-resources-uri"
       ],
+      "plainExplanation": "Une Resource MCP permet de lire une donnée en toute sécurité, contrairement à un Tool qui exécute une action.",
       "rationale": "Dans le standard MCP, les `Resources` représentent des données structurées ou textuelles identifiées par URI (schémas, fichiers, journaux) exposées en lecture seule sans effet de bord, par opposition aux `Tools` qui exécutent des actions.",
       "examTip": "Dans MCP : `Resources` = données en lecture par URI · `Prompts` = modèles utilisateur · `Tools` = actions exécutables.",
       "sourceIds": [
@@ -155,6 +166,7 @@
       "correctOptionIds": [
         "ecrire-logs-sur-stderr"
       ],
+      "plainExplanation": "Le canal standard (stdout) est réservé aux messages JSON du protocole MCP ; les journaux doivent être écrits sur stderr.",
       "rationale": "Lorsqu'un serveur MCP communique via le transport `stdio`, le flux `stdout` véhicule exclusivement les messages JSON-RPC 2.0. Tout journal applicatif écrit sur `stdout` (`console.log`, `print`) casse le parsing du client ; il faut utiliser `stderr` (`console.error`).",
       "examTip": "Serveur MCP en transport `stdio` : jamais de `console.log` sur `stdout`, écrivez tous vos logs sur `stderr` !",
       "sourceIds": [
@@ -168,6 +180,7 @@
       "correctOptionIds": [
         "vm-ou-conteneur-isole-moindre-privilege"
       ],
+      "plainExplanation": "Faites-le toujours tourner dans une machine virtuelle isolée avec le minimum de droits, jamais sur votre session personnelle.",
       "rationale": "Computer Use interagissant directement avec l'écran, la souris et le clavier, Anthropic recommande de l'exécuter dans une machine virtuelle ou un conteneur isolé disposant du strict minimum de droits et d'accès réseau, avec validation humaine des actions sensibles.",
       "examTip": "Computer Use = toujours confiné dans une VM ou un conteneur dédié sans session ni secrets personnels.",
       "sourceIds": [
@@ -181,6 +194,7 @@
       "correctOptionIds": [
         "charte-explicite-principes-auto-critique"
       ],
+      "plainExplanation": "Claude apprend à s'auto-corriger en suivant une charte écrite de règles éthiques et de sécurité (être utile, honnête et inoffensif).",
       "rationale": "Constitutional AI aligne les modèles Claude en s'appuyant sur une constitution explicite de principes normatifs (visant un comportement utile, honnête et inoffensif) lors des phases d'auto-critique et d'apprentissage par renforcement.",
       "examTip": "Constitutional AI = alignement de sécurité fondé sur une charte explicite de principes (Helpful, Honest, Harmless).",
       "sourceIds": [
@@ -194,6 +208,7 @@
       "correctOptionIds": [
         "injection-instructions-cachees-description-tool"
       ],
+      "plainExplanation": "Des ordres cachés dans la description d'un outil trompent l'IA pour lui faire dérober des données à l'insu de l'utilisateur.",
       "rationale": "Puisque les descriptions d'outils retournées par `tools/list` sont injectées dans le contexte du modèle pour qu'il sache comment les appeler, un serveur MCP malveillant peut y glisser des instructions cachées (Tool Poisoning) poussant le LLM à lire et exfiltrer des données locales.",
       "examTip": "Tool Poisoning MCP = injection de prompt dissimulée dans la description `tools/list` d'un serveur MCP non fiable.",
       "sourceIds": [
@@ -207,6 +222,7 @@
       "correctOptionIds": [
         "role-sql-lecture-seule-replica-et-serveur-audite"
       ],
+      "plainExplanation": "Connectez le serveur MCP avec un compte de base de données configuré strictement en lecture seule.",
       "rationale": "La sécurité d'un serveur MCP repose sur le moindre privilège au niveau de l'infrastructure cible : connecter le serveur à un réplica avec un compte PostgreSQL en lecture seule garantit techniquement qu'aucune écriture ou suppression ne peut avoir lieu.",
       "examTip": "Ne comptez jamais sur le prompt pour empêcher un `DROP` ou un `DELETE` via MCP : imposez un rôle base de données en lecture seule.",
       "sourceIds": [

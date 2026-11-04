@@ -126,30 +126,48 @@ test("valide les 9 pistes phares internationales du Radar 35 fournisseurs et val
   assert.equal(report.radarTrackCount, 13);
 });
 
-test("valide les 4 parcours phares IA generative & metier (M365 Copilot & Agents, OpenAI & Codex, Anthropic Claude & MCP, Harvey Legal IA)", () => {
+test("valide les 4 parcours phares IA generative & metier (M365 Copilot & Agents, OpenAI & Codex, Anthropic Claude & MCP, Harvey Academy & Legal IA)", () => {
   const result = validateEditorialTracks({ root: repoRoot });
   assert.equal(result.ok, true, result.errors.join("\n"));
   assert.equal(result.trackCount, 4);
   assert.equal(result.moduleCount, 12);
-  assert.equal(result.lessonCount, 32);
-  assert.equal(result.questionCount, 64);
+  assert.equal(result.lessonCount, 34);
+  assert.equal(result.questionCount, 68);
   assert.deepEqual(result.trackFiles, [
     "editorial/tracks/anthropic-claude-mcp.json",
     "editorial/tracks/harvey-legal-ai.json",
     "editorial/tracks/m365-copilot-agents.json",
     "editorial/tracks/openai-chatgpt-codex.json",
   ]);
+  const allRouteAliases = new Set();
   for (const file of result.trackFiles) {
     const track = readJson(resolve(repoRoot, file));
+    const sols = readJson(resolve(repoRoot, `content/answerKey/editorial/tracks/${track.id}.solutions.json`));
     assert.equal(track.brand, "CertiGo");
+    assert.equal(track.brandIdentity.logoSlug, track.providerId);
+    assert.ok(track.routeAliases.includes(track.routeCode));
+    for (const alias of track.routeAliases) allRouteAliases.add(alias);
     assert.equal(track.modules.length, 3);
+    const qIds = [];
     for (const mod of track.modules) {
       assert.ok(mod.architectureSchema.diagram.includes("➔"));
       for (const lesson of mod.lessons) {
         assert.ok(lesson.declicCard.title.length > 0);
         assert.equal(lesson.microSlides.length, 3);
         assert.ok(lesson.questions.length >= 2);
+        for (const q of lesson.questions) {
+          assert.ok(q.plainPrompt.length >= 20, `${q.id}: plainPrompt requis`);
+          assert.ok(q.prompt.length >= 20, `${q.id}: prompt expert requis`);
+          qIds.push(q.id);
+        }
       }
     }
+    assert.deepEqual(track.mockExam.questionIds, qIds);
+    for (const sol of sols.solutions) {
+      assert.ok(sol.plainExplanation.length >= 20, `${sol.id}: plainExplanation requis`);
+    }
+  }
+  for (const expectedCode of ["HARVEY-LEGAL", "HARVEY-ACADEMY", "OPENAI-PRO", "ANTHROPIC-CLAUDE", "MS-4004"]) {
+    assert.ok(allRouteAliases.has(expectedCode), `routeAlias attendu: ${expectedCode}`);
   }
 });

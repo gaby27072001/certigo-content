@@ -46,6 +46,16 @@ const FORBIDDEN_PUBLIC_KEYS = [
 // Versions portant la metadata runtime (domainId, conceptId) et rattachees au graphe
 // canonique. Les corriges de ces versions ne dupliquent pas la metadata.
 const RUNTIME_ITEM_VERSIONS = ["v4", "v5"];
+const LONG_DASH_RE = /[\u2013\u2014]/u;
+
+function containsLongDash(value) {
+  if (typeof value === "string") return LONG_DASH_RE.test(value);
+  if (Array.isArray(value)) return value.some(containsLongDash);
+  if (value !== null && typeof value === "object") {
+    return Object.values(value).some(containsLongDash);
+  }
+  return false;
+}
 
 function isRuntimeItem(payload) {
   return RUNTIME_ITEM_VERSIONS.includes(payload?.schemaVersion);
@@ -1001,6 +1011,14 @@ export async function validateContent(options = {}) {
     if (question.data.schemaVersion !== solution.data.schemaVersion) {
       err(
         `[integrity:schema-version] paire "${id}": ${question.data.schemaVersion} != ${solution.data.schemaVersion}`
+      );
+    }
+    if (
+      question.data.schemaVersion !== "v2" &&
+      (containsLongDash(question.data) || containsLongDash(solution.data))
+    ) {
+      err(
+        `[editorial:long-dash] paire "${id}": long tiret interdit (U+2013/U+2014)`
       );
     }
     if (
