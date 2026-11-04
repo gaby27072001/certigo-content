@@ -5,7 +5,32 @@
   "providerId": "openai",
   "radarTrackId": "openai:chatgpt-codex-agents",
   "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné sur OpenAI Academy et la documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
+  },
   "locale": "fr-FR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
   "status": "active",
   "title": "CertiGo Pro : OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
   "subtitle": "Maîtriser le choix des modèles (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent de programmation autonome Codex et l'ingénierie IA de production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
@@ -135,6 +160,7 @@
               "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Vous avez un problème financier ou logique très complexe avec douze règles à vérifier en même temps. Quel modèle OpenAI choisir ?",
               "prompt": "Un architecte financier doit vérifier la cohérence mathématique et réglementaire d'un modèle de couverture de taux comportant douze contraintes croisées et identifier les cas limites où la formule diverge. Quel modèle OpenAI doit-il sélectionner dans ChatGPT Enterprise ?",
               "options": [
                 {
@@ -153,13 +179,13 @@
                   "id": "modele-moderation-seul",
                   "label": "Le classifieur de modération de contenu qui produit uniquement des scores de sécurité booléens."
                 }
-              ],
-              "plainPrompt": "Vous avez un problème financier ou logique très complexe avec douze règles à vérifier en même temps. Quel modèle OpenAI choisir ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Quelle est la différence pratique entre les modèles de réflexion o3 et o4-mini chez OpenAI ?",
               "prompt": "Quel compromis distingue principalement `o4-mini` de `o3` au sein de la famille des modèles de raisonnement OpenAI ?",
               "options": [
                 {
@@ -178,8 +204,7 @@
                   "id": "limite-dix-jetons-entree",
                   "label": "o4-mini accepte au maximum dix mots en entrée et ne peut lire aucun fichier structuré."
                 }
-              ],
-              "plainPrompt": "Quelle est la différence pratique entre les modèles de réflexion o3 et o4-mini chez OpenAI ?"
+              ]
             }
           ],
           "recap": "GPT-4o pour la vitesse multimodale et rédactionnelle ; o4-mini pour le raisonnement technique agile ; o3 pour les arbitrages complexes à forte profondeur logique.",
@@ -250,6 +275,7 @@
               "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Quel outil de ChatGPT permet de chercher dans des dizaines de documents officiels et de rédiger un rapport complet avec toutes les sources ?",
               "prompt": "Une responsable veille réglementaire doit produire un rapport comparant les exigences publiées par cinq autorités de régulation avec des citations vérifiables ligne par ligne. Quelle fonctionnalité de ChatGPT Pro / Enterprise est spécifiquement conçue pour ce travail ?",
               "options": [
                 {
@@ -268,13 +294,13 @@
                   "id": "mode-dictaphone-seul",
                   "label": "L'enregistreur vocal mobile utilisé sans connexion aux référentiels réglementaires."
                 }
-              ],
-              "plainPrompt": "Quel outil de ChatGPT permet de chercher dans des dizaines de documents officiels et de rédiger un rapport complet avec toutes les sources ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule un total de ventes différent de votre comptabilité à partir d'un fichier Excel. Que devez-vous vérifier en premier ?",
               "prompt": "Après avoir chargé un fichier CSV de 60 000 ventes dans ChatGPT Data Analysis, un contrôleur obtient un chiffre d'affaires supérieur de 12 % à celui de la comptabilité. Quel réflexe de vérification doit-il appliquer immédiatement ?",
               "options": [
                 {
@@ -293,8 +319,7 @@
                   "id": "accepter-chiffre-sans-verification",
                   "label": "Publier directement le graphique car un script Python généré applique toujours les conventions comptables propres à chaque société."
                 }
-              ],
-              "plainPrompt": "ChatGPT calcule un total de ventes différent de votre comptabilité à partir d'un fichier Excel. Que devez-vous vérifier en premier ?"
+              ]
             }
           ],
           "recap": "Deep Research explore et cite les sources ; Data Analysis exécute du Python déterministe et inspectable sur vos données chiffrées.",
@@ -365,6 +390,7 @@
               "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
               "itemType": "scenario",
               "difficulty": 1,
+              "plainPrompt": "Comment modifier seulement 30 lignes d'un long programme dans ChatGPT sans risquer qu'il réécrive ou casse le reste du fichier ?",
               "prompt": "Vous travaillez sur un script Python de 250 lignes dans ChatGPT et souhaitez optimiser uniquement la fonction de pagination aux lignes 80 à 110 tout en garantissant que le reste du fichier reste strictement intact et versionné. Quel outil devez-vous utiliser ?",
               "options": [
                 {
@@ -383,13 +409,13 @@
                   "id": "suppression-historique-workspace",
                   "label": "Purger définitivement l'historique de l'espace de travail à chaque modification d'une variable locale."
                 }
-              ],
-              "plainPrompt": "Comment modifier seulement 30 lignes d'un long programme dans ChatGPT sans risquer qu'il réécrive ou casse le reste du fichier ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Dans ChatGPT Enterprise, quand faut-il créer un Project plutôt qu'un Custom GPT ?",
               "prompt": "Quelle différence principale guide le choix entre un Project et un Custom GPT dans ChatGPT Enterprise ?",
               "options": [
                 {
@@ -408,8 +434,7 @@
                   "id": "project-limite-images-seules",
                   "label": "Un Project accepte uniquement des fichiers d'images matricielles et refuse toute conversation textuelle."
                 }
-              ],
-              "plainPrompt": "Dans ChatGPT Enterprise, quand faut-il créer un Project plutôt qu'un Custom GPT ?"
+              ]
             }
           ],
           "recap": "Canvas pour l'édition chirurgicale côte à côte ; Projects pour vos chantiers au long cours ; Custom GPTs pour standardiser et partager un assistant métier.",
@@ -515,6 +540,7 @@
               "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Pourquoi l'agent de programmation OpenAI Codex coupe-t-il l'accès à Internet pendant qu'il modifie votre code ?",
               "prompt": "Pourquoi l'environnement d'exécution d'OpenAI Codex désactive-t-il l'accès Internet sortant pendant que l'agent modifie le code et exécute les tests ?",
               "options": [
                 {
@@ -533,13 +559,13 @@
                   "id": "economie-memoire-vive-ecran",
                   "label": "Pour réduire la résolution graphique de la carte vidéo locale de l'ordinateur portable du développeur."
                 }
-              ],
-              "plainPrompt": "Pourquoi l'agent de programmation OpenAI Codex coupe-t-il l'accès à Internet pendant qu'il modifie votre code ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque un outil qui s'installe normalement depuis Internet. Comment régler cela ?",
               "prompt": "Une tâche confiée à OpenAI Codex échoue lors de l'exécution de `pytest` car les bibliothèques du fichier `requirements.txt` ne sont pas installées et l'agent ne peut pas contacter PyPI. Quelle est la résolution appropriée ?",
               "options": [
                 {
@@ -558,8 +584,7 @@
                   "id": "coder-cles-api-dans-readme",
                   "label": "Inscrire les clés secrètes de production en clair dans le fichier README.md du dépôt public."
                 }
-              ],
-              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque un outil qui s'installe normalement depuis Internet. Comment régler cela ?"
+              ]
             }
           ],
           "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne dans son sandbox isolé et exigez la preuve par les logs de tests.",
@@ -631,6 +656,7 @@
               "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "À quoi sert le fichier AGENTS.md placé dans votre projet informatique pour OpenAI Codex ?",
               "prompt": "Quel est le rôle du fichier `AGENTS.md` placé à la racine et dans les sous-dossiers d'un dépôt Git utilisé avec OpenAI Codex ?",
               "options": [
                 {
@@ -649,13 +675,13 @@
                   "id": "desactiver-revue-pull-request",
                   "label": "Contraindre GitHub à fusionner toutes les branches sans exécuter les workflows d'intégration continue."
                 }
-              ],
-              "plainPrompt": "À quoi sert le fichier AGENTS.md placé dans votre projet informatique pour OpenAI Codex ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger dans quatre parties différentes de votre logiciel. Comment gagner du temps avec Codex ?",
               "prompt": "Vous avez quatre bugs indépendants bien reproduits dans quatre modules distincts de votre application. Comment exploiter OpenAI Codex de façon optimale ?",
               "options": [
                 {
@@ -674,8 +700,7 @@
                   "id": "modifier-directement-main-production",
                   "label": "Pousser des modifications non testées directement sur la branche de production en contournant la revue de code."
                 }
-              ],
-              "plainPrompt": "Vous avez quatre bugs indépendants à corriger dans quatre parties différentes de votre logiciel. Comment gagner du temps avec Codex ?"
+              ]
             }
           ],
           "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue de PR = le workflow d'ingénierie augmentée avec OpenAI Codex.",
@@ -746,6 +771,7 @@
               "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Dans quel ordre Codex doit-il travailler pour prouver qu'il a vraiment corrigé un bug ?",
               "prompt": "Vous déléguez à OpenAI Codex la correction d'un bug de calcul d'arrondi signalé en production. Quelle séquence de travail garantit que le correctif règle réellement le problème sans régression ?",
               "options": [
                 {
@@ -764,13 +790,13 @@
                   "id": "desactiver-pipeline-ci-branche",
                   "label": "Retirer le workflow GitHub Actions de la branche pour masquer l'échec du build."
                 }
-              ],
-              "plainPrompt": "Dans quel ordre Codex doit-il travailler pour prouver qu'il a vraiment corrigé un bug ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
               "itemType": "spotTheIssue",
               "difficulty": 3,
+              "plainPrompt": "Un agent propose de faire passer un test de sécurité au vert en désactivant le contrôle sur le fichier posant problème. Que faites-vous ?",
               "prompt": "Lors de la relecture d'une Pull Request générée pour corriger un test d'anti-fuite en échec, vous constatez que le diff ajoute le fichier fautif à une liste d'exclusion globale au lieu de retirer le champ sensible. Quelle décision devez-vous prendre ?",
               "options": [
                 {
@@ -789,8 +815,7 @@
                   "id": "ignorer-diff-fichiers-tests",
                   "label": "Configurer l'outil de revue de code pour masquer systématiquement les modifications apportées aux fichiers de tests."
                 }
-              ],
-              "plainPrompt": "Un agent propose de faire passer un test de sécurité au vert en désactivant le contrôle sur le fichier posant problème. Que faites-vous ?"
+              ]
             }
           ],
           "recap": "Exigez toujours la boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver une PR d'agent.",
@@ -896,6 +921,7 @@
               "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Comment obliger l'API OpenAI à renvoyer une réponse JSON qui respecte toujours exactement les champs attendus par votre logiciel ?",
               "prompt": "Votre backend appelle l'API OpenAI pour extraire les lignes d'une facture et exige que la réponse respecte à 100 % un schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) et `lignes` (array), sans aucune propriété supplémentaire. Quelle configuration devez-vous utiliser ?",
               "options": [
                 {
@@ -914,13 +940,13 @@
                   "id": "temperature-deux-sans-schema",
                   "label": "Régler la température sur 2.0 en mode texte libre pour diversifier le nom des clés JSON."
                 }
-              ],
-              "plainPrompt": "Comment obliger l'API OpenAI à renvoyer une réponse JSON qui respecte toujours exactement les champs attendus par votre logiciel ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Avec le mode strict d'OpenAI, comment déclarer un champ facultatif (comme un commentaire) dans votre format JSON ?",
               "prompt": "Comment modéliser un champ optionnel (par exemple `commentaire`) dans un JSON Schema utilisé avec OpenAI Structured Outputs en mode `strict: true` ?",
               "options": [
                 {
@@ -939,8 +965,7 @@
                   "id": "utiliser-commentaires-xml-dans-json",
                   "label": "Insérer des balises XML à l'intérieur du schéma JSON pour désactiver le validateur de jetons."
                 }
-              ],
-              "plainPrompt": "Avec le mode strict d'OpenAI, comment déclarer un champ facultatif (comme un commentaire) dans votre format JSON ?"
+              ]
             }
           ],
           "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur de parsing JSON en production.",
@@ -1011,6 +1036,7 @@
               "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
               "itemType": "spotTheIssue",
               "difficulty": 3,
+              "plainPrompt": "Pourquoi est-il dangereux de laisser l'IA choisir elle-même le numéro de dossier client à lire sans vérifier qui est connecté ?",
               "prompt": "Dans une application utilisant le Function Calling d'OpenAI, la fonction `lire_dossier_medical(patient_id)` laisse le modèle choisir librement `patient_id` à partir du texte de la conversation sans vérifier la session authentifiée côté serveur. Quel est le risque principal ?",
               "options": [
                 {
@@ -1029,13 +1055,13 @@
                   "id": "suppression-automatique-schema",
                   "label": "La suppression automatique du fichier JSON Schema sur le disque dur du serveur OpenAI."
                 }
-              ],
-              "plainPrompt": "Pourquoi est-il dangereux de laisser l'IA choisir elle-même le numéro de dossier client à lire sans vérifier qui est connecté ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Dans le kit OpenAI Agents SDK, comment arrêter immédiatement un agent si un contrôle détecte une demande dangereuse ?",
               "prompt": "Dans l'OpenAI Agents SDK, quel mécanisme permet à un contrôle de sécurité exécuté en parallèle d'interrompre immédiatement l'agent avant qu'un outil sensible ne soit appelé ?",
               "options": [
                 {
@@ -1054,8 +1080,7 @@
                   "id": "suppression-descriptions-handoffs",
                   "label": "Le retrait de toutes les instructions système des agents spécialisés recevant un handoff."
                 }
-              ],
-              "plainPrompt": "Dans le kit OpenAI Agents SDK, comment arrêter immédiatement un agent si un contrôle détecte une demande dangereuse ?"
+              ]
             }
           ],
           "recap": "Schémas d'outils stricts + identité injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = des agents robustes en production.",
@@ -1126,6 +1151,7 @@
               "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Vous changez les consignes de votre assistant IA. Comment vérifier que vous n'avez rien cassé avant la mise en ligne ?",
               "prompt": "Votre équipe modifie les instructions système d'un agent en production pour raccourcir ses réponses, et veut s'assurer que ce changement ne dégrade pas le choix des outils Function Calling sur les 150 scénarios critiques de l'entreprise. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
               "options": [
                 {
@@ -1144,13 +1170,13 @@
                   "id": "attendre-plaintes-utilisateurs",
                   "label": "Déployer sans test préalable et compter sur les tickets de réclamation des clients pour mesurer la qualité."
                 }
-              ],
-              "plainPrompt": "Vous changez les consignes de votre assistant IA. Comment vérifier que vous n'avez rien cassé avant la mise en ligne ?"
+              ]
             },
             {
               "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Comment vérifier de façon simple, rapide et gratuite qu'un agent a bien choisi la devise EUR dans un test automatique ?",
               "prompt": "Quel type de grader (notateur) est le plus fiable et le plus économique pour vérifier dans OpenAI Evals qu'un agent a appelé la fonction `creer_avoir` avec le bon code devise `EUR` ?",
               "options": [
                 {
@@ -1169,8 +1195,7 @@
                   "id": "tirage-aleatoire-sans-reference",
                   "label": "Un générateur de nombres aléatoires attribuant un score sans comparer la sortie à la valeur attendue."
                 }
-              ],
-              "plainPrompt": "Comment vérifier de façon simple, rapide et gratuite qu'un agent a bien choisi la devise EUR dans un test automatique ?"
+              ]
             }
           ],
           "recap": "Dataset doré représentatif + Graders déterministes et sémantiques + Porte de non-régression CI = l'ingénierie IA pilotée par les Evals.",
@@ -1182,18 +1207,6 @@
       ]
     }
   ],
-  "routeAliases": [
-    "OPENAI-PRO",
-    "OPENAI-CODEX",
-    "OPENAI-ACADEMY"
-  ],
-  "brandIdentity": {
-    "logoSlug": "openai",
-    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
-    "primaryHex": "#10A37F",
-    "accentHex": "#0D8A6A",
-    "masteryModel": "Parcours d'expertise produit complet aligné sur OpenAI Academy et la documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
-  },
   "mockExam": {
     "id": "openai-chatgpt-codex-mock-exam",
     "title": "Examen Blanc CertiGo Pro : OpenAI (ChatGPT Enterprise, Modèles o3/o4-mini, Codex, Responses API & Agents SDK)",

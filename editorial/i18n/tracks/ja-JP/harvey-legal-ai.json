@@ -1,0 +1,1129 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "harvey-legal-ai",
+  "brand": "CertiGo",
+  "providerId": "harvey",
+  "radarTrackId": "harvey:legal-ai-platform",
+  "routeCode": "HARVEY-LEGAL",
+  "routeAliases": [
+    "HARVEY-LEGAL",
+    "HARVEY-ACADEMY",
+    "HARVEY-AI"
+  ],
+  "brandIdentity": {
+    "logoSlug": "harvey",
+    "displayName": "Harvey AI & Harvey Academy",
+    "primaryHex": "#141413",
+    "accentHex": "#C8A97E",
+    "masteryModel": "Parcours d'expertise produit complet aligné 上の Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work ・ badges Credly by Pearson) : 3 unités progressives, 8 leçons opérationnelles, Cartes Déclic, labs pratiques, questions à double niveau (simple なしで jargon ・ expert) ・ examen blanc."
+  },
+  "locale": "ja-JP",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: Harvey Academy & Legal IA (Foundations, Legal Engineering, Assistant, Vault, Knowledge & Workflows)",
+  "subtitle": "習得： programme officiel Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work & badges Credly), Harvey Assistant (Word Add-In, redlining, mémos), Harvey Vault (Data Rooms M&A, Review Tables) ・ Harvey Knowledge & Workflows.",
+  "audience": "Avocats d'affaires (M&A, Corporate, Contentieux, Droit social, IP/IT), directeurs juridiques (General Counsel), juristes d'企業 ・ Legal Ops.",
+  "prerequisites": "Connaître structure の 契約書 d'affaires, principes d'audit juridique (Due Diligence) ・ règles déontologiques の confidentialité.",
+  "estimatedMinutes": 96,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "harvey-platform-overview",
+      "title": "Harvey Legal AI Platform: Assistant, Vault, Knowledge, およびWorkflows",
+      "url": "https://www.harvey.ai/",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente quatre piliers の plateforme Harvey : Assistant (rédaction, révision, redlining), Vault (audit の Data Rooms ・ grilles d'extraction 上の の milliers の documents), Knowledge (recherche juridique ・ réglementaire sourcée) ・ Workflows multi-étapes.",
+      "limits": "Toute sortie générée par Harvey constitue projet の travail soumis à revue ・ à validation finale d' avocat または juriste habilité."
+    },
+    {
+      "id": "harvey-product-blog",
+      "title": "Harvey Engineering & Product Insights: Multi-model Legal Workflows, Vault Review Tables, およびSecurity",
+      "url": "https://www.harvey.ai/blog",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement の Review Tables 内の Harvey Vault, l'ancrage citationnel なしで hallucination 内の Harvey Knowledge, l'intégration Word 向け redlining ・ l'engagement の confidentialité zéro-entraînement 上の データ clients.",
+      "limits": "cloisonnement の dossiers (Ethical Walls / Matter-level access controls) 必要がある être configuré conformément aux politiques の gestion の conflits d'intérêts の cabinet または の direction juridique."
+    },
+    {
+      "id": "harvey-academy-blog",
+      "title": "Harvey Academy: Shaping the Future of Legal AI Literacy (Intro to Harvey, AI for Legal Basics, Harvey in Practice, Deep Dives) (CertiGo コース)",
+      "url": "https://www.harvey.ai/blog/introducing-harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente portail officiel Harvey Academy (academy.harvey.ai) conçu par の praticiens の droit : parcours Intro to Harvey, cours certifiant AI for Legal Basics, ateliers vidéo Harvey in Practice, Harvey Deep Dives ・ déploiement par rôle à l'échelle の cabinets ・ directions juridiques.",
+      "limits": "formations の fondation sont ouvertes gratuitement 上の inscription ; modules avancés liés au workspace exigent compte client Harvey actif."
+    },
+    {
+      "id": "harvey-academy-help",
+      "title": "Getting Started with Harvey Academy: Level 1 Foundations, Legal Engineering Certification, Preparing for Legal Work, およびCredly Badges",
+      "url": "https://help.harvey.ai/articles/harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente certifications officielles Harvey Academy (Level 1 Foundations combinant AI for Legal Basics ・ AI Analysis for Legal Workflows, Legal Engineering Certification, ・ Preparing for Legal Work), parcours Getting Started for Users/Admins, l'Add-In Word ・ délivrance の badges numériques vérifiés via Credly by Pearson.",
+      "limits": "L'émission の badge vérifié Credly nécessite d'活用： même adresse e-mail 上の Harvey Academy ・ 上の Credly by Pearson."
+    }
+  ],
+  "modules": [
+    {
+      "id": "harvey-assistant-contrats-redlining-memos",
+      "unitNumber": 1,
+      "title": "ユニット 1 · Harvey Assistant : Rédaction, Redlining Assisté & Mémos Clients",
+      "subtitle": "Rédiger ・ réviser の 契約書 ・ son playbook の négociation, automatiser redlining argumenté ・ produire の mémos の synthèse client sourcés.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Appliquer playbook の négociation contractuelle 内の Harvey Assistant 向け réviser 契約 fournisseur (MSA/DPA), générer redlining motivé clause par clause ・ rédiger mémo exécutif destiné au client.",
+      "memoKeyTopics": [
+        "Rédaction ・ révision の 契約書 : alignement 上の playbook interne (position préférentielle, position の repli / fallback, point の rupture / walk-away)",
+        "Redlining assisté par IA (interface Harvey & Add-in Microsoft Word) : réécriture chirurgicale ・ commentaire justificatif destiné à partie adverse",
+        "Recherche juridique sourcée なしで hallucination ・ rédaction の mémos の synthèse client structurés (Executive Summary + analyse IRAC)"
+      ],
+      "memoGoldenRule": "Fournissez toujours à Harvey Assistant votre playbook の négociation ・ rôle の votre client (Acheteur vs Prestataire, Bailleur vs Preneur) avant の lancer redlining.",
+      "architectureSchema": {
+        "title": "Flux の Révision Contractuelle & Redlining ・ Harvey Assistant",
+        "diagram": "[契約 Adverse + Playbook Client (Positions Gold / Fallback / Red Flag)] ➔ [Harvey Assistant : Analyse d'Écarts + Vérification の Définitions] ➔ [Redline Word (Suivi の modifications + Commentaires négociateur) + Mémo Client]",
+        "components": [
+          {
+            "name": "Playbook & Contexte の Partie",
+            "role": "Définit position の client (ex. Acheteur), plafonds acceptables, clauses の repli autorisées ・ exclusions non négociables."
+          },
+          {
+            "name": "Moteur の Redlining Harvey (Web & Word Add-in)",
+            "role": "Compare chaque clause の projet adverse au playbook, propose réécriture exacte au minimum d'intrusion textuelle ・ génère note d'explication commerciale."
+          },
+          {
+            "name": "Générateur の Mémo Client Sourcé",
+            "role": "Synthétise points d'arbitrage majeurs en langage clair 向け direction générale または client, ・ renvoi exact aux numéros d'articles."
+          }
+        ],
+        "securityInvariant": "Chaque clause réécrite または citée par Harvey Assistant est liée à l'article source の 契約 téléversé ; aucune donnée の dossier n'est partagée hors の l'espace sécurisé の cabinet または の l'企業."
+      },
+      "lessons": [
+        {
+          "id": "redaction-revision-contrats-playbook",
+          "title": "Rédaction ・ révision の 契約書 ・ Playbook 内の Harvey Assistant",
+          "objective": "Structurer invite juridique précise 内の Harvey Assistant en associant 契約 à réviser, qualité の partie représentée ・ playbook の négociation.",
+          "estimatedMinutes": 12,
+          "hook": "Demander « Révises ce 契約 » なしで préciser si vous défendez client acheteur または fournisseur vendeur produit の recommandations inversées : comment cadrer Harvey Assistant comme collaborateur senior ?",
+          "declicCard": {
+            "title": "ひらめきポイント Playbook Harvey : Rôle の Client + Grille (Idéal / Fallback / Red Flag) + Vérification の Définitions",
+            "diagramTop": "Entrées : 1. Rôle (ex. Client Acheteur) · 2. 契約 source · 3. Playbook の négociation",
+            "diagramBottom": "Sortie Harvey : Tableau d'écarts par article + Clause の repli (Fallback) + Contrôle の termes définis",
+            "step1": "Précisez toujours partie que vous représentez, droit applicable, type の 契約 ・ joignez votre playbook の clauses.",
+            "step2": "Demandez à Harvey の classer chaque écart selon trois niveaux (Conforme / Acceptable en Fallback / Red Flag bloquant) ・ の 検証： termes ・ majuscule.",
+            "rule": "terme défini à l'Article 1 peut neutraliser garantie à l'Article 14 : exigez toujours contrôle croisé の définitions."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · CADRER COMME ASSOCIÉ",
+              "title": "Posture contractuelle, juridiction ・ playbook",
+              "bodyParagraph": "内の Harvey Assistant, encadrez chaque révision par quatre paramètres : 1. Qui vous représentez (ex. l'acquéreur または preneur の licence SaaS) · 2. droit applicable (ex. droit français, New York law) · 3. Votre playbook の positions (standard, fallback, no-go) · 4. format の livrable attendu.",
+              "keyTakeawayPill": "Prompt juridique = Rôle représenté + Droit applicable + Playbook + Format の sortie"
+            },
+            {
+              "stepBadge": "ステップ 2 · POSITIONS の REPLI (FALLBACK)",
+              "title": "Préparer à fois position cible ・ compromis",
+              "bodyParagraph": "向け chaque clause sensible (plafond の responsabilité, dommages indirects, propriété intellectuelle, indemnisation), demandez à Harvey Assistant の générer non seulement rédaction cible idéale, mais aussi rédaction の repli (fallback) conforme à votre playbook si partie adverse refuse premier jet.",
+              "keyTakeawayPill": "向け chaque clause critique : Position Idéale + Clause の Repli (Fallback) prête à négocier"
+            },
+            {
+              "stepBadge": "ステップ 3 · AUDIT の TERMES DÉFINIS",
+              "title": "Traquer définitions orphelines または piégées",
+              "bodyParagraph": "piège classique の 契約書 longs réside 内の section Définitions : terme défini trop étroitement (ex. « Informations Confidentielles » exigeant marquage écrit systématique) vide clause の confidentialité の sa substance. Demandez systématiquement à Harvey d'auditer termes définis ・ renvois d'articles.",
+              "keyTakeawayPill": "Toujours faire 検証： par Harvey : Définitions piégées + Termes non définis + Renvois cassés"
+            }
+          ],
+          "keyIdeas": [
+            "révision contractuelle 内の Harvey Assistant exige の spécifier partie représentée, juridiction ・ playbook の référence.",
+            "génération conjointe の position préférentielle ・ の clause の repli (fallback) accélère cycles の négociation.",
+            "L'audit automatisé の cohérence 間の l'article Définitions ・ corps の 契約 détecte restrictions cachées ・ renvois erronés."
+          ],
+          "workedExample": {
+            "situation": "juriste IT d' groupe bancaire révise ・ Harvey Assistant 契約 d'hébergement Cloud (MSA) の 45 pages soumis par fournisseur étranger.",
+            "steps": [
+              "Téléverser 内の Harvey Assistant MSA proposé ainsi que Playbook Achats IT の banque (qui exige plafond の responsabilité の 24 mois の redevances ・ préavis の réversibilité の 6 mois).",
+              "Demander tableau comparatif article par article isolant écarts majeurs, définitions restrictives ・ renvois circulaires.",
+              "Identifier immédiatement grâce à Harvey que définition の « Faute Lourde » à l'Annexe 1 excluait pannes の sous-traitants ultérieurs."
+            ],
+            "decision": "juriste sécurise négociation en corrigeant à fois l'article 上の responsabilité ・ définition cachée en annexe."
+          },
+          "practice": {
+            "prompt": "Rédigez invite structurée 向け Harvey Assistant afin d'analyser clause の limitation の responsabilité 内の 契約 SaaS où vous représentez client 企業, en intégrant position cible ・ fallback.",
+            "successCriteria": [
+              "Préciser rôle (Client 企業 souscripteur の SaaS) ・ droit applicable.",
+              "Définir position cible (ex. plafond mutuel à 24 mois の redevances + déplafonnement 向け violation の confidentialité, データ personnelles ・ contrefaçon IP) ・ position の repli (ex. super-cap à 3x 向け データ personnelles).",
+              "Demander l'identification の écarts exacts ・ proposition の réécriture assortie d' argumentaire commercial."
+            ],
+            "feedback": "Structurer l'invite autour の couple (Position cible / Super-cap の repli) 可能にする à Harvey の produire の propositions immédiatement utilisables en séance の négociation."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Que devez-vous donner à Harvey Assistant au départ 向け qu'il relise 契約 selon règles の votre 企業 ?",
+              "prompt": "法務部門がutilise Harvey Assistant 向け réviser 契約 の licence logicielle reçu d' éditeur. Quels éléments faut-il fournir 内の l'invite 向け obtenir analyse の risques ・ の propositions の clauses 直接 alignées 上の politique の l'企業 ?",
+              "options": [
+                {
+                  "id": "role-client-droit-applicable-et-playbook",
+                  "label": "契約 adverse, rôle défendu (Client licencié), droit applicable ・ playbook interne précisant positions cibles ・ の repli (fallback)."
+                },
+                {
+                  "id": "uniquement-derniere-page-signatures",
+                  "label": "のみ page の signature vierge なしで corps の 契約 ni indication の partie représentée."
+                },
+                {
+                  "id": "demande-generique-sans-contexte",
+                  "label": "consigne d' ligne « Améliore texte » なしで préciser si l'on représente l'éditeur vendeur または client acheteur."
+                },
+                {
+                  "id": "suppression-article-definitions",
+                  "label": "契約 amputé の son article Définitions ・ の ses annexes financières afin の raccourcir lecture."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "clause paraît rassurante mais mot ・ majuscule cache piège 内の définitions au début の 契約. Que demander à Harvey ?",
+              "prompt": "Lors の relecture d' accord の confidentialité (NDA), l'article 4 semble protéger largement votre client, mais définition の « Informations Confidentielles » à l'article 1 exige qu'elles soient estampillées par tampon humide 内の 24 heures suivant tout échange oral. Quel contrôle Harvey Assistant 可能にする の déjouer ce piège ?",
+              "options": [
+                {
+                  "id": "audit-croise-definitions-et-clauses-substantives",
+                  "label": "Demander audit croisé 間の termes définis à l'article 1 ・ obligations substantives 向け repérer toute définition excessivement restrictive."
+                },
+                {
+                  "id": "verification-orthographique-seule",
+                  "label": "Limiter l'analyse à correction の fautes の frappe なしで lire sens の définitions contractuelles."
+                },
+                {
+                  "id": "ignorer-mots-avec-majuscule",
+                  "label": "Demander à l'assistant d'ignorer tous termes commençant par lettre majuscule 内の l'accord."
+                },
+                {
+                  "id": "traduire-sans-analyser-portee",
+                  "label": "Traduire littéralement l'article 4 en trois langues なしで examiner conditions の forme の l'article 1."
+                }
+              ]
+            }
+          ],
+          "recap": "内の Harvey Assistant : cadrez partie représentée, attachez votre playbook (cible + fallback) ・ contrôlez toujours définitions.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "redlining-assiste-ia-et-memos-clients",
+          "title": "Redlining assisté par IA 内の Word ・ rédaction の mémos の synthèse client",
+          "objective": "Réaliser redlining chirurgical ・ commentaires justificatifs destinés à partie adverse ・ produire mémo の synthèse client clair ・ sourcé.",
+          "estimatedMinutes": 12,
+          "hook": "Réécrire entièrement clause adverse braque négociateur d'en face, tandis qu'envoyer 40 pages の marques の révision brutes à votre directeur général est illisible : comment 活用： Harvey 向け réussir deux exercices ?",
+          "declicCard": {
+            "title": "ひらめきポイント Redlining & Mémo : Intrusion Minimale 上の 契約 + Synthèse Décisionnelle 向け Client",
+            "diagramTop": "Redline (向け partie adverse) : Modification chirurgicale minimale + Commentaire objectif (« Conformité RGPD / Réciprocité »)",
+            "diagramBottom": "Mémo Client (向け votre dirigeant) : Executive Summary + Top 3 points d'arbitrage commercial + Recommandation",
+            "step1": "Lors の redlining 内の Word ・ Harvey, demandez modification à intrusion minimale (conserver structure adverse tout en insérant garde-fous の votre playbook).",
+            "step2": "Générez deux livrables distincts : note d'explication neutre 向け partie adverse ・ mémo stratégique confidentiel 向け votre client.",
+            "rule": "Ne confondez jamais commentaire の redline (lu par partie adverse !) ・ note の risque interne (couverte par 弁護士・依頼者間秘匿特権)."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · REDLINING CHIRURGICAL",
+              "title": "Modifier minimum の mots 向け maximiser l'acceptation",
+              "bodyParagraph": "bon négociateur ne remplace pas article entier s'il suffit d'insérer « raisonnablement », « réciproquement » または plafond chiffré. ・ l'extension Harvey 向け Microsoft Word (または 内の l'interface の révision), demandez の propositions の redline à intrusion minimale qui préservent numérotation ・ style の document source.",
+              "keyTakeawayPill": "Redlining chirurgical = modifier のみ mots nécessaires 向け 保護： clause"
+            },
+            {
+              "stepBadge": "ステップ 2 · DISTINGUER DEUX COMMENTAIRES",
+              "title": "Justification externe vs Note の risque interne",
+              "bodyParagraph": "Demandez à Harvey の produire deux colonnes bien séparées :\n1. **Justification externe (向け partie adverse)** : neutre, constructive, fondée 上の pratique の marché または réciprocité.\n2. **Analyse の risque interne (向け votre client のみ)** : évaluation franche の l'exposition financière ・ の levier の négociation.",
+              "keyTakeawayPill": "Toujours séparer justification externe (partagée) ・ l'analyse の risque interne (confidentielle) !"
+            },
+            {
+              "stepBadge": "ステップ 3 · MÉMO の SYNTHÈSE CLIENT",
+              "title": "の l'analyse technique au mémo exécutif actionnable",
+              "bodyParagraph": "向け votre client または votre direction générale, demandez à Harvey Assistant の transformer revue en mémo structuré : 1. Synthèse exécutive (statut global) · 2. Tableau の 3 à 5 arbitrages commerciaux restants (Clause, Risque concret en euros/opérations, Option recommandée) · 3. Prochaines étapes.",
+              "keyTakeawayPill": "[JA] Mémo client = Décisions commerciales à trancher + Impact métier + Recommandation claire"
+            }
+          ],
+          "keyIdeas": [
+            "redlining assisté par Harvey privilégie modifications chirurgicales (intrusion minimale) alignées 上の playbook afin d'accélérer conclusion の l'accord.",
+            "Il est impératif の séparer commentaires の marge destinés à partie adverse の notes stratégiques internes destinées au client.",
+            "mémo の synthèse client traduit écarts juridiques en arbitrages opérationnels ・ financiers 直接 exploitables par dirigeant."
+          ],
+          "workedExample": {
+            "situation": "Sarah, avocate M&A/契約書, révise pacte d'actionnaires en urgence ・ 必要がある envoyer d' côté document en suivi の modifications au conseil の fonds, ・ の l'autre note d'arbitrage au PDG fondateur.",
+            "steps": [
+              "活用： Harvey 内の Word 向け proposer の redlines chirurgicaux 上の clauses の Bad Leaver, d'inaliénabilité ・ の sortie conjointe (Drag-Along).",
+              "Générer の bulles の commentaires neutres orientées pratique の marché 向け document Word destiné au conseil adverse.",
+              "Générer séparément 内の Harvey Assistant mémo exécutif d' page 向け PDG résumant trois points économiques à trancher avant l'appel."
+            ],
+            "decision": "conseil adverse accepte 80 % の redlines dès premier tour ・ PDG tranche 20 % restants en dix minutes grâce au mémo."
+          },
+          "practice": {
+            "prompt": "collaborateur junior s'apprête à envoyer à partie adverse 契約 Word dont bulles の commentaires générées contiennent notre position の repli secrète (« Nous accepterons 500 k€ s'ils insistent »). Expliquez l'erreur critique ・ règle の workflow à imposer ・ Harvey.",
+            "successCriteria": [
+              "Identifier divulgation accidentelle の stratégie の négociation ・ の seuil の repli の client à partie adverse.",
+              "Imposer 内の prompt Harvey séparation stricte 間の livrable « Commentaires の négociation externes » ・ livrable « Note stratégique interne client ».",
+              "Relire ・ purger systématiquement métadonnées ・ commentaires internes の ファイル Word avant tout envoi externe."
+            ],
+            "feedback": "Ne laissez jamais stratégie の repli interne figurer 内の bulles の commentaires の document Word envoyé à partie adverse."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "内の Word ・ Harvey, pourquoi vaut-il mieux corriger のみ mots risqués d' clause plutôt que tout réécrire の zéro ?",
+              "prompt": "Lors d' redlining assisté par Harvey 内の Microsoft Word, pourquoi est-il préférable の demander révision « à intrusion minimale » (surgical redlining) plutôt qu' remplacement intégral par votre clause type lorsque vous êtes en position の négociation équilibrée ?",
+              "options": [
+                {
+                  "id": "conserver-structure-adverse-inserer-gardes-fous",
+                  "label": "Cela préserve rédaction ・ numérotation の partie adverse tout en insérant exactement protections requises, réduisant frictions ・ délais の négociation."
+                },
+                {
+                  "id": "empecher-lecture-par-avocat-adverse",
+                  "label": "Cela rend modifications invisibles 内の mode Suivi の modifications の Microsoft Word."
+                },
+                {
+                  "id": "supprimer-valeur-juridique-contrat",
+                  "label": "Cela annule 自動的に toutes obligations financières の l'accord なしで accord の parties."
+                },
+                {
+                  "id": "bloquer-enregistrement-fichier-docx",
+                  "label": "Cela verrouille ファイル en lecture seule définitive 上の serveur の messagerie."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "juriste laisse par erreur phrase « nous pouvons céder jusqu'à 2 M€ » 内の ファイル Word envoyé à l'adversaire. Quelle erreur a-t-il commise ?",
+              "prompt": "juriste génère ・ Harvey tableau contenant à fois texte の redline ・ note confidentielle « Notre client est prêt à céder jusqu'à 2 M€ の plafond en dernier recours », puis copie l'intégralité 内の commentaires の ファイル Word envoyé au fournisseur. Quelle règle fondamentale a été violée ?",
+              "options": [
+                {
+                  "id": "confusion-commentaire-externe-et-note-strategie-interne",
+                  "label": "Il a mélangé justification externe destinée à partie adverse ・ l'analyse confidentielle の seuils の repli réservée au client."
+                },
+                {
+                  "id": "utilisation-police-serif-standard",
+                  "label": "Il a utilisé police の caractères Times New Roman au lieu d' police なしで empattement."
+                },
+                {
+                  "id": "pagination-automatique-pied-page",
+                  "label": "Il a laissé numérotation の pages active 内の pied の page の 契約 Word."
+                },
+                {
+                  "id": "format-date-iso-dans-titre",
+                  "label": "Il a nommé ファイル ・ date の jour au format année-mois-jour."
+                }
+              ]
+            }
+          ],
+          "recap": "Redline chirurgical + séparation stricte 間の commentaire externe ・ stratégie interne + mémo exécutif orienté décision = méthode Harvey Assistant.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-foundations-ai-legal-basics",
+          "title": "[JA] Harvey Academy Level 1 Foundations : AI for Legal Basics, AI Analysis & Add-In Word",
+          "objective": "習得： parcours officiel Harvey Academy Level 1 Foundations (AI for Legal Basics, AI Analysis for Legal Workflows, Getting Started for Users) ・ l'intégration directe 内の Microsoft Word.",
+          "estimatedMinutes": 12,
+          "hook": "どのようにpasser の curiosité envers l'IA générative à pratique juridique rigoureuse, vérifiable ・ 直接 intégrée 内の Microsoft Word selon référentiel officiel Harvey Academy ?",
+          "declicCard": {
+            "title": "ひらめきポイント Harvey Academy Level 1 : Littératie IA Juridique + Analyse Structurée + Exécution 内の Word",
+            "diagramTop": "[JA] Parcours Level 1 Foundations : 1. AI for Legal Basics (67 min) · 2. AI Analysis for Legal Workflows (60 min) · 3. Harvey in Practice",
+            "diagramBottom": "[JA] Application quotidienne : Getting Started for Users + Harvey for Word Add-In (rédaction, playbook, redlining in situ)",
+            "step1": "Validez fondamentaux (AI for Legal Basics) 向け distinguer ce que l'IA juridique fait ・ fiabilité (structuration, extraction, comparaison) の ce qui exige jugement の l'avocat.",
+            "step2": "Appliquez méthode AI Analysis for Legal Workflows ・ l'Add-In Harvey for Word 向け auditer ・ réviser vos actes 直接 内の votre document の travail.",
+            "rule": "Ne faites jamais confiance à sortie IA avant d'avoir cadré tâche, vérifié sources ・ contrôlé erreurs potentielles avant tout envoi client."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · AI FOR LEGAL BASICS",
+              "title": "Acquérir littératie IA juridique consciente の risques",
+              "bodyParagraph": "Premier pilier の certification Level 1 Foundations の Harvey Academy, cours AI for Legal Basics (67 min) pose bases indispensables : fonctionnement の grands モデル の langage en droit, cas d'usage à forte valeur ajoutée, limites structurelles (hallucinations hors contexte ancré, biais の formulation) ・ contrôle humain obligatoire avant tout acte または dépôt.",
+              "keyTakeawayPill": "AI for Legal Basics = 理解： capacités, limites ・ devoir の vérification"
+            },
+            {
+              "stepBadge": "ステップ 2 · AI ANALYSIS FOR LEGAL WORKFLOWS",
+              "title": "Concevoir, exécuter ・ 検証： analyse documentaire à grande échelle",
+              "bodyParagraph": "Deuxième pilier の Level 1 Foundations, cours AI Analysis for Legal Workflows (60 min) enseigne comment structurer の prompts d'extraction précis, découper revue documentaire complexe ・ détecter méthodiquement omissions または erreurs d'interprétation avant qu' livrable n'atteigne associé, client または juridiction.",
+              "keyTakeawayPill": "AI Analysis for Legal Workflows = structurer l'extraction + détecter erreurs en amont"
+            },
+            {
+              "stepBadge": "ステップ 3 · HARVEY IN PRACTICE & WORD ADD-IN",
+              "title": "Travailler 直接 内の Microsoft Word ・ workspace Harvey",
+              "bodyParagraph": "parcours Getting Started for Users ・ Get Started With the Harvey for Word Add-In の Harvey Academy montrent comment transformer réponses の Harvey en livrables réutilisables : ouverture の volet Harvey 直接 内の Microsoft Word, application の playbooks の clauses, révision chirurgicale ・ conservation の formatage juridique.",
+              "keyTakeawayPill": "Harvey for Word Add-In = rédiger, comparer au playbook ・ réviser なしで quitter Word"
+            }
+          ],
+          "keyIdeas": [
+            "certification officielle Level 1 Foundations の Harvey Academy combine AI for Legal Basics ・ AI Analysis for Legal Workflows.",
+            "méthode Harvey Academy impose の bâtir littératie IA ・ protocole の vérification avant の se fier aux sorties génératives.",
+            "module Get Started With the Harvey for Word Add-In 可能にする d'intégrer rédaction, comparaison au playbook ・ redlining 直接 内の Microsoft Word."
+          ],
+          "workedExample": {
+            "situation": "法律事務所がd'affaires intègre trente nouveaux collaborateurs ・ souhaite qu'ils maîtrisent Harvey Assistant ・ l'Add-In Word dès leur première semaine なしで erreur méthodologique.",
+            "steps": [
+              "Inscrire chaque collaborateur 上の Harvey Academy (academy.harvey.ai) ・ son adresse professionnelle 向け suivre parcours certifiant Level 1 Foundations (AI for Legal Basics + AI Analysis for Legal Workflows).",
+              "Compléter parcours pratique Getting Started for Users ・ module dédié Get Started With the Harvey for Word Add-In.",
+              "Valider quiz final 向け obtenir certificat numérique ・ badge vérifié Credly by Pearson attestant maîtrise の fondamentaux."
+            ],
+            "decision": "collaborateurs adoptent dès premier jour réflexe systématique の cadrage par playbook ・ の vérification の sources 内の Word."
+          },
+          "practice": {
+            "prompt": "Construisez plan d'embarquement Harvey Academy d' チーム juridique の 15 juristes : sélectionnez cours の parcours Level 1 Foundations, définissez règle の contrôle qualité issue d'AI Analysis for Legal Workflows ・ précisez l'usage の l'Add-In Word.",
+            "successCriteria": [
+              "Inclure cours AI for Legal Basics (fondamentaux ・ gestion の risques) ・ AI Analysis for Legal Workflows (structuration の extractions ・ détection d'erreurs).",
+              "Intégrer modules pratiques Getting Started for Users ・ Get Started With the Harvey for Word Add-In.",
+              "Exiger vérification systématique の citations ・ の définitions contractuelles avant toute diffusion の livrable."
+            ],
+            "feedback": "L'alliance の parcours certifiant Level 1 Foundations ・ の pratique 上の l'Add-In Word 保証する adoption rapide ・ sécurisée."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "内の Harvey Academy, quel parcours gratuit 可能にする d'acquérir bases の l'IA juridique responsable ・ l'analyse documentaire avant の passer l'examen certifiant ?",
+              "prompt": "Au sein の programme officiel Harvey Academy, quels cours composent socle の certification Level 1 Foundations destinée à bâtir pratique juridique responsable の l'IA ?",
+              "options": [
+                {
+                  "id": "ai-for-legal-basics-et-ai-analysis-for-legal-workflows",
+                  "label": "cours AI for Legal Basics (littératie IA ・ décision consciente の risques) ・ AI Analysis for Legal Workflows (conception, exécution ・ vérification d'analyses documentaires à grande échelle)."
+                },
+                {
+                  "id": "entrainement-poids-llm-en-assembleur",
+                  "label": "cours d'écriture の noyaux CUDA en assembleur 向け réentraîner soi-même poids の モデル 上の の serveurs personnels."
+                },
+                {
+                  "id": "validation-automatique-sans-relecture-avocat",
+                  "label": "module autorisant l'envoi direct の projets générés par l'IA aux tribunaux なしで aucune relecture par juriste."
+                },
+                {
+                  "id": "remplacement-integral-bases-legales-par-reseaux-sociaux",
+                  "label": "formation remplaçant consultation の textes officiels par の résumés non sourcés issus の forums publics."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "どのようにtravailler 直接 上の 契約 内の Microsoft Word tout en appliquant guides の clauses enseignés 内の Harvey Academy ?",
+              "prompt": "juriste formé via module Get Started With the Harvey for Word Add-In の Harvey Academy 必要がある réviser 契約 fournisseur urgent tout en préservant numérotation ・ mise en page complexes の ファイル `.docx`. Quelle pratique 必要がある-il appliquer ?",
+              "options": [
+                {
+                  "id": "utiliser-addin-harvey-for-word-in-situ-avec-playbook",
+                  "label": "活用： Harvey for Word Add-In 直接 内の Microsoft Word 向け analyser clauses, appliquer playbook ・ insérer révisions ciblées なしで quitter ni déstructurer document."
+                },
+                {
+                  "id": "convertir-docx-en-image-jpeg-basse-resolution",
+                  "label": "Convertir cinquante pages の 契約 en images JPEG basse résolution ・ perdre toute structure の styles Word."
+                },
+                {
+                  "id": "copier-coller-sans-styles-dans-bloc-notes",
+                  "label": "Tout copier 内の Bloc-notes Windows en supprimant renvois automatiques ・ numérotation の articles."
+                },
+                {
+                  "id": "partager-contrat-sur-outil-public-grand-public",
+                  "label": "Téléverser 契約 confidentiel 上の outil gratuit grand public dépourvu d'engagement の confidentialité."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy Level 1 Foundations = AI for Legal Basics + AI Analysis for Legal Workflows + pratique directe via Harvey for Word Add-In.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-platform-overview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-vault-data-rooms-due-diligence",
+      "unitNumber": 2,
+      "title": "ユニット 2 · Harvey Vault : Audit Massif の Data Rooms (M&A) & Grilles d'Extraction",
+      "subtitle": "Auditer の milliers の documents en Data Room M&A, construire の grilles d'extraction multi-契約書 (Review Tables) ・ 検証： chaque clause à source.",
+      "estimatedMinutes": 24,
+      "memoActivity": "構成： projet Harvey Vault 上の Data Room d'acquisition の 2 500 documents, exécuter grille d'extraction multi-契約書 (changement の contrôle, responsabilité, résiliation) ・ auditer Red Flags via citations directes.",
+      "memoKeyTopics": [
+        "Harvey Vault : espace documentaire sécurisé à grande échelle 向け l'audit の Data Rooms (M&A, Due Diligence, immobilier, contentieux)",
+        "Grilles d'extraction multi-契約書 (Review Tables) : extraction structurée の clauses の changement の contrôle (Change of Control), responsabilité, exclusivité ・ résiliation",
+        "Contrôle qualité juridique : vérification en clic の citation exacte 内の document source, détection の avenants modifiant 契約 initial ・ rapport Red Flags"
+      ],
+      "memoGoldenRule": "内の Harvey Vault, définissez chaque colonne の votre grille d'extraction ・ question juridique fermée ・ précise, ・ vérifiez toujours avenants rattachés au 契約 principal.",
+      "architectureSchema": {
+        "title": "Pipeline d'Audit M&A ・ Due Diligence 内の Harvey Vault",
+        "diagram": "[Data Room (Milliers の PDF/DOCX scannés または natifs)] ➔ [Harvey Vault : OCR Juridique, Classification & Indexation par Dossier] ➔ [Review Table : Colonnes d'Extraction Multi-契約書] ➔ [Cellules Sourcées (Citation cliquable page/clause) ➔ Rapport Red Flags M&A]",
+        "components": [
+          {
+            "name": "[JA] Conteneur Sécurisé Harvey Vault",
+            "role": "Ingère, classe ・ indexe の milliers の pièces の Data Room 内の coffre isolé par dossier (Matter) ・ contrôle d'アクセス granulaire."
+          },
+          {
+            "name": "[JA] Grilles d'Extraction (Review Tables)",
+            "role": "Exécute en parallèle の colonnes d'extraction personnalisées または issues の モデル 上の の centaines の 契約書 (Change of Control, Liability Cap, Governing Law, Termination)."
+          },
+          {
+            "name": "[JA] Ancrage Citationnel & Vérification d'Avenants",
+            "role": "Relie chaque cellule extraite au passage exact の document source 向け permettre à l'avocat の valider Red Flag en quelques secondes."
+          }
+        ],
+        "securityInvariant": "Chaque projet Vault est strictement cloisonné au niveau の dossier client (Matter-level isolation) afin の garantir l'étanchéité 間の opérations M&A ・ respect の murailles éthiques (Ethical Walls)."
+      },
+      "lessons": [
+        {
+          "id": "vault-audit-data-rooms-due-diligence",
+          "title": "Harvey Vault : organiser ・ auditer massivement Data Room M&A",
+          "objective": "Structurer l'ingestion d' Data Room 内の Harvey Vault, classer corpus contractuel ・ クエリ実行： の milliers の documents ・ preuves sourcées.",
+          "estimatedMinutes": 12,
+          "hook": "Vendredi 19 h : 3 200 契約書 ・ avenants viennent d'être déposés 内の Data Room d' cible d'acquisition ・ rapport の Due Diligence Red Flags est attendu lundi matin. どのようにstructurer votre audit 内の Harvey Vault ?",
+          "declicCard": {
+            "title": "ひらめきポイント Harvey Vault : の Tri Manuel à l'Audit Massif Sourcé par Dossier",
+            "diagramTop": "Data Room brute (3 200 ファイル) ➔ Ingestion 内の projet Harvey Vault isolé par dossier (Matter)",
+            "diagramBottom": "Classification automatique + Regroupement 契約/Avenants ➔ Requêtes transversales ・ citations exactes",
+            "step1": "Créez projet Vault dédié à l'opération ・ 権限 restreintes à l'チーム の dossier (Ethical Wall) ・ importez l'arborescence の Data Room.",
+            "step2": "Identifiez d'abord typologie の pièces (契約書 clients Top 20, baux, financements, IP, pactes) ・ reliez chaque 契約 の base à ses avenants ultérieurs.",
+            "rule": "契約 initial lu なしで son Avenant n° 3 qui double préavis または modifie prix conduit à conclusion d'audit fausse !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · INGESTION & CLOISONNEMENT",
+              "title": "coffre-fort dédié par opération (Matter)",
+              "bodyParagraph": "Harvey Vault 可能にする の charger の milliers の documents (PDF natifs, scans OCRisés, ファイル Word) au sein d' projet isolé. Seuls avocats ・ juristes habilités 上の ce dossier (Matter) y ont アクセス, garantissant respect strict の murailles éthiques (Ethical Walls) の cabinet.",
+              "keyTakeawayPill": "[JA] 1 opération M&A / Contentieux = 1 projet Vault cloisonné aux seuls membres habilités"
+            },
+            {
+              "stepBadge": "ステップ 2 · CARTOGRAPHIER CORPUS",
+              "title": "Relier 契約書 principaux, annexes ・ avenants",
+              "bodyParagraph": "En Data Room, ファイル sont souvent mal nommés (`Scan_042.pdf`). Utilisez Harvey Vault 向け identifier 自動的に nature の chaque acte, parties signataires, date d'effet ・ surtout 向け regrouper chaque 契約-cadre ・ ses avenants (Amendments) ・ bons の commande.",
+              "keyTakeawayPill": "Toujours regrouper 契約-cadre + Annexes + Avenants par ordre chronologique"
+            },
+            {
+              "stepBadge": "ステップ 3 · INTERROGATION TRANSVERSALE SOURCÉE",
+              "title": "Trouver l'aiguille 内の 3 000 documents ・ preuve",
+              "bodyParagraph": "Vous pouvez クエリ実行： l'ensemble の Vault または sous-dossier ciblé (ex. « Quels 契約書 fournisseurs comportent obligation d'achat minimum annuel または exclusivité géographique ? »). Chaque 応答 cite documents précis ・ ouvre passage surligné en regard.",
+              "keyTakeawayPill": "リクエスト 上の Vault = 応答 synthétique + Liens directs vers page ・ paragraphe の chaque pièce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Vault ingère ・ indexe の grands volumes documentaires 内の espace isolé par dossier (Matter) respectant murailles éthiques.",
+            "En Due Diligence, il est essentiel の relier chaque 契約 initial à ses avenants successifs afin d'évaluer l'état の droit en vigueur à date の l'audit.",
+            "Toute affirmation issue d' recherche 上の Vault est accompagnée の citations cliquables permettant à l'avocat の 検証： texte original."
+          ],
+          "workedExample": {
+            "situation": "あるチームがM&A audite l'acquisition d' groupe logistique dont Data Room comporte 1 800 ファイル commerciaux ・ immobiliers.",
+            "steps": [
+              "作成： Vault dédié à l'opération « Projet Horizon » limité aux six avocats の l'チーム M&A/Immobilier.",
+              "Lancer classification initiale 内の Vault 向け 分離： 45 契約書 clients représentant 80 % の chiffre d'affaires ainsi que leurs avenants.",
+              "Détecter grâce au recoupement chronologique qu' avenant signé deux mois plus tôt avait ajouté clause d'exclusivité européenne 上の principal client."
+            ],
+            "decision": "Red Flag d'exclusivité, invisible 内の 契約 initial の 2022 mais présent 内の l'avenant の 2026, est remonté immédiatement à l'acquéreur."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi analyser のみ 契約書 initiaux なしで regrouper leurs avenants (Amendments) 内の Data Room M&A constitue faute méthodologique, ・ comment organiser cette vérification 内の Harvey Vault.",
+            "successCriteria": [
+              "解説： qu' avenant postérieur prévaut 上の clauses qu'il modifie (durée, prix, plafond, changement の contrôle).",
+              "Extraire 内の Harvey Vault l'identifiant の 契約 parent, parties ・ date の signature の chaque pièce.",
+              "Consolider l'analyse par relation contractuelle en appliquant version plus récente の chaque clause modifiée."
+            ],
+            "feedback": "En audit contractuel, vérité juridique résulte の lecture combinée の 契約 の base ・ の son dernier avenant en vigueur."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "あなたはanalyser 2 400 documents confidentiels d' rachat d'企業 内の Harvey Vault. どのようにprotéger secret の dossier ?",
+              "prompt": "法律事務所がreçoit l'アクセス à Data Room の 2 400 documents 向け opération d'acquisition (M&A) soumise à muraille éthique (Ethical Wall) stricte. どのようにconfigurer l'audit 内の Harvey ?",
+              "options": [
+                {
+                  "id": "creer-projet-vault-isole-equipe-dossier",
+                  "label": "作成： projet Harvey Vault dédié à l'opération ・ restreindre ses 権限 d'アクセス aux seuls avocats habilités 上の ce dossier."
+                },
+                {
+                  "id": "deposer-fichiers-espace-public-cabinet",
+                  "label": "Charger 2 400 pièces 内の dossier public accessible à l'ensemble の associés ・ stagiaires の cabinet."
+                },
+                {
+                  "id": "fusionner-deux-data-rooms-concurrentes",
+                  "label": "Mélanger documents の deux cibles concurrentes 内の même grille d'analyse 向け gagner の temps."
+                },
+                {
+                  "id": "analyser-sans-citations-sources",
+                  "label": "無効化： l'affichage の références の documents 向け alléger rapport d'audit remis au client."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "なぜest-il dangereux の faire analyser のみ 契約書 initiaux 内の Harvey Vault en oubliant dossier の avenants signés après ?",
+              "prompt": "Lors d' Due Diligence 内の Harvey Vault, auditeur filtre のみ ファイル intitulés « Contrat_Cadre » ・ conclut qu'aucun 契約 ne contient d'exclusivité, en omettant d'inclure sous-dossier « Avenants_2025_2026 » 内の sa sélection. Quel est risque ?",
+              "options": [
+                {
+                  "id": "omission-clauses-modifiees-par-avenant",
+                  "label": "avenant postérieur a pu introduire clause d'exclusivité または modifier préavis の 契約-cadre initial なしで que l'audit ne détecte."
+                },
+                {
+                  "id": "erreur-formatage-marges-impression",
+                  "label": "marges d'impression の navigateur risquent d'être décalées の deux millimètres à l'export."
+                },
+                {
+                  "id": "changement-langue-interface-harvey",
+                  "label": "L'interface ユーザー の Harvey risque の basculer 自動的に en espagnol."
+                },
+                {
+                  "id": "suppression-automatique-fichiers-pdf",
+                  "label": "ファイル PDF non sélectionnés sont définitivement supprimés の serveur の Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "内の Harvey Vault : isolez chaque dossier par Matter, regroupez 契約書 ・ avenants, ・ exigez toujours citation exacte の pièce.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "grilles-extraction-multi-contrats-review-tables",
+          "title": "Grilles d'extraction multi-契約書 (Review Tables) : changement の contrôle, responsabilité ・ résiliation",
+          "objective": "Concevoir ・ exécuter の grilles d'extraction multi-契約書 (Review Tables) 内の Harvey Vault 向け auditer clauses の changement の contrôle, の responsabilité ・ の résiliation.",
+          "estimatedMinutes": 12,
+          "hook": "どのようにextraire en quinze minutes, 上の 400 契約書 commerciaux, liste exacte の ceux qui permettent au cocontractant の résilier または d'exiger consentement écrit en cas の rachat の société cible (Change of Control) ?",
+          "declicCard": {
+            "title": "ひらめきポイント Review Tables : 1 Ligne = 1 契約 · 1 Colonne = 1 Question Juridique Structurée + Citation",
+            "diagramTop": "Lignes : 400 契約書 の Data Room · Colonnes : Parties | Date | Change of Control (Oui/Non + Préavis) | Plafond Responsabilité | Résiliation",
+            "diagramBottom": "Clic 上の n'importe quelle cellule ➔ Ouvre 契約 source au paragraphe exact surligné 向け vérification",
+            "step1": "Décomposez chaque clause complexe en deux colonnes complémentaires : colonne の qualification rapide (`Oui / Non / Silence の 契約`) ・ colonne の détail (`Condition, délai の préavis ・ citation`).",
+            "step2": "Filtrez lignes où `Changement の contrôle = Consentement requis または Résiliation` ・ vérifiez passages surlignés 向け dresser matrice Red Flags.",
+            "rule": "Exigez toujours que grille distingue explicitement « Non autorisé par clause » ・ « Silence の 契約 (aucune clause trouvée) »."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · ARCHITECTURE D' REVIEW TABLE",
+              "title": "Transformer 400 契約書 en matrice structurée",
+              "bodyParagraph": "内の Harvey Vault, Review Table applique en parallèle même série の colonnes d'extraction à の centaines の 契約書. Chaque ligne représente document ・ chaque colonne répond à consigne précise (ex. Parties, Date d'échéance, Tacite reconduction, Changement の contrôle, Plafond の responsabilité, Droit applicable).",
+              "keyTakeawayPill": "[JA] Review Table = Extraction parallèle structurée + Cellules liées au texte source"
+            },
+            {
+              "stepBadge": "ステップ 2 · CONCEVOIR の COLONNES PRÉCISES",
+              "title": "Séparer verdict binaire ・ détail opérationnel",
+              "bodyParagraph": "向け auditer clauses の changement の contrôle (Change of Control), créez : 1. colonne fermée (`Consentement préalable requis`, `Simple notification`, `Droit の résiliation`, `Aucune clause`) · 2. colonne の détail extrayant seuil の détention déclencheur, délai の préavis ・ référence の l'article.",
+              "keyTakeawayPill": "Colonne 1 = Catégorie filtrable · Colonne 2 = Conditions exactes, délais ・ article cité"
+            },
+            {
+              "stepBadge": "ステップ 3 · VÉRIFICATION CITATIONNELLE & EXPORT",
+              "title": "Cliquer, 検証： passage surligné ・ exporter",
+              "bodyParagraph": "Aucune cellule の Review Table n'est boîte noire : clic 上の cellule ouvre côte à côte PDF または DOCX original à page exacte ・ paragraphe surligné. L'associé または collaborateur valide ainsi Red Flags critiques avant d'exporter matrice vers Excel または Word.",
+              "keyTakeawayPill": "1 clic 上の cellule = lecture immédiate の clause originale surlignée 内の 契約"
+            }
+          ],
+          "keyIdeas": [
+            "Review Tables の Harvey Vault permettent d'extraire ・ の comparer mêmes clauses clés (changement の contrôle, plafond の responsabilité, indemnisation, résiliation) 上の の centaines の 契約書 simultanément.",
+            "Coupler colonne の classification fermée (facile à filtrer/trier) ・ colonne d'analyse détaillée maximise fiabilité の revue.",
+            "Distinguer explicitement l'interdiction expresse ・ silence の 契約 évite toute mauvaise interprétation juridique."
+          ],
+          "workedExample": {
+            "situation": "Lors の l'acquisition d' éditeur の logiciels B2B, l'チーム Corporate 必要がある 検証： 上の 350 契約書 clients si cession の 100 % の titres déclenche droit の résiliation anticipée.",
+            "steps": [
+              "作成： Review Table 内の Harvey Vault 上の 350 契約書 ・ colonnes : `Client`, `Revenu Annuel`, `Statut Change of Control (Consentement / Notification / Résiliation / Silence)`, `Achat の titres inclus 内の définition ?`, ・ `Délai & Sanction`.",
+              "Filtrer 28 契約書 où `Statut Change of Control` indique `Consentement` または `Résiliation`.",
+              "Cliquer 上の citations の 28 cellules 向け confirmer que 11 契約書 incluent expressément changement d'actionnariat indirect ・ préparer lettres の demande d'accord (waivers)."
+            ],
+            "decision": "liste の 11 waivers prioritaires est établie ・ vérifiée en matinée au lieu の deux semaines の dépouillement linéaire."
+          },
+          "practice": {
+            "prompt": "Concevez intitulés ・ consignes の trois colonnes d' Review Table Harvey Vault destinée à auditer risque の plafond の responsabilité (Liability Cap) 上の 200 契約書 fournisseurs.",
+            "successCriteria": [
+              "Colonne 1 (Classification) : `Existence ・ Type の Plafond` (Plafond fixe, Multiple の redevances, Responsabilité illimitée, Silence の 契約).",
+              "Colonne 2 (Montant / Formule) : `Montant または Formule の Plafond` (extraire chiffre exact または nombre の mois の redevances ・ l'article cité).",
+              "Colonne 3 (Exceptions / Carve-outs) : `Exceptions au Plafond` (lister cas déplafonnés : fraude, faute lourde, confidentialité, IP, データ personnelles)."
+            ],
+            "feedback": "Séparer principe の plafond, sa formule の calcul ・ ses exceptions (carve-outs) 可能にする tri instantané の 契約書 sous-protégés."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "上の 500 契約書 内の Harvey Vault, comment repérer d' coup d'œil ceux qui posent problème tout en pouvant 検証： phrase exacte の 契約 ?",
+              "prompt": "En Due Diligence M&A 上の 500 契約書 commerciaux 内の Harvey Vault, vous devez identifier rapidement tous 契約書 qui exigent l'accord préalable の client en cas の changement の contrôle, tout en pouvant lire clause exacte. Quelle méthode est plus efficace ?",
+              "options": [
+                {
+                  "id": "review-table-colonne-fermee-plus-detail-citation",
+                  "label": "Construire Review Table combinant colonne の classification fermée (`Consentement requis / Notification / Aucune clause`) ・ colonne détaillant conditions ・ citation cliquable."
+                },
+                {
+                  "id": "demander-resume-unique-sans-tableau",
+                  "label": "Demander résumé narratif global の dix lignes 上の 500 契約書 なしで nommer aucun ファイル."
+                },
+                {
+                  "id": "imprimer-cinq-cents-contrats-papier",
+                  "label": "Exporter 500 契約書 en images non indexées なしで exécuter の grille d'extraction."
+                },
+                {
+                  "id": "confondre-silence-et-interdiction",
+                  "label": "Forcer モデル à répondre のみ Oui または Non même lorsque document est totalement silencieux 上の sujet."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "内の tableau d'analyse Harvey Vault, pourquoi faut-il prévoir case « 契約 n'en parle pas » en plus の « Oui » ・ « Non » ?",
+              "prompt": "なぜest-il essentiel qu' colonne の Review Table 内の Harvey Vault prévoie explicitement valeur « Silence の 契約 (Aucune clause) » en plus の « Oui » ・ « Non » ?",
+              "options": [
+                {
+                  "id": "distinguer-absence-clause-et-stipulation-expresse",
+                  "label": "向け distinguer juridiquement 契約 qui interdit expressément opération d' 契約 qui n'aborde pas sujet (auquel s'applique alors droit commun)."
+                },
+                {
+                  "id": "reduire-nombre-colonnes-ecran",
+                  "label": "向け masquer 自動的に lignes paires の tableau lors の l'exportation vers Excel."
+                },
+                {
+                  "id": "desactiver-liens-vers-pdf",
+                  "label": "向け 削除： liens の citation vers pages の 契約書 originaux."
+                },
+                {
+                  "id": "modifier-texte-pdf-source",
+                  "label": "向け réécrire 直接 ファイル PDF scannés stockés 内の Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "Review Tables 内の Harvey Vault = colonnes の tri fermées + colonnes の détail + distinction の silence contractuel + vérification en clic 上の source.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-knowledge-workflows-secret-professionnel",
+      "unitNumber": 3,
+      "title": "ユニット 3 · Harvey Knowledge, Workflows Multi-Étapes & Secret Professionnel",
+      "subtitle": "Recherche réglementaire ・ jurisprudentielle sourcée, exécution の workflows juridiques multi-étapes, confidentialité zéro-entraînement client ・ respect の 弁護士・依頼者間秘匿特権.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Exécuter recherche réglementaire ・ jurisprudentielle vérifiée 内の Harvey Knowledge, orchestrer workflow juridique multi-étapes ・ auditer garanties の confidentialité zéro-entraînement ・ の 弁護士・依頼者間秘匿特権.",
+      "memoKeyTopics": [
+        "Harvey Knowledge : recherche juridique, réglementaire, fiscale ・ jurisprudentielle ancrée 上の の bases officielles ・ citations vérifiables",
+        "Harvey Workflows : automatisation guidée の processus juridiques multi-étapes (qualification ➔ extraction ➔ analyse の droit ➔ rédaction の livrable)",
+        "Déontologie & セキュリティ : confidentialité zéro-entraînement 上の データ clients, isolation par locataire/dossier ・ protection の 弁護士・依頼者間秘匿特権 の l'avocat"
+      ],
+      "memoGoldenRule": "avocat ne cite jamais jurisprudence または article の loi なしで avoir vérifié son texte source ・ son état の vigueur via citations の Harvey Knowledge, ・ conserve toujours responsabilité déontologique の conseil livré.",
+      "architectureSchema": {
+        "title": "Architecture Harvey Knowledge, Workflows Multi-Étapes & Frontière の Confidentialité",
+        "diagram": "[Dossier Client (Zéro-Entraînement & Ethical Wall)] + [Harvey Knowledge (Bases Légales, Réglementaires & Jurisprudence)] ➔ [Harvey Workflow : Étape 1 Extraction ➔ Étape 2 Confrontation au Droit ➔ Étape 3 Projet d'Acte / Note] ➔ [Revue & Validation の l'Avocat]",
+        "components": [
+          {
+            "name": "[JA] Harvey Knowledge",
+            "role": "Interroge の corpus juridiques, réglementaires ・ jurisprudentiels の référence 向け fournir の réponses ancrées ・ liens directs vers textes ・ décisions."
+          },
+          {
+            "name": "[JA] Harvey Workflows",
+            "role": "Enchaîne の manière reproductible plusieurs étapes spécialisées (collecte の pièces, extraction の faits, recherche の droit, génération d'acte または の conclusions) ・ validation humaine."
+          },
+          {
+            "name": "[JA] Garantie Zéro-Entraînement & Secret Professionnel",
+            "role": "保証する contractuellement ・ techniquement qu'aucun prompt, 契約 または mémo client n'est utilisé 向け entraîner の モデル partagés ni exposé à d'autres clients."
+          }
+        ],
+        "securityInvariant": "データ soumises 内の Harvey restent strictement confinées au locataire ・ au dossier autorisé, ・ politique zéro-entraînement の モデル の fondation ・ maintien intégral の 弁護士・依頼者間秘匿特権."
+      },
+      "lessons": [
+        {
+          "id": "harvey-knowledge-recherche-juridique-sourcee",
+          "title": "Harvey Knowledge : recherche réglementaire ・ jurisprudentielle sourcée なしで hallucination",
+          "objective": "Conduire recherche réglementaire ・ jurisprudentielle 内の Harvey Knowledge en vérifiant hiérarchie の normes, juridiction, date の vigueur ・ citations.",
+          "estimatedMinutes": 12,
+          "hook": "Plusieurs avocats 内の monde ont été sanctionnés par の tribunaux 向け avoir cité の arrêts inventés par chatbot grand public : comment l'architecture d'ancrage の Harvey Knowledge ・ votre protocole の revue éliminent-ils ce risque ?",
+          "declicCard": {
+            "title": "ひらめきポイント Harvey Knowledge : Ancrage 上の Bases Officielles + Vérification の Source Citée",
+            "diagramTop": "Question の droit (Juridiction + Matière + Période) ➔ Recherche 内の Harvey Knowledge (Textes & Jurisprudence réels)",
+            "diagramBottom": "応答 ancrée ・ citations numérotées ➔ Ouverture ・ lecture の l'arrêt/article par l'avocat avant citation",
+            "step1": "Formulez votre question en précisant juridiction, branche の droit, faits pertinents ・ date の faits litigieux.",
+            "step2": "Ouvrez systématiquement décisions ・ textes cités par Harvey Knowledge 向け 検証： attendu/considérant exact ・ l'absence の revirement postérieur.",
+            "rule": "Zéro référence jurisprudentielle または légale 内の acte または consultation なしで avoir ouvert ・ lu source citée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · POURQUOI CHATBOT GÉNÉRALISTE HALLUCINE",
+              "title": "Prédire numéro d'arrêt plausible ≠ Retrouver vrai arrêt",
+              "bodyParagraph": "モデル の langage non ancré 上の base juridique officielle prédit の suites の mots statistiquement plausibles : il peut inventer の toutes pièces numéro の pourvoi または attendu qui sonne vrai. Harvey Knowledge résout ce problème à racine en ancrant génération 上の の bases documentaires juridiques, fiscales ・ réglementaires vérifiées.",
+              "keyTakeawayPill": "Harvey Knowledge = génération ancrée 上の の corpus législatifs, réglementaires ・ jurisprudentiels réels"
+            },
+            {
+              "stepBadge": "ステップ 2 · FORMULER QUESTION の DROIT PRÉCISE",
+              "title": "Juridiction, faits qualifiés ・ question の droit",
+              "bodyParagraph": "向け tirer meilleur parti の Harvey Knowledge, structurez votre リクエスト comme saisine : 1. Juridiction ・ droit applicable (ex. Cour の cassation, chambre commerciale ; droit の l'Union européenne) · 2. Qualification の faits (ex. rupture brutale d' relation commerciale établie の 8 ans) · 3. Question précise à trancher.",
+              "keyTakeawayPill": "Juridiction exacte + Faits qualifiés + Question の droit = recherche ciblée ・ pertinente"
+            },
+            {
+              "stepBadge": "ステップ 3 · CONTRÔLE の VIGUEUR & PORTÉE",
+              "title": "Lire l'arrêt 内の son contexte avant の l'invoquer",
+              "bodyParagraph": "citation exacte peut malgré tout porter 上の texte abrogé または 上の の faits d'espèce différents の vôtres (distinguishing). Cliquez toujours 上の source 内の Harvey Knowledge 向け 検証： date の décision, chambre, solution retenue ・ son applicabilité exacte au dossier client.",
+              "keyTakeawayPill": "Toujours 検証： : 1. Existence の texte/arrêt · 2. État の vigueur · 3. Pertinence aux faits d'espèce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Knowledge ancre recherche juridique ・ réglementaire 上の の sources autorisées ・ attache の citations vérifiables à chaque affirmation.",
+            "Préciser juridiction, l'ordre の juridiction, matière ・ l'époque の faits évite transpositions erronées 間の systèmes juridiques.",
+            "L'avocat または juriste 必要がある systématiquement ouvrir citation source 向け contrôler portée exacte の décision ・ l'absence d'abrogation または の revirement."
+          ],
+          "workedExample": {
+            "situation": "avocat en droit の concurrence prépare note urgente 上の validité d' clause の non-concurrence post-contractuelle 内の 契約 の franchise en droit français ・ européen.",
+            "steps": [
+              "クエリ実行： Harvey Knowledge en spécifiant droit français (Code の commerce) ・ règlement d'exemption européen 上の restrictions verticales.",
+              "Examiner conditions cumulatives extraites par Harvey Knowledge (limitation 内の temps à an, limitation aux locaux, caractère indispensable à protection の savoir-faire) ・ ouvrir références citées.",
+              "Intégrer références vérifiées 内の consultation juridique remise au franchiseur."
+            ],
+            "decision": "consultation est solidement étayée par textes ・ arrêts exacts, vérifiés en quelques minutes."
+          },
+          "practice": {
+            "prompt": "stagiaire vous remet projet の conclusions contenant trois arrêts trouvés via outil d'IA grand public non connecté à base juridique, なしで avoir ouvert décisions. Quelle procédure の contrôle lui imposez-vous ・ Harvey Knowledge ?",
+            "successCriteria": [
+              "Interdire formellement l'insertion 内の acte judiciaire の toute référence jurisprudentielle non vérifiée à source.",
+              "Relancer recherche の droit 内の Harvey Knowledge en précisant juridiction ・ question の droit.",
+              "Ouvrir chacune の décisions citées par Harvey Knowledge 向け 検証： texte intégral, date ・ l'adéquation aux faits の dossier."
+            ],
+            "feedback": "responsabilité professionnelle の l'avocat impose que chaque autorité juridique citée ait été lue ・ vérifiée 内の sa source officielle."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "どのようにHarvey Knowledge évite-t-il d'inventer の fausses lois または の faux jugements ?",
+              "prompt": "どのようにHarvey Knowledge prévient-il risque d'hallucination の références jurisprudentielles または réglementaires lors d' recherche juridique ?",
+              "options": [
+                {
+                  "id": "ancrage-bases-juridiques-verifiees-et-citations",
+                  "label": "En ancrant 応答 上の の データベース juridiques ・ réglementaires faisant foi ・ en attachant の citations cliquables vers textes sources."
+                },
+                {
+                  "id": "generation-numeros-pourvoi-aleatoires",
+                  "label": "En générant の numéros の pourvoi aléatoires à partir d' dictionnaire statistique なしで consulter の base documentaire."
+                },
+                {
+                  "id": "interdiction-afficher-sources",
+                  "label": "En masquant références d'articles の loi afin que lecteur ne puisse pas 検証： l'origine の raisonnement."
+                },
+                {
+                  "id": "traduction-automatique-romans-fiction",
+                  "label": "En s'appuyant のみ 上の の articles の blogs anonymes non juridiques."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "fois que Harvey Knowledge vous donne 応答 juridique ・ の sources, que devez-vous toujours faire avant の valider votre conseil ?",
+              "prompt": "Après avoir obtenu 応答 sourcée 内の Harvey Knowledge 上の l'application d' directive européenne ・ の sa transposition nationale, quelle vérification professionnelle juriste 必要がある-il toujours effectuer avant の signer sa note ?",
+              "options": [
+                {
+                  "id": "ouvrir-citations-verifier-vigueur-et-espece",
+                  "label": "Ouvrir textes ・ arrêts cités 向け confirmer leur état の vigueur à date の faits ・ 検証： que faits d'espèce correspondent au dossier."
+                },
+                {
+                  "id": "copier-sans-lire-sources-citees",
+                  "label": "Envoyer note au tribunal なしで jamais cliquer 上の citations ni 検証： date の textes."
+                },
+                {
+                  "id": "supprimer-mentions-juridiction",
+                  "label": "Retirer toute mention の pays ・ の juridiction compétente 内の conclusions finales."
+                },
+                {
+                  "id": "remplacer-textes-par-avis-personnel",
+                  "label": "Effacer références légales 向け ne conserver qu' opinion générale non motivée."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Knowledge apporte rapidité の l'ancrage sourcé ; l'ouverture の citation ・ contrôle の vigueur scellent rigueur の l'avocat.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-workflows-et-secret-professionnel",
+          "title": "Harvey Workflows multi-étapes, zéro-entraînement client ・ 弁護士・依頼者間秘匿特権",
+          "objective": "Exécuter の workflows juridiques multi-étapes 内の Harvey ・ 習得： l'architecture の confidentialité (zéro-entraînement client, cloisonnement ・ 弁護士・依頼者間秘匿特権).",
+          "estimatedMinutes": 12,
+          "hook": "どのようにstandardiser l'excellence d' associé senior 内の workflow reproductible par tout cabinet, tout en garantissant aux clients que leurs secrets d'affaires ・ leur 弁護士・依頼者間秘匿特権 sont protégés à 100 % ?",
+          "declicCard": {
+            "title": "ひらめきポイント Workflows & Déontologie : Orchestration Multi-Étapes + Zéro-Entraînement Client",
+            "diagramTop": "[JA] Harvey Workflow : 1. Ingestion Pièces ➔ 2. Extraction Faits/Clauses ➔ 3. Confrontation au Droit ➔ 4. Brouillon d'Acte",
+            "diagramBottom": "Garantie Déontologique : Zéro entraînement 上の データ clients + Cloisonnement par dossier + Supervision humaine",
+            "step1": "Utilisez Harvey Workflows 向け enchaîner の façon déterministe ・ guidée の tâches complexes (ex. préparation d' assignation, 応答 à contrôle réglementaire, revue DORA/NIS2).",
+            "step2": "Vérifiez toujours trois piliers déontologiques : engagement zéro-entraînement client, muraille éthique par dossier ・ validation finale par l'avocat.",
+            "rule": "confidentialité d' dossier juridique ne souffre aucune exception : zéro usage d'outils publics gratuits réentraînés 上の prompts !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · HARVEY WORKFLOWS MULTI-ÉTAPES",
+              "title": "Industrialiser savoir-faire juridique なしで perdre nuance",
+              "bodyParagraph": "workflow 内の Harvey enchaîne plusieurs étapes spécialisées conçues par experts juridiques : par exemple, 1. Extraire chronologie の faits depuis 50 pièces の contentieux · 2. Identifier manquements contractuels · 3. Rechercher fondements légaux applicables · 4. Générer projet の mise en demeure または の conclusions ・ renvoi aux pièces (`Pièce n° X`).",
+              "keyTakeawayPill": "Harvey Workflows = Chaînage structuré d'étapes juridiques ・ jalons の validation"
+            },
+            {
+              "stepBadge": "ステップ 2 · ZÉRO-ENTRAÎNEMENT CLIENT",
+              "title": "Vos dossiers n'entraînent jamais モデル d' autre client",
+              "bodyParagraph": "Contrairement aux services grand public où conversations peuvent alimenter l'entraînement futur の モデル, l'architecture d'企業 の Harvey 保証する contractuellement ・ techniquement **zéro-entraînement** (Zero Training) 上の prompts, documents ・ livrables の clients, ・ 暗号化 en transit ・ au repos.",
+              "keyTakeawayPill": "Zéro-Entraînement Client = aucune donnée d' dossier n'間の 内の poids の モデル"
+            },
+            {
+              "stepBadge": "ステップ 3 · SECRET PROFESSIONNEL & RESPONSABILITÉ",
+              "title": "Supervision humaine, Ethical Walls ・ traçabilité",
+              "bodyParagraph": "respect の 弁護士・依頼者間秘匿特権 の l'avocat (・ の legal privilege) repose 上の trois contrôles : 1. Isolation stricte par client ・ par dossier (Ethical Walls) · 2. Journalisation d'audit ・ politiques の rétention maîtrisées par cabinet · 3. Revue, validation ・ signature par professionnel の droit qui demeure seul responsable の conseil.",
+              "keyTakeawayPill": "Secret professionnel = Isolation par dossier + Zéro entraînement + Validation humaine の l'avocat"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Workflows 可能にする d'orchestrer の processus juridiques multi-étapes reproductibles (chronologie の pièces, grille の conformité, projet d'acte) en intégrant savoir-faire の cabinet.",
+            "garantie zéro-entraînement client assure qu'aucune donnée confidentielle soumise à Harvey ne sert à entraîner モデル sous-jacents.",
+            "respect の 弁護士・依頼者間秘匿特権 exige l'isolation の dossiers (Ethical Walls), l'interdiction の outils grand public non contractuels ・ revue finale par l'avocat."
+          ],
+          "workedExample": {
+            "situation": "direction juridique d' groupe pharmaceutique ・ son cabinet conseil 必要がある auditer 120 契約書 critiques au regard の règlement européen DORA / NIS2 ・ générer avenants の mise en conformité.",
+            "steps": [
+              "Lancer 内の Harvey Workflow multi-étapes : (1) Extraction の clauses の セキュリティ ・ の notification d'incident 内の Vault, (2) Confrontation aux exigences réglementaires via Knowledge, (3) Génération individualisée の projet d'avenant 向け chaque fournisseur incomplet.",
+              "Maintenir l'ensemble の pièces 内の l'environnement Harvey d'企業 couvert par l'engagement zéro-entraînement ・ 弁護士・依頼者間秘匿特権.",
+              "Faire relire ・ valider chaque avenant par juriste responsable の 契約 avant envoi au fournisseur."
+            ],
+            "decision": "campagne の conformité réglementaire 上の 120 契約書 est bouclée en dix jours ・ traçabilité complète ・ zéro compromis 上の confidentialité."
+          },
+          "practice": {
+            "prompt": "client demande à votre cabinet d'avocats quelles garanties concrètes protègent ses documents confidentiels lorsque vos équipes utilisent Harvey. Formulez 応答 structurée en trois points.",
+            "successCriteria": [
+              "1. Garantie contractuelle ・ technique の zéro-entraînement : documents ・ prompts の client ne sont jamais utilisés 向け entraîner の モデル partagés.",
+              "2. Cloisonnement strict の アクセス par dossier (Ethical Walls), 暗号化 の bout en bout ・ hébergement conforme aux standards の セキュリティ d'企業.",
+              "3. Maintien intégral の supervision ・ の responsabilité professionnelle の avocats の cabinet 上の chaque analyse ・ chaque acte produit."
+            ],
+            "feedback": "Cette 応答 rassure direction juridique ・ RSSI の client en couvrant à fois l'architecture IA (zéro-entraînement), セキュリティ d'アクセス (cloisonnement) ・ déontologie (supervision の l'avocat)."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quel est l'avantage d' Workflow Harvey par rapport à simple question posée 内の chat ?",
+              "prompt": "Quel est l'apport principal の Harvey Workflows par rapport à simple prompt isolé lors の traitement d' dossier juridique complexe ?",
+              "options": [
+                {
+                  "id": "orchestration-multi-etapes-reproductible-validee",
+                  "label": "Il orchestre の façon reproductible séquence d'étapes juridiques spécialisées (extraction の pièces, analyse の droit, génération の projet d'acte) ・ jalons の validation humaine."
+                },
+                {
+                  "id": "depot-automatique-greffe-sans-avocat",
+                  "label": "Il dépose ・ signe 自動的に の actes の procédure au greffe の tribunal なしで aucune relecture d' avocat."
+                },
+                {
+                  "id": "publication-dossiers-clients-reseaux-sociaux",
+                  "label": "Il publie pièces confidentielles の dossier 上の forum communautaire 向け recueillir の avis externes."
+                },
+                {
+                  "id": "suppression-numerotation-pieces-contentieux",
+                  "label": "Il efface numéros の pièces justificatives afin d'empêcher juge の 検証： faits allégués."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Qu'est-ce qui 保証する que 契約書 confidentiels confiés à Harvey ne serviront jamais à entraîner l'IA 向け d'autres clients ?",
+              "prompt": "法務部門がexige que ses mémos の litige ・ ses projets d'acquisition restent couverts par confidentialité ・ ne puissent en aucun cas enrichir モデル d'IA accessible à の tiers. Quelle garantie d'architecture の Harvey répond 直接 à cette exigence ?",
+              "options": [
+                {
+                  "id": "zero-entrainement-client-et-isolation-locataire",
+                  "label": "politique の confidentialité zéro-entraînement 上の データ clients combinée au cloisonnement strict par organisation ・ par dossier."
+                },
+                {
+                  "id": "partage-poids-modele-inter-cabinets",
+                  "label": "réentraînement quotidien d' モデル public commun 上の l'ensemble の 契約書 téléversés par tous cabinets."
+                },
+                {
+                  "id": "conservation-publique-prompts",
+                  "label": "L'indexation の prompts juridiques 内の annuaire の recherche ouvert aux moteurs web."
+                },
+                {
+                  "id": "desactivation-chiffrement-tls",
+                  "label": "transmission の pièces の Data Room en texte clair 上の ネットワーク Wi-Fi public non chiffré."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Workflows industrialise vos processus multi-étapes ; zéro-entraînement client, cloisonnement par dossier ・ validation の l'avocat protègent 弁護士・依頼者間秘匿特権.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-legal-engineering-credly",
+          "title": "[JA] Harvey Academy Legal Engineering, Preparing for Legal Work, Admins & Badges Credly",
+          "objective": "習得： Legal Engineering Certification, parcours badgé Preparing for Legal Work, guide Getting Started for Admins, nouveautés Harvey II ・ gestion の badges vérifiés Credly by Pearson.",
+          "estimatedMinutes": 12,
+          "hook": "どのようにindustrialiser l'excellence IA 内の cabinet または direction juridique grâce au rôle の Legal Engineer, au parcours Admin の Harvey Academy ・ aux certifications vérifiables Credly ?",
+          "declicCard": {
+            "title": "ひらめきポイント Legal Engineering & Credly : Industrialisation の Workflows + ガバナンス Admin + Preuve Vérifiée",
+            "diagramTop": "[JA] Certifications & Parcours : Legal Engineering Certification · Preparing for Legal Work (45 min) · Getting Started for Admins · Harvey II",
+            "diagramBottom": "Reconnaissance officielle : Certificat Harvey Academy + Badge numérique vérifié Credly by Pearson (なしで expiration)",
+            "step1": "Formez vos référents via Legal Engineering Certification ・ Getting Started for Admins 向け concevoir の workflows fiables ・ 構成： セキュリティ の workspace.",
+            "step2": "Validez pratique opérationnelle ・ Preparing for Legal Work ・ associez l'adresse e-mail の compte Academy à Credly by Pearson 向け publier badge vérifié.",
+            "rule": "Utilisez toujours même adresse e-mail professionnelle 上の Harvey, Harvey Academy ・ Credly (・ autorisez admin@credly.com) 向け rattacher vos certifications なしで délai."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · LEGAL ENGINEERING CERTIFICATION",
+              "title": "compétences clés の Legal Engineer 内の Harvey Academy",
+              "bodyParagraph": "Legal Engineering Certification の Harvey Academy (parcours spécialisé en 2 cours, ouvert gratuitement 上の création の compte Academy) forme aux compétences d'ingénierie juridique : décomposition d' processus complexe en étapes vérifiables, conception の prompts ・ の grilles Review Tables standardisés, tests 上の cas limites ・ assurance qualité avant déploiement à l'チーム.",
+              "keyTakeawayPill": "Legal Engineering Certification = concevoir, tester ・ standardiser workflows juridiques"
+            },
+            {
+              "stepBadge": "ステップ 2 · PREPARING FOR LEGAL WORK, ADMINS & HARVEY II",
+              "title": "Embarquer équipes ・ administrer workspace dès jour 1",
+              "bodyParagraph": "向け ユーザー disposant d' アクセス Harvey (via SSO または code OTP), cours badgé Preparing for Legal Work (45 min) valide mise en pratique par の exercices réels ・ badge capstone. En parallèle, parcours Getting Started for Admins (4 cours) guide administrateurs ・ Legal Ops 内の configuration sécurisée の workspace, l'organisation の flux ・ suivi の nouveautés comme playlist Harvey II.",
+              "keyTakeawayPill": "[JA] Preparing for Legal Work (pratique SSO) + Getting Started for Admins (déploiement sécurisé)"
+            },
+            {
+              "stepBadge": "ステップ 3 · BADGES VÉRIFIÉS CREDLY BY PEARSON",
+              "title": "Revendiquer, 検証： ・ 共有： ses certifications Harvey Academy",
+              "bodyParagraph": "Chaque certification réussie 上の Harvey Academy délivre certificat numérique ・ badge vérifié émis via Credly by Pearson (なしで date d'expiration). badge atteste l'émetteur, date d'obtention, compétences validées ・ lien public の vérification 向け LinkedIn または signature professionnelle. Si vous possédez déjà compte Credly sous autre adresse, ajoutez simplement votre e-mail Academy 内の Settings > Account.",
+              "keyTakeawayPill": "Badge Harvey via Credly by Pearson = preuve vérifiable ・ permanente の compétence Legal IA"
+            }
+          ],
+          "keyIdeas": [
+            "Legal Engineering Certification ・ Level 1 Foundations sont accessibles gratuitement ・ compte Harvey Academy ; Preparing for Legal Work est dédié aux ユーザー Harvey connectés (SSO/OTP).",
+            "parcours Getting Started for Admins (4 cours) outille Legal Ops ・ administrateurs 向け 構成： l'espace の travail ・ デプロイ： の workflows sécurisés dès premier jour.",
+            "badges の certification Harvey Academy sont émis par Credly by Pearson, ne périment pas ・ se rattachent via l'adresse e-mail の compte Academy."
+          ],
+          "workedExample": {
+            "situation": "directrice Legal Ops déploie Harvey auprès の 120 avocats ・ souhaite structurer ネットワーク の référents certifiés tout en permettant à chacun の valoriser sa certification 上の LinkedIn.",
+            "steps": [
+              "Suivre parcours Getting Started for Admins (4 cours) ・ playlist Harvey II 向け 構成： workspace, murailles éthiques ・ モデル d'チーム.",
+              "Faire passer Legal Engineering Certification aux référents métiers ・ cours badgé Preparing for Legal Work (45 min) aux avocats connectés en SSO.",
+              "Autoriser courriels の admin@credly.com 上の passerelle の messagerie の cabinet afin que chaque lauréat reçoive ・ accepte son badge vérifié Credly by Pearson."
+            ],
+            "decision": "cabinet dispose d'administrateurs formés, の Legal Engineers certifiés ・ d' reconnaissance officielle vérifiable 向け chaque avocat."
+          },
+          "practice": {
+            "prompt": "Rédigez procédure interne permettant aux juristes の votre organisation の passer certifications Harvey Academy (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) ・ の récupérer leur badge Credly by Pearson なしで blocage technique.",
+            "successCriteria": [
+              "Préciser の 作成： compte Harvey Academy ・ même adresse e-mail professionnelle que celle utilisée 向け se connecter à Harvey.",
+              "Distinguer certifications ouvertes (Level 1 Foundations, Legal Engineering) の parcours pratique réservé aux ユーザー Harvey connectés en SSO/OTP (Preparing for Legal Work).",
+              "Indiquer procédure d'acceptation の badge envoyé par Harvey via Credly (autorisation の admin@credly.com ・ ajout d'adresse secondaire 内の Credly Settings > Account si nécessaire)."
+            ],
+            "feedback": "Ce protocole couvre à fois progression pédagogique officielle の Harvey Academy ・ délivrance fluide の justificatifs Credly."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "内の Harvey Academy, quelle certification spécialisée forme à concevoir の workflows juridiques reproductibles, structurer の grilles d'extraction ・ industrialiser contrôles qualité ?",
+              "prompt": "Au sein d' direction juridique, responsable innovation souhaite former の référents capables の concevoir の workflows reproductibles, の calibrer の grilles Review Tables ・ d'administrer l'espace の travail Harvey dès premier jour. Quels parcours の Harvey Academy répondent spécifiquement à ce besoin ?",
+              "options": [
+                {
+                  "id": "legal-engineering-certification-et-getting-started-for-admins",
+                  "label": "Legal Engineering Certification (compétences clés d'ingénierie juridique en 2 cours) associée au parcours Getting Started for Admins (configuration の workspace ・ déploiement の workflows sécurisés en 4 cours)."
+                },
+                {
+                  "id": "desactivation-complete-des-controles-acces",
+                  "label": "suppression の contrôles d'アクセス par dossier ・ l'improvisation の prompts なしで aucun test préalable."
+                },
+                {
+                  "id": "utilisation-comptes-partages-anonymes",
+                  "label": "partage d' seul identifiant anonyme 間の cent juristes なしで suivi の progression ni ガバナンス."
+                },
+                {
+                  "id": "redaction-manuelle-sans-aucun-modele",
+                  "label": "L'interdiction d'活用： の モデル の prompts または の Review Tables afin que chaque juriste réinvente sa méthode."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "どのようにun professionnel certifié 上の Harvey Academy reçoit-il ・ prouve-t-il officiellement son badge の certification 上の LinkedIn ?",
+              "prompt": "どのようにfonctionne délivrance ・ vérification の badges officiels obtenus après réussite d' certification 上の Harvey Academy ?",
+              "options": [
+                {
+                  "id": "badge-verifie-credly-by-pearson-sans-expiration",
+                  "label": "badge est émis via Credly by Pearson 上の l'adresse e-mail の compte Harvey Academy, ne comporte pas の date d'expiration ・ fournit lien public vérifiant l'émetteur, date ・ compétences acquises."
+                },
+                {
+                  "id": "image-locale-non-verifiable-valable-24h",
+                  "label": "badge est simple image なしで lien の vérification qui expire 自動的に au bout の vingt-quatre heures."
+                },
+                {
+                  "id": "envoi-postal-papier-uniquement",
+                  "label": "diplôme est envoyé のみ par courrier postal papier なしで aucun justificatif numérique partageable 上の LinkedIn."
+                },
+                {
+                  "id": "obligation-creer-nouveau-profil-linkedin",
+                  "label": "L'obtention の badge oblige juriste à 削除： son profil LinkedIn existant 向け en recréer nouveau."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy certifie vos équipes (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) ・ の badges vérifiés Credly by Pearson.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "harvey-legal-ai-mock-exam",
+    "title": "模擬試験 CertiGo Pro: Harvey Academy & Legal IA (Assistant, Vault, Knowledge, Workflows & Legal Engineering)",
+    "durationMinutes": 30,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète の maîtrise produit inspirée の certifications Harvey Academy (Level 1 Foundations, Legal Engineering ・ Preparing for Legal Work) : révision の 契約書 ・ playbook, redlining Word, audit の Data Rooms M&A 内の Vault, Review Tables, recherche sourcée Knowledge ・ protection の 弁護士・依頼者間秘匿特権.",
+    "questionIds": [
+      "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+      "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.002"
+    ]
+  }
+}

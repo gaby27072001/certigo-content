@@ -1,0 +1,1129 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "harvey-legal-ai",
+  "brand": "CertiGo",
+  "providerId": "harvey",
+  "radarTrackId": "harvey:legal-ai-platform",
+  "routeCode": "HARVEY-LEGAL",
+  "routeAliases": [
+    "HARVEY-LEGAL",
+    "HARVEY-ACADEMY",
+    "HARVEY-AI"
+  ],
+  "brandIdentity": {
+    "logoSlug": "harvey",
+    "displayName": "Harvey AI & Harvey Academy",
+    "primaryHex": "#141413",
+    "accentHex": "#C8A97E",
+    "masteryModel": "Parcours d'expertise produit complet aligné 在 Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work 与 badges Credly by Pearson) : 3 unités progressives, 8 leçons opérationnelles, Cartes Déclic, labs pratiques, questions à double niveau (simple 无 jargon 与 expert) 与 examen blanc."
+  },
+  "locale": "zh-Hans",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro：Harvey Academy & Legal IA (Foundations, Legal Engineering, Assistant, Vault, Knowledge & Workflows)",
+  "subtitle": "掌握 programme officiel Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work & badges Credly), Harvey Assistant (Word Add-In, redlining, mémos), Harvey Vault (Data Rooms M&A, Review Tables) 与 Harvey Knowledge & Workflows.",
+  "audience": "Avocats d'affaires (M&A, Corporate, Contentieux, Droit social, IP/IT), directeurs juridiques (General Counsel), juristes d'企业 与 Legal Ops.",
+  "prerequisites": "Connaître structure 的 合同 d'affaires, principes d'audit juridique (Due Diligence) 与 règles déontologiques 的 confidentialité.",
+  "estimatedMinutes": 96,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "harvey-platform-overview",
+      "title": "Harvey Legal AI Platform: Assistant, Vault, Knowledge, 与Workflows",
+      "url": "https://www.harvey.ai/",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente quatre piliers 的 plateforme Harvey : Assistant (rédaction, révision, redlining), Vault (audit 的 Data Rooms 与 grilles d'extraction 在 的 milliers 的 documents), Knowledge (recherche juridique 与 réglementaire sourcée) 与 Workflows multi-étapes.",
+      "limits": "Toute sortie générée par Harvey constitue 一个 projet 的 travail soumis à revue 与 à validation finale d'一个 avocat 或 juriste habilité."
+    },
+    {
+      "id": "harvey-product-blog",
+      "title": "Harvey Engineering & Product Insights: Multi-model Legal Workflows, Vault Review Tables, 与Security",
+      "url": "https://www.harvey.ai/blog",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement 的 Review Tables 在 Harvey Vault, l'ancrage citationnel 无 hallucination 在 Harvey Knowledge, l'intégration Word 用于 redlining 与 l'engagement 的 confidentialité zéro-entraînement 在 数据 clients.",
+      "limits": "cloisonnement 的 dossiers (Ethical Walls / Matter-level access controls) 必须 être configuré conformément aux politiques 的 gestion 的 conflits d'intérêts 的 cabinet 或 的 direction juridique."
+    },
+    {
+      "id": "harvey-academy-blog",
+      "title": "Harvey Academy: Shaping the Future of Legal AI Literacy (Intro to Harvey, AI for Legal Basics, Harvey in Practice, Deep Dives) (CertiGo 路径)",
+      "url": "https://www.harvey.ai/blog/introducing-harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente portail officiel Harvey Academy (academy.harvey.ai) conçu par 的 praticiens 的 droit : parcours Intro to Harvey, cours certifiant AI for Legal Basics, ateliers vidéo Harvey in Practice, Harvey Deep Dives 与 déploiement par rôle à l'échelle 的 cabinets 与 directions juridiques.",
+      "limits": "formations 的 fondation sont ouvertes gratuitement 在 inscription ; modules avancés liés au workspace exigent 一个 compte client Harvey actif."
+    },
+    {
+      "id": "harvey-academy-help",
+      "title": "Getting Started with Harvey Academy: Level 1 Foundations, Legal Engineering Certification, Preparing for Legal Work, 与Credly Badges",
+      "url": "https://help.harvey.ai/articles/harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente certifications officielles Harvey Academy (Level 1 Foundations combinant AI for Legal Basics 与 AI Analysis for Legal Workflows, Legal Engineering Certification, 与 Preparing for Legal Work), parcours Getting Started for Users/Admins, l'Add-In Word 与 délivrance 的 badges numériques vérifiés via Credly by Pearson.",
+      "limits": "L'émission 的 badge vérifié Credly nécessite d'使用 même adresse e-mail 在 Harvey Academy 与 在 Credly by Pearson."
+    }
+  ],
+  "modules": [
+    {
+      "id": "harvey-assistant-contrats-redlining-memos",
+      "unitNumber": 1,
+      "title": "第 1 单元 · Harvey Assistant : Rédaction, Redlining Assisté & Mémos Clients",
+      "subtitle": "Rédiger 与 réviser 的 合同 配合 son playbook 的 négociation, automatiser redlining argumenté 与 produire 的 mémos 的 synthèse client sourcés.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Appliquer 一个 playbook 的 négociation contractuelle 在 Harvey Assistant 用于 réviser 一个 合同 fournisseur (MSA/DPA), générer 一个 redlining motivé clause par clause 与 rédiger 一个 mémo exécutif destiné au client.",
+      "memoKeyTopics": [
+        "Rédaction 与 révision 的 合同 : alignement 在 playbook interne (position préférentielle, position 的 repli / fallback, point 的 rupture / walk-away)",
+        "Redlining assisté par IA (interface Harvey & Add-in Microsoft Word) : réécriture chirurgicale 与 commentaire justificatif destiné à partie adverse",
+        "Recherche juridique sourcée 无 hallucination 与 rédaction 的 mémos 的 synthèse client structurés (Executive Summary + analyse IRAC)"
+      ],
+      "memoGoldenRule": "Fournissez toujours à Harvey Assistant votre playbook 的 négociation 与 rôle 的 votre client (Acheteur vs Prestataire, Bailleur vs Preneur) avant 的 lancer 一个 redlining.",
+      "architectureSchema": {
+        "title": "Flux 的 Révision Contractuelle & Redlining 配合 Harvey Assistant",
+        "diagram": "[合同 Adverse + Playbook Client (Positions Gold / Fallback / Red Flag)] ➔ [Harvey Assistant : Analyse d'Écarts + Vérification 的 Définitions] ➔ [Redline Word (Suivi 的 modifications + Commentaires négociateur) + Mémo Client]",
+        "components": [
+          {
+            "name": "Playbook & Contexte 的 Partie",
+            "role": "Définit position 的 client (ex. Acheteur), plafonds acceptables, clauses 的 repli autorisées 与 exclusions non négociables."
+          },
+          {
+            "name": "Moteur 的 Redlining Harvey (Web & Word Add-in)",
+            "role": "Compare chaque clause 的 projet adverse au playbook, propose réécriture exacte au minimum d'intrusion textuelle 与 génère note d'explication commerciale."
+          },
+          {
+            "name": "Générateur 的 Mémo Client Sourcé",
+            "role": "Synthétise points d'arbitrage majeurs en langage clair 用于 direction générale 或 client, 配合 renvoi exact aux numéros d'articles."
+          }
+        ],
+        "securityInvariant": "Chaque clause réécrite 或 citée par Harvey Assistant est liée à l'article source 的 合同 téléversé ; aucune donnée 的 dossier n'est partagée hors 的 l'espace sécurisé 的 cabinet 或 的 l'企业."
+      },
+      "lessons": [
+        {
+          "id": "redaction-revision-contrats-playbook",
+          "title": "Rédaction 与 révision 的 合同 配合 Playbook 在 Harvey Assistant",
+          "objective": "Structurer 一项 invite juridique précise 在 Harvey Assistant en associant 合同 à réviser, qualité 的 partie représentée 与 playbook 的 négociation.",
+          "estimatedMinutes": 12,
+          "hook": "Demander « Révises ce 合同 » 无 préciser si vous défendez client acheteur 或 fournisseur vendeur produit 的 recommandations inversées : comment cadrer Harvey Assistant comme 一个 collaborateur senior ?",
+          "declicCard": {
+            "title": "核心顿悟 Playbook Harvey : Rôle 的 Client + Grille (Idéal / Fallback / Red Flag) + Vérification 的 Définitions",
+            "diagramTop": "Entrées : 1. Rôle (ex. Client Acheteur) · 2. 合同 source · 3. Playbook 的 négociation",
+            "diagramBottom": "Sortie Harvey : Tableau d'écarts par article + Clause 的 repli (Fallback) + Contrôle 的 termes définis",
+            "step1": "Précisez toujours partie que vous représentez, droit applicable, type 的 合同 与 joignez votre playbook 的 clauses.",
+            "step2": "Demandez à Harvey 的 classer chaque écart selon trois niveaux (Conforme / Acceptable en Fallback / Red Flag bloquant) 与 的 验证 termes 配合 majuscule.",
+            "rule": "一个 terme défini à l'Article 1 peut neutraliser 一项 garantie à l'Article 14 : exigez toujours contrôle croisé 的 définitions."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · CADRER COMME 一个 ASSOCIÉ",
+              "title": "Posture contractuelle, juridiction 与 playbook",
+              "bodyParagraph": "在 Harvey Assistant, encadrez chaque révision par quatre paramètres : 1. Qui vous représentez (ex. l'acquéreur 或 preneur 的 licence SaaS) · 2. droit applicable (ex. droit français, New York law) · 3. Votre playbook 的 positions (standard, fallback, no-go) · 4. format 的 livrable attendu.",
+              "keyTakeawayPill": "Prompt juridique = Rôle représenté + Droit applicable + Playbook + Format 的 sortie"
+            },
+            {
+              "stepBadge": "步骤 2 · POSITIONS 的 REPLI (FALLBACK)",
+              "title": "Préparer à fois position cible 与 compromis",
+              "bodyParagraph": "用于 chaque clause sensible (plafond 的 responsabilité, dommages indirects, propriété intellectuelle, indemnisation), demandez à Harvey Assistant 的 générer non seulement rédaction cible idéale, mais aussi rédaction 的 repli (fallback) conforme à votre playbook si partie adverse refuse premier jet.",
+              "keyTakeawayPill": "用于 chaque clause critique : Position Idéale + Clause 的 Repli (Fallback) prête à négocier"
+            },
+            {
+              "stepBadge": "步骤 3 · AUDIT 的 TERMES DÉFINIS",
+              "title": "Traquer définitions orphelines 或 piégées",
+              "bodyParagraph": "一个 piège classique 的 合同 longs réside 在 section Définitions : 一个 terme défini trop étroitement (ex. « Informations Confidentielles » exigeant 一个 marquage écrit systématique) vide clause 的 confidentialité 的 sa substance. Demandez systématiquement à Harvey d'auditer termes définis 与 renvois d'articles.",
+              "keyTakeawayPill": "Toujours faire 验证 par Harvey : Définitions piégées + Termes non définis + Renvois cassés"
+            }
+          ],
+          "keyIdeas": [
+            "一项 révision contractuelle 在 Harvey Assistant exige 的 spécifier partie représentée, juridiction 与 playbook 的 référence.",
+            "génération conjointe 的 position préférentielle 与 的 clause 的 repli (fallback) accélère cycles 的 négociation.",
+            "L'audit automatisé 的 cohérence 之间 l'article Définitions 与 corps 的 合同 détecte restrictions cachées 与 renvois erronés."
+          ],
+          "workedExample": {
+            "situation": "一个 juriste IT d'一个 groupe bancaire révise 配合 Harvey Assistant 一个 合同 d'hébergement Cloud (MSA) 的 45 pages soumis par 一个 fournisseur étranger.",
+            "steps": [
+              "Téléverser 在 Harvey Assistant MSA proposé ainsi que Playbook Achats IT 的 banque (qui exige 一个 plafond 的 responsabilité 的 24 mois 的 redevances 与 一个 préavis 的 réversibilité 的 6 mois).",
+              "Demander 一个 tableau comparatif article par article isolant écarts majeurs, définitions restrictives 与 renvois circulaires.",
+              "Identifier immédiatement grâce à Harvey que définition 的 « Faute Lourde » à l'Annexe 1 excluait pannes 的 sous-traitants ultérieurs."
+            ],
+            "decision": "juriste sécurise négociation en corrigeant à fois l'article 在 responsabilité 与 définition cachée en annexe."
+          },
+          "practice": {
+            "prompt": "Rédigez 一项 invite structurée 用于 Harvey Assistant afin d'analyser 一项 clause 的 limitation 的 responsabilité 在 一个 合同 SaaS où vous représentez client 企业, en intégrant 一项 position cible 与 一个 fallback.",
+            "successCriteria": [
+              "Préciser rôle (Client 企业 souscripteur 的 SaaS) 与 droit applicable.",
+              "Définir position cible (ex. plafond mutuel à 24 mois 的 redevances + déplafonnement 用于 violation 的 confidentialité, 数据 personnelles 与 contrefaçon IP) 与 position 的 repli (ex. super-cap à 3x 用于 数据 personnelles).",
+              "Demander l'identification 的 écarts exacts 与 proposition 的 réécriture assortie d'一个 argumentaire commercial."
+            ],
+            "feedback": "Structurer l'invite autour 的 couple (Position cible / Super-cap 的 repli) 支持 à Harvey 的 produire 的 propositions immédiatement utilisables en séance 的 négociation."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Que devez-vous donner à Harvey Assistant au départ 用于 qu'il relise 一个 合同 selon règles 的 votre 企业 ?",
+              "prompt": "法务部门utilise Harvey Assistant 用于 réviser 一个 合同 的 licence logicielle reçu d'一个 éditeur. Quels éléments faut-il fournir 在 l'invite 用于 obtenir 一项 analyse 的 risques 与 的 propositions 的 clauses 直接 alignées 在 politique 的 l'企业 ?",
+              "options": [
+                {
+                  "id": "role-client-droit-applicable-et-playbook",
+                  "label": "合同 adverse, rôle défendu (Client licencié), droit applicable 与 playbook interne précisant positions cibles 与 的 repli (fallback)."
+                },
+                {
+                  "id": "uniquement-derniere-page-signatures",
+                  "label": "仅 page 的 signature vierge 无 corps 的 合同 ni indication 的 partie représentée."
+                },
+                {
+                  "id": "demande-generique-sans-contexte",
+                  "label": "一项 consigne d'一项 ligne « Améliore texte » 无 préciser si l'on représente l'éditeur vendeur 或 client acheteur."
+                },
+                {
+                  "id": "suppression-article-definitions",
+                  "label": "合同 amputé 的 son article Définitions 与 的 ses annexes financières afin 的 raccourcir lecture."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "一项 clause paraît rassurante mais 一个 mot 配合 majuscule cache 一个 piège 在 définitions au début 的 合同. Que demander à Harvey ?",
+              "prompt": "Lors 的 relecture d'一个 accord 的 confidentialité (NDA), l'article 4 semble protéger largement votre client, mais définition 的 « Informations Confidentielles » à l'article 1 exige qu'elles soient estampillées par tampon humide 在 24 heures suivant tout échange oral. Quel contrôle Harvey Assistant 支持 的 déjouer ce piège ?",
+              "options": [
+                {
+                  "id": "audit-croise-definitions-et-clauses-substantives",
+                  "label": "Demander 一个 audit croisé 之间 termes définis à l'article 1 与 obligations substantives 用于 repérer toute définition excessivement restrictive."
+                },
+                {
+                  "id": "verification-orthographique-seule",
+                  "label": "Limiter l'analyse à correction 的 fautes 的 frappe 无 lire sens 的 définitions contractuelles."
+                },
+                {
+                  "id": "ignorer-mots-avec-majuscule",
+                  "label": "Demander à l'assistant d'ignorer tous termes commençant par 一项 lettre majuscule 在 l'accord."
+                },
+                {
+                  "id": "traduire-sans-analyser-portee",
+                  "label": "Traduire littéralement l'article 4 en trois langues 无 examiner conditions 的 forme 的 l'article 1."
+                }
+              ]
+            }
+          ],
+          "recap": "在 Harvey Assistant : cadrez partie représentée, attachez votre playbook (cible + fallback) 与 contrôlez toujours définitions.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "redlining-assiste-ia-et-memos-clients",
+          "title": "Redlining assisté par IA 在 Word 与 rédaction 的 mémos 的 synthèse client",
+          "objective": "Réaliser 一个 redlining chirurgical 配合 commentaires justificatifs destinés à partie adverse 与 produire 一个 mémo 的 synthèse client clair 与 sourcé.",
+          "estimatedMinutes": 12,
+          "hook": "Réécrire entièrement 一项 clause adverse braque négociateur d'en face, tandis qu'envoyer 40 pages 的 marques 的 révision brutes à votre directeur général est illisible : comment 使用 Harvey 用于 réussir deux exercices ?",
+          "declicCard": {
+            "title": "核心顿悟 Redlining & Mémo : Intrusion Minimale 在 合同 + Synthèse Décisionnelle 用于 Client",
+            "diagramTop": "Redline (用于 partie adverse) : Modification chirurgicale minimale + Commentaire objectif (« Conformité RGPD / Réciprocité »)",
+            "diagramBottom": "Mémo Client (用于 votre dirigeant) : Executive Summary + Top 3 points d'arbitrage commercial + Recommandation",
+            "step1": "Lors 的 redlining 在 Word 配合 Harvey, demandez 一项 modification à intrusion minimale (conserver structure adverse tout en insérant garde-fous 的 votre playbook).",
+            "step2": "Générez deux livrables distincts : 一项 note d'explication neutre 用于 partie adverse 与 一个 mémo stratégique confidentiel 用于 votre client.",
+            "rule": "Ne confondez jamais commentaire 的 redline (lu par partie adverse !) 与 note 的 risque interne (couverte par 律师-客户保密特权)."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · REDLINING CHIRURGICAL",
+              "title": "Modifier minimum 的 mots 用于 maximiser l'acceptation",
+              "bodyParagraph": "一个 bon négociateur ne remplace pas 一个 article entier s'il suffit d'insérer « raisonnablement », « réciproquement » 或 一个 plafond chiffré. 配合 l'extension Harvey 用于 Microsoft Word (或 在 l'interface 的 révision), demandez 的 propositions 的 redline à intrusion minimale qui préservent numérotation 与 style 的 document source.",
+              "keyTakeawayPill": "Redlining chirurgical = modifier 仅 mots nécessaires 用于 安全加固 clause"
+            },
+            {
+              "stepBadge": "步骤 2 · DISTINGUER DEUX COMMENTAIRES",
+              "title": "Justification externe vs Note 的 risque interne",
+              "bodyParagraph": "Demandez à Harvey 的 produire deux colonnes bien séparées :\n1. **Justification externe (用于 partie adverse)** : neutre, constructive, fondée 在 pratique 的 marché 或 réciprocité.\n2. **Analyse 的 risque interne (用于 votre client 仅)** : évaluation franche 的 l'exposition financière 与 的 levier 的 négociation.",
+              "keyTakeawayPill": "Toujours séparer justification externe (partagée) 与 l'analyse 的 risque interne (confidentielle) !"
+            },
+            {
+              "stepBadge": "步骤 3 · MÉMO 的 SYNTHÈSE CLIENT",
+              "title": "的 l'analyse technique au mémo exécutif actionnable",
+              "bodyParagraph": "用于 votre client 或 votre direction générale, demandez à Harvey Assistant 的 transformer revue en 一个 mémo structuré : 1. Synthèse exécutive (statut global) · 2. Tableau 的 3 à 5 arbitrages commerciaux restants (Clause, Risque concret en euros/opérations, Option recommandée) · 3. Prochaines étapes.",
+              "keyTakeawayPill": "[ZH] Mémo client = Décisions commerciales à trancher + Impact métier + Recommandation claire"
+            }
+          ],
+          "keyIdeas": [
+            "redlining assisté par Harvey privilégie modifications chirurgicales (intrusion minimale) alignées 在 playbook afin d'accélérer conclusion 的 l'accord.",
+            "Il est impératif 的 séparer commentaires 的 marge destinés à partie adverse 的 notes stratégiques internes destinées au client.",
+            "一个 mémo 的 synthèse client traduit écarts juridiques en arbitrages opérationnels 与 financiers 直接 exploitables par 一个 dirigeant."
+          ],
+          "workedExample": {
+            "situation": "Sarah, avocate M&A/合同, révise 一个 pacte d'actionnaires en urgence 与 必须 envoyer d'一个 côté document en suivi 的 modifications au conseil 的 fonds, 与 的 l'autre 一项 note d'arbitrage au PDG fondateur.",
+            "steps": [
+              "使用 Harvey 在 Word 用于 proposer 的 redlines chirurgicaux 在 clauses 的 Bad Leaver, d'inaliénabilité 与 的 sortie conjointe (Drag-Along).",
+              "Générer 的 bulles 的 commentaires neutres orientées pratique 的 marché 用于 document Word destiné au conseil adverse.",
+              "Générer séparément 在 Harvey Assistant 一个 mémo exécutif d'一项 page 用于 PDG résumant trois points économiques à trancher avant l'appel."
+            ],
+            "decision": "conseil adverse accepte 80 % 的 redlines dès premier tour 与 PDG tranche 20 % restants en dix minutes grâce au mémo."
+          },
+          "practice": {
+            "prompt": "一个 collaborateur junior s'apprête à envoyer à partie adverse 一个 合同 Word dont bulles 的 commentaires générées contiennent notre position 的 repli secrète (« Nous accepterons 500 k€ s'ils insistent »). Expliquez l'erreur critique 与 règle 的 workflow à imposer 配合 Harvey.",
+            "successCriteria": [
+              "Identifier divulgation accidentelle 的 stratégie 的 négociation 与 的 seuil 的 repli 的 client à partie adverse.",
+              "Imposer 在 prompt Harvey séparation stricte 之间 一个 livrable « Commentaires 的 négociation externes » 与 一个 livrable « Note stratégique interne client ».",
+              "Relire 与 purger systématiquement métadonnées 与 commentaires internes 的 文件 Word avant tout envoi externe."
+            ],
+            "feedback": "Ne laissez jamais stratégie 的 repli interne figurer 在 bulles 的 commentaires 的 document Word envoyé à partie adverse."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "在 Word 配合 Harvey, pourquoi vaut-il mieux corriger 仅 mots risqués d'一项 clause plutôt que tout réécrire 的 zéro ?",
+              "prompt": "Lors d'一个 redlining assisté par Harvey 在 Microsoft Word, pourquoi est-il préférable 的 demander 一项 révision « à intrusion minimale » (surgical redlining) plutôt qu'一个 remplacement intégral par votre clause type lorsque vous êtes en position 的 négociation équilibrée ?",
+              "options": [
+                {
+                  "id": "conserver-structure-adverse-inserer-gardes-fous",
+                  "label": "Cela préserve rédaction 与 numérotation 的 partie adverse tout en insérant exactement protections requises, réduisant frictions 与 délais 的 négociation."
+                },
+                {
+                  "id": "empecher-lecture-par-avocat-adverse",
+                  "label": "Cela rend modifications invisibles 在 mode Suivi 的 modifications 的 Microsoft Word."
+                },
+                {
+                  "id": "supprimer-valeur-juridique-contrat",
+                  "label": "Cela annule 自动 toutes obligations financières 的 l'accord 无 accord 的 parties."
+                },
+                {
+                  "id": "bloquer-enregistrement-fichier-docx",
+                  "label": "Cela verrouille 文件 en lecture seule définitive 在 serveur 的 messagerie."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "一个 juriste laisse par erreur phrase « nous pouvons céder jusqu'à 2 M€ » 在 文件 Word envoyé à l'adversaire. Quelle erreur a-t-il commise ?",
+              "prompt": "一个 juriste génère 配合 Harvey 一个 tableau contenant à fois texte 的 redline 与 note confidentielle « Notre client est prêt à céder jusqu'à 2 M€ 的 plafond en dernier recours », puis copie l'intégralité 在 commentaires 的 文件 Word envoyé au fournisseur. Quelle règle fondamentale a été violée ?",
+              "options": [
+                {
+                  "id": "confusion-commentaire-externe-et-note-strategie-interne",
+                  "label": "Il a mélangé justification externe destinée à partie adverse 与 l'analyse confidentielle 的 seuils 的 repli réservée au client."
+                },
+                {
+                  "id": "utilisation-police-serif-standard",
+                  "label": "Il a utilisé 一项 police 的 caractères Times New Roman au lieu d'一项 police 无 empattement."
+                },
+                {
+                  "id": "pagination-automatique-pied-page",
+                  "label": "Il a laissé numérotation 的 pages active 在 pied 的 page 的 合同 Word."
+                },
+                {
+                  "id": "format-date-iso-dans-titre",
+                  "label": "Il a nommé 文件 配合 date 的 jour au format année-mois-jour."
+                }
+              ]
+            }
+          ],
+          "recap": "Redline chirurgical + séparation stricte 之间 commentaire externe 与 stratégie interne + mémo exécutif orienté décision = méthode Harvey Assistant.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-foundations-ai-legal-basics",
+          "title": "[ZH] Harvey Academy Level 1 Foundations : AI for Legal Basics, AI Analysis & Add-In Word",
+          "objective": "掌握 parcours officiel Harvey Academy Level 1 Foundations (AI for Legal Basics, AI Analysis for Legal Workflows, Getting Started for Users) 与 l'intégration directe 在 Microsoft Word.",
+          "estimatedMinutes": 12,
+          "hook": "如何passer 的 curiosité envers l'IA générative à 一项 pratique juridique rigoureuse, vérifiable 与 直接 intégrée 在 Microsoft Word selon référentiel officiel Harvey Academy ?",
+          "declicCard": {
+            "title": "核心顿悟 Harvey Academy Level 1 : Littératie IA Juridique + Analyse Structurée + Exécution 在 Word",
+            "diagramTop": "[ZH] Parcours Level 1 Foundations : 1. AI for Legal Basics (67 min) · 2. AI Analysis for Legal Workflows (60 min) · 3. Harvey in Practice",
+            "diagramBottom": "[ZH] Application quotidienne : Getting Started for Users + Harvey for Word Add-In (rédaction, playbook, redlining in situ)",
+            "step1": "Validez fondamentaux (AI for Legal Basics) 用于 distinguer ce que l'IA juridique fait 配合 fiabilité (structuration, extraction, comparaison) 的 ce qui exige jugement 的 l'avocat.",
+            "step2": "Appliquez méthode AI Analysis for Legal Workflows 与 l'Add-In Harvey for Word 用于 auditer 与 réviser vos actes 直接 在 votre document 的 travail.",
+            "rule": "Ne faites jamais confiance à 一项 sortie IA avant d'avoir cadré tâche, vérifié sources 与 contrôlé erreurs potentielles avant tout envoi client."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · AI FOR LEGAL BASICS",
+              "title": "Acquérir 一项 littératie IA juridique consciente 的 risques",
+              "bodyParagraph": "Premier pilier 的 certification Level 1 Foundations 的 Harvey Academy, cours AI for Legal Basics (67 min) pose bases indispensables : fonctionnement 的 grands 模型 的 langage en droit, cas d'usage à forte valeur ajoutée, limites structurelles (hallucinations hors contexte ancré, biais 的 formulation) 与 contrôle humain obligatoire avant tout acte 或 dépôt.",
+              "keyTakeawayPill": "AI for Legal Basics = 理解 capacités, limites 与 devoir 的 vérification"
+            },
+            {
+              "stepBadge": "步骤 2 · AI ANALYSIS FOR LEGAL WORKFLOWS",
+              "title": "Concevoir, exécuter 与 验证 一项 analyse documentaire à grande échelle",
+              "bodyParagraph": "Deuxième pilier 的 Level 1 Foundations, cours AI Analysis for Legal Workflows (60 min) enseigne comment structurer 的 prompts d'extraction précis, découper 一项 revue documentaire complexe 与 détecter méthodiquement omissions 或 erreurs d'interprétation avant qu'一个 livrable n'atteigne 一个 associé, 一个 client 或 一项 juridiction.",
+              "keyTakeawayPill": "AI Analysis for Legal Workflows = structurer l'extraction + détecter erreurs en amont"
+            },
+            {
+              "stepBadge": "步骤 3 · HARVEY IN PRACTICE & WORD ADD-IN",
+              "title": "Travailler 直接 在 Microsoft Word 与 workspace Harvey",
+              "bodyParagraph": "parcours Getting Started for Users 与 Get Started With the Harvey for Word Add-In 的 Harvey Academy montrent comment transformer réponses 的 Harvey en livrables réutilisables : ouverture 的 volet Harvey 直接 在 Microsoft Word, application 的 playbooks 的 clauses, révision chirurgicale 与 conservation 的 formatage juridique.",
+              "keyTakeawayPill": "Harvey for Word Add-In = rédiger, comparer au playbook 与 réviser 无 quitter Word"
+            }
+          ],
+          "keyIdeas": [
+            "certification officielle Level 1 Foundations 的 Harvey Academy combine AI for Legal Basics 与 AI Analysis for Legal Workflows.",
+            "méthode Harvey Academy impose 的 bâtir littératie IA 与 protocole 的 vérification avant 的 se fier aux sorties génératives.",
+            "module Get Started With the Harvey for Word Add-In 支持 d'intégrer rédaction, comparaison au playbook 与 redlining 直接 在 Microsoft Word."
+          ],
+          "workedExample": {
+            "situation": "某律师事务所d'affaires intègre trente nouveaux collaborateurs 与 souhaite qu'ils maîtrisent Harvey Assistant 与 l'Add-In Word dès leur première semaine 无 erreur méthodologique.",
+            "steps": [
+              "Inscrire chaque collaborateur 在 Harvey Academy (academy.harvey.ai) 配合 son adresse professionnelle 用于 suivre parcours certifiant Level 1 Foundations (AI for Legal Basics + AI Analysis for Legal Workflows).",
+              "Compléter parcours pratique Getting Started for Users 与 module dédié Get Started With the Harvey for Word Add-In.",
+              "Valider quiz final 用于 obtenir certificat numérique 与 badge vérifié Credly by Pearson attestant maîtrise 的 fondamentaux."
+            ],
+            "decision": "collaborateurs adoptent dès premier jour 一个 réflexe systématique 的 cadrage par playbook 与 的 vérification 的 sources 在 Word."
+          },
+          "practice": {
+            "prompt": "Construisez plan d'embarquement Harvey Academy d'一项 团队 juridique 的 15 juristes : sélectionnez cours 的 parcours Level 1 Foundations, définissez règle 的 contrôle qualité issue d'AI Analysis for Legal Workflows 与 précisez l'usage 的 l'Add-In Word.",
+            "successCriteria": [
+              "Inclure cours AI for Legal Basics (fondamentaux 与 gestion 的 risques) 与 AI Analysis for Legal Workflows (structuration 的 extractions 与 détection d'erreurs).",
+              "Intégrer modules pratiques Getting Started for Users 与 Get Started With the Harvey for Word Add-In.",
+              "Exiger vérification systématique 的 citations 与 的 définitions contractuelles avant toute diffusion 的 livrable."
+            ],
+            "feedback": "L'alliance 的 parcours certifiant Level 1 Foundations 与 的 pratique 在 l'Add-In Word 确保 一项 adoption rapide 与 sécurisée."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "在 Harvey Academy, quel parcours gratuit 支持 d'acquérir bases 的 l'IA juridique responsable 与 l'analyse documentaire avant 的 passer l'examen certifiant ?",
+              "prompt": "Au sein 的 programme officiel Harvey Academy, quels cours composent socle 的 certification Level 1 Foundations destinée à bâtir 一项 pratique juridique responsable 的 l'IA ?",
+              "options": [
+                {
+                  "id": "ai-for-legal-basics-et-ai-analysis-for-legal-workflows",
+                  "label": "cours AI for Legal Basics (littératie IA 与 décision consciente 的 risques) 与 AI Analysis for Legal Workflows (conception, exécution 与 vérification d'analyses documentaires à grande échelle)."
+                },
+                {
+                  "id": "entrainement-poids-llm-en-assembleur",
+                  "label": "一个 cours d'écriture 的 noyaux CUDA en assembleur 用于 réentraîner soi-même poids 的 模型 在 的 serveurs personnels."
+                },
+                {
+                  "id": "validation-automatique-sans-relecture-avocat",
+                  "label": "一个 module autorisant l'envoi direct 的 projets générés par l'IA aux tribunaux 无 aucune relecture par 一个 juriste."
+                },
+                {
+                  "id": "remplacement-integral-bases-legales-par-reseaux-sociaux",
+                  "label": "一项 formation remplaçant consultation 的 textes officiels par 的 résumés non sourcés issus 的 forums publics."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "如何travailler 直接 在 一个 合同 在 Microsoft Word tout en appliquant guides 的 clauses enseignés 在 Harvey Academy ?",
+              "prompt": "一个 juriste formé via module Get Started With the Harvey for Word Add-In 的 Harvey Academy 必须 réviser 一个 合同 fournisseur urgent tout en préservant numérotation 与 mise en page complexes 的 文件 `.docx`. Quelle pratique 必须-il appliquer ?",
+              "options": [
+                {
+                  "id": "utiliser-addin-harvey-for-word-in-situ-avec-playbook",
+                  "label": "使用 Harvey for Word Add-In 直接 在 Microsoft Word 用于 analyser clauses, appliquer playbook 与 insérer révisions ciblées 无 quitter ni déstructurer document."
+                },
+                {
+                  "id": "convertir-docx-en-image-jpeg-basse-resolution",
+                  "label": "Convertir cinquante pages 的 合同 en images JPEG basse résolution 与 perdre toute structure 的 styles Word."
+                },
+                {
+                  "id": "copier-coller-sans-styles-dans-bloc-notes",
+                  "label": "Tout copier 在 Bloc-notes Windows en supprimant renvois automatiques 与 numérotation 的 articles."
+                },
+                {
+                  "id": "partager-contrat-sur-outil-public-grand-public",
+                  "label": "Téléverser 合同 confidentiel 在 一个 outil gratuit grand public dépourvu d'engagement 的 confidentialité."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy Level 1 Foundations = AI for Legal Basics + AI Analysis for Legal Workflows + pratique directe via Harvey for Word Add-In.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-platform-overview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-vault-data-rooms-due-diligence",
+      "unitNumber": 2,
+      "title": "第 2 单元 · Harvey Vault : Audit Massif 的 Data Rooms (M&A) & Grilles d'Extraction",
+      "subtitle": "Auditer 的 milliers 的 documents en Data Room M&A, construire 的 grilles d'extraction multi-合同 (Review Tables) 与 验证 chaque clause à source.",
+      "estimatedMinutes": 24,
+      "memoActivity": "配置 一个 projet Harvey Vault 在 一项 Data Room d'acquisition 的 2 500 documents, exécuter 一项 grille d'extraction multi-合同 (changement 的 contrôle, responsabilité, résiliation) 与 auditer Red Flags via citations directes.",
+      "memoKeyTopics": [
+        "Harvey Vault : espace documentaire sécurisé à grande échelle 用于 l'audit 的 Data Rooms (M&A, Due Diligence, immobilier, contentieux)",
+        "Grilles d'extraction multi-合同 (Review Tables) : extraction structurée 的 clauses 的 changement 的 contrôle (Change of Control), responsabilité, exclusivité 与 résiliation",
+        "Contrôle qualité juridique : vérification en 一个 clic 的 citation exacte 在 document source, détection 的 avenants modifiant 合同 initial 与 rapport Red Flags"
+      ],
+      "memoGoldenRule": "在 Harvey Vault, définissez chaque colonne 的 votre grille d'extraction 配合 一项 question juridique fermée 与 précise, 与 vérifiez toujours avenants rattachés au 合同 principal.",
+      "architectureSchema": {
+        "title": "Pipeline d'Audit M&A 与 Due Diligence 在 Harvey Vault",
+        "diagram": "[Data Room (Milliers 的 PDF/DOCX scannés 或 natifs)] ➔ [Harvey Vault : OCR Juridique, Classification & Indexation par Dossier] ➔ [Review Table : Colonnes d'Extraction Multi-合同] ➔ [Cellules Sourcées (Citation cliquable page/clause) ➔ Rapport Red Flags M&A]",
+        "components": [
+          {
+            "name": "[ZH] Conteneur Sécurisé Harvey Vault",
+            "role": "Ingère, classe 与 indexe 的 milliers 的 pièces 的 Data Room 在 一个 coffre isolé par dossier (Matter) 配合 contrôle d'访问 granulaire."
+          },
+          {
+            "name": "[ZH] Grilles d'Extraction (Review Tables)",
+            "role": "Exécute en parallèle 的 colonnes d'extraction personnalisées 或 issues 的 模型 在 的 centaines 的 合同 (Change of Control, Liability Cap, Governing Law, Termination)."
+          },
+          {
+            "name": "[ZH] Ancrage Citationnel & Vérification d'Avenants",
+            "role": "Relie chaque cellule extraite au passage exact 的 document source 用于 permettre à l'avocat 的 valider Red Flag en quelques secondes."
+          }
+        ],
+        "securityInvariant": "Chaque projet Vault est strictement cloisonné au niveau 的 dossier client (Matter-level isolation) afin 的 garantir l'étanchéité 之间 opérations M&A 与 respect 的 murailles éthiques (Ethical Walls)."
+      },
+      "lessons": [
+        {
+          "id": "vault-audit-data-rooms-due-diligence",
+          "title": "Harvey Vault : organiser 与 auditer massivement 一项 Data Room M&A",
+          "objective": "Structurer l'ingestion d'一项 Data Room 在 Harvey Vault, classer corpus contractuel 与 查询 的 milliers 的 documents 配合 preuves sourcées.",
+          "estimatedMinutes": 12,
+          "hook": "Vendredi 19 h : 3 200 合同 与 avenants viennent d'être déposés 在 Data Room d'一项 cible d'acquisition 与 rapport 的 Due Diligence Red Flags est attendu lundi matin. 如何structurer votre audit 在 Harvey Vault ?",
+          "declicCard": {
+            "title": "核心顿悟 Harvey Vault : 的 Tri Manuel à l'Audit Massif Sourcé par Dossier",
+            "diagramTop": "Data Room brute (3 200 文件) ➔ Ingestion 在 一个 projet Harvey Vault isolé par dossier (Matter)",
+            "diagramBottom": "Classification automatique + Regroupement 合同/Avenants ➔ Requêtes transversales 配合 citations exactes",
+            "step1": "Créez 一个 projet Vault dédié à l'opération 配合 权限 restreintes à l'团队 的 dossier (Ethical Wall) 与 importez l'arborescence 的 Data Room.",
+            "step2": "Identifiez d'abord typologie 的 pièces (合同 clients Top 20, baux, financements, IP, pactes) 与 reliez chaque 合同 的 base à ses avenants ultérieurs.",
+            "rule": "一个 合同 initial lu 无 son Avenant n° 3 qui double préavis 或 modifie prix conduit à 一项 conclusion d'audit fausse !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · INGESTION & CLOISONNEMENT",
+              "title": "一个 coffre-fort dédié par opération (Matter)",
+              "bodyParagraph": "Harvey Vault 支持 的 charger 的 milliers 的 documents (PDF natifs, scans OCRisés, 文件 Word) au sein d'一个 projet isolé. Seuls avocats 与 juristes habilités 在 ce dossier (Matter) y ont 访问, garantissant respect strict 的 murailles éthiques (Ethical Walls) 的 cabinet.",
+              "keyTakeawayPill": "[ZH] 1 opération M&A / Contentieux = 1 projet Vault cloisonné aux seuls membres habilités"
+            },
+            {
+              "stepBadge": "步骤 2 · CARTOGRAPHIER CORPUS",
+              "title": "Relier 合同 principaux, annexes 与 avenants",
+              "bodyParagraph": "En Data Room, 文件 sont souvent mal nommés (`Scan_042.pdf`). Utilisez Harvey Vault 用于 identifier 自动 nature 的 chaque acte, parties signataires, date d'effet 与 surtout 用于 regrouper chaque 合同-cadre 配合 ses avenants (Amendments) 与 bons 的 commande.",
+              "keyTakeawayPill": "Toujours regrouper 合同-cadre + Annexes + Avenants par ordre chronologique"
+            },
+            {
+              "stepBadge": "步骤 3 · INTERROGATION TRANSVERSALE SOURCÉE",
+              "title": "Trouver l'aiguille 在 3 000 documents 配合 preuve",
+              "bodyParagraph": "Vous pouvez 查询 l'ensemble 的 Vault 或 一个 sous-dossier ciblé (ex. « Quels 合同 fournisseurs comportent 一项 obligation d'achat minimum annuel 或 一项 exclusivité géographique ? »). Chaque 响应 cite documents précis 与 ouvre passage surligné en regard.",
+              "keyTakeawayPill": "请求 在 Vault = 响应 synthétique + Liens directs vers page 与 paragraphe 的 chaque pièce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Vault ingère 与 indexe 的 grands volumes documentaires 在 一个 espace isolé par dossier (Matter) respectant murailles éthiques.",
+            "En Due Diligence, il est essentiel 的 relier chaque 合同 initial à ses avenants successifs afin d'évaluer l'état 的 droit en vigueur à date 的 l'audit.",
+            "Toute affirmation issue d'一项 recherche 在 Vault est accompagnée 的 citations cliquables permettant à l'avocat 的 验证 texte original."
+          ],
+          "workedExample": {
+            "situation": "某团队M&A audite l'acquisition d'一个 groupe logistique dont Data Room comporte 1 800 文件 commerciaux 与 immobiliers.",
+            "steps": [
+              "创建 一个 Vault dédié à l'opération « Projet Horizon » limité aux six avocats 的 l'团队 M&A/Immobilier.",
+              "Lancer 一项 classification initiale 在 Vault 用于 隔离 45 合同 clients représentant 80 % 的 chiffre d'affaires ainsi que leurs avenants.",
+              "Détecter grâce au recoupement chronologique qu'一个 avenant signé deux mois plus tôt avait ajouté 一项 clause d'exclusivité européenne 在 principal client."
+            ],
+            "decision": "Red Flag d'exclusivité, invisible 在 合同 initial 的 2022 mais présent 在 l'avenant 的 2026, est remonté immédiatement à l'acquéreur."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi analyser 仅 合同 initiaux 无 regrouper leurs avenants (Amendments) 在 一项 Data Room M&A constitue 一项 faute méthodologique, 与 comment organiser cette vérification 在 Harvey Vault.",
+            "successCriteria": [
+              "解析 qu'一个 avenant postérieur prévaut 在 clauses qu'il modifie (durée, prix, plafond, changement 的 contrôle).",
+              "Extraire 在 Harvey Vault l'identifiant 的 合同 parent, parties 与 date 的 signature 的 chaque pièce.",
+              "Consolider l'analyse par relation contractuelle en appliquant version plus récente 的 chaque clause modifiée."
+            ],
+            "feedback": "En audit contractuel, vérité juridique résulte 的 lecture combinée 的 合同 的 base 与 的 son dernier avenant en vigueur."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "您必须analyser 2 400 documents confidentiels d'一个 rachat d'企业 在 Harvey Vault. 如何protéger secret 的 dossier ?",
+              "prompt": "某律师事务所reçoit l'访问 à 一项 Data Room 的 2 400 documents 用于 一项 opération d'acquisition (M&A) soumise à 一项 muraille éthique (Ethical Wall) stricte. 如何configurer l'audit 在 Harvey ?",
+              "options": [
+                {
+                  "id": "creer-projet-vault-isole-equipe-dossier",
+                  "label": "创建 一个 projet Harvey Vault dédié à l'opération 与 restreindre ses 权限 d'访问 aux seuls avocats habilités 在 ce dossier."
+                },
+                {
+                  "id": "deposer-fichiers-espace-public-cabinet",
+                  "label": "Charger 2 400 pièces 在 一个 dossier public accessible à l'ensemble 的 associés 与 stagiaires 的 cabinet."
+                },
+                {
+                  "id": "fusionner-deux-data-rooms-concurrentes",
+                  "label": "Mélanger documents 的 deux cibles concurrentes 在 même grille d'analyse 用于 gagner 的 temps."
+                },
+                {
+                  "id": "analyser-sans-citations-sources",
+                  "label": "禁用 l'affichage 的 références 的 documents 用于 alléger rapport d'audit remis au client."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "为什么est-il dangereux 的 faire analyser 仅 合同 initiaux 在 Harvey Vault en oubliant dossier 的 avenants signés après ?",
+              "prompt": "Lors d'一项 Due Diligence 在 Harvey Vault, 一个 auditeur filtre 仅 文件 intitulés « Contrat_Cadre » 与 conclut qu'aucun 合同 ne contient d'exclusivité, en omettant d'inclure sous-dossier « Avenants_2025_2026 » 在 sa sélection. Quel est risque ?",
+              "options": [
+                {
+                  "id": "omission-clauses-modifiees-par-avenant",
+                  "label": "一个 avenant postérieur a pu introduire 一项 clause d'exclusivité 或 modifier préavis 的 合同-cadre initial 无 que l'audit ne détecte."
+                },
+                {
+                  "id": "erreur-formatage-marges-impression",
+                  "label": "marges d'impression 的 navigateur risquent d'être décalées 的 deux millimètres à l'export."
+                },
+                {
+                  "id": "changement-langue-interface-harvey",
+                  "label": "L'interface 用户 的 Harvey risque 的 basculer 自动 en espagnol."
+                },
+                {
+                  "id": "suppression-automatique-fichiers-pdf",
+                  "label": "文件 PDF non sélectionnés sont définitivement supprimés 的 serveur 的 Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "在 Harvey Vault : isolez chaque dossier par Matter, regroupez 合同 与 avenants, 与 exigez toujours citation exacte 的 pièce.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "grilles-extraction-multi-contrats-review-tables",
+          "title": "Grilles d'extraction multi-合同 (Review Tables) : changement 的 contrôle, responsabilité 与 résiliation",
+          "objective": "Concevoir 与 exécuter 的 grilles d'extraction multi-合同 (Review Tables) 在 Harvey Vault 用于 auditer clauses 的 changement 的 contrôle, 的 responsabilité 与 的 résiliation.",
+          "estimatedMinutes": 12,
+          "hook": "如何extraire en quinze minutes, 在 400 合同 commerciaux, liste exacte 的 ceux qui permettent au cocontractant 的 résilier 或 d'exiger 一个 consentement écrit en cas 的 rachat 的 société cible (Change of Control) ?",
+          "declicCard": {
+            "title": "核心顿悟 Review Tables : 1 Ligne = 1 合同 · 1 Colonne = 1 Question Juridique Structurée + Citation",
+            "diagramTop": "Lignes : 400 合同 的 Data Room · Colonnes : Parties | Date | Change of Control (Oui/Non + Préavis) | Plafond Responsabilité | Résiliation",
+            "diagramBottom": "Clic 在 n'importe quelle cellule ➔ Ouvre 合同 source au paragraphe exact surligné 用于 vérification",
+            "step1": "Décomposez chaque clause complexe en deux colonnes complémentaires : 一项 colonne 的 qualification rapide (`Oui / Non / Silence 的 合同`) 与 一项 colonne 的 détail (`Condition, délai 的 préavis 与 citation`).",
+            "step2": "Filtrez lignes où `Changement 的 contrôle = Consentement requis 或 Résiliation` 与 vérifiez passages surlignés 用于 dresser matrice Red Flags.",
+            "rule": "Exigez toujours que grille distingue explicitement « Non autorisé par 一项 clause » 与 « Silence 的 合同 (aucune clause trouvée) »."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · ARCHITECTURE D'一项 REVIEW TABLE",
+              "title": "Transformer 400 合同 en 一项 matrice structurée",
+              "bodyParagraph": "在 Harvey Vault, 一项 Review Table applique en parallèle même série 的 colonnes d'extraction à 的 centaines 的 合同. Chaque ligne représente 一个 document 与 chaque colonne répond à 一项 consigne précise (ex. Parties, Date d'échéance, Tacite reconduction, Changement 的 contrôle, Plafond 的 responsabilité, Droit applicable).",
+              "keyTakeawayPill": "[ZH] Review Table = Extraction parallèle structurée + Cellules liées au texte source"
+            },
+            {
+              "stepBadge": "步骤 2 · CONCEVOIR 的 COLONNES PRÉCISES",
+              "title": "Séparer verdict binaire 与 détail opérationnel",
+              "bodyParagraph": "用于 auditer clauses 的 changement 的 contrôle (Change of Control), créez : 1. 一项 colonne fermée (`Consentement préalable requis`, `Simple notification`, `Droit 的 résiliation`, `Aucune clause`) · 2. 一项 colonne 的 détail extrayant seuil 的 détention déclencheur, délai 的 préavis 与 référence 的 l'article.",
+              "keyTakeawayPill": "Colonne 1 = Catégorie filtrable · Colonne 2 = Conditions exactes, délais 与 article cité"
+            },
+            {
+              "stepBadge": "步骤 3 · VÉRIFICATION CITATIONNELLE & EXPORT",
+              "title": "Cliquer, 验证 passage surligné 与 exporter",
+              "bodyParagraph": "Aucune cellule 的 Review Table n'est 一项 boîte noire : 一个 clic 在 cellule ouvre côte à côte PDF 或 DOCX original à page exacte 配合 paragraphe surligné. L'associé 或 collaborateur valide ainsi Red Flags critiques avant d'exporter matrice vers Excel 或 Word.",
+              "keyTakeawayPill": "1 clic 在 一项 cellule = lecture immédiate 的 clause originale surlignée 在 合同"
+            }
+          ],
+          "keyIdeas": [
+            "Review Tables 的 Harvey Vault permettent d'extraire 与 的 comparer mêmes clauses clés (changement 的 contrôle, plafond 的 responsabilité, indemnisation, résiliation) 在 的 centaines 的 合同 simultanément.",
+            "Coupler 一项 colonne 的 classification fermée (facile à filtrer/trier) 与 一项 colonne d'analyse détaillée maximise fiabilité 的 revue.",
+            "Distinguer explicitement l'interdiction expresse 与 silence 的 合同 évite toute mauvaise interprétation juridique."
+          ],
+          "workedExample": {
+            "situation": "Lors 的 l'acquisition d'一个 éditeur 的 logiciels B2B, l'团队 Corporate 必须 验证 在 350 合同 clients si cession 的 100 % 的 titres déclenche 一个 droit 的 résiliation anticipée.",
+            "steps": [
+              "创建 一项 Review Table 在 Harvey Vault 在 350 合同 配合 colonnes : `Client`, `Revenu Annuel`, `Statut Change of Control (Consentement / Notification / Résiliation / Silence)`, `Achat 的 titres inclus 在 définition ?`, 与 `Délai & Sanction`.",
+              "Filtrer 28 合同 où `Statut Change of Control` indique `Consentement` 或 `Résiliation`.",
+              "Cliquer 在 citations 的 28 cellules 用于 confirmer que 11 合同 incluent expressément changement d'actionnariat indirect 与 préparer lettres 的 demande d'accord (waivers)."
+            ],
+            "decision": "liste 的 11 waivers prioritaires est établie 与 vérifiée en 一项 matinée au lieu 的 deux semaines 的 dépouillement linéaire."
+          },
+          "practice": {
+            "prompt": "Concevez intitulés 与 consignes 的 trois colonnes d'一项 Review Table Harvey Vault destinée à auditer risque 的 plafond 的 responsabilité (Liability Cap) 在 200 合同 fournisseurs.",
+            "successCriteria": [
+              "Colonne 1 (Classification) : `Existence 与 Type 的 Plafond` (Plafond fixe, Multiple 的 redevances, Responsabilité illimitée, Silence 的 合同).",
+              "Colonne 2 (Montant / Formule) : `Montant 或 Formule 的 Plafond` (extraire chiffre exact 或 nombre 的 mois 的 redevances 与 l'article cité).",
+              "Colonne 3 (Exceptions / Carve-outs) : `Exceptions au Plafond` (lister cas déplafonnés : fraude, faute lourde, confidentialité, IP, 数据 personnelles)."
+            ],
+            "feedback": "Séparer principe 的 plafond, sa formule 的 calcul 与 ses exceptions (carve-outs) 支持 一个 tri instantané 的 合同 sous-protégés."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "在 500 合同 在 Harvey Vault, comment repérer d'一个 coup d'œil ceux qui posent problème tout en pouvant 验证 phrase exacte 的 合同 ?",
+              "prompt": "En Due Diligence M&A 在 500 合同 commerciaux 在 Harvey Vault, vous devez identifier rapidement tous 合同 qui exigent l'accord préalable 的 client en cas 的 changement 的 contrôle, tout en pouvant lire clause exacte. Quelle méthode est plus efficace ?",
+              "options": [
+                {
+                  "id": "review-table-colonne-fermee-plus-detail-citation",
+                  "label": "Construire 一项 Review Table combinant 一项 colonne 的 classification fermée (`Consentement requis / Notification / Aucune clause`) 与 一项 colonne détaillant conditions 配合 citation cliquable."
+                },
+                {
+                  "id": "demander-resume-unique-sans-tableau",
+                  "label": "Demander 一个 résumé narratif global 的 dix lignes 在 500 合同 无 nommer aucun 文件."
+                },
+                {
+                  "id": "imprimer-cinq-cents-contrats-papier",
+                  "label": "Exporter 500 合同 en images non indexées 无 exécuter 的 grille d'extraction."
+                },
+                {
+                  "id": "confondre-silence-et-interdiction",
+                  "label": "Forcer 模型 à répondre 仅 Oui 或 Non même lorsque document est totalement silencieux 在 sujet."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "在 一个 tableau d'analyse Harvey Vault, pourquoi faut-il prévoir case « 合同 n'en parle pas » en plus 的 « Oui » 与 « Non » ?",
+              "prompt": "为什么est-il essentiel qu'一项 colonne 的 Review Table 在 Harvey Vault prévoie explicitement valeur « Silence 的 合同 (Aucune clause) » en plus 的 « Oui » 与 « Non » ?",
+              "options": [
+                {
+                  "id": "distinguer-absence-clause-et-stipulation-expresse",
+                  "label": "用于 distinguer juridiquement 一个 合同 qui interdit expressément 一项 opération d'一个 合同 qui n'aborde pas sujet (auquel s'applique alors droit commun)."
+                },
+                {
+                  "id": "reduire-nombre-colonnes-ecran",
+                  "label": "用于 masquer 自动 lignes paires 的 tableau lors 的 l'exportation vers Excel."
+                },
+                {
+                  "id": "desactiver-liens-vers-pdf",
+                  "label": "用于 删除 liens 的 citation vers pages 的 合同 originaux."
+                },
+                {
+                  "id": "modifier-texte-pdf-source",
+                  "label": "用于 réécrire 直接 文件 PDF scannés stockés 在 Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "Review Tables 在 Harvey Vault = colonnes 的 tri fermées + colonnes 的 détail + distinction 的 silence contractuel + vérification en 一个 clic 在 source.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-knowledge-workflows-secret-professionnel",
+      "unitNumber": 3,
+      "title": "第 3 单元 · Harvey Knowledge, Workflows Multi-Étapes & Secret Professionnel",
+      "subtitle": "Recherche réglementaire 与 jurisprudentielle sourcée, exécution 的 workflows juridiques multi-étapes, confidentialité zéro-entraînement client 与 respect 的 律师-客户保密特权.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Exécuter 一项 recherche réglementaire 与 jurisprudentielle vérifiée 在 Harvey Knowledge, orchestrer 一个 workflow juridique multi-étapes 与 auditer garanties 的 confidentialité zéro-entraînement 与 的 律师-客户保密特权.",
+      "memoKeyTopics": [
+        "Harvey Knowledge : recherche juridique, réglementaire, fiscale 与 jurisprudentielle ancrée 在 的 bases officielles 配合 citations vérifiables",
+        "Harvey Workflows : automatisation guidée 的 processus juridiques multi-étapes (qualification ➔ extraction ➔ analyse 的 droit ➔ rédaction 的 livrable)",
+        "Déontologie & 安全 : confidentialité zéro-entraînement 在 数据 clients, isolation par locataire/dossier 与 protection 的 律师-客户保密特权 的 l'avocat"
+      ],
+      "memoGoldenRule": "一个 avocat ne cite jamais 一项 jurisprudence 或 一个 article 的 loi 无 avoir vérifié son texte source 与 son état 的 vigueur via citations 的 Harvey Knowledge, 与 conserve toujours responsabilité déontologique 的 conseil livré.",
+      "architectureSchema": {
+        "title": "Architecture Harvey Knowledge, Workflows Multi-Étapes & Frontière 的 Confidentialité",
+        "diagram": "[Dossier Client (Zéro-Entraînement & Ethical Wall)] + [Harvey Knowledge (Bases Légales, Réglementaires & Jurisprudence)] ➔ [Harvey Workflow : Étape 1 Extraction ➔ Étape 2 Confrontation au Droit ➔ Étape 3 Projet d'Acte / Note] ➔ [Revue & Validation 的 l'Avocat]",
+        "components": [
+          {
+            "name": "[ZH] Harvey Knowledge",
+            "role": "Interroge 的 corpus juridiques, réglementaires 与 jurisprudentiels 的 référence 用于 fournir 的 réponses ancrées 配合 liens directs vers textes 与 décisions."
+          },
+          {
+            "name": "[ZH] Harvey Workflows",
+            "role": "Enchaîne 的 manière reproductible plusieurs étapes spécialisées (collecte 的 pièces, extraction 的 faits, recherche 的 droit, génération d'acte 或 的 conclusions) 配合 validation humaine."
+          },
+          {
+            "name": "[ZH] Garantie Zéro-Entraînement & Secret Professionnel",
+            "role": "确保 contractuellement 与 techniquement qu'aucun prompt, 合同 或 mémo client n'est utilisé 用于 entraîner 的 模型 partagés ni exposé à d'autres clients."
+          }
+        ],
+        "securityInvariant": "数据 soumises 在 Harvey restent strictement confinées au locataire 与 au dossier autorisé, 配合 一项 politique zéro-entraînement 的 模型 的 fondation 与 maintien intégral 的 律师-客户保密特权."
+      },
+      "lessons": [
+        {
+          "id": "harvey-knowledge-recherche-juridique-sourcee",
+          "title": "Harvey Knowledge : recherche réglementaire 与 jurisprudentielle sourcée 无 hallucination",
+          "objective": "Conduire 一项 recherche réglementaire 与 jurisprudentielle 在 Harvey Knowledge en vérifiant hiérarchie 的 normes, juridiction, date 的 vigueur 与 citations.",
+          "estimatedMinutes": 12,
+          "hook": "Plusieurs avocats 在 monde ont été sanctionnés par 的 tribunaux 用于 avoir cité 的 arrêts inventés par 一个 chatbot grand public : comment l'architecture d'ancrage 的 Harvey Knowledge 与 votre protocole 的 revue éliminent-ils ce risque ?",
+          "declicCard": {
+            "title": "核心顿悟 Harvey Knowledge : Ancrage 在 Bases Officielles + Vérification 的 Source Citée",
+            "diagramTop": "Question 的 droit (Juridiction + Matière + Période) ➔ Recherche 在 Harvey Knowledge (Textes & Jurisprudence réels)",
+            "diagramBottom": "响应 ancrée 配合 citations numérotées ➔ Ouverture 与 lecture 的 l'arrêt/article par l'avocat avant citation",
+            "step1": "Formulez votre question en précisant juridiction, branche 的 droit, faits pertinents 与 date 的 faits litigieux.",
+            "step2": "Ouvrez systématiquement décisions 与 textes cités par Harvey Knowledge 用于 验证 attendu/considérant exact 与 l'absence 的 revirement postérieur.",
+            "rule": "Zéro référence jurisprudentielle 或 légale 在 一个 acte 或 一项 consultation 无 avoir ouvert 与 lu source citée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · POURQUOI 一个 CHATBOT GÉNÉRALISTE HALLUCINE",
+              "title": "Prédire 一个 numéro d'arrêt plausible ≠ Retrouver 一个 vrai arrêt",
+              "bodyParagraph": "一个 模型 的 langage non ancré 在 一项 base juridique officielle prédit 的 suites 的 mots statistiquement plausibles : il peut inventer 的 toutes pièces 一个 numéro 的 pourvoi 或 一个 attendu qui sonne vrai. Harvey Knowledge résout ce problème à racine en ancrant génération 在 的 bases documentaires juridiques, fiscales 与 réglementaires vérifiées.",
+              "keyTakeawayPill": "Harvey Knowledge = génération ancrée 在 的 corpus législatifs, réglementaires 与 jurisprudentiels réels"
+            },
+            {
+              "stepBadge": "步骤 2 · FORMULER 一项 QUESTION 的 DROIT PRÉCISE",
+              "title": "Juridiction, faits qualifiés 与 question 的 droit",
+              "bodyParagraph": "用于 tirer meilleur parti 的 Harvey Knowledge, structurez votre 请求 comme 一项 saisine : 1. Juridiction 与 droit applicable (ex. Cour 的 cassation, chambre commerciale ; droit 的 l'Union européenne) · 2. Qualification 的 faits (ex. rupture brutale d'一项 relation commerciale établie 的 8 ans) · 3. Question précise à trancher.",
+              "keyTakeawayPill": "Juridiction exacte + Faits qualifiés + Question 的 droit = recherche ciblée 与 pertinente"
+            },
+            {
+              "stepBadge": "步骤 3 · CONTRÔLE 的 VIGUEUR & PORTÉE",
+              "title": "Lire l'arrêt 在 son contexte avant 的 l'invoquer",
+              "bodyParagraph": "一项 citation exacte peut malgré tout porter 在 一个 texte abrogé 或 在 的 faits d'espèce différents 的 vôtres (distinguishing). Cliquez toujours 在 source 在 Harvey Knowledge 用于 验证 date 的 décision, chambre, solution retenue 与 son applicabilité exacte au dossier client.",
+              "keyTakeawayPill": "Toujours 验证 : 1. Existence 的 texte/arrêt · 2. État 的 vigueur · 3. Pertinence aux faits d'espèce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Knowledge ancre recherche juridique 与 réglementaire 在 的 sources autorisées 与 attache 的 citations vérifiables à chaque affirmation.",
+            "Préciser juridiction, l'ordre 的 juridiction, matière 与 l'époque 的 faits évite transpositions erronées 之间 systèmes juridiques.",
+            "L'avocat 或 juriste 必须 systématiquement ouvrir citation source 用于 contrôler portée exacte 的 décision 与 l'absence d'abrogation 或 的 revirement."
+          ],
+          "workedExample": {
+            "situation": "一个 avocat en droit 的 concurrence prépare 一项 note urgente 在 validité d'一项 clause 的 non-concurrence post-contractuelle 在 一个 合同 的 franchise en droit français 与 européen.",
+            "steps": [
+              "查询 Harvey Knowledge en spécifiant droit français (Code 的 commerce) 与 règlement d'exemption européen 在 restrictions verticales.",
+              "Examiner conditions cumulatives extraites par Harvey Knowledge (limitation 在 temps à 一个 an, limitation aux locaux, caractère indispensable à protection 的 savoir-faire) 与 ouvrir références citées.",
+              "Intégrer références vérifiées 在 consultation juridique remise au franchiseur."
+            ],
+            "decision": "consultation est solidement étayée par textes 与 arrêts exacts, vérifiés en quelques minutes."
+          },
+          "practice": {
+            "prompt": "一个 stagiaire vous remet 一个 projet 的 conclusions contenant trois arrêts trouvés via 一个 outil d'IA grand public non connecté à 一项 base juridique, 无 avoir ouvert décisions. Quelle procédure 的 contrôle lui imposez-vous 配合 Harvey Knowledge ?",
+            "successCriteria": [
+              "Interdire formellement l'insertion 在 一个 acte judiciaire 的 toute référence jurisprudentielle non vérifiée à source.",
+              "Relancer recherche 的 droit 在 Harvey Knowledge en précisant juridiction 与 question 的 droit.",
+              "Ouvrir chacune 的 décisions citées par Harvey Knowledge 用于 验证 texte intégral, date 与 l'adéquation aux faits 的 dossier."
+            ],
+            "feedback": "responsabilité professionnelle 的 l'avocat impose que chaque autorité juridique citée ait été lue 与 vérifiée 在 sa source officielle."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "如何Harvey Knowledge évite-t-il d'inventer 的 fausses lois 或 的 faux jugements ?",
+              "prompt": "如何Harvey Knowledge prévient-il risque d'hallucination 的 références jurisprudentielles 或 réglementaires lors d'一项 recherche juridique ?",
+              "options": [
+                {
+                  "id": "ancrage-bases-juridiques-verifiees-et-citations",
+                  "label": "En ancrant 响应 在 的 数据库 juridiques 与 réglementaires faisant foi 与 en attachant 的 citations cliquables vers textes sources."
+                },
+                {
+                  "id": "generation-numeros-pourvoi-aleatoires",
+                  "label": "En générant 的 numéros 的 pourvoi aléatoires à partir d'一个 dictionnaire statistique 无 consulter 的 base documentaire."
+                },
+                {
+                  "id": "interdiction-afficher-sources",
+                  "label": "En masquant références d'articles 的 loi afin que lecteur ne puisse pas 验证 l'origine 的 raisonnement."
+                },
+                {
+                  "id": "traduction-automatique-romans-fiction",
+                  "label": "En s'appuyant 仅 在 的 articles 的 blogs anonymes non juridiques."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "一项 fois que Harvey Knowledge vous donne 一项 响应 juridique 配合 的 sources, que devez-vous toujours faire avant 的 valider votre conseil ?",
+              "prompt": "Après avoir obtenu 一项 响应 sourcée 在 Harvey Knowledge 在 l'application d'一项 directive européenne 与 的 sa transposition nationale, quelle vérification professionnelle juriste 必须-il toujours effectuer avant 的 signer sa note ?",
+              "options": [
+                {
+                  "id": "ouvrir-citations-verifier-vigueur-et-espece",
+                  "label": "Ouvrir textes 与 arrêts cités 用于 confirmer leur état 的 vigueur à date 的 faits 与 验证 que faits d'espèce correspondent au dossier."
+                },
+                {
+                  "id": "copier-sans-lire-sources-citees",
+                  "label": "Envoyer note au tribunal 无 jamais cliquer 在 citations ni 验证 date 的 textes."
+                },
+                {
+                  "id": "supprimer-mentions-juridiction",
+                  "label": "Retirer toute mention 的 pays 与 的 juridiction compétente 在 conclusions finales."
+                },
+                {
+                  "id": "remplacer-textes-par-avis-personnel",
+                  "label": "Effacer références légales 用于 ne conserver qu'一项 opinion générale non motivée."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Knowledge apporte rapidité 的 l'ancrage sourcé ; l'ouverture 的 citation 与 contrôle 的 vigueur scellent rigueur 的 l'avocat.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-workflows-et-secret-professionnel",
+          "title": "Harvey Workflows multi-étapes, zéro-entraînement client 与 律师-客户保密特权",
+          "objective": "Exécuter 的 workflows juridiques multi-étapes 在 Harvey 与 掌握 l'architecture 的 confidentialité (zéro-entraînement client, cloisonnement 与 律师-客户保密特权).",
+          "estimatedMinutes": 12,
+          "hook": "如何standardiser l'excellence d'一个 associé senior 在 一个 workflow reproductible par tout cabinet, tout en garantissant aux clients que leurs secrets d'affaires 与 leur 律师-客户保密特权 sont protégés à 100 % ?",
+          "declicCard": {
+            "title": "核心顿悟 Workflows & Déontologie : Orchestration Multi-Étapes + Zéro-Entraînement Client",
+            "diagramTop": "[ZH] Harvey Workflow : 1. Ingestion Pièces ➔ 2. Extraction Faits/Clauses ➔ 3. Confrontation au Droit ➔ 4. Brouillon d'Acte",
+            "diagramBottom": "Garantie Déontologique : Zéro entraînement 在 数据 clients + Cloisonnement par dossier + Supervision humaine",
+            "step1": "Utilisez Harvey Workflows 用于 enchaîner 的 façon déterministe 与 guidée 的 tâches complexes (ex. préparation d'一项 assignation, 响应 à 一个 contrôle réglementaire, revue DORA/NIS2).",
+            "step2": "Vérifiez toujours trois piliers déontologiques : engagement zéro-entraînement client, muraille éthique par dossier 与 validation finale par l'avocat.",
+            "rule": "confidentialité d'一个 dossier juridique ne souffre aucune exception : zéro usage d'outils publics gratuits réentraînés 在 prompts !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · HARVEY WORKFLOWS MULTI-ÉTAPES",
+              "title": "Industrialiser savoir-faire juridique 无 perdre nuance",
+              "bodyParagraph": "一个 workflow 在 Harvey enchaîne plusieurs étapes spécialisées conçues par experts juridiques : par exemple, 1. Extraire chronologie 的 faits depuis 50 pièces 的 contentieux · 2. Identifier manquements contractuels · 3. Rechercher fondements légaux applicables · 4. Générer projet 的 mise en demeure 或 的 conclusions 配合 renvoi aux pièces (`Pièce n° X`).",
+              "keyTakeawayPill": "Harvey Workflows = Chaînage structuré d'étapes juridiques 配合 jalons 的 validation"
+            },
+            {
+              "stepBadge": "步骤 2 · ZÉRO-ENTRAÎNEMENT CLIENT",
+              "title": "Vos dossiers n'entraînent jamais 模型 d'一个 autre client",
+              "bodyParagraph": "Contrairement aux services grand public où conversations peuvent alimenter l'entraînement futur 的 模型, l'architecture d'企业 的 Harvey 确保 contractuellement 与 techniquement **zéro-entraînement** (Zero Training) 在 prompts, documents 与 livrables 的 clients, 配合 加密 en transit 与 au repos.",
+              "keyTakeawayPill": "Zéro-Entraînement Client = aucune donnée d'一个 dossier n'之间 在 poids 的 模型"
+            },
+            {
+              "stepBadge": "步骤 3 · SECRET PROFESSIONNEL & RESPONSABILITÉ",
+              "title": "Supervision humaine, Ethical Walls 与 traçabilité",
+              "bodyParagraph": "respect 的 律师-客户保密特权 的 l'avocat (与 的 legal privilege) repose 在 trois contrôles : 1. Isolation stricte par client 与 par dossier (Ethical Walls) · 2. Journalisation d'audit 与 politiques 的 rétention maîtrisées par cabinet · 3. Revue, validation 与 signature par 一个 professionnel 的 droit qui demeure seul responsable 的 conseil.",
+              "keyTakeawayPill": "Secret professionnel = Isolation par dossier + Zéro entraînement + Validation humaine 的 l'avocat"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Workflows 支持 d'orchestrer 的 processus juridiques multi-étapes reproductibles (chronologie 的 pièces, grille 的 conformité, projet d'acte) en intégrant savoir-faire 的 cabinet.",
+            "garantie zéro-entraînement client assure qu'aucune donnée confidentielle soumise à Harvey ne sert à entraîner 模型 sous-jacents.",
+            "respect 的 律师-客户保密特权 exige l'isolation 的 dossiers (Ethical Walls), l'interdiction 的 outils grand public non contractuels 与 revue finale par l'avocat."
+          ],
+          "workedExample": {
+            "situation": "direction juridique d'一个 groupe pharmaceutique 与 son cabinet conseil 必须 auditer 120 合同 critiques au regard 的 règlement européen DORA / NIS2 与 générer avenants 的 mise en conformité.",
+            "steps": [
+              "Lancer 在 Harvey 一个 Workflow multi-étapes : (1) Extraction 的 clauses 的 安全 与 的 notification d'incident 在 Vault, (2) Confrontation aux exigences réglementaires via Knowledge, (3) Génération individualisée 的 projet d'avenant 用于 chaque fournisseur incomplet.",
+              "Maintenir l'ensemble 的 pièces 在 l'environnement Harvey d'企业 couvert par l'engagement zéro-entraînement 与 律师-客户保密特权.",
+              "Faire relire 与 valider chaque avenant par juriste responsable 的 合同 avant envoi au fournisseur."
+            ],
+            "decision": "campagne 的 conformité réglementaire 在 120 合同 est bouclée en dix jours 配合 一项 traçabilité complète 与 zéro compromis 在 confidentialité."
+          },
+          "practice": {
+            "prompt": "一个 client demande à votre cabinet d'avocats quelles garanties concrètes protègent ses documents confidentiels lorsque vos équipes utilisent Harvey. Formulez 一项 响应 structurée en trois points.",
+            "successCriteria": [
+              "1. Garantie contractuelle 与 technique 的 zéro-entraînement : documents 与 prompts 的 client ne sont jamais utilisés 用于 entraîner 的 模型 partagés.",
+              "2. Cloisonnement strict 的 访问 par dossier (Ethical Walls), 加密 的 bout en bout 与 hébergement conforme aux standards 的 安全 d'企业.",
+              "3. Maintien intégral 的 supervision 与 的 responsabilité professionnelle 的 avocats 的 cabinet 在 chaque analyse 与 chaque acte produit."
+            ],
+            "feedback": "Cette 响应 rassure direction juridique 与 RSSI 的 client en couvrant à fois l'architecture IA (zéro-entraînement), 安全 d'访问 (cloisonnement) 与 déontologie (supervision 的 l'avocat)."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quel est l'avantage d'一个 Workflow Harvey par rapport à 一项 simple question posée 在 chat ?",
+              "prompt": "Quel est l'apport principal 的 Harvey Workflows par rapport à 一个 simple prompt isolé lors 的 traitement d'一个 dossier juridique complexe ?",
+              "options": [
+                {
+                  "id": "orchestration-multi-etapes-reproductible-validee",
+                  "label": "Il orchestre 的 façon reproductible 一项 séquence d'étapes juridiques spécialisées (extraction 的 pièces, analyse 的 droit, génération 的 projet d'acte) 配合 jalons 的 validation humaine."
+                },
+                {
+                  "id": "depot-automatique-greffe-sans-avocat",
+                  "label": "Il dépose 与 signe 自动 的 actes 的 procédure au greffe 的 tribunal 无 aucune relecture d'一个 avocat."
+                },
+                {
+                  "id": "publication-dossiers-clients-reseaux-sociaux",
+                  "label": "Il publie pièces confidentielles 的 dossier 在 一个 forum communautaire 用于 recueillir 的 avis externes."
+                },
+                {
+                  "id": "suppression-numerotation-pieces-contentieux",
+                  "label": "Il efface numéros 的 pièces justificatives afin d'empêcher juge 的 验证 faits allégués."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Qu'est-ce qui 确保 que 合同 confidentiels confiés à Harvey ne serviront jamais à entraîner l'IA 用于 d'autres clients ?",
+              "prompt": "法务部门exige que ses mémos 的 litige 与 ses projets d'acquisition restent couverts par confidentialité 与 ne puissent en aucun cas enrichir 一个 模型 d'IA accessible à 的 tiers. Quelle garantie d'architecture 的 Harvey répond 直接 à cette exigence ?",
+              "options": [
+                {
+                  "id": "zero-entrainement-client-et-isolation-locataire",
+                  "label": "politique 的 confidentialité zéro-entraînement 在 数据 clients combinée au cloisonnement strict par organisation 与 par dossier."
+                },
+                {
+                  "id": "partage-poids-modele-inter-cabinets",
+                  "label": "réentraînement quotidien d'一个 模型 public commun 在 l'ensemble 的 合同 téléversés par tous cabinets."
+                },
+                {
+                  "id": "conservation-publique-prompts",
+                  "label": "L'indexation 的 prompts juridiques 在 一个 annuaire 的 recherche ouvert aux moteurs web."
+                },
+                {
+                  "id": "desactivation-chiffrement-tls",
+                  "label": "transmission 的 pièces 的 Data Room en texte clair 在 一个 网络 Wi-Fi public non chiffré."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Workflows industrialise vos processus multi-étapes ; zéro-entraînement client, cloisonnement par dossier 与 validation 的 l'avocat protègent 律师-客户保密特权.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-legal-engineering-credly",
+          "title": "[ZH] Harvey Academy Legal Engineering, Preparing for Legal Work, Admins & Badges Credly",
+          "objective": "掌握 Legal Engineering Certification, parcours badgé Preparing for Legal Work, guide Getting Started for Admins, nouveautés Harvey II 与 gestion 的 badges vérifiés Credly by Pearson.",
+          "estimatedMinutes": 12,
+          "hook": "如何industrialiser l'excellence IA 在 一个 cabinet 或 一项 direction juridique grâce au rôle 的 Legal Engineer, au parcours Admin 的 Harvey Academy 与 aux certifications vérifiables Credly ?",
+          "declicCard": {
+            "title": "核心顿悟 Legal Engineering & Credly : Industrialisation 的 Workflows + 治理 Admin + Preuve Vérifiée",
+            "diagramTop": "[ZH] Certifications & Parcours : Legal Engineering Certification · Preparing for Legal Work (45 min) · Getting Started for Admins · Harvey II",
+            "diagramBottom": "Reconnaissance officielle : Certificat Harvey Academy + Badge numérique vérifié Credly by Pearson (无 expiration)",
+            "step1": "Formez vos référents via Legal Engineering Certification 与 Getting Started for Admins 用于 concevoir 的 workflows fiables 与 配置 安全 的 workspace.",
+            "step2": "Validez pratique opérationnelle 配合 Preparing for Legal Work 与 associez l'adresse e-mail 的 compte Academy à Credly by Pearson 用于 publier badge vérifié.",
+            "rule": "Utilisez toujours même adresse e-mail professionnelle 在 Harvey, Harvey Academy 与 Credly (与 autorisez admin@credly.com) 用于 rattacher vos certifications 无 délai."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "步骤 1 · LEGAL ENGINEERING CERTIFICATION",
+              "title": "compétences clés 的 Legal Engineer 在 Harvey Academy",
+              "bodyParagraph": "Legal Engineering Certification 的 Harvey Academy (parcours spécialisé en 2 cours, ouvert gratuitement 在 création 的 compte Academy) forme aux compétences d'ingénierie juridique : décomposition d'一个 processus complexe en étapes vérifiables, conception 的 prompts 与 的 grilles Review Tables standardisés, tests 在 cas limites 与 assurance qualité avant déploiement à l'团队.",
+              "keyTakeawayPill": "Legal Engineering Certification = concevoir, tester 与 standardiser workflows juridiques"
+            },
+            {
+              "stepBadge": "步骤 2 · PREPARING FOR LEGAL WORK, ADMINS & HARVEY II",
+              "title": "Embarquer équipes 与 administrer workspace dès jour 1",
+              "bodyParagraph": "用于 用户 disposant d'一个 访问 Harvey (via SSO 或 code OTP), cours badgé Preparing for Legal Work (45 min) valide mise en pratique par 的 exercices réels 与 一个 badge capstone. En parallèle, parcours Getting Started for Admins (4 cours) guide administrateurs 与 Legal Ops 在 configuration sécurisée 的 workspace, l'organisation 的 flux 与 suivi 的 nouveautés comme playlist Harvey II.",
+              "keyTakeawayPill": "[ZH] Preparing for Legal Work (pratique SSO) + Getting Started for Admins (déploiement sécurisé)"
+            },
+            {
+              "stepBadge": "步骤 3 · BADGES VÉRIFIÉS CREDLY BY PEARSON",
+              "title": "Revendiquer, 验证 与 共享 ses certifications Harvey Academy",
+              "bodyParagraph": "Chaque certification réussie 在 Harvey Academy délivre 一个 certificat numérique 与 一个 badge vérifié émis via Credly by Pearson (无 date d'expiration). badge atteste l'émetteur, date d'obtention, compétences validées 与 一个 lien public 的 vérification 用于 LinkedIn 或 一项 signature professionnelle. Si vous possédez déjà 一个 compte Credly sous 一项 autre adresse, ajoutez simplement votre e-mail Academy 在 Settings > Account.",
+              "keyTakeawayPill": "Badge Harvey via Credly by Pearson = preuve vérifiable 与 permanente 的 compétence Legal IA"
+            }
+          ],
+          "keyIdeas": [
+            "Legal Engineering Certification 与 Level 1 Foundations sont accessibles gratuitement 配合 一个 compte Harvey Academy ; Preparing for Legal Work est dédié aux 用户 Harvey connectés (SSO/OTP).",
+            "parcours Getting Started for Admins (4 cours) outille Legal Ops 与 administrateurs 用于 配置 l'espace 的 travail 与 部署 的 workflows sécurisés dès premier jour.",
+            "badges 的 certification Harvey Academy sont émis par Credly by Pearson, ne périment pas 与 se rattachent via l'adresse e-mail 的 compte Academy."
+          ],
+          "workedExample": {
+            "situation": "一项 directrice Legal Ops déploie Harvey auprès 的 120 avocats 与 souhaite structurer 一个 网络 的 référents certifiés tout en permettant à chacun 的 valoriser sa certification 在 LinkedIn.",
+            "steps": [
+              "Suivre parcours Getting Started for Admins (4 cours) 与 playlist Harvey II 用于 配置 workspace, murailles éthiques 与 模型 d'团队.",
+              "Faire passer Legal Engineering Certification aux référents métiers 与 cours badgé Preparing for Legal Work (45 min) aux avocats connectés en SSO.",
+              "Autoriser courriels 的 admin@credly.com 在 passerelle 的 messagerie 的 cabinet afin que chaque lauréat reçoive 与 accepte son badge vérifié Credly by Pearson."
+            ],
+            "decision": "cabinet dispose d'administrateurs formés, 的 Legal Engineers certifiés 与 d'一项 reconnaissance officielle vérifiable 用于 chaque avocat."
+          },
+          "practice": {
+            "prompt": "Rédigez procédure interne permettant aux juristes 的 votre organisation 的 passer certifications Harvey Academy (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) 与 的 récupérer leur badge Credly by Pearson 无 blocage technique.",
+            "successCriteria": [
+              "Préciser 的 创建 compte Harvey Academy 配合 même adresse e-mail professionnelle que celle utilisée 用于 se connecter à Harvey.",
+              "Distinguer certifications ouvertes (Level 1 Foundations, Legal Engineering) 的 parcours pratique réservé aux 用户 Harvey connectés en SSO/OTP (Preparing for Legal Work).",
+              "Indiquer procédure d'acceptation 的 badge envoyé par Harvey via Credly (autorisation 的 admin@credly.com 与 ajout d'adresse secondaire 在 Credly Settings > Account si nécessaire)."
+            ],
+            "feedback": "Ce protocole couvre à fois progression pédagogique officielle 的 Harvey Academy 与 délivrance fluide 的 justificatifs Credly."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "在 Harvey Academy, quelle certification spécialisée forme à concevoir 的 workflows juridiques reproductibles, structurer 的 grilles d'extraction 与 industrialiser contrôles qualité ?",
+              "prompt": "Au sein d'一项 direction juridique, 一个 responsable innovation souhaite former 的 référents capables 的 concevoir 的 workflows reproductibles, 的 calibrer 的 grilles Review Tables 与 d'administrer l'espace 的 travail Harvey dès premier jour. Quels parcours 的 Harvey Academy répondent spécifiquement à ce besoin ?",
+              "options": [
+                {
+                  "id": "legal-engineering-certification-et-getting-started-for-admins",
+                  "label": "Legal Engineering Certification (compétences clés d'ingénierie juridique en 2 cours) associée au parcours Getting Started for Admins (configuration 的 workspace 与 déploiement 的 workflows sécurisés en 4 cours)."
+                },
+                {
+                  "id": "desactivation-complete-des-controles-acces",
+                  "label": "suppression 的 contrôles d'访问 par dossier 与 l'improvisation 的 prompts 无 aucun test préalable."
+                },
+                {
+                  "id": "utilisation-comptes-partages-anonymes",
+                  "label": "partage d'一个 seul identifiant anonyme 之间 cent juristes 无 suivi 的 progression ni 治理."
+                },
+                {
+                  "id": "redaction-manuelle-sans-aucun-modele",
+                  "label": "L'interdiction d'使用 的 模型 的 prompts 或 的 Review Tables afin que chaque juriste réinvente sa méthode."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "如何un professionnel certifié 在 Harvey Academy reçoit-il 与 prouve-t-il officiellement son badge 的 certification 在 LinkedIn ?",
+              "prompt": "如何fonctionne délivrance 与 vérification 的 badges officiels obtenus après réussite d'一项 certification 在 Harvey Academy ?",
+              "options": [
+                {
+                  "id": "badge-verifie-credly-by-pearson-sans-expiration",
+                  "label": "badge est émis via Credly by Pearson 在 l'adresse e-mail 的 compte Harvey Academy, ne comporte pas 的 date d'expiration 与 fournit 一个 lien public vérifiant l'émetteur, date 与 compétences acquises."
+                },
+                {
+                  "id": "image-locale-non-verifiable-valable-24h",
+                  "label": "badge est 一项 simple image 无 lien 的 vérification qui expire 自动 au bout 的 vingt-quatre heures."
+                },
+                {
+                  "id": "envoi-postal-papier-uniquement",
+                  "label": "diplôme est envoyé 仅 par courrier postal papier 无 aucun justificatif numérique partageable 在 LinkedIn."
+                },
+                {
+                  "id": "obligation-creer-nouveau-profil-linkedin",
+                  "label": "L'obtention 的 badge oblige juriste à 删除 son profil LinkedIn existant 用于 en recréer 一个 nouveau."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy certifie vos équipes (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) 配合 的 badges vérifiés Credly by Pearson.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "harvey-legal-ai-mock-exam",
+    "title": "全真模拟考试 CertiGo Pro：Harvey Academy & Legal IA (Assistant, Vault, Knowledge, Workflows & Legal Engineering)",
+    "durationMinutes": 30,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète 的 maîtrise produit inspirée 的 certifications Harvey Academy (Level 1 Foundations, Legal Engineering 与 Preparing for Legal Work) : révision 的 合同 配合 playbook, redlining Word, audit 的 Data Rooms M&A 在 Vault, Review Tables, recherche sourcée Knowledge 与 protection 的 律师-客户保密特权.",
+    "questionIds": [
+      "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+      "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.002"
+    ]
+  }
+}

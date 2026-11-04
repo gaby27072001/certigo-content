@@ -1,0 +1,163 @@
+{
+  "schema": "certigo.editorial.pilot/v1",
+  "id": "responsible-ai-assistants",
+  "locale": "es-ES",
+  "status": "draft",
+  "purpose": "learning-not-certification",
+  "title": "Travailler con un assistant IA sin lui Delegar son jugement",
+  "audience": "Personnes qui débutent con los assistants IA para lire una documentation, préparer un diagnostic o proposer una modification technique.",
+  "prerequisites": "Savoir ouvrir una documentation y distinguer un environnement de test d'un environnement de production. Aucun compte AWS ni acceso à un assistant n'est nécessaire.",
+  "estimatedMinutes": 18,
+  "asOf": "2026-10-14",
+  "scope": "Pilote d'apprentissage original, en français, sin notation ni préparation à una certification o à un titre officiel. Los situations sont fictives. Los conseils de travail sont de los choix pédagogiques de CertiGo ; los faits propres à Amazon Bedrock sont bornés aux pages AWS consultées à la date indiquée. Ne pas exécuter de commande, envoyer de document réel ni modifier de permission para suivre ce pilote.",
+  "sources": [
+    {
+      "id": "aws-kb-overview",
+      "title": "Retrieve data y generate AI responses with Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "checkedOn": "2026-10-14",
+      "supports": "Una base de connaissances recherche de los informations en de los sources ; los informations retrouvées peuvent enrichir una respuesta générée. Los citations permettent de remonter aux sources para Verificar la respuesta.",
+      "limits": "Una citation n'atteste ni la vérité de toute la respuesta ni l'actualité de la source. Los capacités y permisos dépendent del type de base y de sa configuration ; ne pas los généraliser à tout assistant."
+    },
+    {
+      "id": "aws-kb-rag",
+      "title": "How Amazon Bedrock knowledge bases work (Ruta CertiGo)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-it-works.html",
+      "checkedOn": "2026-10-14",
+      "supports": "En el parcours RAG vectoriel décrit, de los documents non structurés sont découpés, convertis en représentations numériques y indexés. La consulta est aussi représentée numériquement ; de los passages proches sont retrouvés puis ajoutés au contexte transmis au modelo.",
+      "limits": "C'est el parcours vectoriel de documents non structurés, pas una description de tous los modes de recherche. L'utilisation d'un modelo para calculer de los embeddings n'est pas son entraînement ; una ingestion n'est pas un ajustement de los paramètres del modelo générateur."
+    },
+    {
+      "id": "aws-grounding",
+      "title": "Use contextual grounding check to filter hallucinations in responses (Ruta CertiGo)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html",
+      "checkedOn": "2026-10-14",
+      "supports": "Los contrôles d'ancrage contextuel évaluent l'appui d'una respuesta en una source de référence y sa pertinence para una consulta, con de los scores y de los seuils configurables.",
+      "limits": "Ces contrôles ne certifient pas la vérité externe de la source. La page consultée limite los usages pris en charge à la synthèse, la reformulation y los questions-réponses, hors chatbot conversationnel. Un score ne debe pas être présenté comme una probabilité de vérité ni comme una garantie de confidentialité."
+    },
+    {
+      "id": "aws-data-protection",
+      "title": "Data protection (Ruta CertiGo)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "checkedOn": "2026-10-14",
+      "supports": "El client garde la responsabilité de son contenu y de la configuration de seguridad. AWS recommande de los permisos limitées au travail nécessaire y déconseille los informations sensibles en los tags, champs de nom libres y URL contenant de los identifiants.",
+      "limits": "Cette page ne donne pas una autorisation d'envoyer de los datos de l'organisation. Los règles de conservation, la journalisation, los acceso y los traitements deben être vérifiés para el service y la configuration utilisés ; ni un filtre ni el cifrado ne garantissent à eux seuls la confidentialité."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "verify-claims",
+      "title": "Una respuesta convaincante n'est pas una preuve",
+      "objective": "Proposer un plan de vérification d'una affirmation technique : Aislar ce qui est à Verificar, préciser los sources y conditions à rechercher y formuler una décision bornée si los preuves manquent.",
+      "estimatedMinutes": 6,
+      "hook": "Un assistant rédige una note claire en quelques secondes. El risque commence quand sa clarté remplace votre vérification.",
+      "keyIdeas": [
+        "Traitez la respuesta comme una proposition. Séparez los faits vérifiables, los hypothèses y los recommandations. Una citation est una piste de vérification, pas un certificat de vérité.",
+        "Choisissez una source adaptée : documentation officielle para el comportement d'un service, référence de la version concernée para una API, procédure interne autorisée para una règle de votre organisation. Un témoignage peut aider à chercher sin établir una règle générale.",
+        "Ouvrez la source y cherchez el passage qui soutient exactement l'affirmation. Vérifiez el service, la version, la région y los conditions utiles. Si el passage ne suffit pas, notez ce qui reste inconnu au lieu de compléter par intuition.",
+        "Un contrôle d'ancrage contextuel compare una respuesta à una source y à una demande. Una respuesta peut être conforme à un document erroné o périmé. Un contrôle favorable ne remplace donc pas la vérification humaine."
+      ],
+      "workedExample": {
+        "situation": "Para préparer una revue technique, Camille reçoit cette proposition fictive : « Notre respuesta cite un document y passe el contrôle d'ancrage, donc toutes ses affirmations sont exactes. » Aucune modification n'a encore été appliquée.",
+        "steps": [
+          "Aislar la conclusion à Verificar : citations y contrôle favorable garantiraient l'exactitude de toutes los affirmations.",
+          "Consulter los pages AWS Knowledge Bases y contextual grounding checks : l'una permite de remonter aux sources ; l'autre décrit una comparaison con una source y una consulta, pas un audit de vérité universel.",
+          "Relire el document cité, Verificar sa date y rapprocher chaque affirmation importante d'un passage précis. Signaler los affirmations non étayées y celles dont los conditions ne correspondent pas au contexte.",
+          "Conserver en la note la source, sa date de consultation, los conditions vérifiées y los incertitudes. Ne pas transformer una incertitude en consigne de production."
+        ],
+        "decision": "Camille retire la garantie d'exactitude y fait relire los points non établis avant toute action. Una citation utile y un contrôle favorable réduisent certains risques ; ils ne suppriment pas el besoin de Verificar."
+      },
+      "practice": {
+        "prompt": "Un collègue propose : « Ce réglage fonctionne en toutes los régions ; l'assistant cite una page AWS. » Ce cas fictif ne précise ni el réglage ni la page : il sert à préparer una vérification, pas à la réaliser. Sin compte cloud, isolez l'affirmation à Verificar, proposez deux vérifications con los sources à rechercher y formulez la décision à prendre si la page ne couvre que votre région de test.",
+        "successCriteria": [
+          "Aislar la généralisation « en toutes los régions » y prévoir de confronter el réglage y ses conditions au passage cité.",
+          "Prévoir de rechercher la documentation officielle de los régions prises en charge à la version o date utile ; demander el nom del réglage y el lien manquants.",
+          "Formuler una décision conditionnelle : ne pas généraliser au-delà de los régions établies, suspendre el déploiement envisagé y demander una revue si los informations manquent."
+        ],
+        "feedback": "Votre production est un plan : elle ne prouve pas que vous avez trouvé o vérifié una source. Una deuxième respuesta de l'assistant ne constituerait pas una preuve indépendante. El plan debe nommer los informations manquantes, los sources à rechercher y la limite de la décision. La recherche effective d'un passage y el transfert à un cas nouveau restent à pratiquer y à observer ultérieurement."
+      },
+      "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence de preuve, dire ce qui manque est plus utile que parler con assurance.",
+      "sourceIds": [
+        "aws-kb-overview",
+        "aws-grounding"
+      ]
+    },
+    {
+      "id": "retrieval-not-training",
+      "title": "Donner del contexte n'est pas entraîner un modelo",
+      "objective": "Explicar el parcours RAG vectoriel d'un document y distinguer indexation, recherche, contexte y entraînement.",
+      "estimatedMinutes": 6,
+      "hook": "Vous ajoutez una procédure à una base documentaire. L'assistant peut ensuite la retrouver : a-t-il appris cette procédure en ses paramètres ? Pas par cette seule opération.",
+      "keyIdeas": [
+        "RAG signifie génération enrichie par recherche : l'application retrouve de l'information puis la fournit au modelo comme contexte para produire una respuesta.",
+        "En el parcours vectoriel non structuré décrit par AWS, l'ingestion prépare los documents : extraction de texte, découpage en passages, calcul d'embeddings y almacenamiento en un index. Un embedding est una représentation numérique utilisée para comparer de los contenus, pas una respuesta ni una garantie de compréhension.",
+        "Lors d'una demande, un modelo d'embeddings représente aussi la consulta. La recherche sélectionne de los passages proches, puis ces passages complètent el contexte envoyé au modelo générateur. Un passage pertinent peut malgré tout être incomplet, obsolète o mal interprété.",
+        "L'entraînement o l'ajustement d'un modelo modifie ses paramètres. Calculer de los embeddings con un modelo existant y ajouter de los documents à un index ne réentraîne pas, par ces seules opérations, el modelo générateur. Cela n'affirme rien en los autres traitements o la conservation de los datos del service.",
+        "Toutes los recherches ne suivent pas ce parcours vectoriel : el mot RAG ne suffit pas à décrire l'architecture, los acceso o los datos réellement transmises."
+      ],
+      "workedExample": {
+        "situation": "Un equipo indexe una procédure fictive « test de reprise, version 2 ». Una consulta retrouve un ancien passage de la version 1. L'equipo conclut que el modelo a mal appris la nouvelle procédure.",
+        "steps": [
+          "Distinguer la procédure stockée, los passages indexés, los passages retrouvés y la respuesta générée. Ne pas attribuer immédiatement el défaut à l'entraînement.",
+          "Verificar, en una revue sin datos réelles, quelle version a été ingérée y quels passages la recherche a sélectionnés. Un document ajouté mais non synchronisé peut manquer en l'index.",
+          "Comparer los passages transmis au modelo con la procédure en vigueur. Si el contexte est ancien, examiner l'ingestion y la recherche ; si el contexte est adéquat mais la respuesta diverge, examiner la génération y la vérification.",
+          "Faire approuver toute mise à jour de la base par son responsable ; ne pas lancer un entraînement ni élargir los acceso para masquer el problème."
+        ],
+        "decision": "L'equipo cherche d'abord où la version périmée entre en el parcours. Mettre à jour un index y ajuster los paramètres d'un modelo sont de los opérations différentes, con de los objectifs y de los risques différents."
+      },
+      "practice": {
+        "prompt": "Reconstituez à l'écrit el trajet d'una procédure fictive jusqu'à una respuesta RAG vectorielle. Placez el découpage, los embeddings de los documents, l'index, la représentation de la consulta, los passages retrouvés y el contexte. Expliquez ensuite pourquoi « el document est indexé » ne signifie pas « el modelo générateur a été réentraîné ».",
+        "successCriteria": [
+          "Séparer la préparation de los documents de la recherche effectuée lors d'una demande.",
+          "Placer los embeddings de los passages en l'index y la représentation de la consulta avant la comparaison.",
+          "Placer los passages retrouvés en el contexte avant la génération.",
+          "Distinguer l'utilisation d'un modelo existant para calculer de los vecteurs d'una modification de ses paramètres par entraînement."
+        ],
+        "feedback": "El trajet attendu est : document → passages → embeddings → index ; puis consulta → représentation → recherche de passages → contexte enrichi → respuesta. Si vous avez relié directamente l'index aux paramètres del générateur, reprenez la distinction entre contexte fourni à una demande y entraînement. Ce schéma n'est pas universel à toutes los bases de connaissances."
+      },
+      "recap": "L'index sert à retrouver ; el contexte sert à informer una demande ; l'entraînement sert à modifier los paramètres. Ne confondez pas ces trois rôles.",
+      "sourceIds": [
+        "aws-kb-rag",
+        "aws-kb-overview"
+      ]
+    },
+    {
+      "id": "stop-and-escalate",
+      "title": "Savoir s'arrêter avant d'envoyer o d'autoriser",
+      "objective": "Repérer una donnée sensible o un acceso excessif, suspendre l'action y demander una décision au responsable adapté.",
+      "estimatedMinutes": 6,
+      "hook": "Un diagnostic peut être techniquement utile y pourtant inacceptable si los datos o los derechos nécessaires ne sont pas autorisés.",
+      "keyIdeas": [
+        "Avant de transmettre, identifiez los datos, el destinataire, la finalité y l'autorisation. Secrets, datos personnelles, registros clients y documents internes demandent una vérification spécifique. Pouvoir lire un archivo ne donne pas automáticamente el droit de l'envoyer à un assistant.",
+        "El choix d'un service approuvé ne dispense pas de Verificar sa configuration : acceso, journalisation, conservation y règles internes. La responsabilité partagée ne signifie pas que el fournisseur prend toutes los décisions à votre place.",
+        "Un filtre de datos sensibles peut aider, mais il ne garantiza pas de tout détecter. Retirer un nom ne suffit pas toujours à anonymiser un journal. Préférez un exemple synthétique sin donnée réelle si cela répond au besoin y respecte los règles internes.",
+        "Demandez seulement los permisos nécessaires à la tâche. Face à una demande d'administration globale, ne cliquez pas para gagner del temps : demandez au responsable de los acceso una revue del besoin y una permission limitée.",
+        "Si la donnée o l'autorisation est incertaine, arrêtez l'envoi o la modification. Contactez el propriétaire de los datos, el référent seguridad o el responsable de los acceso selon el cas, en décrivant el besoin sin reproduire el secret."
+      ],
+      "workedExample": {
+        "situation": "Nora prépare un diagnostic fictif. El journal proposé contient de los adresses de clients y un token d'acceso. L'assistant suggère de l'envoyer à un outil externe y de lui attribuer un rôle administrateur para lire d'autres registros.",
+        "steps": [
+          "Ne pas envoyer el journal ni accorder el rôle. L'outil destinataire y l'usage de ces datos ne sont pas encore autorisés.",
+          "Décrire el blocage au propriétaire de los registros y au référent seguridad sin joindre el token ni los datos clients. Si un secret a déjà été exposé, suivre la procédure d'incident y demander sa révocation o rotation par una personne habilitée.",
+          "Proposer una reproduction synthétique del message d'erreur para commencer el diagnostic, sous réserve de los règles internes. Ne pas supposer qu'una simple suppression de los noms rend el journal partageable.",
+          "Faire examiner par el responsable de los acceso el périmètre réellement nécessaire. Reprendre seulement con un destinataire approuvé, de los datos autorisées y los permisos validées."
+        ],
+        "decision": "Nora suspend l'action à risque y garde el diagnostic au stade d'un exemple fictif. El filtre de l'assistant o la promesse « nous ne réentraînons pas el modelo » ne vaut ni autorisation de transfert ni garantie de confidentialité."
+      },
+      "practice": {
+        "prompt": "Un equipo veut envoyer una capture de journal interne à un assistant : los noms sont masqués, mais un identifiant de client y una URL de connexion restent visibles. Elle demande aussi un acceso administrateur temporaire. Rédigez una respuesta de trois phrases : ce que vous suspendez, à qui vous demandez una revue y comment poursuivre sin transmettre de datos réelles.",
+        "successCriteria": [
+          "Suspendre l'envoi y l'attribution del rôle, sin déclarer la capture anonyme ni el rôle acceptable parce qu'il est temporaire.",
+          "Demander una revue au propriétaire de los datos o au référent seguridad para el transfert, y au responsable de los acceso para los permisos.",
+          "Proposer un exemple synthétique y una permission limitée au besoin, à faire valider avant de reprendre."
+        ],
+        "feedback": "Masquer los noms ne règle pas los autres identifiants ni los informations éventuellement contenues en l'URL. Un rôle temporaire peut encore donner trop de derechos. Una bonne respuesta nomme el blocage, el décideur y una voie de travail sûre ; elle ne copie pas los éléments sensibles en la demande de revue."
+      },
+      "recap": "Datos o derechos incertains → arrêter l'action → décrire el besoin sin secret → obtenir la revue adaptée. La qualité technique ne remplace jamais l'autorisation.",
+      "sourceIds": [
+        "aws-data-protection",
+        "aws-grounding"
+      ]
+    }
+  ]
+}

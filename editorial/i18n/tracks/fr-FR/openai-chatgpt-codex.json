@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné sur OpenAI Academy et la documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
+  },
+  "locale": "fr-FR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro : OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "Maîtriser le choix des modèles (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent de programmation autonome Codex et l'ingénierie IA de production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads et responsables produit déployant les offres OpenAI en entreprise.",
+  "prerequisites": "Connaître les bases du développement logiciel (Git, JSON, API REST) et l'utilisation courante d'un assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI and Prompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente les bonnes pratiques d'ingénierie de prompt, le routage entre modèles multimodaux et modèles de raisonnement, l'usage de Canvas, Projects, Custom GPTs et l'évaluation systématique.",
+      "limits": "Les performances d'un prompt ou d'un workflow dépendent d'évaluations empiriques (Evals) sur les données représentatives du cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille le fonctionnement de l'agent OpenAI Codex : exécution de tâches en parallèle dans un conteneur cloud isolé avec accès coupé à Internet pendant l'exécution, lecture des conventions AGENTS.md, exécution des tests et ouverture de Pull Requests vérifiables.",
+      "limits": "Codex exécute les tests configurés dans son environnement sandbox ; toute fusion en production reste soumise à la revue de code et aux contrôles CI de l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, and Evals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente la Responses API unifiée, l'application stricte de JSON Schema via Structured Outputs (strict: true), le Function Calling, l'Agents SDK (handoffs, guardrails, tracing) et les suites d'évaluation Evals.",
+      "limits": "La garantie syntaxique de Structured Outputs assure le respect du schéma JSON, mais pas la véracité métier des valeurs retournées ni l'autorisation d'exécuter un appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "Unité 1 · ChatGPT Pro & Enterprise : Modèles, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs modèles de raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs et Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner le modèle optimal selon la tâche (GPT-4o vs o3/o4-mini), conduire une étude sourcée avec Deep Research et structurer un espace de travail récurrent avec Projects, Canvas et Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage de modèle : GPT-4o multimodal rapide vs modèles de raisonnement à chaîne de pensée interne o3 et o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée avec citations) & Data Analysis (exécution Python pour nettoyer, modéliser et tracer des données)",
+        "Canvas (co-édition ciblée de texte et de code), Projects (instructions et fichiers persistants) et Custom GPTs gouvernés en entreprise"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o pour l'interaction multimodale rapide et la rédaction fluide, o3/o4-mini pour le raisonnement algorithmique ou analytique complexe, et Deep Research lorsqu'une synthèse exige d'explorer, croiser et citer des dizaines de sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage de Modèles & Espaces de Travail",
+        "diagram": "[Requête Utilisateur] ➔ [Choix Modèle : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image et audio avec faible latence ; o3 et o4-mini allouent du calcul de raisonnement avant de répondre aux problèmes logiques, mathématiques, juridiques ou d'architecture."
+          },
+          {
+            "name": "Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement le web et les connecteurs autorisés pour livrer un rapport sourcé ; Data Analysis exécute du code Python pour analyser des fichiers CSV/Excel."
+          },
+          {
+            "name": "Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre un éditeur côte à côte pour réviser du texte ou du code par section ; Projects regroupe conversations, instructions et fichiers ; Custom GPTs partage des assistants spécialisés dans le workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "Dans ChatGPT Enterprise, les conversations, fichiers de Projects et exécutions Data Analysis sont isolés par espace de travail client et ne servent jamais à entraîner les modèles OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "Choisir le bon modèle : GPT-4o multimodal vs modèles de raisonnement o3 et o4-mini",
+          "objective": "Arbitrer entre GPT-4o, o3 et o4-mini selon la complexité logique, le besoin multimodal, la latence et le coût d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "Utiliser le modèle de raisonnement le plus lourd pour reformuler un courriel de trois lignes gaspille du temps, mais confier un audit d'architecture distribuée à un modèle instantané fait rater des cas limites : quelle est la règle de tri ?",
+          "declicCard": {
+            "title": "Le Déclic Modèles OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse et échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne de pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "Pour rédiger, résumer, traduire ou dialoguer rapidement à partir de texte ou d'images courantes, choisissez GPT-4o.",
+            "step2": "Pour résoudre un bug subtil, prouver une cohérence financière/juridique ou planifier sous fortes contraintes, choisissez o3 (profondeur maximale) ou o4-mini (raisonnement rapide et économique).",
+            "rule": "Prompting o3/o4-mini : donnez un objectif précis, les contraintes et le format attendu, sans imposer de « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · GPT-4O MULTIMODAL",
+              "title": "Le modèle polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle dans les tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse de réunions, traduction nuancée, extraction visuelle rapide et conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · MODÈLES DE RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer du temps de réflexion avant le premier mot",
+              "bodyParagraph": "Les modèles de la série o (`o3` et `o4-mini`) génèrent une chaîne de raisonnement interne avant d'émettre leur réponse finale : ils vérifient leurs hypothèses, reviennent en arrière en cas de contradiction et excellent en algorithmique, finance, analyse de causes racines et revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement de pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · ADAPTER SON PROMPTING",
+              "title": "Un brief d'objectif clair plutôt que du micro-guidage",
+              "bodyParagraph": "Avec GPT-4o, détailler les étapes intermédiaires améliore souvent la sortie. Avec o3 et o4-mini, spécifiez clairement l'objectif final, les invariants à respecter, les données d'entrée et le schéma de sortie : le modèle construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "Sur o3/o4-mini : spécifiez le QUOI (contraintes + critères de succès), laissez le modèle gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie la faible latence et l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre la profondeur de raisonnement maximale pour les problèmes scientifiques, architecturaux, financiers ou de débogage complexe, tandis qu'`o4-mini` optimise le compromis vitesse/coût sur les tâches techniques.",
+            "Un prompt destiné à un modèle de raisonnement doit définir rigoureusement les contraintes, les cas limites et le livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "Une équipe d'ingénierie chez un éditeur SaaS doit traiter deux demandes : (1) transformer des notes d'atelier en FAQ client multilingue, et (2) identifier une condition de course (race condition) entre trois microservices de paiement.",
+            "steps": [
+              "Affecter la rédaction et la traduction de la FAQ client à GPT-4o dans Canvas pour itérer rapidement sur le style.",
+              "Soumettre les journaux d'exécution et le code des trois microservices à o3 en précisant les invariants transactionnels à vérifier.",
+              "Valider le scénario d'entrelacement découvert par o3 au moyen d'un test automatisé reproductible."
+            ],
+            "decision": "Le routage intentionnel divise le temps de rédaction par trois et résout le bug de concurrence que les revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez les trois tâches suivantes entre GPT-4o, o4-mini et o3 en justifiant votre choix : (A) Reformuler 15 fiches produit pour le catalogue web, (B) Diagnostiquer une incohérence entre quatre clauses de pénalité et un modèle actuariel, (C) Générer rapidement des tests unitaires sur vingt fonctions utilitaires.",
+            "successCriteria": [
+              "Associer (A) à GPT-4o pour sa rapidité rédactionnelle et sa maîtrise du ton.",
+              "Associer (B) à o3 pour sa capacité de raisonnement multi-contraintes profond.",
+              "Associer (C) à o4-mini pour son raisonnement code rapide et économique à haut volume."
+            ],
+            "feedback": "Choisir le modèle proportionné à la difficulté cognitive évite à la fois la sur-qualité lente et l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez un problème financier ou logique très complexe avec douze règles à vérifier en même temps. Quel modèle OpenAI choisir ?",
+              "prompt": "Un architecte financier doit vérifier la cohérence mathématique et réglementaire d'un modèle de couverture de taux comportant douze contraintes croisées et identifier les cas limites où la formule diverge. Quel modèle OpenAI doit-il sélectionner dans ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "Le modèle de raisonnement o3, conçu pour décomposer et vérifier des problèmes logiques, mathématiques et multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "Un modèle de transcription vocale purement acoustique dépourvu de capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "Un modèle d'embeddings vectoriels qui retourne uniquement une liste de nombres flottants sans texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "Le classifieur de modération de contenu qui produit uniquement des scores de sécurité booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est la différence pratique entre les modèles de réflexion o3 et o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` de `o3` au sein de la famille des modèles de raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre un raisonnement technique et code beaucoup plus rapide et économique pour les tâches à haut débit, tandis qu'o3 privilégie la profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération de code informatique et se limite à la retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie automatiquement les prompts d'entreprise sur Internet contrairement au modèle o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée et ne peut lire aucun fichier structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o pour la vitesse multimodale et rédactionnelle ; o4-mini pour le raisonnement technique agile ; o3 pour les arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée et analyse Python",
+          "objective": "Conduire une recherche approfondie multi-sources avec Deep Research et analyser des jeux de données tabulaires avec Data Analysis dans ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "Vous devez livrer demain matin une étude concurrentielle citant trente sources vérifiables ET une analyse de cohorte sur un fichier de 120 000 lignes de ventes : comment combiner Deep Research et Data Analysis sans jamais inventer un chiffre ?",
+          "declicCard": {
+            "title": "Le Déclic Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré avec citations",
+            "diagramBottom": "Data Analysis : Fichier CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research les synthèses documentaires et études de marché nécessitant de parcourir, recouper et citer des dizaines de sources.",
+            "step2": "Confiez à Data Analysis tout calcul sur vos fichiers chiffrés afin que le résultat provienne d'une exécution Python réelle et non d'un calcul mental du LLM.",
+            "rule": "Ne demandez jamais à un modèle de calculer de tête sur 50 000 lignes : exigez l'exécution Python de Data Analysis et inspectez le code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · DEEP RESEARCH",
+              "title": "Un analyste de recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à une recherche web rapide d'une seconde, Deep Research établit un plan d'investigation, explore de multiples pages et documents autorisés, recoupe les contradictions et rédige un rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif sur vos jeux de données",
+              "bodyParagraph": "Lorsque vous déposez un fichier CSV, Excel ou JSON dans ChatGPT Enterprise, Data Analysis écrit et exécute du code Python (`pandas`, `numpy`, `matplotlib`) dans un environnement isolé. Il nettoie les valeurs manquantes, calcule les agrégats exacts et génère des visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable et déterministe sur vos fichiers de données"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · VÉRIFICATION DE BOUT EN BOUT",
+              "title": "Auditer les sources et le script Python",
+              "bodyParagraph": "Un professionnel CertiGo vérifie toujours deux éléments avant de diffuser son livrable : dans Deep Research, il ouvre les citations des conclusions critiques ; dans Data Analysis, il déplie le bloc de code Python (`</>`) pour vérifier les filtres appliqués (par exemple le traitement des lignes annulées ou des devises).",
+              "keyTakeawayPill": "Toujours ouvrir les citations Deep Research + inspecter les filtres du script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit des recherches multi-étapes sur plusieurs minutes pour produire des rapports exhaustifs accompagnés de citations précises.",
+            "Data Analysis exécute du code Python dans un bac à sable pour garantir l'exactitude mathématique des statistiques, jointures et graphiques sur des fichiers volumineux.",
+            "L'inspection du code Python généré (`</>`) permet de valider les hypothèses de nettoyage (valeurs nulles, doublons, devises) avant de présenter les chiffres."
+          ],
+          "workedExample": {
+            "situation": "Une équipe stratégie prépare l'entrée sur un nouveau marché européen : elle doit comparer les cadres réglementaires de quatre pays et analyser l'historique interne de 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant les quatre juridictions, les autorités officielles à privilégier et la grille comparative attendue avec liens sources.",
+              "Charger l'extrait anonymisé des 80 000 commandes dans Data Analysis et demander le calcul du panier moyen, de la rétention à 6 mois et de la saisonnalité via Python.",
+              "Déplier le code Python pour vérifier que les commandes remboursées ont bien été exclues du chiffre d'affaires net, puis vérifier les citations réglementaires de Deep Research."
+            ],
+            "decision": "Le comité d'investissement reçoit un dossier où chaque règle juridique pointe vers son texte officiel et chaque indicateur financier est issu d'un script Python reproductible."
+          },
+          "practice": {
+            "prompt": "Un analyste colle 5 000 lignes de transactions dans un prompt texte et demande au modèle de calculer la médiane et l'écart-type sans utiliser Data Analysis. Expliquez le risque et la bonne méthode à adopter.",
+            "successCriteria": [
+              "Expliquer que la prédiction de jetons texte sans exécution de code risque de produire des calculs statistiques approximatifs ou tronqués.",
+              "Joindre le fichier structuré (CSV/XLSX) et demander explicitement l'exécution d'un script Python via Data Analysis.",
+              "Ouvrir le bloc de code exécuté pour vérifier la colonne ciblée et le traitement des valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique ou statistique sur un tableau de données doit passer par l'exécution Python de Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil de ChatGPT permet de chercher dans des dizaines de documents officiels et de rédiger un rapport complet avec toutes les sources ?",
+              "prompt": "Une responsable veille réglementaire doit produire un rapport comparant les exigences publiées par cinq autorités de régulation avec des citations vérifiables ligne par ligne. Quelle fonctionnalité de ChatGPT Pro / Enterprise est spécifiquement conçue pour ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie une recherche multi-étapes, recoupe les documents et produit un rapport structuré avec citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "Une complétion hors-ligne à température élevée sans accès aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "Le générateur d'illustrations graphiques dépourvu de moteur de recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé sans connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule un total de ventes différent de votre comptabilité à partir d'un fichier Excel. Que devez-vous vérifier en premier ?",
+              "prompt": "Après avoir chargé un fichier CSV de 60 000 ventes dans ChatGPT Data Analysis, un contrôleur obtient un chiffre d'affaires supérieur de 12 % à celui de la comptabilité. Quel réflexe de vérification doit-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir le code Python exécuté (`</>`) pour vérifier comment les lignes annulées, les taxes et les devises ont été filtrées dans pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "Désactiver l'exécution Python pour obliger le modèle de langage à additionner les 60 000 lignes de tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir le fichier CSV en image JPEG compressée avant de relancer la somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier directement le graphique car un script Python généré applique toujours les conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore et cite les sources ; Data Analysis exécute du Python déterministe et inspectable sur vos données chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer et partager l'IA en entreprise",
+          "objective": "Distinguer et combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) et Custom GPTs (assistants métier partagés et gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il créer un Project ou un Custom GPT ? Et comment modifier trois lignes au milieu d'un document ou d'un script de 300 lignes sans que ChatGPT ne régénère tout depuis le début ?",
+          "declicCard": {
+            "title": "Le Déclic Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'Équipe)",
+            "diagramTop": "Canvas = Éditeur côte à côte pour retoucher une section précise d'un texte ou d'un code",
+            "diagramBottom": "Projects = Votre dossier de travail continu · Custom GPT = Assistant standardisé partagé avec l'équipe",
+            "step1": "Ouvrez Canvas pour itérer sur un livrable long (article, spécification, script) en surlignant uniquement le passage à réécrire ou déboguer.",
+            "step2": "Utilisez un Project pour regrouper vos fichiers et instructions d'un dossier en cours, et publiez un Custom GPT lorsque toute l'équipe a besoin du même assistant métier.",
+            "rule": "Travail récurrent d'un dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé pour l'équipe = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · CANVAS",
+              "title": "Fini la régénération complète à chaque retouche",
+              "bodyParagraph": "Dans Canvas, le document ou le code s'affiche dans un volet dédié à droite du chat. Vous pouvez surligner un seul paragraphe ou une seule fonction pour demander une réécriture, un changement de niveau de lecture, l'ajout de logs ou le portage vers un autre langage, avec un historique de versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner une zone ➔ Édition chirurgicale in-place + Historique de versions"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · PROJECTS",
+              "title": "Garder le contexte d'un dossier au fil des semaines",
+              "bodyParagraph": "Un Project dans ChatGPT rassemble en un seul endroit vos instructions personnalisées, vos fichiers de référence (cahier des charges, architecture, charte éditoriale) et tous les fils de conversation liés à ce chantier. Chaque nouveau chat ouvert dans le Project hérite immédiatement de ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + Fichiers sources + Historique de chats organisé"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · CUSTOM GPTS EN ENTREPRISE",
+              "title": "Standardiser un assistant métier avec Actions et gouvernance",
+              "bodyParagraph": "Lorsqu'un workflow est stabilisé (ex. Revue d'appel d'offres, Générateur de post-mortem SRE), encapsulez ses instructions système, sa base documentaire et ses Actions API OpenAPI dans un Custom GPT publié uniquement au sein de votre espace de travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en sécurité"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas permet la co-édition granulaire de texte et de code avec raccourcis dédiés (longueur, ton, revue de code, ajout de commentaires, portage de langage) et gestion de versions.",
+            "Projects organise les travaux au long cours d'un utilisateur ou d'une équipe autour d'instructions et de fichiers de référence persistants.",
+            "Les Custom GPTs dans ChatGPT Enterprise permettent de distribuer des assistants spécialisés dotés d'Actions OpenAPI sous le contrôle de la console d'administration."
+          ],
+          "workedExample": {
+            "situation": "Une équipe SRE souhaite (1) suivre l'opération de migration Cloud du trimestre avec ses schémas d'architecture, (2) co-rédiger le runbook de bascule section par section, et (3) offrir à tous les ingénieurs d'astreinte un assistant standardisé de rédaction de post-mortem.",
+            "steps": [
+              "Créer un Project « Migration Cloud T4 » contenant les schémas d'architecture et les contraintes de SLA.",
+              "Rédiger et affiner le runbook de bascule dans Canvas en révisant chaque procédure de rollback sans altérer les sections déjà validées.",
+              "Publier un Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré avec le modèle d'incident et la grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "Les trois outils sont utilisés selon leur rôle exact : continuité de dossier (Project), édition fine (Canvas) et standardisation d'équipe (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer un prompt complexe utilisé par dix personnes en copier-coller vers un Custom GPT d'entreprise sécurisé, et précisez quand les utilisateurs devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer le prompt validé dans les instructions système du Custom GPT et y joindre les documents de référence officiels.",
+              "Restreindre le partage du Custom GPT aux groupes autorisés du workspace ChatGPT Enterprise.",
+              "Utiliser Canvas lorsque l'utilisateur souhaite peaufiner localement un paragraphe du livrable généré avant export."
+            ],
+            "feedback": "Centraliser le prompt dans un Custom GPT élimine la dérive des versions copiées-collées, tandis que Canvas assure la finition sur mesure de chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "Comment modifier seulement 30 lignes d'un long programme dans ChatGPT sans risquer qu'il réécrive ou casse le reste du fichier ?",
+              "prompt": "Vous travaillez sur un script Python de 250 lignes dans ChatGPT et souhaitez optimiser uniquement la fonction de pagination aux lignes 80 à 110 tout en garantissant que le reste du fichier reste strictement intact et versionné. Quel outil devez-vous utiliser ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir le code dans Canvas, surligner les lignes 80 à 110 et demander l'optimisation ciblée avec suivi de version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir une conversation vierge sans fournir le fichier et demander de réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir le script Python en fichier audio MP3 avant de le soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique de l'espace de travail à chaque modification d'une variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Dans ChatGPT Enterprise, quand faut-il créer un Project plutôt qu'un Custom GPT ?",
+              "prompt": "Quelle différence principale guide le choix entre un Project et un Custom GPT dans ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "Un Project organise un espace de travail continu (chats, fichiers et consignes d'un chantier), tandis qu'un Custom GPT publie un assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "Un Project indexe automatiquement ses fichiers sur les moteurs de recherche publics alors qu'un Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "Un Custom GPT ne peut contenir ni instructions système ni documents de référence, contrairement à un Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "Un Project accepte uniquement des fichiers d'images matricielles et refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas pour l'édition chirurgicale côte à côte ; Projects pour vos chantiers au long cours ; Custom GPTs pour standardiser et partager un assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "Unité 2 · OpenAI Codex : Agent de Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée de Codex, pilotage par AGENTS.md, exécution parallèle de tâches, génération de Pull Requests vérifiées et revue de code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Configurer un fichier AGENTS.md déterministe, déléguer en parallèle un correctif de bug et une implémentation de fonctionnalité à OpenAI Codex dans son sandbox, et auditer le diff ainsi que les journaux de tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, accès réseau coupé pendant l'exécution pour prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes de build/lint/test, invariants d'architecture et conventions de dépôt",
+        "Parallélisation de tâches, ouverture de Pull Requests avec preuves d'exécution de tests et revue de code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que les commandes de vérification documentées dans votre AGENTS.md : exigez toujours des tests verts dans le journal du sandbox avant de fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (Réseau OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs de Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit et modifie le code et exécute les tests avec l'accès réseau externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "Contrat AGENTS.md",
+            "role": "Fichier versionné dans le dépôt (racine et sous-dossiers) qui indique à Codex comment compiler, linter, tester et respecter les frontières architecturales."
+          },
+          {
+            "name": "Vérification & Pull Request",
+            "role": "Codex itère sur son implémentation jusqu'à ce que la suite de tests passe, puis produit un commit/PR accompagné des citations de fichiers et des sorties de terminal."
+          }
+        ],
+        "securityInvariant": "Pendant la phase d'exécution de l'agent Codex, l'accès Internet sortant est désactivé dans le bac à sable afin d'empêcher toute exfiltration de code source ou téléchargement de paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "Expliquer comment OpenAI Codex exécute du code et des tests dans un conteneur sandbox cloud isolé et pourquoi la coupure réseau pendant l'exécution protège le dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est la différence fondamentale entre un assistant d'autocomplétion dans l'IDE et l'agent OpenAI Codex capable de vous livrer une Pull Request testée de bout en bout ?",
+          "declicCard": {
+            "title": "Le Déclic Codex : De la Suggestion de Ligne à la Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création du conteneur + Clone du dépôt + Installation des dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, Réseau OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement de tâche prépare le dépôt et ses dépendances, puis verrouille l'accès réseau externe avant de donner la main à l'agent.",
+            "step2": "Codex explore la base de code, applique ses modifications et lance réellement les compilateurs et tests jusqu'à obtenir un résultat vert.",
+            "rule": "Un patch non exécuté est une hypothèse ; un patch validé par les tests dans le sandbox Codex est un livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · UN CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone et isolée dans le cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre dans son propre conteneur cloud isolé contenant votre dépôt Git à la révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction de bug, refactorisation, couverture de tests) sans jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié et indépendant"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · SÉCURITÉ RÉSEAU OFF",
+              "title": "Pourquoi l'accès Internet est coupé pendant la boucle agent",
+              "bodyParagraph": "Une fois le script d'initialisation d'environnement terminé (installation des dépendances via `npm ci` ou `pip`), le conteneur coupe l'accès Internet sortant pendant que l'agent travaille. Ainsi, même face à une instruction piégée dans un fichier de test, Codex ne peut ni exfiltrer de code ni télécharger de binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure réseau ➔ Exécution sûre de l'agent"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · PREUVES D'EXÉCUTION",
+              "title": "Journal de terminal, citations de lignes et diff Git",
+              "bodyParagraph": "À la fin de sa mission, Codex ne renvoie pas une simple explication théorique : il fournit le diff Git exact, les citations des fichiers modifiés et le journal complet des commandes de test exécutées dans le terminal du sandbox.",
+              "keyTakeawayPill": "Toujours inspecter le journal de test du sandbox avant de créer ou fusionner la PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère dans un conteneur cloud isolé dédié à chaque tâche, permettant de paralléliser plusieurs chantiers logiciels.",
+            "La séparation entre la phase d'initialisation (installation des dépendances) et la phase d'exécution de l'agent (réseau externe désactivé) élimine les risques d'exfiltration et d'injection supply-chain en cours de tâche.",
+            "Chaque résultat inclut une trace vérifiable des commandes exécutées et des tests passés."
+          ],
+          "workedExample": {
+            "situation": "Une équipe plateforme veut confier à Codex la mise à jour d'un validateur de schéma TypeScript, mais lors du premier essai, `npm test` échoue dans le sandbox avec `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant la boucle d'exécution de l'agent, l'accès réseau est coupé, donc l'agent ne peut pas télécharger de paquets depuis le registre npm.",
+              "Ajouter `npm ci` dans le script de configuration initiale de l'environnement Codex (qui s'exécute avant la coupure réseau).",
+              "Relancer la tâche : Codex dispose désormais de `node_modules`, exécute les 85 tests unitaires et livre un diff 100 % vert."
+            ],
+            "decision": "L'équipe documente le script de préchargement des dépendances dans la configuration de l'environnement Codex du dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi un agent de programmation autonome exécutant des tests dans un dépôt doit tourner avec l'accès réseau externe désactivé une fois les dépendances installées, et comment gérer les appels à des API tierces dans les tests.",
+            "successCriteria": [
+              "Expliquer que la coupure réseau empêche l'exfiltration du code propriétaire et le téléchargement de code arbitraire en cas de prompt injection.",
+              "Préinstaller toutes les dépendances requises lors de la phase de setup de l'environnement.",
+              "Utiliser des fixtures locales ou des mocks déterministes pour tester les intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "Des tests rapides, déterministes et hors-ligne (sur fixtures) sont à la fois une bonne pratique d'ingénierie logicielle et la clé de l'efficacité de Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Pourquoi l'agent de programmation OpenAI Codex coupe-t-il l'accès à Internet pendant qu'il modifie votre code ?",
+              "prompt": "Pourquoi l'environnement d'exécution d'OpenAI Codex désactive-t-il l'accès Internet sortant pendant que l'agent modifie le code et exécute les tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "Pour empêcher toute exfiltration de code ou de secrets ainsi que le téléchargement de paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "Pour empêcher le compilateur TypeScript ou Python de lire les fichiers présents dans le répertoire de travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "Pour désactiver l'historique Git local et interdire la génération d'un diff entre branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "Pour réduire la résolution graphique de la carte vidéo locale de l'ordinateur portable du développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque un outil qui s'installe normalement depuis Internet. Comment régler cela ?",
+              "prompt": "Une tâche confiée à OpenAI Codex échoue lors de l'exécution de `pytest` car les bibliothèques du fichier `requirements.txt` ne sont pas installées et l'agent ne peut pas contacter PyPI. Quelle est la résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "Configurer l'installation des dépendances (`pip install -r requirements.txt`) dans le script d'initialisation de l'environnement sandbox avant la coupure réseau."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex de supprimer le dossier `tests/` afin que la commande retourne un code de sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "Désactiver la vérification par tests et fusionner directement le code généré sur la branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire les clés secrètes de production en clair dans le fichier README.md du dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne dans son sandbox isolé et exigez la preuve par les logs de tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées et revue de code avec Codex",
+          "objective": "Structurer un fichier AGENTS.md efficace, déléguer des tâches ciblées ou des revues de code à Codex et valider les Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "Comment faire en sorte que Codex connaisse instantanément vos commandes de test ciblées, vos règles d'architecture et vos interdits de sécurité sans avoir à les répéter dans chaque prompt ?",
+          "declicCard": {
+            "title": "Le Déclic AGENTS.md : Le Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à la racine (et par sous-dossier) = Commandes de validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible les bons fichiers, lance les bons tests et ouvre une PR propre",
+            "step1": "Documentez dans `AGENTS.md` les commandes exactes (`npm test`, `npm run validate`), les invariants métier et les règles de style.",
+            "step2": "Utilisez des fichiers `AGENTS.md` plus spécifiques dans les sous-dossiers d'un monorepo (`backend/`, `apps/mobile/`) pour affiner les consignes locales.",
+            "rule": "Si vous corrigez deux fois la même erreur de convention dans une PR d'agent, transformez cette remarque en règle dans `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · LE STANDARD AGENTS.MD",
+              "title": "Donner à l'agent la carte et la boussole du dépôt",
+              "bodyParagraph": "Un bon fichier `AGENTS.md` ne répète pas du marketing : il donne l'architecture des dossiers, les règles strictes (ex. séparation public/privé, déterminisme des manifestes), la commande de test rapide pour itérer et la suite complète à exécuter avant de conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes de test rapides et complètes"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "Du ticket bien borné à la Pull Request prête à relire",
+              "bodyParagraph": "Pour déléguer efficacement à Codex, formulez une tâche bornée : symptôme ou comportement attendu, fichiers ou modules concernés et critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit une branche et une Pull Request documentant les changements et les tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère de test = Pull Request autonome prête pour revue"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · REVUE DE CODE PAR CODEX",
+              "title": "Détecter les bugs logiques et régressions avant fusion",
+              "bodyParagraph": "En mode revue de code sur une Pull Request, Codex compare l'intention au diff réel, exécute ou trace les chemins d'erreur (nullabilité, conditions de course, oubli de validation de borne, fuite d'information) et signale uniquement les défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles de sécurité et cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit un contexte persistant et hiérarchique (racine puis sous-répertoires) que Codex consulte automatiquement.",
+            "La délégation parallèle permet de traiter simultanément des corrections de bugs, des ajouts de tests et des refactorisations isolées.",
+            "Utiliser Codex en revue de Pull Request permet d'identifier les erreurs de logique, les oublis de cas limites et les écarts vis-à-vis des invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "Dans le dépôt `certigo-content`, chaque question publique doit avoir une solution privée correspondante et aucun champ `correct` ou `rationale` ne doit figurer dans `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or et la séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` dans `AGENTS.md`.",
+              "Confier à Codex l'ajout d'un nouveau parcours avec ses questions et solutions.",
+              "Vérifier dans le rapport de PR que Codex a exécuté de lui-même toutes les commandes prescrites par `AGENTS.md` avant de proposer la fusion."
+            ],
+            "decision": "Le fichier `AGENTS.md` garantit que chaque tâche exécutée par l'agent respecte les gardes de sécurité et de contrat du dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez les quatre rubriques indispensables d'un fichier `AGENTS.md` pour une API backend soumise à des exigences strictes de rétrocompatibilité de schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture et répertoires critiques (ex. schémas de contrat, séparation des couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use sur les schémas, interdiction des secrets).",
+              "3. Commandes d'installation et de validation ciblée puis complète.",
+              "4. Processus de changement attendu avant ouverture de Pull Request."
+            ],
+            "feedback": "Un `AGENTS.md` concis, impératif et orienté commandes de vérification améliore radicalement le taux de réussite au premier essai de Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert le fichier AGENTS.md placé dans votre projet informatique pour OpenAI Codex ?",
+              "prompt": "Quel est le rôle du fichier `AGENTS.md` placé à la racine et dans les sous-dossiers d'un dépôt Git utilisé avec OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir automatiquement à l'agent les commandes de build/test, l'architecture et les invariants du dépôt ou du sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair les mots de passe de la base de données de production pour éviter les variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "Remplacer le binaire du compilateur par une interprétation purement approximative sans exécution de tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes les branches sans exécuter les workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger dans quatre parties différentes de votre logiciel. Comment gagner du temps avec Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits dans quatre modules distincts de votre application. Comment exploiter OpenAI Codex de façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "Déléguer les quatre corrections en parallèle dans quatre tâches Codex distinctes en exigeant un test de non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander une réécriture totale de l'application dans un seul commit géant en désactivant la suite de tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre uniquement le titre « Ça ne marche pas » sans indiquer ni le module ni la trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser des modifications non testées directement sur la branche de production en contournant la revue de code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue de PR = le workflow d'ingénierie augmentée avec OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic de régressions CI, remédiation et sécurité avec Codex",
+          "objective": "Utiliser Codex pour diagnostiquer un échec CI complexe, écrire un test reproducteur avant le correctif (TDD) et appliquer les garde-fous de sécurité.",
+          "estimatedMinutes": 8,
+          "hook": "Un pipeline CI échoue de façon intermittente sur une erreur de sérialisation : comment guider Codex pour qu'il prouve la cause racine par un test rouge avant d'écrire une seule ligne de correctif ?",
+          "declicCard": {
+            "title": "Le Déclic Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ Vérifier les Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire un test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer le correctif chirurgical (Vert) ➔ 3. Exécuter la suite complète & gardes de contrat",
+            "step1": "Fournissez la trace d'erreur exacte à Codex et demandez d'abord un test minimal qui échoue sur le bug actuel.",
+            "step2": "Une fois le symptôme reproduit, laissez Codex appliquer le correctif minimal et vérifier qu'aucune garde existante ne régresse.",
+            "rule": "Un correctif sans test reproducteur qui échouait avant et passe après n'est pas une remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · REPRODUIRE AVANT DE CORRIGER",
+              "title": "La discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez un bug à Codex, exigez dans le prompt (ou dans `AGENTS.md`) qu'il commence par reproduire l'erreur avec un test ciblé. Voir le test échouer pour la raison attendue prouve que l'agent a compris le vrai mécanisme du bug et non un symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger la cause racine (Green) ➔ 3. Vérifier l'ensemble"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter le bruit et les refactorisations non demandées",
+              "bodyParagraph": "Un bon correctif d'agent modifie uniquement les lignes nécessaires et ajoute le test correspondant, sans reformater des dizaines de fichiers non liés ni affaiblir une assertion de sécurité pour faire passer le test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement de test ou suppression de garde pour obtenir un vert artificiel"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · CONTRÔLE HUMAIN DES FRONTIÈRES",
+              "title": "Ce qu'un relecteur humain vérifie toujours sur une PR d'agent",
+              "bodyParagraph": "Lors de la relecture de la PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test ou contrôle de schéma n'a été contourné · 2. Que les nouvelles dépendances éventuelles sont légitimes · 3. Que les frontières de sécurité (permissions, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue de PR : inspecter en priorité les tests modifiés, les schémas et les frontières de confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger la reproduction préalable du bug par un test qui échoue garantit la pertinence du correctif produit par Codex.",
+            "Un agent ne doit jamais faire passer un build au vert en supprimant ou en relâchant une assertion de sécurité ou de contrat.",
+            "La revue humaine de la Pull Request se concentre sur la validité des tests ajoutés, la minimalité du diff et le respect des frontières de sécurité."
+          ],
+          "workedExample": {
+            "situation": "Dans un pipeline de packaging, un fichier Windows en CRLF produit un hash SHA-256 différent de celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire un test unitaire injectant des fins de ligne `\\r\\n` et vérifiant que le hash normalisé reste identique à celui en `\\n` (le test échoue initialement).",
+              "Corriger la fonction de hachage pour normaliser les fins de ligne avant le calcul du digest SHA-256.",
+              "Exécuter toute la suite de tests et vérifier que les vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "La PR contient 6 lignes de code productif et 20 lignes de test d'isolation prouvant la résolution sur Windows et Linux."
+          },
+          "practice": {
+            "prompt": "Un agent propose une PR qui corrige une erreur de validation en supprimant la règle `additionalProperties: false` du schéma JSON. Expliquez pourquoi vous devez rejeter cette PR et quelle consigne donner.",
+            "successCriteria": [
+              "Expliquer que retirer `additionalProperties: false` ouvre le contrat à des propriétés inconnues ou à des fuites de données.",
+              "Identifier quelle propriété provoquant le rejet était illégitime dans les données (ou si une procédure formelle d'expand backend est requise).",
+              "Exiger que le schéma reste strictement fermé et qu'un test négatif vérifie le rejet des propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais un correctif éteindre l'alarme au lieu d'éteindre l'incendie : les schémas fermés et les gardes doivent rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Dans quel ordre Codex doit-il travailler pour prouver qu'il a vraiment corrigé un bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex la correction d'un bug de calcul d'arrondi signalé en production. Quelle séquence de travail garantit que le correctif règle réellement le problème sans régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord un test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer le correctif minimal (vert), puis lancer toute la suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "Supprimer les assertions numériques des tests existants afin que la suite s'exécute sans erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier la fonction mathématique sans exécuter les tests et fusionner immédiatement la branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer le workflow GitHub Actions de la branche pour masquer l'échec du build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "Un agent propose de faire passer un test de sécurité au vert en désactivant le contrôle sur le fichier posant problème. Que faites-vous ?",
+              "prompt": "Lors de la relecture d'une Pull Request générée pour corriger un test d'anti-fuite en échec, vous constatez que le diff ajoute le fichier fautif à une liste d'exclusion globale au lieu de retirer le champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter la PR car elle neutralise la garde de sécurité, et demander de supprimer le champ sensible du fichier public tout en conservant le contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver et fusionner immédiatement puisque l'indicateur du pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "Supprimer complètement le fichier de test d'anti-fuite pour accélérer les prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "Configurer l'outil de revue de code pour masquer systématiquement les modifications apportées aux fichiers de tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours la boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver une PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "Unité 3 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire des systèmes d'IA de production fiables avec la Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK et les évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir un appel Responses API combinant Function Calling et Structured Outputs (`strict: true`), orchestrer un transfert (handoff) avec Guardrails dans l'Agents SDK et valider la qualité via une suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % la conformité au JSON Schema",
+        "Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux de données de référence, graders déterministes/modèles et portes de non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` sur vos schémas JSON (Structured Outputs & Function Calling), validez les permissions côté serveur avant d'exécuter un outil, et bloquez tout changement de prompt ou de modèle qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent de Production avec OpenAI Responses API & Agents SDK",
+        "diagram": "[Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "Responses API & Structured Outputs",
+            "role": "Unifie la génération avec état, les outils natifs (recherche, fichiers, code) et contraint le décodage du modèle pour respecter un JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "Function Calling & Agents SDK",
+            "role": "Permet au modèle d'émettre des appels de fonctions typés exécutés par votre code backend et d'orchestrer des transferts (handoffs) entre agents spécialisés protégés par des Guardrails."
+          },
+          {
+            "name": "OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, le respect des consignes et l'absence de régression sur un jeu de cas de test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "Un appel de fonction retourné par le modèle (`tool_call`) est une intention non fiable : le backend applicatif doit toujours valider l'identité, les permissions et les bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir le contrat JSON à 100 %",
+          "objective": "Exploiter la Responses API et configurer Structured Outputs (`strict: true`) pour éliminer toute erreur de parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h du matin parce que le LLM a oublié une virgule JSON ou renommé le champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "Le Déclic Structured Outputs : Du JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés ou types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types et enums",
+            "step1": "Définissez votre schéma de sortie (Pydantic / Zod / JSON Schema) avec `strict: true` et `additionalProperties: false` sur chaque objet.",
+            "step2": "Gérez explicitement le champ `refusal` dans votre code au cas où la requête est rejetée pour motif de sécurité.",
+            "rule": "En production, n'espérez jamais qu'une consigne dans le prompt suffise à garantir un schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · LA RESPONSES API",
+              "title": "Une primitive unique pour le texte, les outils et l'état",
+              "bodyParagraph": "La Responses API d'OpenAI unifie la génération de réponses, le chaînage multi-tours (`previous_response_id`), l'appel de fonctions personnalisées et l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) dans une seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État de conversation + Outils natifs et personnalisés"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "Le décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui garantit seulement des accolades valides, Structured Outputs avec `strict: true` compile votre JSON Schema en une grammaire qui filtre les jetons lors de l'inférence : le modèle ne peut littéralement pas émettre une clé inconnue, omettre un champ requis ou violer un `enum`.",
+              "keyTakeawayPill": "Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · GESTION DES REFUS & VALIDATION MÉTIER",
+              "title": "Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si une demande viole les règles de sécurité, le modèle remplit la propriété dédiée `refusal` plutôt que le schéma : votre code doit vérifier `refusal` avant de lire l'objet parsé. De plus, `strict: true` garantit le type (ex. un nombre), mais votre backend doit toujours valider les règles métier (ex. taux de TVA autorisé).",
+              "keyTakeawayPill": "Vérifier `refusal` + Valider les règles métier côté serveur après la désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "La Responses API combine génération multimodale, chaînage d'état et invocation d'outils en une seule boucle.",
+            "Structured Outputs avec `strict: true` impose le respect exact du JSON Schema (clés requises, types, enums et `additionalProperties: false`) par décodage contraint.",
+            "Le code applicatif doit toujours inspecter le cas de refus (`refusal`) et appliquer ses propres validations métier sur les valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "Une assurtech extrait automatiquement les garanties et franchises de contrats PDF vers son moteur de tarification C# et subissait 2 % d'erreurs de désérialisation avec de simples instructions dans le prompt.",
+            "steps": [
+              "Définir le schéma JSON de l'extraction avec `strict: true`, `additionalProperties: false` et des énumérations fermées pour les types de franchise.",
+              "Appeler la Responses API avec ce schéma dans `text.format` (`json_schema`).",
+              "Ajouter un contrôle en sortie vérifiant l'absence de `refusal` et la cohérence arithmétique (franchise <= plafond de garantie)."
+            ],
+            "decision": "Le taux d'erreur de formatage JSON tombe à 0,00 % en production dès le déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez la différence entre le mode `json_object` historique et `json_schema` avec `strict: true` (Structured Outputs), et listez deux exigences structurelles du JSON Schema en mode strict.",
+            "successCriteria": [
+              "Expliquer que `json_object` garantit uniquement une syntaxe JSON valide sans imposer de schéma, tandis que `json_schema` (`strict: true`) garantit le respect exact de la structure.",
+              "Mentionner que chaque objet du schéma doit déclarer `additionalProperties: false`.",
+              "Mentionner que tous les champs définis dans `properties` doivent figurer dans `required` (en utilisant un type nullable `[\"string\", \"null\"]` pour les champs optionnels)."
+            ],
+            "feedback": "En mode strict, un champ optionnel se modélise par un type union incluant `null` tout en restant listé dans `required`, avec `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Comment obliger l'API OpenAI à renvoyer une réponse JSON qui respecte toujours exactement les champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI pour extraire les lignes d'une facture et exige que la réponse respecte à 100 % un schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) et `lignes` (array), sans aucune propriété supplémentaire. Quelle configuration devez-vous utiliser ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "Utiliser Structured Outputs (`json_schema`) avec `strict: true` et `additionalProperties: false` sur chaque objet du schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules dans le prompt sans activer de schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer la réponse brute au centième caractère avant d'ajouter une accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler la température sur 2.0 en mode texte libre pour diversifier le nom des clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Avec le mode strict d'OpenAI, comment déclarer un champ facultatif (comme un commentaire) dans votre format JSON ?",
+              "prompt": "Comment modéliser un champ optionnel (par exemple `commentaire`) dans un JSON Schema utilisé avec OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure le champ dans `required` et définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) avec `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` et supprimer totalement le tableau `required` de l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer le nom du champ avec une chaîne vide en guise de définition de type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer des balises XML à l'intérieur du schéma JSON pour désactiver le validateur de jetons."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur de parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs et guardrails",
+          "objective": "Implémenter le Function Calling avec schémas stricts et orchestrer des agents spécialisés avec Handoffs, Guardrails et Tracing dans l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "Comment faire collaborer un agent de triage, un agent de facturation et un agent technique sans créer une usine à gaz impossible à déboguer ni laisser un prompt malveillant déclencher un remboursement non autorisé ?",
+          "declicCard": {
+            "title": "Le Déclic Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : Le modèle propose `call_tool(args)` ➔ VOTRE code vérifie les droits et exécute",
+            "diagramBottom": "Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` sur les définitions de fonctions (`tools`) et validez toujours les autorisations côté serveur avant d'exécuter la fonction.",
+            "step2": "Découpez les responsabilités avec des Handoffs explicites entre agents spécialisés et protégez les entrées/sorties par des Guardrails parallèles.",
+            "rule": "Le modèle ne touche jamais directement votre base de données : il émet une proposition d'appel d'outil que votre backend contrôle et exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · FUNCTION CALLING STRICT",
+              "title": "Séparer la décision d'appel et l'exécution réelle",
+              "bodyParagraph": "Lors d'un Function Calling, le modèle ne lance aucun code sur les serveurs d'OpenAI : il retourne un objet structuré indiquant le nom de la fonction et ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie les permissions de l'utilisateur, exécute la fonction et renvoie le résultat au modèle.",
+              "keyTakeawayPill": "Modèle = propose l'appel et les arguments · Votre serveur = vérifie les droits et exécute"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer des spécialistes plutôt qu'un méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose sur des primitives légères : un `Agent` (instructions + modèle + outils), des `Handoffs` (délégation explicite de la conversation vers un agent spécialiste comme un transfert d'appel qualifié) et le `Tracing` natif qui enregistre chaque étape, appel d'outil et transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré de bout en bout"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · GUARDRAILS D'ENTRÉE ET DE SORTIE",
+              "title": "Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "Les `Guardrails` s'exécutent en parallèle de l'agent : un guardrail d'entrée léger détecte immédiatement une tentative d'injection de prompt ou une demande hors périmètre et déclenche un `tripwire` qui interrompt l'exécution avant même que le modèle principal ou ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil ou génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, le modèle génère uniquement les arguments structurés de l'appel (`strict: true`) ; l'exécution et le contrôle d'accès restent sous la responsabilité du serveur applicatif.",
+            "L'OpenAI Agents SDK structure les workflows multi-agents autour d'Agents, de Tools, de Handoffs (transferts de contrôle) et du Tracing intégré.",
+            "Les Guardrails d'entrée et de sortie utilisent un mécanisme de disjoncteur (`tripwire`) pour bloquer les requêtes malveillantes ou les sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "Un service client bancaire déploie une architecture multi-agents avec l'OpenAI Agents SDK : un agent d'accueil, un agent Cartes Bancaires (pouvant faire opposition) et un agent Crédits.",
+            "steps": [
+              "Placer un Input Guardrail qui vérifie qu'aucune tentative de contournement d'identité ou de demande hors banque n'est présente.",
+              "Configurer l'agent d'accueil avec deux Handoffs explicites vers l'agent Cartes et l'agent Crédits.",
+              "Dans l'outil `bloquer_carte(carte_id)` de l'agent Cartes, activer `strict: true` sur le schéma et vérifier côté serveur que `carte_id` appartient bien au `user_id` authentifié dans le contexte de session."
+            ],
+            "decision": "Le parcours est traçable dans le dashboard de Tracing et protégé contre les appels d'outils sur les cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "Un développeur passe `user_id` comme argument libre dans le schéma de Function Calling `rembourser_commande(user_id, commande_id)` et fait confiance à la valeur choisie par le LLM. Expliquez la vulnérabilité et comment la corriger.",
+            "successCriteria": [
+              "Identifier la faille d'autorisation (un prompt injection peut convaincre le LLM de passer le `user_id` d'un autre client).",
+              "Retirer `user_id` des arguments générés par le LLM et l'injecter côté serveur depuis le jeton d'authentification vérifié de la session.",
+              "Valider en base de données que `commande_id` appartient bien à cet utilisateur authentifié et appliquer un plafond de remboursement."
+            ],
+            "feedback": "Les identifiants de sécurité (qui est connecté, quel est son tenant) doivent toujours provenir du contexte serveur authentifié, jamais des arguments devinés par le modèle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "Pourquoi est-il dangereux de laisser l'IA choisir elle-même le numéro de dossier client à lire sans vérifier qui est connecté ?",
+              "prompt": "Dans une application utilisant le Function Calling d'OpenAI, la fonction `lire_dossier_medical(patient_id)` laisse le modèle choisir librement `patient_id` à partir du texte de la conversation sans vérifier la session authentifiée côté serveur. Quel est le risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "Une divulgation non autorisée (IDOR) : un utilisateur peut manipuler le prompt pour amener le modèle à demander le dossier d'un autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "Une incompatibilité d'affichage des caractères accentués dans la police système du navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "Une saturation du périphérique audio local lors de la sérialisation de l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "La suppression automatique du fichier JSON Schema sur le disque dur du serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Dans le kit OpenAI Agents SDK, comment arrêter immédiatement un agent si un contrôle détecte une demande dangereuse ?",
+              "prompt": "Dans l'OpenAI Agents SDK, quel mécanisme permet à un contrôle de sécurité exécuté en parallèle d'interrompre immédiatement l'agent avant qu'un outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "Un Guardrail déclenchant un disjoncteur (`tripwire`) dès que sa condition de sécurité ou de périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation du paramètre `max_output_tokens` au-delà de la fenêtre de contexte du modèle."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "La désactivation complète du module de Tracing dans la configuration globale du SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "Le retrait de toutes les instructions système des agents spécialisés recevant un handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + identité injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = des agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant de déployer",
+          "objective": "Construire une suite d'évaluation (OpenAI Evals) combinant jeu de données de référence, graders déterministes et LLM-as-a-judge pour piloter les mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt sur trois exemples et ça a l'air super ! » : pourquoi cette phrase est-elle la cause numéro un des régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "Le Déclic Evals : Traiter les Prompts et Modèles comme du Code avec des Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution sur la variante",
+            "diagramBottom": "Graders (Exactitude de schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez un dataset doré (golden dataset) couvrant les cas nominaux, les cas ambigus et les tentatives de contournement.",
+            "step2": "Combinez des graders déterministes (schéma JSON, nom de l'outil appelé, mots-clés interdits) et des graders sémantiques calibrés.",
+            "rule": "Aucun changement de prompt, de modèle ou de RAG ne part en production sans passer la suite d'Evals au-dessus du seuil de référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ÉTAPE 1 · LE DATASET DE RÉFÉRENCE",
+              "title": "Partir des vraies erreurs observées sur le terrain",
+              "bodyParagraph": "Une bonne suite d'évaluation (Evals) ne contient pas uniquement des questions faciles : elle réunit 50 à 200 cas représentatifs de la production, incluant les formulations ambiguës des utilisateurs, les documents contradictoires, les valeurs nulles et les scénarios où l'agent doit refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas de refus attendus"
+            },
+            {
+              "stepBadge": "ÉTAPE 2 · LES GRADERS (NOTATEURS)",
+              "title": "Privilégier le déterminisme, compléter par un juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité des graders déterministes rapides et reproductibles : correspondance exacte d'un identifiant, validité du JSON Schema, vérification que le bon `tool_call` a été émis avec les bons paramètres. Pour évaluer la fidélité au contexte (groundedness) ou le ton, ajoutez un grader par modèle (LLM-as-a-judge) doté d'une grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par modèle sur grille explicite"
+            },
+            {
+              "stepBadge": "ÉTAPE 3 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser coût, latence et qualité en confiance",
+              "bodyParagraph": "Avec une suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si le passage d'un modèle coûteux vers `o4-mini` ou `gpt-4o-mini` maintient 99 % de précision tout en divisant la latence et la facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation de modèle ou de prompt à l'aveugle : les Evals tranchent par la preuve"
+            }
+          ],
+          "keyIdeas": [
+            "Les évaluations systématiques (Evals) transforment l'amélioration d'un système IA d'une intuition subjective en une ingénierie mesurable.",
+            "Une suite d'Evals robuste combine des contrôles déterministes (schéma, sélection d'outils, règles métier) et des évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production doit être converti en un nouveau cas de test dans le dataset d'Evals pour empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "Une équipe souhaite réduire de 60 % le temps de réponse de son agent de qualification de tickets en remplaçant son prompt système de 4 000 mots et en changeant de modèle.",
+            "steps": [
+              "Construire dans OpenAI Evals un jeu de 120 tickets historiques annotés avec la catégorie attendue, la priorité et l'outil à appeler.",
+              "Définir deux graders : un grader déterministe sur le couple `(categorie, priorite, tool_name)` et un grader de conformité vérifiant l'absence de promesse commerciale non autorisée.",
+              "Comparer le score de la nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, pour une latence divisée par 2,4."
+            ],
+            "decision": "La mise en production est approuvée sur la base du rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez les trois types de cas de test et les deux types de graders que vous devez inclure dans une suite OpenAI Evals pour valider un agent qui résume des contrats et appelle une API d'archivage.",
+            "successCriteria": [
+              "Trois familles de cas : contrats standards complets, contrats incomplets/contradictoires (cas limites) et prompts tentant de forcer un archivage non autorisé.",
+              "Grader déterministe : vérifier la structure JSON du résumé et les arguments exacts passés à la fonction d'archivage.",
+              "Grader d'ancrage : vérifier que chaque clause citée dans le résumé figure réellement dans le contrat source."
+            ],
+            "feedback": "Tester ensemble la fidélité du texte et la justesse de l'appel d'outil couvre à la fois la génération et l'action de l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez les consignes de votre assistant IA. Comment vérifier que vous n'avez rien cassé avant la mise en ligne ?",
+              "prompt": "Votre équipe modifie les instructions système d'un agent en production pour raccourcir ses réponses, et veut s'assurer que ce changement ne dégrade pas le choix des outils Function Calling sur les 150 scénarios critiques de l'entreprise. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter une suite automatisée OpenAI Evals vérifiant les appels d'outils sur les 150 scénarios et bloquer le déploiement en cas de régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles dans l'interface de chat puis déployer immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer les schémas de paramètres des fonctions afin qu'aucune erreur de typage ne remonte dans les journaux."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "Déployer sans test préalable et compter sur les tickets de réclamation des clients pour mesurer la qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Comment vérifier de façon simple, rapide et gratuite qu'un agent a bien choisi la devise EUR dans un test automatique ?",
+              "prompt": "Quel type de grader (notateur) est le plus fiable et le plus économique pour vérifier dans OpenAI Evals qu'un agent a appelé la fonction `creer_avoir` avec le bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "Un grader déterministe inspectant directement le nom de la fonction appelée et l'égalité stricte de l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "Une évaluation purement stylistique demandant à un modèle tiers si la réponse semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "Une règle vérifiant uniquement que la réponse textuelle dépasse mille caractères, sans lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "Un générateur de nombres aléatoires attribuant un score sans comparer la sortie à la valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes et sémantiques + Porte de non-régression CI = l'ingénierie IA pilotée par les Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "Examen Blanc CertiGo Pro : OpenAI (ChatGPT Enterprise, Modèles o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète de maîtrise des produits OpenAI en entreprise : sélection de modèles (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex avec AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK et OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "m365-copilot-agents",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "zh-Hans",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "jeton-entra-acl"
+      ],
+      "plainExplanation": "Copilot utilise 仅 文件 与 courriels auxquels votre propre compte Microsoft a déjà droit d'accéder.",
+      "rationale": "Microsoft 365 Copilot exécute Grounding Microsoft Graph 与 recherche 在 l'index sémantique (Work IQ) en présentant 令牌 Entra ID 的 l'用户 connecté : seuls documents 与 courriels auxquels l'analyste a déjà 访问 peuvent être récupérés.",
+      "examTip": "Grounding Graph = 权限 Entra ID 的 l'用户 courant, zéro élévation 的 privilège 与 zéro réentraînement public.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "surpartage-acl-sharepoint"
+      ],
+      "plainExplanation": "文件 était déjà partagé par erreur 配合 trop 的 monde 在 SharePoint : il faut restreindre 权限 d'访问 的 dossier.",
+      "rationale": "Lorsque Copilot cite 一个 document interne inattendu, c'est que l'用户 dispose déjà d'一个 droit 的 lecture 在 ce 文件 (在-partage SharePoint/OneDrive). remédiation consiste à corriger ACL SharePoint 与 à appliquer 一项 étiquette 的 sensibilité Microsoft Purview.",
+      "examTip": "一个 document sensible visible 在 Copilot révèle 一个 在-partage SharePoint (oversharing), jamais 一项 fuite 的 poids 的 LLM.",
+      "sourceIds": [
+        "ms-copilot-privacy",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "delegation-cowork-plan"
+      ],
+      "plainExplanation": "Déléguez mission à Copilot Cowork : il prépare dossier étape par étape en arrière-plan 与 vous soumet résultat.",
+      "rationale": "Copilot Cowork est conçu 用于 planifier 与 exécuter en arrière-plan 的 travaux multi-étapes croisant plusieurs sources Work IQ (Teams, Outlook, Excel, Word) tout en soumettant livrable à 一个 point 的 contrôle humain.",
+      "examTip": "Mission transversale multi-applications 配合 suivi d'étapes = délégation asynchrone Copilot Cowork.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "heritage-identite-et-validation"
+      ],
+      "plainExplanation": "Non, il respecte exactement vos 权限 d'访问 与 vous demande confirmation avant toute action importante.",
+      "rationale": "Même en exécution asynchrone, Copilot Cowork opère strictement sous l'身份 与 权限 的 l'用户 qui délègue tâche, 与 maintient 一个 point d'approbation humaine avant toute diffusion 或 action externe.",
+      "examTip": "Asynchrone ne veut jamais dire 无 治理 : Cowork conserve vos 权限 Entra ID 与 vos jalons d'approbation.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "copilot-pages-composant-loop"
+      ],
+      "plainExplanation": "Copilot Pages (basé 在 Microsoft Loop) 支持 的 modifier même contenu en direct depuis Teams comme depuis Outlook.",
+      "rationale": "En ouvrant 响应 在 Copilot Pages puis en partageant comme composant Microsoft Loop, table reste synchronisée en temps réel 之间 Teams, Outlook, Word 与 web.",
+      "examTip": "Co-édition bidirectionnelle en direct 之间 Teams 与 Outlook = Copilot Pages + composant Microsoft Loop.",
+      "sourceIds": [
+        "ms-copilot-pages"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "sharepoint-embedded-purview"
+      ],
+      "plainExplanation": "Elles sont stockées 在 SharePoint Embedded 与 bénéficient 自动 的 mêmes règles 的 安全 que vos sites SharePoint.",
+      "rationale": "Copilot Pages sont stockées 在 的 conteneurs SharePoint Embedded rattachés au locataire Microsoft 365, ce qui 确保 l'application complète 的 règles 的 rétention, d'eDiscovery 与 的 治理 Microsoft Purview.",
+      "examTip": "Copilot Pages repose 在 SharePoint Embedded : même 安全 与 même conformité Purview que SharePoint Online.",
+      "sourceIds": [
+        "ms-copilot-pages",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "selecteur-slash-fichiers-reference"
+      ],
+      "plainExplanation": "Utilisez bouton « / » 在 Copilot 用于 attacher 直接 文件 的 référence avant 的 lancer rédaction.",
+      "rationale": "在 Copilot 用于 Word, l'opérateur `/` 支持 的 pointer explicitement vers 的 文件 OneDrive 或 SharePoint afin d'ancrer génération 的 texte, 的 clauses 或 d'一项 synthèse exécutive 在 ces documents 的 référence.",
+      "examTip": "在 Word, `/` = attacher 文件 sources qui font foi 用于 éviter toute invention.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-ouvert-et-styles-word"
+      ],
+      "plainExplanation": "Structurez d'abord votre document Word 配合 的 titres clairs, puis créez présentation depuis votre 模型 PowerPoint d'企业.",
+      "rationale": "Copilot 在 PowerPoint s'appuie 在 hiérarchie Titre 1 / Titre 2 的 文件 Word 用于 découper diapositives 与 générer notes d'orateur, tout en appliquant masques 的 模型 PowerPoint ouvert.",
+      "examTip": "Styles Titre 1/2 在 Word + 模型 d'企业 ouvert 在 PowerPoint = présentation chartée 配合 speaker notes.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "let-et-lambda"
+      ],
+      "plainExplanation": "LET 支持 的 donner 一个 nom aux étapes 的 calcul, 与 LAMBDA transforme formule en fonction réutilisable partout 在 classeur.",
+      "rationale": "fonction `LET` nomme 与 stocke calculs intermédiaires au sein d'一项 formule 用于 améliorer lisibilité 与 performances, tandis que `LAMBDA` transforme cette logique en fonction personnalisée réutilisable 无 macro VBA.",
+      "examTip": "Variables locales 在 一项 formule Excel = LET · Fonction métier réutilisable 无 VBA = LAMBDA.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "conteneur-isole-azure-xl"
+      ],
+      "plainExplanation": "Il tourne 在 一个 espace isolé Microsoft Cloud 无 aucun 访问 à Internet, ce qui protège vos tableaux financiers.",
+      "rationale": "Python in Excel exécute code 在 一个 conteneur isolé par hyperviseur 在 Azure Container Instances 无 访问 au 网络, au disque local ni au 令牌 用户, 与 n'accède qu'aux 数据 passées via `xl()`.",
+      "examTip": "Python in Excel = conteneur Azure isolé, zéro 访问 网络 与 lecture exclusive via `xl()`.",
+      "sourceIds": [
+        "ms-python-excel"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "transcription-ou-enregistrement-actif"
+      ],
+      "plainExplanation": "transcription (或 l'enregistrement) 的 réunion 必须 avoir été activée 用于 que Copilot puisse lire échanges passés.",
+      "rationale": "用于 synthétiser échanges passés 与 attribuer actions à leurs propriétaires, Copilot 在 Teams 与 Intelligent Meeting Recap s'appuient 在 transcription (或 l'enregistrement transcrit) 配合 identification 的 orateurs.",
+      "examTip": "无 transcription active 在 Teams, Copilot ne peut ni citer décisions passées ni attribuer actions aux intervenants.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "analyse-ton-ressenti-clarte"
+      ],
+      "plainExplanation": "Elle relit votre brouillon 与 vous conseille 用于 rendre ton plus diplomatique 与 message plus clair avant l'envoi.",
+      "rationale": "Coaching by Copilot 在 Outlook examine brouillon d'e-mail 在 trois axes (ton, ressenti 的 lecteur 与 clarté) 与 fournit 的 recommandations concrètes avant l'envoi.",
+      "examTip": "Générer 一个 brouillon = Draft with Copilot · Améliorer ton, l'impact 与 clarté d'一个 texte = Coaching by Copilot.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "agent-autonome-copilot-studio"
+      ],
+      "plainExplanation": "Il faut 一个 agent autonome 在 Copilot Studio, car lui seul peut réagir 自动 à 一个 événement système.",
+      "rationale": "一个 agent qui réagit 自动 à 一个 événement 的 数据 (création d'entrée Dataverse) 无 intervention initiale d'一个 用户 在 chat est 一个 agent autonome conçu 在 Microsoft Copilot Studio.",
+      "examTip": "Déclencheur d'événement système (Dataverse, boîte partagée, planification) 无 prompt humain = Agent autonome Copilot Studio.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "cadrage-sources-sur-orchestrateur-m365"
+      ],
+      "plainExplanation": "Lorsqu'on veut spécialiser chat Copilot 在 一项 base documentaire précise 的 l'企业 配合 quelques outils ciblés.",
+      "rationale": "一个 agent déclaratif spécialise Microsoft 365 Copilot en définissant 的 instructions 在 mesure, 的 sources SharePoint/Graph bornées 与 的 actions tout en s'appuyant 在 l'orchestrateur 与 安全 的 M365 Copilot.",
+      "examTip": "[ZH] Agent déclaratif = instructions + sources bornées + actions exécutées par l'orchestrateur M365 Copilot.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "elevation-privileges-via-auteur"
+      ],
+      "plainExplanation": "N'importe quel employé pourrait alors 使用 l'agent 用于 faire 的 opérations réservées à l'administrateur.",
+      "rationale": "Exécuter 一项 action d'écriture ERP 配合 identifiants 的 l'auteur 支持 à tout 用户 的 l'agent d'agir 配合 权限 的 cet auteur. Il faut imposer l'authentification 的 l'用户 final (`User authentication`).",
+      "examTip": "在 toute action qui lit 的 数据 privées 或 modifie 一个 système métier, imposez l'authentification 的 l'用户 final.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "descriptions-detaillees-actions-parametres"
+      ],
+      "plainExplanation": "Rédigez 一项 description très précise 在 chaque outil en indiquant quand l'使用 与 quand ne pas l'使用.",
+      "rationale": "L'orchestrateur génératif sélectionne ses outils 与 renseigne leurs arguments à partir 的 descriptions en langage naturel 的 chaque action 与 的 chaque paramètre.",
+      "examTip": "description d'一项 action Copilot Studio fait partie 的 prompt 的 routage 的 l'orchestrateur : soyez explicite 与 discriminant.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "heritage-etiquette-plus-restrictive"
+      ],
+      "plainExplanation": "résumé reçoit 自动 l'étiquette plus stricte (« Confidentiel Direction ») 用于 éviter toute fuite.",
+      "rationale": "Microsoft 365 Copilot applique règle d'héritage 的 Microsoft Purview : lorsqu'一项 响应 或 一个 document combine plusieurs sources, l'étiquette 的 sensibilité ayant priorité plus élevée ( plus restrictive) est 自动 appliquée.",
+      "examTip": "Fusion multi-documents 在 Copilot = héritage automatique 的 l'étiquette Purview plus restrictive.",
+      "sourceIds": [
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "politique-dlp-power-platform"
+      ],
+      "plainExplanation": "一项 règle 的 protection contre perte 的 数据 (DLP Power Platform) bloque tout transfert 之间 SharePoint 与 的 connecteurs externes.",
+      "rationale": "politiques DLP (Data Loss Prevention) 的 Power Platform permettent d'隔离 connecteurs métier (Business) 的 connecteurs externes 与 的 bloquer connecteurs HTTP non autorisés 在 Copilot Studio.",
+      "examTip": "Empêcher 一个 agent Copilot Studio d'exfiltrer 的 数据 SharePoint vers 一项 API tierce = Politique DLP Power Platform.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-privacy"
+      ]
+    }
+  ]
+}

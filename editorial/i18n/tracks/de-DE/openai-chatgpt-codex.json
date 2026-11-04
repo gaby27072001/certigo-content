@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné auf OpenAI Academy und die documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple ohne jargon und expert) und examen blanc."
+  },
+  "locale": "de-DE",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "Meistern der choix der Modelle (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent von programmation autonome Codex und l'ingénierie IA von production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads und responsables produit déployant die offres OpenAI en Unternehmen.",
+  "prerequisites": "Connaître die bases des développement logiciel (Git, JSON, API REST) und l'utilisation courante d'ein assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI und Prompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente die bonnes pratiques d'ingénierie von prompt, der routage zwischen Modelle multimodaux und Modelle von raisonnement, l'usage von Canvas, Projects, Custom GPTs und l'évaluation systématique.",
+      "limits": "Die performances d'ein prompt oder d'ein workflow dépendent d'évaluations empiriques (Evals) auf die Daten représentatives des cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox (CertiGo-Pfad)",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille der fonctionnement von l'agent OpenAI Codex : exécution von tâches en parallèle in ein conteneur cloud isolé mit Zugriff coupé à Internet pendant l'exécution, lecture der conventions AGENTS.md, exécution der tests und ouverture von Pull Requests vérifiables.",
+      "limits": "Codex exécute die tests configurés in son environnement sandbox ; toute fusion en production reste soumise à die revue von code und aux contrôles CI von l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, und Evals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente die Responses API unifiée, l'application stricte von JSON Schema via Structured Outputs (strict: true), der Function Calling, l'Agents SDK (handoffs, guardrails, tracing) und die suites d'évaluation Evals.",
+      "limits": "Die garantie syntaxique von Structured Outputs assure der respect des schéma JSON, mais pas die véracité métier der valeurs retournées ni l'autorisation d'exécuter ein appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "Einheit 1 · ChatGPT Pro & Enterprise : Modelle, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs Modelle von raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs und Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner der Modell optimal selon die tâche (GPT-4o vs o3/o4-mini), conduire eine étude sourcée mit Deep Research und structurer ein espace von travail récurrent mit Projects, Canvas und Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage von Modell : GPT-4o multimodal rapide vs Modelle von raisonnement à chaîne von pensée interne o3 und o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée mit citations) & Data Analysis (exécution Python für nettoyer, modéliser und tracer der Daten)",
+        "Canvas (co-édition ciblée von texte und von code), Projects (instructions und Dateien persistants) und Custom GPTs gouvernés en Unternehmen"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o für l'interaction multimodale rapide und die rédaction fluide, o3/o4-mini für der raisonnement algorithmique oder analytique complexe, und Deep Research lorsqu'eine synthèse exige d'explorer, croiser und citer der dizaines von sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage von Modelle & Espaces von Travail",
+        "diagram": "[Anfrage Benutzer] ➔ [Choix Modell : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "[DE] GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image und audio mit faible latence ; o3 und o4-mini allouent des calcul von raisonnement avant von répondre aux problèmes logiques, mathématiques, juridiques oder d'architecture."
+          },
+          {
+            "name": "[DE] Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement der web und die connecteurs autorisés für livrer ein rapport sourcé ; Data Analysis exécute des code Python für analyser der Dateien CSV/Excel."
+          },
+          {
+            "name": "[DE] Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre ein éditeur côte à côte für réviser des texte oder des code par section ; Projects regroupe conversations, instructions und Dateien ; Custom GPTs partage der assistants spécialisés in der workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "In ChatGPT Enterprise, die conversations, Dateien von Projects und exécutions Data Analysis sont isolés par espace von travail client und ne servent jamais à entraîner die Modelle OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "Wählen der bon Modell : GPT-4o multimodal vs Modelle von raisonnement o3 und o4-mini",
+          "objective": "Arbitrer zwischen GPT-4o, o3 und o4-mini selon die complexité logique, der besoin multimodal, die latence und der Kosten d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "Verwenden der Modell von raisonnement der plus lourd für reformuler ein courriel von trois lignes gaspille des temps, mais confier ein audit d'architecture distribuée à ein Modell instantané fait rater der cas limites : quelle est die règle von tri ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Modelle OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse und échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne von pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "Für rédiger, résumer, traduire oder dialoguer rapidement à partir von texte oder d'images courantes, choisissez GPT-4o.",
+            "step2": "Für résoudre ein bug subtil, prouver eine cohérence financière/juridique oder planifier sous fortes contraintes, choisissez o3 (profondeur maximale) oder o4-mini (raisonnement rapide und économique).",
+            "rule": "Prompting o3/o4-mini : donnez ein objectif précis, die contraintes und der format attendu, ohne imposer von « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · GPT-4O MULTIMODAL",
+              "title": "Der Modell polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle in die tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse von réunions, traduction nuancée, extraction visuelle rapide und conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "[DE] GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · Modelle Von RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer des temps von réflexion avant der premier mot",
+              "bodyParagraph": "Die Modelle von die série o (`o3` und `o4-mini`) génèrent eine chaîne von raisonnement interne avant d'émettre leur Antwort finale : ils vérifient leurs hypothèses, reviennent en arrière en cas von contradiction und excellent en algorithmique, finance, analyse von causes racines und revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement von pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · ADAPTER SON PROMPTING",
+              "title": "Ein brief d'objectif clair plutôt que des micro-guidage",
+              "bodyParagraph": "Mit GPT-4o, détailler die étapes intermédiaires améliore souvent die sortie. Mit o3 und o4-mini, spécifiez clairement l'objectif final, die invariants à respecter, die Daten d'entrée und der schéma von sortie : der Modell construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "Auf o3/o4-mini : spécifiez der QUOI (contraintes + critères von succès), laissez der Modell gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie die faible latence und l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre die profondeur von raisonnement maximale für die problèmes scientifiques, architecturaux, financiers oder von débogage complexe, tandis qu'`o4-mini` optimise der compromis vitesse/Kosten auf die tâches techniques.",
+            "Ein prompt destiné à ein Modell von raisonnement muss définir rigoureusement die contraintes, die cas limites und der livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "Ein Team d'ingénierie chez ein éditeur SaaS muss traiter deux demandes : (1) transformer der notes d'atelier en FAQ client multilingue, und (2) identifier eine condition von course (race condition) zwischen trois microservices von paiement.",
+            "steps": [
+              "Affecter die rédaction und die traduction von die FAQ client à GPT-4o in Canvas für itérer rapidement auf der style.",
+              "Soumettre die Protokolle d'exécution und der code der trois microservices à o3 en précisant die invariants transactionnels à Überprüfen.",
+              "Valider der scénario d'entrelacement découvert par o3 au moyen d'ein test automatisé reproductible."
+            ],
+            "decision": "Der routage intentionnel divise der temps von rédaction par trois und résout der bug von concurrence que die revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez die trois tâches suivantes zwischen GPT-4o, o4-mini und o3 en justifiant votre choix : (A) Reformuler 15 fiches produit für der catalogue web, (B) Diagnostiquer eine incohérence zwischen quatre clauses von pénalité und ein Modell actuariel, (C) Générer rapidement der tests unitaires auf vingt fonctions utilitaires.",
+            "successCriteria": [
+              "Verknüpfen (A) à GPT-4o für sa rapidité rédactionnelle und sa maîtrise des ton.",
+              "Verknüpfen (B) à o3 für sa capacité von raisonnement multi-contraintes profond.",
+              "Verknüpfen (C) à o4-mini für son raisonnement code rapide und économique à haut volume."
+            ],
+            "feedback": "Wählen der Modell proportionné à die difficulté cognitive évite à die fois die auf-qualité lente und l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez ein problème financier oder logique très complexe mit douze règles à Überprüfen en même temps. Quel Modell OpenAI Wählen ?",
+              "prompt": "Ein Architekt financier muss Überprüfen die cohérence mathématique und réglementaire d'ein Modell von couverture von taux comportant douze contraintes croisées und identifier die cas limites où die formule diverge. Quel Modell OpenAI muss-il sélectionner in ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "Der Modell von raisonnement o3, conçu für décomposer und Überprüfen der problèmes logiques, mathématiques und multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "Ein Modell von transcription vocale purement acoustique dépourvu von capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "Ein Modell d'embeddings vectoriels qui retourne nur eine liste von nombres flottants ohne texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "Der classifieur von modération von contenu qui produit nur der scores von Sicherheit booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est die différence pratique zwischen die Modelle von réflexion o3 und o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` von `o3` au sein von die famille der Modelle von raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre ein raisonnement technique und code beaucoup plus rapide und économique für die tâches à haut débit, tandis qu'o3 privilégie die profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération von code informatique und se limite à die retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie automatisch die prompts d'Unternehmen auf Internet contrairement au Modell o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée und ne peut lire aucun Datei structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o für die vitesse multimodale und rédactionnelle ; o4-mini für der raisonnement technique agile ; o3 für die arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée und analyse Python",
+          "objective": "Conduire eine recherche approfondie multi-sources mit Deep Research und analyser der jeux von Daten tabulaires mit Data Analysis in ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "Sie müssen livrer demain matin eine étude concurrentielle citant trente sources vérifiables Und eine analyse von cohorte auf ein Datei von 120 000 lignes von ventes : comment combiner Deep Research und Data Analysis ohne jamais inventer ein chiffre ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré mit citations",
+            "diagramBottom": "Data Analysis : Datei CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research die synthèses documentaires und études von marché nécessitant von parcourir, recouper und citer der dizaines von sources.",
+            "step2": "Confiez à Data Analysis tout calcul auf vos Dateien chiffrés afin que der résultat provienne d'eine exécution Python réelle und non d'ein calcul mental des LLM.",
+            "rule": "Ne demandez jamais à ein Modell von calculer von tête auf 50 000 lignes : exigez l'exécution Python von Data Analysis und inspectez der code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · DEEP RESEARCH",
+              "title": "Ein analyste von recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à eine recherche web rapide d'eine seconde, Deep Research établit ein plan d'investigation, explore von multiples pages und documents autorisés, recoupe die contradictions und rédige ein rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "[DE] Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif auf vos jeux von Daten",
+              "bodyParagraph": "Lorsque vous déposez ein Datei CSV, Excel oder JSON in ChatGPT Enterprise, Data Analysis écrit und exécute des code Python (`pandas`, `numpy`, `matplotlib`) in ein environnement isolé. Il nettoie die valeurs manquantes, calcule die agrégats exacts und génère der visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable und déterministe auf vos Dateien von Daten"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · VÉRIFICATION Von BOUT EN BOUT",
+              "title": "Auditer die sources und der script Python",
+              "bodyParagraph": "Ein professionnel CertiGo vérifie toujours deux éléments avant von diffuser son livrable : in Deep Research, il ouvre die citations der conclusions critiques ; in Data Analysis, il déplie der bloc von code Python (`</>`) für Überprüfen die filtres appliqués (par exemple der traitement der lignes annulées oder der devises).",
+              "keyTakeawayPill": "Toujours ouvrir die citations Deep Research + inspecter die filtres des script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit der recherches multi-étapes auf plusieurs minutes für produire der rapports exhaustifs accompagnés von citations précises.",
+            "Data Analysis exécute des code Python in ein bac à sable für garantir l'exactitude mathématique der statistiques, jointures und graphiques auf der Dateien volumineux.",
+            "L'inspection des code Python généré (`</>`) ermöglicht von valider die hypothèses von nettoyage (valeurs nulles, doublons, devises) avant von présenter die chiffres."
+          ],
+          "workedExample": {
+            "situation": "Ein Team stratégie prépare l'entrée auf ein nouveau marché européen : elle muss comparer die cadres réglementaires von quatre pays und analyser l'historique interne von 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant die quatre juridictions, die autorités officielles à privilégier und die grille comparative attendue mit liens sources.",
+              "Charger l'extrait anonymisé der 80 000 commandes in Data Analysis und demander der calcul des panier moyen, von die rétention à 6 mois und von die saisonnalité via Python.",
+              "Déplier der code Python für Überprüfen que die commandes remboursées ont bien été exclues des chiffre d'affaires net, puis Überprüfen die citations réglementaires von Deep Research."
+            ],
+            "decision": "Der comité d'investissement reçoit ein dossier où chaque règle juridique pointe vers son texte officiel und chaque indicateur financier est issu d'ein script Python reproductible."
+          },
+          "practice": {
+            "prompt": "Ein analyste colle 5 000 lignes von transactions in ein prompt texte und demande au Modell von calculer die médiane und l'écart-type ohne Verwenden Data Analysis. Expliquez der risque und die bonne méthode à adopter.",
+            "successCriteria": [
+              "Erklären que die prédiction von Tokens texte ohne exécution von code risque von produire der calculs statistiques approximatifs oder tronqués.",
+              "Joindre der Datei structuré (CSV/XLSX) und demander explicitement l'exécution d'ein script Python via Data Analysis.",
+              "Ouvrir der bloc von code exécuté für Überprüfen die colonne ciblée und der traitement der valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique oder statistique auf ein tableau von Daten muss passer par l'exécution Python von Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil von ChatGPT ermöglicht von chercher in der dizaines von documents officiels und von rédiger ein rapport complet mit toutes die sources ?",
+              "prompt": "Eine responsable veille réglementaire muss produire ein rapport comparant die exigences publiées par cinq autorités von régulation mit der citations vérifiables ligne par ligne. Quelle fonctionnalité von ChatGPT Pro / Enterprise est spécifiquement conçue für ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie eine recherche multi-étapes, recoupe die documents und produit ein rapport structuré mit citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "Eine complétion hors-ligne à température élevée ohne Zugriff aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "Der générateur d'illustrations graphiques dépourvu von moteur von recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé ohne connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule ein total von ventes différent von votre comptabilité à partir d'ein Datei Excel. Que devez-vous Überprüfen en premier ?",
+              "prompt": "Après avoir chargé ein Datei CSV von 60 000 ventes in ChatGPT Data Analysis, ein contrôleur obtient ein chiffre d'affaires supérieur von 12 % à celui von die comptabilité. Quel réflexe von vérification muss-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir der code Python exécuté (`</>`) für Überprüfen comment die lignes annulées, die taxes und die devises ont été filtrées in pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "Deaktivieren l'exécution Python für obliger der Modell von langage à additionner die 60 000 lignes von tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir der Datei CSV en image JPEG compressée avant von relancer die somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier direkt der graphique car ein script Python généré applique toujours die conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore und cite die sources ; Data Analysis exécute des Python déterministe und inspectable auf vos Daten chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer und Teilen l'IA en Unternehmen",
+          "objective": "Distinguer und combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) und Custom GPTs (assistants métier partagés und gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il Erstellen ein Project oder ein Custom GPT ? Und comment modifier trois lignes au milieu d'ein document oder d'ein script von 300 lignes ohne que ChatGPT ne régénère tout depuis der début ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'Team)",
+            "diagramTop": "Canvas = Éditeur côte à côte für retoucher eine section précise d'ein texte oder d'ein code",
+            "diagramBottom": "Projects = Votre dossier von travail continu · Custom GPT = Assistant standardisé partagé mit l'Team",
+            "step1": "Ouvrez Canvas für itérer auf ein livrable long (article, spécification, script) en surlignant nur der passage à réécrire oder déboguer.",
+            "step2": "Utilisez ein Project für regrouper vos Dateien und instructions d'ein dossier en cours, und publiez ein Custom GPT lorsque toute l'Team a besoin des même assistant métier.",
+            "rule": "Travail récurrent d'ein dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé für l'Team = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · CANVAS",
+              "title": "Fini die régénération complète à chaque retouche",
+              "bodyParagraph": "In Canvas, der document oder der code s'affiche in ein volet dédié à droite des chat. Vous pouvez surligner ein seul paragraphe oder eine seule fonction für demander eine réécriture, ein changement von niveau von lecture, l'ajout von logs oder der portage vers ein autre langage, mit ein historique von versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner eine zone ➔ Édition chirurgicale in-place + Historique von versions"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · PROJECTS",
+              "title": "Garder der contexte d'ein dossier au fil der semaines",
+              "bodyParagraph": "Ein Project in ChatGPT rassemble en ein seul endroit vos instructions personnalisées, vos Dateien von référence (cahier der charges, architecture, charte éditoriale) und tous die fils von conversation liés à ce chantier. Chaque nouveau chat ouvert in der Project hérite immédiatement von ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + Dateien sources + Historique von chats organisé"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · CUSTOM GPTS EN Unternehmen",
+              "title": "Standardiser ein assistant métier mit Actions und Governance",
+              "bodyParagraph": "Lorsqu'ein workflow est stabilisé (ex. Revue d'appel d'offres, Générateur von post-mortem SRE), encapsulez ses instructions système, sa base documentaire und ses Actions API OpenAPI in ein Custom GPT publié nur au sein von votre espace von travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en Sicherheit"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas ermöglicht die co-édition granulaire von texte und von code mit raccourcis dédiés (longueur, ton, revue von code, ajout von commentaires, portage von langage) und gestion von versions.",
+            "Projects organise die travaux au long cours d'ein Benutzer oder d'eine Team autour d'instructions und von Dateien von référence persistants.",
+            "Die Custom GPTs in ChatGPT Enterprise permettent von distribuer der assistants spécialisés dotés d'Actions OpenAPI sous der contrôle von die console d'administration."
+          ],
+          "workedExample": {
+            "situation": "Ein Team SRE souhaite (1) suivre l'opération von migration Cloud des trimestre mit ses schémas d'architecture, (2) co-rédiger der runbook von bascule section par section, und (3) offrir à tous die ingénieurs d'astreinte ein assistant standardisé von rédaction von post-mortem.",
+            "steps": [
+              "Erstellen ein Project « Migration Cloud T4 » contenant die schémas d'architecture und die contraintes von SLA.",
+              "Rédiger und affiner der runbook von bascule in Canvas en révisant chaque procédure von rollback ohne altérer die sections déjà validées.",
+              "Publier ein Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré mit der Modell d'incident und die grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "Die trois outils sont utilisés selon leur rôle exact : continuité von dossier (Project), édition fine (Canvas) und standardisation d'Team (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer ein prompt complexe utilisé par dix personnes en copier-coller vers ein Custom GPT d'Unternehmen sécurisé, und précisez quand die Benutzer devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer der prompt validé in die instructions système des Custom GPT und y joindre die documents von référence officiels.",
+              "Restreindre der partage des Custom GPT aux groupes autorisés des workspace ChatGPT Enterprise.",
+              "Verwenden Canvas lorsque l'Benutzer souhaite peaufiner localement ein paragraphe des livrable généré avant export."
+            ],
+            "feedback": "Centraliser der prompt in ein Custom GPT élimine die dérive der versions copiées-collées, tandis que Canvas assure die finition auf mesure von chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "Wie modifier seulement 30 lignes d'ein long programme in ChatGPT ohne risquer qu'il réécrive oder casse der reste des Datei ?",
+              "prompt": "Vous travaillez auf ein script Python von 250 lignes in ChatGPT und souhaitez optimiser nur die fonction von pagination aux lignes 80 à 110 tout en garantissant que der reste des Datei reste strictement intact und versionné. Quel outil devez-vous Verwenden ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir der code in Canvas, surligner die lignes 80 à 110 und demander l'optimisation ciblée mit suivi von version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir eine conversation vierge ohne fournir der Datei und demander von réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir der script Python en Datei audio MP3 avant von der soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique von l'espace von travail à chaque modification d'eine variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "In ChatGPT Enterprise, quand faut-il Erstellen ein Project plutôt qu'ein Custom GPT ?",
+              "prompt": "Quelle différence principale guide der choix zwischen ein Project und ein Custom GPT in ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "Ein Project organise ein espace von travail continu (chats, Dateien und consignes d'ein chantier), tandis qu'ein Custom GPT publie ein assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "Ein Project indexe automatisch ses Dateien auf die moteurs von recherche publics alors qu'ein Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "Ein Custom GPT ne peut contenir ni instructions système ni documents von référence, contrairement à ein Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "Ein Project accepte nur der Dateien d'images matricielles und refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas für l'édition chirurgicale côte à côte ; Projects für vos chantiers au long cours ; Custom GPTs für standardiser und Teilen ein assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "Einheit 2 · OpenAI Codex : Agent von Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée von Codex, pilotage par AGENTS.md, exécution parallèle von tâches, génération von Pull Requests vérifiées und revue von code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Konfigurieren ein Datei AGENTS.md déterministe, Delegieren en parallèle ein correctif von bug und eine implémentation von fonctionnalité à OpenAI Codex in son sandbox, und auditer der diff ainsi que die Protokolle von tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, Zugriff Netzwerk coupé pendant l'exécution für prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes von build/lint/test, invariants d'architecture und conventions von dépôt",
+        "Parallélisation von tâches, ouverture von Pull Requests mit preuves d'exécution von tests und revue von code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que die commandes von vérification documentées in votre AGENTS.md : exigez toujours der tests verts in der journal des sandbox avant von fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "[DE] Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (Netzwerk OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs von Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "[DE] Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit und modifie der code und exécute die tests mit l'Zugriff Netzwerk externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "Vertrag AGENTS.md",
+            "role": "Datei versionné in der dépôt (racine und sous-dossiers) qui indique à Codex comment compiler, linter, tester und respecter die frontières architecturales."
+          },
+          {
+            "name": "[DE] Vérification & Pull Request",
+            "role": "Codex itère auf son implémentation jusqu'à ce que die suite von tests passe, puis produit ein commit/PR accompagné der citations von Dateien und der sorties von terminal."
+          }
+        ],
+        "securityInvariant": "Pendant die phase d'exécution von l'agent Codex, l'Zugriff Internet sortant est désactivé in der bac à sable afin d'empêcher toute exfiltration von code source oder téléchargement von paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "[DE] Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "Erklären comment OpenAI Codex exécute des code und der tests in ein conteneur sandbox cloud isolé und pourquoi die coupure Netzwerk pendant l'exécution protège der dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est die différence fondamentale zwischen ein assistant d'autocomplétion in l'IDE und l'agent OpenAI Codex capable von vous livrer eine Pull Request testée von bout en bout ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Codex : Von die Suggestion von Ligne à die Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création des conteneur + Clone des dépôt + Installation der dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, Netzwerk OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement von tâche prépare der dépôt und ses dépendances, puis verrouille l'Zugriff Netzwerk externe avant von donner die main à l'agent.",
+            "step2": "Codex explore die base von code, applique ses modifications und lance réellement die compilateurs und tests jusqu'à obtenir ein résultat vert.",
+            "rule": "Ein patch non exécuté est eine hypothèse ; ein patch validé par die tests in der sandbox Codex est ein livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · Ein CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone und isolée in der cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre in son propre conteneur cloud isolé contenant votre dépôt Git à die révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction von bug, refactorisation, couverture von tests) ohne jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié und indépendant"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · Sicherheit Netzwerk OFF",
+              "title": "Warum l'Zugriff Internet est coupé pendant die boucle agent",
+              "bodyParagraph": "Eine fois der script d'initialisation d'environnement terminé (installation der dépendances via `npm ci` oder `pip`), der conteneur coupe l'Zugriff Internet sortant pendant que l'agent travaille. Ainsi, même face à eine instruction piégée in ein Datei von test, Codex ne peut ni exfiltrer von code ni télécharger von binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure Netzwerk ➔ Exécution sûre von l'agent"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · PREUVES D'EXÉCUTION",
+              "title": "Journal von terminal, citations von lignes und diff Git",
+              "bodyParagraph": "À die fin von sa mission, Codex ne renvoie pas eine simple explication théorique : il fournit der diff Git exact, die citations der Dateien modifiés und der journal complet der commandes von test exécutées in der terminal des sandbox.",
+              "keyTakeawayPill": "Toujours inspecter der journal von test des sandbox avant von Erstellen oder fusionner die PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère in ein conteneur cloud isolé dédié à chaque tâche, permettant von paralléliser plusieurs chantiers logiciels.",
+            "Die séparation zwischen die phase d'initialisation (installation der dépendances) und die phase d'exécution von l'agent (Netzwerk externe désactivé) élimine die risques d'exfiltration und d'injection supply-chain en cours von tâche.",
+            "Chaque résultat inclut eine trace vérifiable der commandes exécutées und der tests passés."
+          ],
+          "workedExample": {
+            "situation": "Ein Team plateforme veut confier à Codex die mise à jour d'ein validateur von schéma TypeScript, mais lors des premier essai, `npm test` échoue in der sandbox mit `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant die boucle d'exécution von l'agent, l'Zugriff Netzwerk est coupé, donc l'agent ne peut pas télécharger von paquets depuis der registre npm.",
+              "Ajouter `npm ci` in der script von configuration initiale von l'environnement Codex (qui s'exécute avant die coupure Netzwerk).",
+              "Relancer die tâche : Codex dispose désormais von `node_modules`, exécute die 85 tests unitaires und livre ein diff 100 % vert."
+            ],
+            "decision": "L'Team documente der script von préchargement der dépendances in die configuration von l'environnement Codex des dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi ein agent von programmation autonome exécutant der tests in ein dépôt muss tourner mit l'Zugriff Netzwerk externe désactivé eine fois die dépendances installées, und comment gérer die appels à der API tierces in die tests.",
+            "successCriteria": [
+              "Erklären que die coupure Netzwerk empêche l'exfiltration des code propriétaire und der téléchargement von code arbitraire en cas von prompt injection.",
+              "Préinstaller toutes die dépendances requises lors von die phase von setup von l'environnement.",
+              "Verwenden der fixtures locales oder der mocks déterministes für tester die intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "Der tests rapides, déterministes und hors-ligne (auf fixtures) sont à die fois eine bonne pratique d'ingénierie logicielle und die clé von l'efficacité von Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Warum l'agent von programmation OpenAI Codex coupe-t-il l'Zugriff à Internet pendant qu'il modifie votre code ?",
+              "prompt": "Warum l'environnement d'exécution d'OpenAI Codex désactive-t-il l'Zugriff Internet sortant pendant que l'agent modifie der code und exécute die tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "Für empêcher toute exfiltration von code oder von secrets ainsi que der téléchargement von paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "Für empêcher der compilateur TypeScript oder Python von lire die Dateien présents in der répertoire von travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "Für Deaktivieren l'historique Git local und interdire die génération d'ein diff zwischen branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "Für réduire die résolution graphique von die carte vidéo locale von l'ordinateur portable des développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque ein outil qui s'installe normalement depuis Internet. Wie régler cela ?",
+              "prompt": "Eine tâche confiée à OpenAI Codex échoue lors von l'exécution von `pytest` car die bibliothèques des Datei `requirements.txt` ne sont pas installées und l'agent ne peut pas contacter PyPI. Quelle est die résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "Konfigurieren l'installation der dépendances (`pip install -r requirements.txt`) in der script d'initialisation von l'environnement sandbox avant die coupure Netzwerk."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex von Löschen der dossier `tests/` afin que die commande retourne ein code von sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "Deaktivieren die vérification par tests und fusionner direkt der code généré auf die branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire die clés secrètes von production en clair in der Datei README.md des dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne in son sandbox isolé und exigez die preuve par die logs von tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées und revue von code mit Codex",
+          "objective": "Structurer ein Datei AGENTS.md efficace, Delegieren der tâches ciblées oder der revues von code à Codex und valider die Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "Wie faire en sorte que Codex connaisse instantanément vos commandes von test ciblées, vos règles d'architecture und vos interdits von Sicherheit ohne avoir à die répéter in chaque prompt ?",
+          "declicCard": {
+            "title": "Der Aha-Moment AGENTS.md : Der Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à die racine (und par sous-dossier) = Commandes von validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible die bons Dateien, lance die bons tests und ouvre eine PR propre",
+            "step1": "Documentez in `AGENTS.md` die commandes exactes (`npm test`, `npm run validate`), die invariants métier und die règles von style.",
+            "step2": "Utilisez der Dateien `AGENTS.md` plus spécifiques in die sous-dossiers d'ein monorepo (`backend/`, `apps/mobile/`) für affiner die consignes locales.",
+            "rule": "Si vous corrigez deux fois die même erreur von convention in eine PR d'agent, transformez cette remarque en règle in `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · Der STANDARD AGENTS.MD",
+              "title": "Donner à l'agent die carte und die boussole des dépôt",
+              "bodyParagraph": "Ein bon Datei `AGENTS.md` ne répète pas des marketing : il donne l'architecture der dossiers, die règles strictes (ex. séparation public/privé, déterminisme der manifestes), die commande von test rapide für itérer und die suite complète à exécuter avant von conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes von test rapides und complètes"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "Des ticket bien borné à die Pull Request prête à relire",
+              "bodyParagraph": "Für Delegieren efficacement à Codex, formulez eine tâche bornée : symptôme oder comportement attendu, Dateien oder modules concernés und critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit eine branche und eine Pull Request documentant die changements und die tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère von test = Pull Request autonome prête für revue"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · REVUE Von CODE PAR CODEX",
+              "title": "Détecter die bugs logiques und régressions avant fusion",
+              "bodyParagraph": "En mode revue von code auf eine Pull Request, Codex compare l'intention au diff réel, exécute oder trace die chemins d'erreur (nullabilité, conditions von course, oubli von validation von borne, fuite d'information) und signale nur die défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles von Sicherheit und cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit ein contexte persistant und hiérarchique (racine puis sous-répertoires) que Codex consulte automatisch.",
+            "Die délégation parallèle ermöglicht von traiter simultanément der corrections von bugs, der ajouts von tests und der refactorisations isolées.",
+            "Verwenden Codex en revue von Pull Request ermöglicht d'identifier die erreurs von logique, die oublis von cas limites und die écarts vis-à-vis der invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "In der dépôt `certigo-content`, chaque question publique muss avoir eine solution privée correspondante und aucun champ `correct` oder `rationale` ne muss figurer in `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or und die séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` in `AGENTS.md`.",
+              "Confier à Codex l'ajout d'ein nouveau parcours mit ses questions und solutions.",
+              "Überprüfen in der rapport von PR que Codex a exécuté von lui-même toutes die commandes prescrites par `AGENTS.md` avant von proposer die fusion."
+            ],
+            "decision": "Der Datei `AGENTS.md` gewährleistet que chaque tâche exécutée par l'agent respecte die gardes von Sicherheit und von Vertrag des dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez die quatre rubriques indispensables d'ein Datei `AGENTS.md` für eine API backend soumise à der exigences strictes von rétrocompatibilité von schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture und répertoires critiques (ex. schémas von Vertrag, séparation der couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use auf die schémas, interdiction der secrets).",
+              "3. Commandes d'installation und von validation ciblée puis complète.",
+              "4. Processus von changement attendu avant ouverture von Pull Request."
+            ],
+            "feedback": "Ein `AGENTS.md` concis, impératif und orienté commandes von vérification améliore radicalement der taux von réussite au premier essai von Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert der Datei AGENTS.md placé in votre projet informatique für OpenAI Codex ?",
+              "prompt": "Quel est der rôle des Datei `AGENTS.md` placé à die racine und in die sous-dossiers d'ein dépôt Git utilisé mit OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir automatisch à l'agent die commandes von build/test, l'architecture und die invariants des dépôt oder des sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair die mots von passe von die Datenbank von production für éviter die variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "Ersetzen der binaire des compilateur par eine interprétation purement approximative ohne exécution von tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes die branches ohne exécuter die workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger in quatre parties différentes von votre logiciel. Wie gagner des temps mit Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits in quatre modules distincts von votre application. Wie exploiter OpenAI Codex von façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "Delegieren die quatre corrections en parallèle in quatre tâches Codex distinctes en exigeant ein test von non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander eine réécriture totale von l'application in ein seul commit géant en désactivant die suite von tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre nur der titre « Ça ne marche pas » ohne indiquer ni der module ni die trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser der modifications non testées direkt auf die branche von production en contournant die revue von code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue von PR = der workflow d'ingénierie augmentée mit OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic von régressions CI, remédiation und Sicherheit mit Codex",
+          "objective": "Verwenden Codex für diagnostiquer ein échec CI complexe, écrire ein test reproducteur avant der correctif (TDD) und appliquer die garde-fous von Sicherheit.",
+          "estimatedMinutes": 8,
+          "hook": "Ein pipeline CI échoue von façon intermittente auf eine erreur von sérialisation : comment guider Codex für qu'il prouve die cause racine par ein test rouge avant d'écrire eine seule ligne von correctif ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ Überprüfen die Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire ein test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer der correctif chirurgical (Vert) ➔ 3. Exécuter die suite complète & gardes von Vertrag",
+            "step1": "Fournissez die trace d'erreur exacte à Codex und demandez d'abord ein test minimal qui échoue auf der bug actuel.",
+            "step2": "Eine fois der symptôme reproduit, laissez Codex appliquer der correctif minimal und Überprüfen qu'aucune garde existante ne régresse.",
+            "rule": "Ein correctif ohne test reproducteur qui échouait avant und passe après n'est pas eine remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · REPRODUIRE AVANT Von CORRIGER",
+              "title": "Die discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez ein bug à Codex, exigez in der prompt (oder in `AGENTS.md`) qu'il commence par reproduire l'erreur mit ein test ciblé. Voir der test échouer für die raison attendue prouve que l'agent a compris der vrai mécanisme des bug und non ein symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger die cause racine (Green) ➔ 3. Überprüfen l'ensemble"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter der bruit und die refactorisations non demandées",
+              "bodyParagraph": "Ein bon correctif d'agent modifie nur die lignes nécessaires und ajoute der test correspondant, ohne reformater der dizaines von Dateien non liés ni affaiblir eine assertion von Sicherheit für faire passer der test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement von test oder suppression von garde für obtenir ein vert artificiel"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · CONTRÔLE HUMAIN Der FRONTIÈRES",
+              "title": "Ce qu'ein relecteur humain vérifie toujours auf eine PR d'agent",
+              "bodyParagraph": "Lors von die relecture von die PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test oder contrôle von schéma n'a été contourné · 2. Que die nouvelles dépendances éventuelles sont légitimes · 3. Que die frontières von Sicherheit (Berechtigungen, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue von PR : inspecter en priorité die tests modifiés, die schémas und die frontières von confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger die reproduction préalable des bug par ein test qui échoue gewährleistet die pertinence des correctif produit par Codex.",
+            "Ein agent ne muss jamais faire passer ein build au vert en supprimant oder en relâchant eine assertion von Sicherheit oder von Vertrag.",
+            "Die revue humaine von die Pull Request se concentre auf die validité der tests ajoutés, die minimalité des diff und der respect der frontières von Sicherheit."
+          ],
+          "workedExample": {
+            "situation": "In ein pipeline von packaging, ein Datei Windows en CRLF produit ein hash SHA-256 différent von celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire ein test unitaire injectant der fins von ligne `\\r\\n` und vérifiant que der hash normalisé reste identique à celui en `\\n` (der test échoue initialement).",
+              "Corriger die fonction von hachage für normaliser die fins von ligne avant der calcul des digest SHA-256.",
+              "Exécuter toute die suite von tests und Überprüfen que die vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "Die PR contient 6 lignes von code productif und 20 lignes von test d'isolation prouvant die résolution auf Windows und Linux."
+          },
+          "practice": {
+            "prompt": "Ein agent propose eine PR qui corrige eine erreur von validation en supprimant die règle `additionalProperties: false` des schéma JSON. Expliquez pourquoi vous devez rejeter cette PR und quelle consigne donner.",
+            "successCriteria": [
+              "Erklären que retirer `additionalProperties: false` ouvre der Vertrag à der propriétés inconnues oder à der fuites von Daten.",
+              "Identifier quelle propriété provoquant der rejet était illégitime in die Daten (oder si eine procédure formelle d'expand backend est requise).",
+              "Exiger que der schéma reste strictement fermé und qu'ein test négatif vérifie der rejet der propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais ein correctif éteindre l'alarme au lieu d'éteindre l'incendie : die schémas fermés und die gardes müssen rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "In quel ordre Codex muss-il travailler für prouver qu'il a vraiment corrigé ein bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex die correction d'ein bug von calcul d'arrondi signalé en production. Quelle séquence von travail gewährleistet que der correctif règle réellement der problème ohne régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord ein test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer der correctif minimal (vert), puis lancer toute die suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "Löschen die assertions numériques der tests existants afin que die suite s'exécute ohne erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier die fonction mathématique ohne exécuter die tests und fusionner immédiatement die branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer der workflow GitHub Actions von die branche für masquer l'échec des build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "Ein agent propose von faire passer ein test von Sicherheit au vert en désactivant der contrôle auf der Datei posant problème. Que faites-vous ?",
+              "prompt": "Lors von die relecture d'eine Pull Request générée für corriger ein test d'anti-fuite en échec, vous constatez que der diff ajoute der Datei fautif à eine liste d'exclusion globale au lieu von retirer der champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter die PR car elle neutralise die garde von Sicherheit, und demander von Löschen der champ sensible des Datei public tout en conservant der contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver und fusionner immédiatement puisque l'indicateur des pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "Löschen complètement der Datei von test d'anti-fuite für accélérer die prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "Konfigurieren l'outil von revue von code für masquer systématiquement die modifications apportées aux Dateien von tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours die boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver eine PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "Einheit 3 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire der systèmes d'IA von production fiables mit die Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK und die évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir ein appel Responses API combinant Function Calling und Structured Outputs (`strict: true`), orchestrer ein transfert (handoff) mit Guardrails in l'Agents SDK und valider die qualité via eine suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % die conformité au JSON Schema",
+        "[DE] Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux von Daten von référence, graders déterministes/Modelle und portes von non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` auf vos schémas JSON (Structured Outputs & Function Calling), validez die Berechtigungen côté serveur avant d'exécuter ein outil, und bloquez tout changement von prompt oder von Modell qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent von Production mit OpenAI Responses API & Agents SDK",
+        "diagram": "[DE] [Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "[DE] Responses API & Structured Outputs",
+            "role": "Unifie die génération mit état, die outils natifs (recherche, Dateien, code) und contraint der décodage des Modell für respecter ein JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "[DE] Function Calling & Agents SDK",
+            "role": "Ermöglicht au Modell d'émettre der appels von fonctions typés exécutés par votre code backend und d'orchestrer der transferts (handoffs) zwischen agents spécialisés protégés par der Guardrails."
+          },
+          {
+            "name": "[DE] OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, der respect der consignes und l'absence von régression auf ein jeu von cas von test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "Ein appel von fonction retourné par der Modell (`tool_call`) est eine intention non fiable : der backend applicatif muss toujours valider l'Identität, die Berechtigungen und die bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir der Vertrag JSON à 100 %",
+          "objective": "Exploiter die Responses API und Konfigurieren Structured Outputs (`strict: true`) für éliminer toute erreur von parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h des matin parce que der LLM a oublié eine virgule JSON oder renommé der champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Structured Outputs : Des JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés oder types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types und enums",
+            "step1": "Définissez votre schéma von sortie (Pydantic / Zod / JSON Schema) mit `strict: true` und `additionalProperties: false` auf chaque objet.",
+            "step2": "Gérez explicitement der champ `refusal` in votre code au cas où die Anfrage est rejetée für motif von Sicherheit.",
+            "rule": "En production, n'espérez jamais qu'eine consigne in der prompt suffise à garantir ein schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · Die RESPONSES API",
+              "title": "Eine primitive unique für der texte, die outils und l'état",
+              "bodyParagraph": "Die Responses API d'OpenAI unifie die génération von réponses, der chaînage multi-tours (`previous_response_id`), l'appel von fonctions personnalisées und l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) in eine seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État von conversation + Outils natifs und personnalisés"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "Der décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui gewährleistet seulement der accolades valides, Structured Outputs mit `strict: true` compile votre JSON Schema en eine grammaire qui filtre die Tokens lors von l'inférence : der Modell ne peut littéralement pas émettre eine clé inconnue, omettre ein champ requis oder violer ein `enum`.",
+              "keyTakeawayPill": "[DE] Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · GESTION Der REFUS & VALIDATION MÉTIER",
+              "title": "[DE] Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si eine demande viole die règles von Sicherheit, der Modell remplit die propriété dédiée `refusal` plutôt que der schéma : votre code muss Überprüfen `refusal` avant von lire l'objet parsé. Von plus, `strict: true` gewährleistet der type (ex. ein nombre), mais votre backend muss toujours valider die règles métier (ex. taux von TVA autorisé).",
+              "keyTakeawayPill": "Überprüfen `refusal` + Valider die règles métier côté serveur après die désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "Die Responses API combine génération multimodale, chaînage d'état und invocation d'outils en eine seule boucle.",
+            "Structured Outputs mit `strict: true` impose der respect exact des JSON Schema (clés requises, types, enums und `additionalProperties: false`) par décodage contraint.",
+            "Der code applicatif muss toujours inspecter der cas von refus (`refusal`) und appliquer ses propres validations métier auf die valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "Eine assurtech extrait automatisch die garanties und franchises von Verträge PDF vers son moteur von tarification C# und subissait 2 % d'erreurs von désérialisation mit von simples instructions in der prompt.",
+            "steps": [
+              "Définir der schéma JSON von l'extraction mit `strict: true`, `additionalProperties: false` und der énumérations fermées für die types von franchise.",
+              "Appeler die Responses API mit ce schéma in `text.format` (`json_schema`).",
+              "Ajouter ein contrôle en sortie vérifiant l'absence von `refusal` und die cohérence arithmétique (franchise <= plafond von garantie)."
+            ],
+            "decision": "Der taux d'erreur von formatage JSON tombe à 0,00 % en production dès der déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez die différence zwischen der mode `json_object` historique und `json_schema` mit `strict: true` (Structured Outputs), und listez deux exigences structurelles des JSON Schema en mode strict.",
+            "successCriteria": [
+              "Erklären que `json_object` gewährleistet nur eine syntaxe JSON valide ohne imposer von schéma, tandis que `json_schema` (`strict: true`) gewährleistet der respect exact von die structure.",
+              "Mentionner que chaque objet des schéma muss déclarer `additionalProperties: false`.",
+              "Mentionner que tous die champs définis in `properties` müssen figurer in `required` (en utilisant ein type nullable `[\"string\", \"null\"]` für die champs optionnels)."
+            ],
+            "feedback": "En mode strict, ein champ optionnel se modélise par ein type union incluant `null` tout en restant listé in `required`, mit `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Wie obliger l'API OpenAI à renvoyer eine Antwort JSON qui respecte toujours exactement die champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI für extraire die lignes d'eine facture und exige que die Antwort respecte à 100 % ein schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) und `lignes` (array), ohne aucune propriété supplémentaire. Welche Konfiguration devez-vous Verwenden ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "Verwenden Structured Outputs (`json_schema`) mit `strict: true` und `additionalProperties: false` auf chaque objet des schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules in der prompt ohne Aktivieren von schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer die Antwort brute au centième caractère avant d'ajouter eine accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler die température auf 2.0 en mode texte libre für diversifier der nom der clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Mit der mode strict d'OpenAI, comment déclarer ein champ facultatif (comme ein commentaire) in votre format JSON ?",
+              "prompt": "Wie modéliser ein champ optionnel (par exemple `commentaire`) in ein JSON Schema utilisé mit OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure der champ in `required` und définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) mit `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` und Löschen totalement der tableau `required` von l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer der nom des champ mit eine chaîne vide en guise von définition von type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer der balises XML à l'intérieur des schéma JSON für Deaktivieren der validateur von Tokens."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur von parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs und guardrails",
+          "objective": "Implémenter der Function Calling mit schémas stricts und orchestrer der agents spécialisés mit Handoffs, Guardrails und Tracing in l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "Wie faire collaborer ein agent von triage, ein agent von facturation und ein agent technique ohne Erstellen eine usine à gaz impossible à déboguer ni laisser ein prompt malveillant déclencher ein remboursement non autorisé ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : Der Modell propose `call_tool(args)` ➔ VOTRE code vérifie die Rechte und exécute",
+            "diagramBottom": "[DE] Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` auf die définitions von fonctions (`tools`) und validez toujours die autorisations côté serveur avant d'exécuter die fonction.",
+            "step2": "Découpez die responsabilités mit der Handoffs explicites zwischen agents spécialisés und protégez die entrées/sorties par der Guardrails parallèles.",
+            "rule": "Der Modell ne touche jamais direkt votre Datenbank : il émet eine proposition d'appel d'outil que votre backend contrôle und exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · FUNCTION CALLING STRICT",
+              "title": "Séparer die décision d'appel und l'exécution réelle",
+              "bodyParagraph": "Lors d'ein Function Calling, der Modell ne lance aucun code auf die serveurs d'OpenAI : il retourne ein objet structuré indiquant der nom von die fonction und ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie die Berechtigungen von l'Benutzer, exécute die fonction und renvoie der résultat au Modell.",
+              "keyTakeawayPill": "Modell = propose l'appel und die arguments · Votre serveur = vérifie die Rechte und exécute"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer der spécialistes plutôt qu'ein méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose auf der primitives légères : ein `Agent` (instructions + Modell + outils), der `Handoffs` (délégation explicite von die conversation vers ein agent spécialiste comme ein transfert d'appel qualifié) und der `Tracing` natif qui enregistre chaque étape, appel d'outil und transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré von bout en bout"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · GUARDRAILS D'ENTRÉE Und Von SORTIE",
+              "title": "[DE] Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "Die `Guardrails` s'exécutent en parallèle von l'agent : ein guardrail d'entrée léger détecte immédiatement eine tentative d'injection von prompt oder eine demande hors périmètre und déclenche ein `tripwire` qui interrompt l'exécution avant même que der Modell principal oder ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil oder génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, der Modell génère nur die arguments structurés von l'appel (`strict: true`) ; l'exécution und der contrôle d'Zugriff restent sous die responsabilité des serveur applicatif.",
+            "L'OpenAI Agents SDK structure die workflows multi-agents autour d'Agents, von Tools, von Handoffs (transferts von contrôle) und des Tracing intégré.",
+            "Die Guardrails d'entrée und von sortie utilisent ein mécanisme von disjoncteur (`tripwire`) für bloquer die requêtes malveillantes oder die sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "Ein service client bancaire déploie eine architecture multi-agents mit l'OpenAI Agents SDK : ein agent d'accueil, ein agent Cartes Bancaires (pouvant faire opposition) und ein agent Crédits.",
+            "steps": [
+              "Placer ein Input Guardrail qui vérifie qu'aucune tentative von contournement d'Identität oder von demande hors banque n'est présente.",
+              "Konfigurieren l'agent d'accueil mit deux Handoffs explicites vers l'agent Cartes und l'agent Crédits.",
+              "In l'outil `bloquer_carte(carte_id)` von l'agent Cartes, Aktivieren `strict: true` auf der schéma und Überprüfen côté serveur que `carte_id` appartient bien au `user_id` authentifié in der contexte von session."
+            ],
+            "decision": "Der parcours est traçable in der dashboard von Tracing und protégé contre die appels d'outils auf die cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "Ein Entwickler passe `user_id` comme argument libre in der schéma von Function Calling `rembourser_commande(user_id, commande_id)` und fait confiance à die valeur choisie par der LLM. Expliquez die vulnérabilité und comment die corriger.",
+            "successCriteria": [
+              "Identifier die faille d'autorisation (ein prompt injection peut convaincre der LLM von passer der `user_id` d'ein autre client).",
+              "Retirer `user_id` der arguments générés par der LLM und l'injecter côté serveur depuis der Token d'authentification vérifié von die session.",
+              "Valider en Datenbank que `commande_id` appartient bien à cet Benutzer authentifié und appliquer ein plafond von remboursement."
+            ],
+            "feedback": "Die identifiants von Sicherheit (qui est connecté, quel est son tenant) müssen toujours provenir des contexte serveur authentifié, jamais der arguments devinés par der Modell."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "Warum est-il dangereux von laisser l'IA Wählen elle-même der numéro von dossier client à lire ohne Überprüfen qui est connecté ?",
+              "prompt": "In eine application utilisant der Function Calling d'OpenAI, die fonction `lire_dossier_medical(patient_id)` laisse der Modell Wählen librement `patient_id` à partir des texte von die conversation ohne Überprüfen die session authentifiée côté serveur. Quel est der risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "Eine divulgation non autorisée (IDOR) : ein Benutzer peut manipuler der prompt für amener der Modell à demander der dossier d'ein autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "Eine incompatibilité d'affichage der caractères accentués in die police système des navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "Eine saturation des périphérique audio local lors von die sérialisation von l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "Die suppression automatique des Datei JSON Schema auf der disque dur des serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "In der kit OpenAI Agents SDK, comment arrêter immédiatement ein agent si ein contrôle détecte eine demande dangereuse ?",
+              "prompt": "In l'OpenAI Agents SDK, quel mécanisme ermöglicht à ein contrôle von Sicherheit exécuté en parallèle d'interrompre immédiatement l'agent avant qu'ein outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "Ein Guardrail déclenchant ein disjoncteur (`tripwire`) dès que sa condition von Sicherheit oder von périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation des paramètre `max_output_tokens` au-delà von die fenêtre von contexte des Modell."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "Die désactivation complète des module von Tracing in die configuration globale des SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "Der retrait von toutes die instructions système der agents spécialisés recevant ein handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + Identität injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = der agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant von Bereitstellen",
+          "objective": "Construire eine suite d'évaluation (OpenAI Evals) combinant jeu von Daten von référence, graders déterministes und LLM-as-a-judge für piloter die mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt auf trois exemples und ça a l'air super ! » : pourquoi cette phrase est-elle die cause numéro ein der régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "Der Aha-Moment Evals : Traiter die Prompts und Modelle comme des Code mit der Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution auf die variante",
+            "diagramBottom": "Graders (Exactitude von schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez ein dataset doré (golden dataset) couvrant die cas nominaux, die cas ambigus und die tentatives von contournement.",
+            "step2": "Combinez der graders déterministes (schéma JSON, nom von l'outil appelé, mots-clés interdits) und der graders sémantiques calibrés.",
+            "rule": "Aucun changement von prompt, von Modell oder von RAG ne part en production ohne passer die suite d'Evals au-dessus des seuil von référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "SCHRITT 1 · Der DATASET Von RÉFÉRENCE",
+              "title": "Partir der vraies erreurs observées auf der terrain",
+              "bodyParagraph": "Eine bonne suite d'évaluation (Evals) ne contient pas nur der questions faciles : elle réunit 50 à 200 cas représentatifs von die production, incluant die formulations ambiguës der Benutzer, die documents contradictoires, die valeurs nulles und die scénarios où l'agent muss refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas von refus attendus"
+            },
+            {
+              "stepBadge": "SCHRITT 2 · Die GRADERS (NOTATEURS)",
+              "title": "Privilégier der déterminisme, compléter par ein juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité der graders déterministes rapides und reproductibles : correspondance exacte d'ein identifiant, validité des JSON Schema, vérification que der bon `tool_call` a été émis mit die bons paramètres. Für évaluer die fidélité au contexte (groundedness) oder der ton, ajoutez ein grader par Modell (LLM-as-a-judge) doté d'eine grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par Modell auf grille explicite"
+            },
+            {
+              "stepBadge": "SCHRITT 3 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser Kosten, latence und qualité en confiance",
+              "bodyParagraph": "Mit eine suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si der passage d'ein Modell coûteux vers `o4-mini` oder `gpt-4o-mini` maintient 99 % von précision tout en divisant die latence und die facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation von Modell oder von prompt à l'aveugle : die Evals tranchent par die preuve"
+            }
+          ],
+          "keyIdeas": [
+            "Die évaluations systématiques (Evals) transforment l'amélioration d'ein système IA d'eine intuition subjective en eine ingénierie mesurable.",
+            "Eine suite d'Evals robuste combine der contrôles déterministes (schéma, sélection d'outils, règles métier) und der évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production muss être converti en ein nouveau cas von test in der dataset d'Evals für empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "Ein Team souhaite réduire von 60 % der temps von Antwort von son agent von qualification von tickets en remplaçant son prompt système von 4 000 mots und en changeant von Modell.",
+            "steps": [
+              "Construire in OpenAI Evals ein jeu von 120 tickets historiques annotés mit die catégorie attendue, die priorité und l'outil à appeler.",
+              "Définir deux graders : ein grader déterministe auf der couple `(categorie, priorite, tool_name)` und ein grader von conformité vérifiant l'absence von promesse commerciale non autorisée.",
+              "Comparer der score von die nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, für eine latence divisée par 2,4."
+            ],
+            "decision": "Die mise en production est approuvée auf die base des rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez die trois types von cas von test und die deux types von graders que vous devez inclure in eine suite OpenAI Evals für valider ein agent qui résume der Verträge und appelle eine API d'archivage.",
+            "successCriteria": [
+              "Trois familles von cas : Verträge standards complets, Verträge incomplets/contradictoires (cas limites) und prompts tentant von forcer ein archivage non autorisé.",
+              "Grader déterministe : Überprüfen die structure JSON des résumé und die arguments exacts passés à die fonction d'archivage.",
+              "Grader d'ancrage : Überprüfen que chaque clause citée in der résumé figure réellement in der Vertrag source."
+            ],
+            "feedback": "Tester ensemble die fidélité des texte und die justesse von l'appel d'outil couvre à die fois die génération und l'action von l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez die consignes von votre assistant IA. Wie Überprüfen que vous n'avez rien cassé avant die mise en ligne ?",
+              "prompt": "Votre Team modifie die instructions système d'ein agent en production für raccourcir ses réponses, und veut s'assurer que ce changement ne dégrade pas der choix der outils Function Calling auf die 150 scénarios critiques von l'Unternehmen. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter eine suite automatisée OpenAI Evals vérifiant die appels d'outils auf die 150 scénarios und bloquer der déploiement en cas von régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles in l'interface von chat puis Bereitstellen immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer die schémas von paramètres der fonctions afin qu'aucune erreur von typage ne remonte in die Protokolle."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "Bereitstellen ohne test préalable und compter auf die tickets von réclamation der clients für mesurer die qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Wie Überprüfen von façon simple, rapide und gratuite qu'ein agent a bien choisi die devise EUR in ein test automatique ?",
+              "prompt": "Quel type von grader (notateur) est der plus fiable und der plus économique für Überprüfen in OpenAI Evals qu'ein agent a appelé die fonction `creer_avoir` mit der bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "Ein grader déterministe inspectant direkt der nom von die fonction appelée und l'égalité stricte von l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "Eine évaluation purement stylistique demandant à ein Modell tiers si die Antwort semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "Eine règle vérifiant nur que die Antwort textuelle dépasse mille caractères, ohne lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "Ein générateur von nombres aléatoires attribuant ein score ohne comparer die sortie à die valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes und sémantiques + Porte von non-régression CI = l'ingénierie IA pilotée par die Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "Übungsprüfung CertiGo Pro: OpenAI (ChatGPT Enterprise, Modelle o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète von maîtrise der produits OpenAI en Unternehmen : sélection von Modelle (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex mit AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK und OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

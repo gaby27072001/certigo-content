@@ -1,0 +1,280 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "m365-copilot-agents",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "hi-IN",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "jeton-entra-acl"
+      ],
+      "plainExplanation": "Copilot utilise केवल फ़ाइलें और courriels auxquels votre propre compte Microsoft a déjà droit d'accéder.",
+      "rationale": "Microsoft 365 Copilot exécute Grounding Microsoft Graph और recherche में l'index sémantique (Work IQ) en présentant टोकन Entra ID का l'उपयोगकर्ता connecté : seuls documents और courriels auxquels l'analyste a déjà पहुंच peuvent être récupérés.",
+      "examTip": "Grounding Graph = अनुमतियां Entra ID का l'उपयोगकर्ता courant, zéro élévation का privilège और zéro réentraînement public.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+      "lessonId": "microsoft-graph-grounding-work-iq",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "surpartage-acl-sharepoint"
+      ],
+      "plainExplanation": "फ़ाइल était déjà partagé par erreur के साथ trop का monde पर SharePoint : il faut restreindre अधिकार d'पहुंच का dossier.",
+      "rationale": "Lorsque Copilot cite एक document interne inattendu, c'est que l'उपयोगकर्ता dispose déjà d'एक droit का lecture पर ce फ़ाइल (पर-partage SharePoint/OneDrive). remédiation consiste à corriger ACL SharePoint और à appliquer एक étiquette का sensibilité Microsoft Purview.",
+      "examTip": "एक document sensible visible में Copilot révèle एक पर-partage SharePoint (oversharing), jamais एक fuite के poids का LLM.",
+      "sourceIds": [
+        "ms-copilot-privacy",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "delegation-cowork-plan"
+      ],
+      "plainExplanation": "Déléguez mission à Copilot Cowork : il prépare dossier étape par étape en arrière-plan और vous soumet résultat.",
+      "rationale": "Copilot Cowork est conçu के लिए planifier और exécuter en arrière-plan के travaux multi-étapes croisant plusieurs sources Work IQ (Teams, Outlook, Excel, Word) tout en soumettant livrable à एक point का contrôle humain.",
+      "examTip": "Mission transversale multi-applications के साथ suivi d'étapes = délégation asynchrone Copilot Cowork.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+      "lessonId": "copilot-cowork-delegation-asynchrone",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "heritage-identite-et-validation"
+      ],
+      "plainExplanation": "Non, il respecte exactement vos अधिकार d'पहुंच और vous demande confirmation avant toute action importante.",
+      "rationale": "Même en exécution asynchrone, Copilot Cowork opère strictement sous l'पहचान और अनुमतियां का l'उपयोगकर्ता qui délègue tâche, और maintient एक point d'approbation humaine avant toute diffusion या action externe.",
+      "examTip": "Asynchrone ne veut jamais dire बिना गवर्नेंस : Cowork conserve vos अधिकार Entra ID और vos jalons d'approbation.",
+      "sourceIds": [
+        "ms-copilot-overview",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "copilot-pages-composant-loop"
+      ],
+      "plainExplanation": "Copilot Pages (basé पर Microsoft Loop) सक्षम करता है का modifier même contenu en direct depuis Teams comme depuis Outlook.",
+      "rationale": "En ouvrant प्रतिक्रिया में Copilot Pages puis en partageant comme composant Microsoft Loop, table reste synchronisée en temps réel के बीच Teams, Outlook, Word और web.",
+      "examTip": "Co-édition bidirectionnelle en direct के बीच Teams और Outlook = Copilot Pages + composant Microsoft Loop.",
+      "sourceIds": [
+        "ms-copilot-pages"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+      "lessonId": "collaboration-loop-copilot-pages",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "sharepoint-embedded-purview"
+      ],
+      "plainExplanation": "Elles sont stockées में SharePoint Embedded और bénéficient स्वचालित रूप से के mêmes règles का सुरक्षा que vos sites SharePoint.",
+      "rationale": "Copilot Pages sont stockées में के conteneurs SharePoint Embedded rattachés au locataire Microsoft 365, ce qui सुनिश्चित करता है l'application complète के règles का rétention, d'eDiscovery और का गवर्नेंस Microsoft Purview.",
+      "examTip": "Copilot Pages repose पर SharePoint Embedded : même सुरक्षा और même conformité Purview que SharePoint Online.",
+      "sourceIds": [
+        "ms-copilot-pages",
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "selecteur-slash-fichiers-reference"
+      ],
+      "plainExplanation": "Utilisez bouton « / » में Copilot के लिए attacher सीधे फ़ाइलें का référence avant का lancer rédaction.",
+      "rationale": "में Copilot के लिए Word, l'opérateur `/` सक्षम करता है का pointer explicitement vers के फ़ाइलें OneDrive या SharePoint afin d'ancrer génération का texte, का clauses या d'एक synthèse exécutive पर ces documents का référence.",
+      "examTip": "में Word, `/` = attacher फ़ाइलें sources qui font foi के लिए éviter toute invention.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+      "lessonId": "word-powerpoint-redaction-narration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "modele-ouvert-et-styles-word"
+      ],
+      "plainExplanation": "Structurez d'abord votre document Word के साथ के titres clairs, puis créez présentation depuis votre मॉडल PowerPoint d'उद्यम.",
+      "rationale": "Copilot में PowerPoint s'appuie पर hiérarchie Titre 1 / Titre 2 का फ़ाइल Word के लिए découper diapositives और générer notes d'orateur, tout en appliquant masques का मॉडल PowerPoint ouvert.",
+      "examTip": "Styles Titre 1/2 में Word + मॉडल d'उद्यम ouvert में PowerPoint = présentation chartée के साथ speaker notes.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "let-et-lambda"
+      ],
+      "plainExplanation": "LET सक्षम करता है का donner एक nom aux étapes का calcul, और LAMBDA transforme formule en fonction réutilisable partout में classeur.",
+      "rationale": "fonction `LET` nomme और stocke calculs intermédiaires au sein d'एक formule के लिए améliorer lisibilité और performances, tandis que `LAMBDA` transforme cette logique en fonction personnalisée réutilisable बिना macro VBA.",
+      "examTip": "Variables locales में एक formule Excel = LET · Fonction métier réutilisable बिना VBA = LAMBDA.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+      "lessonId": "excel-formules-complexes-python-anomalies",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "conteneur-isole-azure-xl"
+      ],
+      "plainExplanation": "Il tourne में एक espace isolé Microsoft Cloud बिना aucun पहुंच à Internet, ce qui protège vos tableaux financiers.",
+      "rationale": "Python in Excel exécute code में एक conteneur isolé par hyperviseur पर Azure Container Instances बिना पहुंच au नेटवर्क, au disque local ni au टोकन उपयोगकर्ता, और n'accède qu'aux डेटा passées via `xl()`.",
+      "examTip": "Python in Excel = conteneur Azure isolé, zéro पहुंच नेटवर्क और lecture exclusive via `xl()`.",
+      "sourceIds": [
+        "ms-python-excel"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "transcription-ou-enregistrement-actif"
+      ],
+      "plainExplanation": "transcription (या l'enregistrement) का réunion चाहिए avoir été activée के लिए que Copilot puisse lire échanges passés.",
+      "rationale": "के लिए synthétiser échanges passés और attribuer actions à leurs propriétaires, Copilot में Teams और Intelligent Meeting Recap s'appuient पर transcription (या l'enregistrement transcrit) के साथ identification के orateurs.",
+      "examTip": "बिना transcription active में Teams, Copilot ne peut ni citer décisions passées ni attribuer actions aux intervenants.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+      "lessonId": "teams-outlook-recap-actions-triage",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "analyse-ton-ressenti-clarte"
+      ],
+      "plainExplanation": "Elle relit votre brouillon और vous conseille के लिए rendre ton plus diplomatique और message plus clair avant l'envoi.",
+      "rationale": "Coaching by Copilot में Outlook examine brouillon d'e-mail पर trois axes (ton, ressenti का lecteur और clarté) और fournit के recommandations concrètes avant l'envoi.",
+      "examTip": "Générer एक brouillon = Draft with Copilot · Améliorer ton, l'impact और clarté d'एक texte = Coaching by Copilot.",
+      "sourceIds": [
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "agent-autonome-copilot-studio"
+      ],
+      "plainExplanation": "Il faut एक agent autonome में Copilot Studio, car lui seul peut réagir स्वचालित रूप से à एक événement système.",
+      "rationale": "एक agent qui réagit स्वचालित रूप से à एक événement का डेटा (création d'entrée Dataverse) बिना intervention initiale d'एक उपयोगकर्ता में chat est एक agent autonome conçu में Microsoft Copilot Studio.",
+      "examTip": "Déclencheur d'événement système (Dataverse, boîte partagée, planification) बिना prompt humain = Agent autonome Copilot Studio.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+      "lessonId": "agents-declaratifs-vs-copilot-studio",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "cadrage-sources-sur-orchestrateur-m365"
+      ],
+      "plainExplanation": "Lorsqu'on veut spécialiser chat Copilot पर एक base documentaire précise का l'उद्यम के साथ quelques outils ciblés.",
+      "rationale": "एक agent déclaratif spécialise Microsoft 365 Copilot en définissant के instructions पर mesure, के sources SharePoint/Graph bornées और के actions tout en s'appuyant पर l'orchestrateur और सुरक्षा का M365 Copilot.",
+      "examTip": "[HI] Agent déclaratif = instructions + sources bornées + actions exécutées par l'orchestrateur M365 Copilot.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-overview"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "elevation-privileges-via-auteur"
+      ],
+      "plainExplanation": "N'importe quel employé pourrait alors उपयोग करें l'agent के लिए faire के opérations réservées à l'administrateur.",
+      "rationale": "Exécuter एक action d'écriture ERP के साथ identifiants का l'auteur सक्षम करता है à tout उपयोगकर्ता का l'agent d'agir के साथ अधिकार का cet auteur. Il faut imposer l'authentification का l'उपयोगकर्ता final (`User authentication`).",
+      "examTip": "पर toute action qui lit के डेटा privées या modifie एक système métier, imposez l'authentification का l'उपयोगकर्ता final.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+      "lessonId": "declencheurs-actions-connecteurs-orchestration",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "descriptions-detaillees-actions-parametres"
+      ],
+      "plainExplanation": "Rédigez एक description très précise पर chaque outil en indiquant quand l'उपयोग करें और quand ne pas l'उपयोग करें.",
+      "rationale": "L'orchestrateur génératif sélectionne ses outils और renseigne leurs arguments à partir के descriptions en langage naturel का chaque action और का chaque paramètre.",
+      "examTip": "description d'एक action Copilot Studio fait partie का prompt का routage का l'orchestrateur : soyez explicite और discriminant.",
+      "sourceIds": [
+        "ms-copilot-studio"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "heritage-etiquette-plus-restrictive"
+      ],
+      "plainExplanation": "résumé reçoit स्वचालित रूप से l'étiquette plus stricte (« Confidentiel Direction ») के लिए éviter toute fuite.",
+      "rationale": "Microsoft 365 Copilot applique règle d'héritage का Microsoft Purview : lorsqu'एक प्रतिक्रिया या एक document combine plusieurs sources, l'étiquette का sensibilité ayant priorité plus élevée ( plus restrictive) est स्वचालित रूप से appliquée.",
+      "examTip": "Fusion multi-documents में Copilot = héritage automatique का l'étiquette Purview plus restrictive.",
+      "sourceIds": [
+        "ms-copilot-privacy"
+      ]
+    },
+    {
+      "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002",
+      "lessonId": "gouvernance-purview-sharepoint-agents",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "politique-dlp-power-platform"
+      ],
+      "plainExplanation": "एक règle का protection contre perte का डेटा (DLP Power Platform) bloque tout transfert के बीच SharePoint और के connecteurs externes.",
+      "rationale": "politiques DLP (Data Loss Prevention) का Power Platform permettent d'अलग करें connecteurs métier (Business) के connecteurs externes और का bloquer connecteurs HTTP non autorisés में Copilot Studio.",
+      "examTip": "Empêcher एक agent Copilot Studio d'exfiltrer के डेटा SharePoint vers एक API tierce = Politique DLP Power Platform.",
+      "sourceIds": [
+        "ms-copilot-studio",
+        "ms-copilot-privacy"
+      ]
+    }
+  ]
+}

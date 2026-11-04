@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné 上の OpenAI Academy ・ documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple なしで jargon ・ expert) ・ examen blanc."
+  },
+  "locale": "ja-JP",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "習得： choix の モデル (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent の programmation autonome Codex ・ l'ingénierie IA の production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads ・ responsables produit déployant offres OpenAI en 企業.",
+  "prerequisites": "Connaître bases の développement logiciel (Git, JSON, API REST) ・ l'utilisation courante d' assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI およびPrompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente bonnes pratiques d'ingénierie の prompt, routage 間の モデル multimodaux ・ モデル の raisonnement, l'usage の Canvas, Projects, Custom GPTs ・ l'évaluation systématique.",
+      "limits": "performances d' prompt または d' workflow dépendent d'évaluations empiriques (Evals) 上の データ représentatives の cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox (CertiGo コース)",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement の l'agent OpenAI Codex : exécution の tâches en parallèle 内の conteneur cloud isolé ・ アクセス coupé à Internet pendant l'exécution, lecture の conventions AGENTS.md, exécution の tests ・ ouverture の Pull Requests vérifiables.",
+      "limits": "Codex exécute tests configurés 内の son environnement sandbox ; toute fusion en production reste soumise à revue の code ・ aux contrôles CI の l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, およびEvals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente Responses API unifiée, l'application stricte の JSON Schema via Structured Outputs (strict: true), Function Calling, l'Agents SDK (handoffs, guardrails, tracing) ・ suites d'évaluation Evals.",
+      "limits": "garantie syntaxique の Structured Outputs assure respect の schéma JSON, mais pas véracité métier の valeurs retournées ni l'autorisation d'exécuter appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "ユニット 1 · ChatGPT Pro & Enterprise : モデル, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs モデル の raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs ・ Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner モデル optimal selon tâche (GPT-4o vs o3/o4-mini), conduire étude sourcée ・ Deep Research ・ structurer espace の travail récurrent ・ Projects, Canvas ・ Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage の モデル : GPT-4o multimodal rapide vs モデル の raisonnement à chaîne の pensée interne o3 ・ o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée ・ citations) & Data Analysis (exécution Python 向け nettoyer, modéliser ・ tracer の データ)",
+        "Canvas (co-édition ciblée の texte ・ の code), Projects (instructions ・ ファイル persistants) ・ Custom GPTs gouvernés en 企業"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o 向け l'interaction multimodale rapide ・ rédaction fluide, o3/o4-mini 向け raisonnement algorithmique または analytique complexe, ・ Deep Research lorsqu' synthèse exige d'explorer, croiser ・ citer の dizaines の sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage の モデル & Espaces の Travail",
+        "diagram": "[リクエスト ユーザー] ➔ [Choix モデル : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "[JA] GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image ・ audio ・ faible latence ; o3 ・ o4-mini allouent の calcul の raisonnement avant の répondre aux problèmes logiques, mathématiques, juridiques または d'architecture."
+          },
+          {
+            "name": "[JA] Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement web ・ connecteurs autorisés 向け livrer rapport sourcé ; Data Analysis exécute の code Python 向け analyser の ファイル CSV/Excel."
+          },
+          {
+            "name": "[JA] Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre éditeur côte à côte 向け réviser の texte または の code par section ; Projects regroupe conversations, instructions ・ ファイル ; Custom GPTs partage の assistants spécialisés 内の workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "内の ChatGPT Enterprise, conversations, ファイル の Projects ・ exécutions Data Analysis sont isolés par espace の travail client ・ ne servent jamais à entraîner モデル OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "選択： bon モデル : GPT-4o multimodal vs モデル の raisonnement o3 ・ o4-mini",
+          "objective": "Arbitrer 間の GPT-4o, o3 ・ o4-mini selon complexité logique, besoin multimodal, latence ・ コスト d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "活用： モデル の raisonnement plus lourd 向け reformuler courriel の trois lignes gaspille の temps, mais confier audit d'architecture distribuée à モデル instantané fait rater の cas limites : quelle est règle の tri ?",
+          "declicCard": {
+            "title": "ひらめきポイント モデル OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse ・ échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne の pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "向け rédiger, résumer, traduire または dialoguer rapidement à partir の texte または d'images courantes, choisissez GPT-4o.",
+            "step2": "向け résoudre bug subtil, prouver cohérence financière/juridique または planifier sous fortes contraintes, choisissez o3 (profondeur maximale) または o4-mini (raisonnement rapide ・ économique).",
+            "rule": "Prompting o3/o4-mini : donnez objectif précis, contraintes ・ format attendu, なしで imposer の « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · GPT-4O MULTIMODAL",
+              "title": "モデル polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle 内の tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse の réunions, traduction nuancée, extraction visuelle rapide ・ conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "[JA] GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "ステップ 2 · モデル の RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer の temps の réflexion avant premier mot",
+              "bodyParagraph": "モデル の série o (`o3` ・ `o4-mini`) génèrent chaîne の raisonnement interne avant d'émettre leur 応答 finale : ils vérifient leurs hypothèses, reviennent en arrière en cas の contradiction ・ excellent en algorithmique, finance, analyse の causes racines ・ revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement の pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "ステップ 3 · ADAPTER SON PROMPTING",
+              "title": "brief d'objectif clair plutôt que の micro-guidage",
+              "bodyParagraph": "・ GPT-4o, détailler étapes intermédiaires améliore souvent sortie. ・ o3 ・ o4-mini, spécifiez clairement l'objectif final, invariants à respecter, データ d'entrée ・ schéma の sortie : モデル construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "上の o3/o4-mini : spécifiez QUOI (contraintes + critères の succès), laissez モデル gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie faible latence ・ l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre profondeur の raisonnement maximale 向け problèmes scientifiques, architecturaux, financiers または の débogage complexe, tandis qu'`o4-mini` optimise compromis vitesse/コスト 上の tâches techniques.",
+            "prompt destiné à モデル の raisonnement 必要がある définir rigoureusement contraintes, cas limites ・ livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "あるチームがd'ingénierie chez éditeur SaaS 必要がある traiter deux demandes : (1) transformer の notes d'atelier en FAQ client multilingue, ・ (2) identifier condition の course (race condition) 間の trois microservices の paiement.",
+            "steps": [
+              "Affecter rédaction ・ traduction の FAQ client à GPT-4o 内の Canvas 向け itérer rapidement 上の style.",
+              "Soumettre ログ d'exécution ・ code の trois microservices à o3 en précisant invariants transactionnels à 検証：.",
+              "Valider scénario d'entrelacement découvert par o3 au moyen d' test automatisé reproductible."
+            ],
+            "decision": "routage intentionnel divise temps の rédaction par trois ・ résout bug の concurrence que revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez trois tâches suivantes 間の GPT-4o, o4-mini ・ o3 en justifiant votre choix : (A) Reformuler 15 fiches produit 向け catalogue web, (B) Diagnostiquer incohérence 間の quatre clauses の pénalité ・ モデル actuariel, (C) Générer rapidement の tests unitaires 上の vingt fonctions utilitaires.",
+            "successCriteria": [
+              "関連付け： (A) à GPT-4o 向け sa rapidité rédactionnelle ・ sa maîtrise の ton.",
+              "関連付け： (B) à o3 向け sa capacité の raisonnement multi-contraintes profond.",
+              "関連付け： (C) à o4-mini 向け son raisonnement code rapide ・ économique à haut volume."
+            ],
+            "feedback": "選択： モデル proportionné à difficulté cognitive évite à fois 上の-qualité lente ・ l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez problème financier または logique très complexe ・ douze règles à 検証： en même temps. Quel モデル OpenAI 選択： ?",
+              "prompt": "アーキテクトがfinancier 必要がある 検証： cohérence mathématique ・ réglementaire d' モデル の couverture の taux comportant douze contraintes croisées ・ identifier cas limites où formule diverge. Quel モデル OpenAI 必要がある-il sélectionner 内の ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "モデル の raisonnement o3, conçu 向け décomposer ・ 検証： の problèmes logiques, mathématiques ・ multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "モデル の transcription vocale purement acoustique dépourvu の capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "モデル d'embeddings vectoriels qui retourne のみ liste の nombres flottants なしで texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "classifieur の modération の contenu qui produit のみ の scores の セキュリティ booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est différence pratique 間の モデル の réflexion o3 ・ o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` の `o3` au sein の famille の モデル の raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre raisonnement technique ・ code beaucoup plus rapide ・ économique 向け tâches à haut débit, tandis qu'o3 privilégie profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération の code informatique ・ se limite à retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie 自動的に prompts d'企業 上の Internet contrairement au モデル o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée ・ ne peut lire aucun ファイル structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o 向け vitesse multimodale ・ rédactionnelle ; o4-mini 向け raisonnement technique agile ; o3 向け arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée ・ analyse Python",
+          "objective": "Conduire recherche approfondie multi-sources ・ Deep Research ・ analyser の jeux の データ tabulaires ・ Data Analysis 内の ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "あなたはlivrer demain matin étude concurrentielle citant trente sources vérifiables ・ analyse の cohorte 上の ファイル の 120 000 lignes の ventes : comment combiner Deep Research ・ Data Analysis なしで jamais inventer chiffre ?",
+          "declicCard": {
+            "title": "ひらめきポイント Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré ・ citations",
+            "diagramBottom": "Data Analysis : ファイル CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research synthèses documentaires ・ études の marché nécessitant の parcourir, recouper ・ citer の dizaines の sources.",
+            "step2": "Confiez à Data Analysis tout calcul 上の vos ファイル chiffrés afin que résultat provienne d' exécution Python réelle ・ non d' calcul mental の LLM.",
+            "rule": "Ne demandez jamais à モデル の calculer の tête 上の 50 000 lignes : exigez l'exécution Python の Data Analysis ・ inspectez code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · DEEP RESEARCH",
+              "title": "analyste の recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à recherche web rapide d' seconde, Deep Research établit plan d'investigation, explore の multiples pages ・ documents autorisés, recoupe contradictions ・ rédige rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "[JA] Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "ステップ 2 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif 上の vos jeux の データ",
+              "bodyParagraph": "Lorsque vous déposez ファイル CSV, Excel または JSON 内の ChatGPT Enterprise, Data Analysis écrit ・ exécute の code Python (`pandas`, `numpy`, `matplotlib`) 内の environnement isolé. Il nettoie valeurs manquantes, calcule agrégats exacts ・ génère の visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable ・ déterministe 上の vos ファイル の データ"
+            },
+            {
+              "stepBadge": "ステップ 3 · VÉRIFICATION の BOUT EN BOUT",
+              "title": "Auditer sources ・ script Python",
+              "bodyParagraph": "professionnel CertiGo vérifie toujours deux éléments avant の diffuser son livrable : 内の Deep Research, il ouvre citations の conclusions critiques ; 内の Data Analysis, il déplie bloc の code Python (`</>`) 向け 検証： filtres appliqués (par exemple traitement の lignes annulées または の devises).",
+              "keyTakeawayPill": "Toujours ouvrir citations Deep Research + inspecter filtres の script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit の recherches multi-étapes 上の plusieurs minutes 向け produire の rapports exhaustifs accompagnés の citations précises.",
+            "Data Analysis exécute の code Python 内の bac à sable 向け garantir l'exactitude mathématique の statistiques, jointures ・ graphiques 上の の ファイル volumineux.",
+            "L'inspection の code Python généré (`</>`) 可能にする の valider hypothèses の nettoyage (valeurs nulles, doublons, devises) avant の présenter chiffres."
+          ],
+          "workedExample": {
+            "situation": "あるチームがstratégie prépare l'entrée 上の nouveau marché européen : elle 必要がある comparer cadres réglementaires の quatre pays ・ analyser l'historique interne の 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant quatre juridictions, autorités officielles à privilégier ・ grille comparative attendue ・ liens sources.",
+              "Charger l'extrait anonymisé の 80 000 commandes 内の Data Analysis ・ demander calcul の panier moyen, の rétention à 6 mois ・ の saisonnalité via Python.",
+              "Déplier code Python 向け 検証： que commandes remboursées ont bien été exclues の chiffre d'affaires net, puis 検証： citations réglementaires の Deep Research."
+            ],
+            "decision": "comité d'investissement reçoit dossier où chaque règle juridique pointe vers son texte officiel ・ chaque indicateur financier est issu d' script Python reproductible."
+          },
+          "practice": {
+            "prompt": "analyste colle 5 000 lignes の transactions 内の prompt texte ・ demande au モデル の calculer médiane ・ l'écart-type なしで 活用： Data Analysis. Expliquez risque ・ bonne méthode à adopter.",
+            "successCriteria": [
+              "解説： que prédiction の トークン texte なしで exécution の code risque の produire の calculs statistiques approximatifs または tronqués.",
+              "Joindre ファイル structuré (CSV/XLSX) ・ demander explicitement l'exécution d' script Python via Data Analysis.",
+              "Ouvrir bloc の code exécuté 向け 検証： colonne ciblée ・ traitement の valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique または statistique 上の tableau の データ 必要がある passer par l'exécution Python の Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil の ChatGPT 可能にする の chercher 内の の dizaines の documents officiels ・ の rédiger rapport complet ・ toutes sources ?",
+              "prompt": "responsable veille réglementaire 必要がある produire rapport comparant exigences publiées par cinq autorités の régulation ・ の citations vérifiables ligne par ligne. Quelle fonctionnalité の ChatGPT Pro / Enterprise est spécifiquement conçue 向け ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie recherche multi-étapes, recoupe documents ・ produit rapport structuré ・ citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "complétion hors-ligne à température élevée なしで アクセス aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "générateur d'illustrations graphiques dépourvu の moteur の recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé なしで connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule total の ventes différent の votre comptabilité à partir d' ファイル Excel. Que devez-vous 検証： en premier ?",
+              "prompt": "Après avoir chargé ファイル CSV の 60 000 ventes 内の ChatGPT Data Analysis, contrôleur obtient chiffre d'affaires supérieur の 12 % à celui の comptabilité. Quel réflexe の vérification 必要がある-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir code Python exécuté (`</>`) 向け 検証： comment lignes annulées, taxes ・ devises ont été filtrées 内の pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "無効化： l'exécution Python 向け obliger モデル の langage à additionner 60 000 lignes の tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir ファイル CSV en image JPEG compressée avant の relancer somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier 直接 graphique car script Python généré applique toujours conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore ・ cite sources ; Data Analysis exécute の Python déterministe ・ inspectable 上の vos データ chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer ・ 共有： l'IA en 企業",
+          "objective": "Distinguer ・ combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) ・ Custom GPTs (assistants métier partagés ・ gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il 作成： Project または Custom GPT ? ・ comment modifier trois lignes au milieu d' document または d' script の 300 lignes なしで que ChatGPT ne régénère tout depuis début ?",
+          "declicCard": {
+            "title": "ひらめきポイント Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'チーム)",
+            "diagramTop": "Canvas = Éditeur côte à côte 向け retoucher section précise d' texte または d' code",
+            "diagramBottom": "Projects = Votre dossier の travail continu · Custom GPT = Assistant standardisé partagé ・ l'チーム",
+            "step1": "Ouvrez Canvas 向け itérer 上の livrable long (article, spécification, script) en surlignant のみ passage à réécrire または déboguer.",
+            "step2": "Utilisez Project 向け regrouper vos ファイル ・ instructions d' dossier en cours, ・ publiez Custom GPT lorsque toute l'チーム a besoin の même assistant métier.",
+            "rule": "Travail récurrent d' dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé 向け l'チーム = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · CANVAS",
+              "title": "Fini régénération complète à chaque retouche",
+              "bodyParagraph": "内の Canvas, document または code s'affiche 内の volet dédié à droite の chat. Vous pouvez surligner seul paragraphe または seule fonction 向け demander réécriture, changement の niveau の lecture, l'ajout の logs または portage vers autre langage, ・ historique の versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner zone ➔ Édition chirurgicale in-place + Historique の versions"
+            },
+            {
+              "stepBadge": "ステップ 2 · PROJECTS",
+              "title": "Garder contexte d' dossier au fil の semaines",
+              "bodyParagraph": "Project 内の ChatGPT rassemble en seul endroit vos instructions personnalisées, vos ファイル の référence (cahier の charges, architecture, charte éditoriale) ・ tous fils の conversation liés à ce chantier. Chaque nouveau chat ouvert 内の Project hérite immédiatement の ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + ファイル sources + Historique の chats organisé"
+            },
+            {
+              "stepBadge": "ステップ 3 · CUSTOM GPTS EN 企業",
+              "title": "Standardiser assistant métier ・ Actions ・ ガバナンス",
+              "bodyParagraph": "Lorsqu' workflow est stabilisé (ex. Revue d'appel d'offres, Générateur の post-mortem SRE), encapsulez ses instructions système, sa base documentaire ・ ses Actions API OpenAPI 内の Custom GPT publié のみ au sein の votre espace の travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en セキュリティ"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas 可能にする co-édition granulaire の texte ・ の code ・ raccourcis dédiés (longueur, ton, revue の code, ajout の commentaires, portage の langage) ・ gestion の versions.",
+            "Projects organise travaux au long cours d' ユーザー または d' チーム autour d'instructions ・ の ファイル の référence persistants.",
+            "Custom GPTs 内の ChatGPT Enterprise permettent の distribuer の assistants spécialisés dotés d'Actions OpenAPI sous contrôle の console d'administration."
+          ],
+          "workedExample": {
+            "situation": "あるチームがSRE souhaite (1) suivre l'opération の migration Cloud の trimestre ・ ses schémas d'architecture, (2) co-rédiger runbook の bascule section par section, ・ (3) offrir à tous ingénieurs d'astreinte assistant standardisé の rédaction の post-mortem.",
+            "steps": [
+              "作成： Project « Migration Cloud T4 » contenant schémas d'architecture ・ contraintes の SLA.",
+              "Rédiger ・ affiner runbook の bascule 内の Canvas en révisant chaque procédure の rollback なしで altérer sections déjà validées.",
+              "Publier Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré ・ モデル d'incident ・ grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "trois outils sont utilisés selon leur rôle exact : continuité の dossier (Project), édition fine (Canvas) ・ standardisation d'チーム (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer prompt complexe utilisé par dix personnes en copier-coller vers Custom GPT d'企業 sécurisé, ・ précisez quand ユーザー devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer prompt validé 内の instructions système の Custom GPT ・ y joindre documents の référence officiels.",
+              "Restreindre partage の Custom GPT aux groupes autorisés の workspace ChatGPT Enterprise.",
+              "活用： Canvas lorsque l'ユーザー souhaite peaufiner localement paragraphe の livrable généré avant export."
+            ],
+            "feedback": "Centraliser prompt 内の Custom GPT élimine dérive の versions copiées-collées, tandis que Canvas assure finition 上の mesure の chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "どのようにmodifier seulement 30 lignes d' long programme 内の ChatGPT なしで risquer qu'il réécrive または casse reste の ファイル ?",
+              "prompt": "Vous travaillez 上の script Python の 250 lignes 内の ChatGPT ・ souhaitez optimiser のみ fonction の pagination aux lignes 80 à 110 tout en garantissant que reste の ファイル reste strictement intact ・ versionné. Quel outil devez-vous 活用： ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir code 内の Canvas, surligner lignes 80 à 110 ・ demander l'optimisation ciblée ・ suivi の version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir conversation vierge なしで fournir ファイル ・ demander の réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir script Python en ファイル audio MP3 avant の soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique の l'espace の travail à chaque modification d' variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "内の ChatGPT Enterprise, quand faut-il 作成： Project plutôt qu' Custom GPT ?",
+              "prompt": "Quelle différence principale guide choix 間の Project ・ Custom GPT 内の ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "Project organise espace の travail continu (chats, ファイル ・ consignes d' chantier), tandis qu' Custom GPT publie assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "Project indexe 自動的に ses ファイル 上の moteurs の recherche publics alors qu' Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "Custom GPT ne peut contenir ni instructions système ni documents の référence, contrairement à Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "Project accepte のみ の ファイル d'images matricielles ・ refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas 向け l'édition chirurgicale côte à côte ; Projects 向け vos chantiers au long cours ; Custom GPTs 向け standardiser ・ 共有： assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "ユニット 2 · OpenAI Codex : Agent の Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée の Codex, pilotage par AGENTS.md, exécution parallèle の tâches, génération の Pull Requests vérifiées ・ revue の code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "構成： ファイル AGENTS.md déterministe, 委任： en parallèle correctif の bug ・ implémentation の fonctionnalité à OpenAI Codex 内の son sandbox, ・ auditer diff ainsi que ログ の tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, アクセス ネットワーク coupé pendant l'exécution 向け prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes の build/lint/test, invariants d'architecture ・ conventions の dépôt",
+        "Parallélisation の tâches, ouverture の Pull Requests ・ preuves d'exécution の tests ・ revue の code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que commandes の vérification documentées 内の votre AGENTS.md : exigez toujours の tests verts 内の journal の sandbox avant の fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "[JA] Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (ネットワーク OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs の Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "[JA] Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit ・ modifie code ・ exécute tests ・ l'アクセス ネットワーク externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "契約 AGENTS.md",
+            "role": "ファイル versionné 内の dépôt (racine ・ sous-dossiers) qui indique à Codex comment compiler, linter, tester ・ respecter frontières architecturales."
+          },
+          {
+            "name": "[JA] Vérification & Pull Request",
+            "role": "Codex itère 上の son implémentation jusqu'à ce que suite の tests passe, puis produit commit/PR accompagné の citations の ファイル ・ の sorties の terminal."
+          }
+        ],
+        "securityInvariant": "Pendant phase d'exécution の l'agent Codex, l'アクセス Internet sortant est désactivé 内の bac à sable afin d'empêcher toute exfiltration の code source または téléchargement の paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "[JA] Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "解説： comment OpenAI Codex exécute の code ・ の tests 内の conteneur sandbox cloud isolé ・ pourquoi coupure ネットワーク pendant l'exécution protège dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est différence fondamentale 間の assistant d'autocomplétion 内の l'IDE ・ l'agent OpenAI Codex capable の vous livrer Pull Request testée の bout en bout ?",
+          "declicCard": {
+            "title": "ひらめきポイント Codex : の Suggestion の Ligne à Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création の conteneur + Clone の dépôt + Installation の dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, ネットワーク OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement の tâche prépare dépôt ・ ses dépendances, puis verrouille l'アクセス ネットワーク externe avant の donner main à l'agent.",
+            "step2": "Codex explore base の code, applique ses modifications ・ lance réellement compilateurs ・ tests jusqu'à obtenir résultat vert.",
+            "rule": "patch non exécuté est hypothèse ; patch validé par tests 内の sandbox Codex est livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone ・ isolée 内の cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre 内の son propre conteneur cloud isolé contenant votre dépôt Git à révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction の bug, refactorisation, couverture の tests) なしで jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié ・ indépendant"
+            },
+            {
+              "stepBadge": "ステップ 2 · セキュリティ ネットワーク OFF",
+              "title": "なぜl'アクセス Internet est coupé pendant boucle agent",
+              "bodyParagraph": "fois script d'initialisation d'environnement terminé (installation の dépendances via `npm ci` または `pip`), conteneur coupe l'アクセス Internet sortant pendant que l'agent travaille. Ainsi, même face à instruction piégée 内の ファイル の test, Codex ne peut ni exfiltrer の code ni télécharger の binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure ネットワーク ➔ Exécution sûre の l'agent"
+            },
+            {
+              "stepBadge": "ステップ 3 · PREUVES D'EXÉCUTION",
+              "title": "Journal の terminal, citations の lignes ・ diff Git",
+              "bodyParagraph": "À fin の sa mission, Codex ne renvoie pas simple explication théorique : il fournit diff Git exact, citations の ファイル modifiés ・ journal complet の commandes の test exécutées 内の terminal の sandbox.",
+              "keyTakeawayPill": "Toujours inspecter journal の test の sandbox avant の 作成： または fusionner PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère 内の conteneur cloud isolé dédié à chaque tâche, permettant の paralléliser plusieurs chantiers logiciels.",
+            "séparation 間の phase d'initialisation (installation の dépendances) ・ phase d'exécution の l'agent (ネットワーク externe désactivé) élimine risques d'exfiltration ・ d'injection supply-chain en cours の tâche.",
+            "Chaque résultat inclut trace vérifiable の commandes exécutées ・ の tests passés."
+          ],
+          "workedExample": {
+            "situation": "あるチームがplateforme veut confier à Codex mise à jour d' validateur の schéma TypeScript, mais lors の premier essai, `npm test` échoue 内の sandbox ・ `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant boucle d'exécution の l'agent, l'アクセス ネットワーク est coupé, donc l'agent ne peut pas télécharger の paquets depuis registre npm.",
+              "Ajouter `npm ci` 内の script の configuration initiale の l'environnement Codex (qui s'exécute avant coupure ネットワーク).",
+              "Relancer tâche : Codex dispose désormais の `node_modules`, exécute 85 tests unitaires ・ livre diff 100 % vert."
+            ],
+            "decision": "L'チーム documente script の préchargement の dépendances 内の configuration の l'environnement Codex の dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi agent の programmation autonome exécutant の tests 内の dépôt 必要がある tourner ・ l'アクセス ネットワーク externe désactivé fois dépendances installées, ・ comment gérer appels à の API tierces 内の tests.",
+            "successCriteria": [
+              "解説： que coupure ネットワーク empêche l'exfiltration の code propriétaire ・ téléchargement の code arbitraire en cas の prompt injection.",
+              "Préinstaller toutes dépendances requises lors の phase の setup の l'environnement.",
+              "活用： の fixtures locales または の mocks déterministes 向け tester intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "の tests rapides, déterministes ・ hors-ligne (上の fixtures) sont à fois bonne pratique d'ingénierie logicielle ・ clé の l'efficacité の Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "なぜl'agent の programmation OpenAI Codex coupe-t-il l'アクセス à Internet pendant qu'il modifie votre code ?",
+              "prompt": "なぜl'environnement d'exécution d'OpenAI Codex désactive-t-il l'アクセス Internet sortant pendant que l'agent modifie code ・ exécute tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "向け empêcher toute exfiltration の code または の secrets ainsi que téléchargement の paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "向け empêcher compilateur TypeScript または Python の lire ファイル présents 内の répertoire の travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "向け 無効化： l'historique Git local ・ interdire génération d' diff 間の branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "向け réduire résolution graphique の carte vidéo locale の l'ordinateur portable の développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque outil qui s'installe normalement depuis Internet. どのようにrégler cela ?",
+              "prompt": "tâche confiée à OpenAI Codex échoue lors の l'exécution の `pytest` car bibliothèques の ファイル `requirements.txt` ne sont pas installées ・ l'agent ne peut pas contacter PyPI. Quelle est résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "構成： l'installation の dépendances (`pip install -r requirements.txt`) 内の script d'initialisation の l'environnement sandbox avant coupure ネットワーク."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex の 削除： dossier `tests/` afin que commande retourne code の sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "無効化： vérification par tests ・ fusionner 直接 code généré 上の branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire clés secrètes の production en clair 内の ファイル README.md の dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne 内の son sandbox isolé ・ exigez preuve par logs の tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées ・ revue の code ・ Codex",
+          "objective": "Structurer ファイル AGENTS.md efficace, 委任： の tâches ciblées または の revues の code à Codex ・ valider Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "どのようにfaire en sorte que Codex connaisse instantanément vos commandes の test ciblées, vos règles d'architecture ・ vos interdits の セキュリティ なしで avoir à répéter 内の chaque prompt ?",
+          "declicCard": {
+            "title": "ひらめきポイント AGENTS.md : Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à racine (・ par sous-dossier) = Commandes の validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible bons ファイル, lance bons tests ・ ouvre PR propre",
+            "step1": "Documentez 内の `AGENTS.md` commandes exactes (`npm test`, `npm run validate`), invariants métier ・ règles の style.",
+            "step2": "Utilisez の ファイル `AGENTS.md` plus spécifiques 内の sous-dossiers d' monorepo (`backend/`, `apps/mobile/`) 向け affiner consignes locales.",
+            "rule": "Si vous corrigez deux fois même erreur の convention 内の PR d'agent, transformez cette remarque en règle 内の `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · STANDARD AGENTS.MD",
+              "title": "Donner à l'agent carte ・ boussole の dépôt",
+              "bodyParagraph": "bon ファイル `AGENTS.md` ne répète pas の marketing : il donne l'architecture の dossiers, règles strictes (ex. séparation public/privé, déterminisme の manifestes), commande の test rapide 向け itérer ・ suite complète à exécuter avant の conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes の test rapides ・ complètes"
+            },
+            {
+              "stepBadge": "ステップ 2 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "の ticket bien borné à Pull Request prête à relire",
+              "bodyParagraph": "向け 委任： efficacement à Codex, formulez tâche bornée : symptôme または comportement attendu, ファイル または modules concernés ・ critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit branche ・ Pull Request documentant changements ・ tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère の test = Pull Request autonome prête 向け revue"
+            },
+            {
+              "stepBadge": "ステップ 3 · REVUE の CODE PAR CODEX",
+              "title": "Détecter bugs logiques ・ régressions avant fusion",
+              "bodyParagraph": "En mode revue の code 上の Pull Request, Codex compare l'intention au diff réel, exécute または trace chemins d'erreur (nullabilité, conditions の course, oubli の validation の borne, fuite d'information) ・ signale のみ défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles の セキュリティ ・ cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit contexte persistant ・ hiérarchique (racine puis sous-répertoires) que Codex consulte 自動的に.",
+            "délégation parallèle 可能にする の traiter simultanément の corrections の bugs, の ajouts の tests ・ の refactorisations isolées.",
+            "活用： Codex en revue の Pull Request 可能にする d'identifier erreurs の logique, oublis の cas limites ・ écarts vis-à-vis の invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "内の dépôt `certigo-content`, chaque question publique 必要がある avoir solution privée correspondante ・ aucun champ `correct` または `rationale` ne 必要がある figurer 内の `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or ・ séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` 内の `AGENTS.md`.",
+              "Confier à Codex l'ajout d' nouveau parcours ・ ses questions ・ solutions.",
+              "検証： 内の rapport の PR que Codex a exécuté の lui-même toutes commandes prescrites par `AGENTS.md` avant の proposer fusion."
+            ],
+            "decision": "ファイル `AGENTS.md` 保証する que chaque tâche exécutée par l'agent respecte gardes の セキュリティ ・ の 契約 の dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez quatre rubriques indispensables d' ファイル `AGENTS.md` 向け API backend soumise à の exigences strictes の rétrocompatibilité の schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture ・ répertoires critiques (ex. schémas の 契約, séparation の couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use 上の schémas, interdiction の secrets).",
+              "3. Commandes d'installation ・ の validation ciblée puis complète.",
+              "4. Processus の changement attendu avant ouverture の Pull Request."
+            ],
+            "feedback": "`AGENTS.md` concis, impératif ・ orienté commandes の vérification améliore radicalement taux の réussite au premier essai の Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert ファイル AGENTS.md placé 内の votre projet informatique 向け OpenAI Codex ?",
+              "prompt": "Quel est rôle の ファイル `AGENTS.md` placé à racine ・ 内の sous-dossiers d' dépôt Git utilisé ・ OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir 自動的に à l'agent commandes の build/test, l'architecture ・ invariants の dépôt または の sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair mots の passe の データベース の production 向け éviter variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "置換： binaire の compilateur par interprétation purement approximative なしで exécution の tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes branches なしで exécuter workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger 内の quatre parties différentes の votre logiciel. どのようにgagner の temps ・ Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits 内の quatre modules distincts の votre application. どのようにexploiter OpenAI Codex の façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "委任： quatre corrections en parallèle 内の quatre tâches Codex distinctes en exigeant test の non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander réécriture totale の l'application 内の seul commit géant en désactivant suite の tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre のみ titre « Ça ne marche pas » なしで indiquer ni module ni trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser の modifications non testées 直接 上の branche の production en contournant revue の code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue の PR = workflow d'ingénierie augmentée ・ OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic の régressions CI, remédiation ・ セキュリティ ・ Codex",
+          "objective": "活用： Codex 向け diagnostiquer échec CI complexe, écrire test reproducteur avant correctif (TDD) ・ appliquer garde-fous の セキュリティ.",
+          "estimatedMinutes": 8,
+          "hook": "pipeline CI échoue の façon intermittente 上の erreur の sérialisation : comment guider Codex 向け qu'il prouve cause racine par test rouge avant d'écrire seule ligne の correctif ?",
+          "declicCard": {
+            "title": "ひらめきポイント Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ 検証： Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer correctif chirurgical (Vert) ➔ 3. Exécuter suite complète & gardes の 契約",
+            "step1": "Fournissez trace d'erreur exacte à Codex ・ demandez d'abord test minimal qui échoue 上の bug actuel.",
+            "step2": "fois symptôme reproduit, laissez Codex appliquer correctif minimal ・ 検証： qu'aucune garde existante ne régresse.",
+            "rule": "correctif なしで test reproducteur qui échouait avant ・ passe après n'est pas remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · REPRODUIRE AVANT の CORRIGER",
+              "title": "discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez bug à Codex, exigez 内の prompt (または 内の `AGENTS.md`) qu'il commence par reproduire l'erreur ・ test ciblé. Voir test échouer 向け raison attendue prouve que l'agent a compris vrai mécanisme の bug ・ non symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger cause racine (Green) ➔ 3. 検証： l'ensemble"
+            },
+            {
+              "stepBadge": "ステップ 2 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter bruit ・ refactorisations non demandées",
+              "bodyParagraph": "bon correctif d'agent modifie のみ lignes nécessaires ・ ajoute test correspondant, なしで reformater の dizaines の ファイル non liés ni affaiblir assertion の セキュリティ 向け faire passer test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement の test または suppression の garde 向け obtenir vert artificiel"
+            },
+            {
+              "stepBadge": "ステップ 3 · CONTRÔLE HUMAIN の FRONTIÈRES",
+              "title": "Ce qu' relecteur humain vérifie toujours 上の PR d'agent",
+              "bodyParagraph": "Lors の relecture の PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test または contrôle の schéma n'a été contourné · 2. Que nouvelles dépendances éventuelles sont légitimes · 3. Que frontières の セキュリティ (権限, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue の PR : inspecter en priorité tests modifiés, schémas ・ frontières の confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger reproduction préalable の bug par test qui échoue 保証する pertinence の correctif produit par Codex.",
+            "agent ne 必要がある jamais faire passer build au vert en supprimant または en relâchant assertion の セキュリティ または の 契約.",
+            "revue humaine の Pull Request se concentre 上の validité の tests ajoutés, minimalité の diff ・ respect の frontières の セキュリティ."
+          ],
+          "workedExample": {
+            "situation": "内の pipeline の packaging, ファイル Windows en CRLF produit hash SHA-256 différent の celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire test unitaire injectant の fins の ligne `\\r\\n` ・ vérifiant que hash normalisé reste identique à celui en `\\n` ( test échoue initialement).",
+              "Corriger fonction の hachage 向け normaliser fins の ligne avant calcul の digest SHA-256.",
+              "Exécuter toute suite の tests ・ 検証： que vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "PR contient 6 lignes の code productif ・ 20 lignes の test d'isolation prouvant résolution 上の Windows ・ Linux."
+          },
+          "practice": {
+            "prompt": "agent propose PR qui corrige erreur の validation en supprimant règle `additionalProperties: false` の schéma JSON. Expliquez pourquoi vous devez rejeter cette PR ・ quelle consigne donner.",
+            "successCriteria": [
+              "解説： que retirer `additionalProperties: false` ouvre 契約 à の propriétés inconnues または à の fuites の データ.",
+              "Identifier quelle propriété provoquant rejet était illégitime 内の データ (または si procédure formelle d'expand backend est requise).",
+              "Exiger que schéma reste strictement fermé ・ qu' test négatif vérifie rejet の propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais correctif éteindre l'alarme au lieu d'éteindre l'incendie : schémas fermés ・ gardes 必要がある rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "内の quel ordre Codex 必要がある-il travailler 向け prouver qu'il a vraiment corrigé bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex correction d' bug の calcul d'arrondi signalé en production. Quelle séquence の travail 保証する que correctif règle réellement problème なしで régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer correctif minimal (vert), puis lancer toute suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "削除： assertions numériques の tests existants afin que suite s'exécute なしで erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier fonction mathématique なしで exécuter tests ・ fusionner immédiatement branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer workflow GitHub Actions の branche 向け masquer l'échec の build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "agent propose の faire passer test の セキュリティ au vert en désactivant contrôle 上の ファイル posant problème. Que faites-vous ?",
+              "prompt": "Lors の relecture d' Pull Request générée 向け corriger test d'anti-fuite en échec, vous constatez que diff ajoute ファイル fautif à liste d'exclusion globale au lieu の retirer champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter PR car elle neutralise garde の セキュリティ, ・ demander の 削除： champ sensible の ファイル public tout en conservant contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver ・ fusionner immédiatement puisque l'indicateur の pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "削除： complètement ファイル の test d'anti-fuite 向け accélérer prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "構成： l'outil の revue の code 向け masquer systématiquement modifications apportées aux ファイル の tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "ユニット 3 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire の systèmes d'IA の production fiables ・ Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK ・ évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir appel Responses API combinant Function Calling ・ Structured Outputs (`strict: true`), orchestrer transfert (handoff) ・ Guardrails 内の l'Agents SDK ・ valider qualité via suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % conformité au JSON Schema",
+        "[JA] Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux の データ の référence, graders déterministes/モデル ・ portes の non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` 上の vos schémas JSON (Structured Outputs & Function Calling), validez 権限 côté serveur avant d'exécuter outil, ・ bloquez tout changement の prompt または の モデル qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent の Production ・ OpenAI Responses API & Agents SDK",
+        "diagram": "[JA] [Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "[JA] Responses API & Structured Outputs",
+            "role": "Unifie génération ・ état, outils natifs (recherche, ファイル, code) ・ contraint décodage の モデル 向け respecter JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "[JA] Function Calling & Agents SDK",
+            "role": "可能にする au モデル d'émettre の appels の fonctions typés exécutés par votre code backend ・ d'orchestrer の transferts (handoffs) 間の agents spécialisés protégés par の Guardrails."
+          },
+          {
+            "name": "[JA] OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, respect の consignes ・ l'absence の régression 上の jeu の cas の test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "appel の fonction retourné par モデル (`tool_call`) est intention non fiable : backend applicatif 必要がある toujours valider l'ID, 権限 ・ bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir 契約 JSON à 100 %",
+          "objective": "Exploiter Responses API ・ 構成： Structured Outputs (`strict: true`) 向け éliminer toute erreur の parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h の matin parce que LLM a oublié virgule JSON または renommé champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "ひらめきポイント Structured Outputs : の JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés または types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types ・ enums",
+            "step1": "Définissez votre schéma の sortie (Pydantic / Zod / JSON Schema) ・ `strict: true` ・ `additionalProperties: false` 上の chaque objet.",
+            "step2": "Gérez explicitement champ `refusal` 内の votre code au cas où リクエスト est rejetée 向け motif の セキュリティ.",
+            "rule": "En production, n'espérez jamais qu' consigne 内の prompt suffise à garantir schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · RESPONSES API",
+              "title": "primitive unique 向け texte, outils ・ l'état",
+              "bodyParagraph": "Responses API d'OpenAI unifie génération の réponses, chaînage multi-tours (`previous_response_id`), l'appel の fonctions personnalisées ・ l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) 内の seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État の conversation + Outils natifs ・ personnalisés"
+            },
+            {
+              "stepBadge": "ステップ 2 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui 保証する seulement の accolades valides, Structured Outputs ・ `strict: true` compile votre JSON Schema en grammaire qui filtre トークン lors の l'inférence : モデル ne peut littéralement pas émettre clé inconnue, omettre champ requis または violer `enum`.",
+              "keyTakeawayPill": "[JA] Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "ステップ 3 · GESTION の REFUS & VALIDATION MÉTIER",
+              "title": "[JA] Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si demande viole règles の セキュリティ, モデル remplit propriété dédiée `refusal` plutôt que schéma : votre code 必要がある 検証： `refusal` avant の lire l'objet parsé. の plus, `strict: true` 保証する type (ex. nombre), mais votre backend 必要がある toujours valider règles métier (ex. taux の TVA autorisé).",
+              "keyTakeawayPill": "検証： `refusal` + Valider règles métier côté serveur après désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "Responses API combine génération multimodale, chaînage d'état ・ invocation d'outils en seule boucle.",
+            "Structured Outputs ・ `strict: true` impose respect exact の JSON Schema (clés requises, types, enums ・ `additionalProperties: false`) par décodage contraint.",
+            "code applicatif 必要がある toujours inspecter cas の refus (`refusal`) ・ appliquer ses propres validations métier 上の valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "assurtech extrait 自動的に garanties ・ franchises の 契約書 PDF vers son moteur の tarification C# ・ subissait 2 % d'erreurs の désérialisation ・ の simples instructions 内の prompt.",
+            "steps": [
+              "Définir schéma JSON の l'extraction ・ `strict: true`, `additionalProperties: false` ・ の énumérations fermées 向け types の franchise.",
+              "Appeler Responses API ・ ce schéma 内の `text.format` (`json_schema`).",
+              "Ajouter contrôle en sortie vérifiant l'absence の `refusal` ・ cohérence arithmétique (franchise <= plafond の garantie)."
+            ],
+            "decision": "taux d'erreur の formatage JSON tombe à 0,00 % en production dès déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez différence 間の mode `json_object` historique ・ `json_schema` ・ `strict: true` (Structured Outputs), ・ listez deux exigences structurelles の JSON Schema en mode strict.",
+            "successCriteria": [
+              "解説： que `json_object` 保証する のみ syntaxe JSON valide なしで imposer の schéma, tandis que `json_schema` (`strict: true`) 保証する respect exact の structure.",
+              "Mentionner que chaque objet の schéma 必要がある déclarer `additionalProperties: false`.",
+              "Mentionner que tous champs définis 内の `properties` 必要がある figurer 内の `required` (en utilisant type nullable `[\"string\", \"null\"]` 向け champs optionnels)."
+            ],
+            "feedback": "En mode strict, champ optionnel se modélise par type union incluant `null` tout en restant listé 内の `required`, ・ `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "どのようにobliger l'API OpenAI à renvoyer 応答 JSON qui respecte toujours exactement champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI 向け extraire lignes d' facture ・ exige que 応答 respecte à 100 % schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) ・ `lignes` (array), なしで aucune propriété supplémentaire. どの構成がdevez-vous 活用： ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "活用： Structured Outputs (`json_schema`) ・ `strict: true` ・ `additionalProperties: false` 上の chaque objet の schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules 内の prompt なしで 有効化： の schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer 応答 brute au centième caractère avant d'ajouter accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler température 上の 2.0 en mode texte libre 向け diversifier nom の clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "・ mode strict d'OpenAI, comment déclarer champ facultatif (comme commentaire) 内の votre format JSON ?",
+              "prompt": "どのようにmodéliser champ optionnel (par exemple `commentaire`) 内の JSON Schema utilisé ・ OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure champ 内の `required` ・ définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) ・ `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` ・ 削除： totalement tableau `required` の l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer nom の champ ・ chaîne vide en guise の définition の type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer の balises XML à l'intérieur の schéma JSON 向け 無効化： validateur の トークン."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur の parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs ・ guardrails",
+          "objective": "Implémenter Function Calling ・ schémas stricts ・ orchestrer の agents spécialisés ・ Handoffs, Guardrails ・ Tracing 内の l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "どのようにfaire collaborer agent の triage, agent の facturation ・ agent technique なしで 作成： usine à gaz impossible à déboguer ni laisser prompt malveillant déclencher remboursement non autorisé ?",
+          "declicCard": {
+            "title": "ひらめきポイント Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : モデル propose `call_tool(args)` ➔ VOTRE code vérifie 権限 ・ exécute",
+            "diagramBottom": "[JA] Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` 上の définitions の fonctions (`tools`) ・ validez toujours autorisations côté serveur avant d'exécuter fonction.",
+            "step2": "Découpez responsabilités ・ の Handoffs explicites 間の agents spécialisés ・ protégez entrées/sorties par の Guardrails parallèles.",
+            "rule": "モデル ne touche jamais 直接 votre データベース : il émet proposition d'appel d'outil que votre backend contrôle ・ exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · FUNCTION CALLING STRICT",
+              "title": "Séparer décision d'appel ・ l'exécution réelle",
+              "bodyParagraph": "Lors d' Function Calling, モデル ne lance aucun code 上の serveurs d'OpenAI : il retourne objet structuré indiquant nom の fonction ・ ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie 権限 の l'ユーザー, exécute fonction ・ renvoie résultat au モデル.",
+              "keyTakeawayPill": "モデル = propose l'appel ・ arguments · Votre serveur = vérifie 権限 ・ exécute"
+            },
+            {
+              "stepBadge": "ステップ 2 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer の spécialistes plutôt qu' méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose 上の の primitives légères : `Agent` (instructions + モデル + outils), の `Handoffs` (délégation explicite の conversation vers agent spécialiste comme transfert d'appel qualifié) ・ `Tracing` natif qui enregistre chaque étape, appel d'outil ・ transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré の bout en bout"
+            },
+            {
+              "stepBadge": "ステップ 3 · GUARDRAILS D'ENTRÉE ・ の SORTIE",
+              "title": "[JA] Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "`Guardrails` s'exécutent en parallèle の l'agent : guardrail d'entrée léger détecte immédiatement tentative d'injection の prompt または demande hors périmètre ・ déclenche `tripwire` qui interrompt l'exécution avant même que モデル principal または ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil または génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, モデル génère のみ arguments structurés の l'appel (`strict: true`) ; l'exécution ・ contrôle d'アクセス restent sous responsabilité の serveur applicatif.",
+            "L'OpenAI Agents SDK structure workflows multi-agents autour d'Agents, の Tools, の Handoffs (transferts の contrôle) ・ の Tracing intégré.",
+            "Guardrails d'entrée ・ の sortie utilisent mécanisme の disjoncteur (`tripwire`) 向け bloquer requêtes malveillantes または sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "service client bancaire déploie architecture multi-agents ・ l'OpenAI Agents SDK : agent d'accueil, agent Cartes Bancaires (pouvant faire opposition) ・ agent Crédits.",
+            "steps": [
+              "Placer Input Guardrail qui vérifie qu'aucune tentative の contournement d'ID または の demande hors banque n'est présente.",
+              "構成： l'agent d'accueil ・ deux Handoffs explicites vers l'agent Cartes ・ l'agent Crédits.",
+              "内の l'outil `bloquer_carte(carte_id)` の l'agent Cartes, 有効化： `strict: true` 上の schéma ・ 検証： côté serveur que `carte_id` appartient bien au `user_id` authentifié 内の contexte の session."
+            ],
+            "decision": "parcours est traçable 内の dashboard の Tracing ・ protégé contre appels d'outils 上の cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "開発者がpasse `user_id` comme argument libre 内の schéma の Function Calling `rembourser_commande(user_id, commande_id)` ・ fait confiance à valeur choisie par LLM. Expliquez vulnérabilité ・ comment corriger.",
+            "successCriteria": [
+              "Identifier faille d'autorisation ( prompt injection peut convaincre LLM の passer `user_id` d' autre client).",
+              "Retirer `user_id` の arguments générés par LLM ・ l'injecter côté serveur depuis トークン d'authentification vérifié の session.",
+              "Valider en データベース que `commande_id` appartient bien à cet ユーザー authentifié ・ appliquer plafond の remboursement."
+            ],
+            "feedback": "identifiants の セキュリティ (qui est connecté, quel est son tenant) 必要がある toujours provenir の contexte serveur authentifié, jamais の arguments devinés par モデル."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "なぜest-il dangereux の laisser l'IA 選択： elle-même numéro の dossier client à lire なしで 検証： qui est connecté ?",
+              "prompt": "内の application utilisant Function Calling d'OpenAI, fonction `lire_dossier_medical(patient_id)` laisse モデル 選択： librement `patient_id` à partir の texte の conversation なしで 検証： session authentifiée côté serveur. Quel est risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "divulgation non autorisée (IDOR) : ユーザー peut manipuler prompt 向け amener モデル à demander dossier d' autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "incompatibilité d'affichage の caractères accentués 内の police système の navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "saturation の périphérique audio local lors の sérialisation の l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "suppression automatique の ファイル JSON Schema 上の disque dur の serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "内の kit OpenAI Agents SDK, comment arrêter immédiatement agent si contrôle détecte demande dangereuse ?",
+              "prompt": "内の l'OpenAI Agents SDK, quel mécanisme 可能にする à contrôle の セキュリティ exécuté en parallèle d'interrompre immédiatement l'agent avant qu' outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "Guardrail déclenchant disjoncteur (`tripwire`) dès que sa condition の セキュリティ または の périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation の paramètre `max_output_tokens` au-delà の fenêtre の contexte の モデル."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "désactivation complète の module の Tracing 内の configuration globale の SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "retrait の toutes instructions système の agents spécialisés recevant handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + ID injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = の agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant の デプロイ：",
+          "objective": "Construire suite d'évaluation (OpenAI Evals) combinant jeu の データ の référence, graders déterministes ・ LLM-as-a-judge 向け piloter mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt 上の trois exemples ・ ça a l'air super ! » : pourquoi cette phrase est-elle cause numéro の régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "ひらめきポイント Evals : Traiter Prompts ・ モデル comme の Code ・ の Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution 上の variante",
+            "diagramBottom": "Graders (Exactitude の schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez dataset doré (golden dataset) couvrant cas nominaux, cas ambigus ・ tentatives の contournement.",
+            "step2": "Combinez の graders déterministes (schéma JSON, nom の l'outil appelé, mots-clés interdits) ・ の graders sémantiques calibrés.",
+            "rule": "Aucun changement の prompt, の モデル または の RAG ne part en production なしで passer suite d'Evals au-dessus の seuil の référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "ステップ 1 · DATASET の RÉFÉRENCE",
+              "title": "Partir の vraies erreurs observées 上の terrain",
+              "bodyParagraph": "bonne suite d'évaluation (Evals) ne contient pas のみ の questions faciles : elle réunit 50 à 200 cas représentatifs の production, incluant formulations ambiguës の ユーザー, documents contradictoires, valeurs nulles ・ scénarios où l'agent 必要がある refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas の refus attendus"
+            },
+            {
+              "stepBadge": "ステップ 2 · GRADERS (NOTATEURS)",
+              "title": "Privilégier déterminisme, compléter par juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité の graders déterministes rapides ・ reproductibles : correspondance exacte d' identifiant, validité の JSON Schema, vérification que bon `tool_call` a été émis ・ bons paramètres. 向け évaluer fidélité au contexte (groundedness) または ton, ajoutez grader par モデル (LLM-as-a-judge) doté d' grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par モデル 上の grille explicite"
+            },
+            {
+              "stepBadge": "ステップ 3 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser コスト, latence ・ qualité en confiance",
+              "bodyParagraph": "・ suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si passage d' モデル coûteux vers `o4-mini` または `gpt-4o-mini` maintient 99 % の précision tout en divisant latence ・ facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation の モデル または の prompt à l'aveugle : Evals tranchent par preuve"
+            }
+          ],
+          "keyIdeas": [
+            "évaluations systématiques (Evals) transforment l'amélioration d' système IA d' intuition subjective en ingénierie mesurable.",
+            "suite d'Evals robuste combine の contrôles déterministes (schéma, sélection d'outils, règles métier) ・ の évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production 必要がある être converti en nouveau cas の test 内の dataset d'Evals 向け empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "あるチームがsouhaite réduire の 60 % temps の 応答 の son agent の qualification の tickets en remplaçant son prompt système の 4 000 mots ・ en changeant の モデル.",
+            "steps": [
+              "Construire 内の OpenAI Evals jeu の 120 tickets historiques annotés ・ catégorie attendue, priorité ・ l'outil à appeler.",
+              "Définir deux graders : grader déterministe 上の couple `(categorie, priorite, tool_name)` ・ grader の conformité vérifiant l'absence の promesse commerciale non autorisée.",
+              "Comparer score の nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, 向け latence divisée par 2,4."
+            ],
+            "decision": "mise en production est approuvée 上の base の rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez trois types の cas の test ・ deux types の graders que vous devez inclure 内の suite OpenAI Evals 向け valider agent qui résume の 契約書 ・ appelle API d'archivage.",
+            "successCriteria": [
+              "Trois familles の cas : 契約書 standards complets, 契約書 incomplets/contradictoires (cas limites) ・ prompts tentant の forcer archivage non autorisé.",
+              "Grader déterministe : 検証： structure JSON の résumé ・ arguments exacts passés à fonction d'archivage.",
+              "Grader d'ancrage : 検証： que chaque clause citée 内の résumé figure réellement 内の 契約 source."
+            ],
+            "feedback": "Tester ensemble fidélité の texte ・ justesse の l'appel d'outil couvre à fois génération ・ l'action の l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez consignes の votre assistant IA. どのようにvérifier que vous n'avez rien cassé avant mise en ligne ?",
+              "prompt": "Votre チーム modifie instructions système d' agent en production 向け raccourcir ses réponses, ・ veut s'assurer que ce changement ne dégrade pas choix の outils Function Calling 上の 150 scénarios critiques の l'企業. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter suite automatisée OpenAI Evals vérifiant appels d'outils 上の 150 scénarios ・ bloquer déploiement en cas の régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles 内の l'interface の chat puis デプロイ： immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer schémas の paramètres の fonctions afin qu'aucune erreur の typage ne remonte 内の ログ."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "デプロイ： なしで test préalable ・ compter 上の tickets の réclamation の clients 向け mesurer qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "どのようにvérifier の façon simple, rapide ・ gratuite qu' agent a bien choisi devise EUR 内の test automatique ?",
+              "prompt": "Quel type の grader (notateur) est plus fiable ・ plus économique 向け 検証： 内の OpenAI Evals qu' agent a appelé fonction `creer_avoir` ・ bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "grader déterministe inspectant 直接 nom の fonction appelée ・ l'égalité stricte の l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "évaluation purement stylistique demandant à モデル tiers si 応答 semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "règle vérifiant のみ que 応答 textuelle dépasse mille caractères, なしで lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "générateur の nombres aléatoires attribuant score なしで comparer sortie à valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes ・ sémantiques + Porte の non-régression CI = l'ingénierie IA pilotée par Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "模擬試験 CertiGo Pro: OpenAI (ChatGPT Enterprise, モデル o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète の maîtrise の produits OpenAI en 企業 : sélection の モデル (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex ・ AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK ・ OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

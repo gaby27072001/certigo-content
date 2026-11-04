@@ -1,0 +1,163 @@
+{
+  "schema": "certigo.editorial.pilot/v1",
+  "id": "responsible-ai-assistants",
+  "locale": "hi-IN",
+  "status": "draft",
+  "purpose": "learning-not-certification",
+  "title": "Travailler के साथ एक assistant IA बिना lui सौंपें son jugement",
+  "audience": "Personnes qui débutent के साथ assistants IA के लिए lire एक documentation, préparer एक diagnostic या proposer एक modification technique.",
+  "prerequisites": "Savoir ouvrir एक documentation और distinguer एक environnement का test d'एक environnement का production. Aucun compte AWS ni पहुंच à एक assistant n'est nécessaire.",
+  "estimatedMinutes": 18,
+  "asOf": "2026-10-14",
+  "scope": "Pilote d'apprentissage original, en français, बिना notation ni préparation à एक certification या à एक titre officiel. situations sont fictives. conseils का travail sont के choix pédagogiques का CertiGo ; faits propres à Amazon Bedrock sont bornés aux pages AWS consultées à date indiquée. Ne pas exécuter का commande, envoyer का document réel ni modifier का permission के लिए suivre ce pilote.",
+  "sources": [
+    {
+      "id": "aws-kb-overview",
+      "title": "Retrieve data और generate AI responses with Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "checkedOn": "2026-10-14",
+      "supports": "एक base का connaissances recherche के informations में के sources ; informations retrouvées peuvent enrichir एक प्रतिक्रिया générée. citations permettent का remonter aux sources के लिए सत्यापित करें प्रतिक्रिया.",
+      "limits": "एक citation n'atteste ni vérité का toute प्रतिक्रिया ni l'actualité का source. capacités और अनुमतियां dépendent का type का base और का sa configuration ; ne pas généraliser à tout assistant."
+    },
+    {
+      "id": "aws-kb-rag",
+      "title": "How Amazon Bedrock knowledge bases work (CertiGo पथ)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-it-works.html",
+      "checkedOn": "2026-10-14",
+      "supports": "में parcours RAG vectoriel décrit, के documents non structurés sont découpés, convertis en représentations numériques और indexés. अनुरोध est aussi représentée numériquement ; के passages proches sont retrouvés puis ajoutés au contexte transmis au मॉडल.",
+      "limits": "C'est parcours vectoriel का documents non structurés, pas एक description का tous modes का recherche. L'utilisation d'एक मॉडल के लिए calculer के embeddings n'est pas son entraînement ; एक ingestion n'est pas एक ajustement के paramètres का मॉडल générateur."
+    },
+    {
+      "id": "aws-grounding",
+      "title": "Use contextual grounding check to filter hallucinations in responses (CertiGo पथ)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html",
+      "checkedOn": "2026-10-14",
+      "supports": "contrôles d'ancrage contextuel évaluent l'appui d'एक प्रतिक्रिया पर एक source का référence और sa pertinence के लिए एक अनुरोध, के साथ के scores और के seuils configurables.",
+      "limits": "Ces contrôles ne certifient pas vérité externe का source. page consultée limite usages pris en charge à synthèse, reformulation और questions-réponses, hors chatbot conversationnel. एक score ne चाहिए pas être présenté comme एक probabilité का vérité ni comme एक garantie का confidentialité."
+    },
+    {
+      "id": "aws-data-protection",
+      "title": "Data protection (CertiGo पथ)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "checkedOn": "2026-10-14",
+      "supports": "client garde responsabilité का son contenu और का configuration का सुरक्षा. AWS recommande के अनुमतियां limitées au travail nécessaire और déconseille informations sensibles में tags, champs का nom libres और URL contenant के identifiants.",
+      "limits": "Cette page ne donne pas एक autorisation d'envoyer के डेटा का l'organisation. règles का conservation, journalisation, पहुंच और traitements चाहिए être vérifiés के लिए service और configuration utilisés ; ni एक filtre ni एन्क्रिप्शन ne garantissent à eux seuls confidentialité."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "verify-claims",
+      "title": "एक प्रतिक्रिया convaincante n'est pas एक preuve",
+      "objective": "Proposer एक plan का vérification d'एक affirmation technique : अलग करें ce qui est à सत्यापित करें, préciser sources और conditions à rechercher और formuler एक décision bornée si preuves manquent.",
+      "estimatedMinutes": 6,
+      "hook": "एक assistant rédige एक note claire en quelques secondes. risque commence quand sa clarté remplace votre vérification.",
+      "keyIdeas": [
+        "Traitez प्रतिक्रिया comme एक proposition. Séparez faits vérifiables, hypothèses और recommandations. एक citation est एक piste का vérification, pas एक certificat का vérité.",
+        "Choisissez एक source adaptée : documentation officielle के लिए comportement d'एक service, référence का version concernée के लिए एक API, procédure interne autorisée के लिए एक règle का votre organisation. एक témoignage peut aider à chercher बिना établir एक règle générale.",
+        "Ouvrez source और cherchez passage qui soutient exactement l'affirmation. Vérifiez service, version, région और conditions utiles. Si passage ne suffit pas, notez ce qui reste inconnu au lieu का compléter par intuition.",
+        "एक contrôle d'ancrage contextuel compare एक प्रतिक्रिया à एक source और à एक demande. एक प्रतिक्रिया peut être conforme à एक document erroné या périmé. एक contrôle favorable ne remplace donc pas vérification humaine."
+      ],
+      "workedExample": {
+        "situation": "के लिए préparer एक revue technique, Camille reçoit cette proposition fictive : « Notre प्रतिक्रिया cite एक document और passe contrôle d'ancrage, donc toutes ses affirmations sont exactes. » Aucune modification n'a encore été appliquée.",
+        "steps": [
+          "अलग करें conclusion à सत्यापित करें : citations और contrôle favorable garantiraient l'exactitude का toutes affirmations.",
+          "Consulter pages AWS Knowledge Bases और contextual grounding checks : l'एक सक्षम करता है का remonter aux sources ; l'autre décrit एक comparaison के साथ एक source और एक अनुरोध, pas एक audit का vérité universel.",
+          "Relire document cité, सत्यापित करें sa date और rapprocher chaque affirmation importante d'एक passage précis. Signaler affirmations non étayées और celles dont conditions ne correspondent pas au contexte.",
+          "Conserver में note source, sa date का consultation, conditions vérifiées और incertitudes. Ne pas transformer एक incertitude en consigne का production."
+        ],
+        "decision": "Camille retire garantie d'exactitude और fait relire points non établis avant toute action. एक citation utile और एक contrôle favorable réduisent certains risques ; ils ne suppriment pas besoin का सत्यापित करें."
+      },
+      "practice": {
+        "prompt": "एक collègue propose : « Ce réglage fonctionne में toutes régions ; l'assistant cite एक page AWS. » Ce cas fictif ne précise ni réglage ni page : il sert à préparer एक vérification, pas à réaliser. बिना compte cloud, isolez l'affirmation à सत्यापित करें, proposez deux vérifications के साथ sources à rechercher और formulez décision à prendre si page ne couvre que votre région का test.",
+        "successCriteria": [
+          "अलग करें généralisation « में toutes régions » और prévoir का confronter réglage और ses conditions au passage cité.",
+          "Prévoir का rechercher documentation officielle के régions prises en charge à version या date utile ; demander nom का réglage और lien manquants.",
+          "Formuler एक décision conditionnelle : ne pas généraliser au-delà के régions établies, suspendre déploiement envisagé और demander एक revue si informations manquent."
+        ],
+        "feedback": "Votre production est एक plan : elle ne prouve pas que vous avez trouvé या vérifié एक source. एक deuxième प्रतिक्रिया का l'assistant ne constituerait pas एक preuve indépendante. plan चाहिए nommer informations manquantes, sources à rechercher और limite का décision. recherche effective d'एक passage और transfert à एक cas nouveau restent à pratiquer और à observer ultérieurement."
+      },
+      "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence का preuve, dire ce qui manque est plus utile que parler के साथ assurance.",
+      "sourceIds": [
+        "aws-kb-overview",
+        "aws-grounding"
+      ]
+    },
+    {
+      "id": "retrieval-not-training",
+      "title": "Donner का contexte n'est pas entraîner एक मॉडल",
+      "objective": "समझाएं parcours RAG vectoriel d'एक document और distinguer indexation, recherche, contexte और entraînement.",
+      "estimatedMinutes": 6,
+      "hook": "Vous ajoutez एक procédure à एक base documentaire. L'assistant peut ensuite retrouver : a-t-il appris cette procédure में ses paramètres ? Pas par cette seule opération.",
+      "keyIdeas": [
+        "RAG signifie génération enrichie par recherche : l'application retrouve का l'information puis fournit au मॉडल comme contexte के लिए produire एक प्रतिक्रिया.",
+        "में parcours vectoriel non structuré décrit par AWS, l'ingestion prépare documents : extraction का texte, découpage en passages, calcul d'embeddings और स्टोरेज में एक index. एक embedding est एक représentation numérique utilisée के लिए comparer के contenus, pas एक प्रतिक्रिया ni एक garantie का compréhension.",
+        "Lors d'एक demande, एक मॉडल d'embeddings représente aussi अनुरोध. recherche sélectionne के passages proches, puis ces passages complètent contexte envoyé au मॉडल générateur. एक passage pertinent peut malgré tout être incomplet, obsolète या mal interprété.",
+        "L'entraînement या l'ajustement d'एक मॉडल modifie ses paramètres. Calculer के embeddings के साथ एक मॉडल existant और ajouter के documents à एक index ne réentraîne pas, par ces seules opérations, मॉडल générateur. Cela n'affirme rien पर autres traitements या conservation के डेटा का service.",
+        "Toutes recherches ne suivent pas ce parcours vectoriel : mot RAG ne suffit pas à décrire l'architecture, पहुंच या डेटा réellement transmises."
+      ],
+      "workedExample": {
+        "situation": "एक टीम indexe एक procédure fictive « test का reprise, version 2 ». एक अनुरोध retrouve एक ancien passage का version 1. L'टीम conclut que मॉडल a mal appris nouvelle procédure.",
+        "steps": [
+          "Distinguer procédure stockée, passages indexés, passages retrouvés और प्रतिक्रिया générée. Ne pas attribuer immédiatement défaut à l'entraînement.",
+          "सत्यापित करें, में एक revue बिना डेटा réelles, quelle version a été ingérée और quels passages recherche a sélectionnés. एक document ajouté mais non synchronisé peut manquer में l'index.",
+          "Comparer passages transmis au मॉडल के साथ procédure en vigueur. Si contexte est ancien, examiner l'ingestion और recherche ; si contexte est adéquat mais प्रतिक्रिया diverge, examiner génération और vérification.",
+          "Faire approuver toute mise à jour का base par son responsable ; ne pas lancer एक entraînement ni élargir पहुंच के लिए masquer problème."
+        ],
+        "decision": "L'टीम cherche d'abord où version périmée के बीच में parcours. Mettre à jour एक index और ajuster paramètres d'एक मॉडल sont के opérations différentes, के साथ के objectifs और के risques différents."
+      },
+      "practice": {
+        "prompt": "Reconstituez à l'écrit trajet d'एक procédure fictive jusqu'à एक प्रतिक्रिया RAG vectorielle. Placez découpage, embeddings के documents, l'index, représentation का अनुरोध, passages retrouvés और contexte. Expliquez ensuite pourquoi « document est indexé » ne signifie pas « मॉडल générateur a été réentraîné ».",
+        "successCriteria": [
+          "Séparer préparation के documents का recherche effectuée lors d'एक demande.",
+          "Placer embeddings के passages में l'index और représentation का अनुरोध avant comparaison.",
+          "Placer passages retrouvés में contexte avant génération.",
+          "Distinguer l'utilisation d'एक मॉडल existant के लिए calculer के vecteurs d'एक modification का ses paramètres par entraînement."
+        ],
+        "feedback": "trajet attendu est : document → passages → embeddings → index ; puis अनुरोध → représentation → recherche का passages → contexte enrichi → प्रतिक्रिया. Si vous avez relié सीधे l'index aux paramètres का générateur, reprenez distinction के बीच contexte fourni à एक demande और entraînement. Ce schéma n'est pas universel à toutes bases का connaissances."
+      },
+      "recap": "L'index sert à retrouver ; contexte sert à informer एक demande ; l'entraînement sert à modifier paramètres. Ne confondez pas ces trois rôles.",
+      "sourceIds": [
+        "aws-kb-rag",
+        "aws-kb-overview"
+      ]
+    },
+    {
+      "id": "stop-and-escalate",
+      "title": "Savoir s'arrêter avant d'envoyer या d'autoriser",
+      "objective": "Repérer एक donnée sensible या एक पहुंच excessif, suspendre l'action और demander एक décision au responsable adapté.",
+      "estimatedMinutes": 6,
+      "hook": "एक diagnostic peut être techniquement utile और pourtant inacceptable si डेटा या अधिकार nécessaires ne sont pas autorisés.",
+      "keyIdeas": [
+        "Avant का transmettre, identifiez डेटा, destinataire, finalité और l'autorisation. Secrets, डेटा personnelles, लॉग्स clients और documents internes demandent एक vérification spécifique. Pouvoir lire एक फ़ाइल ne donne pas स्वचालित रूप से droit का l'envoyer à एक assistant.",
+        "choix d'एक service approuvé ne dispense pas का सत्यापित करें sa configuration : पहुंच, journalisation, conservation और règles internes. responsabilité partagée ne signifie pas que fournisseur prend toutes décisions à votre place.",
+        "एक filtre का डेटा sensibles peut aider, mais il ne सुनिश्चित करता है pas का tout détecter. Retirer एक nom ne suffit pas toujours à anonymiser एक journal. Préférez एक exemple synthétique बिना donnée réelle si cela répond au besoin और respecte règles internes.",
+        "Demandez seulement अनुमतियां nécessaires à tâche. Face à एक demande d'administration globale, ne cliquez pas के लिए gagner का temps : demandez au responsable के पहुंच एक revue का besoin और एक permission limitée.",
+        "Si donnée या l'autorisation est incertaine, arrêtez l'envoi या modification. Contactez propriétaire के डेटा, référent सुरक्षा या responsable के पहुंच selon cas, en décrivant besoin बिना reproduire secret."
+      ],
+      "workedExample": {
+        "situation": "Nora prépare एक diagnostic fictif. journal proposé contient के adresses का clients और एक टोकन d'पहुंच. L'assistant suggère का l'envoyer à एक outil externe और का lui attribuer एक rôle administrateur के लिए lire d'autres लॉग्स.",
+        "steps": [
+          "Ne pas envoyer journal ni accorder rôle. L'outil destinataire और l'usage का ces डेटा ne sont pas encore autorisés.",
+          "Décrire blocage au propriétaire के लॉग्स और au référent सुरक्षा बिना joindre टोकन ni डेटा clients. Si एक secret a déjà été exposé, suivre procédure d'incident और demander sa révocation या rotation par एक personne habilitée.",
+          "Proposer एक reproduction synthétique का message d'erreur के लिए commencer diagnostic, sous réserve के règles internes. Ne pas supposer qu'एक simple suppression के noms rend journal partageable.",
+          "Faire examiner par responsable के पहुंच périmètre réellement nécessaire. Reprendre seulement के साथ एक destinataire approuvé, के डेटा autorisées और अनुमतियां validées."
+        ],
+        "decision": "Nora suspend l'action à risque और garde diagnostic au stade d'एक exemple fictif. filtre का l'assistant या promesse « nous ne réentraînons pas मॉडल » ne vaut ni autorisation का transfert ni garantie का confidentialité."
+      },
+      "practice": {
+        "prompt": "एक टीम veut envoyer एक capture का journal interne à एक assistant : noms sont masqués, mais एक identifiant का client और एक URL का connexion restent visibles. Elle demande aussi एक पहुंच administrateur temporaire. Rédigez एक प्रतिक्रिया का trois phrases : ce que vous suspendez, à qui vous demandez एक revue और comment poursuivre बिना transmettre का डेटा réelles.",
+        "successCriteria": [
+          "Suspendre l'envoi और l'attribution का rôle, बिना déclarer capture anonyme ni rôle acceptable parce qu'il est temporaire.",
+          "Demander एक revue au propriétaire के डेटा या au référent सुरक्षा के लिए transfert, और au responsable के पहुंच के लिए अनुमतियां.",
+          "Proposer एक exemple synthétique और एक permission limitée au besoin, à faire valider avant का reprendre."
+        ],
+        "feedback": "Masquer noms ne règle pas autres identifiants ni informations éventuellement contenues में l'URL. एक rôle temporaire peut encore donner trop का अधिकार. एक bonne प्रतिक्रिया nomme blocage, décideur और एक voie का travail sûre ; elle ne copie pas éléments sensibles में demande का revue."
+      },
+      "recap": "डेटा या अधिकार incertains → arrêter l'action → décrire besoin बिना secret → obtenir revue adaptée. qualité technique ne remplace jamais l'autorisation.",
+      "sourceIds": [
+        "aws-data-protection",
+        "aws-grounding"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,32 @@
   "providerId": "anthropic",
   "radarTrackId": "anthropic:claude-code-mcp",
   "routeCode": "CLAUDE-MCP",
+  "routeAliases": [
+    "ANTHROPIC-CLAUDE",
+    "CLAUDE-MCP",
+    "CLAUDE-CODE"
+  ],
+  "brandIdentity": {
+    "logoSlug": "anthropic",
+    "displayName": "Anthropic (Claude Enterprise, Claude Code & MCP)",
+    "primaryHex": "#D97757",
+    "accentHex": "#191918",
+    "masteryModel": "Parcours d'expertise produit complet aligné sur Claude Academy et la documentation technique Anthropic : 3 unités progressives (Prompting XML & Extended Thinking, agent CLI Claude Code, architecture Model Context Protocol MCP & Computer Use), Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
+  },
   "locale": "fr-FR",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
   "status": "active",
   "title": "CertiGo Pro : Anthropic (Claude, Artifacts, Projects, Claude Code & Model Context Protocol MCP)",
   "subtitle": "Maîtriser le prompting structuré par balises XML, Extended Thinking, Projects & Artifacts, l'agent en ligne de commande Claude Code, l'architecture Model Context Protocol (MCP), Computer Use et Constitutional AI.",
@@ -143,6 +168,7 @@
               "id": "anthropic-claude-mcp.prompting-structure-balises-xml.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Vous donnez un document de 150 pages à lire à Claude avant de lui poser une question. Où placer le document et la question ?",
               "prompt": "Vous soumettez 150 pages de documentation technique à Claude suivies d'une question d'audit précise. Où devez-vous placer les documents et comment les structurer pour maximiser la précision du modèle ?",
               "options": [
                 {
@@ -161,13 +187,13 @@
                   "id": "supprimer-noms-fichiers-sources",
                   "label": "Retirer tous les identifiants de source afin d'empêcher Claude de citer le document d'origine."
                 }
-              ],
-              "plainPrompt": "Vous donnez un document de 150 pages à lire à Claude avant de lui poser une question. Où placer le document et la question ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Pourquoi demander à Claude de copier d'abord les phrases exactes du texte avant de donner sa réponse finale ?",
               "prompt": "Pourquoi est-il recommandé de demander à Claude d'extraire d'abord les passages pertinents dans une balise `<quotes>` avant de produire sa conclusion dans `<answer>` ?",
               "options": [
                 {
@@ -186,8 +212,7 @@
                   "id": "reduction-fenetre-contexte-minimale",
                   "label": "Parce que cette balise limite la fenêtre de contexte de Claude à cent caractères."
                 }
-              ],
-              "plainPrompt": "Pourquoi demander à Claude de copier d'abord les phrases exactes du texte avant de donner sa réponse finale ?"
+              ]
             }
           ],
           "recap": "Balises XML claires + Documents en haut + Instructions en bas + `<quotes>` avant `<answer>` = le standard d'excellence sur Claude.",
@@ -257,6 +282,7 @@
               "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Quand vous donnez à Claude un budget de réflexion de 8 000 jetons, quelle règle devez-vous respecter sur la taille totale maximale de sortie ?",
               "prompt": "Lors d'un appel à l'API Messages d'Anthropic avec Extended Thinking activé (`thinking: { type: \"enabled\", budget_tokens: 8000 }`), quelle contrainte s'applique au paramètre `max_tokens` ?",
               "options": [
                 {
@@ -275,13 +301,13 @@
                   "id": "suppression-role-user",
                   "label": "Le tableau `messages` ne peut plus contenir de message avec le rôle `user`."
                 }
-              ],
-              "plainPrompt": "Quand vous donnez à Claude un budget de réflexion de 8 000 jetons, quelle règle devez-vous respecter sur la taille totale maximale de sortie ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
               "itemType": "scenario",
               "difficulty": 1,
+              "plainPrompt": "Quelle fonction de Claude permet de voir et tester directement un écran interactif ou un schéma à côté de la discussion ?",
               "prompt": "Une cheffe de produit souhaite que Claude génère un tableau de bord interactif en React ainsi qu'un diagramme d'architecture Mermaid qu'elle puisse manipuler, prévisualiser en direct et faire évoluer version par version à côté de la conversation. Quelle fonctionnalité de Claude répond à ce besoin ?",
               "options": [
                 {
@@ -300,8 +326,7 @@
                   "id": "desactivation-interface-visuelle",
                   "label": "Le mode texte ASCII pur qui bloque l'interprétation des balises SVG et des composants React."
                 }
-              ],
-              "plainPrompt": "Quelle fonction de Claude permet de voir et tester directement un écran interactif ou un schéma à côté de la discussion ?"
+              ]
             }
           ],
           "recap": "Projects garde le savoir de l'équipe, Extended Thinking approfondit le raisonnement et Artifacts donne vie aux interfaces et schémas en direct.",
@@ -372,6 +397,7 @@
               "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "Pourquoi le cache de Claude ne fonctionne-t-il jamais si vous mettez un numéro aléatoire différent tout au début de votre consigne ?",
               "prompt": "Une équipe active `cache_control: { type: \"ephemeral\" }` à la fin d'un prompt système de 90 000 jetons dans l'API Anthropic, mais observe que `cache_read_input_tokens` vaut toujours 0 en production. À l'examen du code, la première ligne du prompt système contient `RequestID: ${crypto.randomUUID()}`. Quelle est la cause du problème ?",
               "options": [
                 {
@@ -390,13 +416,13 @@
                   "id": "obligation-mode-synchrone-xml",
                   "label": "Le cache ne fonctionne que si les clés JSON de l'API sont renommées en majuscules."
                 }
-              ],
-              "plainPrompt": "Pourquoi le cache de Claude ne fonctionne-t-il jamais si vous mettez un numéro aléatoire différent tout au début de votre consigne ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Comment demander à l'API Claude d'indiquer automatiquement de quelle page ou phrase du PDF vient chaque affirmation ?",
               "prompt": "Comment obtenir des citations vérifiables renvoyant aux passages exacts d'un document PDF ou texte lors d'un appel à l'API Messages de Claude ?",
               "options": [
                 {
@@ -415,8 +441,7 @@
                   "id": "desactiver-message-systeme",
                   "label": "Interdire l'usage du champ `system` et envoyer une requête au corps entièrement vide."
                 }
-              ],
-              "plainPrompt": "Comment demander à l'API Claude d'indiquer automatiquement de quelle page ou phrase du PDF vient chaque affirmation ?"
+              ]
             }
           ],
           "recap": "Préfixe immuable (`tools` ➔ `system` ➔ corpus) avec `cache_control` + blocs `document` avec `citations: { enabled: true }` = vitesse, économie et preuves.",
@@ -522,6 +547,7 @@
               "id": "anthropic-claude-mcp.claude-code-cli-claude-md.001",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Quel fichier placé à la racine d'un projet permet à Claude Code de connaître dès l'ouverture les règles et commandes de l'équipe ?",
               "prompt": "Quel fichier versionné à la racine d'un dépôt est lu automatiquement par Claude Code au démarrage pour connaître les commandes de build, de test et les conventions d'architecture ?",
               "options": [
                 {
@@ -540,13 +566,13 @@
                   "id": "historique-navigateur-cookies",
                   "label": "La base SQLite des cookies tiers du navigateur web par défaut."
                 }
-              ],
-              "plainPrompt": "Quel fichier placé à la racine d'un projet permet à Claude Code de connaître dès l'ouverture les règles et commandes de l'équipe ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Vous avez fini un sujet dans Claude Code et voulez passer à un tout autre sujet en repartant d'une conversation vierge. Quelle commande taper ?",
               "prompt": "Après avoir résolu un bug complexe sur le module de facturation avec Claude Code, vous souhaitez démarrer un ticket totalement indépendant sur le moteur de recherche sans polluer le contexte ni payer pour l'historique précédent. Quelle commande slash utilisez-vous ?",
               "options": [
                 {
@@ -565,8 +591,7 @@
                   "id": "desinstaller-node-modules",
                   "label": "Effacer les compilateurs et bibliothèques installés sur la machine de développement."
                 }
-              ],
-              "plainPrompt": "Vous avez fini un sujet dans Claude Code et voulez passer à un tout autre sujet en repartant d'une conversation vierge. Quelle commande taper ?"
+              ]
             }
           ],
           "recap": "`CLAUDE.md` donne les règles du dépôt, le plan guide les changements multi-fichiers et `/clear` garde chaque mission focalisée.",
@@ -636,6 +661,7 @@
               "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Comment autoriser Claude Code à lancer vos tests tout seul, tout en lui interdisant de lire vos mots de passe dans le fichier .env ?",
               "prompt": "Comment configurer Claude Code pour qu'il puisse exécuter automatiquement la suite de tests `npm test` sans demander confirmation à chaque tour, tout en continuant de bloquer la lecture des fichiers `.env` et l'exécution de commandes réseau arbitraires ?",
               "options": [
                 {
@@ -654,13 +680,13 @@
                   "id": "executer-en-root-sans-pare-feu",
                   "label": "Lancer le terminal avec les privilèges système `root` en ouvrant tous les ports entrants de la machine."
                 }
-              ],
-              "plainPrompt": "Comment autoriser Claude Code à lancer vos tests tout seul, tout en lui interdisant de lire vos mots de passe dans le fichier .env ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
               "itemType": "spotTheIssue",
               "difficulty": 3,
+              "plainPrompt": "Quel est le danger si Claude Code lit automatiquement des messages d'inconnus sur Internet avec tous les droits administrateur ?",
               "prompt": "Un workflow GitHub Actions exécute Claude Code en mode headless (`claude -p`) sur le texte d'issues créées par des utilisateurs publics anonymes, en lui donnant un jeton d'administration d'organisation et tous les outils Bash sans restriction. Quel est le risque critique ?",
               "options": [
                 {
@@ -679,8 +705,7 @@
                   "id": "compression-automatique-images-png",
                   "label": "Les captures d'écran jointes à l'issue seront converties en niveaux de gris par le runner Linux."
                 }
-              ],
-              "plainPrompt": "Quel est le danger si Claude Code lit automatiquement des messages d'inconnus sur Internet avec tous les droits administrateur ?"
+              ]
             }
           ],
           "recap": "Allowlist granulaire dans `.claude/settings.json`, méfiance envers les entrées externes et conteneur à moindre privilège en CI.",
@@ -786,6 +811,7 @@
               "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
               "itemType": "mcq",
               "difficulty": 2,
+              "plainPrompt": "Dans le protocole MCP, quel élément sert uniquement à lire une information (comme un fichier ou un plan) sans rien modifier ?",
               "prompt": "Dans l'architecture Model Context Protocol (MCP), quelle primitive serveur est spécifiquement conçue pour exposer des données en lecture identifiées par une URI (comme un schéma de base de données ou un fichier de configuration) sans effet de bord ?",
               "options": [
                 {
@@ -804,13 +830,13 @@
                   "id": "modification-poids-modele",
                   "label": "Une requête de réentraînement direct des couches d'attention du modèle sur le serveur distant."
                 }
-              ],
-              "plainPrompt": "Dans le protocole MCP, quel élément sert uniquement à lire une information (comme un fichier ou un plan) sans rien modifier ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
               "itemType": "spotTheIssue",
               "difficulty": 2,
+              "plainPrompt": "Pourquoi un serveur MCP local plante-t-il dès qu'on utilise console.log() pour afficher un message d'information ?",
               "prompt": "Un serveur MCP local connecté via le transport `stdio` provoque une erreur `SyntaxError: Unexpected token` côté client dès son démarrage parce qu'il appelle `console.log(\"Connexion BD réussie\")`. Comment corriger ce défaut ?",
               "options": [
                 {
@@ -829,8 +855,7 @@
                   "id": "couper-flux-entree-stdin",
                   "label": "Fermer immédiatement le descripteur d'entrée standard `stdin` avant la négociation `initialize`."
                 }
-              ],
-              "plainPrompt": "Pourquoi un serveur MCP local plante-t-il dès qu'on utilise console.log() pour afficher un message d'information ?"
+              ]
             }
           ],
           "recap": "MCP unifie l'accès au contexte et à l'action via JSON-RPC 2.0 avec trois primitives nettes : `Resources` (URI), `Prompts` (templates) et `Tools` (actions).",
@@ -902,6 +927,7 @@
               "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Où faut-il faire tourner l'agent Computer Use de Claude lorsqu'il clique et tape au clavier sur un écran comme un humain ?",
               "prompt": "Vous devez déployer l'agent Computer Use de Claude pour interagir avec l'interface graphique d'un logiciel métier interne. Quelle architecture d'exécution est recommandée par Anthropic pour maîtriser les risques de sécurité ?",
               "options": [
                 {
@@ -920,13 +946,13 @@
                   "id": "suppression-journalisation-actions",
                   "label": "Désactiver la capture des journaux d'actions et les confirmations sur les formulaires de virement bancaire."
                 }
-              ],
-              "plainPrompt": "Où faut-il faire tourner l'agent Computer Use de Claude lorsqu'il clique et tape au clavier sur un écran comme un humain ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
               "itemType": "mcq",
               "difficulty": 1,
+              "plainPrompt": "Sur quel principe repose la méthode Constitutional AI utilisée par Anthropic pour entraîner Claude ?",
               "prompt": "Quel est le principe fondateur de l'approche Constitutional AI développée par Anthropic pour aligner les modèles Claude ?",
               "options": [
                 {
@@ -945,8 +971,7 @@
                   "id": "interdiction-totale-code-informatique",
                   "label": "Empêcher le modèle de répondre à toute question portant sur la programmation ou l'architecture logicielle."
                 }
-              ],
-              "plainPrompt": "Sur quel principe repose la méthode Constitutional AI utilisée par Anthropic pour entraîner Claude ?"
+              ]
             }
           ],
           "recap": "MCP pour les intégrations structurées, Computer Use en VM isolée pour les interfaces sans API, et Constitutional AI pour un alignement transparent et sûr.",
@@ -1017,6 +1042,7 @@
               "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
               "itemType": "spotTheIssue",
               "difficulty": 3,
+              "plainPrompt": "En quoi consiste le piège appelé « Tool Poisoning » sur un serveur MCP externe ?",
               "prompt": "Qu'est-ce qu'une attaque de « Tool Poisoning » dans l'écosystème Model Context Protocol (MCP) ?",
               "options": [
                 {
@@ -1035,13 +1061,13 @@
                   "id": "compression-gzip-reponses-http",
                   "label": "L'activation de la compression standard GZIP sur les réponses d'une API REST interne."
                 }
-              ],
-              "plainPrompt": "En quoi consiste le piège appelé « Tool Poisoning » sur un serveur MCP externe ?"
+              ]
             },
             {
               "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
               "itemType": "scenario",
               "difficulty": 2,
+              "plainPrompt": "Comment être certain à 100 % que Claude ne pourra jamais supprimer de données en interrogeant votre base SQL via MCP ?",
               "prompt": "Une équipe data déploie un serveur MCP PostgreSQL pour permettre aux analystes d'explorer les ventes avec Claude. Comment garantir qu'aucune requête générée par le modèle ne puisse modifier ni supprimer des lignes de production ?",
               "options": [
                 {
@@ -1060,8 +1086,7 @@
                   "id": "partager-mot-de-passe-root-dans-git",
                   "label": "Publier la chaîne de connexion administrateur dans un dépôt public pour faciliter le diagnostic."
                 }
-              ],
-              "plainPrompt": "Comment être certain à 100 % que Claude ne pourra jamais supprimer de données en interrogeant votre base SQL via MCP ?"
+              ]
             }
           ],
           "recap": "Auditez les descriptions `tools/list`, épinglez les serveurs MCP autorisés, donnez des jetons en lecture seule et validez chaque action sensible.",
@@ -1073,18 +1098,6 @@
       ]
     }
   ],
-  "routeAliases": [
-    "ANTHROPIC-CLAUDE",
-    "CLAUDE-MCP",
-    "CLAUDE-CODE"
-  ],
-  "brandIdentity": {
-    "logoSlug": "anthropic",
-    "displayName": "Anthropic (Claude Enterprise, Claude Code & MCP)",
-    "primaryHex": "#D97757",
-    "accentHex": "#191918",
-    "masteryModel": "Parcours d'expertise produit complet aligné sur Claude Academy et la documentation technique Anthropic : 3 unités progressives (Prompting XML & Extended Thinking, agent CLI Claude Code, architecture Model Context Protocol MCP & Computer Use), Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
-  },
   "mockExam": {
     "id": "anthropic-claude-mcp-mock-exam",
     "title": "Examen Blanc CertiGo Pro : Anthropic (Claude, Extended Thinking, Claude Code, MCP & Constitutional AI)",

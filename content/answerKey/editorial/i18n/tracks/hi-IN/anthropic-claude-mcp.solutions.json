@@ -1,0 +1,247 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "anthropic-claude-mcp",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "hi-IN",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.001",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "documents-xml-en-haut-question-en-bas"
+      ],
+      "plainExplanation": "Placez toujours longs documents tout en haut में एक balise <documents> और mettez votre question tout à fin.",
+      "rationale": "Anthropic recommande का structurer prompts complexes के साथ के balises XML (`<documents>`, `<document>`, `<instructions>`) और का placer longs documents का référence en haut का prompt, avant instructions और question finale.",
+      "examTip": "पर Claude के साथ long contexte : `<documents>` en haut का prompt + `<instructions>` और question tout en bas.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-contexte-avant-generation"
+      ],
+      "plainExplanation": "Obliger Claude à citer d'abord passages réels l'empêche d'inventer के informations qui ne sont pas में document.",
+      "rationale": "En extrayant d'abord citations littérales में `<quotes>`, मॉडल place preuves exactes में son contexte का génération immédiat avant का rédiger `<answer>`, ce qui réduit drastiquement extrapolations non fondées.",
+      "examTip": "Demandez toujours `<quotes>` (extraction littérale) avant `<answer>` (analyse) पर tâches documentaires critiques.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "max-tokens-superieur-budget-thinking"
+      ],
+      "plainExplanation": "limite totale (max_tokens) चाहिए toujours être plus grande que budget का réflexion के लिए laisser का place à प्रतिक्रिया finale.",
+      "rationale": "में l'API Messages d'Anthropic, `budget_tokens` représente part maximale का `max_tokens` allouée au bloc `thinking` : `max_tokens` चाहिए donc toujours être strictement supérieur à `budget_tokens` के लिए permettre génération का प्रतिक्रिया finale.",
+      "examTip": "के साथ Extended Thinking : `max_tokens > budget_tokens` (car `max_tokens` = réflexion + प्रतिक्रिया finale).",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "artifacts-interactifs-versionnes"
+      ],
+      "plainExplanation": "Artifacts affichent en direct interfaces, graphiques और schémas générés par Claude में एक volet dédié.",
+      "rationale": "Artifacts affiche और exécute en direct में एक panneau latéral isolé composants React, pages HTML, graphiques SVG और diagrammes Mermaid, के साथ bascule code/aperçu और historique का versions.",
+      "examTip": "Rendu interactif en direct का code UI (React/HTML), SVG या diagrammes Mermaid = Artifacts.",
+      "sourceIds": [
+        "anthropic-academy-teams"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "invalidation-prefixe-par-uuid-debut"
+      ],
+      "plainExplanation": "cache ne réutilise que ce qui est identique depuis premier mot : toute valeur qui change चाहिए être placée à fin.",
+      "rationale": "Prompt Caching d'Anthropic repose पर l'égalité exacte का préfixe का अनुरोध. Injecter एक UUID या एक horodatage changeant au début का bloc `system` modifie préfixe à chaque appel और empêche toute lecture en cache.",
+      "examTip": "के लिए que Prompt Caching fonctionne : gardez début (`tools` ➔ `system` ➔ corpus) 100 % statique और placez डेटा dynamiques à fin.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "bloc-document-citations-enabled-true"
+      ],
+      "plainExplanation": "Activez l'option native citations: { enabled: true } पर document envoyé à Claude.",
+      "rationale": "fonctionnalité native का citations का l'API Messages s'active en fournissant sources में के blocs का type `document` के साथ l'option `citations: { enabled: true }`.",
+      "examTip": "Citations vérifiables natives में l'API Claude = bloc `document` के साथ `citations: { enabled: true }`.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.001",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "fichier-claude-md"
+      ],
+      "plainExplanation": "फ़ाइल CLAUDE.md sert का mémoire permanente lue स्वचालित रूप से par Claude Code à chaque démarrage.",
+      "rationale": "Claude Code charge स्वचालित रूप से फ़ाइलें `CLAUDE.md` के लिए connaître commandes का build, का lint, का test और conventions d'architecture का dépôt.",
+      "examTip": "`CLAUDE.md` est mémoire persistante का votre dépôt के लिए Claude Code.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "commande-slash-clear"
+      ],
+      "plainExplanation": "commande /clear vide entièrement conversation en cours के लिए repartir à zéro बिना mélanger sujets.",
+      "rationale": "commande `/clear` vide l'historique का conversation का session courante के लिए repartir पर एक contexte propre और économique lors d'एक changement का sujet, tout en conservant instructions का `CLAUDE.md`.",
+      "examTip": "Changement का tâche indépendante में Claude Code = `/clear` ; résumé d'एक tâche longue en cours = `/compact`.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "settings-json-allow-npm-test-deny-env"
+      ],
+      "plainExplanation": "Réglez फ़ाइल .claude/settings.json के लिए autoriser commande का test और bloquer explicitement lecture के फ़ाइलें sensibles.",
+      "rationale": "फ़ाइल `.claude/settings.json` सक्षम करता है d'autoriser finement के commandes sûres comme `Bash(npm test)` में `अनुमतियां.allow` tout en interdisant explicitement lecture के secrets `.env*` और appels नेटवर्क non approuvés में `अनुमतियां.deny`.",
+      "examTip": "Utilisez `.claude/settings.json` (`allow` / `deny`) के लिए pré-approuver केवल commandes का test inoffensives.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "prompt-injection-via-issue-publique"
+      ],
+      "plainExplanation": "एक message piégé pourrait manipuler l'agent के लिए lui faire exécuter के commandes dangereuses या voler के पहुंच secrets.",
+      "rationale": "एक texte soumis par एक tiers externe (issue publique, PR externe, page web) est एक entrée non fiable : s'il est traité par एक agent en mode headless disposant d'outils Bash complets और d'एक टोकन administrateur, एक injection का prompt peut provoquer एक compromission grave.",
+      "examTip": "En CI headless (`claude -p`) पर के entrées externes : conteneur éphémère + `--allowedTools` minimal + टोकन en lecture seule.",
+      "sourceIds": [
+        "anthropic-claude-code",
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "primitive-resources-uri"
+      ],
+      "plainExplanation": "एक Resource MCP सक्षम करता है का lire एक donnée en toute सुरक्षा, contrairement à एक Tool qui exécute एक action.",
+      "rationale": "में standard MCP, `Resources` représentent के डेटा structurées या textuelles identifiées par URI (schémas, फ़ाइलें, लॉग्स) exposées en lecture seule बिना effet का bord, par opposition aux `Tools` qui exécutent के actions.",
+      "examTip": "में MCP : `Resources` = डेटा en lecture par URI · `Prompts` = मॉडल उपयोगकर्ता · `Tools` = actions exécutables.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "ecrire-logs-sur-stderr"
+      ],
+      "plainExplanation": "canal standard (stdout) est réservé aux messages JSON का protocole MCP ; लॉग्स चाहिए être écrits पर stderr.",
+      "rationale": "Lorsqu'एक serveur MCP communique via transport `stdio`, flux `stdout` véhicule exclusivement messages JSON-RPC 2.0. Tout journal applicatif écrit पर `stdout` (`console.log`, `print`) casse parsing का client ; il faut उपयोग करें `stderr` (`console.error`).",
+      "examTip": "Serveur MCP en transport `stdio` : jamais का `console.log` पर `stdout`, écrivez tous vos logs पर `stderr` !",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "vm-ou-conteneur-isole-moindre-privilege"
+      ],
+      "plainExplanation": "Faites- toujours tourner में एक वर्चुअल मशीन isolée के साथ minimum का अधिकार, jamais पर votre session personnelle.",
+      "rationale": "Computer Use interagissant सीधे के साथ l'écran, souris और clavier, Anthropic recommande का l'exécuter में एक वर्चुअल मशीन या एक conteneur isolé disposant का strict minimum का अधिकार और d'पहुंच नेटवर्क, के साथ validation humaine के actions sensibles.",
+      "examTip": "Computer Use = toujours confiné में एक VM या एक conteneur dédié बिना session ni secrets personnels.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "charte-explicite-principes-auto-critique"
+      ],
+      "plainExplanation": "Claude apprend à s'auto-corriger en suivant एक charte écrite का règles éthiques और का सुरक्षा (être utile, honnête और inoffensif).",
+      "rationale": "Constitutional AI aligne मॉडल Claude en s'appuyant पर एक constitution explicite का principes normatifs (visant एक comportement utile, honnête और inoffensif) lors के phases d'auto-critique और d'apprentissage par renforcement.",
+      "examTip": "Constitutional AI = alignement का सुरक्षा fondé पर एक charte explicite का principes (Helpful, Honest, Harmless).",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "injection-instructions-cachees-description-tool"
+      ],
+      "plainExplanation": "के ordres cachés में description d'एक outil trompent l'IA के लिए lui faire dérober के डेटा à l'insu का l'उपयोगकर्ता.",
+      "rationale": "Puisque descriptions d'outils retournées par `tools/list` sont injectées में contexte का मॉडल के लिए qu'il sache comment appeler, एक serveur MCP malveillant peut y glisser के instructions cachées (Tool Poisoning) poussant LLM à lire और exfiltrer के डेटा locales.",
+      "examTip": "Tool Poisoning MCP = injection का prompt dissimulée में description `tools/list` d'एक serveur MCP non fiable.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-sql-lecture-seule-replica-et-serveur-audite"
+      ],
+      "plainExplanation": "Connectez serveur MCP के साथ एक compte का डेटाबेस configuré strictement en lecture seule.",
+      "rationale": "सुरक्षा d'एक serveur MCP repose पर न्यूनतम विशेषाधिकार au niveau का l'infrastructure cible : connecter serveur à एक réplica के साथ एक compte PostgreSQL en lecture seule सुनिश्चित करता है techniquement qu'aucune écriture या suppression ne peut avoir lieu.",
+      "examTip": "Ne comptez jamais पर prompt के लिए empêcher एक `DROP` या एक `DELETE` via MCP : imposez एक rôle डेटाबेस en lecture seule.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    }
+  ]
+}

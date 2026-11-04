@@ -1,0 +1,1253 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "m365-copilot-agents",
+  "brand": "CertiGo",
+  "providerId": "microsoft",
+  "radarTrackId": "microsoft:m365-copilot",
+  "routeCode": "MS-4004",
+  "routeAliases": [
+    "MS-4004",
+    "MS-365-COPILOT",
+    "M365-COPILOT",
+    "COPILOT-STUDIO"
+  ],
+  "brandIdentity": {
+    "logoSlug": "microsoft",
+    "displayName": "Microsoft 365 Copilot & Copilot Studio",
+    "primaryHex": "#0F6CBD",
+    "accentHex": "#5B5FC7",
+    "masteryModel": "Parcours d'expertise produit complet aligné en Microsoft Learn : 3 unités progressives (Microsoft Graph Grounding, Copilot Cowork & applications Office, création d'agents Copilot Studio & gobernanza Microsoft Purview), Cartes Déclic, labs pratiques, questions à double niveau (simple sin jargon y expert) y examen blanc."
+  },
+  "locale": "es-ES",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: Microsoft 365 Copilot, Cowork, Bureautique (Word, PowerPoint, Excel, Teams/Outlook) & Agents",
+  "subtitle": "Dominar Microsoft Graph Grounding / Work IQ, la délégation asynchrone Copilot Cowork, l'excellence bureautique y l'architecture d'agents déclaratifs y autonomes Copilot Studio sous gobernanza Purview.",
+  "audience": "Consultants métier, chefs de projet, analystes financiers, juristes d'empresa, architectes Microsoft 365 y créateurs d'agents Copilot Studio.",
+  "prerequisites": "Connaître l'environnement Microsoft 365 (Word, Excel, PowerPoint, Outlook, Teams, SharePoint) y los principes de base de los permisos d'empresa.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "ms-copilot-overview",
+      "title": "Microsoft 365 Copilot overview y architecture",
+      "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Décrit l'architecture de Microsoft 365 Copilot : interface usuario, ancrage via Microsoft Graph y l'index sémantique (Work IQ), traitement par modelo de fondation y respect de los contrôles de seguridad del locataire.",
+      "limits": "L'ancrage dépend de los permisos existantes de l'usuario en SharePoint/OneDrive/Exchange ; un en-partage préexistant expose los documents accessibles à cet usuario."
+    },
+    {
+      "id": "ms-copilot-privacy",
+      "title": "Data, Privacy, y Security for Microsoft 365 Copilot",
+      "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy",
+      "checkedOn": "2026-10-21",
+      "supports": "Établit que los prompts, réponses y datos Microsoft Graph ne servent pas à entraîner los modelos de fondation publics y que l'héritage de los étiquettes de sensibilité Microsoft Purview s'applique.",
+      "limits": "L'isolation au sein del locataire ne remplace pas una gobernanza de los acceso SharePoint (SAM) ni de los politiques DLP correctement configurées."
+    },
+    {
+      "id": "ms-copilot-pages",
+      "title": "Microsoft 365 Copilot Pages y Loop collaboration",
+      "url": "https://learn.microsoft.com/en-us/copilot/microsoft-365/copilot-pages",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille la transformation de réponses Copilot en Copilot Pages persistantes basées en de los composants Loop synchronisés en temps réel en Teams, Outlook y Word.",
+      "limits": "El partage d'una Page o d'un composant Loop suit los règles de partage SharePoint Embedded del conteneur de l'usuario."
+    },
+    {
+      "id": "ms-python-excel",
+      "title": "Data security y Python in Excel",
+      "url": "https://learn.microsoft.com/en-us/office/python-in-excel-security",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente l'exécution del code Python in Excel en un conteneur isolé par hyperviseur en Azure Container Instances con la distribution Anaconda, sin acceso au red local ni au token de l'usuario.",
+      "limits": "El code Python n'accède qu'aux datos del classeur explicitement référencées via la fonction xl() y ne peut pas appeler d'API externes."
+    },
+    {
+      "id": "ms-copilot-studio",
+      "title": "What is Microsoft Copilot Studio y autonomous agents",
+      "url": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-what-is-copilot-studio",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente la conception d'agents déclaratifs y d'agents personnalisés o autonomes en Copilot Studio con déclencheurs événementiels, actions, connecteurs Power Platform y gobernanza d'environnement.",
+      "limits": "Los actions qui modifient de los systèmes tiers requièrent una authentification explicite (usuario o auteur con gobernanza DLP) y una validation de los opérations critiques."
+    }
+  ],
+  "modules": [
+    {
+      "id": "copilot-cowork-work-iq",
+      "unitNumber": 1,
+      "title": "Unidad 1 · Copilot, Work IQ & Délégation Asynchrone Cowork",
+      "subtitle": "Ancrage Microsoft Graph, mémoire de travail Work IQ, délégation multi-étapes Copilot Cowork y collaboration temps réel en Loop & Pages.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Cartographier el cycle complet d'una consulta Microsoft 365 Copilot (Prompt ➔ Pré-traitement & Grounding Work IQ ➔ LLM ➔ Post-traitement Purview) y Delegar un dossier transversal à Copilot Cowork.",
+      "memoKeyTopics": [
+        "Ancrage Microsoft Graph Grounding & Index Sémantique (Work IQ) exécuté sous el token Entra ID de l'usuario",
+        "Délégation asynchrone multi-étapes con Copilot Cowork : planification, collecte inter-applications y jalons de validation",
+        "Co-édition temps réel con Copilot Pages y composants Microsoft Loop partagés en Teams, Outlook y Word"
+      ],
+      "memoGoldenRule": "Copilot ne voit que ce que votre token Entra ID a déjà el droit d'ouvrir en Microsoft Graph, y ne réentraîne jamais el modelo public con vos datos.",
+      "architectureSchema": {
+        "title": "[ES] Pipeline d'ancrage Microsoft Graph Grounding (Work IQ) & Copilot Cowork",
+        "diagram": "[Prompt Usuario] ➔ [Grounding Work IQ : Graph + Index Sémantique (Token Entra ID)] ➔ [Planificateur Cowork / LLM] ➔ [Contrôles Purview & RAI] ➔ [Copilot Page / Loop]",
+        "components": [
+          {
+            "name": "[ES] Work IQ & Index Sémantique",
+            "role": "Combine los signaux d'activité, los relations professionnelles y la recherche vectorielle/lexicale en SharePoint, OneDrive, Outlook y Teams."
+          },
+          {
+            "name": "[ES] Copilot Cowork",
+            "role": "Agent de délégation asynchrone qui décompose un objectif complexe en sous-tâches, interroge el graphe métier en arrière-plan y soumet ses livrables à validation."
+          },
+          {
+            "name": "[ES] Copilot Pages & Loop",
+            "role": "Transforme una synthèse éphémère de chat en canevas collaboratif persistant y synchronisé en toutes los applications Microsoft 365."
+          }
+        ],
+        "securityInvariant": "Toute consulta de recherche Graph y toute exécution Cowork s'exécutent en el périmètre strict de los ACL SharePoint y de los étiquettes de sensibilité Microsoft Purview de l'usuario."
+      },
+      "lessons": [
+        {
+          "id": "microsoft-graph-grounding-work-iq",
+          "title": "[ES] Ancrage Microsoft Graph Grounding & Work IQ",
+          "objective": "Explicar comment Microsoft 365 Copilot enrichit un prompt via Work IQ y l'index sémantique tout en respectant los permisos Entra ID y SharePoint.",
+          "estimatedMinutes": 8,
+          "hook": "Deux collègues tapent exactement el même prompt en Microsoft 365 Copilot y obtiennent deux réponses différentes : pourquoi est-ce una preuve de seguridad y non un bug ?",
+          "declicCard": {
+            "title": "El Clic Work IQ : Recherche au nom de l'usuario ≠ Entraînement",
+            "diagramTop": "Prompt ➔ Recherche Graph + Index Sémantique (ACL Entra ID de l'usuario)",
+            "diagramBottom": "Passages autorisés injectés en el contexte ➔ Respuesta sourcée con citations",
+            "step1": "Avant d'appeler el modelo, Copilot interroge Microsoft Graph únicamente en los e-mails, réunions y archivos que VOUS avez el droit de lire.",
+            "step2": "Los extraits pertinents sont injectés en la fenêtre de contexte del prompt ; los poids del modelo ne sont jamais modifiés.",
+            "rule": "Même prompt + derechos différents = contexte Graph différent = respuesta adaptée aux permisos de chacun."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · El CONTEXTE MÉTIER",
+              "title": "¿Qué es Work IQ en Microsoft 365 Copilot ?",
+              "bodyParagraph": "Un modelo de langage seul ne connaît ni vos projets internes, ni vos réunions Teams d'hier. Work IQ relie el modelo à votre contexte professionnel via Microsoft Graph (e-mails, calendrier, chats, documents SharePoint/OneDrive) y l'index sémantique.",
+              "keyTakeawayPill": "Work IQ = Signaux Microsoft Graph + Index sémantique vectoriel y lexical"
+            },
+            {
+              "stepBadge": "PASO 2 · Los 3 PHASES D'Un PROMPT",
+              "title": "[ES] Grounding ➔ Inférence LLM ➔ Post-traitement",
+              "bodyParagraph": "Chaque consulta suit trois étapes : 1. El Grounding recherche los extraits autorisés en Graph · 2. El prompt enrichi est envoyé au LLM hébergé en la frontière de confiance Microsoft · 3. El post-traitement vérifie los filtres d'IA responsable, los politiques Purview y attache los citations cliquables.",
+              "keyTakeawayPill": "[ES] 1. Pré-traitement Graph ➔ 2. LLM isolé ➔ 3. Post-traitement Purview + Citations"
+            },
+            {
+              "stepBadge": "PASO 3 · La FRONTIÈRE De Seguridad",
+              "title": "Zéro fuite inter-usuarios y zéro entraînement public",
+              "bodyParagraph": "Copilot s'exécutant sous votre identidad Entra ID, si un dossier M&A est restreint au comité exécutif, aucun autre salarié ne el verra en ses réponses Copilot. Ni vos prompts ni vos archivos ne quittent la frontière del locataire para entraîner de los modelos publics.",
+              "keyTakeawayPill": "Vos permisos SharePoint/Entra ID gouvernent 100 % de ce que Copilot peut citer."
+            }
+          ],
+          "keyIdeas": [
+            "El Grounding Microsoft Graph récupère únicamente los objets (e-mails, chats Teams, archivos SharePoint/OneDrive) accessibles par el token Entra ID de l'usuario courant.",
+            "L'index sémantique combine la correspondance par mots-clés y la proximité conceptuelle para retrouver los passages exacts y afficher de los citations vérifiables.",
+            "Los datos injectées en el prompt servent únicamente à l'inférence de la session courante y ne modifient jamais los paramètres del modelo de fondation."
+          ],
+          "workedExample": {
+            "situation": "Lors d'un pilote CertiGo chez un équipementier industriel, un chef de projet demande à Business Chat : « Résume los risques del projet Titan à partir de los dernières réunions y notes. » Il s'étonne que el budget salarial confidentiel del projet n'apparaisse pas.",
+            "steps": [
+              "Verificar los permisos SharePoint del archivo de budget salarial : il est stocké en el site RH restreint auquel el chef de projet n'a pas acceso.",
+              "Observer los citations retournées par Copilot : elles pointent vers el compte rendu Teams del comité technique y el cahier de los charges SharePoint de l'equipo projet.",
+              "Confirmer con el RSSI que el filtrage par token usuario Entra ID fonctionne exactement comme prévu."
+            ],
+            "decision": "L'equipo valide el comportement : l'absence del budget salarial prouve que Microsoft Graph Grounding applique strictement el menor privilegio de l'usuario."
+          },
+          "practice": {
+            "prompt": "Un collaborateur découvre en una respuesta Copilot un extrait d'un archivo de stratégie non destiné à son equipo. Expliquez en trois étapes comment diagnostiquer la cause réelle sin accuser el modelo d'avoir « appris » el document.",
+            "successCriteria": [
+              "Ouvrir la citation source affichée sous la respuesta Copilot para identifier l'emplacement SharePoint o OneDrive exact del archivo.",
+              "Inspecter los permisos del site o del lien de partage (par exemple un lien « Tout el monde en l'organisation » créé par erreur).",
+              "Restreindre los ACL SharePoint y appliquer una étiquette de sensibilité Microsoft Purview au document."
+            ],
+            "feedback": "¿Cuándo Copilot cite un document interne inattendu, la cause est un en-partage (oversharing) en SharePoint o OneDrive, jamais una fuite d'entraînement del LLM."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "¿Cómo Microsoft 365 Copilot sait-il quels archivos y e-mails de l'empresa il a el droit d'Utilizar para vous répondre ?",
+              "prompt": "Una analyste M&A interroge Microsoft 365 Copilot para obtenir la synthèse d'un projet d'acquisition. ¿Cómo Copilot détermine-t-il quels documents SharePoint y quels courriels Outlook peuvent nourrir la respuesta ?",
+              "options": [
+                {
+                  "id": "jeton-entra-acl",
+                  "label": "En interrogeant Microsoft Graph y l'index sémantique con el token Entra ID de l'analyste para ne retenir que los contenus autorisés."
+                },
+                {
+                  "id": "compte-service-global",
+                  "label": "En utilisant un compte administrateur global puis en masquant los noms de archivos confidentiels en el résumé final."
+                },
+                {
+                  "id": "poids-modele-nocturne",
+                  "label": "En lisant los poids d'un modelo réentraîné chaque nuit en la totalité de los boîtes aux lettres del locataire d'empresa."
+                },
+                {
+                  "id": "cache-public-partage",
+                  "label": "En copiant los documents del site d'equipo vers un index public temporaire accessible à tous los membres del département."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "[ES] Si un employé découvre un tableau de salaires confidentiel grâce à Copilot, d'où vient réellement l'erreur ?",
+              "prompt": "Lors d'una recette interne, un salarié voit Copilot citer una grille de rémunération stockée en SharePoint. Quelle est la cause technique de cette exposition y quelle action corrective s'impose ?",
+              "options": [
+                {
+                  "id": "surpartage-acl-sharepoint",
+                  "label": "La bibliothèque SharePoint autorise l'acceso à toute l'organisation ; il faut resserrer ses permisos ACL y étiqueter el archivo en Purview."
+                },
+                {
+                  "id": "memorisation-poids-llm",
+                  "label": "El modelo de fondation a mémorisé la grille lors d'un prompt précédent del DRH ; il faut purger los poids neuronaux del modelo."
+                },
+                {
+                  "id": "desactiver-citations-chat",
+                  "label": "Los citations cliquables créent un contournement de los derechos ; il suffit de masquer los notes de bas de page en l'interface."
+                },
+                {
+                  "id": "bloquer-index-semantique",
+                  "label": "L'index sémantique ignore los groupes de seguridad Entra ID par défaut ; il faut Desactivar la recherche vectorielle en el tenant."
+                }
+              ]
+            }
+          ],
+          "recap": "Work IQ ancre chaque respuesta en vos datos Microsoft Graph en respectant vos derechos Entra ID y sin jamais réentraîner el modelo public.",
+          "sourceIds": [
+            "ms-copilot-overview",
+            "ms-copilot-privacy"
+          ]
+        },
+        {
+          "id": "copilot-cowork-delegation-asynchrone",
+          "title": "Délégation asynchrone con Copilot Cowork",
+          "objective": "Delegar una mission complexe multi-étapes à Copilot Cowork, superviser son plan d'exécution asynchrone y valider los livrables intermédiaires.",
+          "estimatedMinutes": 8,
+          "hook": "Plutôt que d'enchaîner dix prompts manuels entre Outlook, Teams, Excel y Word, comment confier à Copilot Cowork la préparation complète d'una revue trimestrielle pendant que vous dirigez votre réunion ?",
+          "declicCard": {
+            "title": "El Clic Cowork : Del Chat Synchrone à la Délégation Asynchrone",
+            "diagramTop": "Chat classique : 1 Prompt ➔ 1 Respuesta immédiate (vous orchestrez chaque étape)",
+            "diagramBottom": "[ES] Copilot Cowork : Objectif métier ➔ Plan multi-étapes en arrière-plan + Points de validation",
+            "step1": "Exprimez el résultat attendu, los sources de vérité (projets, réunions, classeurs) y los contraintes de format.",
+            "step2": "Cowork planifie los étapes, rassemble el contexte Work IQ de façon asynchrone y vous sollicite en los arbitrages clés.",
+            "rule": "Delegar l'exécution y la collecte à Cowork, mais garder la validation humaine avant tout envoi o publication externe."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · CHAT VS COWORK",
+              "title": "¿Cuándo passer del prompt instantané à Copilot Cowork ?",
+              "bodyParagraph": "El chat synchrone excelle para résumer un document o reformuler un e-mail en quelques secondes. Dès qu'una mission exige de croiser plusieurs réunions Teams, de los fils Outlook, un budget Excel y de produire un dossier complet, Copilot Cowork prend el relais en arrière-plan.",
+              "keyTakeawayPill": "[ES] Tâche unitaire rapide = Chat synchrone · Mission multi-sources à plusieurs étapes = Copilot Cowork"
+            },
+            {
+              "stepBadge": "PASO 2 · El PLAN D'EXÉCUTION",
+              "title": "Décomposition, collecte Work IQ y points de contrôle",
+              "bodyParagraph": "Copilot Cowork génère d'abord un plan visible : recherche de los derniers échanges clients, extraction de los écarts budgétaires, rédaction de la note de synthèse y préparation de la présentation. Vous pouvez ajuster ce plan avant o pendant l'exécution.",
+              "keyTakeawayPill": "[ES] Objectif ➔ Plan explicite ➔ Exécution asynchrone ➔ Point de contrôle humain"
+            },
+            {
+              "stepBadge": "PASO 3 · Gobernanza De DÉLÉGATION",
+              "title": "[ES] Approbation humaine avant action engageante",
+              "bodyParagraph": "Même en mode asynchrone, Cowork agit sous votre identidad y ne prend jamais d'engagement irréversible (envoi d'offre commerciale, modification d'enregistrement critique) sin votre confirmation explicite en el brouillon préparé.",
+              "keyTakeawayPill": "Cowork prépare, croise y structure ; el responsable métier approuve avant diffusion."
+            }
+          ],
+          "keyIdeas": [
+            "Copilot Cowork transforme una intention métier en un plan structuré exécuté de manière asynchrone à travers los applications Microsoft 365.",
+            "L'ancrage Work IQ permite à Cowork de relier automáticamente los décisions prises en réunion Teams, los engagements pris par e-mail y los archivos de projet SharePoint.",
+            "Los jalons de révision permettent à l'usuario d'orienter el travail en cours de route y de valider chaque livrable avant diffusion."
+          ],
+          "workedExample": {
+            "situation": "Léa, directrice de compte, debe préparer d'ici midi el comité de renouvellement del client Helios : bilan de los tickets résolus, synthèse de los trois dernières réunions Teams, tableau de consommation Excel y proposition commerciale Word.",
+            "steps": [
+              "Confier à Copilot Cowork l'objectif : « Prépare el dossier de renouvellement Helios T4 en croisant los réunions Teams del mois, los e-mails de suivi, el archivo `/Suivi_Helios_T4.xlsx` y el modelo `/Modele_Renouvellement.docx`. »",
+              "Verificar el plan proposé par Cowork y confirmer l'exclusion de los brouillons internes non validés.",
+              "À la notification de fin d'exécution, relire los citations attachées à chaque chiffre del tableau y approuver el document final."
+            ],
+            "decision": "[ES] Léa économise deux heures de collecte dispersée tout en vérifiant chaque chiffre cité avant d'envoyer l'invitation au client."
+          },
+          "practice": {
+            "prompt": "Rédigez un brief de délégation Copilot Cowork para préparer una revue mensuelle de seguridad croisant de los comptes rendus Teams, un registre de los incidents Excel y una note de synthèse destinée au COMEX.",
+            "successCriteria": [
+              "Nommer explicitement los sources de référence (réunions Teams concernées, archivo Excel de los incidents, modelo de note).",
+              "Préciser los livrables attendus (synthèse exécutive, tableau de los actions en retard con propriétaires, questions d'arbitrage).",
+              "Inclure un point de contrôle humain avant tout partage o envoi aux membres del COMEX."
+            ],
+            "feedback": "Un bon brief Cowork définit l'objectif final, los sources d'ancrage, la structure del livrable y la frontière d'approbation humaine."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "¿Cómo confier à Copilot un travail long qui croise plusieurs réunions Teams y un archivo Excel pendant que vous êtes en réunion ?",
+              "prompt": "Un responsable de los opérations debe compiler los retours de cinq réunions régionales Teams, croiser los écarts de livraison d'un classeur Excel y produire una note d'arbitrage structurée pendant qu'il anime un atelier. ¿Qué enfoque exploite au mieux Microsoft 365 Copilot ?",
+              "options": [
+                {
+                  "id": "delegation-cowork-plan",
+                  "label": "Delegar la mission multi-étapes à Copilot Cowork con los archivos cibles y valider el livrable au jalon de revue."
+                },
+                {
+                  "id": "copier-coller-transcriptions",
+                  "label": "Copier los cinq transcriptions intégrales en un seul message de chat para contourner la planification d'étapes."
+                },
+                {
+                  "id": "envoi-automatique-sans-revue",
+                  "label": "Configurar un envoi extérieur immédiat aux directeurs régionaux sin relecture humaine de los chiffres agrégés."
+                },
+                {
+                  "id": "conversion-pdf-statique",
+                  "label": "Convertir el classeur Excel en image statique afin d'éviter l'analyse de los colonnes par el moteur sémantique."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Un agent Copilot Cowork qui travaille en arrière-plan peut-il envoyer de los e-mails o modifier de los archivos sin votre accord ?",
+              "prompt": "Quelle garantie de seguridad s'applique lorsqu'una tâche asynchrone est exécutée par Copilot Cowork en Microsoft 365 ?",
+              "options": [
+                {
+                  "id": "heritage-identite-et-validation",
+                  "label": "Cowork agit en el périmètre de los permisos de l'usuario y requiert sa validation avant toute action externe engageante."
+                },
+                {
+                  "id": "elevation-admin-temporaire",
+                  "label": "Cowork obtient temporairement los privilèges d'administrateur SharePoint para lire los dossiers verrouillés del projet."
+                },
+                {
+                  "id": "sortie-frontiere-tenant",
+                  "label": "Los archivos analysés en arrière-plan sont transférés hors del locataire vers un cluster public sin journal d'audit."
+                },
+                {
+                  "id": "suppression-etiquettes-purview",
+                  "label": "Los étiquettes de sensibilité Microsoft Purview sont retirées de los documents intermédiaires para accélérer la synthèse."
+                }
+              ]
+            }
+          ],
+          "recap": "Copilot Cowork orchestre en arrière-plan vos missions multi-applications en Work IQ tout en maintenant vos permisos y votre validation humaine.",
+          "sourceIds": [
+            "ms-copilot-overview",
+            "ms-copilot-privacy"
+          ]
+        },
+        {
+          "id": "collaboration-loop-copilot-pages",
+          "title": "Collaboration temps réel en Copilot Pages & Loop",
+          "objective": "Transformer un résultat Copilot o Cowork en una Copilot Page persistante y synchroniser de los composants Loop entre Teams, Outlook y Word.",
+          "estimatedMinutes": 8,
+          "hook": "Una excellente respuesta de Copilot coincée en votre historique de chat individuel ne sert qu'à vous : comment la transformer en un espace de travail vivant que toute l'equipo enrichit en direct ?",
+          "declicCard": {
+            "title": "El Clic Pages & Loop : De la Respuesta Privée au Composant Vivant",
+            "diagramTop": "Chat Copilot (Individuel) ➔ Bouton « Modifier en Pages » (Copilot Page persistante)",
+            "diagramBottom": "Composant Loop partagé en Teams + Outlook + Word (Synchronisation bidirectionnelle temps réel)",
+            "step1": "Cliquez en « Modifier en Pages » sous una respuesta Copilot para l'ancrer en una Copilot Page persistante.",
+            "step2": "Partagez el composant Loop en un canal Teams o un e-mail Outlook : chaque modification est vue instantanément partout.",
+            "rule": "Plus de versions v2_finale_bis.docx : una seule source vivante co-éditée par l'equipo y par Copilot."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · COPILOT PAGES",
+              "title": "Rendre la génération IA persistante y partageable",
+              "bodyParagraph": "Lorsque Copilot génère un plan projet o un tableau comparatif en Business Chat, un clic en « Modifier en Pages » l'ouvre en un panneau latéral dédié. Vous pouvez continuer à solliciter Copilot para affiner una section précise sin perdre el reste de la page.",
+              "keyTakeawayPill": "Chat Copilot = Exploration · Copilot Pages = Document de travail persistant y itératif"
+            },
+            {
+              "stepBadge": "PASO 2 · COMPOSANTS MICROSOFT LOOP",
+              "title": "Un même bloc synchronisé en Teams, Outlook y Word",
+              "bodyParagraph": "Una Copilot Page o una table d'actions peut être copiée comme composant Loop y collée en un chat Teams, un courriel Outlook o un document Word. Lorsqu'un collègue coche una tâche depuis son e-mail Outlook, la case se coche en direct en Teams y en la Page.",
+              "keyTakeawayPill": "1 composant Loop unique = mis à jour en temps réel en Teams, Outlook, Word y el Web"
+            },
+            {
+              "stepBadge": "PASO 3 · Gobernanza SHAREPOINT EMBEDDED",
+              "title": "Almacenamiento, cycle de vie y audit de los Pages",
+              "bodyParagraph": "Techniquement, los Copilot Pages y composants Loop sont stockés en de los conteneurs SharePoint Embedded rattachés au locataire. Ils bénéficient donc de los mêmes règles de rétention, d'eDiscovery y de contrôle de los liens de partage Microsoft Purview que vos sites SharePoint.",
+              "keyTakeawayPill": "Stocké en SharePoint Embedded = Auditable, gouverné par Purview y soumis aux politiques DLP"
+            }
+          ],
+          "keyIdeas": [
+            "Copilot Pages transforme una respuesta de chat en artefact persistant où plusieurs collaborateurs y Copilot peuvent itérer simultanément.",
+            "Los composants Microsoft Loop restent synchronisés de façon bidirectionnelle qu'ils soient consultés en Teams, Outlook, Word o l'application Loop.",
+            "L'hébergement en SharePoint Embedded garantiza l'application de los politiques de conformité, de rétention y d'audit de l'empresa."
+          ],
+          "workedExample": {
+            "situation": "L'equipo produit de CertiGo prépare la feuille de route trimestrielle. Jusqu'ici, trois archivos Word circulaient par e-mail con de los tableaux contradictoires.",
+            "steps": [
+              "Générer la première version de la matrice de priorités en Business Chat à partir de los notes de réunion, puis cliquer en « Modifier en Pages ».",
+              "Copier el tableau d'arbitrage en tant que composant Loop en el canal Teams de l'equipo ingénierie y en l'e-mail Outlook envoyé à la direction.",
+              "Pendant la réunion, chaque responsable met à jour sa colonne directamente depuis Teams o Outlook y demande à Copilot en la Page de synthétiser los dépendances."
+            ],
+            "decision": "L'equipo adopte Copilot Pages comme source unique de vérité para toutes los revues hebdomadaires."
+          },
+          "practice": {
+            "prompt": "Expliquez comment organiser el suivi d'un plan de lancement entre l'equipo produit (en Teams) y la direction commerciale (en Outlook) sin dupliquer de archivo Excel o Word.",
+            "successCriteria": [
+              "Crear la table de suivi en una Copilot Page à partir de los documents de cadrage.",
+              "Insérer la table comme composant Loop synchronisé en el canal Teams y en el fil d'e-mail Outlook.",
+              "Verificar que los permisos del lien de partage respectent el périmètre de l'equipo projet."
+            ],
+            "feedback": "El composant Loop évite toute divergence de version entre los usuarios de Teams y ceux d'Outlook tout en restant gouverné en SharePoint Embedded."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "Quel outil permite à plusieurs collègues de modifier ensemble y en direct un tableau généré par Copilot depuis Teams o Outlook ?",
+              "prompt": "Après avoir généré un plan d'action con Microsoft 365 Copilot, vous souhaitez que quatre collègues puissent modifier el même tableau en direct aussi bien depuis un fil de discussion Teams que depuis un courriel Outlook. Quelle fonctionnalité devez-vous Utilizar ?",
+              "options": [
+                {
+                  "id": "copilot-pages-composant-loop",
+                  "label": "Ouvrir la respuesta en Copilot Pages puis Compartir el bloc sous forme de composant Microsoft Loop synchronisé."
+                },
+                {
+                  "id": "export-capture-ecran-png",
+                  "label": "Exporter la respuesta en capture d'écran PNG y la joindre en pièce jointe au courriel Outlook y au canal Teams."
+                },
+                {
+                  "id": "copier-texte-brut-local",
+                  "label": "Coller la respuesta en texte sin mise en forme en quatre archivos locaux distincts en el bureau de chaque membre."
+                },
+                {
+                  "id": "impression-pdf-verrouille",
+                  "label": "Imprimer l'historique de conversation en PDF en lecture seule avant de l'archiver en un serveur de archivos."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Où sont enregistrées los Copilot Pages y comment l'empresa los protège-t-elle ?",
+              "prompt": "Où sont stockées los Copilot Pages au sein de l'architecture Microsoft 365 y quelles règles de gobernanza s'y appliquent ?",
+              "options": [
+                {
+                  "id": "sharepoint-embedded-purview",
+                  "label": "En de los conteneurs SharePoint Embedded del locataire, soumis aux politiques de partage, de rétention y d'eDiscovery Microsoft Purview."
+                },
+                {
+                  "id": "cache-navigateur-non-audite",
+                  "label": "En el almacenamiento local del navigateur web de l'auteur, hors de portée de los outils d'audit y de conformité de l'empresa."
+                },
+                {
+                  "id": "serveur-externe-public",
+                  "label": "En una base documentaire publique partagée entre plusieurs entreprises clientes sin isolation par locataire Entra ID."
+                },
+                {
+                  "id": "dossier-temporaire-exchange",
+                  "label": "En la corbeille temporaire d'Exchange Online con suppression automatique obligatoire au bout de vingt-quatre heures."
+                }
+              ]
+            }
+          ],
+          "recap": "Copilot Pages y Microsoft Loop transforment los réponses de l'IA en livrables collaboratifs synchronisés en temps réel y gouvernés par SharePoint Embedded.",
+          "sourceIds": [
+            "ms-copilot-pages",
+            "ms-copilot-overview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pro-bureautique-word-ppt-excel-teams-outlook",
+      "unitNumber": 2,
+      "title": "Unidad 2 · Devenir un Pro en Word, PowerPoint, Excel, Outlook & Teams",
+      "subtitle": "Rédaction sourcée y coaching de ton en Word, narration visuelle en PowerPoint, formules avancées y Python in Excel, récapitulatifs intelligents y triage en Teams & Outlook.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Produire un livrable exécutif complet : contrato révisé en Word (`/`), présentation narrative PowerPoint con notes d'orateur, détection d'anomalies en Excel (XLOOKUP/LET/LAMBDA + Python) y plan d'action extrait de Teams/Outlook.",
+      "memoKeyTopics": [
+        "Word (`/` archivos de référence, réécriture de clauses, synthèse exécutive, coaching de ton) & PowerPoint (création depuis Word en gabarit de marque, speaker notes)",
+        "Excel : tableaux structurés, formules avancées (XLOOKUP, LET, LAMBDA), tableaux croisés dynamiques y Python in Excel exécuté en conteneur isolé Azure",
+        "Teams & Outlook : Intelligent Meeting Recap, extraction d'actions con propriétaires, triage de boîte de réception y coaching de rédaction"
+      ],
+      "memoGoldenRule": "Ancrez toujours Word y PowerPoint en vos archivos de référence (`/`), formatez vos plages en Tableau Excel avant d'analyser, y vérifiez l'enregistrement/transcription en Teams.",
+      "architectureSchema": {
+        "title": "[ES] Flux de productivité bout-en-bout : Réunions Teams ➔ Analyse Excel ➔ Document Word ➔ Présentation PowerPoint",
+        "diagram": "[Teams Recap & Actions] + [Excel : XLOOKUP/LET/LAMBDA + Python Sandbox Azure] ➔ [Word : Brouillon ancré en `/` + Coaching de ton] ➔ [PowerPoint : Deck en modelo + Speaker Notes]",
+        "components": [
+          {
+            "name": "Copilot en Word & PowerPoint",
+            "role": "Génère y réécrit de los clauses à partir de archivos de référence `/` y transforme el document structuré en diapositives con notes d'orateur."
+          },
+          {
+            "name": "Copilot en Excel & Python in Excel",
+            "role": "Écrit de los formules XLOOKUP/LET/LAMBDA en los Tableaux Excel y exécute de los scripts statistiques/graphiques Python en un conteneur Azure isolé."
+          },
+          {
+            "name": "Copilot en Teams & Outlook",
+            "role": "Synthétise los réunions transcrites con propriétaires d'actions, priorise los fils d'e-mails critiques y ajuste el ton de los réponses."
+          }
+        ],
+        "securityInvariant": "Lorsqu'un archivo Word étiqueté par Purview sert de source à PowerPoint o Word, l'étiquette de sensibilité est préservée y Python in Excel s'exécute sin acceso red externe."
+      },
+      "lessons": [
+        {
+          "id": "word-powerpoint-redaction-narration",
+          "title": "Word & PowerPoint : références (/), clauses, synthèse y narration visuelle",
+          "objective": "Dominar la génération sourcée con `/` en Word, la réécriture de clauses, el coaching de ton y la transformation d'un document Word en présentation PowerPoint structurée con speaker notes.",
+          "estimatedMinutes": 8,
+          "hook": "¿Cómo passer d'una note stratégique de vingt-cinq pages y de trois contratos de référence à un avenant irréprochable en Word puis à un comité de direction de dix diapositives con notes d'orateur en quinze minutes ?",
+          "declicCard": {
+            "title": "El Clic Word & PowerPoint : L'Opérateur `/` y los Styles de Titre",
+            "diagramTop": "[ES] Word : Prompt + `/ContratCadre.docx` + `/GrilleTarifs.xlsx` ➔ Clauses & Synthèse exécutive",
+            "diagramBottom": "Modelo PowerPoint ouvert + « Crear una présentation depuis `/Note.docx` » ➔ Diapositives + Speaker Notes",
+            "step1": "En Word, utilisez `/` para ancrer la rédaction o la réécriture de clauses en vos documents approuvés y structurez con Titre 1 / Titre 2.",
+            "step2": "En PowerPoint, ouvrez d'abord el gabarit de votre empresa puis demandez à Copilot de Crear la présentation depuis el archivo Word structuré.",
+            "rule": "De los styles Titre 1 / Titre 2 propres en Word = un découpage narratif impeccable en PowerPoint."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · WORD : ANCRAGE `/` & CLAUSES",
+              "title": "Générer con `/` y réécrire con précision",
+              "bodyParagraph": "En Word, tapez `/` en la zone de prompt Copilot para sélectionner vos archivos de référence (cahier de los charges, contrato-cadre, compte rendu). Demandez ensuite una synthèse exécutive en tête de document o sélectionnez una clause juridique para la réécrire con un ton plus ferme, concis o diplomatique.",
+              "keyTakeawayPill": "Opérateur `/` = ancrage multi-archivos · Sélection de texte = réécriture ciblée y coaching de ton"
+            },
+            {
+              "stepBadge": "PASO 2 · POWERPOINT DEPUIS WORD",
+              "title": "Conserver la charte graphique y la structure narrative",
+              "bodyParagraph": "Ne partez pas d'una présentation blanche si vous avez una charte d'empresa : ouvrez d'abord votre modelo `.potx`/`.pptx` officiel, puis lancez Copilot con « Crear una présentation à partir del archivo `/Note_Strategique.docx` ». Copilot mappe los Titre 1 y Titre 2 en sections y diapositives aux couleurs de votre marque.",
+              "keyTakeawayPill": "Ouvrir el modelo de marque d'abord + référencer el archivo Word structuré"
+            },
+            {
+              "stepBadge": "PASO 3 · SPEAKER NOTES & VISUELS",
+              "title": "Notes d'orateur, reformulation y synthèse de diapositives",
+              "bodyParagraph": "Copilot génère automáticamente de los notes d'orateur (speaker notes) sous chaque diapositive à partir de los paragraphes détaillés del document Word, tandis que la diapositive ne garde que los messages clés percutants. Vous pouvez ensuite demander à Copilot d'ajouter una diapositive de résumé exécutif o de réorganiser l'agenda.",
+              "keyTakeawayPill": "Diapositive = message visuel concis · Notes d'orateur = argumentaire détaillé issu del Word"
+            }
+          ],
+          "keyIdeas": [
+            "L'opérateur `/` en Word permite d'ancrer la génération d'un document o d'una synthèse exécutive en de los archivos Word, Excel, PowerPoint o PDF autorisés.",
+            "La sélection d'un paragraphe en Word permite de réécrire una clause, de la convertir en tableau comparatif o d'ajuster son registre de langue (coaching de ton).",
+            "En PowerPoint, partir d'un modelo d'empresa ouvert y d'un document Word structuré en styles Titre 1 / Titre 2 produit una trame narrative fidèle con speaker notes."
+          ],
+          "workedExample": {
+            "situation": "Antoine, directeur juridique adjoint, debe préparer un avenant au contrato fournisseur Atlas y el présenter en comité d'achat.",
+            "steps": [
+              "En Word, invoquer Copilot con `/Contrat_Atlas_2025.docx` y `/Politique_Achats.docx` para générer l'avenant y una synthèse exécutive d'una page.",
+              "Sélectionner la clause de responsabilité para la reformuler en limitant el plafond d'indemnisation selon la politique interne.",
+              "Ouvrir el gabarit PowerPoint del groupe, demander à Copilot de générer la présentation depuis l'avenant Word y Verificar los notes d'orateur en chaque diapositive."
+            ],
+            "decision": "El dossier complet (avenant Word + support PowerPoint charté con notes d'orateur) est prêt y validé avant el comité."
+          },
+          "practice": {
+            "prompt": "Décrivez la procédure optimale para transformer un rapport d'audit Word de 20 pages en una présentation PowerPoint de 10 diapositives respectant la charte de votre empresa y dotée de notes d'orateur.",
+            "successCriteria": [
+              "Verificar que el rapport Word utilise los styles natifs Titre 1 y Titre 2 y comporte una synthèse exécutive.",
+              "Ouvrir un nouveau archivo PowerPoint basé en el modelo officiel de l'empresa avant d'invoquer Copilot.",
+              "Utilizar l'invite « Crear una présentation à partir del archivo » en pointant vers el rapport Word y relire los notes d'orateur générées."
+            ],
+            "feedback": "La structure de los titres Word guide directamente el découpage narratif de PowerPoint, y l'ouverture préalable del modelo garantiza el respect de los masques de diapositives."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "En Word, comment obliger Copilot à rédiger una proposition commerciale en utilisant únicamente vos vrais tarifs y el cahier de los charges ?",
+              "prompt": "En Microsoft Word, vous rédigez una proposition commerciale y souhaitez que Copilot génère una synthèse exécutive fidèle au cahier de los charges del client y à votre grille tarifaire stockés en OneDrive. Quelle manipulation devez-vous effectuer en el volet Copilot ?",
+              "options": [
+                {
+                  "id": "selecteur-slash-fichiers-reference",
+                  "label": "Taper el caractère / en el prompt para attacher el cahier de los charges y la grille tarifaire comme archivos de référence."
+                },
+                {
+                  "id": "coller-captures-bitmap-annexe",
+                  "label": "Insérer de los captures d'écran de los deux archivos en bas de page afin que el correcteur orthographique los lise."
+                },
+                {
+                  "id": "renommer-fichier-meme-dossier",
+                  "label": "Placer los archivos en la corbeille OneDrive para forcer Copilot à rechercher únicamente los versions archivées."
+                },
+                {
+                  "id": "desactiver-styles-titre-word",
+                  "label": "Eliminar tous los styles Titre 1 y Titre 2 del document actif avant d'exécuter la commande de résumé."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "¿Cómo transformer un long document Word en présentation PowerPoint aux couleurs de votre empresa con de los notes para l'oral ?",
+              "prompt": "Una consultante veut Crear una présentation PowerPoint aux couleurs exactes de son cabinet à partir d'un document Word de trente pages, con de los notes d'orateur détaillées sous chaque diapositive. Quelle méthode garantiza el meilleur résultat ?",
+              "options": [
+                {
+                  "id": "modele-ouvert-et-styles-word",
+                  "label": "Structurer el archivo Word con de los styles Titre 1/2, ouvrir el modelo PowerPoint del cabinet puis générer la présentation depuis ce archivo."
+                },
+                {
+                  "id": "renommer-docx-en-pptx",
+                  "label": "Modifier l'extension del archivo .docx en .pptx en l'explorateur Windows avant d'ouvrir el diaporama en mode lecture."
+                },
+                {
+                  "id": "copier-tout-dans-une-diapo",
+                  "label": "Coller los trente pages de texte en una seule zone de titre PowerPoint puis Activar la vérification d'accessibilité."
+                },
+                {
+                  "id": "supprimer-masques-diapositives",
+                  "label": "Effacer tous los masques de diapositives del modelo d'empresa afin d'autoriser la génération de los notes d'orateur."
+                }
+              ]
+            }
+          ],
+          "recap": "Combinez l'ancrage `/` y el coaching de ton en Word con la génération en gabarit ouvert en PowerPoint para industrialiser vos livrables.",
+          "sourceIds": [
+            "ms-copilot-overview",
+            "ms-copilot-privacy"
+          ]
+        },
+        {
+          "id": "excel-formules-complexes-python-anomalies",
+          "title": "Excel : XLOOKUP, LET, LAMBDA, Tableaux Croisés y Python in Excel",
+          "objective": "Générer y Explicar de los formules avancées (XLOOKUP, LET, LAMBDA), construire de los tableaux croisés dynamiques y exécuter una détection d'anomalies con Python in Excel.",
+          "estimatedMinutes": 8,
+          "hook": "Votre directeur financier vous demande en dix minutes de croiser deux tables de ventes con XLOOKUP, d'encapsuler una règle de marge nette con LET y LAMBDA, y d'Aislar los transactions statistiquement anormales con Python in Excel : par quoi commencez-vous ?",
+          "declicCard": {
+            "title": "El Clic Excel : Tableau Structuré + Formules Modernes + Sandbox Python",
+            "diagramTop": "[ES] Plage convertie en Tableau Excel (`Ctrl+T`) ➔ Formules Copilot (`XLOOKUP`, `LET`, `LAMBDA`) & TCD",
+            "diagramBottom": "[ES] Mode Python in Excel (`=PY(...)`) ➔ Conteneur isolé Azure (pandas / statsmodels / seaborn)",
+            "step1": "Formatez toujours vos datos en Tableau Excel nommé con de los en-têtes clairs : c'est el prérequis para que Copilot écrive de los références structurées fiables.",
+            "step2": "Utilisez Copilot para générer XLOOKUP/LET/LAMBDA au quotidien, y activez Python in Excel para los corrélations, régressions y détections d'anomalies.",
+            "rule": "Formules métier réutilisables = LET & LAMBDA · Analyse statistique lourde y détection d'outliers = Python in Excel isolé en Azure."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · XLOOKUP, LET & LAMBDA",
+              "title": "De los formules lisibles, rapides y réutilisables",
+              "bodyParagraph": "Con Copilot en Excel, demandez una recherche multi-critères propre con `XLOOKUP` (con valeur par défaut en cas d'absence), utilisez `LET` para nommer vos variables intermédiaires sin recalculer trois fois la même sous-formule, y encapsulez la logique métier en una fonction `LAMBDA` réutilisable en tout el classeur.",
+              "keyTakeawayPill": "XLOOKUP = recherche robuste · LET = variables locales lisibles · LAMBDA = fonction métier en mesure"
+            },
+            {
+              "stepBadge": "PASO 2 · TABLEAUX CROISÉS & INSIGHTS",
+              "title": "Synthétiser y visualiser en langage naturel",
+              "bodyParagraph": "En un Tableau Excel (`Ctrl+T`), demandez à Copilot : « Crée un tableau croisé dynamique de la marge nette par région y par trimestre y mets en évidence los écarts négatifs ». Copilot propose l'insertion en una nouvelle feuille afin de ne jamais écraser vos datos sources.",
+              "keyTakeawayPill": "Toujours valider en una nouvelle feuille o colonne calculée avant d'altérer la source"
+            },
+            {
+              "stepBadge": "PASO 3 · PYTHON IN EXCEL & ANOMALIES",
+              "title": "Détection d'anomalies en un conteneur Azure isolé",
+              "bodyParagraph": "Activez l'analyse avancée con Python in Excel : Copilot génère una cellule `=PY(...)` utilisant `pandas` y el score Z o l'écart interquartile (IQR) para détecter los transactions atypiques. El code s'exécute en un conteneur hyperviseur isolé en Azure Container Instances, sin acceso au red ni à votre token Entra ID.",
+              "keyTakeawayPill": "Python in Excel = puissance de pandas/seaborn en un bac à sable Azure zéro-red"
+            }
+          ],
+          "keyIdeas": [
+            "Copilot en Excel nécessite que los datos soient organisées en Tableau Excel structuré con de los en-têtes de colonnes explicites.",
+            "`XLOOKUP` remplace avantageusement `VLOOKUP`, `LET` évite la répétition de calculs intermédiaires en nommant de los variables locales, y `LAMBDA` crée de los fonctions personnalisées sin macro VBA.",
+            "Python in Excel exécute los scripts d'analyse y de détection d'anomalies en un conteneur Azure isolé qui ne peut lire que los plages passées via `xl()`."
+          ],
+          "workedExample": {
+            "situation": "Claire, responsable del contrôle de gestion, audite un tableau Excel de 45 000 lignes de facturation (`Ventes_2026`) y cherche los remises commerciales anormales.",
+            "steps": [
+              "Demander à Copilot d'ajouter una colonne calculée utilisant `XLOOKUP` para rapatrier el plafond de remise autorisé par segment client, puis `LET` para calculer el dépassement net.",
+              "Générer un tableau croisé dynamique par direction régionale para visualiser la concentration de los dépassements.",
+              "Activar l'analyse avancée con Python in Excel para identifier toutes los lignes dont el taux de remise dépasse 3 écarts-types (Z-score > 3) en chaque catégorie produit."
+            ],
+            "decision": "Claire identifie 18 commandes aberrantes en cinq minutes con una formule `LET` lisible y un diagnostic Python reproductible."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi una equipo financière debe préférer una combinaison `LET` + `LAMBDA` y Python in Excel plutôt qu'una macro VBA téléchargée en Internet para calculer de los marges ajustées y détecter de los valeurs aberrantes.",
+            "successCriteria": [
+              "Souligner que `LET` y `LAMBDA` sont de los formules natives sin risque d'exécution de macro malveillante en el poste client.",
+              "Rappeler que Python in Excel tourne en un conteneur Azure isolé sin acceso au système de archivos local ni au red.",
+              "Mentionner la nécessité de structurer los datos en Tableau Excel para que Copilot référence proprement los colonnes."
+            ],
+            "feedback": "Los formules modernes (`XLOOKUP`, `LET`, `LAMBDA`) y el bac à sable Python in Excel offrent una auditabilité y una seguridad nettement supérieures aux macros locales non signées."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "En Excel, quelles fonctions modernes permettent de nommer un calcul intermédiaire y d'en faire una formule réutilisable sin macro ?",
+              "prompt": "En Microsoft Excel, vous souhaitez écrire una formule de calcul de prime qui stocke el chiffre d'affaires net y el taux de marge en de los variables intermédiaires nommées afin de ne los évaluer qu'una seule fois, puis transformer cette règle en fonction réutilisable sin VBA. Quelles fonctions demandez-vous à Copilot de combiner ?",
+              "options": [
+                {
+                  "id": "let-et-lambda",
+                  "label": "Utilizar LET para déclarer y réutiliser los variables intermédiaires, puis encapsuler l'expression en LAMBDA."
+                },
+                {
+                  "id": "concat-et-indirect",
+                  "label": "Imbriquer CONCAT y INDIRECT en de los cellules fusionnées dépourvues d'en-têtes de tableau structuré."
+                },
+                {
+                  "id": "recherchev-statique",
+                  "label": "Répéter cinq appels VLOOKUP identiques con un index de colonne fixe en una feuille non formatée."
+                },
+                {
+                  "id": "macro-active-x",
+                  "label": "Enregistrer un contrôle ActiveX local non signé para recalculer la feuille à chaque ouverture red."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Où s'exécute el code Python lancé par Copilot en Excel y peut-il envoyer vos chiffres en Internet ?",
+              "prompt": "Quelle affirmation décrit con exactitude l'architecture de seguridad de Python in Excel lorsqu'il est sollicité par Copilot para détecter de los anomalies ?",
+              "options": [
+                {
+                  "id": "conteneur-isole-azure-xl",
+                  "label": "El code s'exécute en un conteneur isolé en Azure Container Instances sin acceso red externe y ne lit que los plages appelées via xl()."
+                },
+                {
+                  "id": "acces-direct-disque-local",
+                  "label": "El script Python lit directamente el registre Windows local y exporte el token Entra ID de l'usuario vers PyPI."
+                },
+                {
+                  "id": "execution-navigateur-publique",
+                  "label": "Los datos del classeur sont publiées en un dépôt GitHub public temporaire avant el calcul de los écarts-types."
+                },
+                {
+                  "id": "connexion-odbc-directe",
+                  "label": "Chaque cellule Python ouvre un tunnel SSH direct vers los serveurs SQL internes del red local de l'empresa."
+                }
+              ]
+            }
+          ],
+          "recap": "Tableaux Excel structurés + formules `XLOOKUP`/`LET`/`LAMBDA` + Python in Excel en conteneur isolé Azure = el trio gagnant de l'analyste augmenté.",
+          "sourceIds": [
+            "ms-python-excel",
+            "ms-copilot-overview"
+          ]
+        },
+        {
+          "id": "teams-outlook-recap-actions-triage",
+          "title": "Teams & Outlook : récapitulatifs intelligents, actions con propriétaires y triage d'e-mails",
+          "objective": "Exploiter el récapitulatif intelligent de réunion en Teams para extraire los décisions y actions con propriétaires, puis trier y rédiger de los e-mails ciblés con Coaching by Copilot en Outlook.",
+          "estimatedMinutes": 8,
+          "hook": "Quarante-cinq e-mails non lus au retour d'una réunion Teams d'una heure où douze décisions ont été prises : comment transformer ce chaos en una liste d'actions attribuées y trois réponses exécutives en cinq minutes ?",
+          "declicCard": {
+            "title": "El Clic Teams & Outlook : Transcription Active ➔ Actions Attribuées ➔ Triage & Coaching",
+            "diagramTop": "[ES] Teams (Transcription activée) ➔ Intelligent Recap : Décisions + Actions + Propriétaires + Citations horodatées",
+            "diagramBottom": "[ES] Outlook ➔ Résumé de fil + Coaching de ton/clarté + Brouillon d'e-mail de suivi",
+            "step1": "Activez systématiquement la transcription (o l'enregistrement) dès el début de la réunion Teams para alimenter l'extraction structurée.",
+            "step2": "En Outlook, résumez d'abord los longs fils, utilisez Coaching by Copilot para Verificar el ton y l'appel à l'action, puis envoyez après relecture.",
+            "rule": "Pas de transcription Teams = pas de mémoire de réunion vérifiable ; chaque action extraite debe avoir un propriétaire y una échéance."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · INTELLIGENT MEETING RECAP",
+              "title": "Capturer décisions, désaccords y actions par propriétaire",
+              "bodyParagraph": "En Teams, dès que la transcription est active, demandez à Copilot : « Liste los décisions validées, los points restés en suspens y présente en un tableau chaque action à suivre con son propriétaire y son échéance ». Chaque point renvoie au moment exact de la réunion.",
+              "keyTakeawayPill": "[ES] Tableau d'actions = Tâche + Propriétaire nommé + Échéance + Citation horodatée"
+            },
+            {
+              "stepBadge": "PASO 2 · TRIAGE OUTLOOK",
+              "title": "[ES] Résumer un fil de 25 réponses en un coup d'œil",
+              "bodyParagraph": "En Outlook, au lieu de dérouler vingt-cinq messages imbriqués del bas vers el haut, cliquez en « Résumer con Copilot » en haut del fil : Copilot isole los demandes qui vous sont adressées, los blocages signalés y los pièces jointes mentionnées con de los numéros de citation renvoyant aux messages exacts.",
+              "keyTakeawayPill": "[ES] Résumé de fil Outlook = Ce qui a été décidé + Ce qu'on attend de vous maintenant"
+            },
+            {
+              "stepBadge": "PASO 3 · RÉDACTION & COACHING BY COPILOT",
+              "title": "Ajuster el ton, el ressenti del lecteur y la clarté",
+              "bodyParagraph": "Avant d'envoyer un e-mail délicat (escalade fournisseur, arbitrage budgétaire), lancez « Coaching by Copilot » en Outlook : il analyse séparément el ton, el ressenti del destinataire y la clarté de votre demande, puis propose de los reformulations concrètes avant que vous ne génériez el brouillon final.",
+              "keyTakeawayPill": "Coaching by Copilot = Analyse del ton + Ressenti lecteur + Clarté de l'appel à l'action"
+            }
+          ],
+          "keyIdeas": [
+            "L'extraction d'actions y el récapitulatif intelligent en Teams s'appuient en la transcription de la réunion (con attribution par intervenant).",
+            "Una bonne invite de fin de réunion distingue los décisions actées, los questions non tranchées y el tableau de los actions (Propriétaire, Action, Échéance).",
+            "En Outlook, la synthèse de fil accélère el triage y Coaching by Copilot évalue el ton, l'impact émotionnel y la clarté avant l'envoi."
+          ],
+          "workedExample": {
+            "situation": "Mehdi anime el comité hebdomadaire de mise en production en Teams con douze intervenants, puis debe envoyer el relevé de décisions par Outlook à la direction.",
+            "steps": [
+              "Verificar dès l'ouverture del comité que la transcription con identification de los orateurs est active en Teams.",
+              "Cinq minutes avant la fin, demander à Copilot en Teams de dresser el tableau de los actions par propriétaire y de el lire à voix haute para validation en séance.",
+              "Coller ce tableau en un brouillon Outlook, Utilizar Copilot para rédiger l'introduction exécutive y passer « Coaching by Copilot » para rendre l'appel à validation limpide."
+            ],
+            "decision": "El compte rendu est envoyé deux minutes après la clôture de la réunion, sin aucune ambiguïté en los responsables d'action."
+          },
+          "practice": {
+            "prompt": "Rédigez el prompt exact que vous utiliseriez en Microsoft Teams en fin de réunion projet para obtenir un compte rendu actionnable, puis indiquez comment Verificar qu'aucune action n'a été attribuée à tort.",
+            "successCriteria": [
+              "Demander una séparation explicite entre los décisions validées, los risques ouverts y el tableau de los actions (Action, Propriétaire, Date cible).",
+              "Cliquer en los citations horodatées de la transcription para Verificar que la personne citée a bien accepté l'action.",
+              "Compartir el tableau validé en el fil de réunion o en Outlook."
+            ],
+            "feedback": "L'attribution automatique par reconnaissance vocale debe toujours être confirmée en séance o via l'horodatage de la transcription avant diffusion officielle."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "Vous arrivez en retard en una réunion Teams. À quelle condition Copilot peut-il vous résumer ce qui s'est dit avant votre arrivée ?",
+              "prompt": "Vous rejoignez una réunion Microsoft Teams vingt minutes après son début y souhaitez que Copilot vous résume los décisions déjà prises y dresse la liste de los actions attribuées à chaque participant. Quelle condition debe être réunie ?",
+              "options": [
+                {
+                  "id": "transcription-ou-enregistrement-actif",
+                  "label": "La transcription o l'enregistrement con identification de los intervenants debe être activé pendant la réunion."
+                },
+                {
+                  "id": "partage-ecran-4k-obligatoire",
+                  "label": "Tous los participants deben Compartir simultanément leur écran principal en haute résolution."
+                },
+                {
+                  "id": "microphone-coupe-organisateur",
+                  "label": "L'organisateur debe couper son microphone y Desactivar el canal de discussion écrit de la réunion."
+                },
+                {
+                  "id": "invitation-externe-anonyme",
+                  "label": "La réunion debe être configurée en acceso anonyme sin authentification Microsoft Entra ID."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "En Outlook, à quoi sert l'option « Coaching by Copilot » en un e-mail que vous avez déjà écrit ?",
+              "prompt": "En Microsoft Outlook, quelle est la fonction spécifique de « Coaching by Copilot » lors de la préparation d'un courriel complexe ?",
+              "options": [
+                {
+                  "id": "analyse-ton-ressenti-clarte",
+                  "label": "Évaluer el ton, el ressenti potentiel del lecteur y la clarté del message en proposant de los pistes d'amélioration ciblées."
+                },
+                {
+                  "id": "envoi-automatique-sans-clic",
+                  "label": "Expédier automáticamente tous los brouillons en attente vers los listes de distribution externes à minuit."
+                },
+                {
+                  "id": "chiffrement-smime-certificat",
+                  "label": "Générer un certificat racine S/MIME matériel en la carte à puce de l'expéditeur."
+                },
+                {
+                  "id": "suppression-pieces-jointes",
+                  "label": "Eliminar définitivement los pièces jointes volumineuses de la boîte aux lettres Exchange Online."
+                }
+              ]
+            }
+          ],
+          "recap": "Transcription Teams active + tableau d'actions horodaté + résumé y Coaching Outlook = zéro réunion sin suite y zéro e-mail confus.",
+          "sourceIds": [
+            "ms-copilot-overview",
+            "ms-copilot-pages"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "agents-m365-copilot-studio-gouvernance",
+      "unitNumber": 3,
+      "title": "Unidad 3 · Agents M365 Copilot, Copilot Studio & Gobernanza Purview",
+      "subtitle": "Agents déclaratifs vs agents personnalisés y autonomes en Copilot Studio, déclencheurs événementiels, connecteurs/actions y gobernanza Purview / SharePoint.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Elegir entre un agent déclaratif y un agent autonome Copilot Studio, Configurar un déclencheur événementiel con connecteurs sécurisés y appliquer la gobernanza Purview + SharePoint Advanced Management.",
+      "memoKeyTopics": [
+        "Arbitrage architectural : Agent déclaratif en M365 Copilot vs Agent personnalisé y autonome en Microsoft Copilot Studio",
+        "Déclencheurs événementiels (Dataverse, courriel, planification), actions/connecteurs Power Platform y authentification usuario vs auteur",
+        "Gobernanza d'empresa : étiquettes de sensibilité Microsoft Purview, politiques DLP Power Platform y SharePoint Advanced Management (SAM)"
+      ],
+      "memoGoldenRule": "Utilisez un agent déclaratif para spécialiser M365 Copilot en un périmètre documentaire/API, y Copilot Studio dès qu'il faut un déclencheur événementiel autonome, un flux d'orchestration dédié o un déploiement multicanal.",
+      "architectureSchema": {
+        "title": "[ES] Architecture comparée : Agent Déclaratif M365 vs Agent Autonome Copilot Studio",
+        "diagram": "[ES] [Agent Déclaratif : Instructions + Sources SharePoint/Graph + Actions ➔ Orchestrateur M365 Copilot] vs [Agent Autonome Copilot Studio : Event Trigger (Dataverse/Mail) ➔ Orchestrateur dédié + Connecteurs + Approbation humaine ➔ Audit Purview & DLP]",
+        "components": [
+          {
+            "name": "[ES] Agent Déclaratif M365 Copilot",
+            "role": "S'exécute au sein de l'orchestrateur Microsoft 365 Copilot con de los instructions métier, un périmètre de connaissances ciblé y de los actions API."
+          },
+          {
+            "name": "[ES] Agent Autonome Copilot Studio",
+            "role": "Réagit à de los événements système sin prompt humain initial, exécute de los raisonnements multi-étapes, appelle de los connecteurs Power Platform/MCP y escalade si nécessaire."
+          },
+          {
+            "name": "Gobernanza Purview, DLP & SharePoint SAM",
+            "role": "Contrôle quels connecteurs un agent peut invoquer (DLP), propage los étiquettes de sensibilité Purview y bloque el en-partage documentaire SharePoint."
+          }
+        ],
+        "securityInvariant": "Aucune action d'écriture en un système d'enregistrement critique (ERP, SIRH, CRM) ne debe s'exécuter con un compte privilégié partagé sin contrôle DLP y validation explicite."
+      },
+      "lessons": [
+        {
+          "id": "agents-declaratifs-vs-copilot-studio",
+          "title": "Agents déclaratifs M365 vs Agents personnalisés y autonomes en Copilot Studio",
+          "objective": "Distinguer l'architecture, el mode d'orchestration y los cas d'usage d'un agent déclaratif Microsoft 365 Copilot y d'un agent personnalisé o autonome en Copilot Studio.",
+          "estimatedMinutes": 8,
+          "hook": "Votre DSI debe livrer deux assistants : un coach réglementaire interrogé par los salariés en M365 Copilot y un agent qui traite tout seul chaque nouveau litige fournisseur arrivé en Dataverse. ¿Por qué ne faut-il pas Utilizar el même type d'agent para los deux ?",
+          "declicCard": {
+            "title": "El Clic Architecture : Agent Déclaratif vs Agent Autonome Copilot Studio",
+            "diagramTop": "Agent Déclaratif = Spécialiste conversationnel hébergé En l'orchestrateur M365 Copilot",
+            "diagramBottom": "[ES] Agent Autonome Copilot Studio = Moteur propre + Déclencheurs d'événements + Canaux multiples",
+            "step1": "Un agent déclaratif ajoute de los instructions, un périmètre SharePoint/Graph y de los actions à l'orchestrateur M365 Copilot existant.",
+            "step2": "Un agent Copilot Studio possède son propre orchestrateur, de los topics déterministes, de los déclencheurs événementiels y peut agir sin prompt usuario.",
+            "rule": "Invoqué par l'usuario en M365 = Agent déclaratif · Réagit seul à un événement métier o exige un flux en mesure = Copilot Studio."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · L'AGENT DÉCLARATIF",
+              "title": "Spécialiser M365 Copilot sin gérer d'infrastructure",
+              "bodyParagraph": "Un agent déclaratif se définit par un manifeste déclaratif (créé via Copilot Studio Lite / Agent Builder o TypeSpec/Teams Toolkit) : vous fixez ses instructions système, vous ciblez únicamente trois sites SharePoint officiels (au lieu de tout el tenant) y vous ajoutez éventuellement de los actions REST. Il tourne directamente en l'orchestrateur de Microsoft 365 Copilot.",
+              "keyTakeawayPill": "Agent déclaratif = Instructions + Sources bornées + Actions en l'orchestrateur M365 Copilot"
+            },
+            {
+              "stepBadge": "PASO 2 · L'AGENT PERSONNALISÉ COPILOT STUDIO",
+              "title": "Contrôler l'orchestration, los modelos y los canaux",
+              "bodyParagraph": "En Microsoft Copilot Studio complet, vous construisez un agent personnalisé qui dispose de son propre orchestrateur génératif, de parcours conversationnels déterministes (Topics) para los processus réglementés, d'Adaptive Cards interactives y d'una publication en Teams, SharePoint, Web o M365 Copilot.",
+              "keyTakeawayPill": "[ES] Agent personnalisé Copilot Studio = Orchestrateur dédié + Topics hybrides + Multicanal"
+            },
+            {
+              "stepBadge": "PASO 3 · L'AGENT AUTONOME",
+              "title": "Agir en déclencheur événementiel sin attendre un humain",
+              "bodyParagraph": "La grande différence d'un agent autonome en Copilot Studio est qu'il n'attend pas qu'un usuario ouvre una fenêtre de chat : un événement système (nouvelle ligne Dataverse, e-mail reçu en una boîte partagée, alerte IoT) el réveille, il raisonne en ses instructions, appelle ses outils y notifie un humain para décision finale.",
+              "keyTakeawayPill": "[ES] Agent autonome = Déclencheur d'événement (Event Trigger) + Planification d'outils + Escalade humaine"
+            }
+          ],
+          "keyIdeas": [
+            "Un agent déclaratif étend Microsoft 365 Copilot en cadrant ses instructions y ses sources de connaissances sin Crear de moteur d'orchestration séparé.",
+            "Un agent personnalisé en Copilot Studio combine orchestration générative y noeuds déterministes (Topics, Adaptive Cards, variables globales) y peut être publié en de multiples canaux.",
+            "Un agent autonome en Copilot Studio est activé par de los déclencheurs événementiels (triggers) y exécute de los tâches en arrière-plan."
+          ],
+          "workedExample": {
+            "situation": "Una compagnie d'assurance souhaite (A) permettre aux gestionnaires de poser de los questions en el manuel d'indemnisation 2026 en M365 Copilot, y (B) pré-analyser automáticamente chaque déclaration de sinistre déposée en Dataverse à 2 h del matin.",
+            "steps": [
+              "Para el besoin (A), Crear un agent déclaratif ancré exclusivement en la bibliothèque SharePoint validée del manuel d'indemnisation 2026.",
+              "Para el besoin (B), Crear un agent autonome en Copilot Studio doté d'un déclencheur Dataverse « Lorsqu'una déclaration est créée ».",
+              "Configurar l'agent autonome para Verificar la complétude de los pièces, préparer la fiche de synthèse y Crear una tâche d'approbation para el gestionnaire au matin."
+            ],
+            "decision": "L'architecture sépare proprement l'assistance interactive (agent déclaratif) y el traitement événementiel nocturne (agent autonome Copilot Studio)."
+          },
+          "practice": {
+            "prompt": "Para chacun de los trois cas suivants, justifiez el choix entre un agent déclaratif M365 y un agent autonome Copilot Studio : (1) Assistant guide de voyage interne, (2) Agent de rapprochement automatique de los factures fournisseurs dès réception d'un e-mail PDF, (3) Portail client externe en el site web public.",
+            "successCriteria": [
+              "Asociar el cas (1) à un agent déclaratif M365 Copilot ancré en el site SharePoint de la politique voyage.",
+              "Asociar el cas (2) à un agent autonome Copilot Studio doté d'un déclencheur en boîte aux lettres partagée y d'actions d'extraction/ERP.",
+              "Asociar el cas (3) à un agent personnalisé Copilot Studio publié en un canal web externe (car un agent déclaratif M365 est réservé aux usuarios internes del tenant)."
+            ],
+            "feedback": "El canal cible (interne M365 vs web externe) y el mode de déclenchement (prompt usuario vs événement système) déterminent immédiatement la bonne famille d'agent."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel type d'agent Elegir si l'agent debe se déclencher tout seul dès qu'un bon de livraison arrive, sin qu'un humain lui parle ?",
+              "prompt": "Un equipo achats veut qu'un agent surveille en continu l'arrivée de nouveaux bons de livraison en una table Dataverse, vérifie la conformité con la commande SAP y prépare un bon à payer sin qu'un employé n'ait à ouvrir el chat. Quel type d'agent faut-il concevoir ?",
+              "options": [
+                {
+                  "id": "agent-autonome-copilot-studio",
+                  "label": "Un agent autonome en Microsoft Copilot Studio configuré con un déclencheur événementiel Dataverse y un connecteur SAP."
+                },
+                {
+                  "id": "agent-declaratif-sharepoint-seul",
+                  "label": "Un agent déclaratif Microsoft 365 Copilot limité à la lecture statique d'una bibliothèque SharePoint sin déclencheur."
+                },
+                {
+                  "id": "composant-loop-tableau-word",
+                  "label": "Un tableau Microsoft Loop collé en un document Word local sin connexion au système Dataverse."
+                },
+                {
+                  "id": "regle-mise-en-forme-excel",
+                  "label": "Una règle de mise en forme conditionnelle en un classeur Excel fermé en el poste de l'acheteur."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "¿Cuándo suffit-il de Crear un simple agent déclaratif en Microsoft 365 Copilot ?",
+              "prompt": "Quel est l'avantage principal d'un agent déclaratif en Microsoft 365 Copilot para répondre aux questions de los collaborateurs en una procédure interne ?",
+              "options": [
+                {
+                  "id": "cadrage-sources-sur-orchestrateur-m365",
+                  "label": "Il restreint l'ancrage aux sources SharePoint autorisées y applique de los instructions métier dédiées tout en réutilisant l'orchestrateur M365 Copilot."
+                },
+                {
+                  "id": "publication-publique-anonyme-web",
+                  "label": "Il permite d'exposer gratuitement los documents internes aux visiteurs anonymes en el site Internet public de l'empresa."
+                },
+                {
+                  "id": "contournement-licences-et-droits",
+                  "label": "Il accorde aux usuarios l'acceso en lecture aux archivos SharePoint confidentiels en lesquels ils n'ont aucune permission."
+                },
+                {
+                  "id": "entrainement-poids-llm-sur-mesure",
+                  "label": "Il compile un nouveau modelo de langage à partir de zéro à chaque modification d'un paragraphe de la procédure."
+                }
+              ]
+            }
+          ],
+          "recap": "Agent déclaratif = spécialisation interactive en M365 Copilot ; Agent autonome Copilot Studio = réaction événementielle y orchestration multi-systèmes.",
+          "sourceIds": [
+            "ms-copilot-studio",
+            "ms-copilot-overview"
+          ]
+        },
+        {
+          "id": "declencheurs-actions-connecteurs-orchestration",
+          "title": "Déclencheurs événementiels, actions, connecteurs y seguridad d'invocation",
+          "objective": "Configurar los déclencheurs événementiels, los actions/connecteurs Power Platform y Elegir el mode d'authentification (usuario vs auteur) en Copilot Studio.",
+          "estimatedMinutes": 8,
+          "hook": "Un agent qui peut Crear un ticket Jira, modifier una opportunité CRM y envoyer un message Teams est ultra-puissant : comment empêcher qu'un usuario non autorisé ne se serve de l'agent para exécuter una action au-dessus de ses derechos ?",
+          "declicCard": {
+            "title": "El Clic Actions & Connecteurs : Descriptions Claires + Identidad de l'Appelant",
+            "diagramTop": "Orchestrateur Génératif lit la description de l'Action + de los paramètres d'entrée",
+            "diagramBottom": "Exécution via Connecteur : Authentification de l'usuario (recommandé) vs Compte de l'auteur",
+            "step1": "Soignez la description fonctionnelle de chaque action y de chaque paramètre : l'orchestrateur génératif s'en sert para Elegir el bon outil.",
+            "step2": "Privilégiez l'authentification de l'usuario final (`User authentication`) en los actions sensibles y exigez una confirmation avant écriture.",
+            "rule": "Una action d'écriture critique ne debe jamais s'exécuter silencieusement sous un compte administrateur partagé."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · SÉLECTION GÉNÉRATIVE D'OUTILS",
+              "title": "¿Cómo l'orchestrateur choisit la bonne Action",
+              "bodyParagraph": "En mode d'orchestration générative en Copilot Studio, l'agent décide dynamiquement quelle action o quel connecteur appeler en lisant sa description y el typage de ses entrées. Una description vague (« Action 1 ») provoque de los erreurs d'appel ; una description précise (« Recherche el statut d'una commande SAP à partir d'un numéro au format CMD-XXXXXX ») fiabilise l'agent.",
+              "keyTakeawayPill": "Description explicite de l'outil + format de los paramètres = routage d'action fiable"
+            },
+            {
+              "stepBadge": "PASO 2 · AUTHENTIFICATION De CONNEXION",
+              "title": "Identidad de l'usuario vs Identidad de l'auteur",
+              "bodyParagraph": "Chaque action connectée en Copilot Studio offre un choix d'authentification crucial : 1. Utilizar los informations d'identification de l'usuario final (recommandé : respecte los derechos individuels en el CRM/ERP) · 2. Utilizar la connexion fournie par l'auteur (únicamente para de los lectures publiques internes non sensibles o de los agents autonomes bornés par un compte de service dédié au menor privilegio).",
+              "keyTakeawayPill": "Action interactive = Identidad de l'usuario · Agent autonome = Compte de service à menor privilegio"
+            },
+            {
+              "stepBadge": "PASO 3 · DÉCLENCHEURS & BOUCLE INFINIE",
+              "title": "Filtrer los événements dès el déclencheur",
+              "bodyParagraph": "En un agent autonome déclenché par una modification de ligne Dataverse o un e-mail, ajoutez toujours de los conditions de filtrage en el déclencheur (ex. `statut == 'Soumis'` y `modifiéPar != CompteAgent`) afin d'éviter que la mise à jour effectuée par l'agent lui-même ne el redéclenche en boucle !",
+              "keyTakeawayPill": "Toujours filtrer el trigger y exclure los écritures produites par l'agent lui-même"
+            }
+          ],
+          "keyIdeas": [
+            "L'orchestrateur génératif de Copilot Studio s'appuie en los descriptions d'actions y de paramètres para planifier y chaîner ses appels d'outils.",
+            "L'authentification au nom de l'usuario (`End-user credentials`) empêche toute élévation de privilège via l'agent lors d'actions interactives.",
+            "Los déclencheurs événementiels d'un agent autonome deben comporter de los filtres d'entrée stricts para prévenir los boucles d'auto-déclenchement y Dominar la consommation."
+          ],
+          "workedExample": {
+            "situation": "Un arquitecto CertiGo revoit un agent Copilot Studio qui permite aux commerciaux de consulter y d'accorder de los remises en Dynamics 365. Lors del test, un stagiaire parvient à valider una remise de 40 % car l'action utilisait la connexion del directeur commercial auteur de l'agent.",
+            "steps": [
+              "Basculer immédiatement la configuration de l'action Dynamics 365 de « Authentification de l'auteur » vers « Authentification de l'usuario ».",
+              "Activar la demande de confirmation explicite con résumé de los paramètres (montant, client, taux de remise) avant l'appel d'écriture.",
+              "Ajouter una règle métier déterministe qui redirige toute remise supérieure à 15 % vers un flux d'approbation managériale."
+            ],
+            "decision": "L'élévation de privilège est éliminée : chaque commercial agit únicamente con ses propres derechos Dynamics 365."
+          },
+          "practice": {
+            "prompt": "Un agent autonome se déclenche lorsqu'un ticket est mis à jour en ServiceNow, ajoute un commentaire de diagnostic en ce même ticket, puis se redéclenche indéfiniment. Expliquez comment corriger ce défaut d'architecture.",
+            "successCriteria": [
+              "Identifier la boucle d'auto-déclenchement : l'écriture del commentaire par l'agent constitue elle-même una mise à jour del ticket.",
+              "Ajouter una condition de filtrage en el déclencheur (par exemple únicamente à la création, o lorsque l'auteur de la modification n'est pas el compte de service de l'agent).",
+              "[ES] Positionner un indicateur d'état (`diagnostic_effectue = true`) vérifié avant tout traitement."
+            ],
+            "feedback": "Tout déclencheur en événement de mise à jour debe filtrer l'identidad de l'émetteur y l'état fonctionnel para garantir l'idempotence."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "Quel est el danger si un agent utilise el compte administrateur de son créateur au lieu del compte de l'employé qui lui parle ?",
+              "prompt": "Un créateur configure en Copilot Studio una action permettant de modifier el RIB d'un fournisseur en l'ERP en choisissant « Utilizar los informations d'identification de l'auteur de l'agent » (qui possède el rôle Administrateur Achats). Quel risque majeur cette configuration introduit-elle ?",
+              "options": [
+                {
+                  "id": "elevation-privileges-via-auteur",
+                  "label": "Una élévation de privilèges : n'importe quel usuario de l'agent peut modifier un RIB con los derechos administrateur de l'auteur."
+                },
+                {
+                  "id": "compression-automatique-json",
+                  "label": "Una perte de précision décimale causée par la compression binaire de los réponses JSON del connecteur."
+                },
+                {
+                  "id": "expiration-licence-word",
+                  "label": "Una désactivation automatique del correcteur grammatical en l'application de bureau Microsoft Word."
+                },
+                {
+                  "id": "blocage-transcription-teams",
+                  "label": "Una impossibilité d'enregistrer los réunions vidéo en los canaux standards de Microsoft Teams."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "¿Cómo éviter qu'un agent Copilot Studio confonde deux outils qui ont de los noms proches ?",
+              "prompt": "En Microsoft Copilot Studio, comment aider l'orchestrateur génératif à Elegir sin erreur entre deux actions proches (« Rechercher una facture payée » y « Rechercher un avoir en litige ») ?",
+              "options": [
+                {
+                  "id": "descriptions-detaillees-actions-parametres",
+                  "label": "Rédiger de los descriptions fonctionnelles distinctes y explicites en chaque action ainsi que en chacun de leurs paramètres d'entrée."
+                },
+                {
+                  "id": "noms-identiques-abrevises",
+                  "label": "Nommer los deux actions con el même identifiant court y laisser la description vide para réduire los tokens."
+                },
+                {
+                  "id": "augmenter-temperature-maximale",
+                  "label": "Augmenter la température d'échantillonnage au maximum afin que l'agent alterne aléatoirement entre los deux outils."
+                },
+                {
+                  "id": "supprimer-validation-types",
+                  "label": "Convertir tous los paramètres typés en chaînes libres non documentées sin exemple de format attendu."
+                }
+              ]
+            }
+          ],
+          "recap": "De los descriptions d'outils précises, l'authentification de l'usuario final y el filtrage de los déclencheurs garantissent de los agents fiables y sûrs.",
+          "sourceIds": [
+            "ms-copilot-studio",
+            "ms-copilot-privacy"
+          ]
+        },
+        {
+          "id": "gouvernance-purview-sharepoint-agents",
+          "title": "Partage y gobernanza Purview, DLP & SharePoint para Copilot y ses Agents",
+          "objective": "Mettre en œuvre la gobernanza de bout en bout de los agents y de Microsoft 365 Copilot con Microsoft Purview, los politiques DLP Power Platform y SharePoint Advanced Management.",
+          "estimatedMinutes": 8,
+          "hook": "¿Cómo autoriser 500 métiers à Crear de los agents utiles tout en garantissant à 100 % qu'aucun agent ne publie de secret en un webhook externe y que los étiquettes « Très Confidentiel » restent inviolables ?",
+          "declicCard": {
+            "title": "El Clic Gobernanza : SAM (Avant) + Purview (Pendant) + DLP (En los Connecteurs)",
+            "diagramTop": "1. SharePoint SAM (Stoppe el en-partage) ➔ 2. Purview Labels (Héritage de sensibilité)",
+            "diagramBottom": "3. Power Platform DLP (Bloque los connecteurs non autorisés) + Centre d'administration M365",
+            "step1": "Auditez los sites trop ouverts con SharePoint Advanced Management (SAM) y activez l'héritage de los étiquettes de sensibilité Purview.",
+            "step2": "Appliquez de los politiques DLP en Power Platform para interdire el couplage entre connecteurs métier (Business) y connecteurs externes/HTTP (Blocked).",
+            "rule": "Pas de déploiement d'agent à l'échelle sin classification DLP de los connecteurs y audit de los permisos SharePoint."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "PASO 1 · HÉRITAGE D'ÉTIQUETTES PURVIEW",
+              "title": "La protection suit la donnée jusque en la respuesta IA",
+              "bodyParagraph": "Lorsque Microsoft 365 Copilot résume un document portant l'étiquette Microsoft Purview « Confidentiel - Interne », la respuesta générée o el nouveau document créé hérite automáticamente de cette étiquette y de ses restrictions (interdiction de copier/extraire si el droit Extract n'est pas accordé à l'usuario).",
+              "keyTakeawayPill": "[ES] Source étiquetée Purview ➔ Héritage automatique de l'étiquette la plus restrictive"
+            },
+            {
+              "stepBadge": "PASO 2 · SHAREPOINT ADVANCED MANAGEMENT",
+              "title": "Éliminer el en-partage avant qu'il ne devienne visible",
+              "bodyParagraph": "Los rapports de gobernanza d'acceso aux datos (DAG) de SharePoint Advanced Management identifient los sites partagés con « Tout el monde sauf los usuarios externes » (EEEU). En attendant la remédiation par los propriétaires de sites, Restricted SharePoint Search o l'exclusion de sites empêche l'indexation indésirable.",
+              "keyTakeawayPill": "Rapports DAG (SAM) = détecter los liens EEEU · Gobernanza d'acceso = corriger à la source"
+            },
+            {
+              "stepBadge": "PASO 3 · DLP POWER PLATFORM & APPROBATION D'AGENTS",
+              "title": "Encadrer el partage y los connecteurs en Copilot Studio",
+              "bodyParagraph": "En Power Platform Admin Center, los politiques DLP classent los connecteurs en Business, Non-Business y Blocked, y peuvent bloquer los canaux de publication non authentifiés o los webhooks HTTP sortants. Enfin, la publication d'un agent à l'échelle de l'organisation passe par la validation de l'administrateur en el centre d'administration Microsoft 365.",
+              "keyTakeawayPill": "[ES] Politiques DLP = barrière anti-exfiltration · Publication organisationnelle = validation Admin M365"
+            }
+          ],
+          "keyIdeas": [
+            "Microsoft Purview assure l'héritage de l'étiquette de sensibilité la plus stricte parmi los documents sources consultés par Copilot y journalise los interactions à de los fins d'audit y d'eDiscovery.",
+            "SharePoint Advanced Management (SAM) détecte y corrige los sites en-partagés (liens à l'échelle de l'organisation, groupes EEEU) avant qu'ils n'exposent de los datos via la recherche Graph.",
+            "Los politiques de prévention de los pertes de datos (DLP) de Power Platform empêchent un agent Copilot Studio de combiner una source interne sensible con un connecteur externe non approuvé."
+          ],
+          "workedExample": {
+            "situation": "Un banco d'investissement déploie un programme Citizen Developer autour de Copilot Studio y veut empêcher qu'un agent créé par un métier ne lise una liste SharePoint interne para l'envoyer vers un service web tiers.",
+            "steps": [
+              "Crear un environnement Power Platform dédié aux créateurs métiers con una politique DLP classant SharePoint y Dataverse en « Business » y bloquant los connecteurs HTTP génériques y réseaux sociaux en « Blocked ».",
+              "Activar l'inspection de los rapports de gobernanza d'acceso (DAG) en SharePoint Advanced Management para retirer los permisos « Tout el monde » en los sites de projets.",
+              "Soumettre toute publication d'agent en el catalogue d'empresa Microsoft 365 à la file d'approbation del centre d'administration M365."
+            ],
+            "decision": "Los métiers innovent librement en un bac à sable où l'exfiltration de datos par connecteur tiers est techniquement bloquée par la politique DLP."
+          },
+          "practice": {
+            "prompt": "Dressez la liste de contrôle de seguridad en trois volets (SharePoint, Purview, Power Platform DLP) qu'un RSSI debe valider avant d'ouvrir la création y el partage d'agents à un nouveau département.",
+            "successCriteria": [
+              "Volet SharePoint : auditer los partages larges (EEEU / liens d'empresa) via los rapports DAG de SharePoint Advanced Management y révoquer los acceso obsolètes.",
+              "Volet Purview : Verificar los étiquettes de sensibilité (cifrado y droit d'extraction) ainsi que la journalisation d'audit y los politiques de rétention de los prompts Copilot.",
+              "Volet Power Platform : appliquer una politique DLP isolant los connecteurs métier (Business), bloquant los connecteurs non approuvés y restreignant el partage d'agents."
+            ],
+            "feedback": "Cette défense en profondeur couvre los trois vecteurs de risque : la donnée au repos (SharePoint), la donnée en usage (Purview) y la donnée en transit vers de los outils (DLP)."
+          },
+          "questions": [
+            {
+              "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Si Copilot résume ensemble un document « Public » y un document « Confidentiel Direction », quel niveau de confidentialité reçoit el résumé ?",
+              "prompt": "Un usuario demande à Microsoft 365 Copilot de fusionner en una note deux archivos Word : el premier est étiqueté « Public » y el second « Confidentiel - Direction » en Microsoft Purview. Quelle étiquette de sensibilité est appliquée au contenu généré ?",
+              "options": [
+                {
+                  "id": "heritage-etiquette-plus-restrictive",
+                  "label": "El contenu généré hérite automáticamente de l'étiquette la plus restrictive (« Confidentiel - Direction ») y de ses protections."
+                },
+                {
+                  "id": "heritage-etiquette-moins-restrictive",
+                  "label": "El contenu adopte l'étiquette « Public » afin de faciliter el partage de la synthèse en los canaux externes."
+                },
+                {
+                  "id": "suppression-toutes-etiquettes",
+                  "label": "Toutes los étiquettes sont effacées tant que l'administrateur général n'ouvre pas el archivo manuellement."
+                },
+                {
+                  "id": "blocage-total-fichiers-publics",
+                  "label": "Copilot refuse systématiquement de lire un archivo « Public » dès qu'una licence Purview est présente en el tenant."
+                }
+              ]
+            },
+            {
+              "id": "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "Quel réglage de seguridad empêche un agent Copilot Studio d'envoyer de los documents internes SharePoint vers un site externe ?",
+              "prompt": "¿Qué mecanismo empêche un agent Microsoft Copilot Studio de lire de los datos internes en SharePoint y de los transmettre vers un webhook HTTP externe non approuvé ?",
+              "options": [
+                {
+                  "id": "politique-dlp-power-platform",
+                  "label": "Una politique DLP Power Platform séparant SharePoint (groupe Business) y classant el connecteur HTTP externe en Blocked."
+                },
+                {
+                  "id": "theme-visuel-teams",
+                  "label": "El changement de thème de couleurs de l'application Microsoft Teams en el poste del créateur de l'agent."
+                },
+                {
+                  "id": "regle-mise-en-page-word",
+                  "label": "La configuration de los marges d'impression par défaut en el modelo Normal.dotm de Microsoft Word."
+                },
+                {
+                  "id": "compression-archive-onedrive",
+                  "label": "L'activation de la synchronisation de los archivos à la demande en el client OneDrive de l'usuario."
+                }
+              ]
+            }
+          ],
+          "recap": "SharePoint SAM nettoie los acceso, Microsoft Purview protège y trace la sensibilité de los contenus, y Power Platform DLP verrouille los connecteurs de los agents.",
+          "sourceIds": [
+            "ms-copilot-privacy",
+            "ms-copilot-studio"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "m365-copilot-agents-mock-exam",
+    "title": "Examen de Práctica CertiGo Pro: Microsoft 365 Copilot, Copilot Cowork, Copilot Studio & Gobernanza Purview",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète de maîtrise de l'écosystème Microsoft 365 Copilot : ancrage Microsoft Graph, délégation asynchrone Copilot Cowork, Copilot Pages & Loop, Word/PowerPoint/Excel/Teams/Outlook, agents déclaratifs vs agents autonomes Copilot Studio y gobernanza Purview / DLP / SAM.",
+    "questionIds": [
+      "m365-copilot-agents.microsoft-graph-grounding-work-iq.001",
+      "m365-copilot-agents.microsoft-graph-grounding-work-iq.002",
+      "m365-copilot-agents.copilot-cowork-delegation-asynchrone.001",
+      "m365-copilot-agents.copilot-cowork-delegation-asynchrone.002",
+      "m365-copilot-agents.collaboration-loop-copilot-pages.001",
+      "m365-copilot-agents.collaboration-loop-copilot-pages.002",
+      "m365-copilot-agents.word-powerpoint-redaction-narration.001",
+      "m365-copilot-agents.word-powerpoint-redaction-narration.002",
+      "m365-copilot-agents.excel-formules-complexes-python-anomalies.001",
+      "m365-copilot-agents.excel-formules-complexes-python-anomalies.002",
+      "m365-copilot-agents.teams-outlook-recap-actions-triage.001",
+      "m365-copilot-agents.teams-outlook-recap-actions-triage.002",
+      "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.001",
+      "m365-copilot-agents.agents-declaratifs-vs-copilot-studio.002",
+      "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.001",
+      "m365-copilot-agents.declencheurs-actions-connecteurs-orchestration.002",
+      "m365-copilot-agents.gouvernance-purview-sharepoint-agents.001",
+      "m365-copilot-agents.gouvernance-purview-sharepoint-agents.002"
+    ]
+  }
+}

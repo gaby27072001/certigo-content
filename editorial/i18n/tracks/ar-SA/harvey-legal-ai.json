@@ -1,0 +1,1129 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "harvey-legal-ai",
+  "brand": "CertiGo",
+  "providerId": "harvey",
+  "radarTrackId": "harvey:legal-ai-platform",
+  "routeCode": "HARVEY-LEGAL",
+  "routeAliases": [
+    "HARVEY-LEGAL",
+    "HARVEY-ACADEMY",
+    "HARVEY-AI"
+  ],
+  "brandIdentity": {
+    "logoSlug": "harvey",
+    "displayName": "Harvey AI & Harvey Academy",
+    "primaryHex": "#141413",
+    "accentHex": "#C8A97E",
+    "masteryModel": "Parcours d'expertise produit complet aligné على Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work و badges Credly by Pearson) : 3 unités progressives, 8 leçons opérationnelles, Cartes Déclic, labs pratiques, questions à double niveau (simple بدون jargon و expert) و examen blanc."
+  },
+  "locale": "ar-SA",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: Harvey Academy & Legal IA (Foundations, Legal Engineering, Assistant, Vault, Knowledge & Workflows)",
+  "subtitle": "إتقان programme officiel Harvey Academy (Level 1 Foundations, AI for Legal Basics, AI Analysis for Legal Workflows, Legal Engineering Certification, Preparing for Legal Work & badges Credly), Harvey Assistant (Word Add-In, redlining, mémos), Harvey Vault (Data Rooms M&A, Review Tables) و Harvey Knowledge & Workflows.",
+  "audience": "Avocats d'affaires (M&A, Corporate, Contentieux, Droit social, IP/IT), directeurs juridiques (General Counsel), juristes d'المؤسسة و Legal Ops.",
+  "prerequisites": "Connaître structure من العقود d'affaires, principes d'audit juridique (Due Diligence) و règles déontologiques من confidentialité.",
+  "estimatedMinutes": 96,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "harvey-platform-overview",
+      "title": "Harvey Legal AI Platform: Assistant, Vault, Knowledge, وWorkflows",
+      "url": "https://www.harvey.ai/",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente quatre piliers من plateforme Harvey : Assistant (rédaction, révision, redlining), Vault (audit من Data Rooms و grilles d'extraction على من milliers من documents), Knowledge (recherche juridique و réglementaire sourcée) و Workflows multi-étapes.",
+      "limits": "Toute sortie générée par Harvey constitue projet من travail soumis à revue و à validation finale d' avocat أو juriste habilité."
+    },
+    {
+      "id": "harvey-product-blog",
+      "title": "Harvey Engineering & Product Insights: Multi-model Legal Workflows, Vault Review Tables, وSecurity",
+      "url": "https://www.harvey.ai/blog",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement من Review Tables في Harvey Vault, l'ancrage citationnel بدون hallucination في Harvey Knowledge, l'intégration Word من أجل redlining و l'engagement من confidentialité zéro-entraînement على البيانات clients.",
+      "limits": "cloisonnement من dossiers (Ethical Walls / Matter-level access controls) يجب être configuré conformément aux politiques من gestion من conflits d'intérêts من cabinet أو من direction juridique."
+    },
+    {
+      "id": "harvey-academy-blog",
+      "title": "Harvey Academy: Shaping the Future of Legal AI Literacy (Intro to Harvey, AI for Legal Basics, Harvey in Practice, Deep Dives) (مسار CertiGo)",
+      "url": "https://www.harvey.ai/blog/introducing-harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente portail officiel Harvey Academy (academy.harvey.ai) conçu par من praticiens من droit : parcours Intro to Harvey, cours certifiant AI for Legal Basics, ateliers vidéo Harvey in Practice, Harvey Deep Dives و déploiement par rôle à l'échelle من cabinets و directions juridiques.",
+      "limits": "formations من fondation sont ouvertes gratuitement على inscription ; modules avancés liés au workspace exigent compte client Harvey actif."
+    },
+    {
+      "id": "harvey-academy-help",
+      "title": "Getting Started with Harvey Academy: Level 1 Foundations, Legal Engineering Certification, Preparing for Legal Work, وCredly Badges",
+      "url": "https://help.harvey.ai/articles/harvey-academy",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente certifications officielles Harvey Academy (Level 1 Foundations combinant AI for Legal Basics و AI Analysis for Legal Workflows, Legal Engineering Certification, و Preparing for Legal Work), parcours Getting Started for Users/Admins, l'Add-In Word و délivrance من badges numériques vérifiés via Credly by Pearson.",
+      "limits": "L'émission من badge vérifié Credly nécessite d'استخدام même adresse e-mail على Harvey Academy و على Credly by Pearson."
+    }
+  ],
+  "modules": [
+    {
+      "id": "harvey-assistant-contrats-redlining-memos",
+      "unitNumber": 1,
+      "title": "الوحدة 1 · Harvey Assistant : Rédaction, Redlining Assisté & Mémos Clients",
+      "subtitle": "Rédiger و réviser من العقود مع son playbook من négociation, automatiser redlining argumenté و produire من mémos من synthèse client sourcés.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Appliquer playbook من négociation contractuelle في Harvey Assistant من أجل réviser العقد fournisseur (MSA/DPA), générer redlining motivé clause par clause و rédiger mémo exécutif destiné au client.",
+      "memoKeyTopics": [
+        "Rédaction و révision من العقود : alignement على playbook interne (position préférentielle, position من repli / fallback, point من rupture / walk-away)",
+        "Redlining assisté par IA (interface Harvey & Add-in Microsoft Word) : réécriture chirurgicale و commentaire justificatif destiné à partie adverse",
+        "Recherche juridique sourcée بدون hallucination و rédaction من mémos من synthèse client structurés (Executive Summary + analyse IRAC)"
+      ],
+      "memoGoldenRule": "Fournissez toujours à Harvey Assistant votre playbook من négociation و rôle من votre client (Acheteur vs Prestataire, Bailleur vs Preneur) avant من lancer redlining.",
+      "architectureSchema": {
+        "title": "Flux من Révision Contractuelle & Redlining مع Harvey Assistant",
+        "diagram": "[العقد Adverse + Playbook Client (Positions Gold / Fallback / Red Flag)] ➔ [Harvey Assistant : Analyse d'Écarts + Vérification من Définitions] ➔ [Redline Word (Suivi من modifications + Commentaires négociateur) + Mémo Client]",
+        "components": [
+          {
+            "name": "Playbook & Contexte من Partie",
+            "role": "Définit position من client (ex. Acheteur), plafonds acceptables, clauses من repli autorisées و exclusions non négociables."
+          },
+          {
+            "name": "Moteur من Redlining Harvey (Web & Word Add-in)",
+            "role": "Compare chaque clause من projet adverse au playbook, propose réécriture exacte au minimum d'intrusion textuelle و génère note d'explication commerciale."
+          },
+          {
+            "name": "Générateur من Mémo Client Sourcé",
+            "role": "Synthétise points d'arbitrage majeurs en langage clair من أجل direction générale أو client, مع renvoi exact aux numéros d'articles."
+          }
+        ],
+        "securityInvariant": "Chaque clause réécrite أو citée par Harvey Assistant est liée à l'article source من العقد téléversé ; aucune donnée من dossier n'est partagée hors من l'espace sécurisé من cabinet أو من l'المؤسسة."
+      },
+      "lessons": [
+        {
+          "id": "redaction-revision-contrats-playbook",
+          "title": "Rédaction و révision من العقود مع Playbook في Harvey Assistant",
+          "objective": "Structurer invite juridique précise في Harvey Assistant en associant العقد à réviser, qualité من partie représentée و playbook من négociation.",
+          "estimatedMinutes": 12,
+          "hook": "Demander « Révises ce العقد » بدون préciser si vous défendez client acheteur أو fournisseur vendeur produit من recommandations inversées : comment cadrer Harvey Assistant comme collaborateur senior ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Playbook Harvey : Rôle من Client + Grille (Idéal / Fallback / Red Flag) + Vérification من Définitions",
+            "diagramTop": "Entrées : 1. Rôle (ex. Client Acheteur) · 2. العقد source · 3. Playbook من négociation",
+            "diagramBottom": "Sortie Harvey : Tableau d'écarts par article + Clause من repli (Fallback) + Contrôle من termes définis",
+            "step1": "Précisez toujours partie que vous représentez, droit applicable, type من العقد و joignez votre playbook من clauses.",
+            "step2": "Demandez à Harvey من classer chaque écart selon trois niveaux (Conforme / Acceptable en Fallback / Red Flag bloquant) و من التحقق من termes مع majuscule.",
+            "rule": "terme défini à l'Article 1 peut neutraliser garantie à l'Article 14 : exigez toujours contrôle croisé من définitions."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · CADRER COMME ASSOCIÉ",
+              "title": "Posture contractuelle, juridiction و playbook",
+              "bodyParagraph": "في Harvey Assistant, encadrez chaque révision par quatre paramètres : 1. Qui vous représentez (ex. l'acquéreur أو preneur من licence SaaS) · 2. droit applicable (ex. droit français, New York law) · 3. Votre playbook من positions (standard, fallback, no-go) · 4. format من livrable attendu.",
+              "keyTakeawayPill": "Prompt juridique = Rôle représenté + Droit applicable + Playbook + Format من sortie"
+            },
+            {
+              "stepBadge": "الخطوة 2 · POSITIONS من REPLI (FALLBACK)",
+              "title": "Préparer à fois position cible و compromis",
+              "bodyParagraph": "من أجل chaque clause sensible (plafond من responsabilité, dommages indirects, propriété intellectuelle, indemnisation), demandez à Harvey Assistant من générer non seulement rédaction cible idéale, mais aussi rédaction من repli (fallback) conforme à votre playbook si partie adverse refuse premier jet.",
+              "keyTakeawayPill": "من أجل chaque clause critique : Position Idéale + Clause من Repli (Fallback) prête à négocier"
+            },
+            {
+              "stepBadge": "الخطوة 3 · AUDIT من TERMES DÉFINIS",
+              "title": "Traquer définitions orphelines أو piégées",
+              "bodyParagraph": "piège classique من العقود longs réside في section Définitions : terme défini trop étroitement (ex. « Informations Confidentielles » exigeant marquage écrit systématique) vide clause من confidentialité من sa substance. Demandez systématiquement à Harvey d'auditer termes définis و renvois d'articles.",
+              "keyTakeawayPill": "Toujours faire التحقق من par Harvey : Définitions piégées + Termes non définis + Renvois cassés"
+            }
+          ],
+          "keyIdeas": [
+            "révision contractuelle في Harvey Assistant exige من spécifier partie représentée, juridiction و playbook من référence.",
+            "génération conjointe من position préférentielle و من clause من repli (fallback) accélère cycles من négociation.",
+            "L'audit automatisé من cohérence بين l'article Définitions و corps من العقد détecte restrictions cachées و renvois erronés."
+          ],
+          "workedExample": {
+            "situation": "juriste IT d' groupe bancaire révise مع Harvey Assistant العقد d'hébergement Cloud (MSA) من 45 pages soumis par fournisseur étranger.",
+            "steps": [
+              "Téléverser في Harvey Assistant MSA proposé ainsi que Playbook Achats IT من banque (qui exige plafond من responsabilité من 24 mois من redevances و préavis من réversibilité من 6 mois).",
+              "Demander tableau comparatif article par article isolant écarts majeurs, définitions restrictives و renvois circulaires.",
+              "Identifier immédiatement grâce à Harvey que définition من « Faute Lourde » à l'Annexe 1 excluait pannes من sous-traitants ultérieurs."
+            ],
+            "decision": "juriste sécurise négociation en corrigeant à fois l'article على responsabilité و définition cachée en annexe."
+          },
+          "practice": {
+            "prompt": "Rédigez invite structurée من أجل Harvey Assistant afin d'analyser clause من limitation من responsabilité في العقد SaaS où vous représentez client المؤسسة, en intégrant position cible و fallback.",
+            "successCriteria": [
+              "Préciser rôle (Client المؤسسة souscripteur من SaaS) و droit applicable.",
+              "Définir position cible (ex. plafond mutuel à 24 mois من redevances + déplafonnement من أجل violation من confidentialité, البيانات personnelles و contrefaçon IP) و position من repli (ex. super-cap à 3x من أجل البيانات personnelles).",
+              "Demander l'identification من écarts exacts و proposition من réécriture assortie d' argumentaire commercial."
+            ],
+            "feedback": "Structurer l'invite autour من couple (Position cible / Super-cap من repli) يتيح à Harvey من produire من propositions immédiatement utilisables en séance من négociation."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Que devez-vous donner à Harvey Assistant au départ من أجل qu'il relise العقد selon règles من votre المؤسسة ?",
+              "prompt": "الإدارة القانونية utilise Harvey Assistant من أجل réviser العقد من licence logicielle reçu d' éditeur. Quels éléments faut-il fournir في l'invite من أجل obtenir analyse من risques و من propositions من clauses مباشرة alignées على politique من l'المؤسسة ?",
+              "options": [
+                {
+                  "id": "role-client-droit-applicable-et-playbook",
+                  "label": "العقد adverse, rôle défendu (Client licencié), droit applicable و playbook interne précisant positions cibles و من repli (fallback)."
+                },
+                {
+                  "id": "uniquement-derniere-page-signatures",
+                  "label": "فقط page من signature vierge بدون corps من العقد ni indication من partie représentée."
+                },
+                {
+                  "id": "demande-generique-sans-contexte",
+                  "label": "consigne d' ligne « Améliore texte » بدون préciser si l'on représente l'éditeur vendeur أو client acheteur."
+                },
+                {
+                  "id": "suppression-article-definitions",
+                  "label": "العقد amputé من son article Définitions و من ses annexes financières afin من raccourcir lecture."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "clause paraît rassurante mais mot مع majuscule cache piège في définitions au début من العقد. Que demander à Harvey ?",
+              "prompt": "Lors من relecture d' accord من confidentialité (NDA), l'article 4 semble protéger largement votre client, mais définition من « Informations Confidentielles » à l'article 1 exige qu'elles soient estampillées par tampon humide في 24 heures suivant tout échange oral. Quel contrôle Harvey Assistant يتيح من déjouer ce piège ?",
+              "options": [
+                {
+                  "id": "audit-croise-definitions-et-clauses-substantives",
+                  "label": "Demander audit croisé بين termes définis à l'article 1 و obligations substantives من أجل repérer toute définition excessivement restrictive."
+                },
+                {
+                  "id": "verification-orthographique-seule",
+                  "label": "Limiter l'analyse à correction من fautes من frappe بدون lire sens من définitions contractuelles."
+                },
+                {
+                  "id": "ignorer-mots-avec-majuscule",
+                  "label": "Demander à l'assistant d'ignorer tous termes commençant par lettre majuscule في l'accord."
+                },
+                {
+                  "id": "traduire-sans-analyser-portee",
+                  "label": "Traduire littéralement l'article 4 en trois langues بدون examiner conditions من forme من l'article 1."
+                }
+              ]
+            }
+          ],
+          "recap": "في Harvey Assistant : cadrez partie représentée, attachez votre playbook (cible + fallback) و contrôlez toujours définitions.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "redlining-assiste-ia-et-memos-clients",
+          "title": "Redlining assisté par IA في Word و rédaction من mémos من synthèse client",
+          "objective": "Réaliser redlining chirurgical مع commentaires justificatifs destinés à partie adverse و produire mémo من synthèse client clair و sourcé.",
+          "estimatedMinutes": 12,
+          "hook": "Réécrire entièrement clause adverse braque négociateur d'en face, tandis qu'envoyer 40 pages من marques من révision brutes à votre directeur général est illisible : comment استخدام Harvey من أجل réussir deux exercices ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Redlining & Mémo : Intrusion Minimale على العقد + Synthèse Décisionnelle من أجل Client",
+            "diagramTop": "Redline (من أجل partie adverse) : Modification chirurgicale minimale + Commentaire objectif (« Conformité RGPD / Réciprocité »)",
+            "diagramBottom": "Mémo Client (من أجل votre dirigeant) : Executive Summary + Top 3 points d'arbitrage commercial + Recommandation",
+            "step1": "Lors من redlining في Word مع Harvey, demandez modification à intrusion minimale (conserver structure adverse tout en insérant garde-fous من votre playbook).",
+            "step2": "Générez deux livrables distincts : note d'explication neutre من أجل partie adverse و mémo stratégique confidentiel من أجل votre client.",
+            "rule": "Ne confondez jamais commentaire من redline (lu par partie adverse !) و note من risque interne (couverte par السر المهني القانوني)."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · REDLINING CHIRURGICAL",
+              "title": "Modifier minimum من mots من أجل maximiser l'acceptation",
+              "bodyParagraph": "bon négociateur ne remplace pas article entier s'il suffit d'insérer « raisonnablement », « réciproquement » أو plafond chiffré. مع l'extension Harvey من أجل Microsoft Word (أو في l'interface من révision), demandez من propositions من redline à intrusion minimale qui préservent numérotation و style من document source.",
+              "keyTakeawayPill": "Redlining chirurgical = modifier فقط mots nécessaires من أجل تأمين clause"
+            },
+            {
+              "stepBadge": "الخطوة 2 · DISTINGUER DEUX COMMENTAIRES",
+              "title": "Justification externe vs Note من risque interne",
+              "bodyParagraph": "Demandez à Harvey من produire deux colonnes bien séparées :\n1. **Justification externe (من أجل partie adverse)** : neutre, constructive, fondée على pratique من marché أو réciprocité.\n2. **Analyse من risque interne (من أجل votre client فقط)** : évaluation franche من l'exposition financière و من levier من négociation.",
+              "keyTakeawayPill": "Toujours séparer justification externe (partagée) و l'analyse من risque interne (confidentielle) !"
+            },
+            {
+              "stepBadge": "الخطوة 3 · MÉMO من SYNTHÈSE CLIENT",
+              "title": "من l'analyse technique au mémo exécutif actionnable",
+              "bodyParagraph": "من أجل votre client أو votre direction générale, demandez à Harvey Assistant من transformer revue en mémo structuré : 1. Synthèse exécutive (statut global) · 2. Tableau من 3 à 5 arbitrages commerciaux restants (Clause, Risque concret en euros/opérations, Option recommandée) · 3. Prochaines étapes.",
+              "keyTakeawayPill": "[AR] Mémo client = Décisions commerciales à trancher + Impact métier + Recommandation claire"
+            }
+          ],
+          "keyIdeas": [
+            "redlining assisté par Harvey privilégie modifications chirurgicales (intrusion minimale) alignées على playbook afin d'accélérer conclusion من l'accord.",
+            "Il est impératif من séparer commentaires من marge destinés à partie adverse من notes stratégiques internes destinées au client.",
+            "mémo من synthèse client traduit écarts juridiques en arbitrages opérationnels و financiers مباشرة exploitables par dirigeant."
+          ],
+          "workedExample": {
+            "situation": "Sarah, avocate M&A/العقود, révise pacte d'actionnaires en urgence و يجب envoyer d' côté document en suivi من modifications au conseil من fonds, و من l'autre note d'arbitrage au PDG fondateur.",
+            "steps": [
+              "استخدام Harvey في Word من أجل proposer من redlines chirurgicaux على clauses من Bad Leaver, d'inaliénabilité و من sortie conjointe (Drag-Along).",
+              "Générer من bulles من commentaires neutres orientées pratique من marché من أجل document Word destiné au conseil adverse.",
+              "Générer séparément في Harvey Assistant mémo exécutif d' page من أجل PDG résumant trois points économiques à trancher avant l'appel."
+            ],
+            "decision": "conseil adverse accepte 80 % من redlines dès premier tour و PDG tranche 20 % restants en dix minutes grâce au mémo."
+          },
+          "practice": {
+            "prompt": "collaborateur junior s'apprête à envoyer à partie adverse العقد Word dont bulles من commentaires générées contiennent notre position من repli secrète (« Nous accepterons 500 k€ s'ils insistent »). Expliquez l'erreur critique و règle من workflow à imposer مع Harvey.",
+            "successCriteria": [
+              "Identifier divulgation accidentelle من stratégie من négociation و من seuil من repli من client à partie adverse.",
+              "Imposer في prompt Harvey séparation stricte بين livrable « Commentaires من négociation externes » و livrable « Note stratégique interne client ».",
+              "Relire و purger systématiquement métadonnées و commentaires internes من الملف Word avant tout envoi externe."
+            ],
+            "feedback": "Ne laissez jamais stratégie من repli interne figurer في bulles من commentaires من document Word envoyé à partie adverse."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "في Word مع Harvey, pourquoi vaut-il mieux corriger فقط mots risqués d' clause plutôt que tout réécrire من zéro ?",
+              "prompt": "Lors d' redlining assisté par Harvey في Microsoft Word, pourquoi est-il préférable من demander révision « à intrusion minimale » (surgical redlining) plutôt qu' remplacement intégral par votre clause type lorsque vous êtes en position من négociation équilibrée ?",
+              "options": [
+                {
+                  "id": "conserver-structure-adverse-inserer-gardes-fous",
+                  "label": "Cela préserve rédaction و numérotation من partie adverse tout en insérant exactement protections requises, réduisant frictions و délais من négociation."
+                },
+                {
+                  "id": "empecher-lecture-par-avocat-adverse",
+                  "label": "Cela rend modifications invisibles في mode Suivi من modifications من Microsoft Word."
+                },
+                {
+                  "id": "supprimer-valeur-juridique-contrat",
+                  "label": "Cela annule تلقائياً toutes obligations financières من l'accord بدون accord من parties."
+                },
+                {
+                  "id": "bloquer-enregistrement-fichier-docx",
+                  "label": "Cela verrouille الملف en lecture seule définitive على serveur من messagerie."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "juriste laisse par erreur phrase « nous pouvons céder jusqu'à 2 M€ » في الملف Word envoyé à l'adversaire. Quelle erreur a-t-il commise ?",
+              "prompt": "juriste génère مع Harvey tableau contenant à fois texte من redline و note confidentielle « Notre client est prêt à céder jusqu'à 2 M€ من plafond en dernier recours », puis copie l'intégralité في commentaires من الملف Word envoyé au fournisseur. Quelle règle fondamentale a été violée ?",
+              "options": [
+                {
+                  "id": "confusion-commentaire-externe-et-note-strategie-interne",
+                  "label": "Il a mélangé justification externe destinée à partie adverse و l'analyse confidentielle من seuils من repli réservée au client."
+                },
+                {
+                  "id": "utilisation-police-serif-standard",
+                  "label": "Il a utilisé police من caractères Times New Roman au lieu d' police بدون empattement."
+                },
+                {
+                  "id": "pagination-automatique-pied-page",
+                  "label": "Il a laissé numérotation من pages active في pied من page من العقد Word."
+                },
+                {
+                  "id": "format-date-iso-dans-titre",
+                  "label": "Il a nommé الملف مع date من jour au format année-mois-jour."
+                }
+              ]
+            }
+          ],
+          "recap": "Redline chirurgical + séparation stricte بين commentaire externe و stratégie interne + mémo exécutif orienté décision = méthode Harvey Assistant.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-foundations-ai-legal-basics",
+          "title": "[AR] Harvey Academy Level 1 Foundations : AI for Legal Basics, AI Analysis & Add-In Word",
+          "objective": "إتقان parcours officiel Harvey Academy Level 1 Foundations (AI for Legal Basics, AI Analysis for Legal Workflows, Getting Started for Users) و l'intégration directe في Microsoft Word.",
+          "estimatedMinutes": 12,
+          "hook": "كيف passer من curiosité envers l'IA générative à pratique juridique rigoureuse, vérifiable و مباشرة intégrée في Microsoft Word selon référentiel officiel Harvey Academy ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Harvey Academy Level 1 : Littératie IA Juridique + Analyse Structurée + Exécution في Word",
+            "diagramTop": "[AR] Parcours Level 1 Foundations : 1. AI for Legal Basics (67 min) · 2. AI Analysis for Legal Workflows (60 min) · 3. Harvey in Practice",
+            "diagramBottom": "[AR] Application quotidienne : Getting Started for Users + Harvey for Word Add-In (rédaction, playbook, redlining in situ)",
+            "step1": "Validez fondamentaux (AI for Legal Basics) من أجل distinguer ce que l'IA juridique fait مع fiabilité (structuration, extraction, comparaison) من ce qui exige jugement من l'avocat.",
+            "step2": "Appliquez méthode AI Analysis for Legal Workflows و l'Add-In Harvey for Word من أجل auditer و réviser vos actes مباشرة في votre document من travail.",
+            "rule": "Ne faites jamais confiance à sortie IA avant d'avoir cadré tâche, vérifié sources و contrôlé erreurs potentielles avant tout envoi client."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · AI FOR LEGAL BASICS",
+              "title": "Acquérir littératie IA juridique consciente من risques",
+              "bodyParagraph": "Premier pilier من certification Level 1 Foundations من Harvey Academy, cours AI for Legal Basics (67 min) pose bases indispensables : fonctionnement من grands النماذج من langage en droit, cas d'usage à forte valeur ajoutée, limites structurelles (hallucinations hors contexte ancré, biais من formulation) و contrôle humain obligatoire avant tout acte أو dépôt.",
+              "keyTakeawayPill": "AI for Legal Basics = فهم capacités, limites و devoir من vérification"
+            },
+            {
+              "stepBadge": "الخطوة 2 · AI ANALYSIS FOR LEGAL WORKFLOWS",
+              "title": "Concevoir, exécuter و التحقق من analyse documentaire à grande échelle",
+              "bodyParagraph": "Deuxième pilier من Level 1 Foundations, cours AI Analysis for Legal Workflows (60 min) enseigne comment structurer من prompts d'extraction précis, découper revue documentaire complexe و détecter méthodiquement omissions أو erreurs d'interprétation avant qu' livrable n'atteigne associé, client أو juridiction.",
+              "keyTakeawayPill": "AI Analysis for Legal Workflows = structurer l'extraction + détecter erreurs en amont"
+            },
+            {
+              "stepBadge": "الخطوة 3 · HARVEY IN PRACTICE & WORD ADD-IN",
+              "title": "Travailler مباشرة في Microsoft Word و workspace Harvey",
+              "bodyParagraph": "parcours Getting Started for Users و Get Started With the Harvey for Word Add-In من Harvey Academy montrent comment transformer réponses من Harvey en livrables réutilisables : ouverture من volet Harvey مباشرة في Microsoft Word, application من playbooks من clauses, révision chirurgicale و conservation من formatage juridique.",
+              "keyTakeawayPill": "Harvey for Word Add-In = rédiger, comparer au playbook و réviser بدون quitter Word"
+            }
+          ],
+          "keyIdeas": [
+            "certification officielle Level 1 Foundations من Harvey Academy combine AI for Legal Basics و AI Analysis for Legal Workflows.",
+            "méthode Harvey Academy impose من bâtir littératie IA و protocole من vérification avant من se fier aux sorties génératives.",
+            "module Get Started With the Harvey for Word Add-In يتيح d'intégrer rédaction, comparaison au playbook و redlining مباشرة في Microsoft Word."
+          ],
+          "workedExample": {
+            "situation": "مكتب محاماة d'affaires intègre trente nouveaux collaborateurs و souhaite qu'ils maîtrisent Harvey Assistant و l'Add-In Word dès leur première semaine بدون erreur méthodologique.",
+            "steps": [
+              "Inscrire chaque collaborateur على Harvey Academy (academy.harvey.ai) مع son adresse professionnelle من أجل suivre parcours certifiant Level 1 Foundations (AI for Legal Basics + AI Analysis for Legal Workflows).",
+              "Compléter parcours pratique Getting Started for Users و module dédié Get Started With the Harvey for Word Add-In.",
+              "Valider quiz final من أجل obtenir certificat numérique و badge vérifié Credly by Pearson attestant maîtrise من fondamentaux."
+            ],
+            "decision": "collaborateurs adoptent dès premier jour réflexe systématique من cadrage par playbook و من vérification من sources في Word."
+          },
+          "practice": {
+            "prompt": "Construisez plan d'embarquement Harvey Academy d' الفريق juridique من 15 juristes : sélectionnez cours من parcours Level 1 Foundations, définissez règle من contrôle qualité issue d'AI Analysis for Legal Workflows و précisez l'usage من l'Add-In Word.",
+            "successCriteria": [
+              "Inclure cours AI for Legal Basics (fondamentaux و gestion من risques) و AI Analysis for Legal Workflows (structuration من extractions و détection d'erreurs).",
+              "Intégrer modules pratiques Getting Started for Users و Get Started With the Harvey for Word Add-In.",
+              "Exiger vérification systématique من citations و من définitions contractuelles avant toute diffusion من livrable."
+            ],
+            "feedback": "L'alliance من parcours certifiant Level 1 Foundations و من pratique على l'Add-In Word يضمن adoption rapide و sécurisée."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "في Harvey Academy, quel parcours gratuit يتيح d'acquérir bases من l'IA juridique responsable و l'analyse documentaire avant من passer l'examen certifiant ?",
+              "prompt": "Au sein من programme officiel Harvey Academy, quels cours composent socle من certification Level 1 Foundations destinée à bâtir pratique juridique responsable من l'IA ?",
+              "options": [
+                {
+                  "id": "ai-for-legal-basics-et-ai-analysis-for-legal-workflows",
+                  "label": "cours AI for Legal Basics (littératie IA و décision consciente من risques) و AI Analysis for Legal Workflows (conception, exécution و vérification d'analyses documentaires à grande échelle)."
+                },
+                {
+                  "id": "entrainement-poids-llm-en-assembleur",
+                  "label": "cours d'écriture من noyaux CUDA en assembleur من أجل réentraîner soi-même poids من النموذج على من serveurs personnels."
+                },
+                {
+                  "id": "validation-automatique-sans-relecture-avocat",
+                  "label": "module autorisant l'envoi direct من projets générés par l'IA aux tribunaux بدون aucune relecture par juriste."
+                },
+                {
+                  "id": "remplacement-integral-bases-legales-par-reseaux-sociaux",
+                  "label": "formation remplaçant consultation من textes officiels par من résumés non sourcés issus من forums publics."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "كيف travailler مباشرة على العقد في Microsoft Word tout en appliquant guides من clauses enseignés في Harvey Academy ?",
+              "prompt": "juriste formé via module Get Started With the Harvey for Word Add-In من Harvey Academy يجب réviser العقد fournisseur urgent tout en préservant numérotation و mise en page complexes من الملف `.docx`. Quelle pratique يجب-il appliquer ?",
+              "options": [
+                {
+                  "id": "utiliser-addin-harvey-for-word-in-situ-avec-playbook",
+                  "label": "استخدام Harvey for Word Add-In مباشرة في Microsoft Word من أجل analyser clauses, appliquer playbook و insérer révisions ciblées بدون quitter ni déstructurer document."
+                },
+                {
+                  "id": "convertir-docx-en-image-jpeg-basse-resolution",
+                  "label": "Convertir cinquante pages من العقد en images JPEG basse résolution و perdre toute structure من styles Word."
+                },
+                {
+                  "id": "copier-coller-sans-styles-dans-bloc-notes",
+                  "label": "Tout copier في Bloc-notes Windows en supprimant renvois automatiques و numérotation من articles."
+                },
+                {
+                  "id": "partager-contrat-sur-outil-public-grand-public",
+                  "label": "Téléverser العقد confidentiel على outil gratuit grand public dépourvu d'engagement من confidentialité."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy Level 1 Foundations = AI for Legal Basics + AI Analysis for Legal Workflows + pratique directe via Harvey for Word Add-In.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-platform-overview"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-vault-data-rooms-due-diligence",
+      "unitNumber": 2,
+      "title": "الوحدة 2 · Harvey Vault : Audit Massif من Data Rooms (M&A) & Grilles d'Extraction",
+      "subtitle": "Auditer من milliers من documents en Data Room M&A, construire من grilles d'extraction multi-العقود (Review Tables) و التحقق من chaque clause à source.",
+      "estimatedMinutes": 24,
+      "memoActivity": "تكوين projet Harvey Vault على Data Room d'acquisition من 2 500 documents, exécuter grille d'extraction multi-العقود (changement من contrôle, responsabilité, résiliation) و auditer Red Flags via citations directes.",
+      "memoKeyTopics": [
+        "Harvey Vault : espace documentaire sécurisé à grande échelle من أجل l'audit من Data Rooms (M&A, Due Diligence, immobilier, contentieux)",
+        "Grilles d'extraction multi-العقود (Review Tables) : extraction structurée من clauses من changement من contrôle (Change of Control), responsabilité, exclusivité و résiliation",
+        "Contrôle qualité juridique : vérification en clic من citation exacte في document source, détection من avenants modifiant العقد initial و rapport Red Flags"
+      ],
+      "memoGoldenRule": "في Harvey Vault, définissez chaque colonne من votre grille d'extraction مع question juridique fermée و précise, و vérifiez toujours avenants rattachés au العقد principal.",
+      "architectureSchema": {
+        "title": "Pipeline d'Audit M&A و Due Diligence في Harvey Vault",
+        "diagram": "[Data Room (Milliers من PDF/DOCX scannés أو natifs)] ➔ [Harvey Vault : OCR Juridique, Classification & Indexation par Dossier] ➔ [Review Table : Colonnes d'Extraction Multi-العقود] ➔ [Cellules Sourcées (Citation cliquable page/clause) ➔ Rapport Red Flags M&A]",
+        "components": [
+          {
+            "name": "[AR] Conteneur Sécurisé Harvey Vault",
+            "role": "Ingère, classe و indexe من milliers من pièces من Data Room في coffre isolé par dossier (Matter) مع contrôle d'الوصول granulaire."
+          },
+          {
+            "name": "[AR] Grilles d'Extraction (Review Tables)",
+            "role": "Exécute en parallèle من colonnes d'extraction personnalisées أو issues من النماذج على من centaines من العقود (Change of Control, Liability Cap, Governing Law, Termination)."
+          },
+          {
+            "name": "[AR] Ancrage Citationnel & Vérification d'Avenants",
+            "role": "Relie chaque cellule extraite au passage exact من document source من أجل permettre à l'avocat من valider Red Flag en quelques secondes."
+          }
+        ],
+        "securityInvariant": "Chaque projet Vault est strictement cloisonné au niveau من dossier client (Matter-level isolation) afin من garantir l'étanchéité بين opérations M&A و respect من murailles éthiques (Ethical Walls)."
+      },
+      "lessons": [
+        {
+          "id": "vault-audit-data-rooms-due-diligence",
+          "title": "Harvey Vault : organiser و auditer massivement Data Room M&A",
+          "objective": "Structurer l'ingestion d' Data Room في Harvey Vault, classer corpus contractuel و الاستعلام عن من milliers من documents مع preuves sourcées.",
+          "estimatedMinutes": 12,
+          "hook": "Vendredi 19 h : 3 200 العقود و avenants viennent d'être déposés في Data Room d' cible d'acquisition و rapport من Due Diligence Red Flags est attendu lundi matin. كيف structurer votre audit في Harvey Vault ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Harvey Vault : من Tri Manuel à l'Audit Massif Sourcé par Dossier",
+            "diagramTop": "Data Room brute (3 200 الملفات) ➔ Ingestion في projet Harvey Vault isolé par dossier (Matter)",
+            "diagramBottom": "Classification automatique + Regroupement العقد/Avenants ➔ Requêtes transversales مع citations exactes",
+            "step1": "Créez projet Vault dédié à l'opération مع الصلاحيات restreintes à l'الفريق من dossier (Ethical Wall) و importez l'arborescence من Data Room.",
+            "step2": "Identifiez d'abord typologie من pièces (العقود clients Top 20, baux, financements, IP, pactes) و reliez chaque العقد من base à ses avenants ultérieurs.",
+            "rule": "العقد initial lu بدون son Avenant n° 3 qui double préavis أو modifie prix conduit à conclusion d'audit fausse !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · INGESTION & CLOISONNEMENT",
+              "title": "coffre-fort dédié par opération (Matter)",
+              "bodyParagraph": "Harvey Vault يتيح من charger من milliers من documents (PDF natifs, scans OCRisés, الملفات Word) au sein d' projet isolé. Seuls avocats و juristes habilités على ce dossier (Matter) y ont الوصول, garantissant respect strict من murailles éthiques (Ethical Walls) من cabinet.",
+              "keyTakeawayPill": "[AR] 1 opération M&A / Contentieux = 1 projet Vault cloisonné aux seuls membres habilités"
+            },
+            {
+              "stepBadge": "الخطوة 2 · CARTOGRAPHIER CORPUS",
+              "title": "Relier العقود principaux, annexes و avenants",
+              "bodyParagraph": "En Data Room, الملفات sont souvent mal nommés (`Scan_042.pdf`). Utilisez Harvey Vault من أجل identifier تلقائياً nature من chaque acte, parties signataires, date d'effet و surtout من أجل regrouper chaque العقد-cadre مع ses avenants (Amendments) و bons من commande.",
+              "keyTakeawayPill": "Toujours regrouper العقد-cadre + Annexes + Avenants par ordre chronologique"
+            },
+            {
+              "stepBadge": "الخطوة 3 · INTERROGATION TRANSVERSALE SOURCÉE",
+              "title": "Trouver l'aiguille في 3 000 documents مع preuve",
+              "bodyParagraph": "Vous pouvez الاستعلام عن l'ensemble من Vault أو sous-dossier ciblé (ex. « Quels العقود fournisseurs comportent obligation d'achat minimum annuel أو exclusivité géographique ? »). Chaque الاستجابة cite documents précis و ouvre passage surligné en regard.",
+              "keyTakeawayPill": "الطلب على Vault = الاستجابة synthétique + Liens directs vers page و paragraphe من chaque pièce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Vault ingère و indexe من grands volumes documentaires في espace isolé par dossier (Matter) respectant murailles éthiques.",
+            "En Due Diligence, il est essentiel من relier chaque العقد initial à ses avenants successifs afin d'évaluer l'état من droit en vigueur à date من l'audit.",
+            "Toute affirmation issue d' recherche على Vault est accompagnée من citations cliquables permettant à l'avocat من التحقق من texte original."
+          ],
+          "workedExample": {
+            "situation": "يقوم فريق M&A audite l'acquisition d' groupe logistique dont Data Room comporte 1 800 الملفات commerciaux و immobiliers.",
+            "steps": [
+              "إنشاء Vault dédié à l'opération « Projet Horizon » limité aux six avocats من l'الفريق M&A/Immobilier.",
+              "Lancer classification initiale في Vault من أجل عزل 45 العقود clients représentant 80 % من chiffre d'affaires ainsi que leurs avenants.",
+              "Détecter grâce au recoupement chronologique qu' avenant signé deux mois plus tôt avait ajouté clause d'exclusivité européenne على principal client."
+            ],
+            "decision": "Red Flag d'exclusivité, invisible في العقد initial من 2022 mais présent في l'avenant من 2026, est remonté immédiatement à l'acquéreur."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi analyser فقط العقود initiaux بدون regrouper leurs avenants (Amendments) في Data Room M&A constitue faute méthodologique, و comment organiser cette vérification في Harvey Vault.",
+            "successCriteria": [
+              "شرح qu' avenant postérieur prévaut على clauses qu'il modifie (durée, prix, plafond, changement من contrôle).",
+              "Extraire في Harvey Vault l'identifiant من العقد parent, parties و date من signature من chaque pièce.",
+              "Consolider l'analyse par relation contractuelle en appliquant version plus récente من chaque clause modifiée."
+            ],
+            "feedback": "En audit contractuel, vérité juridique résulte من lecture combinée من العقد من base و من son dernier avenant en vigueur."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "يجب عليك analyser 2 400 documents confidentiels d' rachat d'المؤسسة في Harvey Vault. كيف protéger secret من dossier ?",
+              "prompt": "مكتب محاماة reçoit l'الوصول à Data Room من 2 400 documents من أجل opération d'acquisition (M&A) soumise à muraille éthique (Ethical Wall) stricte. كيف تكوين l'audit في Harvey ?",
+              "options": [
+                {
+                  "id": "creer-projet-vault-isole-equipe-dossier",
+                  "label": "إنشاء projet Harvey Vault dédié à l'opération و restreindre ses الصلاحيات d'الوصول aux seuls avocats habilités على ce dossier."
+                },
+                {
+                  "id": "deposer-fichiers-espace-public-cabinet",
+                  "label": "Charger 2 400 pièces في dossier public accessible à l'ensemble من associés و stagiaires من cabinet."
+                },
+                {
+                  "id": "fusionner-deux-data-rooms-concurrentes",
+                  "label": "Mélanger documents من deux cibles concurrentes في même grille d'analyse من أجل gagner من temps."
+                },
+                {
+                  "id": "analyser-sans-citations-sources",
+                  "label": "تعطيل l'affichage من références من documents من أجل alléger rapport d'audit remis au client."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "لماذا est-il dangereux من faire analyser فقط العقود initiaux في Harvey Vault en oubliant dossier من avenants signés après ?",
+              "prompt": "Lors d' Due Diligence في Harvey Vault, auditeur filtre فقط الملفات intitulés « Contrat_Cadre » و conclut qu'aucun العقد ne contient d'exclusivité, en omettant d'inclure sous-dossier « Avenants_2025_2026 » في sa sélection. Quel est risque ?",
+              "options": [
+                {
+                  "id": "omission-clauses-modifiees-par-avenant",
+                  "label": "avenant postérieur a pu introduire clause d'exclusivité أو modifier préavis من العقد-cadre initial بدون que l'audit ne détecte."
+                },
+                {
+                  "id": "erreur-formatage-marges-impression",
+                  "label": "marges d'impression من navigateur risquent d'être décalées من deux millimètres à l'export."
+                },
+                {
+                  "id": "changement-langue-interface-harvey",
+                  "label": "L'interface المستخدم من Harvey risque من basculer تلقائياً en espagnol."
+                },
+                {
+                  "id": "suppression-automatique-fichiers-pdf",
+                  "label": "الملفات PDF non sélectionnés sont définitivement supprimés من serveur من Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "في Harvey Vault : isolez chaque dossier par Matter, regroupez العقود و avenants, و exigez toujours citation exacte من pièce.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "grilles-extraction-multi-contrats-review-tables",
+          "title": "Grilles d'extraction multi-العقود (Review Tables) : changement من contrôle, responsabilité و résiliation",
+          "objective": "Concevoir و exécuter من grilles d'extraction multi-العقود (Review Tables) في Harvey Vault من أجل auditer clauses من changement من contrôle, من responsabilité و من résiliation.",
+          "estimatedMinutes": 12,
+          "hook": "كيف extraire en quinze minutes, على 400 العقود commerciaux, liste exacte من ceux qui permettent au cocontractant من résilier أو d'exiger consentement écrit en cas من rachat من société cible (Change of Control) ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Review Tables : 1 Ligne = 1 العقد · 1 Colonne = 1 Question Juridique Structurée + Citation",
+            "diagramTop": "Lignes : 400 العقود من Data Room · Colonnes : Parties | Date | Change of Control (Oui/Non + Préavis) | Plafond Responsabilité | Résiliation",
+            "diagramBottom": "Clic على n'importe quelle cellule ➔ Ouvre العقد source au paragraphe exact surligné من أجل vérification",
+            "step1": "Décomposez chaque clause complexe en deux colonnes complémentaires : colonne من qualification rapide (`Oui / Non / Silence من العقد`) و colonne من détail (`Condition, délai من préavis و citation`).",
+            "step2": "Filtrez lignes où `Changement من contrôle = Consentement requis أو Résiliation` و vérifiez passages surlignés من أجل dresser matrice Red Flags.",
+            "rule": "Exigez toujours que grille distingue explicitement « Non autorisé par clause » و « Silence من العقد (aucune clause trouvée) »."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · ARCHITECTURE D' REVIEW TABLE",
+              "title": "Transformer 400 العقود en matrice structurée",
+              "bodyParagraph": "في Harvey Vault, Review Table applique en parallèle même série من colonnes d'extraction à من centaines من العقود. Chaque ligne représente document و chaque colonne répond à consigne précise (ex. Parties, Date d'échéance, Tacite reconduction, Changement من contrôle, Plafond من responsabilité, Droit applicable).",
+              "keyTakeawayPill": "[AR] Review Table = Extraction parallèle structurée + Cellules liées au texte source"
+            },
+            {
+              "stepBadge": "الخطوة 2 · CONCEVOIR من COLONNES PRÉCISES",
+              "title": "Séparer verdict binaire و détail opérationnel",
+              "bodyParagraph": "من أجل auditer clauses من changement من contrôle (Change of Control), créez : 1. colonne fermée (`Consentement préalable requis`, `Simple notification`, `Droit من résiliation`, `Aucune clause`) · 2. colonne من détail extrayant seuil من détention déclencheur, délai من préavis و référence من l'article.",
+              "keyTakeawayPill": "Colonne 1 = Catégorie filtrable · Colonne 2 = Conditions exactes, délais و article cité"
+            },
+            {
+              "stepBadge": "الخطوة 3 · VÉRIFICATION CITATIONNELLE & EXPORT",
+              "title": "Cliquer, التحقق من passage surligné و exporter",
+              "bodyParagraph": "Aucune cellule من Review Table n'est boîte noire : clic على cellule ouvre côte à côte PDF أو DOCX original à page exacte مع paragraphe surligné. L'associé أو collaborateur valide ainsi Red Flags critiques avant d'exporter matrice vers Excel أو Word.",
+              "keyTakeawayPill": "1 clic على cellule = lecture immédiate من clause originale surlignée في العقد"
+            }
+          ],
+          "keyIdeas": [
+            "Review Tables من Harvey Vault permettent d'extraire و من comparer mêmes clauses clés (changement من contrôle, plafond من responsabilité, indemnisation, résiliation) على من centaines من العقود simultanément.",
+            "Coupler colonne من classification fermée (facile à filtrer/trier) و colonne d'analyse détaillée maximise fiabilité من revue.",
+            "Distinguer explicitement l'interdiction expresse و silence من العقد évite toute mauvaise interprétation juridique."
+          ],
+          "workedExample": {
+            "situation": "Lors من l'acquisition d' éditeur من logiciels B2B, l'الفريق Corporate يجب التحقق من على 350 العقود clients si cession من 100 % من titres déclenche droit من résiliation anticipée.",
+            "steps": [
+              "إنشاء Review Table في Harvey Vault على 350 العقود مع colonnes : `Client`, `Revenu Annuel`, `Statut Change of Control (Consentement / Notification / Résiliation / Silence)`, `Achat من titres inclus في définition ?`, و `Délai & Sanction`.",
+              "Filtrer 28 العقود où `Statut Change of Control` indique `Consentement` أو `Résiliation`.",
+              "Cliquer على citations من 28 cellules من أجل confirmer que 11 العقود incluent expressément changement d'actionnariat indirect و préparer lettres من demande d'accord (waivers)."
+            ],
+            "decision": "liste من 11 waivers prioritaires est établie و vérifiée en matinée au lieu من deux semaines من dépouillement linéaire."
+          },
+          "practice": {
+            "prompt": "Concevez intitulés و consignes من trois colonnes d' Review Table Harvey Vault destinée à auditer risque من plafond من responsabilité (Liability Cap) على 200 العقود fournisseurs.",
+            "successCriteria": [
+              "Colonne 1 (Classification) : `Existence و Type من Plafond` (Plafond fixe, Multiple من redevances, Responsabilité illimitée, Silence من العقد).",
+              "Colonne 2 (Montant / Formule) : `Montant أو Formule من Plafond` (extraire chiffre exact أو nombre من mois من redevances و l'article cité).",
+              "Colonne 3 (Exceptions / Carve-outs) : `Exceptions au Plafond` (lister cas déplafonnés : fraude, faute lourde, confidentialité, IP, البيانات personnelles)."
+            ],
+            "feedback": "Séparer principe من plafond, sa formule من calcul و ses exceptions (carve-outs) يتيح tri instantané من العقود sous-protégés."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "على 500 العقود في Harvey Vault, comment repérer d' coup d'œil ceux qui posent problème tout en pouvant التحقق من phrase exacte من العقد ?",
+              "prompt": "En Due Diligence M&A على 500 العقود commerciaux في Harvey Vault, vous devez identifier rapidement tous العقود qui exigent l'accord préalable من client en cas من changement من contrôle, tout en pouvant lire clause exacte. Quelle méthode est plus efficace ?",
+              "options": [
+                {
+                  "id": "review-table-colonne-fermee-plus-detail-citation",
+                  "label": "Construire Review Table combinant colonne من classification fermée (`Consentement requis / Notification / Aucune clause`) و colonne détaillant conditions مع citation cliquable."
+                },
+                {
+                  "id": "demander-resume-unique-sans-tableau",
+                  "label": "Demander résumé narratif global من dix lignes على 500 العقود بدون nommer aucun الملف."
+                },
+                {
+                  "id": "imprimer-cinq-cents-contrats-papier",
+                  "label": "Exporter 500 العقود en images non indexées بدون exécuter من grille d'extraction."
+                },
+                {
+                  "id": "confondre-silence-et-interdiction",
+                  "label": "Forcer النموذج à répondre فقط Oui أو Non même lorsque document est totalement silencieux على sujet."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "في tableau d'analyse Harvey Vault, pourquoi faut-il prévoir case « العقد n'en parle pas » en plus من « Oui » و « Non » ?",
+              "prompt": "لماذا est-il essentiel qu' colonne من Review Table في Harvey Vault prévoie explicitement valeur « Silence من العقد (Aucune clause) » en plus من « Oui » و « Non » ?",
+              "options": [
+                {
+                  "id": "distinguer-absence-clause-et-stipulation-expresse",
+                  "label": "من أجل distinguer juridiquement العقد qui interdit expressément opération d' العقد qui n'aborde pas sujet (auquel s'applique alors droit commun)."
+                },
+                {
+                  "id": "reduire-nombre-colonnes-ecran",
+                  "label": "من أجل masquer تلقائياً lignes paires من tableau lors من l'exportation vers Excel."
+                },
+                {
+                  "id": "desactiver-liens-vers-pdf",
+                  "label": "من أجل حذف liens من citation vers pages من العقود originaux."
+                },
+                {
+                  "id": "modifier-texte-pdf-source",
+                  "label": "من أجل réécrire مباشرة الملفات PDF scannés stockés في Data Room."
+                }
+              ]
+            }
+          ],
+          "recap": "Review Tables في Harvey Vault = colonnes من tri fermées + colonnes من détail + distinction من silence contractuel + vérification en clic على source.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "harvey-knowledge-workflows-secret-professionnel",
+      "unitNumber": 3,
+      "title": "الوحدة 3 · Harvey Knowledge, Workflows Multi-Étapes & Secret Professionnel",
+      "subtitle": "Recherche réglementaire و jurisprudentielle sourcée, exécution من workflows juridiques multi-étapes, confidentialité zéro-entraînement client و respect من السر المهني القانوني.",
+      "estimatedMinutes": 36,
+      "memoActivity": "Exécuter recherche réglementaire و jurisprudentielle vérifiée في Harvey Knowledge, orchestrer workflow juridique multi-étapes و auditer garanties من confidentialité zéro-entraînement و من السر المهني القانوني.",
+      "memoKeyTopics": [
+        "Harvey Knowledge : recherche juridique, réglementaire, fiscale و jurisprudentielle ancrée على من bases officielles مع citations vérifiables",
+        "Harvey Workflows : automatisation guidée من processus juridiques multi-étapes (qualification ➔ extraction ➔ analyse من droit ➔ rédaction من livrable)",
+        "Déontologie & الأمان : confidentialité zéro-entraînement على البيانات clients, isolation par locataire/dossier و protection من السر المهني القانوني من l'avocat"
+      ],
+      "memoGoldenRule": "avocat ne cite jamais jurisprudence أو article من loi بدون avoir vérifié son texte source و son état من vigueur via citations من Harvey Knowledge, و conserve toujours responsabilité déontologique من conseil livré.",
+      "architectureSchema": {
+        "title": "Architecture Harvey Knowledge, Workflows Multi-Étapes & Frontière من Confidentialité",
+        "diagram": "[Dossier Client (Zéro-Entraînement & Ethical Wall)] + [Harvey Knowledge (Bases Légales, Réglementaires & Jurisprudence)] ➔ [Harvey Workflow : Étape 1 Extraction ➔ Étape 2 Confrontation au Droit ➔ Étape 3 Projet d'Acte / Note] ➔ [Revue & Validation من l'Avocat]",
+        "components": [
+          {
+            "name": "[AR] Harvey Knowledge",
+            "role": "Interroge من corpus juridiques, réglementaires و jurisprudentiels من référence من أجل fournir من réponses ancrées مع liens directs vers textes و décisions."
+          },
+          {
+            "name": "[AR] Harvey Workflows",
+            "role": "Enchaîne من manière reproductible plusieurs étapes spécialisées (collecte من pièces, extraction من faits, recherche من droit, génération d'acte أو من conclusions) مع validation humaine."
+          },
+          {
+            "name": "[AR] Garantie Zéro-Entraînement & Secret Professionnel",
+            "role": "يضمن contractuellement و techniquement qu'aucun prompt, العقد أو mémo client n'est utilisé من أجل entraîner من النماذج partagés ni exposé à d'autres clients."
+          }
+        ],
+        "securityInvariant": "البيانات soumises في Harvey restent strictement confinées au locataire و au dossier autorisé, مع politique zéro-entraînement من النماذج من fondation و maintien intégral من السر المهني القانوني."
+      },
+      "lessons": [
+        {
+          "id": "harvey-knowledge-recherche-juridique-sourcee",
+          "title": "Harvey Knowledge : recherche réglementaire و jurisprudentielle sourcée بدون hallucination",
+          "objective": "Conduire recherche réglementaire و jurisprudentielle في Harvey Knowledge en vérifiant hiérarchie من normes, juridiction, date من vigueur و citations.",
+          "estimatedMinutes": 12,
+          "hook": "Plusieurs avocats في monde ont été sanctionnés par من tribunaux من أجل avoir cité من arrêts inventés par chatbot grand public : comment l'architecture d'ancrage من Harvey Knowledge و votre protocole من revue éliminent-ils ce risque ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Harvey Knowledge : Ancrage على Bases Officielles + Vérification من Source Citée",
+            "diagramTop": "Question من droit (Juridiction + Matière + Période) ➔ Recherche في Harvey Knowledge (Textes & Jurisprudence réels)",
+            "diagramBottom": "الاستجابة ancrée مع citations numérotées ➔ Ouverture و lecture من l'arrêt/article par l'avocat avant citation",
+            "step1": "Formulez votre question en précisant juridiction, branche من droit, faits pertinents و date من faits litigieux.",
+            "step2": "Ouvrez systématiquement décisions و textes cités par Harvey Knowledge من أجل التحقق من attendu/considérant exact و l'absence من revirement postérieur.",
+            "rule": "Zéro référence jurisprudentielle أو légale في acte أو consultation بدون avoir ouvert و lu source citée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · POURQUOI CHATBOT GÉNÉRALISTE HALLUCINE",
+              "title": "Prédire numéro d'arrêt plausible ≠ Retrouver vrai arrêt",
+              "bodyParagraph": "النموذج من langage non ancré على base juridique officielle prédit من suites من mots statistiquement plausibles : il peut inventer من toutes pièces numéro من pourvoi أو attendu qui sonne vrai. Harvey Knowledge résout ce problème à racine en ancrant génération على من bases documentaires juridiques, fiscales و réglementaires vérifiées.",
+              "keyTakeawayPill": "Harvey Knowledge = génération ancrée على من corpus législatifs, réglementaires و jurisprudentiels réels"
+            },
+            {
+              "stepBadge": "الخطوة 2 · FORMULER QUESTION من DROIT PRÉCISE",
+              "title": "Juridiction, faits qualifiés و question من droit",
+              "bodyParagraph": "من أجل tirer meilleur parti من Harvey Knowledge, structurez votre الطلب comme saisine : 1. Juridiction و droit applicable (ex. Cour من cassation, chambre commerciale ; droit من l'Union européenne) · 2. Qualification من faits (ex. rupture brutale d' relation commerciale établie من 8 ans) · 3. Question précise à trancher.",
+              "keyTakeawayPill": "Juridiction exacte + Faits qualifiés + Question من droit = recherche ciblée و pertinente"
+            },
+            {
+              "stepBadge": "الخطوة 3 · CONTRÔLE من VIGUEUR & PORTÉE",
+              "title": "Lire l'arrêt في son contexte avant من l'invoquer",
+              "bodyParagraph": "citation exacte peut malgré tout porter على texte abrogé أو على من faits d'espèce différents من vôtres (distinguishing). Cliquez toujours على source في Harvey Knowledge من أجل التحقق من date من décision, chambre, solution retenue و son applicabilité exacte au dossier client.",
+              "keyTakeawayPill": "Toujours التحقق من : 1. Existence من texte/arrêt · 2. État من vigueur · 3. Pertinence aux faits d'espèce"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Knowledge ancre recherche juridique و réglementaire على من sources autorisées و attache من citations vérifiables à chaque affirmation.",
+            "Préciser juridiction, l'ordre من juridiction, matière و l'époque من faits évite transpositions erronées بين systèmes juridiques.",
+            "L'avocat أو juriste يجب systématiquement ouvrir citation source من أجل contrôler portée exacte من décision و l'absence d'abrogation أو من revirement."
+          ],
+          "workedExample": {
+            "situation": "avocat en droit من concurrence prépare note urgente على validité d' clause من non-concurrence post-contractuelle في العقد من franchise en droit français و européen.",
+            "steps": [
+              "الاستعلام عن Harvey Knowledge en spécifiant droit français (Code من commerce) و règlement d'exemption européen على restrictions verticales.",
+              "Examiner conditions cumulatives extraites par Harvey Knowledge (limitation في temps à an, limitation aux locaux, caractère indispensable à protection من savoir-faire) و ouvrir références citées.",
+              "Intégrer références vérifiées في consultation juridique remise au franchiseur."
+            ],
+            "decision": "consultation est solidement étayée par textes و arrêts exacts, vérifiés en quelques minutes."
+          },
+          "practice": {
+            "prompt": "stagiaire vous remet projet من conclusions contenant trois arrêts trouvés via outil d'IA grand public non connecté à base juridique, بدون avoir ouvert décisions. Quelle procédure من contrôle lui imposez-vous مع Harvey Knowledge ?",
+            "successCriteria": [
+              "Interdire formellement l'insertion في acte judiciaire من toute référence jurisprudentielle non vérifiée à source.",
+              "Relancer recherche من droit في Harvey Knowledge en précisant juridiction و question من droit.",
+              "Ouvrir chacune من décisions citées par Harvey Knowledge من أجل التحقق من texte intégral, date و l'adéquation aux faits من dossier."
+            ],
+            "feedback": "responsabilité professionnelle من l'avocat impose que chaque autorité juridique citée ait été lue و vérifiée في sa source officielle."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "كيف Harvey Knowledge évite-t-il d'inventer من fausses lois أو من faux jugements ?",
+              "prompt": "كيف Harvey Knowledge prévient-il risque d'hallucination من références jurisprudentielles أو réglementaires lors d' recherche juridique ?",
+              "options": [
+                {
+                  "id": "ancrage-bases-juridiques-verifiees-et-citations",
+                  "label": "En ancrant الاستجابة على من قواعد البيانات juridiques و réglementaires faisant foi و en attachant من citations cliquables vers textes sources."
+                },
+                {
+                  "id": "generation-numeros-pourvoi-aleatoires",
+                  "label": "En générant من numéros من pourvoi aléatoires à partir d' dictionnaire statistique بدون consulter من base documentaire."
+                },
+                {
+                  "id": "interdiction-afficher-sources",
+                  "label": "En masquant références d'articles من loi afin que lecteur ne puisse pas التحقق من l'origine من raisonnement."
+                },
+                {
+                  "id": "traduction-automatique-romans-fiction",
+                  "label": "En s'appuyant فقط على من articles من blogs anonymes non juridiques."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "fois que Harvey Knowledge vous donne الاستجابة juridique مع من sources, que devez-vous toujours faire avant من valider votre conseil ?",
+              "prompt": "Après avoir obtenu الاستجابة sourcée في Harvey Knowledge على l'application d' directive européenne و من sa transposition nationale, quelle vérification professionnelle juriste يجب-il toujours effectuer avant من signer sa note ?",
+              "options": [
+                {
+                  "id": "ouvrir-citations-verifier-vigueur-et-espece",
+                  "label": "Ouvrir textes و arrêts cités من أجل confirmer leur état من vigueur à date من faits و التحقق من que faits d'espèce correspondent au dossier."
+                },
+                {
+                  "id": "copier-sans-lire-sources-citees",
+                  "label": "Envoyer note au tribunal بدون jamais cliquer على citations ni التحقق من date من textes."
+                },
+                {
+                  "id": "supprimer-mentions-juridiction",
+                  "label": "Retirer toute mention من pays و من juridiction compétente في conclusions finales."
+                },
+                {
+                  "id": "remplacer-textes-par-avis-personnel",
+                  "label": "Effacer références légales من أجل ne conserver qu' opinion générale non motivée."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Knowledge apporte rapidité من l'ancrage sourcé ; l'ouverture من citation و contrôle من vigueur scellent rigueur من l'avocat.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-workflows-et-secret-professionnel",
+          "title": "Harvey Workflows multi-étapes, zéro-entraînement client و السر المهني القانوني",
+          "objective": "Exécuter من workflows juridiques multi-étapes في Harvey و إتقان l'architecture من confidentialité (zéro-entraînement client, cloisonnement و السر المهني القانوني).",
+          "estimatedMinutes": 12,
+          "hook": "كيف standardiser l'excellence d' associé senior في workflow reproductible par tout cabinet, tout en garantissant aux clients que leurs secrets d'affaires و leur السر المهني القانوني sont protégés à 100 % ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Workflows & Déontologie : Orchestration Multi-Étapes + Zéro-Entraînement Client",
+            "diagramTop": "[AR] Harvey Workflow : 1. Ingestion Pièces ➔ 2. Extraction Faits/Clauses ➔ 3. Confrontation au Droit ➔ 4. Brouillon d'Acte",
+            "diagramBottom": "Garantie Déontologique : Zéro entraînement على البيانات clients + Cloisonnement par dossier + Supervision humaine",
+            "step1": "Utilisez Harvey Workflows من أجل enchaîner من façon déterministe و guidée من tâches complexes (ex. préparation d' assignation, الاستجابة à contrôle réglementaire, revue DORA/NIS2).",
+            "step2": "Vérifiez toujours trois piliers déontologiques : engagement zéro-entraînement client, muraille éthique par dossier و validation finale par l'avocat.",
+            "rule": "confidentialité d' dossier juridique ne souffre aucune exception : zéro usage d'outils publics gratuits réentraînés على prompts !"
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · HARVEY WORKFLOWS MULTI-ÉTAPES",
+              "title": "Industrialiser savoir-faire juridique بدون perdre nuance",
+              "bodyParagraph": "workflow في Harvey enchaîne plusieurs étapes spécialisées conçues par experts juridiques : par exemple, 1. Extraire chronologie من faits depuis 50 pièces من contentieux · 2. Identifier manquements contractuels · 3. Rechercher fondements légaux applicables · 4. Générer projet من mise en demeure أو من conclusions مع renvoi aux pièces (`Pièce n° X`).",
+              "keyTakeawayPill": "Harvey Workflows = Chaînage structuré d'étapes juridiques مع jalons من validation"
+            },
+            {
+              "stepBadge": "الخطوة 2 · ZÉRO-ENTRAÎNEMENT CLIENT",
+              "title": "Vos dossiers n'entraînent jamais النموذج d' autre client",
+              "bodyParagraph": "Contrairement aux services grand public où conversations peuvent alimenter l'entraînement futur من النماذج, l'architecture d'المؤسسة من Harvey يضمن contractuellement و techniquement **zéro-entraînement** (Zero Training) على prompts, documents و livrables من clients, مع التشفير en transit و au repos.",
+              "keyTakeawayPill": "Zéro-Entraînement Client = aucune donnée d' dossier n'بين في poids من النماذج"
+            },
+            {
+              "stepBadge": "الخطوة 3 · SECRET PROFESSIONNEL & RESPONSABILITÉ",
+              "title": "Supervision humaine, Ethical Walls و traçabilité",
+              "bodyParagraph": "respect من السر المهني القانوني من l'avocat (و من legal privilege) repose على trois contrôles : 1. Isolation stricte par client و par dossier (Ethical Walls) · 2. Journalisation d'audit و politiques من rétention maîtrisées par cabinet · 3. Revue, validation و signature par professionnel من droit qui demeure seul responsable من conseil.",
+              "keyTakeawayPill": "Secret professionnel = Isolation par dossier + Zéro entraînement + Validation humaine من l'avocat"
+            }
+          ],
+          "keyIdeas": [
+            "Harvey Workflows يتيح d'orchestrer من processus juridiques multi-étapes reproductibles (chronologie من pièces, grille من conformité, projet d'acte) en intégrant savoir-faire من cabinet.",
+            "garantie zéro-entraînement client assure qu'aucune donnée confidentielle soumise à Harvey ne sert à entraîner النماذج sous-jacents.",
+            "respect من السر المهني القانوني exige l'isolation من dossiers (Ethical Walls), l'interdiction من outils grand public non contractuels و revue finale par l'avocat."
+          ],
+          "workedExample": {
+            "situation": "direction juridique d' groupe pharmaceutique و son cabinet conseil يجب auditer 120 العقود critiques au regard من règlement européen DORA / NIS2 و générer avenants من mise en conformité.",
+            "steps": [
+              "Lancer في Harvey Workflow multi-étapes : (1) Extraction من clauses من الأمان و من notification d'incident في Vault, (2) Confrontation aux exigences réglementaires via Knowledge, (3) Génération individualisée من projet d'avenant من أجل chaque fournisseur incomplet.",
+              "Maintenir l'ensemble من pièces في l'environnement Harvey d'المؤسسة couvert par l'engagement zéro-entraînement و السر المهني القانوني.",
+              "Faire relire و valider chaque avenant par juriste responsable من العقد avant envoi au fournisseur."
+            ],
+            "decision": "campagne من conformité réglementaire على 120 العقود est bouclée en dix jours مع traçabilité complète و zéro compromis على confidentialité."
+          },
+          "practice": {
+            "prompt": "client demande à votre cabinet d'avocats quelles garanties concrètes protègent ses documents confidentiels lorsque vos équipes utilisent Harvey. Formulez الاستجابة structurée en trois points.",
+            "successCriteria": [
+              "1. Garantie contractuelle و technique من zéro-entraînement : documents و prompts من client ne sont jamais utilisés من أجل entraîner من النماذج partagés.",
+              "2. Cloisonnement strict من الوصول par dossier (Ethical Walls), التشفير من bout en bout و hébergement conforme aux standards من الأمان d'المؤسسة.",
+              "3. Maintien intégral من supervision و من responsabilité professionnelle من avocats من cabinet على chaque analyse و chaque acte produit."
+            ],
+            "feedback": "Cette الاستجابة rassure direction juridique و RSSI من client en couvrant à fois l'architecture IA (zéro-entraînement), الأمان d'الوصول (cloisonnement) و déontologie (supervision من l'avocat)."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quel est l'avantage d' Workflow Harvey par rapport à simple question posée في chat ?",
+              "prompt": "Quel est l'apport principal من Harvey Workflows par rapport à simple prompt isolé lors من traitement d' dossier juridique complexe ?",
+              "options": [
+                {
+                  "id": "orchestration-multi-etapes-reproductible-validee",
+                  "label": "Il orchestre من façon reproductible séquence d'étapes juridiques spécialisées (extraction من pièces, analyse من droit, génération من projet d'acte) مع jalons من validation humaine."
+                },
+                {
+                  "id": "depot-automatique-greffe-sans-avocat",
+                  "label": "Il dépose و signe تلقائياً من actes من procédure au greffe من tribunal بدون aucune relecture d' avocat."
+                },
+                {
+                  "id": "publication-dossiers-clients-reseaux-sociaux",
+                  "label": "Il publie pièces confidentielles من dossier على forum communautaire من أجل recueillir من avis externes."
+                },
+                {
+                  "id": "suppression-numerotation-pieces-contentieux",
+                  "label": "Il efface numéros من pièces justificatives afin d'empêcher juge من التحقق من faits allégués."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Qu'est-ce qui يضمن que العقود confidentiels confiés à Harvey ne serviront jamais à entraîner l'IA من أجل d'autres clients ?",
+              "prompt": "الإدارة القانونية exige que ses mémos من litige و ses projets d'acquisition restent couverts par confidentialité و ne puissent en aucun cas enrichir النموذج d'IA accessible à من tiers. Quelle garantie d'architecture من Harvey répond مباشرة à cette exigence ?",
+              "options": [
+                {
+                  "id": "zero-entrainement-client-et-isolation-locataire",
+                  "label": "politique من confidentialité zéro-entraînement على البيانات clients combinée au cloisonnement strict par organisation و par dossier."
+                },
+                {
+                  "id": "partage-poids-modele-inter-cabinets",
+                  "label": "réentraînement quotidien d' النموذج public commun على l'ensemble من العقود téléversés par tous cabinets."
+                },
+                {
+                  "id": "conservation-publique-prompts",
+                  "label": "L'indexation من prompts juridiques في annuaire من recherche ouvert aux moteurs web."
+                },
+                {
+                  "id": "desactivation-chiffrement-tls",
+                  "label": "transmission من pièces من Data Room en texte clair على الشبكة Wi-Fi public non chiffré."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Workflows industrialise vos processus multi-étapes ; zéro-entraînement client, cloisonnement par dossier و validation من l'avocat protègent السر المهني القانوني.",
+          "sourceIds": [
+            "harvey-platform-overview",
+            "harvey-product-blog"
+          ]
+        },
+        {
+          "id": "harvey-academy-legal-engineering-credly",
+          "title": "[AR] Harvey Academy Legal Engineering, Preparing for Legal Work, Admins & Badges Credly",
+          "objective": "إتقان Legal Engineering Certification, parcours badgé Preparing for Legal Work, guide Getting Started for Admins, nouveautés Harvey II و gestion من badges vérifiés Credly by Pearson.",
+          "estimatedMinutes": 12,
+          "hook": "كيف industrialiser l'excellence IA في cabinet أو direction juridique grâce au rôle من Legal Engineer, au parcours Admin من Harvey Academy و aux certifications vérifiables Credly ?",
+          "declicCard": {
+            "title": "الفكرة المفتاحية Legal Engineering & Credly : Industrialisation من Workflows + الحوكمة Admin + Preuve Vérifiée",
+            "diagramTop": "[AR] Certifications & Parcours : Legal Engineering Certification · Preparing for Legal Work (45 min) · Getting Started for Admins · Harvey II",
+            "diagramBottom": "Reconnaissance officielle : Certificat Harvey Academy + Badge numérique vérifié Credly by Pearson (بدون expiration)",
+            "step1": "Formez vos référents via Legal Engineering Certification و Getting Started for Admins من أجل concevoir من workflows fiables و تكوين الأمان من workspace.",
+            "step2": "Validez pratique opérationnelle مع Preparing for Legal Work و associez l'adresse e-mail من compte Academy à Credly by Pearson من أجل publier badge vérifié.",
+            "rule": "Utilisez toujours même adresse e-mail professionnelle على Harvey, Harvey Academy و Credly (و autorisez admin@credly.com) من أجل rattacher vos certifications بدون délai."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "الخطوة 1 · LEGAL ENGINEERING CERTIFICATION",
+              "title": "compétences clés من Legal Engineer في Harvey Academy",
+              "bodyParagraph": "Legal Engineering Certification من Harvey Academy (parcours spécialisé en 2 cours, ouvert gratuitement على création من compte Academy) forme aux compétences d'ingénierie juridique : décomposition d' processus complexe en étapes vérifiables, conception من prompts و من grilles Review Tables standardisés, tests على cas limites و assurance qualité avant déploiement à l'الفريق.",
+              "keyTakeawayPill": "Legal Engineering Certification = concevoir, tester و standardiser workflows juridiques"
+            },
+            {
+              "stepBadge": "الخطوة 2 · PREPARING FOR LEGAL WORK, ADMINS & HARVEY II",
+              "title": "Embarquer équipes و administrer workspace dès jour 1",
+              "bodyParagraph": "من أجل المستخدمين disposant d' الوصول Harvey (via SSO أو code OTP), cours badgé Preparing for Legal Work (45 min) valide mise en pratique par من exercices réels و badge capstone. En parallèle, parcours Getting Started for Admins (4 cours) guide administrateurs و Legal Ops في configuration sécurisée من workspace, l'organisation من flux و suivi من nouveautés comme playlist Harvey II.",
+              "keyTakeawayPill": "[AR] Preparing for Legal Work (pratique SSO) + Getting Started for Admins (déploiement sécurisé)"
+            },
+            {
+              "stepBadge": "الخطوة 3 · BADGES VÉRIFIÉS CREDLY BY PEARSON",
+              "title": "Revendiquer, التحقق من و مشاركة ses certifications Harvey Academy",
+              "bodyParagraph": "Chaque certification réussie على Harvey Academy délivre certificat numérique و badge vérifié émis via Credly by Pearson (بدون date d'expiration). badge atteste l'émetteur, date d'obtention, compétences validées و lien public من vérification من أجل LinkedIn أو signature professionnelle. Si vous possédez déjà compte Credly sous autre adresse, ajoutez simplement votre e-mail Academy في Settings > Account.",
+              "keyTakeawayPill": "Badge Harvey via Credly by Pearson = preuve vérifiable و permanente من compétence Legal IA"
+            }
+          ],
+          "keyIdeas": [
+            "Legal Engineering Certification و Level 1 Foundations sont accessibles gratuitement مع compte Harvey Academy ; Preparing for Legal Work est dédié aux المستخدمين Harvey connectés (SSO/OTP).",
+            "parcours Getting Started for Admins (4 cours) outille Legal Ops و administrateurs من أجل تكوين l'espace من travail و نشر من workflows sécurisés dès premier jour.",
+            "badges من certification Harvey Academy sont émis par Credly by Pearson, ne périment pas و se rattachent via l'adresse e-mail من compte Academy."
+          ],
+          "workedExample": {
+            "situation": "directrice Legal Ops déploie Harvey auprès من 120 avocats و souhaite structurer الشبكة من référents certifiés tout en permettant à chacun من valoriser sa certification على LinkedIn.",
+            "steps": [
+              "Suivre parcours Getting Started for Admins (4 cours) و playlist Harvey II من أجل تكوين workspace, murailles éthiques و النماذج d'الفريق.",
+              "Faire passer Legal Engineering Certification aux référents métiers و cours badgé Preparing for Legal Work (45 min) aux avocats connectés en SSO.",
+              "Autoriser courriels من admin@credly.com على passerelle من messagerie من cabinet afin que chaque lauréat reçoive و accepte son badge vérifié Credly by Pearson."
+            ],
+            "decision": "cabinet dispose d'administrateurs formés, من Legal Engineers certifiés و d' reconnaissance officielle vérifiable من أجل chaque avocat."
+          },
+          "practice": {
+            "prompt": "Rédigez procédure interne permettant aux juristes من votre organisation من passer certifications Harvey Academy (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) و من récupérer leur badge Credly by Pearson بدون blocage technique.",
+            "successCriteria": [
+              "Préciser من إنشاء compte Harvey Academy مع même adresse e-mail professionnelle que celle utilisée من أجل se connecter à Harvey.",
+              "Distinguer certifications ouvertes (Level 1 Foundations, Legal Engineering) من parcours pratique réservé aux المستخدمين Harvey connectés en SSO/OTP (Preparing for Legal Work).",
+              "Indiquer procédure d'acceptation من badge envoyé par Harvey via Credly (autorisation من admin@credly.com و ajout d'adresse secondaire في Credly Settings > Account si nécessaire)."
+            ],
+            "feedback": "Ce protocole couvre à fois progression pédagogique officielle من Harvey Academy و délivrance fluide من justificatifs Credly."
+          },
+          "questions": [
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "في Harvey Academy, quelle certification spécialisée forme à concevoir من workflows juridiques reproductibles, structurer من grilles d'extraction و industrialiser contrôles qualité ?",
+              "prompt": "Au sein d' direction juridique, responsable innovation souhaite former من référents capables من concevoir من workflows reproductibles, من calibrer من grilles Review Tables و d'administrer l'espace من travail Harvey dès premier jour. Quels parcours من Harvey Academy répondent spécifiquement à ce besoin ?",
+              "options": [
+                {
+                  "id": "legal-engineering-certification-et-getting-started-for-admins",
+                  "label": "Legal Engineering Certification (compétences clés d'ingénierie juridique en 2 cours) associée au parcours Getting Started for Admins (configuration من workspace و déploiement من workflows sécurisés en 4 cours)."
+                },
+                {
+                  "id": "desactivation-complete-des-controles-acces",
+                  "label": "suppression من contrôles d'الوصول par dossier و l'improvisation من prompts بدون aucun test préalable."
+                },
+                {
+                  "id": "utilisation-comptes-partages-anonymes",
+                  "label": "partage d' seul identifiant anonyme بين cent juristes بدون suivi من progression ni الحوكمة."
+                },
+                {
+                  "id": "redaction-manuelle-sans-aucun-modele",
+                  "label": "L'interdiction d'استخدام من النماذج من prompts أو من Review Tables afin que chaque juriste réinvente sa méthode."
+                }
+              ]
+            },
+            {
+              "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "كيف professionnel certifié على Harvey Academy reçoit-il و prouve-t-il officiellement son badge من certification على LinkedIn ?",
+              "prompt": "كيف fonctionne délivrance و vérification من badges officiels obtenus après réussite d' certification على Harvey Academy ?",
+              "options": [
+                {
+                  "id": "badge-verifie-credly-by-pearson-sans-expiration",
+                  "label": "badge est émis via Credly by Pearson على l'adresse e-mail من compte Harvey Academy, ne comporte pas من date d'expiration و fournit lien public vérifiant l'émetteur, date و compétences acquises."
+                },
+                {
+                  "id": "image-locale-non-verifiable-valable-24h",
+                  "label": "badge est simple image بدون lien من vérification qui expire تلقائياً au bout من vingt-quatre heures."
+                },
+                {
+                  "id": "envoi-postal-papier-uniquement",
+                  "label": "diplôme est envoyé فقط par courrier postal papier بدون aucun justificatif numérique partageable على LinkedIn."
+                },
+                {
+                  "id": "obligation-creer-nouveau-profil-linkedin",
+                  "label": "L'obtention من badge oblige juriste à حذف son profil LinkedIn existant من أجل en recréer nouveau."
+                }
+              ]
+            }
+          ],
+          "recap": "Harvey Academy certifie vos équipes (Level 1 Foundations, Legal Engineering, Preparing for Legal Work) مع من badges vérifiés Credly by Pearson.",
+          "sourceIds": [
+            "harvey-academy-blog",
+            "harvey-academy-help",
+            "harvey-product-blog"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "harvey-legal-ai-mock-exam",
+    "title": "اختبار تجريبي CertiGo Pro: Harvey Academy & Legal IA (Assistant, Vault, Knowledge, Workflows & Legal Engineering)",
+    "durationMinutes": 30,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète من maîtrise produit inspirée من certifications Harvey Academy (Level 1 Foundations, Legal Engineering و Preparing for Legal Work) : révision من العقود مع playbook, redlining Word, audit من Data Rooms M&A في Vault, Review Tables, recherche sourcée Knowledge و protection من السر المهني القانوني.",
+    "questionIds": [
+      "harvey-legal-ai.redaction-revision-contrats-playbook.001",
+      "harvey-legal-ai.redaction-revision-contrats-playbook.002",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.001",
+      "harvey-legal-ai.redlining-assiste-ia-et-memos-clients.002",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+      "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.001",
+      "harvey-legal-ai.vault-audit-data-rooms-due-diligence.002",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.001",
+      "harvey-legal-ai.grilles-extraction-multi-contrats-review-tables.002",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.001",
+      "harvey-legal-ai.harvey-knowledge-recherche-juridique-sourcee.002",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.001",
+      "harvey-legal-ai.harvey-workflows-et-secret-professionnel.002",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+      "harvey-legal-ai.harvey-academy-legal-engineering-credly.002"
+    ]
+  }
+}

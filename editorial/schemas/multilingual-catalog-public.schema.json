@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://certigo.microsoft.com/schemas/multilingual-catalog-public.schema.json",
+  "title": "CertiGo multilingual public catalog bundle",
+  "description": "Public localized bundle covering all 41 runtime certifications, 13 international Radar tracks, 176 domains/units/lessons, 779 concepts, and 779 public questions for a supported locale. Never includes answer-bearing keys.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "locale",
+    "asOf",
+    "certifications",
+    "radarTracks",
+    "concepts",
+    "questions"
+  ],
+  "properties": {
+    "schema": {
+      "const": "certigo.multilingual.catalog-public/v1"
+    },
+    "locale": {
+      "enum": [
+        "fr-FR",
+        "en-US",
+        "es-ES",
+        "de-DE",
+        "it-IT",
+        "pt-BR",
+        "ar-SA",
+        "ja-JP",
+        "hi-IN",
+        "zh-Hans",
+        "ko-KR"
+      ]
+    },
+    "asOf": {
+      "type": "string",
+      "format": "date"
+    },
+    "certifications": {
+      "type": "array",
+      "minItems": 41,
+      "items": {
+        "$ref": "#/$defs/localizedCertification"
+      }
+    },
+    "radarTracks": {
+      "type": "array",
+      "minItems": 13,
+      "items": {
+        "$ref": "#/$defs/localizedRadarTrack"
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "minItems": 779,
+      "items": {
+        "$ref": "#/$defs/localizedConcept"
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 779,
+      "items": {
+        "$ref": "#/$defs/localizedQuestion"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "localizedDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "objectiveId",
+        "title",
+        "unitId",
+        "unitTitle",
+        "lessonId",
+        "lessonTitle"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "objectiveId": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" },
+        "unitId": { "$ref": "#/$defs/text" },
+        "unitTitle": { "$ref": "#/$defs/text" },
+        "lessonId": { "$ref": "#/$defs/text" },
+        "lessonTitle": { "$ref": "#/$defs/text" }
+      }
+    },
+    "localizedCertification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "provider",
+        "slug",
+        "code",
+        "title",
+        "summary",
+        "domains"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "provider": { "enum": ["aws", "gcp", "microsoft"] },
+        "slug": { "$ref": "#/$defs/text" },
+        "code": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" },
+        "summary": { "$ref": "#/$defs/text" },
+        "domains": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/localizedDomain" }
+        }
+      }
+    },
+    "localizedRadarObjective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" }
+      }
+    },
+    "localizedRadarTrack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "providerId",
+        "slug",
+        "code",
+        "title",
+        "objectives"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "providerId": { "$ref": "#/$defs/text" },
+        "slug": { "$ref": "#/$defs/text" },
+        "code": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" },
+        "objectives": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/localizedRadarObjective" }
+        }
+      }
+    },
+    "localizedConcept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "certificationId", "domainId", "title"],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "certificationId": { "$ref": "#/$defs/text" },
+        "domainId": { "$ref": "#/$defs/text" },
+        "title": { "$ref": "#/$defs/text" }
+      }
+    },
+    "localizedQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "certificationId",
+        "objectiveId",
+        "plainPrompt",
+        "prompt",
+        "choices"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/text" },
+        "certificationId": { "$ref": "#/$defs/text" },
+        "objectiveId": { "$ref": "#/$defs/text" },
+        "plainPrompt": { "$ref": "#/$defs/text" },
+        "prompt": { "$ref": "#/$defs/text" },
+        "choices": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/text" }
+        }
+      }
+    }
+  }
+}

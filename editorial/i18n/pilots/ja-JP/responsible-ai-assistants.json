@@ -1,0 +1,163 @@
+{
+  "schema": "certigo.editorial.pilot/v1",
+  "id": "responsible-ai-assistants",
+  "locale": "ja-JP",
+  "status": "draft",
+  "purpose": "learning-not-certification",
+  "title": "Travailler ・ assistant IA なしで lui 委任： son jugement",
+  "audience": "Personnes qui débutent ・ assistants IA 向け lire documentation, préparer diagnostic または proposer modification technique.",
+  "prerequisites": "Savoir ouvrir documentation ・ distinguer environnement の test d' environnement の production. Aucun compte AWS ni アクセス à assistant n'est nécessaire.",
+  "estimatedMinutes": 18,
+  "asOf": "2026-10-14",
+  "scope": "Pilote d'apprentissage original, en français, なしで notation ni préparation à certification または à titre officiel. situations sont fictives. conseils の travail sont の choix pédagogiques の CertiGo ; faits propres à Amazon Bedrock sont bornés aux pages AWS consultées à date indiquée. Ne pas exécuter の commande, envoyer の document réel ni modifier の permission 向け suivre ce pilote.",
+  "sources": [
+    {
+      "id": "aws-kb-overview",
+      "title": "Retrieve data およびgenerate AI responses with Amazon Bedrock Knowledge Bases",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html",
+      "checkedOn": "2026-10-14",
+      "supports": "base の connaissances recherche の informations 内の の sources ; informations retrouvées peuvent enrichir 応答 générée. citations permettent の remonter aux sources 向け 検証： 応答.",
+      "limits": "citation n'atteste ni vérité の toute 応答 ni l'actualité の source. capacités ・ 権限 dépendent の type の base ・ の sa configuration ; ne pas généraliser à tout assistant."
+    },
+    {
+      "id": "aws-kb-rag",
+      "title": "How Amazon Bedrock knowledge bases work (CertiGo コース)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/kb-how-it-works.html",
+      "checkedOn": "2026-10-14",
+      "supports": "内の parcours RAG vectoriel décrit, の documents non structurés sont découpés, convertis en représentations numériques ・ indexés. リクエスト est aussi représentée numériquement ; の passages proches sont retrouvés puis ajoutés au contexte transmis au モデル.",
+      "limits": "C'est parcours vectoriel の documents non structurés, pas description の tous modes の recherche. L'utilisation d' モデル 向け calculer の embeddings n'est pas son entraînement ; ingestion n'est pas ajustement の paramètres の モデル générateur."
+    },
+    {
+      "id": "aws-grounding",
+      "title": "Use contextual grounding check to filter hallucinations in responses (CertiGo コース)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html",
+      "checkedOn": "2026-10-14",
+      "supports": "contrôles d'ancrage contextuel évaluent l'appui d' 応答 上の source の référence ・ sa pertinence 向け リクエスト, ・ の scores ・ の seuils configurables.",
+      "limits": "Ces contrôles ne certifient pas vérité externe の source. page consultée limite usages pris en charge à synthèse, reformulation ・ questions-réponses, hors chatbot conversationnel. score ne 必要がある pas être présenté comme probabilité の vérité ni comme garantie の confidentialité."
+    },
+    {
+      "id": "aws-data-protection",
+      "title": "Data protection (CertiGo コース)",
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "checkedOn": "2026-10-14",
+      "supports": "client garde responsabilité の son contenu ・ の configuration の セキュリティ. AWS recommande の 権限 limitées au travail nécessaire ・ déconseille informations sensibles 内の tags, champs の nom libres ・ URL contenant の identifiants.",
+      "limits": "Cette page ne donne pas autorisation d'envoyer の データ の l'organisation. règles の conservation, journalisation, アクセス ・ traitements 必要がある être vérifiés 向け service ・ configuration utilisés ; ni filtre ni 暗号化 ne garantissent à eux seuls confidentialité."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "verify-claims",
+      "title": "応答 convaincante n'est pas preuve",
+      "objective": "Proposer plan の vérification d' affirmation technique : 分離： ce qui est à 検証：, préciser sources ・ conditions à rechercher ・ formuler décision bornée si preuves manquent.",
+      "estimatedMinutes": 6,
+      "hook": "assistant rédige note claire en quelques secondes. risque commence quand sa clarté remplace votre vérification.",
+      "keyIdeas": [
+        "Traitez 応答 comme proposition. Séparez faits vérifiables, hypothèses ・ recommandations. citation est piste の vérification, pas certificat の vérité.",
+        "Choisissez source adaptée : documentation officielle 向け comportement d' service, référence の version concernée 向け API, procédure interne autorisée 向け règle の votre organisation. témoignage peut aider à chercher なしで établir règle générale.",
+        "Ouvrez source ・ cherchez passage qui soutient exactement l'affirmation. Vérifiez service, version, région ・ conditions utiles. Si passage ne suffit pas, notez ce qui reste inconnu au lieu の compléter par intuition.",
+        "contrôle d'ancrage contextuel compare 応答 à source ・ à demande. 応答 peut être conforme à document erroné または périmé. contrôle favorable ne remplace donc pas vérification humaine."
+      ],
+      "workedExample": {
+        "situation": "向け préparer revue technique, Camille reçoit cette proposition fictive : « Notre 応答 cite document ・ passe contrôle d'ancrage, donc toutes ses affirmations sont exactes. » Aucune modification n'a encore été appliquée.",
+        "steps": [
+          "分離： conclusion à 検証： : citations ・ contrôle favorable garantiraient l'exactitude の toutes affirmations.",
+          "Consulter pages AWS Knowledge Bases ・ contextual grounding checks : l' 可能にする の remonter aux sources ; l'autre décrit comparaison ・ source ・ リクエスト, pas audit の vérité universel.",
+          "Relire document cité, 検証： sa date ・ rapprocher chaque affirmation importante d' passage précis. Signaler affirmations non étayées ・ celles dont conditions ne correspondent pas au contexte.",
+          "Conserver 内の note source, sa date の consultation, conditions vérifiées ・ incertitudes. Ne pas transformer incertitude en consigne の production."
+        ],
+        "decision": "Camille retire garantie d'exactitude ・ fait relire points non établis avant toute action. citation utile ・ contrôle favorable réduisent certains risques ; ils ne suppriment pas besoin の 検証：."
+      },
+      "practice": {
+        "prompt": "collègue propose : « Ce réglage fonctionne 内の toutes régions ; l'assistant cite page AWS. » Ce cas fictif ne précise ni réglage ni page : il sert à préparer vérification, pas à réaliser. なしで compte cloud, isolez l'affirmation à 検証：, proposez deux vérifications ・ sources à rechercher ・ formulez décision à prendre si page ne couvre que votre région の test.",
+        "successCriteria": [
+          "分離： généralisation « 内の toutes régions » ・ prévoir の confronter réglage ・ ses conditions au passage cité.",
+          "Prévoir の rechercher documentation officielle の régions prises en charge à version または date utile ; demander nom の réglage ・ lien manquants.",
+          "Formuler décision conditionnelle : ne pas généraliser au-delà の régions établies, suspendre déploiement envisagé ・ demander revue si informations manquent."
+        ],
+        "feedback": "Votre production est plan : elle ne prouve pas que vous avez trouvé または vérifié source. deuxième 応答 の l'assistant ne constituerait pas preuve indépendante. plan 必要がある nommer informations manquantes, sources à rechercher ・ limite の décision. recherche effective d' passage ・ transfert à cas nouveau restent à pratiquer ・ à observer ultérieurement."
+      },
+      "recap": "Affirmation précise → source adaptée → conditions comparables → décision bornée. En l'absence の preuve, dire ce qui manque est plus utile que parler ・ assurance.",
+      "sourceIds": [
+        "aws-kb-overview",
+        "aws-grounding"
+      ]
+    },
+    {
+      "id": "retrieval-not-training",
+      "title": "Donner の contexte n'est pas entraîner モデル",
+      "objective": "解説： parcours RAG vectoriel d' document ・ distinguer indexation, recherche, contexte ・ entraînement.",
+      "estimatedMinutes": 6,
+      "hook": "Vous ajoutez procédure à base documentaire. L'assistant peut ensuite retrouver : a-t-il appris cette procédure 内の ses paramètres ? Pas par cette seule opération.",
+      "keyIdeas": [
+        "RAG signifie génération enrichie par recherche : l'application retrouve の l'information puis fournit au モデル comme contexte 向け produire 応答.",
+        "内の parcours vectoriel non structuré décrit par AWS, l'ingestion prépare documents : extraction の texte, découpage en passages, calcul d'embeddings ・ ストレージ 内の index. embedding est représentation numérique utilisée 向け comparer の contenus, pas 応答 ni garantie の compréhension.",
+        "Lors d' demande, モデル d'embeddings représente aussi リクエスト. recherche sélectionne の passages proches, puis ces passages complètent contexte envoyé au モデル générateur. passage pertinent peut malgré tout être incomplet, obsolète または mal interprété.",
+        "L'entraînement または l'ajustement d' モデル modifie ses paramètres. Calculer の embeddings ・ モデル existant ・ ajouter の documents à index ne réentraîne pas, par ces seules opérations, モデル générateur. Cela n'affirme rien 上の autres traitements または conservation の データ の service.",
+        "Toutes recherches ne suivent pas ce parcours vectoriel : mot RAG ne suffit pas à décrire l'architecture, アクセス または データ réellement transmises."
+      ],
+      "workedExample": {
+        "situation": "あるチームがindexe procédure fictive « test の reprise, version 2 ». リクエスト retrouve ancien passage の version 1. L'チーム conclut que モデル a mal appris nouvelle procédure.",
+        "steps": [
+          "Distinguer procédure stockée, passages indexés, passages retrouvés ・ 応答 générée. Ne pas attribuer immédiatement défaut à l'entraînement.",
+          "検証：, 内の revue なしで データ réelles, quelle version a été ingérée ・ quels passages recherche a sélectionnés. document ajouté mais non synchronisé peut manquer 内の l'index.",
+          "Comparer passages transmis au モデル ・ procédure en vigueur. Si contexte est ancien, examiner l'ingestion ・ recherche ; si contexte est adéquat mais 応答 diverge, examiner génération ・ vérification.",
+          "Faire approuver toute mise à jour の base par son responsable ; ne pas lancer entraînement ni élargir アクセス 向け masquer problème."
+        ],
+        "decision": "L'チーム cherche d'abord où version périmée 間の 内の parcours. Mettre à jour index ・ ajuster paramètres d' モデル sont の opérations différentes, ・ の objectifs ・ の risques différents."
+      },
+      "practice": {
+        "prompt": "Reconstituez à l'écrit trajet d' procédure fictive jusqu'à 応答 RAG vectorielle. Placez découpage, embeddings の documents, l'index, représentation の リクエスト, passages retrouvés ・ contexte. Expliquez ensuite pourquoi « document est indexé » ne signifie pas « モデル générateur a été réentraîné ».",
+        "successCriteria": [
+          "Séparer préparation の documents の recherche effectuée lors d' demande.",
+          "Placer embeddings の passages 内の l'index ・ représentation の リクエスト avant comparaison.",
+          "Placer passages retrouvés 内の contexte avant génération.",
+          "Distinguer l'utilisation d' モデル existant 向け calculer の vecteurs d' modification の ses paramètres par entraînement."
+        ],
+        "feedback": "trajet attendu est : document → passages → embeddings → index ; puis リクエスト → représentation → recherche の passages → contexte enrichi → 応答. Si vous avez relié 直接 l'index aux paramètres の générateur, reprenez distinction 間の contexte fourni à demande ・ entraînement. Ce schéma n'est pas universel à toutes bases の connaissances."
+      },
+      "recap": "L'index sert à retrouver ; contexte sert à informer demande ; l'entraînement sert à modifier paramètres. Ne confondez pas ces trois rôles.",
+      "sourceIds": [
+        "aws-kb-rag",
+        "aws-kb-overview"
+      ]
+    },
+    {
+      "id": "stop-and-escalate",
+      "title": "Savoir s'arrêter avant d'envoyer または d'autoriser",
+      "objective": "Repérer donnée sensible または アクセス excessif, suspendre l'action ・ demander décision au responsable adapté.",
+      "estimatedMinutes": 6,
+      "hook": "diagnostic peut être techniquement utile ・ pourtant inacceptable si データ または 権限 nécessaires ne sont pas autorisés.",
+      "keyIdeas": [
+        "Avant の transmettre, identifiez データ, destinataire, finalité ・ l'autorisation. Secrets, データ personnelles, ログ clients ・ documents internes demandent vérification spécifique. Pouvoir lire ファイル ne donne pas 自動的に droit の l'envoyer à assistant.",
+        "choix d' service approuvé ne dispense pas の 検証： sa configuration : アクセス, journalisation, conservation ・ règles internes. responsabilité partagée ne signifie pas que fournisseur prend toutes décisions à votre place.",
+        "filtre の データ sensibles peut aider, mais il ne 保証する pas の tout détecter. Retirer nom ne suffit pas toujours à anonymiser journal. Préférez exemple synthétique なしで donnée réelle si cela répond au besoin ・ respecte règles internes.",
+        "Demandez seulement 権限 nécessaires à tâche. Face à demande d'administration globale, ne cliquez pas 向け gagner の temps : demandez au responsable の アクセス revue の besoin ・ permission limitée.",
+        "Si donnée または l'autorisation est incertaine, arrêtez l'envoi または modification. Contactez propriétaire の データ, référent セキュリティ または responsable の アクセス selon cas, en décrivant besoin なしで reproduire secret."
+      ],
+      "workedExample": {
+        "situation": "Nora prépare diagnostic fictif. journal proposé contient の adresses の clients ・ トークン d'アクセス. L'assistant suggère の l'envoyer à outil externe ・ の lui attribuer rôle administrateur 向け lire d'autres ログ.",
+        "steps": [
+          "Ne pas envoyer journal ni accorder rôle. L'outil destinataire ・ l'usage の ces データ ne sont pas encore autorisés.",
+          "Décrire blocage au propriétaire の ログ ・ au référent セキュリティ なしで joindre トークン ni データ clients. Si secret a déjà été exposé, suivre procédure d'incident ・ demander sa révocation または rotation par personne habilitée.",
+          "Proposer reproduction synthétique の message d'erreur 向け commencer diagnostic, sous réserve の règles internes. Ne pas supposer qu' simple suppression の noms rend journal partageable.",
+          "Faire examiner par responsable の アクセス périmètre réellement nécessaire. Reprendre seulement ・ destinataire approuvé, の データ autorisées ・ 権限 validées."
+        ],
+        "decision": "Nora suspend l'action à risque ・ garde diagnostic au stade d' exemple fictif. filtre の l'assistant または promesse « nous ne réentraînons pas モデル » ne vaut ni autorisation の transfert ni garantie の confidentialité."
+      },
+      "practice": {
+        "prompt": "あるチームがveut envoyer capture の journal interne à assistant : noms sont masqués, mais identifiant の client ・ URL の connexion restent visibles. Elle demande aussi アクセス administrateur temporaire. Rédigez 応答 の trois phrases : ce que vous suspendez, à qui vous demandez revue ・ comment poursuivre なしで transmettre の データ réelles.",
+        "successCriteria": [
+          "Suspendre l'envoi ・ l'attribution の rôle, なしで déclarer capture anonyme ni rôle acceptable parce qu'il est temporaire.",
+          "Demander revue au propriétaire の データ または au référent セキュリティ 向け transfert, ・ au responsable の アクセス 向け 権限.",
+          "Proposer exemple synthétique ・ permission limitée au besoin, à faire valider avant の reprendre."
+        ],
+        "feedback": "Masquer noms ne règle pas autres identifiants ni informations éventuellement contenues 内の l'URL. rôle temporaire peut encore donner trop の 権限. bonne 応答 nomme blocage, décideur ・ voie の travail sûre ; elle ne copie pas éléments sensibles 内の demande の revue."
+      },
+      "recap": "データ または 権限 incertains → arrêter l'action → décrire besoin なしで secret → obtenir revue adaptée. qualité technique ne remplace jamais l'autorisation.",
+      "sourceIds": [
+        "aws-data-protection",
+        "aws-grounding"
+      ]
+    }
+  ]
+}

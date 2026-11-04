@@ -1,0 +1,1237 @@
+{
+  "schema": "certigo.editorial.track/v1",
+  "id": "openai-chatgpt-codex",
+  "brand": "CertiGo",
+  "providerId": "openai",
+  "radarTrackId": "openai:chatgpt-codex-agents",
+  "routeCode": "OPENAI-CODEX",
+  "routeAliases": [
+    "OPENAI-PRO",
+    "OPENAI-CODEX",
+    "OPENAI-ACADEMY"
+  ],
+  "brandIdentity": {
+    "logoSlug": "openai",
+    "displayName": "OpenAI (ChatGPT Enterprise, Codex & API Platform)",
+    "primaryHex": "#10A37F",
+    "accentHex": "#0D8A6A",
+    "masteryModel": "Parcours d'expertise produit complet aligné पर OpenAI Academy और documentation OpenAI Platform : 3 unités progressives (ChatGPT Enterprise & o3/o4-mini, agent logiciel Codex, ingénierie Responses API & Agents SDK), Cartes Déclic, labs pratiques, questions à double niveau (simple बिना jargon और expert) और examen blanc."
+  },
+  "locale": "hi-IN",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "status": "active",
+  "title": "CertiGo Pro: OpenAI (ChatGPT Enterprise, Codex, Deep Research, Responses API & Agents SDK)",
+  "subtitle": "महारत हासिल करें choix के मॉडल (GPT-4o vs o3/o4-mini), Deep Research, Canvas, Projects, l'agent का programmation autonome Codex और l'ingénierie IA का production (Responses API, Structured Outputs, Function Calling, Agents SDK & Evals).",
+  "audience": "Ingénieurs logiciels, architectes IA, analystes métier, Tech Leads और responsables produit déployant offres OpenAI en उद्यम.",
+  "prerequisites": "Connaître bases का développement logiciel (Git, JSON, API REST) और l'utilisation courante d'एक assistant génératif.",
+  "estimatedMinutes": 72,
+  "asOf": "2026-10-21",
+  "sources": [
+    {
+      "id": "openai-academy-courses",
+      "title": "OpenAI Academy: Applied AI और Prompt Engineering Foundations",
+      "url": "https://academy.openai.com/pages/courses",
+      "checkedOn": "2026-10-21",
+      "supports": "Présente bonnes pratiques d'ingénierie का prompt, routage के बीच मॉडल multimodaux और मॉडल का raisonnement, l'usage का Canvas, Projects, Custom GPTs और l'évaluation systématique.",
+      "limits": "performances d'एक prompt या d'एक workflow dépendent d'évaluations empiriques (Evals) पर डेटा représentatives का cas d'usage."
+    },
+    {
+      "id": "openai-codex-intro",
+      "title": "Introducing Codex: autonomous software engineering agent in a cloud sandbox (CertiGo पथ)",
+      "url": "https://openai.com/index/introducing-codex/",
+      "checkedOn": "2026-10-21",
+      "supports": "Détaille fonctionnement का l'agent OpenAI Codex : exécution का tâches en parallèle में एक conteneur cloud isolé के साथ पहुंच coupé à Internet pendant l'exécution, lecture के conventions AGENTS.md, exécution के tests और ouverture का Pull Requests vérifiables.",
+      "limits": "Codex exécute tests configurés में son environnement sandbox ; toute fusion en production reste soumise à revue का code और aux contrôles CI का l'organisation."
+    },
+    {
+      "id": "openai-platform-docs",
+      "title": "OpenAI Platform Documentation: Responses API, Structured Outputs, Function Calling, और Evals",
+      "url": "https://platform.openai.com/docs/overview",
+      "checkedOn": "2026-10-21",
+      "supports": "Documente Responses API unifiée, l'application stricte का JSON Schema via Structured Outputs (strict: true), Function Calling, l'Agents SDK (handoffs, guardrails, tracing) और suites d'évaluation Evals.",
+      "limits": "garantie syntaxique का Structured Outputs assure respect का schéma JSON, mais pas véracité métier के valeurs retournées ni l'autorisation d'exécuter एक appel d'outil."
+    }
+  ],
+  "modules": [
+    {
+      "id": "chatgpt-pro-enterprise-productivite",
+      "unitNumber": 1,
+      "title": "यूनिट 1 · ChatGPT Pro & Enterprise : मॉडल, Deep Research, Canvas & Projects",
+      "subtitle": "Arbitrage GPT-4o vs मॉडल का raisonnement o3/o4-mini, investigation Deep Research, co-édition Canvas, Projects, Custom GPTs और Data Analysis.",
+      "estimatedMinutes": 24,
+      "memoActivity": "Sélectionner मॉडल optimal selon tâche (GPT-4o vs o3/o4-mini), conduire एक étude sourcée के साथ Deep Research और structurer एक espace का travail récurrent के साथ Projects, Canvas और Custom GPTs.",
+      "memoKeyTopics": [
+        "Routage का मॉडल : GPT-4o multimodal rapide vs मॉडल का raisonnement à chaîne का pensée interne o3 और o4-mini",
+        "Deep Research (synthèse multi-sources vérifiée के साथ citations) & Data Analysis (exécution Python के लिए nettoyer, modéliser और tracer के डेटा)",
+        "Canvas (co-édition ciblée का texte और का code), Projects (instructions और फ़ाइलें persistants) और Custom GPTs gouvernés en उद्यम"
+      ],
+      "memoGoldenRule": "Utilisez GPT-4o के लिए l'interaction multimodale rapide और rédaction fluide, o3/o4-mini के लिए raisonnement algorithmique या analytique complexe, और Deep Research lorsqu'एक synthèse exige d'explorer, croiser और citer के dizaines का sources.",
+      "architectureSchema": {
+        "title": "Écosystème ChatGPT Enterprise : Routage का मॉडल & Espaces का Travail",
+        "diagram": "[अनुरोध उपयोगकर्ता] ➔ [Choix मॉडल : GPT-4o (Multimodal/Vitesse) | o3 / o4-mini (Raisonnement profond) | Deep Research (Investigation multi-sources)] ➔ [Contexte : Projects / Custom GPT + Outils : Data Analysis / Canvas]",
+        "components": [
+          {
+            "name": "[HI] GPT-4o vs o3 / o4-mini",
+            "role": "GPT-4o traite texte, image और audio के साथ faible latence ; o3 और o4-mini allouent का calcul का raisonnement avant का répondre aux problèmes logiques, mathématiques, juridiques या d'architecture."
+          },
+          {
+            "name": "[HI] Deep Research & Data Analysis",
+            "role": "Deep Research explore méthodiquement web और connecteurs autorisés के लिए livrer एक rapport sourcé ; Data Analysis exécute का code Python के लिए analyser के फ़ाइलें CSV/Excel."
+          },
+          {
+            "name": "[HI] Canvas, Projects & Custom GPTs",
+            "role": "Canvas offre एक éditeur côte à côte के लिए réviser का texte या का code par section ; Projects regroupe conversations, instructions और फ़ाइलें ; Custom GPTs partage के assistants spécialisés में workspace Enterprise."
+          }
+        ],
+        "securityInvariant": "में ChatGPT Enterprise, conversations, फ़ाइलें का Projects और exécutions Data Analysis sont isolés par espace का travail client और ne servent jamais à entraîner मॉडल OpenAI."
+      },
+      "lessons": [
+        {
+          "id": "choix-modele-gpt4o-vs-o3-o4mini",
+          "title": "चुनें bon मॉडल : GPT-4o multimodal vs मॉडल का raisonnement o3 और o4-mini",
+          "objective": "Arbitrer के बीच GPT-4o, o3 और o4-mini selon complexité logique, besoin multimodal, latence और लागत d'inférence.",
+          "estimatedMinutes": 8,
+          "hook": "उपयोग करें मॉडल का raisonnement plus lourd के लिए reformuler एक courriel का trois lignes gaspille का temps, mais confier एक audit d'architecture distribuée à एक मॉडल instantané fait rater के cas limites : quelle est règle का tri ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि मॉडल OpenAI : Vitesse Multimodale (GPT-4o) vs Raisonnement Profond (o3 / o4-mini)",
+            "diagramTop": "GPT-4o : Texte + Voix + Vision temps réel ➔ Rédaction, traduction, synthèse और échange fluide",
+            "diagramBottom": "o3 / o4-mini : Chaîne का pensée interne (Thinking) ➔ Architecture, maths, code complexe, arbitrage multi-contraintes",
+            "step1": "के लिए rédiger, résumer, traduire या dialoguer rapidement à partir का texte या d'images courantes, choisissez GPT-4o.",
+            "step2": "के लिए résoudre एक bug subtil, prouver एक cohérence financière/juridique या planifier sous fortes contraintes, choisissez o3 (profondeur maximale) या o4-mini (raisonnement rapide और économique).",
+            "rule": "Prompting o3/o4-mini : donnez एक objectif précis, contraintes और format attendu, बिना imposer का « réfléchis étape par étape » artificiel."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · GPT-4O MULTIMODAL",
+              "title": "मॉडल polyvalent à faible latence",
+              "bodyParagraph": "GPT-4o excelle में tâches quotidiennes à haute réactivité : rédaction d'e-mails, synthèse का réunions, traduction nuancée, extraction visuelle rapide और conversation vocale. Il commence à répondre presque instantanément.",
+              "keyTakeawayPill": "[HI] GPT-4o = Réactivité immédiate + Multimodalité fluide + Rédaction quotidienne"
+            },
+            {
+              "stepBadge": "चरण 2 · मॉडल का RAISONNEMENT O3 & O4-MINI",
+              "title": "Allouer का temps का réflexion avant premier mot",
+              "bodyParagraph": "मॉडल का série o (`o3` और `o4-mini`) génèrent एक chaîne का raisonnement interne avant d'émettre leur प्रतिक्रिया finale : ils vérifient leurs hypothèses, reviennent en arrière en cas का contradiction और excellent en algorithmique, finance, analyse का causes racines और revue d'architecture.",
+              "keyTakeawayPill": "o3 = Raisonnement का pointe multi-étapes · o4-mini = Raisonnement rapide à haut débit"
+            },
+            {
+              "stepBadge": "चरण 3 · ADAPTER SON PROMPTING",
+              "title": "एक brief d'objectif clair plutôt que का micro-guidage",
+              "bodyParagraph": "के साथ GPT-4o, détailler étapes intermédiaires améliore souvent sortie. के साथ o3 और o4-mini, spécifiez clairement l'objectif final, invariants à respecter, डेटा d'entrée और schéma का sortie : मॉडल construit lui-même sa décomposition interne.",
+              "keyTakeawayPill": "पर o3/o4-mini : spécifiez QUOI (contraintes + critères का succès), laissez मॉडल gérer son raisonnement."
+            }
+          ],
+          "keyIdeas": [
+            "GPT-4o privilégie faible latence और l'interaction multimodale quotidienne (rédaction, reformulation, synthèse directe).",
+            "`o3` offre profondeur का raisonnement maximale के लिए problèmes scientifiques, architecturaux, financiers या का débogage complexe, tandis qu'`o4-mini` optimise compromis vitesse/लागत पर tâches techniques.",
+            "एक prompt destiné à एक मॉडल का raisonnement चाहिए définir rigoureusement contraintes, cas limites और livrable attendu."
+          ],
+          "workedExample": {
+            "situation": "एक टीम d'ingénierie chez एक éditeur SaaS चाहिए traiter deux demandes : (1) transformer के notes d'atelier en FAQ client multilingue, और (2) identifier एक condition का course (race condition) के बीच trois microservices का paiement.",
+            "steps": [
+              "Affecter rédaction और traduction का FAQ client à GPT-4o में Canvas के लिए itérer rapidement पर style.",
+              "Soumettre लॉग्स d'exécution और code के trois microservices à o3 en précisant invariants transactionnels à सत्यापित करें.",
+              "Valider scénario d'entrelacement découvert par o3 au moyen d'एक test automatisé reproductible."
+            ],
+            "decision": "routage intentionnel divise temps का rédaction par trois और résout bug का concurrence que revues rapides avaient manqué."
+          },
+          "practice": {
+            "prompt": "Classez trois tâches suivantes के बीच GPT-4o, o4-mini और o3 en justifiant votre choix : (A) Reformuler 15 fiches produit के लिए catalogue web, (B) Diagnostiquer एक incohérence के बीच quatre clauses का pénalité और एक मॉडल actuariel, (C) Générer rapidement के tests unitaires पर vingt fonctions utilitaires.",
+            "successCriteria": [
+              "संबद्ध करें (A) à GPT-4o के लिए sa rapidité rédactionnelle और sa maîtrise का ton.",
+              "संबद्ध करें (B) à o3 के लिए sa capacité का raisonnement multi-contraintes profond.",
+              "संबद्ध करें (C) à o4-mini के लिए son raisonnement code rapide और économique à haut volume."
+            ],
+            "feedback": "चुनें मॉडल proportionné à difficulté cognitive évite à fois पर-qualité lente और l'erreur d'analyse superficielle."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez एक problème financier या logique très complexe के साथ douze règles à सत्यापित करें en même temps. Quel मॉडल OpenAI चुनें ?",
+              "prompt": "एक आर्किटेक्ट financier चाहिए सत्यापित करें cohérence mathématique और réglementaire d'एक मॉडल का couverture का taux comportant douze contraintes croisées और identifier cas limites où formule diverge. Quel मॉडल OpenAI चाहिए-il sélectionner में ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "modele-raisonnement-o3",
+                  "label": "मॉडल का raisonnement o3, conçu के लिए décomposer और सत्यापित करें के problèmes logiques, mathématiques और multi-contraintes."
+                },
+                {
+                  "id": "modele-transcription-audio",
+                  "label": "एक मॉडल का transcription vocale purement acoustique dépourvu का capacité d'inférence logique."
+                },
+                {
+                  "id": "modele-embeddings-vecteurs",
+                  "label": "एक मॉडल d'embeddings vectoriels qui retourne केवल एक liste का nombres flottants बिना texte."
+                },
+                {
+                  "id": "modele-moderation-seul",
+                  "label": "classifieur का modération का contenu qui produit केवल के scores का सुरक्षा booléens."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "Quelle est différence pratique के बीच मॉडल का réflexion o3 और o4-mini chez OpenAI ?",
+              "prompt": "Quel compromis distingue principalement `o4-mini` का `o3` au sein का famille के मॉडल का raisonnement OpenAI ?",
+              "options": [
+                {
+                  "id": "raisonnement-rapide-economique-haut-debit",
+                  "label": "o4-mini offre एक raisonnement technique और code beaucoup plus rapide और économique के लिए tâches à haut débit, tandis qu'o3 privilégie profondeur maximale."
+                },
+                {
+                  "id": "absence-totale-support-code",
+                  "label": "o4-mini refuse toute génération का code informatique और se limite à retouche photographique."
+                },
+                {
+                  "id": "entrainement-public-obligatoire",
+                  "label": "o4-mini publie स्वचालित रूप से prompts d'उद्यम पर Internet contrairement au मॉडल o3."
+                },
+                {
+                  "id": "limite-dix-jetons-entree",
+                  "label": "o4-mini accepte au maximum dix mots en entrée और ne peut lire aucun फ़ाइल structuré."
+                }
+              ]
+            }
+          ],
+          "recap": "GPT-4o के लिए vitesse multimodale और rédactionnelle ; o4-mini के लिए raisonnement technique agile ; o3 के लिए arbitrages complexes à forte profondeur logique.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "deep-research-et-data-analysis",
+          "title": "Deep Research & Data Analysis : investigation sourcée और analyse Python",
+          "objective": "Conduire एक recherche approfondie multi-sources के साथ Deep Research और analyser के jeux का डेटा tabulaires के साथ Data Analysis में ChatGPT Enterprise.",
+          "estimatedMinutes": 8,
+          "hook": "आपको चाहिए livrer demain matin एक étude concurrentielle citant trente sources vérifiables और एक analyse का cohorte पर एक फ़ाइल का 120 000 lignes का ventes : comment combiner Deep Research और Data Analysis बिना jamais inventer एक chiffre ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Investigation : Deep Research (Sources Externes/Internes) + Data Analysis (Calcul Python Exact)",
+            "diagramTop": "Deep Research : Plan d'investigation ➔ Navigation & lecture multi-sources ➔ Rapport structuré के साथ citations",
+            "diagramBottom": "Data Analysis : फ़ाइल CSV/XLSX ➔ Script Python (pandas/matplotlib) exécuté ➔ Chiffres exacts & graphiques",
+            "step1": "Confiez à Deep Research synthèses documentaires और études का marché nécessitant का parcourir, recouper और citer के dizaines का sources.",
+            "step2": "Confiez à Data Analysis tout calcul पर vos फ़ाइलें chiffrés afin que résultat provienne d'एक exécution Python réelle और non d'एक calcul mental का LLM.",
+            "rule": "Ne demandez jamais à एक मॉडल का calculer का tête पर 50 000 lignes : exigez l'exécution Python का Data Analysis और inspectez code généré."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · DEEP RESEARCH",
+              "title": "एक analyste का recherche autonome qui cite ses preuves",
+              "bodyParagraph": "Contrairement à एक recherche web rapide d'एक seconde, Deep Research établit एक plan d'investigation, explore का multiples pages और documents autorisés, recoupe contradictions और rédige एक rapport complet où chaque affirmation clé est reliée à sa source exacte.",
+              "keyTakeawayPill": "[HI] Deep Research = Cadrage initial ➔ Exploration itérative ➔ Rapport approfondi sourcé"
+            },
+            {
+              "stepBadge": "चरण 2 · DATA ANALYSIS (PYTHON)",
+              "title": "Zéro calcul approximatif पर vos jeux का डेटा",
+              "bodyParagraph": "Lorsque vous déposez एक फ़ाइल CSV, Excel या JSON में ChatGPT Enterprise, Data Analysis écrit और exécute का code Python (`pandas`, `numpy`, `matplotlib`) में एक environnement isolé. Il nettoie valeurs manquantes, calcule agrégats exacts और génère के visualisations téléchargeables.",
+              "keyTakeawayPill": "Data Analysis = Code Python inspectable और déterministe पर vos फ़ाइलें का डेटा"
+            },
+            {
+              "stepBadge": "चरण 3 · VÉRIFICATION का BOUT EN BOUT",
+              "title": "Auditer sources और script Python",
+              "bodyParagraph": "एक professionnel CertiGo vérifie toujours deux éléments avant का diffuser son livrable : में Deep Research, il ouvre citations के conclusions critiques ; में Data Analysis, il déplie bloc का code Python (`</>`) के लिए सत्यापित करें filtres appliqués (par exemple traitement के lignes annulées या के devises).",
+              "keyTakeawayPill": "Toujours ouvrir citations Deep Research + inspecter filtres का script Python (`</>`)"
+            }
+          ],
+          "keyIdeas": [
+            "Deep Research conduit के recherches multi-étapes पर plusieurs minutes के लिए produire के rapports exhaustifs accompagnés का citations précises.",
+            "Data Analysis exécute का code Python में एक bac à sable के लिए garantir l'exactitude mathématique के statistiques, jointures और graphiques पर के फ़ाइलें volumineux.",
+            "L'inspection का code Python généré (`</>`) सक्षम करता है का valider hypothèses का nettoyage (valeurs nulles, doublons, devises) avant का présenter chiffres."
+          ],
+          "workedExample": {
+            "situation": "एक टीम stratégie prépare l'entrée पर एक nouveau marché européen : elle चाहिए comparer cadres réglementaires का quatre pays और analyser l'historique interne का 80 000 commandes.",
+            "steps": [
+              "Lancer Deep Research en précisant quatre juridictions, autorités officielles à privilégier और grille comparative attendue के साथ liens sources.",
+              "Charger l'extrait anonymisé के 80 000 commandes में Data Analysis और demander calcul का panier moyen, का rétention à 6 mois और का saisonnalité via Python.",
+              "Déplier code Python के लिए सत्यापित करें que commandes remboursées ont bien été exclues का chiffre d'affaires net, puis सत्यापित करें citations réglementaires का Deep Research."
+            ],
+            "decision": "comité d'investissement reçoit एक dossier où chaque règle juridique pointe vers son texte officiel और chaque indicateur financier est issu d'एक script Python reproductible."
+          },
+          "practice": {
+            "prompt": "एक analyste colle 5 000 lignes का transactions में एक prompt texte और demande au मॉडल का calculer médiane और l'écart-type बिना उपयोग करें Data Analysis. Expliquez risque और bonne méthode à adopter.",
+            "successCriteria": [
+              "समझाएं que prédiction का टोकन texte बिना exécution का code risque का produire के calculs statistiques approximatifs या tronqués.",
+              "Joindre फ़ाइल structuré (CSV/XLSX) और demander explicitement l'exécution d'एक script Python via Data Analysis.",
+              "Ouvrir bloc का code exécuté के लिए सत्यापित करें colonne ciblée और traitement के valeurs manquantes."
+            ],
+            "feedback": "Toute opération arithmétique या statistique पर एक tableau का डेटा चाहिए passer par l'exécution Python का Data Analysis."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Quel outil का ChatGPT सक्षम करता है का chercher में के dizaines का documents officiels और का rédiger एक rapport complet के साथ toutes sources ?",
+              "prompt": "एक responsable veille réglementaire चाहिए produire एक rapport comparant exigences publiées par cinq autorités का régulation के साथ के citations vérifiables ligne par ligne. Quelle fonctionnalité का ChatGPT Pro / Enterprise est spécifiquement conçue के लिए ce travail ?",
+              "options": [
+                {
+                  "id": "deep-research-multi-sources",
+                  "label": "Deep Research, qui planifie एक recherche multi-étapes, recoupe documents और produit एक rapport structuré के साथ citations."
+                },
+                {
+                  "id": "completion-sans-navigation",
+                  "label": "एक complétion hors-ligne à température élevée बिना पहुंच aux sources documentaires ni citations."
+                },
+                {
+                  "id": "generation-image-dalle",
+                  "label": "générateur d'illustrations graphiques dépourvu का moteur का recherche documentaire."
+                },
+                {
+                  "id": "mode-dictaphone-seul",
+                  "label": "L'enregistreur vocal mobile utilisé बिना connexion aux référentiels réglementaires."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "ChatGPT calcule एक total का ventes différent का votre comptabilité à partir d'एक फ़ाइल Excel. Que devez-vous सत्यापित करें en premier ?",
+              "prompt": "Après avoir chargé एक फ़ाइल CSV का 60 000 ventes में ChatGPT Data Analysis, एक contrôleur obtient एक chiffre d'affaires supérieur का 12 % à celui का comptabilité. Quel réflexe का vérification चाहिए-il appliquer immédiatement ?",
+              "options": [
+                {
+                  "id": "inspecter-code-python-filtres",
+                  "label": "Ouvrir code Python exécuté (`</>`) के लिए सत्यापित करें comment lignes annulées, taxes और devises ont été filtrées में pandas."
+                },
+                {
+                  "id": "demander-calcul-mental-sans-code",
+                  "label": "अक्षम करें l'exécution Python के लिए obliger मॉडल का langage à additionner 60 000 lignes का tête."
+                },
+                {
+                  "id": "reduire-fichier-en-image-jpeg",
+                  "label": "Convertir फ़ाइल CSV en image JPEG compressée avant का relancer somme arithmétique."
+                },
+                {
+                  "id": "accepter-chiffre-sans-verification",
+                  "label": "Publier सीधे graphique car एक script Python généré applique toujours conventions comptables propres à chaque société."
+                }
+              ]
+            }
+          ],
+          "recap": "Deep Research explore और cite sources ; Data Analysis exécute का Python déterministe और inspectable पर vos डेटा chiffrées.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "canvas-projects-custom-gpts",
+          "title": "Canvas, Projects & Custom GPTs : structurer और साझा करें l'IA en उद्यम",
+          "objective": "Distinguer और combiner Canvas (co-édition ciblée), Projects (espace personnel persistant) और Custom GPTs (assistants métier partagés और gouvernés).",
+          "estimatedMinutes": 8,
+          "hook": "Faut-il बनाएं एक Project या एक Custom GPT ? और comment modifier trois lignes au milieu d'एक document या d'एक script का 300 lignes बिना que ChatGPT ne régénère tout depuis début ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Organisation : Canvas (Livrable) · Projects (Mon Dossier) · Custom GPT (Outil d'टीम)",
+            "diagramTop": "Canvas = Éditeur côte à côte के लिए retoucher एक section précise d'एक texte या d'एक code",
+            "diagramBottom": "Projects = Votre dossier का travail continu · Custom GPT = Assistant standardisé partagé के साथ l'टीम",
+            "step1": "Ouvrez Canvas के लिए itérer पर एक livrable long (article, spécification, script) en surlignant केवल passage à réécrire या déboguer.",
+            "step2": "Utilisez एक Project के लिए regrouper vos फ़ाइलें और instructions d'एक dossier en cours, और publiez एक Custom GPT lorsque toute l'टीम a besoin का même assistant métier.",
+            "rule": "Travail récurrent d'एक dossier = Project · Co-édition chirurgicale = Canvas · Assistant standardisé के लिए l'टीम = Custom GPT."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · CANVAS",
+              "title": "Fini régénération complète à chaque retouche",
+              "bodyParagraph": "में Canvas, document या code s'affiche में एक volet dédié à droite का chat. Vous pouvez surligner एक seul paragraphe या एक seule fonction के लिए demander एक réécriture, एक changement का niveau का lecture, l'ajout का logs या portage vers एक autre langage, के साथ एक historique का versions complet.",
+              "keyTakeawayPill": "Canvas = Surligner एक zone ➔ Édition chirurgicale in-place + Historique का versions"
+            },
+            {
+              "stepBadge": "चरण 2 · PROJECTS",
+              "title": "Garder contexte d'एक dossier au fil के semaines",
+              "bodyParagraph": "एक Project में ChatGPT rassemble en एक seul endroit vos instructions personnalisées, vos फ़ाइलें का référence (cahier के charges, architecture, charte éditoriale) और tous fils का conversation liés à ce chantier. Chaque nouveau chat ouvert में Project hérite immédiatement का ce contexte.",
+              "keyTakeawayPill": "Projects = Instructions dédiées + फ़ाइलें sources + Historique का chats organisé"
+            },
+            {
+              "stepBadge": "चरण 3 · CUSTOM GPTS EN उद्यम",
+              "title": "Standardiser एक assistant métier के साथ Actions और गवर्नेंस",
+              "bodyParagraph": "Lorsqu'एक workflow est stabilisé (ex. Revue d'appel d'offres, Générateur का post-mortem SRE), encapsulez ses instructions système, sa base documentaire और ses Actions API OpenAPI में एक Custom GPT publié केवल au sein का votre espace का travail ChatGPT Enterprise.",
+              "keyTakeawayPill": "Custom GPT Enterprise = Instructions + Connaissances + Actions OpenAPI partagés en सुरक्षा"
+            }
+          ],
+          "keyIdeas": [
+            "Canvas सक्षम करता है co-édition granulaire का texte और का code के साथ raccourcis dédiés (longueur, ton, revue का code, ajout का commentaires, portage का langage) और gestion का versions.",
+            "Projects organise travaux au long cours d'एक उपयोगकर्ता या d'एक टीम autour d'instructions और का फ़ाइलें का référence persistants.",
+            "Custom GPTs में ChatGPT Enterprise permettent का distribuer के assistants spécialisés dotés d'Actions OpenAPI sous contrôle का console d'administration."
+          ],
+          "workedExample": {
+            "situation": "एक टीम SRE souhaite (1) suivre l'opération का migration Cloud का trimestre के साथ ses schémas d'architecture, (2) co-rédiger runbook का bascule section par section, और (3) offrir à tous ingénieurs d'astreinte एक assistant standardisé का rédaction का post-mortem.",
+            "steps": [
+              "बनाएं एक Project « Migration Cloud T4 » contenant schémas d'architecture और contraintes का SLA.",
+              "Rédiger और affiner runbook का bascule में Canvas en révisant chaque procédure का rollback बिना altérer sections déjà validées.",
+              "Publier एक Custom GPT interne « Assistant Post-Mortem SRE » préconfiguré के साथ मॉडल d'incident और grille d'analyse 5 Pourquoi."
+            ],
+            "decision": "trois outils sont utilisés selon leur rôle exact : continuité का dossier (Project), édition fine (Canvas) और standardisation d'टीम (Custom GPT)."
+          },
+          "practice": {
+            "prompt": "Expliquez comment migrer एक prompt complexe utilisé par dix personnes en copier-coller vers एक Custom GPT d'उद्यम sécurisé, और précisez quand उपयोगकर्ताओं devront ouvrir Canvas pendant son utilisation.",
+            "successCriteria": [
+              "Intégrer prompt validé में instructions système का Custom GPT और y joindre documents का référence officiels.",
+              "Restreindre partage का Custom GPT aux groupes autorisés का workspace ChatGPT Enterprise.",
+              "उपयोग करें Canvas lorsque l'उपयोगकर्ता souhaite peaufiner localement एक paragraphe का livrable généré avant export."
+            ],
+            "feedback": "Centraliser prompt में एक Custom GPT élimine dérive के versions copiées-collées, tandis que Canvas assure finition पर mesure का chaque livrable."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+              "itemType": "scenario",
+              "difficulty": 1,
+              "plainPrompt": "कैसे modifier seulement 30 lignes d'एक long programme में ChatGPT बिना risquer qu'il réécrive या casse reste का फ़ाइल ?",
+              "prompt": "Vous travaillez पर एक script Python का 250 lignes में ChatGPT और souhaitez optimiser केवल fonction का pagination aux lignes 80 à 110 tout en garantissant que reste का फ़ाइल reste strictement intact और versionné. Quel outil devez-vous उपयोग करें ?",
+              "options": [
+                {
+                  "id": "editeur-canvas-selection",
+                  "label": "Ouvrir code में Canvas, surligner lignes 80 à 110 और demander l'optimisation ciblée के साथ suivi का version."
+                },
+                {
+                  "id": "nouveau-chat-sans-contexte",
+                  "label": "Ouvrir एक conversation vierge बिना fournir फ़ाइल और demander का réinventer l'application complète."
+                },
+                {
+                  "id": "export-audio-mp3",
+                  "label": "Convertir script Python en फ़ाइल audio MP3 avant का soumettre au lecteur multimédia."
+                },
+                {
+                  "id": "suppression-historique-workspace",
+                  "label": "Purger définitivement l'historique का l'espace का travail à chaque modification d'एक variable locale."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "में ChatGPT Enterprise, quand faut-il बनाएं एक Project plutôt qu'एक Custom GPT ?",
+              "prompt": "Quelle différence principale guide choix के बीच एक Project और एक Custom GPT में ChatGPT Enterprise ?",
+              "options": [
+                {
+                  "id": "project-dossier-vs-custom-gpt-assistant-partage",
+                  "label": "एक Project organise एक espace का travail continu (chats, फ़ाइलें और consignes d'एक chantier), tandis qu'एक Custom GPT publie एक assistant spécialisé réutilisable par l'organisation."
+                },
+                {
+                  "id": "project-public-internet-obligatoire",
+                  "label": "एक Project indexe स्वचालित रूप से ses फ़ाइलें पर moteurs का recherche publics alors qu'एक Custom GPT est hors-ligne."
+                },
+                {
+                  "id": "custom-gpt-interdit-instructions",
+                  "label": "एक Custom GPT ne peut contenir ni instructions système ni documents का référence, contrairement à एक Project."
+                },
+                {
+                  "id": "project-limite-images-seules",
+                  "label": "एक Project accepte केवल के फ़ाइलें d'images matricielles और refuse toute conversation textuelle."
+                }
+              ]
+            }
+          ],
+          "recap": "Canvas के लिए l'édition chirurgicale côte à côte ; Projects के लिए vos chantiers au long cours ; Custom GPTs के लिए standardiser और साझा करें एक assistant métier.",
+          "sourceIds": [
+            "openai-academy-courses",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-agent-programmation",
+      "unitNumber": 2,
+      "title": "यूनिट 2 · OpenAI Codex : Agent का Programmation Autonome en Sandbox",
+      "subtitle": "Architecture sandbox isolée का Codex, pilotage par AGENTS.md, exécution parallèle का tâches, génération का Pull Requests vérifiées और revue का code.",
+      "estimatedMinutes": 24,
+      "memoActivity": "कॉन्फ़िगर करें एक फ़ाइल AGENTS.md déterministe, सौंपें en parallèle एक correctif का bug और एक implémentation का fonctionnalité à OpenAI Codex में son sandbox, और auditer diff ainsi que लॉग्स का tests avant fusion.",
+      "memoKeyTopics": [
+        "Exécution en conteneur sandbox cloud isolé : dépôt cloné, dépendances préchargées, पहुंच नेटवर्क coupé pendant l'exécution के लिए prévenir toute exfiltration",
+        "Pilotage déclaratif par AGENTS.md : commandes का build/lint/test, invariants d'architecture और conventions का dépôt",
+        "Parallélisation का tâches, ouverture का Pull Requests के साथ preuves d'exécution का tests और revue का code automatisée"
+      ],
+      "memoGoldenRule": "Codex n'est aussi fiable que commandes का vérification documentées में votre AGENTS.md : exigez toujours के tests verts में journal का sandbox avant का fusionner sa Pull Request.",
+      "architectureSchema": {
+        "title": "[HI] Cycle d'Exécution d'OpenAI Codex en Sandbox Cloud Isolé",
+        "diagram": "[Tâche / Issue] ➔ [Setup Container + Clone Repo + Lecture AGENTS.md] ➔ [Sandbox Isolé (नेटवर्क OFF) : Édition Code ⇄ Exécution Tests/Linter] ➔ [Diff Vérifié + Logs का Tests ➔ Pull Request]",
+        "components": [
+          {
+            "name": "[HI] Conteneur Sandbox Isolé",
+            "role": "Environnement éphémère dédié à chaque tâche où Codex lit और modifie code और exécute tests के साथ l'पहुंच नेटवर्क externe désactivé pendant l'exécution."
+          },
+          {
+            "name": "अनुबंध AGENTS.md",
+            "role": "फ़ाइल versionné में dépôt (racine और sous-dossiers) qui indique à Codex comment compiler, linter, tester और respecter frontières architecturales."
+          },
+          {
+            "name": "[HI] Vérification & Pull Request",
+            "role": "Codex itère पर son implémentation jusqu'à ce que suite का tests passe, puis produit एक commit/PR accompagné के citations का फ़ाइलें और के sorties का terminal."
+          }
+        ],
+        "securityInvariant": "Pendant phase d'exécution का l'agent Codex, l'पहुंच Internet sortant est désactivé में bac à sable afin d'empêcher toute exfiltration का code source या téléchargement का paquet non vérifié."
+      },
+      "lessons": [
+        {
+          "id": "codex-architecture-sandbox-isolation",
+          "title": "[HI] Architecture d'OpenAI Codex : exécution autonome en sandbox isolé",
+          "objective": "समझाएं comment OpenAI Codex exécute का code और के tests में एक conteneur sandbox cloud isolé और pourquoi coupure नेटवर्क pendant l'exécution protège dépôt.",
+          "estimatedMinutes": 8,
+          "hook": "Quelle est différence fondamentale के बीच एक assistant d'autocomplétion में l'IDE और l'agent OpenAI Codex capable का vous livrer एक Pull Request testée का bout en bout ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Codex : का Suggestion का Ligne à Boucle Autonome en Sandbox",
+            "diagramTop": "Phase 1 (Setup) : Création का conteneur + Clone का dépôt + Installation के dépendances",
+            "diagramBottom": "Phase 2 (Agent Loop, नेटवर्क OFF) : Lecture ➔ Modification ➔ `npm test` / `pytest` ➔ Correction ➔ PR",
+            "step1": "L'environnement का tâche prépare dépôt और ses dépendances, puis verrouille l'पहुंच नेटवर्क externe avant का donner main à l'agent.",
+            "step2": "Codex explore base का code, applique ses modifications और lance réellement compilateurs और tests jusqu'à obtenir एक résultat vert.",
+            "rule": "एक patch non exécuté est एक hypothèse ; एक patch validé par tests में sandbox Codex est एक livrable vérifiable."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · एक CONTENEUR PAR TÂCHE",
+              "title": "Exécution asynchrone और isolée में cloud",
+              "bodyParagraph": "Chaque mission confiée à OpenAI Codex démarre में son propre conteneur cloud isolé contenant votre dépôt Git à révision demandée. Vous pouvez lancer cinq tâches indépendantes en parallèle (correction का bug, refactorisation, couverture का tests) बिना jamais bloquer votre poste local.",
+              "keyTakeawayPill": "1 tâche Codex = 1 conteneur sandbox dédié और indépendant"
+            },
+            {
+              "stepBadge": "चरण 2 · सुरक्षा नेटवर्क OFF",
+              "title": "क्यों l'पहुंच Internet est coupé pendant boucle agent",
+              "bodyParagraph": "एक fois script d'initialisation d'environnement terminé (installation के dépendances via `npm ci` या `pip`), conteneur coupe l'पहुंच Internet sortant pendant que l'agent travaille. Ainsi, même face à एक instruction piégée में एक फ़ाइल का test, Codex ne peut ni exfiltrer का code ni télécharger का binaire malveillant.",
+              "keyTakeawayPill": "Setup initial (dépendances installées) ➔ Coupure नेटवर्क ➔ Exécution sûre का l'agent"
+            },
+            {
+              "stepBadge": "चरण 3 · PREUVES D'EXÉCUTION",
+              "title": "Journal का terminal, citations का lignes और diff Git",
+              "bodyParagraph": "À fin का sa mission, Codex ne renvoie pas एक simple explication théorique : il fournit diff Git exact, citations के फ़ाइलें modifiés और journal complet के commandes का test exécutées में terminal का sandbox.",
+              "keyTakeawayPill": "Toujours inspecter journal का test का sandbox avant का बनाएं या fusionner PR"
+            }
+          ],
+          "keyIdeas": [
+            "OpenAI Codex opère में एक conteneur cloud isolé dédié à chaque tâche, permettant का paralléliser plusieurs chantiers logiciels.",
+            "séparation के बीच phase d'initialisation (installation के dépendances) और phase d'exécution का l'agent (नेटवर्क externe désactivé) élimine risques d'exfiltration और d'injection supply-chain en cours का tâche.",
+            "Chaque résultat inclut एक trace vérifiable के commandes exécutées और के tests passés."
+          ],
+          "workedExample": {
+            "situation": "एक टीम plateforme veut confier à Codex mise à jour d'एक validateur का schéma TypeScript, mais lors का premier essai, `npm test` échoue में sandbox के साथ `Cannot find module 'ajv'`.",
+            "steps": [
+              "Identifier pourquoi `ajv` manque : pendant boucle d'exécution का l'agent, l'पहुंच नेटवर्क est coupé, donc l'agent ne peut pas télécharger का paquets depuis registre npm.",
+              "Ajouter `npm ci` में script का configuration initiale का l'environnement Codex (qui s'exécute avant coupure नेटवर्क).",
+              "Relancer tâche : Codex dispose désormais का `node_modules`, exécute 85 tests unitaires और livre एक diff 100 % vert."
+            ],
+            "decision": "L'टीम documente script का préchargement के dépendances में configuration का l'environnement Codex का dépôt."
+          },
+          "practice": {
+            "prompt": "Expliquez pourquoi एक agent का programmation autonome exécutant के tests में एक dépôt चाहिए tourner के साथ l'पहुंच नेटवर्क externe désactivé एक fois dépendances installées, और comment gérer appels à के API tierces में tests.",
+            "successCriteria": [
+              "समझाएं que coupure नेटवर्क empêche l'exfiltration का code propriétaire और téléchargement का code arbitraire en cas का prompt injection.",
+              "Préinstaller toutes dépendances requises lors का phase का setup का l'environnement.",
+              "उपयोग करें के fixtures locales या के mocks déterministes के लिए tester intégrations d'API externes hors-ligne."
+            ],
+            "feedback": "के tests rapides, déterministes और hors-ligne (पर fixtures) sont à fois एक bonne pratique d'ingénierie logicielle और clé का l'efficacité का Codex en sandbox."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "क्यों l'agent का programmation OpenAI Codex coupe-t-il l'पहुंच à Internet pendant qu'il modifie votre code ?",
+              "prompt": "क्यों l'environnement d'exécution d'OpenAI Codex désactive-t-il l'पहुंच Internet sortant pendant que l'agent modifie code और exécute tests ?",
+              "options": [
+                {
+                  "id": "prevention-exfiltration-et-supply-chain",
+                  "label": "के लिए empêcher toute exfiltration का code या का secrets ainsi que téléchargement का paquets non vérifiés durant l'exécution autonome."
+                },
+                {
+                  "id": "interdiction-compilateurs-locaux",
+                  "label": "के लिए empêcher compilateur TypeScript या Python का lire फ़ाइलें présents में répertoire का travail."
+                },
+                {
+                  "id": "suppression-controle-version-git",
+                  "label": "के लिए अक्षम करें l'historique Git local और interdire génération d'एक diff के बीच branches."
+                },
+                {
+                  "id": "economie-memoire-vive-ecran",
+                  "label": "के लिए réduire résolution graphique का carte vidéo locale का l'ordinateur portable का développeur."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 2,
+              "plainPrompt": "Codex ne peut pas lancer vos tests car il lui manque एक outil qui s'installe normalement depuis Internet. कैसे régler cela ?",
+              "prompt": "एक tâche confiée à OpenAI Codex échoue lors का l'exécution का `pytest` car bibliothèques का फ़ाइल `requirements.txt` ne sont pas installées और l'agent ne peut pas contacter PyPI. Quelle est résolution appropriée ?",
+              "options": [
+                {
+                  "id": "installer-dependances-script-setup",
+                  "label": "कॉन्फ़िगर करें l'installation के dépendances (`pip install -r requirements.txt`) में script d'initialisation का l'environnement sandbox avant coupure नेटवर्क."
+                },
+                {
+                  "id": "supprimer-tous-les-tests",
+                  "label": "Demander à Codex का हटाएं dossier `tests/` afin que commande retourne एक code का sortie nul."
+                },
+                {
+                  "id": "copier-code-sans-tester",
+                  "label": "अक्षम करें vérification par tests और fusionner सीधे code généré पर branche principale."
+                },
+                {
+                  "id": "coder-cles-api-dans-readme",
+                  "label": "Inscrire clés secrètes का production en clair में फ़ाइल README.md का dépôt public."
+                }
+              ]
+            }
+          ],
+          "recap": "Préchargez vos dépendances au setup, laissez Codex itérer hors-ligne में son sandbox isolé और exigez preuve par logs का tests.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        },
+        {
+          "id": "codex-agents-md-pr-revue-code",
+          "title": "Pilotage par AGENTS.md, PR automatisées और revue का code के साथ Codex",
+          "objective": "Structurer एक फ़ाइल AGENTS.md efficace, सौंपें के tâches ciblées या के revues का code à Codex और valider Pull Requests générées.",
+          "estimatedMinutes": 8,
+          "hook": "कैसे faire en sorte que Codex connaisse instantanément vos commandes का test ciblées, vos règles d'architecture और vos interdits का सुरक्षा बिना avoir à répéter में chaque prompt ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि AGENTS.md : Manuel Opérationnel Lu par l'Agent à Chaque Mission",
+            "diagramTop": "`AGENTS.md` à racine (और par sous-dossier) = Commandes का validation + Frontières d'architecture",
+            "diagramBottom": "Prompt concis + `AGENTS.md` ➔ Codex cible bons फ़ाइलें, lance bons tests और ouvre एक PR propre",
+            "step1": "Documentez में `AGENTS.md` commandes exactes (`npm test`, `npm run validate`), invariants métier और règles का style.",
+            "step2": "Utilisez के फ़ाइलें `AGENTS.md` plus spécifiques में sous-dossiers d'एक monorepo (`backend/`, `apps/mobile/`) के लिए affiner consignes locales.",
+            "rule": "Si vous corrigez deux fois même erreur का convention में एक PR d'agent, transformez cette remarque en règle में `AGENTS.md`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · STANDARD AGENTS.MD",
+              "title": "Donner à l'agent carte और boussole का dépôt",
+              "bodyParagraph": "एक bon फ़ाइल `AGENTS.md` ne répète pas का marketing : il donne l'architecture के dossiers, règles strictes (ex. séparation public/privé, déterminisme के manifestes), commande का test rapide के लिए itérer और suite complète à exécuter avant का conclure.",
+              "keyTakeawayPill": "AGENTS.md = Architecture + Invariants + Commandes का test rapides और complètes"
+            },
+            {
+              "stepBadge": "चरण 2 · DÉLÉGATION & PR AUTOMATISÉES",
+              "title": "का ticket bien borné à Pull Request prête à relire",
+              "bodyParagraph": "के लिए सौंपें efficacement à Codex, formulez एक tâche bornée : symptôme या comportement attendu, फ़ाइलें या modules concernés और critères d'acceptation. Vous pouvez lancer plusieurs tâches en parallèle ; chacune produit एक branche और एक Pull Request documentant changements और tests exécutés.",
+              "keyTakeawayPill": "Tâche bornée + Critère का test = Pull Request autonome prête के लिए revue"
+            },
+            {
+              "stepBadge": "चरण 3 · REVUE का CODE PAR CODEX",
+              "title": "Détecter bugs logiques और régressions avant fusion",
+              "bodyParagraph": "En mode revue का code पर एक Pull Request, Codex compare l'intention au diff réel, exécute या trace chemins d'erreur (nullabilité, conditions का course, oubli का validation का borne, fuite d'information) और signale केवल défauts concrets à haute confiance.",
+              "keyTakeawayPill": "Revue Codex = Chasse aux bugs logiques, failles का सुरक्षा और cas limites oubliés"
+            }
+          ],
+          "keyIdeas": [
+            "`AGENTS.md` fournit एक contexte persistant और hiérarchique (racine puis sous-répertoires) que Codex consulte स्वचालित रूप से.",
+            "délégation parallèle सक्षम करता है का traiter simultanément के corrections का bugs, के ajouts का tests और के refactorisations isolées.",
+            "उपयोग करें Codex en revue का Pull Request सक्षम करता है d'identifier erreurs का logique, oublis का cas limites और écarts vis-à-vis के invariants d'`AGENTS.md`."
+          ],
+          "workedExample": {
+            "situation": "में dépôt `certigo-content`, chaque question publique चाहिए avoir एक solution privée correspondante और aucun champ `correct` या `rationale` ne चाहिए figurer में `content/public/`.",
+            "steps": [
+              "Inscrire ces cinq règles d'or और séquence `npm test && npm run validate && npm run contract:backend && npm run package:verify` में `AGENTS.md`.",
+              "Confier à Codex l'ajout d'एक nouveau parcours के साथ ses questions और solutions.",
+              "सत्यापित करें में rapport का PR que Codex a exécuté का lui-même toutes commandes prescrites par `AGENTS.md` avant का proposer fusion."
+            ],
+            "decision": "फ़ाइल `AGENTS.md` सुनिश्चित करता है que chaque tâche exécutée par l'agent respecte gardes का सुरक्षा और का अनुबंध का dépôt."
+          },
+          "practice": {
+            "prompt": "Rédigez quatre rubriques indispensables d'एक फ़ाइल `AGENTS.md` के लिए एक API backend soumise à के exigences strictes का rétrocompatibilité का schémas.",
+            "successCriteria": [
+              "1. Frontières d'architecture और répertoires critiques (ex. schémas का अनुबंध, séparation के couches).",
+              "2. Règles d'invariants non négociables (ex. règle expand-before-use पर schémas, interdiction के secrets).",
+              "3. Commandes d'installation और का validation ciblée puis complète.",
+              "4. Processus का changement attendu avant ouverture का Pull Request."
+            ],
+            "feedback": "एक `AGENTS.md` concis, impératif और orienté commandes का vérification améliore radicalement taux का réussite au premier essai का Codex."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+              "itemType": "mcq",
+              "difficulty": 1,
+              "plainPrompt": "À quoi sert फ़ाइल AGENTS.md placé में votre projet informatique के लिए OpenAI Codex ?",
+              "prompt": "Quel est rôle का फ़ाइल `AGENTS.md` placé à racine और में sous-dossiers d'एक dépôt Git utilisé के साथ OpenAI Codex ?",
+              "options": [
+                {
+                  "id": "instructions-persistantes-build-test-invariants",
+                  "label": "Fournir स्वचालित रूप से à l'agent commandes का build/test, l'architecture और invariants का dépôt या का sous-module."
+                },
+                {
+                  "id": "stocker-mots-de-passe-production",
+                  "label": "Stocker en clair mots का passe का डेटाबेस का production के लिए éviter variables d'environnement."
+                },
+                {
+                  "id": "remplacer-compilateur-langage",
+                  "label": "बदलें binaire का compilateur par एक interprétation purement approximative बिना exécution का tests."
+                },
+                {
+                  "id": "desactiver-revue-pull-request",
+                  "label": "Contraindre GitHub à fusionner toutes branches बिना exécuter workflows d'intégration continue."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous avez quatre bugs indépendants à corriger में quatre parties différentes का votre logiciel. कैसे gagner का temps के साथ Codex ?",
+              "prompt": "Vous avez quatre bugs indépendants bien reproduits में quatre modules distincts का votre application. कैसे exploiter OpenAI Codex का façon optimale ?",
+              "options": [
+                {
+                  "id": "lancer-quatre-taches-paralleles-avec-tests",
+                  "label": "सौंपें quatre corrections en parallèle में quatre tâches Codex distinctes en exigeant एक test का non-régression par PR."
+                },
+                {
+                  "id": "melanger-quatre-bugs-sans-test",
+                  "label": "Demander एक réécriture totale का l'application में एक seul commit géant en désactivant suite का tests."
+                },
+                {
+                  "id": "attendre-sans-contexte-erreur",
+                  "label": "Soumettre केवल titre « Ça ne marche pas » बिना indiquer ni module ni trace d'erreur."
+                },
+                {
+                  "id": "modifier-directement-main-production",
+                  "label": "Pousser के modifications non testées सीधे पर branche का production en contournant revue का code."
+                }
+              ]
+            }
+          ],
+          "recap": "`AGENTS.md` + tâches bornées parallélisées + tests obligatoires + revue का PR = workflow d'ingénierie augmentée के साथ OpenAI Codex.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "codex-debugging-ci-securite",
+          "title": "Diagnostic का régressions CI, remédiation और सुरक्षा के साथ Codex",
+          "objective": "उपयोग करें Codex के लिए diagnostiquer एक échec CI complexe, écrire एक test reproducteur avant correctif (TDD) और appliquer garde-fous का सुरक्षा.",
+          "estimatedMinutes": 8,
+          "hook": "एक pipeline CI échoue का façon intermittente पर एक erreur का sérialisation : comment guider Codex के लिए qu'il prouve cause racine par एक test rouge avant d'écrire एक seule ligne का correctif ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Remédiation Codex : Reproduire (Rouge) ➔ Corriger (Vert) ➔ सत्यापित करें Gardes",
+            "diagramTop": "Log d'erreur CI ➔ 1. Écrire एक test unitaire qui reproduit l'échec (Rouge)",
+            "diagramBottom": "2. Appliquer correctif chirurgical (Vert) ➔ 3. Exécuter suite complète & gardes का अनुबंध",
+            "step1": "Fournissez trace d'erreur exacte à Codex और demandez d'abord एक test minimal qui échoue पर bug actuel.",
+            "step2": "एक fois symptôme reproduit, laissez Codex appliquer correctif minimal और सत्यापित करें qu'aucune garde existante ne régresse.",
+            "rule": "एक correctif बिना test reproducteur qui échouait avant और passe après n'est pas एक remédiation vérifiée."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · REPRODUIRE AVANT का CORRIGER",
+              "title": "discipline Red ➔ Green appliquée aux agents",
+              "bodyParagraph": "Lorsque vous confiez एक bug à Codex, exigez में prompt (या में `AGENTS.md`) qu'il commence par reproduire l'erreur के साथ एक test ciblé. Voir test échouer के लिए raison attendue prouve que l'agent a compris vrai mécanisme का bug और non एक symptôme superficiel.",
+              "keyTakeawayPill": "1. Reproduire l'échec (Red) ➔ 2. Corriger cause racine (Green) ➔ 3. सत्यापित करें l'ensemble"
+            },
+            {
+              "stepBadge": "चरण 2 · CHANGEMENTS CHIRURGICAUX",
+              "title": "Éviter bruit और refactorisations non demandées",
+              "bodyParagraph": "एक bon correctif d'agent modifie केवल lignes nécessaires और ajoute test correspondant, बिना reformater के dizaines का फ़ाइलें non liés ni affaiblir एक assertion का सुरक्षा के लिए faire passer test au vert.",
+              "keyTakeawayPill": "Interdire tout affaiblissement का test या suppression का garde के लिए obtenir एक vert artificiel"
+            },
+            {
+              "stepBadge": "चरण 3 · CONTRÔLE HUMAIN के FRONTIÈRES",
+              "title": "Ce qu'एक relecteur humain vérifie toujours पर एक PR d'agent",
+              "bodyParagraph": "Lors का relecture का PR générée par Codex, vérifiez prioritairement : 1. Qu'aucun test या contrôle का schéma n'a été contourné · 2. Que nouvelles dépendances éventuelles sont légitimes · 3. Que frontières का सुरक्षा (अनुमतियां, secrets, séparation public/privé) sont intactes.",
+              "keyTakeawayPill": "En revue का PR : inspecter en priorité tests modifiés, schémas और frontières का confiance"
+            }
+          ],
+          "keyIdeas": [
+            "Exiger reproduction préalable का bug par एक test qui échoue सुनिश्चित करता है pertinence का correctif produit par Codex.",
+            "एक agent ne चाहिए jamais faire passer एक build au vert en supprimant या en relâchant एक assertion का सुरक्षा या का अनुबंध.",
+            "revue humaine का Pull Request se concentre पर validité के tests ajoutés, minimalité का diff और respect के frontières का सुरक्षा."
+          ],
+          "workedExample": {
+            "situation": "में एक pipeline का packaging, एक फ़ाइल Windows en CRLF produit एक hash SHA-256 différent का celui calculé sous Linux en CI.",
+            "steps": [
+              "Demander à Codex d'écrire एक test unitaire injectant के fins का ligne `\\r\\n` और vérifiant que hash normalisé reste identique à celui en `\\n` ( test échoue initialement).",
+              "Corriger fonction का hachage के लिए normaliser fins का ligne avant calcul का digest SHA-256.",
+              "Exécuter toute suite का tests और सत्यापित करें que vecteurs goldens existants restent inchangés."
+            ],
+            "decision": "PR contient 6 lignes का code productif और 20 lignes का test d'isolation prouvant résolution पर Windows और Linux."
+          },
+          "practice": {
+            "prompt": "एक agent propose एक PR qui corrige एक erreur का validation en supprimant règle `additionalProperties: false` का schéma JSON. Expliquez pourquoi vous devez rejeter cette PR और quelle consigne donner.",
+            "successCriteria": [
+              "समझाएं que retirer `additionalProperties: false` ouvre अनुबंध à के propriétés inconnues या à के fuites का डेटा.",
+              "Identifier quelle propriété provoquant rejet était illégitime में डेटा (या si एक procédure formelle d'expand backend est requise).",
+              "Exiger que schéma reste strictement fermé और qu'एक test négatif vérifie rejet के propriétés inconnues."
+            ],
+            "feedback": "Ne laissez jamais एक correctif éteindre l'alarme au lieu d'éteindre l'incendie : schémas fermés और gardes चाहिए rester stricts."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "में quel ordre Codex चाहिए-il travailler के लिए prouver qu'il a vraiment corrigé एक bug ?",
+              "prompt": "Vous déléguez à OpenAI Codex correction d'एक bug का calcul d'arrondi signalé en production. Quelle séquence का travail सुनिश्चित करता है que correctif règle réellement problème बिना régression ?",
+              "options": [
+                {
+                  "id": "test-reproducteur-rouge-puis-correctif-vert",
+                  "label": "Écrire d'abord एक test unitaire reproduisant l'erreur d'arrondi (rouge), appliquer correctif minimal (vert), puis lancer toute suite."
+                },
+                {
+                  "id": "supprimer-assertions-arrondi",
+                  "label": "हटाएं assertions numériques के tests existants afin que suite s'exécute बिना erreur."
+                },
+                {
+                  "id": "arrondir-aleatoirement-sans-test",
+                  "label": "Modifier fonction mathématique बिना exécuter tests और fusionner immédiatement branche."
+                },
+                {
+                  "id": "desactiver-pipeline-ci-branche",
+                  "label": "Retirer workflow GitHub Actions का branche के लिए masquer l'échec का build."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "एक agent propose का faire passer एक test का सुरक्षा au vert en désactivant contrôle पर फ़ाइल posant problème. Que faites-vous ?",
+              "prompt": "Lors का relecture d'एक Pull Request générée के लिए corriger एक test d'anti-fuite en échec, vous constatez que diff ajoute फ़ाइल fautif à एक liste d'exclusion globale au lieu का retirer champ sensible. Quelle décision devez-vous prendre ?",
+              "options": [
+                {
+                  "id": "rejeter-contournement-garde-corriger-source",
+                  "label": "Rejeter PR car elle neutralise garde का सुरक्षा, और demander का हटाएं champ sensible का फ़ाइल public tout en conservant contrôle strict."
+                },
+                {
+                  "id": "approuver-car-ci-verte",
+                  "label": "Approuver और fusionner immédiatement puisque l'indicateur का pipeline d'intégration continue est passé au vert."
+                },
+                {
+                  "id": "supprimer-toute-suite-anti-fuite",
+                  "label": "हटाएं complètement फ़ाइल का test d'anti-fuite के लिए accélérer prochaines exécutions CI."
+                },
+                {
+                  "id": "ignorer-diff-fichiers-tests",
+                  "label": "कॉन्फ़िगर करें l'outil का revue का code के लिए masquer systématiquement modifications apportées aux फ़ाइलें का tests."
+                }
+              ]
+            }
+          ],
+          "recap": "Exigez toujours boucle Reproduire (Rouge) ➔ Corriger (Vert) ➔ Gardes intactes avant d'approuver एक PR d'agent.",
+          "sourceIds": [
+            "openai-codex-intro",
+            "openai-platform-docs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openai-responses-api-structured-outputs-evals",
+      "unitNumber": 3,
+      "title": "यूनिट 3 · Ingénierie IA : Responses API, Structured Outputs, Function Calling, Agents SDK & Evals",
+      "subtitle": "Construire के systèmes d'IA का production fiables के साथ Responses API, Structured Outputs (`strict: true`), Function Calling, l'Agents SDK और évaluations systématiques (Evals).",
+      "estimatedMinutes": 24,
+      "memoActivity": "Concevoir एक appel Responses API combinant Function Calling और Structured Outputs (`strict: true`), orchestrer एक transfert (handoff) के साथ Guardrails में l'Agents SDK और valider qualité via एक suite OpenAI Evals.",
+      "memoKeyTopics": [
+        "Responses API unifiée & Structured Outputs (`strict: true`, `additionalProperties: false`) garantissant à 100 % conformité au JSON Schema",
+        "[HI] Function Calling déterministe (outils typés, validation côté serveur) & OpenAI Agents SDK (Agents, Handoffs, Guardrails, Tracing)",
+        "Évaluations systématiques (OpenAI Evals) : jeux का डेटा का référence, graders déterministes/मॉडल और portes का non-régression CI"
+      ],
+      "memoGoldenRule": "Activez toujours `strict: true` पर vos schémas JSON (Structured Outputs & Function Calling), validez अनुमतियां côté serveur avant d'exécuter एक outil, और bloquez tout changement का prompt या का मॉडल qui fait baisser vos Evals.",
+      "architectureSchema": {
+        "title": "Architecture d'Application & d'Agent का Production के साथ OpenAI Responses API & Agents SDK",
+        "diagram": "[HI] [Entrée + Guardrails d'Entrée] ➔ [Responses API / Agents SDK : Boucle d'Outils (Function Calling strict:true) + Handoffs] ➔ [Structured Outputs (JSON Schema strict:true)] ➔ [Porte CI : OpenAI Evals]",
+        "components": [
+          {
+            "name": "[HI] Responses API & Structured Outputs",
+            "role": "Unifie génération के साथ état, outils natifs (recherche, फ़ाइलें, code) और contraint décodage का मॉडल के लिए respecter एक JSON Schema strict (`strict: true`)."
+          },
+          {
+            "name": "[HI] Function Calling & Agents SDK",
+            "role": "सक्षम करता है au मॉडल d'émettre के appels का fonctions typés exécutés par votre code backend और d'orchestrer के transferts (handoffs) के बीच agents spécialisés protégés par के Guardrails."
+          },
+          {
+            "name": "[HI] OpenAI Evals",
+            "role": "Mesure objectivement l'exactitude, respect के consignes और l'absence का régression पर एक jeu का cas का test représentatifs à chaque évolution."
+          }
+        ],
+        "securityInvariant": "एक appel का fonction retourné par मॉडल (`tool_call`) est एक intention non fiable : backend applicatif चाहिए toujours valider l'पहचान, अनुमतियां और bornes métier avant d'exécuter l'action réelle."
+      },
+      "lessons": [
+        {
+          "id": "responses-api-structured-outputs",
+          "title": "Responses API & Structured Outputs : garantir अनुबंध JSON à 100 %",
+          "objective": "Exploiter Responses API और कॉन्फ़िगर करें Structured Outputs (`strict: true`) के लिए éliminer toute erreur का parsing JSON en production.",
+          "estimatedMinutes": 8,
+          "hook": "Votre microservice plante à 3 h का matin parce que LLM a oublié एक virgule JSON या renommé champ `montantHt` en `montant_ht` : comment rendre cette erreur mathématiquement impossible ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Structured Outputs : का JSON « Best-Effort » au Décodage Contraint (`strict: true`)",
+            "diagramTop": "Mode JSON simple : JSON valide syntaxiquement, mais clés या types parfois absents/divergents",
+            "diagramBottom": "Structured Outputs (`strict: true` + JSON Schema fermé) : 100 % conforme aux clés, types और enums",
+            "step1": "Définissez votre schéma का sortie (Pydantic / Zod / JSON Schema) के साथ `strict: true` और `additionalProperties: false` पर chaque objet.",
+            "step2": "Gérez explicitement champ `refusal` में votre code au cas où अनुरोध est rejetée के लिए motif का सुरक्षा.",
+            "rule": "En production, n'espérez jamais qu'एक consigne में prompt suffise à garantir एक schéma JSON : imposez `strict: true`."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · RESPONSES API",
+              "title": "एक primitive unique के लिए texte, outils और l'état",
+              "bodyParagraph": "Responses API d'OpenAI unifie génération का réponses, chaînage multi-tours (`previous_response_id`), l'appel का fonctions personnalisées और l'usage d'outils hébergés (`file_search`, `web_search`, `code_interpreter`) में एक seule interface cohérente.",
+              "keyTakeawayPill": "Responses API = Génération + État का conversation + Outils natifs और personnalisés"
+            },
+            {
+              "stepBadge": "चरण 2 · STRUCTURED OUTPUTS (`STRICT: TRUE`)",
+              "title": "décodage contraint par grammaire (Constrained Decoding)",
+              "bodyParagraph": "Contrairement au mode JSON classique qui सुनिश्चित करता है seulement के accolades valides, Structured Outputs के साथ `strict: true` compile votre JSON Schema en एक grammaire qui filtre टोकन lors का l'inférence : मॉडल ne peut littéralement pas émettre एक clé inconnue, omettre एक champ requis या violer एक `enum`.",
+              "keyTakeawayPill": "[HI] Structured Outputs (`strict: true`) = 0 clé manquante, 0 type invalide, `additionalProperties: false`"
+            },
+            {
+              "stepBadge": "चरण 3 · GESTION के REFUS & VALIDATION MÉTIER",
+              "title": "[HI] Schéma garanti ≠ Vérité métier garantie",
+              "bodyParagraph": "Si एक demande viole règles का सुरक्षा, मॉडल remplit propriété dédiée `refusal` plutôt que schéma : votre code चाहिए सत्यापित करें `refusal` avant का lire l'objet parsé. का plus, `strict: true` सुनिश्चित करता है type (ex. एक nombre), mais votre backend चाहिए toujours valider règles métier (ex. taux का TVA autorisé).",
+              "keyTakeawayPill": "सत्यापित करें `refusal` + Valider règles métier côté serveur après désérialisation"
+            }
+          ],
+          "keyIdeas": [
+            "Responses API combine génération multimodale, chaînage d'état और invocation d'outils en एक seule boucle.",
+            "Structured Outputs के साथ `strict: true` impose respect exact का JSON Schema (clés requises, types, enums और `additionalProperties: false`) par décodage contraint.",
+            "code applicatif चाहिए toujours inspecter cas का refus (`refusal`) और appliquer ses propres validations métier पर valeurs extraites."
+          ],
+          "workedExample": {
+            "situation": "एक assurtech extrait स्वचालित रूप से garanties और franchises का अनुबंध PDF vers son moteur का tarification C# और subissait 2 % d'erreurs का désérialisation के साथ का simples instructions में prompt.",
+            "steps": [
+              "Définir schéma JSON का l'extraction के साथ `strict: true`, `additionalProperties: false` और के énumérations fermées के लिए types का franchise.",
+              "Appeler Responses API के साथ ce schéma में `text.format` (`json_schema`).",
+              "Ajouter एक contrôle en sortie vérifiant l'absence का `refusal` और cohérence arithmétique (franchise <= plafond का garantie)."
+            ],
+            "decision": "taux d'erreur का formatage JSON tombe à 0,00 % en production dès déploiement."
+          },
+          "practice": {
+            "prompt": "Expliquez différence के बीच mode `json_object` historique और `json_schema` के साथ `strict: true` (Structured Outputs), और listez deux exigences structurelles का JSON Schema en mode strict.",
+            "successCriteria": [
+              "समझाएं que `json_object` सुनिश्चित करता है केवल एक syntaxe JSON valide बिना imposer का schéma, tandis que `json_schema` (`strict: true`) सुनिश्चित करता है respect exact का structure.",
+              "Mentionner que chaque objet का schéma चाहिए déclarer `additionalProperties: false`.",
+              "Mentionner que tous champs définis में `properties` चाहिए figurer में `required` (en utilisant एक type nullable `[\"string\", \"null\"]` के लिए champs optionnels)."
+            ],
+            "feedback": "En mode strict, एक champ optionnel se modélise par एक type union incluant `null` tout en restant listé में `required`, के साथ `additionalProperties: false`."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "कैसे obliger l'API OpenAI à renvoyer एक प्रतिक्रिया JSON qui respecte toujours exactement champs attendus par votre logiciel ?",
+              "prompt": "Votre backend appelle l'API OpenAI के लिए extraire lignes d'एक facture और exige que प्रतिक्रिया respecte à 100 % एक schéma contenant `numeroFacture` (string), `devise` (`enum: [\"EUR\", \"USD\"]`) और `lignes` (array), बिना aucune propriété supplémentaire. कौन सा कॉन्फ़िगरेशन devez-vous उपयोग करें ?",
+              "options": [
+                {
+                  "id": "structured-outputs-json-schema-strict",
+                  "label": "उपयोग करें Structured Outputs (`json_schema`) के साथ `strict: true` और `additionalProperties: false` पर chaque objet का schéma."
+                },
+                {
+                  "id": "consigne-texte-majuscules-seule",
+                  "label": "Écrire « RÉPONDS EN JSON SVP » en majuscules में prompt बिना सक्रिय करें का schéma d'API."
+                },
+                {
+                  "id": "expression-reguliere-tronquee",
+                  "label": "Tronquer प्रतिक्रिया brute au centième caractère avant d'ajouter एक accolade fermante."
+                },
+                {
+                  "id": "temperature-deux-sans-schema",
+                  "label": "Régler température पर 2.0 en mode texte libre के लिए diversifier nom के clés JSON."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.responses-api-structured-outputs.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "के साथ mode strict d'OpenAI, comment déclarer एक champ facultatif (comme एक commentaire) में votre format JSON ?",
+              "prompt": "कैसे modéliser एक champ optionnel (par exemple `commentaire`) में एक JSON Schema utilisé के साथ OpenAI Structured Outputs en mode `strict: true` ?",
+              "options": [
+                {
+                  "id": "champ-requis-avec-type-nullable",
+                  "label": "Inclure champ में `required` और définir son type comme nullable (`\"type\": [\"string\", \"null\"]`) के साथ `additionalProperties: false`."
+                },
+                {
+                  "id": "autoriser-additional-properties-true",
+                  "label": "Régler `additionalProperties: true` और हटाएं totalement tableau `required` का l'objet racine."
+                },
+                {
+                  "id": "omettre-type-du-champ",
+                  "label": "Déclarer nom का champ के साथ एक chaîne vide en guise का définition का type JSON Schema."
+                },
+                {
+                  "id": "utiliser-commentaires-xml-dans-json",
+                  "label": "Insérer के balises XML à l'intérieur का schéma JSON के लिए अक्षम करें validateur का टोकन."
+                }
+              ]
+            }
+          ],
+          "recap": "Responses API + Structured Outputs (`strict: true`, `additionalProperties: false`) = zéro erreur का parsing JSON en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "function-calling-agents-sdk-guardrails",
+          "title": "Function Calling & OpenAI Agents SDK : outils, handoffs और guardrails",
+          "objective": "Implémenter Function Calling के साथ schémas stricts और orchestrer के agents spécialisés के साथ Handoffs, Guardrails और Tracing में l'OpenAI Agents SDK.",
+          "estimatedMinutes": 8,
+          "hook": "कैसे faire collaborer एक agent का triage, एक agent का facturation और एक agent technique बिना बनाएं एक usine à gaz impossible à déboguer ni laisser एक prompt malveillant déclencher एक remboursement non autorisé ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Agents SDK : Primitives Simples (Agent + Tools + Handoffs + Guardrails)",
+            "diagramTop": "Function Calling : मॉडल propose `call_tool(args)` ➔ VOTRE code vérifie अधिकार और exécute",
+            "diagramBottom": "[HI] Agents SDK : [Guardrail Entrée] ➔ [Agent Triage] ──(Handoff)──► [Agent Spécialiste + Outils] ➔ [Guardrail Sortie]",
+            "step1": "Activez `strict: true` पर définitions का fonctions (`tools`) और validez toujours autorisations côté serveur avant d'exécuter fonction.",
+            "step2": "Découpez responsabilités के साथ के Handoffs explicites के बीच agents spécialisés और protégez entrées/sorties par के Guardrails parallèles.",
+            "rule": "मॉडल ne touche jamais सीधे votre डेटाबेस : il émet एक proposition d'appel d'outil que votre backend contrôle और exécute."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · FUNCTION CALLING STRICT",
+              "title": "Séparer décision d'appel और l'exécution réelle",
+              "bodyParagraph": "Lors d'एक Function Calling, मॉडल ne lance aucun code पर serveurs d'OpenAI : il retourne एक objet structuré indiquant nom का fonction और ses arguments JSON (garantis conformes au schéma si `strict: true` est activé). C'est votre application qui vérifie अनुमतियां का l'उपयोगकर्ता, exécute fonction और renvoie résultat au मॉडल.",
+              "keyTakeawayPill": "मॉडल = propose l'appel और arguments · Votre serveur = vérifie अधिकार और exécute"
+            },
+            {
+              "stepBadge": "चरण 2 · OPENAI AGENTS SDK & HANDOFFS",
+              "title": "Orchestrer के spécialistes plutôt qu'एक méga-prompt fragile",
+              "bodyParagraph": "L'OpenAI Agents SDK repose पर के primitives légères : एक `Agent` (instructions + मॉडल + outils), के `Handoffs` (délégation explicite का conversation vers एक agent spécialiste comme एक transfert d'appel qualifié) और `Tracing` natif qui enregistre chaque étape, appel d'outil और transfert.",
+              "keyTakeawayPill": "Agents SDK = Agents spécialisés + Handoffs typés + Tracing intégré का bout en bout"
+            },
+            {
+              "stepBadge": "चरण 3 · GUARDRAILS D'ENTRÉE और का SORTIE",
+              "title": "[HI] Couper court aux abus avant l'action coûteuse",
+              "bodyParagraph": "`Guardrails` s'exécutent en parallèle का l'agent : एक guardrail d'entrée léger détecte immédiatement एक tentative d'injection का prompt या एक demande hors périmètre और déclenche एक `tripwire` qui interrompt l'exécution avant même que मॉडल principal या ses outils ne soient invoqués.",
+              "keyTakeawayPill": "Guardrail Tripwire = arrêt immédiat avant tout appel d'outil या génération hors politique"
+            }
+          ],
+          "keyIdeas": [
+            "En Function Calling, मॉडल génère केवल arguments structurés का l'appel (`strict: true`) ; l'exécution और contrôle d'पहुंच restent sous responsabilité का serveur applicatif.",
+            "L'OpenAI Agents SDK structure workflows multi-agents autour d'Agents, का Tools, का Handoffs (transferts का contrôle) और का Tracing intégré.",
+            "Guardrails d'entrée और का sortie utilisent एक mécanisme का disjoncteur (`tripwire`) के लिए bloquer requêtes malveillantes या sorties non conformes."
+          ],
+          "workedExample": {
+            "situation": "एक service client bancaire déploie एक architecture multi-agents के साथ l'OpenAI Agents SDK : एक agent d'accueil, एक agent Cartes Bancaires (pouvant faire opposition) और एक agent Crédits.",
+            "steps": [
+              "Placer एक Input Guardrail qui vérifie qu'aucune tentative का contournement d'पहचान या का demande hors banque n'est présente.",
+              "कॉन्फ़िगर करें l'agent d'accueil के साथ deux Handoffs explicites vers l'agent Cartes और l'agent Crédits.",
+              "में l'outil `bloquer_carte(carte_id)` का l'agent Cartes, सक्रिय करें `strict: true` पर schéma और सत्यापित करें côté serveur que `carte_id` appartient bien au `user_id` authentifié में contexte का session."
+            ],
+            "decision": "parcours est traçable में dashboard का Tracing और protégé contre appels d'outils पर cartes d'autrui (IDOR)."
+          },
+          "practice": {
+            "prompt": "एक डेवलपर passe `user_id` comme argument libre में schéma का Function Calling `rembourser_commande(user_id, commande_id)` और fait confiance à valeur choisie par LLM. Expliquez vulnérabilité और comment corriger.",
+            "successCriteria": [
+              "Identifier faille d'autorisation (एक prompt injection peut convaincre LLM का passer `user_id` d'एक autre client).",
+              "Retirer `user_id` के arguments générés par LLM और l'injecter côté serveur depuis टोकन d'authentification vérifié का session.",
+              "Valider en डेटाबेस que `commande_id` appartient bien à cet उपयोगकर्ता authentifié और appliquer एक plafond का remboursement."
+            ],
+            "feedback": "identifiants का सुरक्षा (qui est connecté, quel est son tenant) चाहिए toujours provenir का contexte serveur authentifié, jamais के arguments devinés par मॉडल."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+              "itemType": "spotTheIssue",
+              "difficulty": 3,
+              "plainPrompt": "क्यों est-il dangereux का laisser l'IA चुनें elle-même numéro का dossier client à lire बिना सत्यापित करें qui est connecté ?",
+              "prompt": "में एक application utilisant Function Calling d'OpenAI, fonction `lire_dossier_medical(patient_id)` laisse मॉडल चुनें librement `patient_id` à partir का texte का conversation बिना सत्यापित करें session authentifiée côté serveur. Quel est risque principal ?",
+              "options": [
+                {
+                  "id": "idor-injection-prompt-identifiant",
+                  "label": "एक divulgation non autorisée (IDOR) : एक उपयोगकर्ता peut manipuler prompt के लिए amener मॉडल à demander dossier d'एक autre patient."
+                },
+                {
+                  "id": "erreur-encodage-utf16",
+                  "label": "एक incompatibilité d'affichage के caractères accentués में police système का navigateur."
+                },
+                {
+                  "id": "ralentissement-carte-son",
+                  "label": "एक saturation का périphérique audio local lors का sérialisation का l'identifiant."
+                },
+                {
+                  "id": "suppression-automatique-schema",
+                  "label": "suppression automatique का फ़ाइल JSON Schema पर disque dur का serveur OpenAI."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "में kit OpenAI Agents SDK, comment arrêter immédiatement एक agent si एक contrôle détecte एक demande dangereuse ?",
+              "prompt": "में l'OpenAI Agents SDK, quel mécanisme सक्षम करता है à एक contrôle का सुरक्षा exécuté en parallèle d'interrompre immédiatement l'agent avant qu'एक outil sensible ne soit appelé ?",
+              "options": [
+                {
+                  "id": "guardrail-tripwire",
+                  "label": "एक Guardrail déclenchant एक disjoncteur (`tripwire`) dès que sa condition का सुरक्षा या का périmètre est violée."
+                },
+                {
+                  "id": "augmentation-max-tokens",
+                  "label": "L'augmentation का paramètre `max_output_tokens` au-delà का fenêtre का contexte का मॉडल."
+                },
+                {
+                  "id": "desactivation-tracing-sdk",
+                  "label": "désactivation complète का module का Tracing में configuration globale का SDK."
+                },
+                {
+                  "id": "suppression-descriptions-handoffs",
+                  "label": "retrait का toutes instructions système के agents spécialisés recevant एक handoff."
+                }
+              ]
+            }
+          ],
+          "recap": "Schémas d'outils stricts + पहचान injectée côté serveur + Handoffs spécialisés + Guardrails à tripwire = के agents robustes en production.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        },
+        {
+          "id": "evaluations-systematiques-openai-evals",
+          "title": "Évaluations systématiques (OpenAI Evals) : mesurer avant का डिप्लॉय करें",
+          "objective": "Construire एक suite d'évaluation (OpenAI Evals) combinant jeu का डेटा का référence, graders déterministes और LLM-as-a-judge के लिए piloter mises en production.",
+          "estimatedMinutes": 8,
+          "hook": "« J'ai testé mon nouveau prompt पर trois exemples और ça a l'air super ! » : pourquoi cette phrase est-elle cause numéro एक के régressions silencieuses en ingénierie IA ?",
+          "declicCard": {
+            "title": "मुख्य अंतर्दृष्टि Evals : Traiter Prompts और मॉडल comme का Code के साथ के Tests Automatisés",
+            "diagramTop": "Dataset d'Évaluation (Cas réels + Cas limites + Pièges d'injection) ➔ Exécution पर variante",
+            "diagramBottom": "Graders (Exactitude का schéma / Choix d'outil / Fidélité aux sources) ➔ Score comparé au baseline",
+            "step1": "Constituez एक dataset doré (golden dataset) couvrant cas nominaux, cas ambigus और tentatives का contournement.",
+            "step2": "Combinez के graders déterministes (schéma JSON, nom का l'outil appelé, mots-clés interdits) और के graders sémantiques calibrés.",
+            "rule": "Aucun changement का prompt, का मॉडल या का RAG ne part en production बिना passer suite d'Evals au-dessus का seuil का référence."
+          },
+          "microSlides": [
+            {
+              "stepBadge": "चरण 1 · DATASET का RÉFÉRENCE",
+              "title": "Partir के vraies erreurs observées पर terrain",
+              "bodyParagraph": "एक bonne suite d'évaluation (Evals) ne contient pas केवल के questions faciles : elle réunit 50 à 200 cas représentatifs का production, incluant formulations ambiguës के उपयोगकर्ताओं, documents contradictoires, valeurs nulles और scénarios où l'agent चाहिए refuser d'agir.",
+              "keyTakeawayPill": "Golden Dataset = Cas fréquents + Cas limites difficiles + Cas का refus attendus"
+            },
+            {
+              "stepBadge": "चरण 2 · GRADERS (NOTATEURS)",
+              "title": "Privilégier déterminisme, compléter par एक juge calibré",
+              "bodyParagraph": "Utilisez toujours en priorité के graders déterministes rapides और reproductibles : correspondance exacte d'एक identifiant, validité का JSON Schema, vérification que bon `tool_call` a été émis के साथ bons paramètres. के लिए évaluer fidélité au contexte (groundedness) या ton, ajoutez एक grader par मॉडल (LLM-as-a-judge) doté d'एक grille à critères binaires clairs.",
+              "keyTakeawayPill": "1. Graders déterministes (code/schéma/tool_call) ➔ 2. Grader par मॉडल पर grille explicite"
+            },
+            {
+              "stepBadge": "चरण 3 · EVAL-DRIVEN DEVELOPMENT",
+              "title": "Optimiser लागत, latence और qualité en confiance",
+              "bodyParagraph": "के साथ एक suite d'Evals automatisée en CI, vous pouvez tester en dix minutes si passage d'एक मॉडल coûteux vers `o4-mini` या `gpt-4o-mini` maintient 99 % का précision tout en divisant latence और facture par cinq.",
+              "keyTakeawayPill": "Pas d'optimisation का मॉडल या का prompt à l'aveugle : Evals tranchent par preuve"
+            }
+          ],
+          "keyIdeas": [
+            "évaluations systématiques (Evals) transforment l'amélioration d'एक système IA d'एक intuition subjective en एक ingénierie mesurable.",
+            "एक suite d'Evals robuste combine के contrôles déterministes (schéma, sélection d'outils, règles métier) और के évaluations sémantiques calibrées.",
+            "Chaque incident découvert en production चाहिए être converti en एक nouveau cas का test में dataset d'Evals के लिए empêcher toute régression."
+          ],
+          "workedExample": {
+            "situation": "एक टीम souhaite réduire का 60 % temps का प्रतिक्रिया का son agent का qualification का tickets en remplaçant son prompt système का 4 000 mots और en changeant का मॉडल.",
+            "steps": [
+              "Construire में OpenAI Evals एक jeu का 120 tickets historiques annotés के साथ catégorie attendue, priorité और l'outil à appeler.",
+              "Définir deux graders : एक grader déterministe पर couple `(categorie, priorite, tool_name)` और एक grader का conformité vérifiant l'absence का promesse commerciale non autorisée.",
+              "Comparer score का nouvelle configuration au baseline : elle obtient 97,5 % contre 96,0 % auparavant, के लिए एक latence divisée par 2,4."
+            ],
+            "decision": "mise en production est approuvée पर base का rapport d'Evals objectif."
+          },
+          "practice": {
+            "prompt": "Décrivez trois types का cas का test और deux types का graders que vous devez inclure में एक suite OpenAI Evals के लिए valider एक agent qui résume के अनुबंध और appelle एक API d'archivage.",
+            "successCriteria": [
+              "Trois familles का cas : अनुबंध standards complets, अनुबंध incomplets/contradictoires (cas limites) और prompts tentant का forcer एक archivage non autorisé.",
+              "Grader déterministe : सत्यापित करें structure JSON का résumé और arguments exacts passés à fonction d'archivage.",
+              "Grader d'ancrage : सत्यापित करें que chaque clause citée में résumé figure réellement में अनुबंध source."
+            ],
+            "feedback": "Tester ensemble fidélité का texte और justesse का l'appel d'outil couvre à fois génération और l'action का l'agent."
+          },
+          "questions": [
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+              "itemType": "scenario",
+              "difficulty": 2,
+              "plainPrompt": "Vous changez consignes का votre assistant IA. कैसे सत्यापित करें que vous n'avez rien cassé avant mise en ligne ?",
+              "prompt": "Votre टीम modifie instructions système d'एक agent en production के लिए raccourcir ses réponses, और veut s'assurer que ce changement ne dégrade pas choix के outils Function Calling पर 150 scénarios critiques का l'उद्यम. Quelle pratique d'ingénierie IA devez-vous appliquer ?",
+              "options": [
+                {
+                  "id": "executer-suite-evals-avant-deploiement",
+                  "label": "Exécuter एक suite automatisée OpenAI Evals vérifiant appels d'outils पर 150 scénarios और bloquer déploiement en cas का régression."
+                },
+                {
+                  "id": "tester-deux-questions-a-la-main",
+                  "label": "Poser deux questions informelles में l'interface का chat puis डिप्लॉय करें immédiatement en production."
+                },
+                {
+                  "id": "supprimer-validations-parametres",
+                  "label": "Retirer schémas का paramètres के fonctions afin qu'aucune erreur का typage ne remonte में लॉग्स."
+                },
+                {
+                  "id": "attendre-plaintes-utilisateurs",
+                  "label": "डिप्लॉय करें बिना test préalable और compter पर tickets का réclamation के clients के लिए mesurer qualité."
+                }
+              ]
+            },
+            {
+              "id": "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002",
+              "itemType": "mcq",
+              "difficulty": 2,
+              "plainPrompt": "कैसे सत्यापित करें का façon simple, rapide और gratuite qu'एक agent a bien choisi devise EUR में एक test automatique ?",
+              "prompt": "Quel type का grader (notateur) est plus fiable और plus économique के लिए सत्यापित करें में OpenAI Evals qu'एक agent a appelé fonction `creer_avoir` के साथ bon code devise `EUR` ?",
+              "options": [
+                {
+                  "id": "grader-deterministe-arguments-outil",
+                  "label": "एक grader déterministe inspectant सीधे nom का fonction appelée और l'égalité stricte का l'argument JSON `devise === \"EUR\"`."
+                },
+                {
+                  "id": "grader-poetique-subjectif",
+                  "label": "एक évaluation purement stylistique demandant à एक मॉडल tiers si प्रतिक्रिया semble agréable à lire."
+                },
+                {
+                  "id": "compteur-longueur-texte-seul",
+                  "label": "एक règle vérifiant केवल que प्रतिक्रिया textuelle dépasse mille caractères, बिना lire l'appel d'outil."
+                },
+                {
+                  "id": "tirage-aleatoire-sans-reference",
+                  "label": "एक générateur का nombres aléatoires attribuant एक score बिना comparer sortie à valeur attendue."
+                }
+              ]
+            }
+          ],
+          "recap": "Dataset doré représentatif + Graders déterministes और sémantiques + Porte का non-régression CI = l'ingénierie IA pilotée par Evals.",
+          "sourceIds": [
+            "openai-platform-docs",
+            "openai-academy-courses"
+          ]
+        }
+      ]
+    }
+  ],
+  "mockExam": {
+    "id": "openai-chatgpt-codex-mock-exam",
+    "title": "मॉक परीक्षा CertiGo Pro: OpenAI (ChatGPT Enterprise, मॉडल o3/o4-mini, Codex, Responses API & Agents SDK)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète का maîtrise के produits OpenAI en उद्यम : sélection का मॉडल (GPT-4o vs o3/o4-mini), Deep Research, Data Analysis, Canvas, Projects, agent autonome Codex के साथ AGENTS.md, Responses API, Structured Outputs, Function Calling, Agents SDK और OpenAI Evals.",
+    "questionIds": [
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.001",
+      "openai-chatgpt-codex.choix-modele-gpt4o-vs-o3-o4mini.002",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.001",
+      "openai-chatgpt-codex.deep-research-et-data-analysis.002",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.001",
+      "openai-chatgpt-codex.canvas-projects-custom-gpts.002",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.001",
+      "openai-chatgpt-codex.codex-architecture-sandbox-isolation.002",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.001",
+      "openai-chatgpt-codex.codex-agents-md-pr-revue-code.002",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.001",
+      "openai-chatgpt-codex.codex-debugging-ci-securite.002",
+      "openai-chatgpt-codex.responses-api-structured-outputs.001",
+      "openai-chatgpt-codex.responses-api-structured-outputs.002",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.001",
+      "openai-chatgpt-codex.function-calling-agents-sdk-guardrails.002",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.001",
+      "openai-chatgpt-codex.evaluations-systematiques-openai-evals.002"
+    ]
+  }
+}

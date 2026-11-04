@@ -1,0 +1,247 @@
+{
+  "schema": "certigo.editorial.track-solutions/v1",
+  "trackId": "anthropic-claude-mcp",
+  "brand": "CertiGo",
+  "kind": "answerKey",
+  "locale": "de-DE",
+  "supportedLocales": [
+    "fr-FR",
+    "en-US",
+    "es-ES",
+    "de-DE",
+    "it-IT",
+    "pt-BR",
+    "ar-SA",
+    "ja-JP",
+    "hi-IN",
+    "zh-Hans",
+    "ko-KR"
+  ],
+  "solutions": [
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.001",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "documents-xml-en-haut-question-en-bas"
+      ],
+      "plainExplanation": "Placez toujours die longs documents tout en haut in eine balise <documents> und mettez votre question tout à die fin.",
+      "rationale": "Anthropic recommande von structurer die prompts complexes mit der balises XML (`<documents>`, `<document>`, `<instructions>`) und von placer die longs documents von référence en haut des prompt, avant die instructions und die question finale.",
+      "examTip": "Auf Claude mit long contexte : `<documents>` en haut des prompt + `<instructions>` und question tout en bas.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
+      "lessonId": "prompting-structure-balises-xml",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ancrage-contexte-avant-generation"
+      ],
+      "plainExplanation": "Obliger Claude à citer d'abord die passages réels l'empêche d'inventer der informations qui ne sont pas in der document.",
+      "rationale": "En extrayant d'abord die citations littérales in `<quotes>`, der Modell place die preuves exactes in son contexte von génération immédiat avant von rédiger `<answer>`, ce qui réduit drastiquement die extrapolations non fondées.",
+      "examTip": "Demandez toujours `<quotes>` (extraction littérale) avant `<answer>` (analyse) auf die tâches documentaires critiques.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "max-tokens-superieur-budget-thinking"
+      ],
+      "plainExplanation": "Die limite totale (max_tokens) muss toujours être plus grande que der budget von réflexion für laisser von die place à die Antwort finale.",
+      "rationale": "In l'API Messages d'Anthropic, `budget_tokens` représente die part maximale von `max_tokens` allouée au bloc `thinking` : `max_tokens` muss donc toujours être strictement supérieur à `budget_tokens` für permettre die génération von die Antwort finale.",
+      "examTip": "Mit Extended Thinking : `max_tokens > budget_tokens` (car `max_tokens` = réflexion + Antwort finale).",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
+      "lessonId": "extended-thinking-projects-artifacts",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "artifacts-interactifs-versionnes"
+      ],
+      "plainExplanation": "Die Artifacts affichent en direct die interfaces, graphiques und schémas générés par Claude in ein volet dédié.",
+      "rationale": "Artifacts affiche und exécute en direct in ein panneau latéral isolé die composants React, pages HTML, graphiques SVG und diagrammes Mermaid, mit bascule code/aperçu und historique von versions.",
+      "examTip": "Rendu interactif en direct von code UI (React/HTML), SVG oder diagrammes Mermaid = Artifacts.",
+      "sourceIds": [
+        "anthropic-academy-teams"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "invalidation-prefixe-par-uuid-debut"
+      ],
+      "plainExplanation": "Der cache ne réutilise que ce qui est identique depuis der premier mot : toute valeur qui change muss être placée à die fin.",
+      "rationale": "Der Prompt Caching d'Anthropic repose auf l'égalité exacte des préfixe von die Anfrage. Injecter ein UUID oder ein horodatage changeant au début des bloc `system` modifie der préfixe à chaque appel und empêche toute lecture en cache.",
+      "examTip": "Für que der Prompt Caching fonctionne : gardez der début (`tools` ➔ `system` ➔ corpus) 100 % statique und placez die Daten dynamiques à die fin.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
+      "lessonId": "claude-prompt-caching-context-engineering",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "bloc-document-citations-enabled-true"
+      ],
+      "plainExplanation": "Activez l'option native citations: { enabled: true } auf der document envoyé à Claude.",
+      "rationale": "Die fonctionnalité native von citations von l'API Messages s'active en fournissant die sources in der blocs von type `document` mit l'option `citations: { enabled: true }`.",
+      "examTip": "Citations vérifiables natives in l'API Claude = bloc `document` mit `citations: { enabled: true }`.",
+      "sourceIds": [
+        "anthropic-prompt-thinking"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.001",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "fichier-claude-md"
+      ],
+      "plainExplanation": "Der Datei CLAUDE.md sert von mémoire permanente lue automatisch par Claude Code à chaque démarrage.",
+      "rationale": "Claude Code charge automatisch die Dateien `CLAUDE.md` für connaître die commandes von build, von lint, von test und die conventions d'architecture des dépôt.",
+      "examTip": "`CLAUDE.md` est die mémoire persistante von votre dépôt für Claude Code.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
+      "lessonId": "claude-code-cli-claude-md",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "commande-slash-clear"
+      ],
+      "plainExplanation": "Die commande /clear vide entièrement die conversation en cours für repartir à zéro ohne mélanger die sujets.",
+      "rationale": "Die commande `/clear` vide l'historique von conversation von die session courante für repartir auf ein contexte propre und économique lors d'ein changement von sujet, tout en conservant die instructions von `CLAUDE.md`.",
+      "examTip": "Changement von tâche indépendante in Claude Code = `/clear` ; résumé d'eine tâche longue en cours = `/compact`.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "settings-json-allow-npm-test-deny-env"
+      ],
+      "plainExplanation": "Réglez der Datei .claude/settings.json für autoriser die commande von test und bloquer explicitement die lecture der Dateien sensibles.",
+      "rationale": "Der Datei `.claude/settings.json` ermöglicht d'autoriser finement der commandes sûres comme `Bash(npm test)` in `Berechtigungen.allow` tout en interdisant explicitement die lecture der secrets `.env*` und die appels Netzwerk non approuvés in `Berechtigungen.deny`.",
+      "examTip": "Utilisez `.claude/settings.json` (`allow` / `deny`) für pré-approuver nur die commandes von test inoffensives.",
+      "sourceIds": [
+        "anthropic-claude-code"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
+      "lessonId": "claude-code-permissions-securite-ci",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "prompt-injection-via-issue-publique"
+      ],
+      "plainExplanation": "Ein message piégé pourrait manipuler l'agent für lui faire exécuter der commandes dangereuses oder voler der Zugriff secrets.",
+      "rationale": "Ein texte soumis par ein tiers externe (issue publique, PR externe, page web) est eine entrée non fiable : s'il est traité par ein agent en mode headless disposant d'outils Bash complets und d'ein Token administrateur, eine injection von prompt peut provoquer eine compromission grave.",
+      "examTip": "En CI headless (`claude -p`) auf der entrées externes : conteneur éphémère + `--allowedTools` minimal + Token en lecture seule.",
+      "sourceIds": [
+        "anthropic-claude-code",
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "primitive-resources-uri"
+      ],
+      "plainExplanation": "Eine Resource MCP ermöglicht von lire eine donnée en toute Sicherheit, contrairement à ein Tool qui exécute eine action.",
+      "rationale": "In der standard MCP, die `Resources` représentent der Daten structurées oder textuelles identifiées par URI (schémas, Dateien, Protokolle) exposées en lecture seule ohne effet von bord, par opposition aux `Tools` qui exécutent der actions.",
+      "examTip": "In MCP : `Resources` = Daten en lecture par URI · `Prompts` = Modelle Benutzer · `Tools` = actions exécutables.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
+      "lessonId": "architecture-mcp-serveurs-outils-ressources-prompts",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "ecrire-logs-sur-stderr"
+      ],
+      "plainExplanation": "Der canal standard (stdout) est réservé aux messages JSON des protocole MCP ; die Protokolle müssen être écrits auf stderr.",
+      "rationale": "Lorsqu'ein serveur MCP communique via der transport `stdio`, der flux `stdout` véhicule exclusivement die messages JSON-RPC 2.0. Tout journal applicatif écrit auf `stdout` (`console.log`, `print`) casse der parsing des client ; il faut Verwenden `stderr` (`console.error`).",
+      "examTip": "Serveur MCP en transport `stdio` : jamais von `console.log` auf `stdout`, écrivez tous vos logs auf `stderr` !",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "vm-ou-conteneur-isole-moindre-privilege"
+      ],
+      "plainExplanation": "Faites-der toujours tourner in eine virtuelle Maschine isolée mit der minimum von Rechte, jamais auf votre session personnelle.",
+      "rationale": "Computer Use interagissant direkt mit l'écran, die souris und der clavier, Anthropic recommande von l'exécuter in eine virtuelle Maschine oder ein conteneur isolé disposant des strict minimum von Rechte und d'Zugriff Netzwerk, mit validation humaine der actions sensibles.",
+      "examTip": "Computer Use = toujours confiné in eine VM oder ein conteneur dédié ohne session ni secrets personnels.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
+      "lessonId": "computer-use-et-constitutional-ai",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "charte-explicite-principes-auto-critique"
+      ],
+      "plainExplanation": "Claude apprend à s'auto-corriger en suivant eine charte écrite von règles éthiques und von Sicherheit (être utile, honnête und inoffensif).",
+      "rationale": "Constitutional AI aligne die Modelle Claude en s'appuyant auf eine constitution explicite von principes normatifs (visant ein comportement utile, honnête und inoffensif) lors der phases d'auto-critique und d'apprentissage par renforcement.",
+      "examTip": "Constitutional AI = alignement von Sicherheit fondé auf eine charte explicite von principes (Helpful, Honest, Harmless).",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "spotTheIssue",
+      "correctOptionIds": [
+        "injection-instructions-cachees-description-tool"
+      ],
+      "plainExplanation": "Der ordres cachés in die description d'ein outil trompent l'IA für lui faire dérober der Daten à l'insu von l'Benutzer.",
+      "rationale": "Puisque die descriptions d'outils retournées par `tools/list` sont injectées in der contexte des Modell für qu'il sache comment die appeler, ein serveur MCP malveillant peut y glisser der instructions cachées (Tool Poisoning) poussant der LLM à lire und exfiltrer der Daten locales.",
+      "examTip": "Tool Poisoning MCP = injection von prompt dissimulée in die description `tools/list` d'ein serveur MCP non fiable.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    },
+    {
+      "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
+      "lessonId": "securite-serveurs-mcp-approbation-entreprise",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "role-sql-lecture-seule-replica-et-serveur-audite"
+      ],
+      "plainExplanation": "Connectez der serveur MCP mit ein compte von Datenbank configuré strictement en lecture seule.",
+      "rationale": "Die Sicherheit d'ein serveur MCP repose auf der geringstes Privileg au niveau von l'infrastructure cible : connecter der serveur à ein réplica mit ein compte PostgreSQL en lecture seule gewährleistet techniquement qu'aucune écriture oder suppression ne peut avoir lieu.",
+      "examTip": "Ne comptez jamais auf der prompt für empêcher ein `DROP` oder ein `DELETE` via MCP : imposez ein rôle Datenbank en lecture seule.",
+      "sourceIds": [
+        "anthropic-mcp-computer-use"
+      ]
+    }
+  ]
+}
