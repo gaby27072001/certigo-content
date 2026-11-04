@@ -188,18 +188,18 @@ test("conserve le package v3 runtime byte-identical", async () => {
       {
         artifact: "public",
         manifestId:
-          "sha256:8b843dad347da5846926aeb96791e3fc200ef994210ac4f8dc448c639d4c0dbd",
+          "sha256:cd2af002254b7bcbf0f423c3569769f9925a13d28ae1981e2dbe81af87167e2b",
       },
       {
         artifact: "private",
         manifestId:
-          "sha256:df7d83db2a1833cda1f8ad29d47d66526d97631f2d27390404870bde4852ff87",
+          "sha256:77825b0244b8365b1af51105693869490f1429841c38f3c3c347c9f9b8bbd908",
       },
     ]
   );
   assert.equal(
     sha256Hex(canonicalize(treeSnapshot(outDir))),
-    "353073685a19d82ecd6487b41d2753e64f4ef3df53c348f5b282fb09098bc763"
+    "5e060641adc35ca43a067fcf9c7104581e01fb8561965a2b26c109c90bbd66f7"
   );
   for (const channel of ["public", "private"]) {
     const manifest = JSON.parse(

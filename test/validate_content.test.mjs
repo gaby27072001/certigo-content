@@ -198,3 +198,63 @@ test("refuse un payload source expose par lien symbolique", async (context) => {
     )
   );
 });
+
+test("rejette les longs tirets (U+2013 et U+2014) dans les questions et solutions v3+", async () => {
+  for (const dash of ["\u2014", "\u2013"]) {
+    const root = createRoot();
+    writePair(root, "microsoft.az-900.section-1.dash.001", {
+      publicFile: "microsoft/az-900/microsoft.az-900.section-1.dash.001",
+      solutionFile: "microsoft/az-900/microsoft.az-900.section-1.dash.001",
+      publicExtra: {
+        schemaVersion: "v3",
+        metadata: {
+          provider: "microsoft",
+          certification: "microsoft:az-900",
+          blueprintVersion: "2026-08-17",
+          objective: "section-1",
+        },
+        prompt: `Une question avec un tiret long ${dash} interdit.`,
+        choices: ["Choix A", "Choix B", "Choix C", "Choix D"],
+      },
+      solutionExtra: {
+        schemaVersion: "v3",
+        metadata: {
+          provider: "microsoft",
+          certification: "microsoft:az-900",
+          blueprintVersion: "2026-08-17",
+          objective: "section-1",
+        },
+        correct: "Choix A",
+        rationale: "Explication sans tiret long.",
+      },
+    });
+    const result = await validateContent({ root });
+    assert.ok(
+      result.errors.some((error) => error.includes("[editorial:long-dash]")),
+      `Le tiret ${dash.codePointAt(0)?.toString(16)} doit etre rejete`
+    );
+  }
+});
+
+test("garantit zero long tiret (U+2013 / U+2014) dans tous les fichiers JSON pedagogiques du depot", async () => {
+  const { glob } = await import("../tools/lib/glob.mjs");
+  const { readFileSync } = await import("node:fs");
+  const files = await glob("{content,editorial,config,goldens}/**/*.json", {
+    cwd: repoRoot,
+    posix: true,
+  });
+  assert.ok(files.length > 1000, "Le scan doit couvrir l'ensemble du corpus JSON");
+  const offenders = [];
+  for (const file of files) {
+    const raw = readFileSync(resolve(repoRoot, file), "utf8");
+    if (/[\u2013\u2014]|\\u201[34]/i.test(raw)) {
+      offenders.push(file);
+    }
+  }
+  assert.deepEqual(
+    offenders,
+    [],
+    `Aucun fichier JSON ne doit contenir de long tiret (U+2013/U+2014): ${offenders.join(", ")}`
+  );
+});
+

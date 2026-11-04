@@ -11,6 +11,7 @@
       "correctOptionIds": [
         "role-client-droit-applicable-et-playbook"
       ],
+      "plainExplanation": "Donnez-lui toujours le contrat reçu, le camp que vous défendez (client ou fournisseur), la loi du pays et votre guide interne des clauses acceptables.",
       "rationale": "Pour qu'une révision contractuelle dans Harvey Assistant soit pertinente et directement exploitable, il faut fournir le contrat source, la partie représentée (ex. Client licencié), le droit applicable ainsi que le playbook définissant les positions cibles et de repli (fallback).",
       "examTip": "Dans Harvey Assistant : précisez toujours Rôle représenté + Droit applicable + Playbook (position idéale & fallback).",
       "sourceIds": [
@@ -25,6 +26,7 @@
       "correctOptionIds": [
         "audit-croise-definitions-et-clauses-substantives"
       ],
+      "plainExplanation": "Demandez systématiquement à Harvey de croiser les mots définis au début du contrat avec les articles qui les utilisent.",
       "rationale": "Une définition excessivement restrictive à l'article 1 peut neutraliser la portée d'une clause substantive. Harvey Assistant permet d'effectuer un audit croisé systématique entre les termes définis et les obligations du contrat.",
       "examTip": "Ne lisez jamais une clause de garantie ou de confidentialité sans faire auditer par Harvey les termes définis auxquels elle renvoie.",
       "sourceIds": [
@@ -38,6 +40,7 @@
       "correctOptionIds": [
         "conserver-structure-adverse-inserer-gardes-fous"
       ],
+      "plainExplanation": "Une retouche ciblée garde le texte familier pour l'autre partie tout en protégeant votre client, ce qui accélère la signature.",
       "rationale": "Le redlining chirurgical (à intrusion minimale) conserve la structure et le style du projet adverse tout en insérant exactement les garde-fous requis par le playbook, ce qui facilite l'acceptation rapide par la partie adverse.",
       "examTip": "En négociation équilibrée, privilégiez le redlining chirurgical à intrusion minimale plutôt que le remplacement intégral d'articles.",
       "sourceIds": [
@@ -51,11 +54,42 @@
       "correctOptionIds": [
         "confusion-commentaire-externe-et-note-strategie-interne"
       ],
+      "plainExplanation": "Il ne faut jamais mélanger les arguments envoyés à l'adversaire et la note confidentielle réservée à votre client.",
       "rationale": "Les commentaires de marge envoyés à la partie adverse doivent contenir uniquement des justifications objectives de négociation, tandis que l'évaluation du risque et les seuils de repli (fallback/walk-away) doivent rester dans un mémo interne confidentiel destiné au client.",
       "examTip": "Séparez toujours le commentaire externe (envoyé à la partie adverse) et la note stratégique interne (couverte par le secret professionnel).",
       "sourceIds": [
         "harvey-platform-overview",
         "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.001",
+      "lessonId": "harvey-academy-foundations-ai-legal-basics",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "ai-for-legal-basics-et-ai-analysis-for-legal-workflows"
+      ],
+      "plainExplanation": "La certification Level 1 Foundations regroupe AI for Legal Basics et AI Analysis for Legal Workflows pour former aux bases et à la vérification des sorties IA.",
+      "rationale": "La certification officielle Level 1 Foundations de Harvey Academy s'appuie sur les cours AI for Legal Basics (littératie IA juridique, usages adaptés et prise de décision consciente des risques) et AI Analysis for Legal Workflows (structuration des prompts d'extraction et détection des erreurs avant diffusion).",
+      "examTip": "Harvey Academy Level 1 Foundations = AI for Legal Basics + AI Analysis for Legal Workflows.",
+      "sourceIds": [
+        "harvey-academy-blog",
+        "harvey-academy-help"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-foundations-ai-legal-basics.002",
+      "lessonId": "harvey-academy-foundations-ai-legal-basics",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "utiliser-addin-harvey-for-word-in-situ-avec-playbook"
+      ],
+      "plainExplanation": "L'extension Harvey for Word Add-In permet de rédiger, comparer au playbook et insérer des révisions ciblées sans quitter Word.",
+      "rationale": "Le module Get Started With the Harvey for Word Add-In de Harvey Academy forme les juristes à rédiger, vérifier les définitions et appliquer leur playbook de négociation directement à l'intérieur de Microsoft Word tout en préservant la structure du fichier .docx.",
+      "examTip": "Pour réviser un contrat .docx sans casser sa numérotation : utilisez le Harvey for Word Add-In avec votre playbook.",
+      "sourceIds": [
+        "harvey-academy-help",
+        "harvey-platform-overview"
       ]
     },
     {
@@ -65,6 +99,7 @@
       "correctOptionIds": [
         "creer-projet-vault-isole-equipe-dossier"
       ],
+      "plainExplanation": "Créez un espace Vault dédié à ce dossier et autorisez uniquement les avocats qui travaillent sur cette opération.",
       "rationale": "Chaque opération de Due Diligence M&A dans Harvey Vault doit être logée dans un projet dédié dont l'accès est strictement restreint aux membres habilités du dossier (Matter-level access control) afin de respecter les murailles éthiques.",
       "examTip": "1 Data Room M&A = 1 projet Harvey Vault isolé avec contrôle d'accès par dossier (Ethical Wall).",
       "sourceIds": [
@@ -79,6 +114,7 @@
       "correctOptionIds": [
         "omission-clauses-modifiees-par-avenant"
       ],
+      "plainExplanation": "Un avenant signé plus tard peut annuler ou modifier une clause du contrat d'origine : il faut toujours analyser l'ensemble.",
       "rationale": "En audit contractuel, un avenant (Amendment) modifie ou remplace les stipulations du contrat initial. Exclure les avenants de l'analyse dans Harvey Vault expose au risque de manquer une obligation critique ajoutée ultérieurement.",
       "examTip": "En Due Diligence dans Vault, regroupez et analysez toujours ensemble le contrat initial et tous ses avenants successifs.",
       "sourceIds": [
@@ -92,6 +128,7 @@
       "correctOptionIds": [
         "review-table-colonne-fermee-plus-detail-citation"
       ],
+      "plainExplanation": "Combinez une colonne de tri simple (Oui / Non / Silence) et une colonne qui cite le passage exact avec un lien cliquable.",
       "rationale": "Dans Harvey Vault, combiner dans une Review Table une colonne de classification fermée (pour filtrer instantanément les contrats à risque) et une colonne de détail avec citation cliquable (pour vérifier la clause exacte dans le PDF) est la méthode d'audit de référence.",
       "examTip": "Review Table optimale = 1 colonne de catégorie fermée (filtrable) + 1 colonne de détail sourcé avec citation cliquable.",
       "sourceIds": [
@@ -106,6 +143,7 @@
       "correctOptionIds": [
         "distinguer-absence-clause-et-stipulation-expresse"
       ],
+      "plainExplanation": "Un contrat qui ne dit rien sur un sujet n'a pas le même effet juridique qu'un contrat qui l'interdit explicitement.",
       "rationale": "En droit des contrats, le silence d'un acte (absence de clause de changement de contrôle ou de cession) n'a pas le même effet juridique qu'une interdiction ou une autorisation expresse. Prévoir la catégorie « Silence du contrat » évite toute fausse inférence.",
       "examTip": "Dans toute grille d'extraction juridique, distinguez toujours « Interdit », « Autorisé » et « Silence du contrat ».",
       "sourceIds": [
@@ -119,6 +157,7 @@
       "correctOptionIds": [
         "ancrage-bases-juridiques-verifiees-et-citations"
       ],
+      "plainExplanation": "Il appuie chaque réponse sur des bases juridiques vérifiées et affiche des liens cliquables vers les textes officiels.",
       "rationale": "Harvey Knowledge s'appuie sur des bases documentaires législatives, réglementaires et jurisprudentielles vérifiées et relie chaque affirmation à sa citation source afin d'éliminer les inventions de références.",
       "examTip": "Harvey Knowledge = ancrage sur sources officielles + citations cliquables vers les textes et décisions.",
       "sourceIds": [
@@ -133,6 +172,7 @@
       "correctOptionIds": [
         "ouvrir-citations-verifier-vigueur-et-espece"
       ],
+      "plainExplanation": "Cliquez sur les sources citées pour vérifier que la loi est toujours en vigueur et s'applique bien à votre cas précis.",
       "rationale": "Même avec un outil juridique ancré, la déontologie et la rigueur imposent d'ouvrir la source citée pour vérifier sa date d'entrée en vigueur, l'absence de revirement et l'adéquation des faits d'espèce au cas du client.",
       "examTip": "Ouvrez toujours la citation dans Harvey Knowledge pour vérifier la vigueur du texte et la pertinence des faits d'espèce.",
       "sourceIds": [
@@ -147,6 +187,7 @@
       "correctOptionIds": [
         "orchestration-multi-etapes-reproductible-validee"
       ],
+      "plainExplanation": "Un Workflow enchaîne plusieurs étapes vérifiées dans le même ordre pour que toute l'équipe produise un travail homogène.",
       "rationale": "Harvey Workflows permet d'enchaîner de manière structurée et reproductible plusieurs étapes d'un processus juridique (analyse de pièces, extraction, recherche de droit, rédaction d'acte) tout en maintenant le contrôle et la validation de l'avocat.",
       "examTip": "Harvey Workflows = enchaînement guidé et reproductible d'étapes juridiques complexes avec validation humaine.",
       "sourceIds": [
@@ -160,11 +201,41 @@
       "correctOptionIds": [
         "zero-entrainement-client-et-isolation-locataire"
       ],
+      "plainExplanation": "Harvey applique une règle de zéro entraînement sur les données clients et isole hermétiquement chaque dossier.",
       "rationale": "Harvey applique une politique stricte de zéro-entraînement sur les données des clients (prompts, documents, livrables) et un cloisonnement complet par organisation et par dossier afin de préserver le secret professionnel et la confidentialité des affaires.",
       "examTip": "Protection du secret professionnel dans Harvey = Zéro-entraînement sur les données clients + Cloisonnement par dossier (Ethical Walls).",
       "sourceIds": [
         "harvey-platform-overview",
         "harvey-product-blog"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.001",
+      "lessonId": "harvey-academy-legal-engineering-credly",
+      "itemType": "scenario",
+      "correctOptionIds": [
+        "legal-engineering-certification-et-getting-started-for-admins"
+      ],
+      "plainExplanation": "La Legal Engineering Certification de Harvey Academy valide la conception de workflows juridiques, l'ingénierie de prompts et le contrôle qualité à grande échelle.",
+      "rationale": "Dans Harvey Academy, la Legal Engineering Certification forme aux compétences de conception et de validation de workflows juridiques reproductibles, tandis que le parcours Getting Started for Admins (4 cours) guide la configuration sécurisée du workspace et l'adoption par les équipes.",
+      "examTip": "Référents & Legal Ops sur Harvey Academy = Legal Engineering Certification + Getting Started for Admins.",
+      "sourceIds": [
+        "harvey-academy-blog",
+        "harvey-academy-help"
+      ]
+    },
+    {
+      "id": "harvey-legal-ai.harvey-academy-legal-engineering-credly.002",
+      "lessonId": "harvey-academy-legal-engineering-credly",
+      "itemType": "mcq",
+      "correctOptionIds": [
+        "badge-verifie-credly-by-pearson-sans-expiration"
+      ],
+      "plainExplanation": "Après réussite de l'examen sur Harvey Academy, un badge numérique vérifiable et sans date d'expiration est émis par Credly by Pearson sur l'adresse e-mail du compte Academy.",
+      "rationale": "Harvey Academy délivre ses badges de certification via Credly by Pearson sur l'adresse e-mail associée au compte Academy. Ces badges vérifiés ne périment pas et permettent à tout tiers de contrôler l'authenticité des compétences acquises.",
+      "examTip": "Badges Harvey Academy = émis via Credly by Pearson, vérifiables publiquement et sans date d'expiration.",
+      "sourceIds": [
+        "harvey-academy-help"
       ]
     }
   ]

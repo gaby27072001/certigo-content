@@ -161,7 +161,8 @@
                   "id": "supprimer-noms-fichiers-sources",
                   "label": "Retirer tous les identifiants de source afin d'empêcher Claude de citer le document d'origine."
                 }
-              ]
+              ],
+              "plainPrompt": "Vous donnez un document de 150 pages à lire à Claude avant de lui poser une question. Où placer le document et la question ?"
             },
             {
               "id": "anthropic-claude-mcp.prompting-structure-balises-xml.002",
@@ -185,7 +186,8 @@
                   "id": "reduction-fenetre-contexte-minimale",
                   "label": "Parce que cette balise limite la fenêtre de contexte de Claude à cent caractères."
                 }
-              ]
+              ],
+              "plainPrompt": "Pourquoi demander à Claude de copier d'abord les phrases exactes du texte avant de donner sa réponse finale ?"
             }
           ],
           "recap": "Balises XML claires + Documents en haut + Instructions en bas + `<quotes>` avant `<answer>` = le standard d'excellence sur Claude.",
@@ -273,7 +275,8 @@
                   "id": "suppression-role-user",
                   "label": "Le tableau `messages` ne peut plus contenir de message avec le rôle `user`."
                 }
-              ]
+              ],
+              "plainPrompt": "Quand vous donnez à Claude un budget de réflexion de 8 000 jetons, quelle règle devez-vous respecter sur la taille totale maximale de sortie ?"
             },
             {
               "id": "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
@@ -297,7 +300,8 @@
                   "id": "desactivation-interface-visuelle",
                   "label": "Le mode texte ASCII pur qui bloque l'interprétation des balises SVG et des composants React."
                 }
-              ]
+              ],
+              "plainPrompt": "Quelle fonction de Claude permet de voir et tester directement un écran interactif ou un schéma à côté de la discussion ?"
             }
           ],
           "recap": "Projects garde le savoir de l'équipe, Extended Thinking approfondit le raisonnement et Artifacts donne vie aux interfaces et schémas en direct.",
@@ -386,7 +390,8 @@
                   "id": "obligation-mode-synchrone-xml",
                   "label": "Le cache ne fonctionne que si les clés JSON de l'API sont renommées en majuscules."
                 }
-              ]
+              ],
+              "plainPrompt": "Pourquoi le cache de Claude ne fonctionne-t-il jamais si vous mettez un numéro aléatoire différent tout au début de votre consigne ?"
             },
             {
               "id": "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
@@ -410,7 +415,8 @@
                   "id": "desactiver-message-systeme",
                   "label": "Interdire l'usage du champ `system` et envoyer une requête au corps entièrement vide."
                 }
-              ]
+              ],
+              "plainPrompt": "Comment demander à l'API Claude d'indiquer automatiquement de quelle page ou phrase du PDF vient chaque affirmation ?"
             }
           ],
           "recap": "Préfixe immuable (`tools` ➔ `system` ➔ corpus) avec `cache_control` + blocs `document` avec `citations: { enabled: true }` = vitesse, économie et preuves.",
@@ -534,7 +540,8 @@
                   "id": "historique-navigateur-cookies",
                   "label": "La base SQLite des cookies tiers du navigateur web par défaut."
                 }
-              ]
+              ],
+              "plainPrompt": "Quel fichier placé à la racine d'un projet permet à Claude Code de connaître dès l'ouverture les règles et commandes de l'équipe ?"
             },
             {
               "id": "anthropic-claude-mcp.claude-code-cli-claude-md.002",
@@ -558,7 +565,8 @@
                   "id": "desinstaller-node-modules",
                   "label": "Effacer les compilateurs et bibliothèques installés sur la machine de développement."
                 }
-              ]
+              ],
+              "plainPrompt": "Vous avez fini un sujet dans Claude Code et voulez passer à un tout autre sujet en repartant d'une conversation vierge. Quelle commande taper ?"
             }
           ],
           "recap": "`CLAUDE.md` donne les règles du dépôt, le plan guide les changements multi-fichiers et `/clear` garde chaque mission focalisée.",
@@ -646,7 +654,8 @@
                   "id": "executer-en-root-sans-pare-feu",
                   "label": "Lancer le terminal avec les privilèges système `root` en ouvrant tous les ports entrants de la machine."
                 }
-              ]
+              ],
+              "plainPrompt": "Comment autoriser Claude Code à lancer vos tests tout seul, tout en lui interdisant de lire vos mots de passe dans le fichier .env ?"
             },
             {
               "id": "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
@@ -670,7 +679,8 @@
                   "id": "compression-automatique-images-png",
                   "label": "Les captures d'écran jointes à l'issue seront converties en niveaux de gris par le runner Linux."
                 }
-              ]
+              ],
+              "plainPrompt": "Quel est le danger si Claude Code lit automatiquement des messages d'inconnus sur Internet avec tous les droits administrateur ?"
             }
           ],
           "recap": "Allowlist granulaire dans `.claude/settings.json`, méfiance envers les entrées externes et conteneur à moindre privilège en CI.",
@@ -794,7 +804,8 @@
                   "id": "modification-poids-modele",
                   "label": "Une requête de réentraînement direct des couches d'attention du modèle sur le serveur distant."
                 }
-              ]
+              ],
+              "plainPrompt": "Dans le protocole MCP, quel élément sert uniquement à lire une information (comme un fichier ou un plan) sans rien modifier ?"
             },
             {
               "id": "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
@@ -818,7 +829,8 @@
                   "id": "couper-flux-entree-stdin",
                   "label": "Fermer immédiatement le descripteur d'entrée standard `stdin` avant la négociation `initialize`."
                 }
-              ]
+              ],
+              "plainPrompt": "Pourquoi un serveur MCP local plante-t-il dès qu'on utilise console.log() pour afficher un message d'information ?"
             }
           ],
           "recap": "MCP unifie l'accès au contexte et à l'action via JSON-RPC 2.0 avec trois primitives nettes : `Resources` (URI), `Prompts` (templates) et `Tools` (actions).",
@@ -908,7 +920,8 @@
                   "id": "suppression-journalisation-actions",
                   "label": "Désactiver la capture des journaux d'actions et les confirmations sur les formulaires de virement bancaire."
                 }
-              ]
+              ],
+              "plainPrompt": "Où faut-il faire tourner l'agent Computer Use de Claude lorsqu'il clique et tape au clavier sur un écran comme un humain ?"
             },
             {
               "id": "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
@@ -932,7 +945,8 @@
                   "id": "interdiction-totale-code-informatique",
                   "label": "Empêcher le modèle de répondre à toute question portant sur la programmation ou l'architecture logicielle."
                 }
-              ]
+              ],
+              "plainPrompt": "Sur quel principe repose la méthode Constitutional AI utilisée par Anthropic pour entraîner Claude ?"
             }
           ],
           "recap": "MCP pour les intégrations structurées, Computer Use en VM isolée pour les interfaces sans API, et Constitutional AI pour un alignement transparent et sûr.",
@@ -1021,7 +1035,8 @@
                   "id": "compression-gzip-reponses-http",
                   "label": "L'activation de la compression standard GZIP sur les réponses d'une API REST interne."
                 }
-              ]
+              ],
+              "plainPrompt": "En quoi consiste le piège appelé « Tool Poisoning » sur un serveur MCP externe ?"
             },
             {
               "id": "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002",
@@ -1045,7 +1060,8 @@
                   "id": "partager-mot-de-passe-root-dans-git",
                   "label": "Publier la chaîne de connexion administrateur dans un dépôt public pour faciliter le diagnostic."
                 }
-              ]
+              ],
+              "plainPrompt": "Comment être certain à 100 % que Claude ne pourra jamais supprimer de données en interrogeant votre base SQL via MCP ?"
             }
           ],
           "recap": "Auditez les descriptions `tools/list`, épinglez les serveurs MCP autorisés, donnez des jetons en lecture seule et validez chaque action sensible.",
@@ -1056,5 +1072,42 @@
         }
       ]
     }
-  ]
+  ],
+  "routeAliases": [
+    "ANTHROPIC-CLAUDE",
+    "CLAUDE-MCP",
+    "CLAUDE-CODE"
+  ],
+  "brandIdentity": {
+    "logoSlug": "anthropic",
+    "displayName": "Anthropic (Claude Enterprise, Claude Code & MCP)",
+    "primaryHex": "#D97757",
+    "accentHex": "#191918",
+    "masteryModel": "Parcours d'expertise produit complet aligné sur Claude Academy et la documentation technique Anthropic : 3 unités progressives (Prompting XML & Extended Thinking, agent CLI Claude Code, architecture Model Context Protocol MCP & Computer Use), Cartes Déclic, labs pratiques, questions à double niveau (simple sans jargon et expert) et examen blanc."
+  },
+  "mockExam": {
+    "id": "anthropic-claude-mcp-mock-exam",
+    "title": "Examen Blanc CertiGo Pro : Anthropic (Claude, Extended Thinking, Claude Code, MCP & Constitutional AI)",
+    "durationMinutes": 35,
+    "passingScorePercent": 80,
+    "scenarioBrief": "Évaluation complète de maîtrise des produits Anthropic : structuration XML longs contextes, Extended Thinking, Prompt Caching, Citations natives, Projects & Artifacts, agent CLI Claude Code (CLAUDE.md, permissions, mode headless CI), serveurs MCP (Resources, Prompts, Tools, sécurité) et Computer Use.",
+    "questionIds": [
+      "anthropic-claude-mcp.prompting-structure-balises-xml.001",
+      "anthropic-claude-mcp.prompting-structure-balises-xml.002",
+      "anthropic-claude-mcp.extended-thinking-projects-artifacts.001",
+      "anthropic-claude-mcp.extended-thinking-projects-artifacts.002",
+      "anthropic-claude-mcp.claude-prompt-caching-context-engineering.001",
+      "anthropic-claude-mcp.claude-prompt-caching-context-engineering.002",
+      "anthropic-claude-mcp.claude-code-cli-claude-md.001",
+      "anthropic-claude-mcp.claude-code-cli-claude-md.002",
+      "anthropic-claude-mcp.claude-code-permissions-securite-ci.001",
+      "anthropic-claude-mcp.claude-code-permissions-securite-ci.002",
+      "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.001",
+      "anthropic-claude-mcp.architecture-mcp-serveurs-outils-ressources-prompts.002",
+      "anthropic-claude-mcp.computer-use-et-constitutional-ai.001",
+      "anthropic-claude-mcp.computer-use-et-constitutional-ai.002",
+      "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.001",
+      "anthropic-claude-mcp.securite-serveurs-mcp-approbation-entreprise.002"
+    ]
+  }
 }
